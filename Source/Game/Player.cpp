@@ -54,26 +54,41 @@ namespace Studio
 
 	void Player::Movement(float aDeltaTime)
 	{
+		bool wKey = Studio::InputManager::GetInstance()->IsKeyDown('W');
+		bool aKey = Studio::InputManager::GetInstance()->IsKeyDown('A');
+		bool sKey = Studio::InputManager::GetInstance()->IsKeyDown('S');
+		bool dKey = Studio::InputManager::GetInstance()->IsKeyDown('D');
 		//W
-		if (Studio::InputManager::GetInstance()->IsKeyDown('W') && myPosition.y > 0.05f)
+
+		if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
+		{
+			mySpeed = 0.2f;
+		}
+		else
+		{
+			mySpeed = 0.3f; //Temp value, change to default value provided by json when added
+		}
+		
+		if (wKey && myPosition.y > 0.05f)
 		{
 			myPosition.y -= mySpeed * aDeltaTime;
 		}
 		//A
-		if (Studio::InputManager::GetInstance()->IsKeyDown('A') && myPosition.x > 0.05f)
+		if (aKey && myPosition.x > 0.05f)
 		{
 			myPosition.x -= mySpeed * aDeltaTime;
 		}
 		//S
-		if (Studio::InputManager::GetInstance()->IsKeyDown('S') && myPosition.y < 0.95f)
+		if (sKey && myPosition.y < 0.95f)
 		{
 			myPosition.y += mySpeed * aDeltaTime;
 		}
 		//D
-		if (Studio::InputManager::GetInstance()->IsKeyDown('D') && myPosition.x < 0.95f)
+		if (dKey && myPosition.x < 0.95f)
 		{
 			myPosition.x += mySpeed * aDeltaTime;
 		}
+		
 		//Spacebar
 		if (Studio::InputManager::GetInstance()->IsKeyDown(VK_SPACE))
 		{

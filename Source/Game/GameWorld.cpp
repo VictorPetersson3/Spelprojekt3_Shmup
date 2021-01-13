@@ -39,14 +39,15 @@ void CGameWorld::Init()
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
+	//Uppdaterar och renderar ut spelaren samt dess kulor.
 	myPlayer->Update(aDeltaTime);
 	Studio::RendererAccessor::GetInstance()->Render(*myPlayer);
-
 	for (int i = 0; i < myPlayer->GetBullets().size(); i++)
 	{
 		Studio::RendererAccessor::GetInstance()->Render(*myPlayer->GetBullets()[i]);
 	}
 
+	//Uppdaterar Enemies, Renderar ut dem, samt renderar ut Enemies kulor
 	for (int i = 0; i < myEnemies.size(); i++)
 	{
 		myEnemies[i]->Update(aDeltaTime);
@@ -54,6 +55,11 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		for (int j = 0; j < myEnemies[i]->GetBullets().size(); j++)
 		{
 			Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]->GetBullets()[j]);
+		}
+
+		if (myEnemies[i]->GetPosition().x < 0.0f)
+		{
+			myEnemies.erase(myEnemies.begin() + i);
 		}
 	}
 }

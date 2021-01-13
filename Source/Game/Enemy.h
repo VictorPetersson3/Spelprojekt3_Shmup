@@ -18,6 +18,8 @@ namespace Studio
 		void Update(float aDeltaTime);
 		void Shoot(float aDeltaTime);
 
+		VECTOR2F GetPosition();
+
 		std::vector<Bullet*>& GetBullets();
 
 		Studio::RenderCommand& GetRenderCommand();

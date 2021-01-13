@@ -46,6 +46,11 @@ namespace Studio
 		}
 	}
 
+	VECTOR2F Enemy::GetPosition()
+	{
+		return myPosition;
+	}
+
 	std::vector<Bullet*>& Enemy::GetBullets()
 	{
 		return myBullets;
@@ -60,6 +65,11 @@ namespace Studio
 		for (int i = 0; i < myBullets.size(); i++)
 		{
 			myBullets[i]->Update(aDeltaTime);
+
+			if (myBullets[i]->GetPosition().x > 1.0f || myBullets[i]->GetPosition().x < 0.0f || myBullets[i]->GetPosition().y < 0.0f || myBullets[i]->GetPosition().y > 1.0f)
+			{
+				myBullets.erase(myBullets.begin() + i);
+			}
 		}
 	}
 }
