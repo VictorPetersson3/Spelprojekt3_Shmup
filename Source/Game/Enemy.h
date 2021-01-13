@@ -9,21 +9,18 @@ namespace Studio
 {
 	class RenderCommand;
 	class Bullet;
-	class Player : public GameObject
+	class Enemy : public GameObject
 	{
 	public:
-		Player(Tga2D::CSprite* aSprite);
-		~Player();
+		Enemy(Tga2D::CSprite* aSprite);
+		~Enemy();
 
 		void Update(float aDeltaTime);
 		void Shoot(float aDeltaTime);
 
 		std::vector<Bullet*>& GetBullets();
 
-		RenderCommand& GetRenderCommand();
-	private:
-		void Movement(float aDeltaTime);
-		void UpdateBullets(float aDeltaTime);
+		Studio::RenderCommand& GetRenderCommand();
 	private:
 		float mySpeed;
 		float myShootCooldown;

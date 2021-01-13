@@ -40,6 +40,9 @@
       <Filter>GameObjects\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="RendererAccessor.cpp" />
+    <ClCompile Include="Enemy.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Health.h" />
@@ -86,6 +89,9 @@
       <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="RendererAccessor.h" />
+    <ClInclude Include="Enemy.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BaseObjects">
@@ -108,6 +114,9 @@
     </Filter>
     <Filter Include="GameObjects\Bullet">
       <UniqueIdentifier>{26bb6712-e0f2-4673-962f-9699856729fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Enemy">
+      <UniqueIdentifier>{d8ab0d0e-5cfc-4a52-bc0e-4002b4210b45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

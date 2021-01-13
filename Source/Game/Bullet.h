@@ -6,11 +6,12 @@ namespace Tga2D
 }
 namespace Studio
 {
+	class RenderCommand;
 	class Bullet : public GameObject
 	{
 	public:
 		Bullet() = default;
-		Bullet(VECTOR2F aPosition, const float& aSpeed, VECTOR2F aDirection, Tga2D::CSprite* aSprite);
+		Bullet(VECTOR2F aPosition, const float& aSpeed, Tga2D::CSprite* aSprite);
 		~Bullet();
 		void Update(float aDeltaTime);
 
@@ -24,7 +25,6 @@ namespace Studio
 		Tga2D::CSprite* mySprite;
 
 		VECTOR2F myPosition;
-		VECTOR2F myDirection;
 	};
 }
 

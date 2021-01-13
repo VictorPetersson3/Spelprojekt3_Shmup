@@ -1,9 +1,11 @@
 #pragma once
 #include "Renderer.h"
+#include <vector>
 
 namespace Studio
 {
 	class Player;
+	class Enemy;
 }
 namespace Tga2D
 {
@@ -27,4 +29,5 @@ private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	Studio::Player* myPlayer;
 
+	std::vector<Studio::Enemy*> myEnemies;
 };

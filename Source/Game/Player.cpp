@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Bullet.h"
 #include "InputManager.h"
 #include "tga2d/sprite/sprite.h"
 
@@ -19,10 +20,39 @@ namespace Studio
 
 	Player::~Player()
 	{
-
+		SAFE_DELETE(myBulletSprite);
 	}
 
 	void Player::Update(float aDeltaTime)
+	{
+		Movement(aDeltaTime);
+
+		Player::GameObject::Update(myPosition);
+
+		UpdateBullets(aDeltaTime);
+	}
+
+	void Player::Shoot(float aDeltaTime)
+	{
+			myShootCooldown += aDeltaTime;
+			if (GetAsyncKeyState(VK_SPACE) && myShootCooldown > 0.1f)
+			{
+				myBullets.push_back(new Bullet(myPosition, 1.0f, myBulletSprite));
+				myShootCooldown = 0;
+			}
+	}
+
+	std::vector<Bullet*>& Player::GetBullets()
+	{
+		return myBullets;
+	}
+
+	RenderCommand& Player::GetRenderCommand()
+	{
+		return Player::GameObject::GetRenderCommand();
+	}
+
+	void Player::Movement(float aDeltaTime)
 	{
 		//W
 		if (Studio::InputManager::GetInstance()->IsKeyDown('W') && myPosition.y > 0.05f)
@@ -44,14 +74,15 @@ namespace Studio
 		{
 			myPosition.x += mySpeed * aDeltaTime;
 		}
-		//D
+		//Spacebar
 		if (Studio::InputManager::GetInstance()->IsKeyDown(VK_SPACE))
 		{
 			Shoot(aDeltaTime);
 		}
+	}
 
-		Player::GameObject::Update(myPosition);
-
+	void Player::UpdateBullets(float aDeltaTime)
+	{
 		for (int i = 0; i < myBullets.size(); i++)
 		{
 			myBullets[i]->Update(aDeltaTime);
@@ -62,26 +93,6 @@ namespace Studio
 			}
 
 		}
-	}
-
-	void Player::Shoot(float aDeltaTime)
-	{
-		myShootCooldown += aDeltaTime;
-		if (GetAsyncKeyState(VK_SPACE) && myShootCooldown > 0.1f)
-		{
-			myBullets.push_back(new Bullet(myPosition, 1.0f, { 1,0 }, myBulletSprite));
-			myShootCooldown = 0;
-		}
-	}
-
-	std::vector<Bullet*>& Player::GetBullets()
-	{
-		return myBullets;
-	}
-
-	Studio::RenderCommand& Player::GetRenderCommand()
-	{
-		return Player::GameObject::GetRenderCommand();
 	}
 }
 
