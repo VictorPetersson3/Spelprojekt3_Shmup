@@ -17,7 +17,7 @@ namespace Studio
 
 		VECTOR2F GetPosition();
 
-		Studio::RenderCommand& GetRenderCommand();
+		Studio::RenderCommand GetRenderCommand();
 
 	private:
 		float mySpeed;

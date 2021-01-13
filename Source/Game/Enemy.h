@@ -21,6 +21,9 @@ namespace Studio
 		std::vector<Bullet*>& GetBullets();
 
 		Studio::RenderCommand& GetRenderCommand();
+
+	private:
+		void UpdateBullets(float aDeltaTime);
 	private:
 		float mySpeed;
 		float myShootCooldown;

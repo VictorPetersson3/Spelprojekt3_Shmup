@@ -30,6 +30,8 @@ namespace Studio
 
 		Shoot(aDeltaTime);
 
+		UpdateBullets(aDeltaTime);
+
 		Enemy::GameObject::Update(myPosition);
 
 	}
@@ -39,7 +41,7 @@ namespace Studio
 		myShootCooldown += aDeltaTime;
 		if (myShootCooldown > 0.7f)
 		{
-			myBullets.push_back(new Bullet(myPosition, 1.0f, myBulletSprite));
+			myBullets.push_back(new Bullet(myPosition, -0.2f, myBulletSprite));
 			myShootCooldown = 0;
 		}
 	}
@@ -52,6 +54,13 @@ namespace Studio
 	RenderCommand& Enemy::GetRenderCommand()
 	{
 		return Enemy::GameObject::GetRenderCommand();
+	}
+	void Enemy::UpdateBullets(float aDeltaTime)
+	{
+		for (int i = 0; i < myBullets.size(); i++)
+		{
+			myBullets[i]->Update(aDeltaTime);
+		}
 	}
 }
 

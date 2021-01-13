@@ -53,9 +53,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
 		for (int j = 0; j < myEnemies[i]->GetBullets().size(); j++)
 		{
-			//varfor do inte fonka
 			Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]->GetBullets()[j]);
-			
 		}
 	}
 }

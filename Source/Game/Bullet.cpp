@@ -28,7 +28,7 @@ namespace Studio
 	{
 		return myPosition;
 	}
-	Studio::RenderCommand& Bullet::GetRenderCommand()
+	Studio::RenderCommand Bullet::GetRenderCommand()
 	{
 		return Bullet::GameObject::GetRenderCommand();
 	}
