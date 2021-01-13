@@ -30,6 +30,13 @@ function createEnemyElement(type, pos, timer)
     enemyBox.setAttribute("draggable", "true");
     enemyBox.addEventListener("dragstart", handleDragStart, false);
     enemyBox.addEventListener("dragend", handleDragEnd, false);
+
+    let x, y;
+
+    // Handle old version and current version
+    x = (pos.x) ? pos.x : pos.X;
+    y = (pos.y) ? pos.y : pos.Y;
+
     enemyBox.innerHTML = `
         <table>
             <tr class="enemy-table-header-row">
@@ -39,14 +46,14 @@ function createEnemyElement(type, pos, timer)
             </tr>
             <tr>
                 <td>${type}</td>
-                <td>{${pos.x}, ${pos.y}}</td>
+                <td>{${x}, ${y}}</td>
                 <td>${timer}ms</td>
             </tr>
         </table>
     `;
     enemyBox.dataset["type"] = type;
-    enemyBox.dataset["x"] = pos.x;
-    enemyBox.dataset["y"] = pos.y;
+    enemyBox.dataset["x"] = x;
+    enemyBox.dataset["y"] = y;
     enemyBox.dataset["timer"] = timer;
     enemyBox.classList.add("enemy-box");
     return enemyBox;
@@ -172,15 +179,15 @@ function exportLevel()
         [...packElement.children].forEach(function(enemyElement, i)
         {
             let enemy = {
-                type: null,
-                position: { x: null, y: null },
-                timer: null
+                Type: null,
+                Position: { X: null, X: null },
+                Timer: null
             };
 
-            enemy.type = enemyElement.dataset["type"];
-            enemy.timer = ~~enemyElement.dataset["timer"];
-            enemy.position.x = ~~enemyElement.dataset["x"];
-            enemy.position.y = ~~enemyElement.dataset["y"];
+            enemy.Type = enemyElement.dataset["type"];
+            enemy.Timer = ~~enemyElement.dataset["timer"];
+            enemy.Position.X = ~~enemyElement.dataset["x"];
+            enemy.Position.Y = ~~enemyElement.dataset["y"];
 
             pack["Enemies"].push(enemy);
         })
@@ -216,7 +223,12 @@ function importLevel(e)
             packObject.Enemies.forEach(function(enemyObject)
             {
                 console.log(enemyObject);
-                pack.appendChild(createEnemyElement(enemyObject.type, enemyObject.position, enemyObject.timer));
+                // Handle old version with small letters
+                if (enemyObject.type != undefined)
+                    pack.appendChild(createEnemyElement(enemyObject.type, enemyObject.position, enemyObject.timer));
+                // Handle current versnio with starting capital letter
+                else if (enemyObject.Type != undefined)
+                    pack.appendChild(createEnemyElement(enemyObject.Type, enemyObject.Position, enemyObject.Timer));
             });
 
             document.getElementById("level-window").appendChild(pack);
