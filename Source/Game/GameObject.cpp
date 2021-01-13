@@ -24,7 +24,7 @@ namespace Studio
 		return myRenderCommand;
 	}
 
-	bool GameObject::Intersects(const GameObject& aGameObject)
+	bool GameObject::Intersects(GameObject& aGameObject)
 	{
 		return myCollider.Intersects(aGameObject.myCollider);
 	}

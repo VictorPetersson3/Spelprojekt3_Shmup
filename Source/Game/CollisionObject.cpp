@@ -3,12 +3,12 @@
 
 Studio::CollisionObject::CollisionObject()
 {
-	myCollisionType = CollisionType::NoCollider;
+	myColliderType = ColliderType::NoCollider;
 }
 
 Studio::CollisionObject::CollisionObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize)
 {
-	myCollisionType = CollisionType::BoxCollider;
+	myColliderType = ColliderType::BoxCollider;
 	myWidth = aColliderSize.x;
 	myHeight = aColliderSize.y;
 	myPosition = aPosition;
@@ -16,7 +16,7 @@ Studio::CollisionObject::CollisionObject(Tga2D::Vector2f aPosition, Tga2D::Vecto
 
 Studio::CollisionObject::CollisionObject(Tga2D::Vector2f aPosition, float aRadius)
 {
-	myCollisionType = CollisionType::CircleCollider;
+	myColliderType = ColliderType::CircleCollider;
 	myRadius = aRadius;
 	myPosition = aPosition;
 }
@@ -36,9 +36,9 @@ float const Studio::CollisionObject::GetRadius()
 	return myRadius;
 }
 
-Studio::CollisionType& Studio::CollisionObject::GetColliderType()
+Studio::ColliderType& Studio::CollisionObject::GetColliderType()
 {
-	return myCollisionType;
+	return myColliderType;
 }
 
 Tga2D::Vector2f Studio::CollisionObject::GetPosition()

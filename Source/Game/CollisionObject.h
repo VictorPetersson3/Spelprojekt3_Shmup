@@ -1,7 +1,7 @@
 #pragma once
 namespace Studio
 {
-	enum class CollisionType
+	enum class ColliderType
 	{
 		CircleCollider,
 		BoxCollider,
@@ -18,13 +18,13 @@ namespace Studio
 		float const GetWidth();
 		float const GetHeight();
 		float const GetRadius();
-		CollisionType& GetColliderType();
+		ColliderType& GetColliderType();
 		Tga2D::Vector2f GetPosition();
 	private:
 		float myWidth = 0;
 		float myHeight = 0;
 		float myRadius = 0;
 		Tga2D::Vector2f myPosition;
-		CollisionType myCollisionType;
+		ColliderType myColliderType;
 	};
 }

@@ -8,7 +8,7 @@ namespace Studio
 	public:
 		void AddColliderObject(CollisionObject& aCollisionObject);
 		// Not implemented
-		bool Intersects(const Collider& aCollider);
+		bool Intersects(Collider& aCollider);
 		// Not implemented
 		bool Contains(const Collider& aCollider);
 
