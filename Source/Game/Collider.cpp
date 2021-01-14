@@ -2,6 +2,12 @@
 #include "Collider.h"
 namespace Studio
 {
+	Collider::Collider()
+	{
+		myCollisionObjects.push_back(CollisionObject(Tga2D::Vector2f({ 0.5f, 0.5f }), Tga2D::Vector2f({ 0.1f, 0.1f })));
+		myCollisionObjects.push_back(CollisionObject(Tga2D::Vector2f({ 0.5f, 0.5f }), 0.1f));
+	}
+
 	void Collider::AddBoxColliderObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize)
 	{
 		myCollisionObjects.push_back(CollisionObject(aPosition, aColliderSize));

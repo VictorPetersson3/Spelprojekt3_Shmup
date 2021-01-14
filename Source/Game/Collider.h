@@ -6,6 +6,8 @@ namespace Studio
 	class Collider
 	{
 	public:
+		Collider();
+
 		void AddBoxColliderObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize);
 
 		void AddCircleColliderObject(Tga2D::Vector2f aPosition, float aRadius);
