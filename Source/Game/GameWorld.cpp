@@ -31,7 +31,7 @@ void CGameWorld::Init()
 	
 	for (int i = 0; i < 1; i++)
 	{
-		auto enemy = new Studio::Enemy(new Tga2D::CSprite("sprites/debugpixel.dds"));
+		auto enemy = new Studio::Enemy(new Tga2D::CSprite("sprites/debugpixel.dds"), { 0.9f, 0.5f });
 		myEnemies.push_back(enemy);
 	}
 }
