@@ -8,6 +8,7 @@ namespace Studio
 	void GameObject::Update(const Tga2D::Vector2f& aPos)
 	{
 		myRenderCommand.Update(aPos);
+		myCollider.Update(aPos);
 	}
 	Sprite& Studio::GameObject::GetSprite()
 	{

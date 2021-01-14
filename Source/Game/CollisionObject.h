@@ -11,10 +11,10 @@ namespace Studio
 	{
 	public:
 		CollisionObject();
-		CollisionObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize);
 		CollisionObject(Tga2D::Vector2f aPosition, float aRadius);
+		CollisionObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize);
 		~CollisionObject() = default;
-
+		void Update(const Tga2D::Vector2f& aPosition);
 		float const GetWidth();
 		float const GetHeight();
 		float const GetRadius();

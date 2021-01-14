@@ -2,9 +2,22 @@
 #include "Collider.h"
 namespace Studio
 {
-	void Collider::AddColliderObject(CollisionObject& aCollisionObject)
+	void Collider::AddBoxColliderObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize)
 	{
-		myCollisionObjects.push_back(aCollisionObject);
+		myCollisionObjects.push_back(CollisionObject(aPosition, aColliderSize));
+	}
+
+	void Collider::AddCircleColliderObject(Tga2D::Vector2f aPosition, float aRadius)
+	{
+		myCollisionObjects.push_back(CollisionObject(aPosition, aRadius));
+	}
+
+	void Collider::Update(const Tga2D::Vector2f& aPosition)
+	{
+		for (CollisionObject& collision : myCollisionObjects)
+		{
+			collision.Update(aPosition);
+		}
 	}
 
 	bool Collider::Intersects(Collider& aCollider)
@@ -16,7 +29,7 @@ namespace Studio
 				if (myCollisionObjects[i].GetColliderType() == ColliderType::CircleCollider &&
 					aCollider.myCollisionObjects[j].GetColliderType() == ColliderType::CircleCollider)
 				{
-					if (CircleToCircleCollision(myCollisionObjects[i], aCollider.myCollisionObjects[j]))
+					if (CircleToCircleIntersect(myCollisionObjects[i], aCollider.myCollisionObjects[j]))
 					{
 						return true;
 					}
@@ -24,7 +37,7 @@ namespace Studio
 				if (myCollisionObjects[i].GetColliderType() == ColliderType::BoxCollider &&
 					aCollider.myCollisionObjects[j].GetColliderType() == ColliderType::BoxCollider)
 				{
-					if (AABBToAABBCollision(myCollisionObjects[i], aCollider.myCollisionObjects[j]))
+					if (AABBToAABBIntersect(myCollisionObjects[i], aCollider.myCollisionObjects[j]))
 					{
 						return true;
 					}
@@ -32,7 +45,7 @@ namespace Studio
 				if (myCollisionObjects[i].GetColliderType() == ColliderType::CircleCollider &&
 					aCollider.myCollisionObjects[j].GetColliderType() == ColliderType::BoxCollider)
 				{
-					if (CircleToAABBCollision(myCollisionObjects[i], aCollider.myCollisionObjects[j]))
+					if (CircleToAABBIntersect(myCollisionObjects[i], aCollider.myCollisionObjects[j]))
 					{
 						return true;
 					}
@@ -46,7 +59,7 @@ namespace Studio
 	{
 		return false;
 	}
-	bool Collider::CircleToCircleCollision(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject)
+	bool Collider::CircleToCircleIntersect(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject)
 	{
 		float deltaX = aFirstCollisionObject.GetPosition().x - aSecondCollisionObject.GetPosition().x;
 		float deltaY = aFirstCollisionObject.GetPosition().y - aSecondCollisionObject.GetPosition().y;
@@ -62,11 +75,11 @@ namespace Studio
 			return false;
 		}
 	}
-	bool Collider::CircleToAABBCollision(CollisionObject& aCircleCollisionObject, CollisionObject& anAABBCollisionObject)
+	bool Collider::CircleToAABBIntersect(CollisionObject& aCircleCollisionObject, CollisionObject& anAABBCollisionObject)
 	{
 		return false;
 	}
-	bool Collider::AABBToAABBCollision(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject)
+	bool Collider::AABBToAABBIntersect(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject)
 	{
 		if (aFirstCollisionObject.GetPosition().x < aSecondCollisionObject.GetPosition().x + aSecondCollisionObject.GetWidth() &&
 			aFirstCollisionObject.GetPosition().x + aFirstCollisionObject.GetWidth() > aSecondCollisionObject.GetPosition().x &&
