@@ -17,7 +17,7 @@ namespace Studio
 {
 	LevelManager::LevelManager()
 	{
-		LoadLevel("JSON/Levels/level_jimmi.json");
+		LoadLevel("JSON/Levels/level_x.json");
 	}
 
 	LevelManager::~LevelManager()
