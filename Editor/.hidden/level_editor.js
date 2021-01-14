@@ -31,12 +31,6 @@ function createEnemyElement(type, pos, timer)
     enemyBox.addEventListener("dragstart", handleDragStart, false);
     enemyBox.addEventListener("dragend", handleDragEnd, false);
 
-    let x, y;
-
-    // Handle old version and current version
-    x = (pos.x) ? pos.x : pos.X;
-    y = (pos.y) ? pos.y : pos.Y;
-
     enemyBox.innerHTML = `
         <table>
             <tr class="enemy-table-header-row">
@@ -46,14 +40,14 @@ function createEnemyElement(type, pos, timer)
             </tr>
             <tr>
                 <td>${type}</td>
-                <td>{${x}, ${y}}</td>
+                <td>{${pos.X}, ${pos.Y}}</td>
                 <td>${timer}ms</td>
             </tr>
         </table>
     `;
     enemyBox.dataset["type"] = type;
-    enemyBox.dataset["x"] = x;
-    enemyBox.dataset["y"] = y;
+    enemyBox.dataset["x"] = pos.X;
+    enemyBox.dataset["y"] = pos.Y;
     enemyBox.dataset["timer"] = timer;
     enemyBox.classList.add("enemy-box");
     return enemyBox;
@@ -63,18 +57,18 @@ createEnemy();
 function createEnemy()
 {
     data = {};
-    data.type = document.getElementById("input-type").value;
-    data.pos = {};
-    data.pos.x = ~~document.getElementById("input-x").value;
-    data.pos.y = ~~document.getElementById("input-y").value;
-    data.timer = ~~document.getElementById("input-timer").value;
+    data.Type = document.getElementById("input-type").value;
+    data.Position = {};
+    data.Position.X = ~~document.getElementById("input-x").value;
+    data.Position.Y = ~~document.getElementById("input-y").value;
+    data.Timer = ~~document.getElementById("input-timer").value;
 
-    if (data.type == "")
+    if (data.Type == "")
     {
-        data.type = "Enemy";
+        data.Type = "Enemy";
     }
 
-    let enemyBox = createEnemyElement(data.type, data.pos, data.timer);
+    let enemyBox = createEnemyElement(data.Type, data.Position, data.Timer);
 
     let spawner = document.getElementById("enemy-spawner");
     spawner.innerHTML = "";
@@ -223,12 +217,7 @@ function importLevel(e)
             packObject.Enemies.forEach(function(enemyObject)
             {
                 console.log(enemyObject);
-                // Handle old version with small letters
-                if (enemyObject.type != undefined)
-                    pack.appendChild(createEnemyElement(enemyObject.type, enemyObject.position, enemyObject.timer));
-                // Handle current versnio with starting capital letter
-                else if (enemyObject.Type != undefined)
-                    pack.appendChild(createEnemyElement(enemyObject.Type, enemyObject.Position, enemyObject.Timer));
+                pack.appendChild(createEnemyElement(enemyObject.Type, enemyObject.Position, enemyObject.Timer));
             });
 
             document.getElementById("level-window").appendChild(pack);
