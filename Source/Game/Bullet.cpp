@@ -9,6 +9,8 @@ namespace Studio
 		myPosition = aPosition;
 		mySpeed = aSpeed;
 
+		Bullet::GameObject::GetCollider().AddCircleColliderObject(myPosition, 0.005f);
+
 		SAFE_CREATE(mySprite, Tga2D::CSprite(*aSprite));
 	}
 

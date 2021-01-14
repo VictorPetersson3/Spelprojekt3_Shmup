@@ -12,7 +12,7 @@ namespace Studio
 	class Enemy : public GameObject
 	{
 	public:
-		Enemy(Tga2D::CSprite* aSprite);
+		Enemy(Tga2D::CSprite* aSprite, VECTOR2F aSpawnPosition);
 		~Enemy();
 
 		void Update(float aDeltaTime);

@@ -6,16 +6,18 @@
 
 namespace Studio
 {
-	Enemy::Enemy(Tga2D::CSprite* aSprite) :
+	Enemy::Enemy(Tga2D::CSprite* aSprite, VECTOR2F aSpawnPosition) :
 		Enemy::GameObject(aSprite)
 	{
-		myPosition = { 1.0f, 0.5f };
+		myPosition = aSpawnPosition;
 		mySpeed = 0.05f;
 		myShootCooldown = 0.0f;
 		mySprite = aSprite;
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
+
+		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 0.03f);
 	}
 
 	Enemy::~Enemy()
