@@ -43,6 +43,7 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>GameObjects\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="LevelManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Health.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Enemy.h">
       <Filter>GameObjects\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="LevelManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BaseObjects">
