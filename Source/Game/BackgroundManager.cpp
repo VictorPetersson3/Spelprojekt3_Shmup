@@ -36,7 +36,7 @@ void Studio::BackgroundManager::CreateTestMapBackground(float LevelWidth)
 
 void Studio::BackgroundManager::UpdateBackground(float aDeltaTime)
 {
-	for (int i = myBackgroundObjects.size(); i-- > 0;)
+	for (int i = 0; i < myBackgroundObjects.size(); i++)
 	{
 		myBackgroundObjects.at(i)->Update(aDeltaTime);
 		if (myBackgroundObjects.at(i)->GetPosition().x < -0.5)
