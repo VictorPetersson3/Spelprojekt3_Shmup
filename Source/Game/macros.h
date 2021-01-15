@@ -4,9 +4,9 @@
 #define SAFE_CREATE(aPointer, aClass) aPointer = new aClass
 #define SAFE_DELETE(aPointer) if (aPointer) delete aPointer; aPointer = nullptr
 #define SAFE_INIT(aPointer) if (aPointer != nullptr) aPointer = nullptr
-#define SAFE_DELETE_VECTOR(anStdVector)									\
-for (auto& PP_CONCAT(aMacroPointerAtLine, __LINE__) : anStdVector) {	\
-	SAFE_DELETE(PP_CONCAT(aMacroPointerAtLine, __LINE__));				\
+#define SAFE_DELETE_VECTOR(anStdVector)								\
+for (auto& PP_CONCAT(aMacroPointer, __COUNTER__) : anStdVector) {	\
+	SAFE_DELETE(PP_CONCAT(aMacroPointer, __COUNTER__));				\
 }
 
 #pragma region Common Key Codes
