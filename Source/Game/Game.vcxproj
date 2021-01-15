@@ -141,6 +141,7 @@
     <ClInclude Include="BulletFactory.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionObject.h" />
+    <ClInclude Include="Counter.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Game.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="macros.h" />
+    <ClInclude Include="Pack.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
@@ -172,6 +174,7 @@
     <ClCompile Include="BulletFactory.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
+    <ClCompile Include="Counter.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -180,6 +183,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="Pack.cpp" />
     <ClCompile Include="RenderCommand.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
