@@ -4,14 +4,20 @@ namespace Tga2D
 {
 	class CSprite;
 }
-
-class TypePattern_Enemy
+namespace Studio
 {
-public:
-	TypePattern_Enemy(const std::string& aPath);
-	~TypePattern_Enemy() = default;
-	std::shared_ptr<Tga2D::CSprite> GetSprite();
-private:
-	std::shared_ptr<Tga2D::CSprite> mySprite;
-};
+	class TypePattern_Enemy
+	{
+	public:
+		TypePattern_Enemy(const std::string& aPath, const unsigned int aLayerOrder);
+		~TypePattern_Enemy();
+
+		const unsigned int GetLayerOrder() const;
+		Tga2D::CSprite* GetSprite();
+	private:
+		Tga2D::CSprite* mySprite;
+		const unsigned int myLayerOrder;
+	};
+}
+
 
