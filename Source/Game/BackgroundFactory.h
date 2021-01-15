@@ -9,7 +9,7 @@ namespace Studio
 	{
 	public:
 		BackgroundFactory() = default;
-		~BackgroundFactory() = default;
+		~BackgroundFactory();
 		void InitBackGroundObject(const std::string& aPath, const unsigned int aLayerOrder, const std::string& aType);
 		Studio::BackgroundObject* CreateBackgroundObject(const std::string& aType, const Tga2D::Vector2f& aPosition, float aSpeed);
 		Studio::BackgroundObject* CreateBackgroundObject(const std::string& aType, const Tga2D::Vector2f& aPosition, float aSpeed, const Tga2D::Vector2f& aSize);
