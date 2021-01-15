@@ -40,6 +40,28 @@ void CGameWorld::Init()
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
+	UpdatePlayer(aDeltaTime);
+
+	UpdateEnemies(aDeltaTime);
+
+	CheckIfEnemiesHit();
+	
+	myBackgroundManager.UpdateBackground(aDeltaTime);
+}
+
+void CGameWorld::Render()
+{
+	//myTga2dLogoSprite->Render();
+	myRenderer.Render();
+}
+
+void CGameWorld::SwapBuffers()
+{
+	myRenderer.SwapBuffers();
+}
+
+void CGameWorld::UpdatePlayer(float aDeltaTime)
+{
 	//Uppdaterar och renderar ut spelaren samt dess kulor.
 	myPlayer->Update(aDeltaTime);
 	Studio::RendererAccessor::GetInstance()->Render(*myPlayer);
@@ -47,7 +69,10 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 	{
 		Studio::RendererAccessor::GetInstance()->Render(*myPlayer->GetBullets()[i]);
 	}
+}
 
+void CGameWorld::UpdateEnemies(float aDeltaTime)
+{
 	//Uppdaterar Enemies, Renderar ut dem, samt renderar ut Enemies kulor
 	for (int i = 0; i < myEnemies.size(); i++)
 	{
@@ -63,7 +88,10 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 			myEnemies.erase(myEnemies.begin() + i);
 		}
 	}
+}
 
+void CGameWorld::CheckIfEnemiesHit()
+{
 	for (int i = 0; i < myPlayer->GetBullets().size(); i++)
 	{
 		for (int j = 0; j < myEnemies.size(); j++)
@@ -75,16 +103,4 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 			}
 		}
 	}
-	myBackgroundManager.UpdateBackground(aDeltaTime);
-}
-
-void CGameWorld::Render()
-{
-	//myTga2dLogoSprite->Render();
-	myRenderer.Render();
-}
-
-void CGameWorld::SwapBuffers()
-{
-	myRenderer.SwapBuffers();
 }

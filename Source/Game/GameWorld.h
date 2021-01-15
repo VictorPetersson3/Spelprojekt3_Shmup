@@ -26,6 +26,10 @@ public:
 	void Render();
 	void SwapBuffers();
 private:
+	void UpdatePlayer(float aDeltaTime);
+	void UpdateEnemies(float aDeltaTime);
+	void CheckIfEnemiesHit();
+private:
 	Studio::BackgroundManager myBackgroundManager;
 	Renderer myRenderer;
 	Tga2D::CSprite* myTga2dLogoSprite;
