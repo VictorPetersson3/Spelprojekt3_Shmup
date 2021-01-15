@@ -12,6 +12,7 @@ namespace Studio
 		public:
 			RenderCommand();
 			RenderCommand(Tga2D::CSprite* aSprite);
+			RenderCommand(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
 			~RenderCommand();
 
 			virtual void Update(const Tga2D::Vector2f& aPos);

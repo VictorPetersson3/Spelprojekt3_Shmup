@@ -34,6 +34,7 @@ void CGameWorld::Init()
 		auto enemy = new Studio::Enemy(new Tga2D::CSprite("sprites/debugpixel.dds"), { 0.9f, 0.5f });
 		myEnemies.push_back(enemy);
 	}
+	myBackgroundManager.CreateTestMapBackground(5120.f);
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
@@ -74,7 +75,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 			}
 		}
 	}
-
+	myBackgroundManager.UpdateBackground(aDeltaTime);
 }
 
 void CGameWorld::Render()

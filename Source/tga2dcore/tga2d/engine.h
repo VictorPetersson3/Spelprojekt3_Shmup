@@ -71,8 +71,8 @@ namespace Tga2D
         { 
             myHwnd							= nullptr; 
             myHInstance						= nullptr;  
-            myWindowWidth					= 1280;
-            myWindowHeight					= 720; 
+            myWindowWidth					= 1920;
+            myWindowHeight					= 1080; 
             myEnableVSync					= false; 
             myRenderWidth					= myWindowWidth; 
             myRenderHeight					= myWindowHeight; 

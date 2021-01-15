@@ -16,6 +16,14 @@ namespace Studio
 		myScale = Tga2D::Vector2f::One;
 	}
 
+	RenderCommand::RenderCommand(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) :
+		mySprite(aSprite)
+	{
+		myPosition = Tga2D::Vector2f::One;
+		myRotation = 0;
+		SetScale(aSize);
+	}
+
 	RenderCommand::~RenderCommand()
 	{
 	}
@@ -58,6 +66,7 @@ namespace Studio
 	void RenderCommand::SetScale(const Tga2D::Vector2f& aScale)
 	{
 		myScale = aScale;
+		mySprite->SetSizeRelativeToImage(aScale);
 	}
 
 	Tga2D::CSprite* RenderCommand::GetSprite() const
