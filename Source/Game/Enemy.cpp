@@ -12,6 +12,7 @@ namespace Studio
 		myPosition = aSpawnPosition;
 		mySpeed = 0.05f;
 		myShootCooldown = 0.0f;
+		myScoreValue = 100;
 		mySprite = aSprite;
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
@@ -46,6 +47,11 @@ namespace Studio
 			myBullets.push_back(new Bullet(myPosition, -0.2f, myBulletSprite));
 			myShootCooldown = 0;
 		}
+	}
+
+	int Enemy::GetScoreValue()
+	{
+		return myScoreValue;
 	}
 
 	VECTOR2F Enemy::GetPosition()
