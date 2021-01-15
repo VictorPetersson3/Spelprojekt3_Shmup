@@ -18,6 +18,8 @@ namespace Studio
 		void Update(float aDeltaTime);
 		void Shoot(float aDeltaTime);
 
+		int GetScoreValue();
+
 		VECTOR2F GetPosition();
 
 		std::vector<Bullet*>& GetBullets();
@@ -27,8 +29,11 @@ namespace Studio
 	private:
 		void UpdateBullets(float aDeltaTime);
 	private:
+		int myScoreValue;
+
 		float mySpeed;
 		float myShootCooldown;
+
 		std::vector<Bullet*> myBullets;
 
 		Tga2D::CSprite* mySprite;
