@@ -134,10 +134,15 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundFactory.h" />
+    <ClInclude Include="BackgroundObject.h" />
+    <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletFactory.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameWorld.h" />
@@ -153,12 +158,20 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TypePattern_Background.h" />
+    <ClInclude Include="TypePattern_Bullet.h" />
+    <ClInclude Include="TypePattern_Enemy.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundFactory.cpp" />
+    <ClCompile Include="BackgroundObject.cpp" />
+    <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletFactory.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWorld.cpp" />
@@ -175,6 +188,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TypePattern_Background.cpp" />
+    <ClCompile Include="TypePattern_Bullet.cpp" />
+    <ClCompile Include="TypePattern_Enemy.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

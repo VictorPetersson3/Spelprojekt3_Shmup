@@ -43,6 +43,14 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>GameObjects\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundObject.cpp" />
+    <ClCompile Include="BulletFactory.cpp" />
+    <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="TypePattern_Bullet.cpp" />
+    <ClCompile Include="TypePattern_Enemy.cpp" />
+    <ClCompile Include="TypePattern_Background.cpp" />
+    <ClCompile Include="BackgroundFactory.cpp" />
+    <ClCompile Include="BackgroundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Health.h" />
@@ -92,6 +100,14 @@
     <ClInclude Include="Enemy.h">
       <Filter>GameObjects\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="BackgroundObject.h" />
+    <ClInclude Include="BulletFactory.h" />
+    <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="TypePattern_Bullet.h" />
+    <ClInclude Include="TypePattern_Enemy.h" />
+    <ClInclude Include="TypePattern_Background.h" />
+    <ClInclude Include="BackgroundFactory.h" />
+    <ClInclude Include="BackgroundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BaseObjects">

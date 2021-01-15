@@ -1,5 +1,6 @@
 #pragma once
 #include "Renderer.h"
+#include "BackgroundManager.h"
 #include <vector>
 
 namespace Studio
@@ -25,6 +26,7 @@ public:
 	void Render();
 	void SwapBuffers();
 private:
+	Studio::BackgroundManager myBackgroundManager;
 	Renderer myRenderer;
 	Tga2D::CSprite* myTga2dLogoSprite;
 	Studio::Player* myPlayer;

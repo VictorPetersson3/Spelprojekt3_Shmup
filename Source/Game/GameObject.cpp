@@ -5,6 +5,9 @@ namespace Studio
 	GameObject::GameObject(Tga2D::CSprite* aSprite) : myRenderCommand(aSprite)
 	{
 	}
+	GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize)
+	{
+	}
 	void GameObject::Update(const Tga2D::Vector2f& aPos)
 	{
 		myRenderCommand.Update(aPos);
