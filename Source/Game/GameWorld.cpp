@@ -31,7 +31,7 @@ void CGameWorld::Init()
 	
 	for (int i = 0; i < 1; i++)
 	{
-		auto enemy = new Studio::Enemy(new Tga2D::CSprite("sprites/debugpixel.dds"));
+		auto enemy = new Studio::Enemy(new Tga2D::CSprite("sprites/debugpixel.dds"), { 0.9f, 0.5f });
 		myEnemies.push_back(enemy);
 	}
 }
@@ -62,6 +62,19 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 			myEnemies.erase(myEnemies.begin() + i);
 		}
 	}
+
+	for (int i = 0; i < myPlayer->GetBullets().size(); i++)
+	{
+		for (int j = 0; j < myEnemies.size(); j++)
+		{
+			if (myPlayer->GetBullets()[i]->Intersects(*myEnemies[j]))
+			{
+				myEnemies.erase(myEnemies.begin() + j);
+				break;
+			}
+		}
+	}
+
 }
 
 void CGameWorld::Render()

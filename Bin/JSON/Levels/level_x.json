@@ -1,0 +1,73 @@
+{
+    "Packs": [
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": [
+          {
+            "Type": "Enemy",
+            "Position": {
+              "X": 0,
+              "Y": 0
+            },
+            "Timer": 0
+          }
+        ]
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      },
+      {
+        "ExitCondition": {
+          "Type": "WaitTillAllEnemiesAreDead"
+        },
+        "Enemies": []
+      }
+    ]
+  }

@@ -36,4 +36,8 @@ namespace Studio
 	{
 		return myCollider.Contains(aGameObject.myCollider);
 	}
+	Collider& GameObject::GetCollider()
+	{
+		return myCollider;
+	}
 }
