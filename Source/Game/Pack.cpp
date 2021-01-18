@@ -26,8 +26,8 @@ namespace Studio
 				x = enemies[i]["Position"]["X"].GetFloat();
 				y = enemies[i]["Position"]["Y"].GetFloat();
 
-				x = (1.0f) - (x / 100.0f);
-				y = (y / 100.0f) + 0.5f;
+				x = (1.0f) - (x / SCREEN_WIDTH);
+				y = (y / SCREEN_HEIGHT) + 0.5f;
 
 				// Store the interval at when the enemy should be spawned
 				myTimedIntervals.push_back(enemies[i]["Timer"].GetFloat() / 1000.0f);
