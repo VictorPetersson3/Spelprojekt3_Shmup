@@ -1,4 +1,50 @@
 ﻿  stdafx.cpp
+  AudioClip.cpp
+  AudioManager.cpp
+  AudioManagerAccesor.cpp
+  BackgroundFactory.cpp
+  BackgroundObject.cpp
+  BackgroundManager.cpp
+  Bullet.cpp
+  BulletFactory.cpp
+  Collider.cpp
+  CollisionObject.cpp
+  Enemy.cpp
+  EnemyFactory.cpp
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\Collider.cpp(63,42): warning C4100: 'aCollider': unreferenced formal parameter
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\Collider.cpp(83,97): warning C4100: 'anAABBCollisionObject': unreferenced formal parameter
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\Collider.cpp(83,56): warning C4100: 'aCircleCollisionObject': unreferenced formal parameter
   Game.cpp
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\BackgroundManager.cpp(17,152): warning C4305: 'argument': truncation from 'double' to 'Type'
+          with
+          [
+              Type=float
+          ]
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\BackgroundManager.cpp(25,150): warning C4305: 'argument': truncation from 'double' to 'Type'
+          with
+          [
+              Type=float
+          ]
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\BackgroundManager.cpp(39,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  GameObject.cpp
   GameWorld.cpp
-  Game.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\..\Lib\Game_Debug.lib
+  InputManager.cpp
+  Health.cpp
+  LevelManager.cpp
+  MenuManager.cpp
+  MenuObject.cpp
+  RenderCommand.cpp
+  Player.cpp
+  Renderer.cpp
+  RendererAccessor.cpp
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\RenderCommand.cpp(52,70): warning C4100: 'aRotation': unreferenced formal parameter
+  Sprite.cpp
+  Timer.cpp
+  TypePattern_Background.cpp
+  TypePattern_Bullet.cpp
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\MenuObject.cpp(42): warning C4715: 'Studio::MenuObject::GetElementWithTag': not all control paths return a value
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\MenuObject.cpp(39): warning C4172: returning address of local variable or temporary: e
+  TypePattern_Enemy.cpp
+  UIElement.cpp
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\Game\GameWorld.cpp(41,62): warning C4100: 'aIsPlaying': unreferenced formal parameter
+  Game.vcxproj -> C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Lib\Game_Debug.lib
