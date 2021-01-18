@@ -3,15 +3,6 @@
 #include "BackgroundObject.h"
 
 
-Studio::BackgroundFactory::~BackgroundFactory()
-{
-	for (auto it = myBackgroundObjects.begin(); it != myBackgroundObjects.end(); ++it)
-	{
-		delete (*it).second;
-		SAFE_DELETE((*it).second);
-	}
-}
-
 void Studio::BackgroundFactory::InitBackGroundObject(const std::string& aPath, const unsigned int aLayerOrder, const std::string& aType)
 {
 	std::pair<std::string, Studio::TypePattern_Background*> temp_pair(aType, new Studio::TypePattern_Background(aPath, aLayerOrder));
