@@ -5,10 +5,6 @@ Studio::UIElement::UIElement()
 {
 }
 
-void Studio::UIElement::Update()
-{
-}
-
 bool Studio::UIElement::IsClicked()
 {
     return false;
