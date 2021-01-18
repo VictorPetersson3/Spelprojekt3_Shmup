@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include <vector>
+
 namespace Tga2D
 {
 	class CSprite;
@@ -9,6 +10,7 @@ namespace Studio
 {
 	class RenderCommand;
 	class Bullet;
+	class Movement;
 	class Enemy : public GameObject
 	{
 	public:
@@ -38,6 +40,9 @@ namespace Studio
 
 		Tga2D::CSprite* mySprite;
 		Tga2D::CSprite* myBulletSprite;
+
+		Movement* myMovement;
+
 		VECTOR2F myPosition;
 
 	};
