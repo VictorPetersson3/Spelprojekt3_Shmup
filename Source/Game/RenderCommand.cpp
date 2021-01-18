@@ -31,34 +31,29 @@ namespace Studio
 	void RenderCommand::Update(const Tga2D::Vector2f& aPos)
 	{
 		myPosition = aPos;
-		mySprite->SetPosition({ myPosition.x, myPosition.y });
 	}
 
 	void RenderCommand::Update(const Tga2D::Vector2f& aPos, Tga2D::CSprite* aSprite)
 	{
 		mySprite = aSprite;
 		myPosition = aPos;
-		mySprite->SetPosition({ myPosition.x, myPosition.y });
 	}
 
 	void RenderCommand::Update(Tga2D::CSprite* aSprite, const float aRotation)
 	{
 		mySprite = aSprite;
 		myRotation += aRotation;
-		mySprite->SetRotation(myRotation);
-		mySprite->SetPosition({ myPosition.x, myPosition.y });
 	}
 
 	void RenderCommand::Update(const Tga2D::Vector2f& aPos, const float aRotation, Tga2D::CSprite* aSprite)
 	{
 		mySprite = aSprite;
 		myPosition = aPos;
-		mySprite->SetRotation(myRotation);
-		mySprite->SetPosition({ myPosition.x, myPosition.y });
 	}
 
 	void RenderCommand::Render()
 	{
+		mySprite->SetRotation(myRotation);
 		mySprite->SetPosition({ myPosition.x, myPosition.y });
 		mySprite->Render();
 	}

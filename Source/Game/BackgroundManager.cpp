@@ -20,7 +20,7 @@ void Studio::BackgroundManager::CreateTestMapBackground(float LevelWidth)
 	
 	for (int i = 0; i < 10; i++)
 	{
-		myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject("Mountains", Tga2D::Vector2f({((512.f / static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x))) * i, 0.873f }), -0.025f));
+		myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject("Mountains", Tga2D::Vector2f({((512.f / static_cast<float>(Tga2D::CEngine::GetInstance()->GetRenderSize().x))) * i, 0.873f }), -0.025f));
 	}
 	myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject("Gradient", Tga2D::Vector2f({ 0.5, 0.5 }), 0, Tga2D::Vector2f({ 1.1, 1.1 })));
 
