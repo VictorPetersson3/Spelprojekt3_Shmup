@@ -5,6 +5,7 @@
 namespace Studio
 {
 	class Enemy;
+	class TypePattern_Enemy;
 	class EnemyFactory
 	{
 	public:

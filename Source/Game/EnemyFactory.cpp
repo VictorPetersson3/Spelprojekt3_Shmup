@@ -29,3 +29,4 @@ Studio::Enemy* Studio::EnemyFactory::CreateEnemyObject(const std::string& aType,
 	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjects.at(aType)->GetSprite(), aPosition);
 	return tempObject;
 }
+
