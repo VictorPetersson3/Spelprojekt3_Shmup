@@ -8,7 +8,7 @@
 
 void Studio::BackgroundManager::CreateTestMapBackground(float LevelWidth)
 {
-	myLevelWidth = LevelWidth / static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x);
+	myLevelWidth = LevelWidth / static_cast<float>(Tga2D::CEngine::GetInstance()->GetRenderSize().x);
 	myBackgroundFactory.InitBackGroundObject("sprites/Background/Background_Background_01.dds", 0, "Background");
 	myBackgroundFactory.InitBackGroundObject("sprites/Background/Background_MountainRange_TileAble.dds", 1, "Mountains");
 	myBackgroundFactory.InitBackGroundObject("sprites/Background/Background_GradientBackground_01.dds", 2, "Gradient");
@@ -20,7 +20,7 @@ void Studio::BackgroundManager::CreateTestMapBackground(float LevelWidth)
 	
 	for (int i = 0; i < 10; i++)
 	{
-		myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject("Mountains", Tga2D::Vector2f({((512.f / static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x))) * i, 0.873f }), -0.025f));
+		myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject("Mountains", Tga2D::Vector2f({((512.f / static_cast<float>(Tga2D::CEngine::GetInstance()->GetRenderSize().x))) * i, 0.873f }), -0.025f));
 	}
 	myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject("Gradient", Tga2D::Vector2f({ 0.5, 0.5 }), 0, Tga2D::Vector2f({ 1.1, 1.1 })));
 
@@ -36,7 +36,7 @@ void Studio::BackgroundManager::CreateTestMapBackground(float LevelWidth)
 
 void Studio::BackgroundManager::UpdateBackground(float aDeltaTime)
 {
-	for (int i = myBackgroundObjects.size(); i-- > 0;)
+	for (int i = 0; i < myBackgroundObjects.size(); i++)
 	{
 		myBackgroundObjects.at(i)->Update(aDeltaTime);
 		if (myBackgroundObjects.at(i)->GetPosition().x < -0.5)

@@ -7,39 +7,74 @@
 // Spelfiler
 #include "Timer.h"
 #include "Enemy.h"
+#include "Bullet.h"
+#include "Pack.h"
+#include "EnemyFactory.h"
 
 // Rendering
 #include "RendererAccessor.h"
 #include "Renderer.h"
-
 #include <tga2d/sprite/sprite.h>
 
 namespace Studio
 {
 	LevelManager::LevelManager()
 	{
+		SAFE_CREATE(myEnemyFactory, EnemyFactory());
+
+		myEnemyFactory->InitEnemyType("Sprites/debugpixel.dds", 999, "Default");
+		//															    ^ key
 		LoadLevel("JSON/Levels/level_x.json");
 	}
 
 	LevelManager::~LevelManager()
 	{
-		for (size_t i = 0; i < myEnemes.size(); i++)
-		{
-			SAFE_DELETE(myEnemes[i]);
-		}
+		myEnemyFactory->~EnemyFactory();
+		SAFE_DELETE(myEnemyFactory);
+		SAFE_DELETE_VECTOR(myPacks);
+		SAFE_DELETE_VECTOR(myEnemies);
+		SAFE_DELETE_VECTOR(myBullets);
 	}
 
 	void LevelManager::Update()
 	{
-		for (size_t i = 0; i < myEnemes.size(); i++)
+		// Pack
+		if (!myCurrentPack->ExitConditionIsMet())
 		{
-			myEnemes[i]->Update(Studio::Timer::GetInstance()->TGetDeltaTime());
-			Studio::RendererAccessor::GetInstance()->Render(*myEnemes[i]);
+			myCurrentPack->Update();
 		}
+
+		for (size_t i = 0; i < myEnemies.size(); i++)
+		{
+			myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
+			Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
+			for (int j = 0; j < myEnemies[i]->GetBullets().size(); j++)
+			{
+				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]->GetBullets()[j]);
+			}
+
+			if (myEnemies[i]->GetPosition().x < 0.0f)
+			{
+				myEnemies.erase(myEnemies.begin() + i);
+			}
+		}
+	}
+
+	const char* LevelManager::CurrentLevelPath()
+	{
+		return myCurrentLevelPath;
+	}
+
+	void LevelManager::AddEnemy(Enemy* anEnemy)
+	{
+		printf_s("Recieved an enemy\n");
+		myEnemies.push_back(anEnemy);
 	}
 
 	void LevelManager::LoadLevel(const char* aLevelPath)
 	{
+		myCurrentLevelPath = aLevelPath;
+
 		rapidjson::Document document;
 
 		std::string text;
@@ -55,25 +90,24 @@ namespace Studio
 		file.close();
 		document.Parse(text.c_str());
 
-		auto enemies = document["Packs"].GetArray()[0]["Enemies"].GetArray();
-
-		printf_s("===JSON===\n%s\n==========\n", text.c_str());
-
-		for (rapidjson::SizeType i = 0; i < enemies.Size(); i++)
+		if (document.HasMember("Packs"))
 		{
-			printf_s("Enemy Number %i\n", i + 1);
+			auto packs = document["Packs"].GetArray();
 
-			auto pixel = new Tga2D::CSprite("Sprites/debugpixel.dds");
-			pixel->SetSizeRelativeToImage({ 64, 64 });
+			printf_s("===JSON===\n%s\n==========\n", text.c_str());
 
-			float x, y;
+			for (rapidjson::SizeType i = 0; i < packs.Size(); i++)
+			{
+				myPacks.push_back(new Pack(this, packs[i]));
+			}
 
-			x = 1.0f - enemies[i]["Position"]["X"].GetFloat() / 100.0f;
-			y = 0.5f + enemies[i]["Position"]["Y"].GetFloat() / 100.0f;
-
-			SAFE_CREATE(auto enemy, Studio::Enemy(pixel, { x, y }));
-
-			myEnemes.push_back(enemy);
+			myCurrentPack = myPacks[0];
+		}
+		else
+		{
+			SETCONSOLECOLOR(12);
+			printf_s("ERROR: \"%s\" is missing packs\n", myCurrentLevelPath);
+			SETCONSOLECOLOR(15);
 		}
 	}
 }
