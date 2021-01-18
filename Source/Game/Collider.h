@@ -18,6 +18,8 @@ namespace Studio
 		// Not implemented
 		bool Contains(const Collider& aCollider);
 
+		void Render();
+
 	private:
 		bool CircleToCircleIntersect(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject);
 
@@ -27,5 +29,10 @@ namespace Studio
 
 		std::vector<CollisionObject> myCollisionObjects;
 
+		bool flag
+#ifdef SHOW_COLLISION
+			= true
+#endif // SHOW_COLLISION
+			;
 	};
 }
