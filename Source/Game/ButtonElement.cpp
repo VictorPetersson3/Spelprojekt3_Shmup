@@ -5,22 +5,37 @@
 #include "RendererAccessor.h"
 #include "Renderer.h"
 
-    Studio::ButtonElement::ButtonElement(const char* aID, const char* aPath, VECTOR2F aPosition, VECTOR2F aSize)
-    {
-        mySprite = new Tga2D::CSprite(aPath);
+Studio::ButtonElement::ButtonElement()
+{
 
-        mySprite->SetPosition(aPosition);
-        mySprite->SetSizeRelativeToImage(aSize);
+    mySprite->SetPivot({0.5f,0.5f});
+    mySprite->SetPosition({ 0,0 });
+    mySprite->SetSizeRelativeToImage({ 1,1 });
 
-        myLeft = mySprite->GetPosition().x - (mySprite->GetSize().x / 2);
-        myRight = mySprite->GetPosition().x + (mySprite->GetSize().x / 2);
-        myTop = mySprite->GetPosition().y - (mySprite->GetSize().y / 2);
-        myBottom = mySprite->GetPosition().y + (mySprite->GetSize().y / 2);
+    myLeft = 0;
+    myRight = 0;
+    myTop = 0;
+    myBottom = 0;
+}
 
-        myRenderCommand = RenderCommand(mySprite);
+Studio::ButtonElement::ButtonElement(const char* aID, const char* aPath, VECTOR2F aPosition, VECTOR2F aSize, VECTOR2F aPivot)
+{
+    mySprite = new Tga2D::CSprite(aPath);
 
-        myId = aID;
-    }
+    mySprite->SetPivot(aPivot);
+    mySprite->SetPosition(aPosition);
+    mySprite->SetSizeRelativeToImage(aSize);
+
+
+    myLeft = mySprite->GetPosition().x - (mySprite->GetSize().x / 2);
+    myRight = mySprite->GetPosition().x + (mySprite->GetSize().x / 2);
+    myTop = mySprite->GetPosition().y - (mySprite->GetSize().y / 2);
+    myBottom = mySprite->GetPosition().y + (mySprite->GetSize().y / 2);
+
+    myRenderCommand = RenderCommand(mySprite);
+
+    myId = aID;
+}
 
     Studio::ButtonElement::~ButtonElement()
     {
