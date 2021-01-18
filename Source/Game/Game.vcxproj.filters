@@ -83,6 +83,7 @@
     <ClCompile Include="BackgroundManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Pack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -172,6 +173,10 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Tga2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Pack.h" />
+    <ClInclude Include="Counter.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
