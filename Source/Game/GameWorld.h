@@ -7,7 +7,6 @@ namespace Studio
 {
 	class Player;
 	class Enemy;
-	class LevelManager;
 }
 namespace Tga2D
 {
@@ -36,6 +35,5 @@ private:
 	Tga2D::CSprite* myTga2dLogoSprite;
 	Studio::Player* myPlayer;
 
-	Studio::LevelManager* myLevelManager;
 	std::vector<Studio::Enemy*> myEnemies;
 };
