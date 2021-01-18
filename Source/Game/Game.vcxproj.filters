@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Health.cpp" />
-    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Collider.cpp">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClCompile>
     <ClCompile Include="CollisionObject.cpp">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Main</Filter>
@@ -19,7 +17,7 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="RenderCommand.cpp">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Utility</Filter>
@@ -39,36 +37,62 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>GameObjects\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="RendererAccessor.cpp" />
     <ClCompile Include="Enemy.cpp">
       <Filter>GameObjects\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="BackgroundObject.cpp" />
-    <ClCompile Include="BulletFactory.cpp" />
-    <ClCompile Include="EnemyFactory.cpp" />
-    <ClCompile Include="TypePattern_Bullet.cpp" />
-    <ClCompile Include="TypePattern_Enemy.cpp" />
-    <ClCompile Include="TypePattern_Background.cpp" />
-    <ClCompile Include="BackgroundFactory.cpp" />
-    <ClCompile Include="BackgroundManager.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Score.cpp" />
-    <ClCompile Include="Counter.cpp" />
-    <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="TypePattern_Background.cpp">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClCompile>
+    <ClCompile Include="TypePattern_Bullet.cpp">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClCompile>
+    <ClCompile Include="TypePattern_Enemy.cpp">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererAccessor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundObject.cpp">
+      <Filter>GameObjects\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Components\BaseObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Counter.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Health.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="Collider.h">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClInclude>
     <ClInclude Include="CollisionObject.h">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Main</Filter>
@@ -77,7 +101,7 @@
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="RenderCommand.h">
-      <Filter>BaseObjects</Filter>
+      <Filter>Components\BaseObjects</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Utility</Filter>
@@ -100,26 +124,57 @@
     <ClInclude Include="macros.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="RendererAccessor.h" />
     <ClInclude Include="Enemy.h">
       <Filter>GameObjects\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="BackgroundObject.h" />
-    <ClInclude Include="BulletFactory.h" />
-    <ClInclude Include="EnemyFactory.h" />
-    <ClInclude Include="TypePattern_Bullet.h" />
-    <ClInclude Include="TypePattern_Enemy.h" />
-    <ClInclude Include="TypePattern_Background.h" />
-    <ClInclude Include="BackgroundFactory.h" />
-    <ClInclude Include="BackgroundManager.h" />
-    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Score.h" />
-    <ClInclude Include="Movement.h" />
+    <ClInclude Include="TypePattern_Background.h">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClInclude>
+    <ClInclude Include="TypePattern_Bullet.h">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClInclude>
+    <ClInclude Include="TypePattern_Enemy.h">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererAccessor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundObject.h">
+      <Filter>GameObjects\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Components\BaseObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Tga2D</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Tga2D</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Tga2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="BaseObjects">
-      <UniqueIdentifier>{c8821333-31d0-4e7a-90ad-e946cd83c4f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{e96d45b3-f73f-456d-8ad0-6d7277eec0bd}</UniqueIdentifier>
     </Filter>
@@ -140,6 +195,30 @@
     </Filter>
     <Filter Include="GameObjects\Enemy">
       <UniqueIdentifier>{d8ab0d0e-5cfc-4a52-bc0e-4002b4210b45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\TypePatterns">
+      <UniqueIdentifier>{d8bd672e-4621-41e4-b8ea-14e6a9938ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Accessors">
+      <UniqueIdentifier>{b28a7e99-02d8-4fdd-ba76-863512f61d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factories">
+      <UniqueIdentifier>{b51d3f45-8b75-4d4a-b4a2-6a292aa4eba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Background">
+      <UniqueIdentifier>{0e91fbec-6711-458e-a791-9d00bedb1949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{31bd57a0-eb04-4e2f-8b7c-5590dd4d0b11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\BaseObjects">
+      <UniqueIdentifier>{c8821333-31d0-4e7a-90ad-e946cd83c4f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{a51c7744-494a-41ce-a5b2-fabe794a933c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tga2D">
+      <UniqueIdentifier>{c1e054b0-c720-43de-a48f-5e33481928f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
