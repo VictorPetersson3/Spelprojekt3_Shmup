@@ -40,3 +40,6 @@ for (auto& PP_CONCAT(aMacroPointerAtLine, __LINE__) : anStdVector) {	\
 #define KEY_NUMPAD_8	104
 #define KEY_NUMPAD_9	105
 #pragma endregion
+
+#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH  1920
