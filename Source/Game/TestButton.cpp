@@ -20,10 +20,10 @@ Studio::TestButton::TestButton(const char* aID, const char* aPath, VECTOR2F aPos
 
     myRenderCommand = RenderCommand(mySprite);
 
-    myId = aID;
+   // myId = aID;
 }
 
-void Studio::TestButton::OnClick()
-{
-	std::cout << "GUI Button pressed" << std::endl;
-}
+//void Studio::TestButton::OnClick()
+//{
+//	std::cout << "GUI Button pressed" << std::endl;
+//}
