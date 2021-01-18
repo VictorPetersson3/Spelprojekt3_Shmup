@@ -142,7 +142,6 @@
     <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletFactory.h" />
-    <ClInclude Include="ButtonElement.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="Enemy.h" />
@@ -165,7 +164,6 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TestButton.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TypePattern_Background.h" />
     <ClInclude Include="TypePattern_Bullet.h" />
@@ -181,7 +179,6 @@
     <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
-    <ClCompile Include="ButtonElement.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -205,7 +202,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestButton.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TypePattern_Background.cpp" />
     <ClCompile Include="TypePattern_Bullet.cpp" />

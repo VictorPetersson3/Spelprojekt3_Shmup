@@ -13,8 +13,7 @@ namespace Studio
 	class ButtonElement : public UIElement
 	{
 	public:
-		ButtonElement();
-		ButtonElement(const char* aID,const char* aPath, VECTOR2F aPosition, VECTOR2F aSize, VECTOR2F aPivot);
+		ButtonElement(const char* aID,const char* aPath, VECTOR2F aPosition, VECTOR2F aSize);
 		~ButtonElement();
 		bool IsClicked() override;
 
@@ -25,7 +24,7 @@ namespace Studio
 
 		void ResetButton();
 
-	protected:
+	private:
 		Tga2D::CSprite* mySprite;
 
 		std::string myId;
