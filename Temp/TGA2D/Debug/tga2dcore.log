@@ -36,9 +36,9 @@
   shader_model.cpp
   shader_normal.cpp
   shader_normal_instanced.cpp
-D:\Github\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(321,36): warning C4018: '<': signed/unsigned mismatch
-D:\Github\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(508,48): warning C4100: 'aMapType': unreferenced formal parameter
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(321,36): warning C4018: '<': signed/unsigned mismatch
   sprite.cpp
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(508,48): warning C4100: 'aMapType': unreferenced formal parameter
   sprite_batch.cpp
   textured_quad.cpp
   textured_quad_batch.cpp
@@ -60,4 +60,4 @@ D:\Github\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(508,48
   imgui_impl_dx11.cpp
   imgui_impl_win32.cpp
   imgui_widgets.cpp
-  tga2dcore.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\..\Lib\TGA2D_Debug.lib
+  tga2dcore.vcxproj -> C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Lib\TGA2D_Debug.lib

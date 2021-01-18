@@ -5,14 +5,8 @@
 #include "RendererAccessor.h"
 #include "Renderer.h"
 
-<<<<<<< HEAD
 Studio::ButtonElement::ButtonElement()
 {
-=======
-    Studio::ButtonElement::ButtonElement(const char* aPath, VECTOR2F aPosition, VECTOR2F aSize)
-    {
-        mySprite = new Tga2D::CSprite(aPath);
->>>>>>> parent of 4a642b0... Audio and Ui updates
 
     mySprite->SetPivot({0.5f,0.5f});
     mySprite->SetPosition({ 0,0 });
@@ -24,7 +18,6 @@ Studio::ButtonElement::ButtonElement()
     myBottom = 0;
 }
 
-<<<<<<< HEAD
 Studio::ButtonElement::ButtonElement(const char* aID, const char* aPath, VECTOR2F aPosition, VECTOR2F aSize, VECTOR2F aPivot)
 {
     mySprite = new Tga2D::CSprite(aPath);
@@ -43,10 +36,6 @@ Studio::ButtonElement::ButtonElement(const char* aID, const char* aPath, VECTOR2
 
     myId = aID;
 }
-=======
-        myRenderCommand = RenderCommand(mySprite);
-    }
->>>>>>> parent of 4a642b0... Audio and Ui updates
 
     Studio::ButtonElement::~ButtonElement()
     {
@@ -77,6 +66,27 @@ Studio::ButtonElement::ButtonElement(const char* aID, const char* aPath, VECTOR2
     void Studio::ButtonElement::Render()
     {
         Studio::RendererAccessor::GetInstance()->RenderRenderCommand(myRenderCommand);
+    }
+
+    void Studio::ButtonElement::Update()
+    {
+        if (myIsEnabled == true)
+        {
+            if (Studio::InputManager::GetInstance()->GetMousePosition().x >= myLeft && Studio::InputManager::GetInstance()->GetMousePosition().x <= myRight)
+            {
+                if (Studio::InputManager::GetInstance()->GetMousePosition().y >= myTop && Studio::InputManager::GetInstance()->GetMousePosition().x <= myBottom)
+                {
+                    if (Studio::InputManager::GetInstance()->GetMouseLDown() && myHasBeenClicked == false)
+                    {
+                        OnClick();
+                    }
+                }
+            }
+        }
+    }
+
+    void Studio::ButtonElement::OnClick()
+    {
     }
 
     void Studio::ButtonElement::ResetButton()
