@@ -134,9 +134,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AudioClip.h" />
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="AudioManagerAccesor.h" />
     <ClInclude Include="BackgroundFactory.h" />
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundManager.h" />
@@ -154,8 +151,6 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="macros.h" />
-    <ClInclude Include="MenuManager.h" />
-    <ClInclude Include="MenuObject.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
@@ -170,12 +165,8 @@
     <ClInclude Include="TypePattern_Background.h" />
     <ClInclude Include="TypePattern_Bullet.h" />
     <ClInclude Include="TypePattern_Enemy.h" />
-    <ClInclude Include="UIElement.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AudioClip.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="AudioManagerAccesor.cpp" />
     <ClCompile Include="BackgroundFactory.cpp" />
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundManager.cpp" />
@@ -192,8 +183,6 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="MenuManager.cpp" />
-    <ClCompile Include="MenuObject.cpp" />
     <ClCompile Include="RenderCommand.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -210,7 +199,6 @@
     <ClCompile Include="TypePattern_Background.cpp" />
     <ClCompile Include="TypePattern_Bullet.cpp" />
     <ClCompile Include="TypePattern_Enemy.cpp" />
-    <ClCompile Include="UIElement.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

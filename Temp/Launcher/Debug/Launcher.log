@@ -1,5 +1,2 @@
 ﻿  Main.cpp
-CommonUtilities_Debug_x64.lib(CURandom.obj) : warning LNK4099: PDB 'CommonUtilities.pdb' was not found with 'CommonUtilities_Debug_x64.lib(CURandom.obj)' or at 'C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Bin\CommonUtilities.pdb'; linking object as if no debug info
-CommonUtilities_Debug_x64.lib(InputManager.obj) : warning LNK4099: PDB 'CommonUtilities.pdb' was not found with 'CommonUtilities_Debug_x64.lib(InputManager.obj)' or at 'C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Bin\CommonUtilities.pdb'; linking object as if no debug info
-CommonUtilities_Debug_x64.lib(Timer.obj) : warning LNK4099: PDB 'CommonUtilities.pdb' was not found with 'CommonUtilities_Debug_x64.lib(Timer.obj)' or at 'C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Bin\CommonUtilities.pdb'; linking object as if no debug info
-  Launcher.vcxproj -> C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Bin\Launcher_Debug.exe
+  Launcher.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\..\Bin\Launcher_Debug.exe
