@@ -53,6 +53,8 @@
     <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Score.cpp" />
+    <ClCompile Include="Pack.cpp" />
+    <ClCompile Include="Counter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Health.h" />
@@ -112,6 +114,8 @@
     <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Score.h" />
+    <ClInclude Include="Pack.h" />
+    <ClInclude Include="Counter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BaseObjects">

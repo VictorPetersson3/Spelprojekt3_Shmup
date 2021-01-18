@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "Enemy.h"
 
+// Rendering
 #include "RendererAccessor.h"
 #include "Renderer.h"
 
