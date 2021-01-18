@@ -58,6 +58,14 @@ namespace Studio
 						return true;
 					}
 				}
+				if (myCollisionObjects[i].GetColliderType() == ColliderType::BoxCollider &&
+					aCollider.myCollisionObjects[j].GetColliderType() == ColliderType::CircleCollider)
+				{
+					if (CircleToAABBIntersect(aCollider.myCollisionObjects[j], myCollisionObjects[i]))
+					{
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -106,14 +114,23 @@ namespace Studio
 	}
 	bool Collider::CircleToAABBIntersect(CollisionObject& aCircleCollisionObject, CollisionObject& anAABBCollisionObject)
 	{
+		float deltaX = aCircleCollisionObject.GetPosition().x - anAABBCollisionObject.GetPosition().x;
+		float deltaY = aCircleCollisionObject.GetPosition().y - anAABBCollisionObject.GetPosition().y;
+
+		float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
+
+		if (distance < aCircleCollisionObject.GetRadius() + ((anAABBCollisionObject.GetWidth() + anAABBCollisionObject.GetHeight()) / 2))
+		{
+			return true;
+		}
 		return false;
 	}
 	bool Collider::AABBToAABBIntersect(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject)
 	{
-		if (aFirstCollisionObject.GetPosition().x < aSecondCollisionObject.GetPosition().x + aSecondCollisionObject.GetWidth() &&
-			aFirstCollisionObject.GetPosition().x + aFirstCollisionObject.GetWidth() > aSecondCollisionObject.GetPosition().x &&
-			aFirstCollisionObject.GetPosition().y < aSecondCollisionObject.GetPosition().y + aSecondCollisionObject.GetHeight() &&
-			aFirstCollisionObject.GetPosition().y + aFirstCollisionObject.GetHeight() > aSecondCollisionObject.GetPosition().y)
+		if (aFirstCollisionObject.GetPosition().x - aFirstCollisionObject.GetWidth() / 2 < aSecondCollisionObject.GetPosition().x + aSecondCollisionObject.GetWidth() / 2 &&
+			aFirstCollisionObject.GetPosition().x + aFirstCollisionObject.GetWidth() / 2 > aSecondCollisionObject.GetPosition().x - aSecondCollisionObject.GetWidth() / 2 &&
+			aFirstCollisionObject.GetPosition().y - aFirstCollisionObject.GetHeight() / 2 < aSecondCollisionObject.GetPosition().y + aSecondCollisionObject.GetHeight() / 2 &&
+			aFirstCollisionObject.GetPosition().y + aFirstCollisionObject.GetHeight() / 2 > aSecondCollisionObject.GetPosition().y - aSecondCollisionObject.GetHeight() / 2)
 		{
 			return true;
 		}
