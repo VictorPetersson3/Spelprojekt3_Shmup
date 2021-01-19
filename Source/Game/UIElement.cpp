@@ -14,6 +14,16 @@ void Studio::UIElement::Render()
 {
 }
 
+void Studio::UIElement::OnClick()
+{
+
+}
+
+void Studio::UIElement::Update()
+{
+
+}
+
 void Studio::UIElement::SetActive(bool aState)
 {
     myIsEnabled = aState;

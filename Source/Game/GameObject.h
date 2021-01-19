@@ -43,6 +43,7 @@ namespace Studio
 		#pragma region Collider Specific
 		bool Intersects(GameObject& aGameObject);
 		bool Contains(const GameObject& aGameObject);
+		void RenderDebugCollider();
 
 		Collider& GetCollider();
 		#pragma endregion

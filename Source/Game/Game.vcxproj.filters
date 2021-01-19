@@ -91,6 +91,12 @@
       <Filter>Factories</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheet_AnimationData.cpp" />
+    <ClCompile Include="Pack.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuObject.cpp" />
+    <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="ButtonElement.cpp" />
+    <ClCompile Include="TestButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -189,6 +195,15 @@
       <Filter>Factories</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheet_AnimationData.h" />
+    <ClInclude Include="Pack.h" />
+    <ClInclude Include="Counter.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuObject.h" />
+    <ClInclude Include="UIElement.h" />
+    <ClInclude Include="ButtonElement.h" />
+    <ClInclude Include="TestButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

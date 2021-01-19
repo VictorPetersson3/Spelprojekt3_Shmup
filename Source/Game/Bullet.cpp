@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "tga2d/sprite/sprite.h"
+#include "Timer.h"
 namespace Studio
 {
 	Bullet::Bullet(VECTOR2F aPosition, const float& aSpeed, Tga2D::CSprite* aSprite) : 
@@ -12,6 +13,9 @@ namespace Studio
 		Bullet::GameObject::GetCollider().AddCircleColliderObject(myPosition, 0.005f);
 
 		SAFE_CREATE(mySprite, Tga2D::CSprite(*aSprite));
+
+		aSprite->SetSizeRelativeToScreen({ 0.01f, 0.01f });
+		aSprite->SetPivot({ 0.5f, 0.5f });
 	}
 
 	Bullet::~Bullet()
@@ -19,9 +23,9 @@ namespace Studio
 		SAFE_DELETE(mySprite);
 	}
 
-	void Bullet::Update(float aDeltaTime)
+	void Bullet::Update()
 	{
-		myPosition.x += mySpeed * aDeltaTime;
+		myPosition.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 
 		Bullet::GameObject::Update(myPosition);
 	}

@@ -71,7 +71,7 @@ namespace Studio
 	{
 		mySprite->SetTextureRect(myTextureRectTopLeft.x, myTextureRectTopLeft.y, myTextureRectBotRight.x, myTextureRectBotRight.y);
 		mySprite->SetRotation(myRotation);
-		mySprite->SetPosition({ myPosition.x, myPosition.y });
+		mySprite->SetPosition({ myPosition.x / SCREEN_WIDTH, myPosition.y / SCREEN_HEIGHT });
 		mySprite->Render();
 	}
 

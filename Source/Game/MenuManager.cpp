@@ -3,6 +3,10 @@
 
 namespace Studio
 {
+    Studio::MenuManager::MenuManager()
+    {
+    }
+
     MenuObject* Studio::MenuManager::GetMainMenu()
     {
         return &myMainMenu;
@@ -16,5 +20,13 @@ namespace Studio
     MenuObject* Studio::MenuManager::GetPauseMenu()
     {
         return &myPausMenu;
+    }
+    void MenuManager::Render()
+    {
+       // myTestButton.Render();
+    }
+    void MenuManager::Update()
+    {
+        //myTestButton.Update();
     }
 }

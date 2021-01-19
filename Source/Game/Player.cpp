@@ -3,14 +3,15 @@
 #include "Bullet.h"
 #include "InputManager.h"
 #include "tga2d/sprite/sprite.h"
+#include "Timer.h"
 
 namespace Studio
 {
 	Player::Player(Tga2D::CSprite* aSprite) : 
 		Player::GameObject(aSprite)
 	{
-		myPosition = { 0.5f, 0.5f };
-		mySpeed = 0.3f;
+		myPosition = { 300, 540 };
+		mySpeed = 0;
 		myShootCooldown = 0.0f;
 		mySprite = aSprite;
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
@@ -23,21 +24,21 @@ namespace Studio
 		SAFE_DELETE(myBulletSprite);
 	}
 
-	void Player::Update(float aDeltaTime)
+	void Player::Update()
 	{
-		Movement(aDeltaTime);
+		Movement();
 
 		Player::GameObject::Update(myPosition);
 
-		UpdateBullets(aDeltaTime);
+		UpdateBullets();
 	}
 
-	void Player::Shoot(float aDeltaTime)
+	void Player::Shoot()
 	{
-			myShootCooldown += aDeltaTime;
+			myShootCooldown += Timer::GetInstance()->TGetDeltaTime();
 			if (GetAsyncKeyState(VK_SPACE) && myShootCooldown > 0.1f)
 			{
-				myBullets.push_back(new Bullet(myPosition, 1.0f, myBulletSprite));
+				myBullets.push_back(new Bullet(myPosition, 800, myBulletSprite));
 				myShootCooldown = 0;
 			}
 	}
@@ -52,7 +53,7 @@ namespace Studio
 		return Player::GameObject::GetRenderCommand();
 	}
 
-	void Player::Movement(float aDeltaTime)
+	void Player::Movement()
 	{
 		bool wKey = Studio::InputManager::GetInstance()->IsKeyDown('W');
 		bool aKey = Studio::InputManager::GetInstance()->IsKeyDown('A');
@@ -62,47 +63,47 @@ namespace Studio
 
 		if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
 		{
-			mySpeed = 0.2f;
+			mySpeed = 200;
 		}
 		else
 		{
-			mySpeed = 0.3f; //Temp value, change to default value provided by json when added
+			mySpeed = 300; //Temp value, change to default value provided by json when added
 		}
 		
-		if (wKey && myPosition.y > 0.05f)
+		if (wKey && myPosition.y > 0)
 		{
-			myPosition.y -= mySpeed * aDeltaTime;
+			myPosition.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//A
-		if (aKey && myPosition.x > 0.05f)
+		if (aKey && myPosition.x > 0)
 		{
-			myPosition.x -= mySpeed * aDeltaTime;
+			myPosition.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//S
-		if (sKey && myPosition.y < 0.95f)
+		if (sKey && myPosition.y < 1080)
 		{
-			myPosition.y += mySpeed * aDeltaTime;
+			myPosition.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//D
-		if (dKey && myPosition.x < 0.95f)
+		if (dKey && myPosition.x < 1920)
 		{
-			myPosition.x += mySpeed * aDeltaTime;
+			myPosition.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		
 		//Spacebar
 		if (Studio::InputManager::GetInstance()->IsKeyDown(VK_SPACE))
 		{
-			Shoot(aDeltaTime);
+			Shoot();
 		}
 	}
 
-	void Player::UpdateBullets(float aDeltaTime)
+	void Player::UpdateBullets()
 	{
 		for (int i = 0; i < myBullets.size(); i++)
 		{
-			myBullets[i]->Update(aDeltaTime);
+			myBullets[i]->Update();
 
-			if (myBullets[i]->GetPosition().x > 1.0f)
+			if (myBullets[i]->GetPosition().x > 1920)
 			{
 				myBullets.erase(myBullets.begin() + i);
 			}

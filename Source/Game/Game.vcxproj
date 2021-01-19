@@ -139,10 +139,14 @@
     <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletFactory.h" />
+    <ClInclude Include="ButtonElement.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionObject.h" />
+    <ClInclude Include="Counter.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuObject.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -153,6 +157,7 @@
     <ClInclude Include="macros.h" />
     <ClInclude Include="ParticleObject.h" />
     <ClInclude Include="Particle_SpriteSheet_Factory.h" />
+    <ClInclude Include="Pack.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
@@ -163,11 +168,13 @@
     <ClInclude Include="SpriteSheet_AnimationData.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestButton.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TypePattern_Background.h" />
     <ClInclude Include="TypePattern_Bullet.h" />
     <ClInclude Include="TypePattern_Enemy.h" />
     <ClInclude Include="TypePattern_Particle_SpriteSheet.h" />
+    <ClInclude Include="UIElement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundFactory.cpp" />
@@ -175,11 +182,14 @@
     <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
+    <ClCompile Include="ButtonElement.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="Counter.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuObject.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -189,6 +199,7 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="ParticleObject.cpp" />
     <ClCompile Include="Particle_SpriteSheet_Factory.cpp" />
+    <ClCompile Include="Pack.cpp" />
     <ClCompile Include="RenderCommand.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -201,11 +212,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestButton.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TypePattern_Background.cpp" />
     <ClCompile Include="TypePattern_Bullet.cpp" />
     <ClCompile Include="TypePattern_Enemy.cpp" />
     <ClCompile Include="TypePattern_Particle_SpriteSheet.cpp" />
+    <ClCompile Include="UIElement.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
