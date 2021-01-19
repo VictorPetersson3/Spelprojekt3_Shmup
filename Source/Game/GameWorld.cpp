@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include <tga2d/sprite/sprite.h>
 #include "RendererAccessor.h"
+#include "LevelManager.h"
 
 CGameWorld::CGameWorld()
 {
@@ -18,6 +19,7 @@ CGameWorld::~CGameWorld()
 	delete myTga2dLogoSprite;
 	myTga2dLogoSprite = nullptr;
 	SAFE_DELETE(myPlayer);
+	SAFE_DELETE(myLevelManager);
 }
 
 void CGameWorld::Init()
@@ -35,6 +37,8 @@ void CGameWorld::Init()
 		myEnemies.push_back(enemy);
 	}
 	myBackgroundManager.CreateTestMapBackground(5120.f);
+
+	SAFE_CREATE(myLevelManager, Studio::LevelManager());
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
@@ -47,6 +51,8 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 	CheckIfEnemiesHit();
 	
 	myBackgroundManager.UpdateBackground(aDeltaTime);
+
+	myLevelManager->Update();
 }
 
 void CGameWorld::Render()

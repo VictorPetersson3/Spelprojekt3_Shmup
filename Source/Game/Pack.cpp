@@ -26,8 +26,8 @@ namespace Studio
 				x = enemies[i]["Position"]["X"].GetFloat();
 				y = enemies[i]["Position"]["Y"].GetFloat();
 
-				x = (SCREEN_WIDTH) - (x / SCREEN_WIDTH);
-				y = (y / SCREEN_HEIGHT) + SCREEN_HEIGHT * 0.5f;
+				x = SCREEN_WIDTH - x;
+				y = y + SCREEN_HEIGHT * 0.5f;
 
 				// Store the interval at when the enemy should be spawned
 				myTimedIntervals.push_back(enemies[i]["Timer"].GetFloat() / 1000.0f);
@@ -107,5 +107,6 @@ namespace Studio
 	void Pack::Update()
 	{
 		TransferTopEnemyToLevelManager();
+		CheckIfExitConditionHasBeenMet();
 	}
 }
