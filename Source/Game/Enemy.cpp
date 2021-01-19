@@ -31,7 +31,7 @@ namespace Studio
 
 	void Enemy::Update(float aDeltaTime)
 	{
-		//myMovement->Straight(myPosition, mySpeed);
+		myMovement->Straight(myPosition, mySpeed);
 
 		Shoot(aDeltaTime);
 
