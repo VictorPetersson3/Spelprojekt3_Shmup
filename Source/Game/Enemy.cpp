@@ -26,7 +26,7 @@ namespace Studio
 	Enemy::~Enemy()
 	{
 		SAFE_DELETE(myBulletSprite);
-		
+		SAFE_DELETE(myMovement);
 	}
 
 	void Enemy::Update(float aDeltaTime)
