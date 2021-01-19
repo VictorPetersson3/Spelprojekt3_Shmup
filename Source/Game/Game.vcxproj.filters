@@ -84,6 +84,9 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Pack.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuObject.cpp" />
+    <ClCompile Include="UIElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -178,6 +181,9 @@
     <ClInclude Include="Counter.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuObject.h" />
+    <ClInclude Include="UIElement.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
