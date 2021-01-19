@@ -36,6 +36,12 @@ namespace Studio
 	{
 		return myCollider.Contains(aGameObject.myCollider);
 	}
+
+	void GameObject::RenderDebugCollider() 
+	{
+		myCollider.Render();
+	}
+
 	Collider& GameObject::GetCollider()
 	{
 		return myCollider;
