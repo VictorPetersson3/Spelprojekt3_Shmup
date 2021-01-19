@@ -31,7 +31,7 @@ void CGameWorld::Init()
 	
 	for (int i = 0; i < 1; i++)
 	{
-		auto enemy = new Studio::Enemy(new Tga2D::CSprite("sprites/debugpixel.dds"), { 0.9f, 0.5f });
+		auto enemy = new Studio::Enemy(new Tga2D::CSprite("sprites/debugpixel.dds"), { 1500, 540 });
 		myEnemies.push_back(enemy);
 	}
 	myBackgroundManager.CreateTestMapBackground(5120.f);

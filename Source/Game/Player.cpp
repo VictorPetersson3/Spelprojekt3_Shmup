@@ -9,7 +9,7 @@ namespace Studio
 	Player::Player(Tga2D::CSprite* aSprite) : 
 		Player::GameObject(aSprite)
 	{
-		myPosition = { 0.5f, 0.5f };
+		myPosition = { 300, 540 };
 		mySpeed = 0;
 		myShootCooldown = 0.0f;
 		mySprite = aSprite;
