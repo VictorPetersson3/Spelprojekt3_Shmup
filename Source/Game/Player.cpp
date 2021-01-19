@@ -10,7 +10,7 @@ namespace Studio
 		Player::GameObject(aSprite)
 	{
 		myPosition = { 0.5f, 0.5f };
-		mySpeed = 0.3f;
+		mySpeed = 0;
 		myShootCooldown = 0.0f;
 		mySprite = aSprite;
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
@@ -37,7 +37,7 @@ namespace Studio
 			myShootCooldown += aDeltaTime;
 			if (GetAsyncKeyState(VK_SPACE) && myShootCooldown > 0.1f)
 			{
-				myBullets.push_back(new Bullet(myPosition, 1.0f, myBulletSprite));
+				myBullets.push_back(new Bullet(myPosition, 800, myBulletSprite));
 				myShootCooldown = 0;
 			}
 	}
@@ -62,29 +62,29 @@ namespace Studio
 
 		if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
 		{
-			mySpeed = 0.2f;
+			mySpeed = 200;
 		}
 		else
 		{
-			mySpeed = 0.3f; //Temp value, change to default value provided by json when added
+			mySpeed = 300; //Temp value, change to default value provided by json when added
 		}
 		
-		if (wKey && myPosition.y > 0.05f)
+		if (wKey && myPosition.y > 0)
 		{
 			myPosition.y -= mySpeed * aDeltaTime;
 		}
 		//A
-		if (aKey && myPosition.x > 0.05f)
+		if (aKey && myPosition.x > 0)
 		{
 			myPosition.x -= mySpeed * aDeltaTime;
 		}
 		//S
-		if (sKey && myPosition.y < 0.95f)
+		if (sKey && myPosition.y < 1080)
 		{
 			myPosition.y += mySpeed * aDeltaTime;
 		}
 		//D
-		if (dKey && myPosition.x < 0.95f)
+		if (dKey && myPosition.x < 1920)
 		{
 			myPosition.x += mySpeed * aDeltaTime;
 		}
@@ -102,7 +102,7 @@ namespace Studio
 		{
 			myBullets[i]->Update(aDeltaTime);
 
-			if (myBullets[i]->GetPosition().x > 1.0f)
+			if (myBullets[i]->GetPosition().x > 1920)
 			{
 				myBullets.erase(myBullets.begin() + i);
 			}
