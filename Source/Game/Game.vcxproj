@@ -145,6 +145,7 @@
     <ClInclude Include="Counter.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuObject.h" />
     <ClInclude Include="Movement.h" />

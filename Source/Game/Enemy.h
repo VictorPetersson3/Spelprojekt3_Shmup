@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include <vector>
+#include "Enums.h"
 
 namespace Tga2D
 {
@@ -10,7 +11,8 @@ namespace Studio
 {
 	class RenderCommand;
 	class Bullet;
-	class Movement;
+	class Movement; 
+	enum class MovementType;
 	class Enemy : public GameObject
 	{
 	public:
@@ -40,6 +42,8 @@ namespace Studio
 
 		Tga2D::CSprite* mySprite;
 		Tga2D::CSprite* myBulletSprite;
+
+		Studio::Enums::MovementPattern aMovementType;
 
 		Movement* myMovement;
 

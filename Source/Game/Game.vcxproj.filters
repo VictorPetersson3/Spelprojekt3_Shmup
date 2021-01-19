@@ -204,6 +204,9 @@
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="ButtonElement.h" />
     <ClInclude Include="TestButton.h" />
+    <ClInclude Include="Enums.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

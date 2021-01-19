@@ -18,7 +18,7 @@ namespace Studio
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
-		SAFE_CREATE(myMovement, Movement(&myPosition));
+		SAFE_CREATE(myMovement, Movement(&myPosition, Enums::MovementPattern::Straight));
 
 		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 25);
 	}
@@ -31,7 +31,7 @@ namespace Studio
 
 	void Enemy::Update(float aDeltaTime)
 	{
-		myMovement->Straight(myPosition, mySpeed);
+		myMovement->Update(mySpeed);
 
 		Shoot(aDeltaTime);
 
