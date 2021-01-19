@@ -30,7 +30,7 @@ void Renderer::SwapBuffers()
 void Renderer::Render()
 {
 	//Render the CSprite on the render commands
-	for (int i = static_cast<int>(myReadFromBuffer->size()); i-- > 0;)
+	for (int i = 0; i < static_cast<int>(myReadFromBuffer->size()); i++)
 	{
 		GetReadFromBuffer()[i].Render();
 	}

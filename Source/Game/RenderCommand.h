@@ -19,6 +19,7 @@ namespace Studio
 			virtual void Update(const Tga2D::Vector2f& aPos, Tga2D::CSprite* aSprite);
 			virtual void Update(Tga2D::CSprite* aSprite, const float aRotation);
 			virtual void Update(const Tga2D::Vector2f& aPos, const float aRotation, Tga2D::CSprite* aSprite);
+			virtual void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
 			void Render();
 			virtual void SetScale(const Tga2D::Vector2f& aScale);
 			Tga2D::CSprite* GetSprite() const;
@@ -28,6 +29,8 @@ namespace Studio
 		Tga2D::CSprite* mySprite;
 		Tga2D::Vector2f myPosition;
 		Tga2D::Vector2f myScale;
+		Tga2D::Vector2f myTextureRectTopLeft;
+		Tga2D::Vector2f myTextureRectBotRight;
 	};
 
 
