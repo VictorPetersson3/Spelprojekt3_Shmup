@@ -37,6 +37,7 @@ namespace Studio
 		return myCollider.Contains(aGameObject.myCollider);
 	}
 
+	//Define SHOW_COLLISION to enable
 	void GameObject::RenderDebugCollider() 
 	{
 		myCollider.Render();
