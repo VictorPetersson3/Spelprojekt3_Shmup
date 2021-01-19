@@ -48,6 +48,31 @@ namespace Studio
 		myCollider.Render();
 	}
 
+	void GameObject::TakeDamage(const float aDamage)
+	{
+		myHealth.TakeDamage(aDamage);
+	}
+
+	const float GameObject::GetMaxHealth()
+	{
+		return myHealth.GetMaxHealth();
+	}
+
+	const float GameObject::GetCurrentHealth()
+	{
+		return myHealth.GetCurrentHealth();
+	}
+
+	const bool GameObject::IsDead()
+	{
+		return myHealth.IsDead();
+	}
+
+	void GameObject::SetGodMode()
+	{
+		myHealth.SetGodMode();
+	}
+
 	Collider& GameObject::GetCollider()
 	{
 		return myCollider;

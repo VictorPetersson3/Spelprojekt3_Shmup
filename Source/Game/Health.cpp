@@ -6,7 +6,7 @@ Studio::Health::Health(float aMaxHealth) :
 	myCurrentHealth(aMaxHealth)
 {}
 
-void Studio::Health::TakeDamage(float aDamageAmount)
+void Studio::Health::TakeDamage(const float aDamageAmount)
 {
 	if (!myIsGodMode)
 	{
@@ -18,12 +18,12 @@ void Studio::Health::TakeDamage(float aDamageAmount)
 	}
 }
 
-float Studio::Health::GetMaxHealth()
+const float Studio::Health::GetMaxHealth()
 {
 	return myMaxHealth;
 }
 
-float Studio::Health::GetCurrentHealth()
+const float Studio::Health::GetCurrentHealth()
 {
 	return myCurrentHealth;
 }

@@ -7,10 +7,10 @@ namespace Studio
 		Health() = default;
 		Health(float aMaxHealth);
 
-		void TakeDamage(float aDamageAmount);
+		void TakeDamage(const float aDamageAmount);
 
-		float GetMaxHealth();
-		float GetCurrentHealth();
+		const float GetMaxHealth();
+		const float GetCurrentHealth();
 		const bool IsDead();
 
 		void SetGodMode();

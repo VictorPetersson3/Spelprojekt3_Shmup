@@ -50,6 +50,12 @@ namespace Studio
 
 		#pragma region Health Specific
 		// TODO: Steal public stuff from Health.h
+		void TakeDamage(const float aDamage);
+		const float GetMaxHealth();
+		const float GetCurrentHealth();
+		const bool IsDead();
+
+		void SetGodMode();
 		#pragma endregion
 	};
 }
