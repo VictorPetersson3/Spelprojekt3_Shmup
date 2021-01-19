@@ -2,10 +2,12 @@
 #include "GameObject.h"
 namespace Studio
 {
-	GameObject::GameObject(Tga2D::CSprite* aSprite) : myRenderCommand(aSprite)
+	GameObject::GameObject(Tga2D::CSprite* aSprite) : myRenderCommand(aSprite),
+		myHealth(100)
 	{
 	}
-	GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize)
+	GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize),
+		myHealth(100)
 	{
 	}
 	
