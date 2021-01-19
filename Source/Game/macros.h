@@ -43,3 +43,9 @@ for (auto& PP_CONCAT(aMacroPointerAtLine, __LINE__) : anStdVector) {	\
 
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH  1920
+// Used in conjunction with SETCONSOLECOLOR as a color reset
+#define CONSOLE_COLOR_WHITE	 15
+// Used in conjunction with SETCONSOLECOLOR to indicate an error
+#define CONSOLE_COLOR_RED	 12
+// Used in conjunction with SETCONSOLECOLOR to indicate a warning
+#define CONSOLE_COLOR_YELLOW 14
