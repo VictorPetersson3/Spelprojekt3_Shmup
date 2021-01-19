@@ -3,7 +3,7 @@
 #include "Bullet.h"
 #include "Renderer.h"
 #include "tga2d/sprite/sprite.h"
-#include "Movement.h"
+#include "MovementStraight.h"
 
 namespace Studio
 {
@@ -18,7 +18,7 @@ namespace Studio
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
-		SAFE_CREATE(myMovement, Movement(&myPosition, Enums::MovementPattern::Straight));
+		SAFE_CREATE(myMovement, MovementStraight(&myPosition, 500.0f));
 
 		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 25);
 	}
@@ -31,7 +31,7 @@ namespace Studio
 
 	void Enemy::Update(float aDeltaTime)
 	{
-		myMovement->Update(mySpeed);
+		myMovement->Update();
 
 		Shoot(aDeltaTime);
 

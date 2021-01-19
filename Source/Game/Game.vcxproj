@@ -156,6 +156,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="macros.h" />
+    <ClInclude Include="MovementStraight.h" />
     <ClInclude Include="ParticleObject.h" />
     <ClInclude Include="Particle_SpriteSheet_Factory.h" />
     <ClInclude Include="Pack.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="MovementStraight.cpp" />
     <ClCompile Include="ParticleObject.cpp" />
     <ClCompile Include="Particle_SpriteSheet_Factory.cpp" />
     <ClCompile Include="Pack.cpp" />
