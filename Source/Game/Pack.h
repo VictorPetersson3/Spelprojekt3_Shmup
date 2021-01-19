@@ -8,6 +8,7 @@ namespace Studio
 	class Counter;
 	class Pack
 	{
+		friend class LevelManager;
 	public:
 
 		Pack(LevelManager*, rapidjson::Value& anEnemyArray);

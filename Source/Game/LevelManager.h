@@ -18,11 +18,15 @@ namespace Studio
 		EnemyFactory* myEnemyFactory;
 		
 		void AddEnemy(Enemy* anEnemy);
+		bool LevelIsCleared();
 
 	private:
 
 		void LoadLevel(const char* aLevelPath);
+		void CheckIfLevelIsCleared();
+		bool myLevelIsCleared;
 		const char* myCurrentLevelPath;
+		int myPackIndex;
 		Pack* myCurrentPack;
 		std::vector<Pack*> myPacks;
 		std::vector<Enemy*> myEnemies;

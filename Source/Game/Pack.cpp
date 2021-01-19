@@ -28,6 +28,7 @@ namespace Studio
 
 				x = SCREEN_WIDTH - x;
 				y = y + SCREEN_HEIGHT * 0.5f;
+				printf_s("Stored enemy at location {x: %f, y: %f}\n", x, y);
 
 				// Store the interval at when the enemy should be spawned
 				myTimedIntervals.push_back(enemies[i]["Timer"].GetFloat() / 1000.0f);
@@ -45,9 +46,9 @@ namespace Studio
 		}
 		else
 		{
-			SETCONSOLECOLOR(12);
+			SETCONSOLECOLOR(CONSOLE_COLOR_RED);
 			printf_s("ERROR: Corrupted pack found in \"%s\", missing Enemies\n", myLevelManager->CurrentLevelPath());
-			SETCONSOLECOLOR(15);
+			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
 
 		printf_s("This pack had %i enemies in it\n", c);
@@ -75,6 +76,7 @@ namespace Studio
 				myLevelManager->AddEnemy(myStoredEnemies[0]);
 				myTransferredEnemies.push_back(myStoredEnemies[0]); // Future proofing for ExitCondition
 				myStoredEnemies.erase(myStoredEnemies.begin());
+				printf_s("Enemies left in storage: %i\n", myStoredEnemies.size());
 
 				myTimedIntervals.erase(myTimedIntervals.begin());
 				if (myTimedIntervals.size() > 0)
@@ -87,7 +89,9 @@ namespace Studio
 
 	void Pack::CheckIfExitConditionHasBeenMet()
 	{
-		bool allTransferredEnemiesAreDead = true;
+		myExitConditionHasBeenMet = (myStoredEnemies.size() == 0);
+
+		/*bool allTransferredEnemiesAreDead = true;
 		for (int i = myTransferredEnemies.size() - 1; i >= 0; i--)
 		{
 			if (myTransferredEnemies[i])
@@ -101,7 +105,7 @@ namespace Studio
 			}
 		}
 
-		myExitConditionHasBeenMet = allTransferredEnemiesAreDead;
+		myExitConditionHasBeenMet = allTransferredEnemiesAreDead;*/
 	}
 
 	void Pack::Update()

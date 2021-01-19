@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "LevelManager.h"
 #include "rapidjson/document.h"
+
 // Filhantering
 #include <fstream>
 #include <sstream>
+
 // Spelfiler
 #include "Timer.h"
 #include "Enemy.h"
@@ -39,28 +41,48 @@ namespace Studio
 
 	void LevelManager::Update()
 	{
-		// Pack
-		if (!myCurrentPack->ExitConditionIsMet())
+		if (myLevelIsCleared)
 		{
-			myCurrentPack->Update();
+			SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
+			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
+			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
-
-		for (size_t i = 0; i < myEnemies.size(); i++)
+		else
 		{
-			myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
-			Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
-			for (int j = 0; j < myEnemies[i]->GetBullets().size(); j++)
+			// Pack
+			if (!myCurrentPack->ExitConditionIsMet())
 			{
-				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]->GetBullets()[j]);
+				myCurrentPack->Update();
+			}
+			else
+			{
+				if (myPackIndex < myPacks.size() - 1)
+				{
+					printf_s("changing to next pack from pack %i ...\n", myPackIndex + 1);
+					myCurrentPack = myPacks[++myPackIndex];
+					printf_s("Size of new pack: %i\n", myCurrentPack->myStoredEnemies.size());
+				}
 			}
 
-			if (myEnemies[i]->GetPosition().x < 0.0f)
+			// Copy & Paste from Jimmi
+			for (size_t i = 0; i < myEnemies.size(); i++)
 			{
-				myEnemies.erase(myEnemies.begin() + i);
-			}
-		}
+				myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
+				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
+				for (int j = 0; j < myEnemies[i]->GetBullets().size(); j++)
+				{
+					Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]->GetBullets()[j]);
+				}
 
-		
+				if (myEnemies[i]->GetPosition().x < 0.0f)
+				{
+					myEnemies.erase(myEnemies.begin() + i);
+				}
+			}
+
+			// Check if Player cleared the level
+			CheckIfLevelIsCleared();
+		}
 	}
 
 	const char* LevelManager::CurrentLevelPath()
@@ -74,9 +96,15 @@ namespace Studio
 		myEnemies.push_back(anEnemy);
 	}
 
+	bool LevelManager::LevelIsCleared()
+	{
+		return myLevelIsCleared;
+	}
+
 	void LevelManager::LoadLevel(const char* aLevelPath)
 	{
 		myCurrentLevelPath = aLevelPath;
+		myLevelIsCleared = false;
 
 		rapidjson::Document document;
 
@@ -104,13 +132,24 @@ namespace Studio
 				myPacks.push_back(new Pack(this, packs[i]));
 			}
 
-			myCurrentPack = myPacks[0];
+			myPackIndex = 0;
+			myCurrentPack = myPacks[myPackIndex];
 		}
 		else
 		{
-			SETCONSOLECOLOR(12);
+			SETCONSOLECOLOR(CONSOLE_COLOR_RED);
 			printf_s("ERROR: \"%s\" is missing packs\n", myCurrentLevelPath);
-			SETCONSOLECOLOR(15);
+			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
+		}
+	}
+	void LevelManager::CheckIfLevelIsCleared()
+	{
+		// This is NOT how to check if a level has been cleared.
+		// TODO: Fix this in beta (maybe check if packs is past mypacks size??)
+
+		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0)
+		{
+			myLevelIsCleared = true;
 		}
 	}
 }
