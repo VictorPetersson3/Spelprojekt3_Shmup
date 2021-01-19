@@ -33,6 +33,16 @@ namespace Studio
 		myTextureRectBotRight = Tga2D::Vector2f::One;
 	}
 
+	RenderCommand::RenderCommand(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize, const Tga2D::Vector2f& aPosition) :
+		mySprite(aSprite)
+	{
+		myPosition = aPosition;
+		myRotation = 0;
+		SetScale(aSize);
+		myTextureRectTopLeft = Tga2D::Vector2f::Zero;
+		myTextureRectBotRight = Tga2D::Vector2f::One;
+	}
+
 	RenderCommand::~RenderCommand()
 	{
 	}
