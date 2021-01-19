@@ -83,6 +83,14 @@
     <ClCompile Include="BackgroundManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleObject.cpp" />
+    <ClCompile Include="TypePattern_Particle_SpriteSheet.cpp">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle_SpriteSheet_Factory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet_AnimationData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -173,6 +181,14 @@
     <ClInclude Include="targetver.h">
       <Filter>Tga2D</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleObject.h" />
+    <ClInclude Include="TypePattern_Particle_SpriteSheet.h">
+      <Filter>GameObjects\TypePatterns</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle_SpriteSheet_Factory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet_AnimationData.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

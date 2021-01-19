@@ -8,10 +8,15 @@ namespace Studio
 	GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize)
 	{
 	}
+	
 	void GameObject::Update(const Tga2D::Vector2f& aPos)
 	{
 		myRenderCommand.Update(aPos);
 		myCollider.Update(aPos);
+	}
+	void GameObject::Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR)
+	{
+		myRenderCommand.Update(aPos, aTexRecTopL, aTexRecBotR);
 	}
 	Sprite& Studio::GameObject::GetSprite()
 	{

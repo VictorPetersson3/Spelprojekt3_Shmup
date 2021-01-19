@@ -23,8 +23,11 @@ namespace Studio
 		GameObject() = default;
 		GameObject(Tga2D::CSprite* aSprite);
 		GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
+		GameObject(const Tga2D::Vector2f& aPosition);
+
 		virtual ~GameObject() = default;
 		virtual void Update(const Tga2D::Vector2f& aPos);
+		virtual void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
 
 
 		// Temporary accessor for mySprite. DO NOT USE IN RETAIL
