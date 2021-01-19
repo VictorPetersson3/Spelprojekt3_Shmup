@@ -12,6 +12,9 @@ namespace Studio
 		Bullet::GameObject::GetCollider().AddCircleColliderObject(myPosition, 0.005f);
 
 		SAFE_CREATE(mySprite, Tga2D::CSprite(*aSprite));
+
+		aSprite->SetSizeRelativeToScreen({ 0.01f, 0.01f });
+		aSprite->SetPivot({ 0.5f, 0.5f });
 	}
 
 	Bullet::~Bullet()
