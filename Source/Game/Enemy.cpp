@@ -11,7 +11,7 @@ namespace Studio
 		Enemy::GameObject(aSprite)
 	{
 		myPosition = aSpawnPosition;
-		mySpeed = 0.05f;
+		mySpeed = 300;
 		myShootCooldown = 0.0f;
 		myScoreValue = 100;
 		mySprite = aSprite;
@@ -20,7 +20,7 @@ namespace Studio
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
 		SAFE_CREATE(myMovement, Movement());
 
-		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 0.03f);
+		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 25);
 	}
 
 	Enemy::~Enemy()
@@ -46,7 +46,7 @@ namespace Studio
 		myShootCooldown += aDeltaTime;
 		if (myShootCooldown > 0.7f)
 		{
-			myBullets.push_back(new Bullet(myPosition, -0.2f, myBulletSprite));
+			myBullets.push_back(new Bullet(myPosition, -500, myBulletSprite));
 			myShootCooldown = 0;
 		}
 	}
@@ -76,7 +76,7 @@ namespace Studio
 		{
 			myBullets[i]->Update(aDeltaTime);
 
-			if (myBullets[i]->GetPosition().x > 1.0f || myBullets[i]->GetPosition().x < 0.0f || myBullets[i]->GetPosition().y < 0.0f || myBullets[i]->GetPosition().y > 1.0f)
+			if (myBullets[i]->GetPosition().x > 1920 || myBullets[i]->GetPosition().x < 0 || myBullets[i]->GetPosition().y < 0 || myBullets[i]->GetPosition().y > 1080)
 			{
 				myBullets.erase(myBullets.begin() + i);
 			}
