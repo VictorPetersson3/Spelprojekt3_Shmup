@@ -28,8 +28,6 @@ public:
 	void Render();
 	void SwapBuffers();
 private:
-	void UpdatePlayer(float aDeltaTime);
-	void UpdateEnemies(float aDeltaTime);
 	void CheckIfEnemiesHit();
 private:
 	Studio::BackgroundManager myBackgroundManager;

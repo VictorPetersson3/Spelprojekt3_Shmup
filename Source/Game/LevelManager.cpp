@@ -19,15 +19,13 @@
 
 namespace Studio
 {
-	LevelManager::LevelManager(Player* aPlayer)
+	LevelManager::LevelManager()
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 
 		myEnemyFactory->InitEnemyType("Sprites/debugpixel.dds", 999, "Default");
 		//															    ^ key
 		LoadLevel("JSON/Levels/level_x.json");
-
-		myPlayer = aPlayer;
 	}
 
 	LevelManager::~LevelManager()
@@ -62,25 +60,7 @@ namespace Studio
 			}
 		}
 
-		//Uppdaterar och renderar ut spelaren samt dess kulor.
-		myPlayer->Update();
-		Studio::RendererAccessor::GetInstance()->Render(*myPlayer);
-		for (int i = 0; i < myPlayer->GetBullets().size(); i++)
-		{
-			Studio::RendererAccessor::GetInstance()->Render(*myPlayer->GetBullets()[i]);
-		}
-
-		for (int i = 0; i < myPlayer->GetBullets().size(); i++)
-		{
-			for (int j = 0; j < myEnemies.size(); j++)
-			{
-				if (myPlayer->GetBullets()[i]->Intersects(*myEnemies[j]))
-				{
-					myEnemies.erase(myEnemies.begin() + j);
-					break;
-				}
-			}
-		}
+		
 	}
 
 	const char* LevelManager::CurrentLevelPath()
