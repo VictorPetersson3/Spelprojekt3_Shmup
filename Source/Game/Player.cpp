@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "InputManager.h"
 #include "tga2d/sprite/sprite.h"
+#include "RendererAccessor.h"
 #include "Timer.h"
 
 namespace Studio
@@ -31,6 +32,25 @@ namespace Studio
 		Player::GameObject::Update(myPosition);
 
 		UpdateBullets();
+
+		/*Studio::RendererAccessor::GetInstance()->Render();
+
+		for (int i = 0; i < myPlayer->GetBullets().size(); i++)
+		{
+			Studio::RendererAccessor::GetInstance()->Render(myBullets[i]);
+		}
+
+		for (int i = 0; i < myPlayer->GetBullets().size(); i++)
+		{
+			for (int j = 0; j < myEnemies.size(); j++)
+			{
+				if (myPlayer->GetBullets()[i]->Intersects(*myEnemies[j]))
+				{
+					myEnemies.erase(myEnemies.begin() + j);
+					break;
+				}
+			}
+		}*/
 	}
 
 	void Player::Shoot()

@@ -35,7 +35,7 @@ void CGameWorld::Init()
 	
 	myBackgroundManager.CreateTestMapBackground(5120.f);
 
-	SAFE_CREATE(myLevelManager, Studio::LevelManager(myPlayer));
+	SAFE_CREATE(myLevelManager, Studio::LevelManager());
 	SAFE_CREATE(myMenuManager, Studio::MenuManager());
 }
 
