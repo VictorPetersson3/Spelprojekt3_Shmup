@@ -8,13 +8,14 @@ namespace Studio
 	class TestButton : public ButtonElement
 	{
 	public:
-		TestButton(const char* aPath, VECTOR2F aPosition, VECTOR2F aSize, VECTOR2F aPivot);
+		TestButton();
+		TestButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot);
 		~TestButton();
 
-		void Update() override;
-		void OnClick() override;
+		void Update();
+		void OnClick();
 
-		//void Render()override;
+		void Render();
 	};
 }
 

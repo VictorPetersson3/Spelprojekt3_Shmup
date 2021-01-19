@@ -23,7 +23,7 @@ namespace Studio
 		MenuObject myHud;
 		MenuObject myPausMenu;
 
-		//UIElement myTestButton = TestButton("Sprites/debugpixel.dds", { 0.1f,0.8f }, { 2,2 }, { 0.5f,0.5f });;
+		TestButton myTestButton = TestButton("Sprites/debugpixel.dds", { 250,900 }, { 200,200 }, { 0.5f,0.5f });
 	};
 
 

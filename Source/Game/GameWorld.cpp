@@ -52,7 +52,6 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 
 void CGameWorld::Render()
 {
-	myMenuManager->Render();
 	//myTga2dLogoSprite->Render();
 	myRenderer.Render();
 }

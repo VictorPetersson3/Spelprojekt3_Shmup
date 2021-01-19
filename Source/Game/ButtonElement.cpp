@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ButtonElement.h"
+#include <iostream>
 
 Studio::ButtonElement::ButtonElement()
 {
@@ -13,12 +14,16 @@ Studio::ButtonElement::ButtonElement()
 
 Studio::ButtonElement::~ButtonElement()
 {
+
 }
 
 void Studio::ButtonElement::OnClick()
 {
+
 }
 
 void Studio::ButtonElement::Update()
 {
+	std::cout << "Test button updating" << std::endl;
+
 }
