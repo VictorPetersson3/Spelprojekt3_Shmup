@@ -14,8 +14,8 @@ namespace Studio
 		ButtonElement();
 		~ButtonElement();
 
-		void OnClick() override;
-		void Update() override;
+		void OnClick();
+		void Update();
 
 	protected:
 		Tga2D::CSprite* mySprite;

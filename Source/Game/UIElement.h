@@ -10,13 +10,11 @@ namespace Studio
 		UIElement();
 		~UIElement() = default;
 
-		virtual bool IsClicked();
-		virtual void Render();
+		bool IsClicked();
+		void Render();
 	
-		virtual void OnClick();
-		virtual void Update();
-
-		//virtual void Render();
+		void OnClick();
+		void Update();
 
 		void SetActive(bool aState);
 		void SetTag(const char* aTag);
@@ -25,6 +23,8 @@ namespace Studio
 	protected:
 		std::string tag;
 		bool myIsEnabled = false;
+
+		float renderAspect = 1.51515f;
 
 		RenderCommand myRenderCommand;
 	};

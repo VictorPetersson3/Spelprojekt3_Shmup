@@ -23,10 +23,10 @@ namespace Studio
     }
     void MenuManager::Render()
     {
-       // myTestButton.Render();
+        myTestButton.Render();
     }
     void MenuManager::Update()
     {
-        //myTestButton.Update();
+        myTestButton.Update();
     }
 }

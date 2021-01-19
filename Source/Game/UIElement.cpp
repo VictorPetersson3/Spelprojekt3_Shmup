@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "UIElement.h"
-
+#include <iostream>
 Studio::UIElement::UIElement()
 {
+   
 }
 
 bool Studio::UIElement::IsClicked()
