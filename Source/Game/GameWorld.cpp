@@ -42,14 +42,10 @@ void CGameWorld::Init()
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
-	/*UpdatePlayer(aDeltaTime);
-
-	UpdateEnemies(aDeltaTime);
-
-	CheckIfEnemiesHit();*/
 	
 	myBackgroundManager.UpdateBackground(aDeltaTime);
 
+	myPlayer->Update();
 	myLevelManager->Update();
 	myMenuManager->Update();
 }
@@ -66,47 +62,18 @@ void CGameWorld::SwapBuffers()
 	myRenderer.SwapBuffers();
 }
 
-//void CGameWorld::UpdatePlayer(float aDeltaTime)
-//{
-//	//Uppdaterar och renderar ut spelaren samt dess kulor.
-//	myPlayer->Update(aDeltaTime);
-//	Studio::RendererAccessor::GetInstance()->Render(*myPlayer);
-//	for (int i = 0; i < myPlayer->GetBullets().size(); i++)
-//	{
-//		Studio::RendererAccessor::GetInstance()->Render(*myPlayer->GetBullets()[i]);
-//	}
-//}
-//
-//void CGameWorld::UpdateEnemies(float aDeltaTime)
-//{
-//	//Uppdaterar Enemies, Renderar ut dem, samt renderar ut Enemies kulor
-//	for (int i = 0; i < myEnemies.size(); i++)
-//	{
-//		myEnemies[i]->Update(aDeltaTime);
-//		Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
-//		for (int j = 0; j < myEnemies[i]->GetBullets().size(); j++)
-//		{
-//			Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]->GetBullets()[j]);
-//		}
-//
-//		if (myEnemies[i]->GetPosition().x < 0.0f)
-//		{
-//			myEnemies.erase(myEnemies.begin() + i);
-//		}
-//	}
-//}
-//
-//void CGameWorld::CheckIfEnemiesHit()
-//{
-//	for (int i = 0; i < myPlayer->GetBullets().size(); i++)
-//	{
-//		for (int j = 0; j < myEnemies.size(); j++)
-//		{
-//			if (myPlayer->GetBullets()[i]->Intersects(*myEnemies[j]))
-//			{
-//				myEnemies.erase(myEnemies.begin() + j);
-//				break;
-//			}
-//		}
-//	}
-//}
+
+void CGameWorld::CheckIfEnemiesHit()
+{
+	for (int i = 0; i < myPlayer->GetBullets().size(); i++)
+	{
+		for (int j = 0; j < myEnemies.size(); j++)
+		{
+			if (myPlayer->GetBullets()[i]->Intersects(*myEnemies[j]))
+			{
+				myEnemies.erase(myEnemies.begin() + j);
+				break;
+			}
+		}
+	}
+}
