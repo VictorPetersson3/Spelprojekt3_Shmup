@@ -5,15 +5,27 @@
 
 namespace Studio
 {
-	Movement::Movement()
+	Movement::Movement(VECTOR2F* aPos)
 	{
+		myPos = aPos;
 	}
 
 	Movement::~Movement()
 	{
 	}
 
-	void Movement::Straight(VECTOR2F& aPos, float aSpeed)
+	void Movement::Update()
+	{
+
+	}
+
+
+
+
+
+
+
+	/*void Movement::Straight(VECTOR2F& aPos, float aSpeed)
 	{
 		aPos.x -= aSpeed * Studio::Timer::GetInstance()->TGetDeltaTime();
 	}
@@ -34,6 +46,6 @@ namespace Studio
 	void Movement::Homing(VECTOR2F& aPos, float aSpeed)
 	{
 
-	}
+	}*/
 }
 

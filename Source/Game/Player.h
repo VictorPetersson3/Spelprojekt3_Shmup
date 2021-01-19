@@ -15,15 +15,15 @@ namespace Studio
 		Player(Tga2D::CSprite* aSprite);
 		~Player();
 
-		void Update(float aDeltaTime);
-		void Shoot(float aDeltaTime);
+		void Update();
+		void Shoot();
 
 		std::vector<Bullet*>& GetBullets();
 
 		RenderCommand& GetRenderCommand();
 	private:
-		void Movement(float aDeltaTime);
-		void UpdateBullets(float aDeltaTime);
+		void Movement();
+		void UpdateBullets();
 	private:
 		float mySpeed;
 		float myShootCooldown;

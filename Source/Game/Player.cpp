@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "InputManager.h"
 #include "tga2d/sprite/sprite.h"
+#include "Timer.h"
 
 namespace Studio
 {
@@ -23,18 +24,18 @@ namespace Studio
 		SAFE_DELETE(myBulletSprite);
 	}
 
-	void Player::Update(float aDeltaTime)
+	void Player::Update()
 	{
-		Movement(aDeltaTime);
+		Movement();
 
 		Player::GameObject::Update(myPosition);
 
-		UpdateBullets(aDeltaTime);
+		UpdateBullets();
 	}
 
-	void Player::Shoot(float aDeltaTime)
+	void Player::Shoot()
 	{
-			myShootCooldown += aDeltaTime;
+			myShootCooldown += Timer::GetInstance()->TGetDeltaTime();
 			if (GetAsyncKeyState(VK_SPACE) && myShootCooldown > 0.1f)
 			{
 				myBullets.push_back(new Bullet(myPosition, 800, myBulletSprite));
@@ -52,7 +53,7 @@ namespace Studio
 		return Player::GameObject::GetRenderCommand();
 	}
 
-	void Player::Movement(float aDeltaTime)
+	void Player::Movement()
 	{
 		bool wKey = Studio::InputManager::GetInstance()->IsKeyDown('W');
 		bool aKey = Studio::InputManager::GetInstance()->IsKeyDown('A');
@@ -71,36 +72,36 @@ namespace Studio
 		
 		if (wKey && myPosition.y > 0)
 		{
-			myPosition.y -= mySpeed * aDeltaTime;
+			myPosition.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//A
 		if (aKey && myPosition.x > 0)
 		{
-			myPosition.x -= mySpeed * aDeltaTime;
+			myPosition.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//S
 		if (sKey && myPosition.y < 1080)
 		{
-			myPosition.y += mySpeed * aDeltaTime;
+			myPosition.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//D
 		if (dKey && myPosition.x < 1920)
 		{
-			myPosition.x += mySpeed * aDeltaTime;
+			myPosition.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		
 		//Spacebar
 		if (Studio::InputManager::GetInstance()->IsKeyDown(VK_SPACE))
 		{
-			Shoot(aDeltaTime);
+			Shoot();
 		}
 	}
 
-	void Player::UpdateBullets(float aDeltaTime)
+	void Player::UpdateBullets()
 	{
 		for (int i = 0; i < myBullets.size(); i++)
 		{
-			myBullets[i]->Update(aDeltaTime);
+			myBullets[i]->Update();
 
 			if (myBullets[i]->GetPosition().x > 1920)
 			{

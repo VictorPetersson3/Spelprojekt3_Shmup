@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "tga2d/sprite/sprite.h"
+#include "Timer.h"
 namespace Studio
 {
 	Bullet::Bullet(VECTOR2F aPosition, const float& aSpeed, Tga2D::CSprite* aSprite) : 
@@ -22,9 +23,9 @@ namespace Studio
 		SAFE_DELETE(mySprite);
 	}
 
-	void Bullet::Update(float aDeltaTime)
+	void Bullet::Update()
 	{
-		myPosition.x += mySpeed * aDeltaTime;
+		myPosition.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 
 		Bullet::GameObject::Update(myPosition);
 	}

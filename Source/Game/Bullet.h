@@ -13,7 +13,7 @@ namespace Studio
 		Bullet() = default;
 		Bullet(VECTOR2F aPosition, const float& aSpeed, Tga2D::CSprite* aSprite);
 		~Bullet();
-		void Update(float aDeltaTime);
+		void Update();
 
 		VECTOR2F GetPosition();
 
