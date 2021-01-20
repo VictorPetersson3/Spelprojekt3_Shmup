@@ -49,3 +49,5 @@ for (auto& PP_CONCAT(aMacroPointerAtLine, __LINE__) : anStdVector) {	\
 #define CONSOLE_COLOR_RED	 12
 // Used in conjunction with SETCONSOLECOLOR to indicate a warning
 #define CONSOLE_COLOR_YELLOW 14
+
+#define MATH_PI std::acos(-1.0f)
