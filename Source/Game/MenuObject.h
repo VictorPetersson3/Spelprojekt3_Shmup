@@ -13,12 +13,14 @@ namespace Studio
 		void Enable();
 		void Disable();
 
-		void Add(UIElement aElementToAdd);
+		void Add(UIElement* aElementToAdd);
+
+		void Update();
 
 		UIElement* GetElementWithTag(const char* aTag);
 
 	private:
-		std::vector<UIElement> myElements;
+		std::vector<UIElement*> myElements;
 	};
 }
 

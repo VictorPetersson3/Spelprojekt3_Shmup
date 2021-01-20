@@ -13,8 +13,8 @@ namespace Studio
 		bool IsClicked();
 		void Render();
 	
-		void OnClick();
-		void Update();
+		virtual void OnClick();
+		virtual void Update();
 
 		void SetActive(bool aState);
 		void SetTag(const char* aTag);

@@ -11,32 +11,40 @@ Studio::MenuObject::~MenuObject()
 
 void Studio::MenuObject::Enable()
 {
-	for (UIElement e : myElements)
+	for (UIElement* e : myElements)
 	{
-		e.SetActive(true);
+		e->SetActive(true);
 	}
 }
 
 void Studio::MenuObject::Disable()
 {
-	for (UIElement e : myElements)
+	for (UIElement* e : myElements)
 	{
-		e.SetActive(false);
+		e->SetActive(false);
 	}
 }
 
-void Studio::MenuObject::Add(UIElement aElementToAdd)
+void Studio::MenuObject::Add(UIElement* aElementToAdd)
 {
 	myElements.push_back(aElementToAdd);
 }
 
+void Studio::MenuObject::Update()
+{
+	for (UIElement* e : myElements)
+	{
+		e->Update();
+	}
+}
+
 Studio::UIElement* Studio::MenuObject::GetElementWithTag(const char* aTag)
 {
-	for (UIElement e : myElements)
+	for (UIElement* e : myElements)
 	{
-		if (e.HasTag(aTag))
+		if (e->HasTag(aTag))
 		{
-			return &e;
+			return e;
 		}
 	}
 }

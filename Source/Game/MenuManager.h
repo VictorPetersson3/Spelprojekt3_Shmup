@@ -15,15 +15,20 @@ namespace Studio
 		MenuObject* GetHUD();
 		MenuObject* GetPauseMenu();
 
-		void Render();
 		void Update();
+
+		bool GameStarted();
+
+
 
 	private:
 		MenuObject myMainMenu;
 		MenuObject myHud;
 		MenuObject myPausMenu;
 
-		TestButton myTestButton = TestButton("Sprites/debugpixel.dds", { 250,900 }, { 200,200 }, { 0.5f,0.5f });
+		bool hasStartedGame = false;
+		
+		TestButton* myTestButton = new TestButton("Sprites/UI/TempPlayButton.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f });
 	};
 
 

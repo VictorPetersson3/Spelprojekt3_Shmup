@@ -23,9 +23,6 @@ Studio::TestButton::TestButton(const char* aPath, const VECTOR2F aPosition, cons
 	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y * aSize.y / 2);
 
 	myRenderCommand = RenderCommand(mySprite, aSize,aPosition);
-
-	//std::cout << mySprite->GetSize().x << " " << mySprite->GetSize().y << std::endl;
-	std::cout << myTop << " " << myBottom << std::endl;
 }
 
 Studio::TestButton::~TestButton()
@@ -36,37 +33,35 @@ Studio::TestButton::~TestButton()
 
 void Studio::TestButton::Update()
 {
-
-	//if (Studio::InputManager::GetInstance()->GetMouseLPressed())
-	//{
-	//	std::cout << Studio::InputManager::GetInstance()->GetMousePosition().x << " " << Studio::InputManager::GetInstance()->GetMousePosition().y << std::endl;
-	//}
-	//
-	
-
-	if (Studio::InputManager::GetInstance()->GetMousePosition().x* renderAspect >= myLeft && Studio::InputManager::GetInstance()->GetMousePosition().x* renderAspect <= myRight)
+	if (myIsEnabled == true)
 	{
-		if (Studio::InputManager::GetInstance()->GetMousePosition().y * renderAspect >= myTop && Studio::InputManager::GetInstance()->GetMousePosition().y * renderAspect <= myBottom)
+		if (myIsClicked == false)
 		{
-			if (Studio::InputManager::GetInstance()->GetMouseLPressed())
+			if (Studio::InputManager::GetInstance()->GetMousePosition().x * renderAspect >= myLeft && Studio::InputManager::GetInstance()->GetMousePosition().x * renderAspect <= myRight)
 			{
-				OnClick();
+				if (Studio::InputManager::GetInstance()->GetMousePosition().y * renderAspect >= myTop && Studio::InputManager::GetInstance()->GetMousePosition().y * renderAspect <= myBottom)
+				{
+					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
+					{
+						OnClick();
+						myIsClicked = true;
+						myIsEnabled = false;
+
+					}
+				}
 			}
 		}
+		if (Studio::InputManager::GetInstance()->GetMouseLReleased() && myIsClicked)
+		{
+			myIsClicked = false;
+		}
+
+
+		Studio::RendererAccessor::GetInstance()->RenderRenderCommand(myRenderCommand);
 	}
-
-	Studio::RendererAccessor::GetInstance()->RenderRenderCommand(myRenderCommand);
-
 }
 
 void Studio::TestButton::OnClick()
 {
 	std::cout << "TestButton Pressed" << std::endl;
-}
-
-void Studio::TestButton::Render()
-{
-	//RendererAccessor::GetInstance()->RenderRenderCommand(myRenderCommand);
-
-	
 }

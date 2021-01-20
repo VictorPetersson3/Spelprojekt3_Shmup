@@ -12,10 +12,10 @@ namespace Studio
 		TestButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot);
 		~TestButton();
 
-		void Update();
-		void OnClick();
+		void Update() override;
+		void OnClick() override;
 
-		void Render();
+		bool myIsClicked = false;
 	};
 }
 

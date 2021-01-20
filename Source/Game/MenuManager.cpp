@@ -5,7 +5,11 @@ namespace Studio
 {
     Studio::MenuManager::MenuManager()
     {
+        myMainMenu.Add(myTestButton);
+        myMainMenu.Enable();
     }
+
+
 
     MenuObject* Studio::MenuManager::GetMainMenu()
     {
@@ -21,12 +25,27 @@ namespace Studio
     {
         return &myPausMenu;
     }
-    void MenuManager::Render()
-    {
-        myTestButton.Render();
-    }
+ 
     void MenuManager::Update()
     {
-        myTestButton.Update();
+        myMainMenu.Update();
+    }
+    bool MenuManager::GameStarted()
+    {
+        if (!hasStartedGame && myTestButton->myIsClicked == true)
+        {
+            hasStartedGame = true;
+            return myTestButton->myIsClicked;
+            myMainMenu.Disable();
+        }
+        else if(hasStartedGame)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+             
     }
 }

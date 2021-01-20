@@ -42,11 +42,15 @@ void CGameWorld::Init()
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
-	
 	myBackgroundManager.UpdateBackground(aDeltaTime);
 
-	myPlayer->Update();
-	myLevelManager->Update();
+	if (myMenuManager->GameStarted())
+	{
+
+		myPlayer->Update();
+		myLevelManager->Update();
+	}
+	
 	myMenuManager->Update();
 }
 
