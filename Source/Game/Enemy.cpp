@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "tga2d/sprite/sprite.h"
 #include "MovementStraight.h"
+#include "MovementWave.h"
 
 namespace Studio
 {
@@ -18,7 +19,7 @@ namespace Studio
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
-		SAFE_CREATE(myMovement, MovementStraight(&myPosition, 500.0f));
+		SAFE_CREATE(myMovement, MovementWave(&myPosition, 100.0f, 500.0f, 500.0f));
 
 		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 25);
 	}

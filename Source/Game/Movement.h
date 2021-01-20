@@ -14,6 +14,7 @@ namespace Studio
 		VECTOR2F* myObjectsPosition;
 		Enums::MovementPattern myPattern;
 		float mySpeed;
+		float myTotalTime;
 	};
 }
 

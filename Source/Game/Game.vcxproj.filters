@@ -100,6 +100,12 @@
     <ClCompile Include="MovementStraight.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
+    <ClCompile Include="MovementWave.cpp">
+      <Filter>Components\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementBobbing.cpp">
+      <Filter>Components\Movement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -211,6 +217,12 @@
       <Filter>Components\BaseObjects</Filter>
     </ClInclude>
     <ClInclude Include="MovementStraight.h">
+      <Filter>Components\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementWave.h">
+      <Filter>Components\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementBobbing.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
   </ItemGroup>
