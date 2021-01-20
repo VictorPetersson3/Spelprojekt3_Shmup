@@ -1,0 +1,7 @@
+# Rader som börjar med '#' kommer att ignoreras.
+level_x
+# Det är första banan som laddas in.
+# Vill ni ladda in en annan ban så är
+# det bara att ersätta vald bana med
+# rätt bana alternativt kommentera
+# ut banan (sätta # framför)

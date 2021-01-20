@@ -27,7 +27,28 @@ namespace Studio
 
 		myEnemyFactory->InitEnemyType("Sprites/debugpixel.dds", 999, "Default");
 		//															    ^ key
-		LoadLevel("JSON/Levels/level_x.json");
+
+		// Load chosen level by Lever Designers
+		std::fstream file;
+		std::string levelPath;
+		file.open("JSON/Levels/level.txt");
+		{
+			bool lineIsComment = true;
+			// Loop through file until line is not a comment
+			do
+			{
+				std::getline(file, levelPath);
+				lineIsComment = (levelPath[0] == '#');
+			} while (lineIsComment);
+		}
+		file.close();
+		std::string path = "JSON/Levels/";
+		path.append(levelPath);
+		path.append(".json");
+
+		printf_s("PATH %s\n", path.c_str());
+
+		LoadLevel(path.c_str());
 	}
 
 	LevelManager::~LevelManager()
