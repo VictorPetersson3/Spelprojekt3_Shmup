@@ -77,6 +77,32 @@ namespace Studio
 		myPosition = aPos;
 	}
 
+	// Alias for RotateRight
+	void RenderCommand::Rotate(const float aRotationInRadians)
+	{
+		myRotation += aRotationInRadians;
+	}
+
+	void RenderCommand::RotateRight(const float aRotationInRadians)
+	{
+		myRotation += aRotationInRadians;
+	}
+
+	void RenderCommand::RotateLeft(const float aRotationInRadians)
+	{
+		myRotation -= aRotationInRadians;
+	}
+
+	void RenderCommand::SetRotation(float aRotationInRadians)
+	{
+		myRotation = aRotationInRadians;
+	}
+
+	const float RenderCommand::GetRotation() const
+	{
+		return myRotation;
+	}
+
 	void RenderCommand::Render()
 	{
 		mySprite->SetTextureRect(myTextureRectTopLeft.x, myTextureRectTopLeft.y, myTextureRectBotRight.x, myTextureRectBotRight.y);
