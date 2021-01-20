@@ -8,7 +8,7 @@ namespace Studio
 		myCalculatedSpeed(std::acos(-1) / (aWaveHeight / aVerticalSpeed))
 	{
 		this->myObjectsPosition = anObjectsPosition;
-		myPattern = Enums::MovementPattern::Wave;
+		myPattern = Enums::MovementPattern::Bobbing;
 		myVerticalSpeed = aVerticalSpeed;
 		myWaveHeight = aWaveHeight;
 		myTotalTime = 0.0f;
