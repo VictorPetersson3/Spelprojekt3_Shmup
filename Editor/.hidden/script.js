@@ -1,16 +1,3 @@
-let enemyPresets = ["Pirate", "Gunner"];
-
-function scopedUniqueId()
-{
-    var internalIdCounter = 0;
-    return function(reset = false)
-    {
-        if (reset) internalIdCounter = 0;
-        return "uid_" + internalIdCounter++;
-    }
-}
-var uniqueId = scopedUniqueId();
-
 function presetChange(e)
 {
     document.getElementById("input-type").value = e.target.value;
@@ -27,10 +14,6 @@ function clearParameters()
 function createEnemyElement(type, pos, timer)
 {
     let enemyBox = document.createElement("div");
-    enemyBox.setAttribute("draggable", "true");
-    enemyBox.addEventListener("dragstart", handleDragStart, false);
-    enemyBox.addEventListener("dragend", handleDragEnd, false);
-
     enemyBox.innerHTML = `
         <table>
             <tr class="enemy-table-header-row">
@@ -73,73 +56,6 @@ function createEnemy()
     let spawner = document.getElementById("enemy-spawner");
     spawner.innerHTML = "";
     spawner.appendChild(enemyBox);
-
-    console.log(data);
-}
-
-function addPackListeners(pack)
-{
-    if (pack)
-    {
-        if (pack.id == "")
-            pack.id = uniqueId();
-        pack.addEventListener("dragenter", handleDragEnter, false);
-        pack.addEventListener("dragleave", handleDragLeave, false);
-    }
-}
-
-addFunctionalityToExistingPacks();
-function addFunctionalityToExistingPacks()
-{
-    uniqueId(true); // Reset id counter
-    addPackListeners(document.getElementById("trashcan"));
-    document.querySelectorAll(".pack").forEach(function(pack) {
-        addPackListeners(pack);
-    });
-}
-
-let drag = { active: true, id: undefined, parent: undefined };
-// Enemy-Box
-function handleDragStart(e)
-{
-    if (drag.active) return false;
-    drag.active = true;
-
-    drag.parent = this.parentNode;
-
-    this.style.opacity = 0.4;
-}
-// Enemy-Box
-function handleDragEnd(e)
-{
-    this.style.opacity = 1;
-    drag.active = false;
-
-    // Handle "drop"
-    if (drag.id)
-    {
-        let container = document.getElementById(drag.id);
-        if (container.classList.contains("trashcan"))
-        {
-            this.remove();
-        }
-        else
-        {
-            container.appendChild(this);
-        }
-    }
-}
-
-// Pack
-function handleDragEnter(e)
-{
-    this.classList.add("drag-over");
-    drag.id = this.id;
-}
-// Pack
-function handleDragLeave(e)
-{
-    this.classList.remove("drag-over");
 }
 
 // Download file to Client
@@ -223,7 +139,16 @@ function importLevel(e)
             document.getElementById("level-window").appendChild(pack);
         });
 
-        addFunctionalityToExistingPacks();
+        addDragulaToPacks();
     }
     reader.readAsText(file);
+}
+
+var dragger = dragula([document.getElementById("enemy-spawner")]);
+addDragulaToPacks();
+function addDragulaToPacks()
+{
+    document.querySelectorAll(".pack").forEach(function(element){
+        dragger.containers.push(element);
+    });
 }

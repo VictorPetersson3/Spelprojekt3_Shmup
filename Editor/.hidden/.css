@@ -39,6 +39,8 @@ html, body
 {
     width: 25%;
     position: fixed;
+    top: 0;
+    left: 0;
     background-color: white;
     overflow-x: scroll;
 }
@@ -146,8 +148,4 @@ td
     min-height: 5em;
     margin: 7px 3px;
     padding-bottom: 3em;
-}
-.drag-over
-{
-    border-style: dashed;
 }
