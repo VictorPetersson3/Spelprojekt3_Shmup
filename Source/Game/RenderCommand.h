@@ -21,6 +21,13 @@ namespace Studio
 			virtual void Update(Tga2D::CSprite* aSprite, const float aRotation);
 			virtual void Update(const Tga2D::Vector2f& aPos, const float aRotation, Tga2D::CSprite* aSprite);
 			virtual void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
+			
+			void Rotate(const float aRotationInRadians);
+			void RotateRight(const float aRotationInRadians);
+			void RotateLeft(const float aRotationInRadians);
+			void SetRotation(float aRotationInRadians);
+			const float GetRotation() const;
+
 			void Render();
 			virtual void SetScale(const Tga2D::Vector2f& aScale);
 			Tga2D::CSprite* GetSprite() const;
