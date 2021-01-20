@@ -62,7 +62,7 @@ namespace Studio
 
 	void LevelManager::Update(Player* aPlayer)
 	{
-		//Pu
+		//Pu som kommer drömma mardrömmar av denna rad
 		myPlayer = aPlayer;
 		if (myLevelIsCleared)
 		{
