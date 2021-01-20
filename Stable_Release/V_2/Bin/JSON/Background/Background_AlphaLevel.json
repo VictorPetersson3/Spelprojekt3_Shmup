@@ -1,0 +1,39 @@
+{
+
+  "BackgroundObjects": [
+    {
+      "BackgroundImage": {
+        "Type": "BackgroundImage",
+        "ImagePath": "sprites/Background/Background_Background_01.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": 0,
+        "Position": {
+          "X": 960,
+          "Y": 540
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": 0,
+        "CreateMany": false,
+        "ManyAtributes": {
+          "Amount": 10,
+          "RandomPositionXmin": 0,
+          "RandomPositionXmax": 1920,
+          "RandomPositionYmin": 0,
+          "RandomPositionYmax": 800
+        }
+      }
+    }
+
+
+
+
+  ]
+}
