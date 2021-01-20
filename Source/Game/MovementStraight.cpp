@@ -17,8 +17,6 @@ namespace Studio
 
 		myObjectsPosition->x -= mySpeed * deltaTime;
 
-		printf_s("\nx%f \ny%f", myObjectsPosition->x, myObjectsPosition->y);
-
 	}
 }
 

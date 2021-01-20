@@ -20,7 +20,6 @@ namespace Studio
 	{
 		myTotalTime += Timer::GetInstance()->TGetDeltaTime();
 		myObjectsPosition->y = -sinf(myTotalTime * myCalculatedSpeed) * myWaveHeight * 0.5f + mySpawnYPos;
-		printf("\n%f", std::acos(-1) / (myWaveHeight / myVerticalSpeed));
 	}
 }
 
