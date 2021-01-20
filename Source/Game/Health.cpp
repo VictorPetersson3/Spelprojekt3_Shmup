@@ -10,7 +10,10 @@ void Studio::Health::TakeDamage(const float aDamageAmount)
 {
 	if (!myIsGodMode)
 	{
-		myCurrentHealth -= aDamageAmount;
+		if (!myIsDead)
+		{
+			myCurrentHealth -= aDamageAmount;
+		}
 		if (myCurrentHealth <= 0)
 		{
 			myIsDead = true;

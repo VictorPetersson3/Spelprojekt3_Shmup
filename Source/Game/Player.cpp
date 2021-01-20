@@ -19,6 +19,8 @@ namespace Studio
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
+		myParticleFactory.InitParticleType("Sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 3.0f);
+		GetCollider().AddCircleColliderObject(myPosition, 20);
 	}
 
 	Player::~Player()
@@ -41,6 +43,10 @@ namespace Studio
 			Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
 		}
 
+		if (myParticleObjects.size() > 0)
+		{
+			myParticleObjects.at(0)->Update(Timer::GetInstance()->TGetDeltaTime());
+		}
 
 		//Kod som behöver ligga i levelmanager troligen
 		/*for (int i = 0; i < myBullets.size(); i++)
@@ -64,6 +70,15 @@ namespace Studio
 				myBullets.push_back(new Bullet(myPosition, 800, myBulletSprite));
 				myShootCooldown = 0;
 			}
+	}
+
+	void Player::PlayExplosion()
+	{
+		if (!myHasDied)
+		{
+			myParticleObjects.push_back(myParticleFactory.CreateParticleObject("Explosion", myPosition));
+			myHasDied = true;
+		}
 	}
 
 	std::vector<Bullet*>& Player::GetBullets()

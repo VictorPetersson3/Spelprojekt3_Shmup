@@ -48,7 +48,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 	{
 
 		myPlayer->Update();
-		myLevelManager->Update();
+		myLevelManager->Update(myPlayer);
 	}
 	
 	myMenuManager->Update();

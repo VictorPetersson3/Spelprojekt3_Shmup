@@ -87,14 +87,14 @@ namespace Studio
 					Tga2D::Vector2f lowerRight({ collision.GetPosition().myX + collision.GetWidth() / 2, collision.GetPosition().myY + collision.GetHeight() / 2 });
 					Tga2D::Vector2f upperLeft({ collision.GetPosition().myX - collision.GetWidth() / 2, collision.GetPosition().myY - collision.GetHeight() / 2 });
 					Tga2D::Vector2f upperRight({ collision.GetPosition().myX + collision.GetWidth() / 2, collision.GetPosition().myY - collision.GetHeight() / 2 });
-					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((lowerLeft), (lowerRight), Tga2D::CColor({ 0.3f, 0.3f, 0.3f, 1.0f }));
-					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((lowerRight), (upperRight), Tga2D::CColor({ 0.3f, 0.3f, 0.3f, 1.0f }));
-					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((upperRight), (upperLeft), Tga2D::CColor({ 0.3f, 0.3f, 0.3f, 1.0f }));
-					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((upperLeft), (lowerLeft), Tga2D::CColor({ 0.3f, 0.3f, 0.3f, 1.0f }));
+					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((lowerLeft), (lowerRight), Tga2D::CColor({ 0.0f, 0.0f, 0.0f, 1.0f }));
+					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((lowerRight), (upperRight), Tga2D::CColor({ 0.0f, 0.0f, 0.0f, 1.0f }));
+					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((upperRight), (upperLeft), Tga2D::CColor({ 0.0f, 0.0f, 0.0f, 1.0f }));
+					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawLine((upperLeft), (lowerLeft), Tga2D::CColor({ 0.0f, 0.0f, 0.0f, 1.0f }));
 				}
 				if (collision.GetColliderType() == ColliderType::CircleCollider)
 				{
-					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawCircle(collision.GetPosition(), collision.GetRadius() / 2.0f, { 0.3f, 0.7f, 0.3f, 1.0f });
+					Tga2D::CEngine::GetInstance()->GetDebugDrawer().DrawCircle(collision.GetPosition(), collision.GetRadius() / 2.0f, { 0.0f, 0.0f, 0.0f, 1.0f });
 				}
 			}
 		}

@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "Particle_SpriteSheet_Factory.h"
+#include "ParticleObject.h"
 #include <vector>
 namespace Tga2D
 {
@@ -17,6 +19,7 @@ namespace Studio
 
 		void Update();
 		void Shoot();
+		void PlayExplosion();
 
 		std::vector<Bullet*>& GetBullets();
 
@@ -27,12 +30,16 @@ namespace Studio
 	private:
 		float mySpeed;
 		float myShootCooldown;
+		bool myHasDied = false;
 		std::vector<Bullet*> myBullets;
+		std::vector<ParticleObject*> myParticleObjects;
 
 		Tga2D::CSprite* mySprite;
 		Tga2D::CSprite* myBulletSprite;
 		VECTOR2F myPosition;
 
+		Particle_SpriteSheet_Factory myParticleFactory;
+		
 	};
 }
 

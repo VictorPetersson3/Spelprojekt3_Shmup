@@ -60,8 +60,10 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myBullets);
 	}
 
-	void LevelManager::Update()
+	void LevelManager::Update(Player* aPlayer)
 	{
+		//Pu
+		myPlayer = aPlayer;
 		if (myLevelIsCleared)
 		{
 			SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
@@ -84,23 +86,8 @@ namespace Studio
 					printf_s("Size of new pack: %i\n", myCurrentPack->myStoredEnemies.size());
 				}
 			}
-
-			// Copy & Paste from Jimmi
-			for (size_t i = 0; i < myEnemies.size(); i++)
-			{
-				myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
-				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
-				for (int j = 0; j < myEnemies[i]->GetBullets().size(); j++)
-				{
-					Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]->GetBullets()[j]);
-				}
-
-				if (myEnemies[i]->GetPosition().x < 0.0f)
-				{
-					myEnemies.erase(myEnemies.begin() + i);
-				}
-			}
-
+			//Pu
+			LevelLogic();
 			// Check if Player cleared the level
 			CheckIfLevelIsCleared();
 		}
@@ -120,6 +107,75 @@ namespace Studio
 	bool LevelManager::LevelIsCleared()
 	{
 		return myLevelIsCleared;
+	}
+	
+	//Pu
+	void LevelManager::LevelLogic()
+	{
+
+		// Copy & Paste from Jimmi
+		for (size_t i = 0; i < myEnemies.size(); i++)
+		{
+			myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
+			Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
+
+			if (myEnemies[i]->GetPosition().x < 0.0f)
+			{
+				myEnemies.erase(myEnemies.begin() + i);
+			}
+		}
+		for (Bullet* bullet : myBullets)
+		{
+			Studio::RendererAccessor::GetInstance()->Render(*bullet);
+		}
+		//Pu
+		CheckCollision();
+	}
+	//Pu
+	void LevelManager::CheckCollision()
+	{
+		bool shouldErase = false;
+		if (myEnemies.size() > 0)
+		{
+			for (int i = 0; i < myEnemies.size(); i++)
+			{
+				if (myEnemies[i]->GetBullets().size() > 0)
+				{
+					for (int j = myEnemies[i]->GetBullets().size() - 1; j >= 0; j--)
+					{
+						if (myPlayer->Intersects(*myEnemies[i]->GetBullets()[j]))
+						{
+							myPlayer->TakeDamage(25);
+							printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
+							if (myPlayer->IsDead())
+							{
+								myPlayer->PlayExplosion();
+							}
+							myEnemies[i]->GetBullets().erase(myEnemies[i]->GetBullets().begin() + j);
+						}
+					}
+				}
+			}
+
+			if (myPlayer->GetBullets().size() > 0)
+			{
+				for (int i = myEnemies.size() - 1; i >= 0; i--)
+				{
+					for (int j = myPlayer->GetBullets().size() - 1; j >= 0; j--)
+					{
+						if (myPlayer->GetBullets()[j]->Intersects(*myEnemies[i]))
+						{
+							shouldErase = true;
+							myPlayer->GetBullets().erase(myPlayer->GetBullets().begin() + j);
+						}
+					}
+					if (shouldErase)
+					{
+						myEnemies.erase(myEnemies.begin() + i);
+					}
+				}
+			}
+		}
 	}
 
 	void LevelManager::LoadLevel(const char* aLevelPath)
