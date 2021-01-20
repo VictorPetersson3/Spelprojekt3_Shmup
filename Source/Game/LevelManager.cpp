@@ -172,6 +172,7 @@ namespace Studio
 					if (shouldErase)
 					{
 						myEnemies.erase(myEnemies.begin() + i);
+						shouldErase = false;
 					}
 				}
 			}
