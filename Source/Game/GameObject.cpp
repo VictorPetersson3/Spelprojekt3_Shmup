@@ -20,6 +20,28 @@ namespace Studio
 	{
 		myRenderCommand.Update(aPos, aTexRecTopL, aTexRecBotR);
 	}
+
+	void GameObject::Rotate(const float aRotationInRadians)
+	{
+		myRenderCommand.Rotate(aRotationInRadians);
+	}
+	void GameObject::RotateRight(const float aRotationInRadians)
+	{
+		myRenderCommand.RotateRight(aRotationInRadians);
+	}
+	void GameObject::RotateLeft(const float aRotationInRadians)
+	{
+		myRenderCommand.RotateLeft(aRotationInRadians);
+	}
+	void GameObject::SetRotation(float aRotationInRadians)
+	{
+		myRenderCommand.SetRotation(aRotationInRadians);
+	}
+	const float GameObject::GetRotation() const
+	{
+		return myRenderCommand.GetRotation();
+	}
+
 	Sprite& Studio::GameObject::GetSprite()
 	{
 		return mySprite;

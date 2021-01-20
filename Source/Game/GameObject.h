@@ -29,6 +29,11 @@ namespace Studio
 		virtual void Update(const Tga2D::Vector2f& aPos);
 		virtual void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
 
+		void Rotate(const float aRotationInRadians);
+		void RotateRight(const float aRotationInRadians);
+		void RotateLeft(const float aRotationInRadians);
+		void SetRotation(float aRotationInRadians);
+		const float GetRotation() const;
 
 		// Temporary accessor for mySprite. DO NOT USE IN RETAIL
 		Sprite& GetSprite();	 // Temporary accesser
