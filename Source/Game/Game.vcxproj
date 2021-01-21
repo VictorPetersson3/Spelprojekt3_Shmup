@@ -157,6 +157,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="macros.h" />
     <ClInclude Include="MovementBobbing.h" />
+    <ClInclude Include="MovementSeeking.h" />
     <ClInclude Include="MovementStraight.h" />
     <ClInclude Include="MovementWave.h" />
     <ClInclude Include="ParticleObject.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MovementBobbing.cpp" />
+    <ClCompile Include="MovementSeeking.cpp" />
     <ClCompile Include="MovementStraight.cpp" />
     <ClCompile Include="MovementWave.cpp" />
     <ClCompile Include="ParticleObject.cpp" />
