@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "Particle_SpriteSheet_Factory.h"
+#include "ParticleObject.h"
 #include <vector>
 #include "Enums.h"
 
@@ -21,6 +23,9 @@ namespace Studio
 
 		void Update(float aDeltaTime);
 		void Shoot(float aDeltaTime);
+		void PlayExplosion();
+		
+		bool HasFinishedExplosion();
 
 		int GetScoreValue();
 
@@ -30,15 +35,19 @@ namespace Studio
 
 		Studio::RenderCommand& GetRenderCommand();
 
+
 	private:
 		void UpdateBullets(float aDeltaTime);
 	private:
 		int myScoreValue;
 
+		bool myHasDied = false;
+
 		float mySpeed;
 		float myShootCooldown;
 
 		std::vector<Bullet*> myBullets;
+		std::vector<ParticleObject*> myParticleObjects;
 
 		Tga2D::CSprite* mySprite;
 		Tga2D::CSprite* myBulletSprite;
@@ -46,6 +55,8 @@ namespace Studio
 		Studio::Enums::MovementPattern aMovementType;
 
 		Movement* myMovement;
+
+		Particle_SpriteSheet_Factory myParticleFactory;
 
 		VECTOR2F myPosition;
 

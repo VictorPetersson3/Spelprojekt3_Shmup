@@ -117,7 +117,10 @@ namespace Studio
 		for (size_t i = 0; i < myEnemies.size(); i++)
 		{
 			myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
-			Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
+			if (!myEnemies[i]->IsDead())
+			{
+				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
+			}
 
 			if (myEnemies[i]->GetPosition().x < 0.0f)
 			{
@@ -130,6 +133,14 @@ namespace Studio
 		}
 		//Pu
 		CheckCollision();
+
+		for (int i = myEnemies.size() - 1; i >= 0; i--)
+		{
+			if (myEnemies[i]->HasFinishedExplosion() && myEnemies[i]->IsDead())
+			{
+				myEnemies.erase(myEnemies.begin() + i);
+			}
+		}
 		if (myPlayer->IsFinishedExploding() && myPlayer->IsDead())
 		{
 			//Reload Level after death explosion is finished
@@ -139,7 +150,7 @@ namespace Studio
 	//Pu
 	void LevelManager::CheckCollision()
 	{
-		bool shouldErase = false;
+		bool shouldExplode = false;
 		if (myEnemies.size() > 0)
 		{
 			for (int i = 0; i < myEnemies.size(); i++)
@@ -170,14 +181,18 @@ namespace Studio
 					{
 						if (myPlayer->GetBullets()[j]->Intersects(*myEnemies[i]))
 						{
-							shouldErase = true;
 							myPlayer->GetBullets().erase(myPlayer->GetBullets().begin() + j);
+							myEnemies[i]->TakeDamage(100);
+							if (myEnemies[i]->IsDead())
+							{
+								shouldExplode = true;
+							}
 						}
 					}
-					if (shouldErase)
+					if (shouldExplode)
 					{
-						myEnemies.erase(myEnemies.begin() + i);
-						shouldErase = false;
+						myEnemies[i]->PlayExplosion();
+						shouldExplode = false;
 					}
 				}
 			}
