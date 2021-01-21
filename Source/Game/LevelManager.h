@@ -20,11 +20,12 @@ namespace Studio
 		
 		void AddEnemy(Enemy* anEnemy);
 		bool LevelIsCleared();
+		void LoadLevel(const char* aLevelPath);
+		const char* GetCurrentLevelPath() const;
 
 	private:
 		void LevelLogic();
 		void CheckCollision();
-		void LoadLevel(const char* aLevelPath);
 		void CheckIfLevelIsCleared();
 		bool myLevelIsCleared;
 		const char* myCurrentLevelPath;

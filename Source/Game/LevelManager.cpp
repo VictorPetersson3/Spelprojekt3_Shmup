@@ -220,6 +220,10 @@ namespace Studio
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
 	}
+	const char* LevelManager::GetCurrentLevelPath() const
+	{
+		return myCurrentLevelPath;
+	}
 	void LevelManager::CheckIfLevelIsCleared()
 	{
 		// This is NOT how to check if a level has been cleared.
