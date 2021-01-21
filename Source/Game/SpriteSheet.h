@@ -14,7 +14,7 @@ namespace Studio
 		signed int myLayer;
 		std::string myImagePath;
 		Tga2D::CSprite* mySprite;
-		VECTOR2F myPosition;
+		Tga2D::Vector2<float> myPosition;
 
 		// TODO: Add data used to animate this sheet
 	};
