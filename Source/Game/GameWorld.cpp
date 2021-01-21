@@ -10,6 +10,7 @@
 #include "MenuManager.h"
 #include "MenuManagerSingleton.h"
 #include "Score.h"
+#include "AudioManagerAccesor.h"
 
 CGameWorld::CGameWorld()
 {
@@ -30,6 +31,7 @@ void CGameWorld::Init()
 {
 	myRenderer.Init();
 	Studio::MenuManagerSingleton::Construct();
+	Studio::AudioManagerAccessor::Construct();
 	Studio::RendererAccessor::SetInstance(&myRenderer);
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });

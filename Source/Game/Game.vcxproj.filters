@@ -117,6 +117,9 @@
     <ClCompile Include="SpriteSheet.cpp">
       <Filter>Components\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="AudioClip.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="AudioManagerAccesor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -247,6 +250,9 @@
     <ClInclude Include="SpriteSheet.h">
       <Filter>Components\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="AudioClip.h" />
+    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="AudioManagerAccesor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

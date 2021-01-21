@@ -1,13 +1,13 @@
 #pragma once
-
-class AudioManager;
+#include "AudioManager.h"
 
 namespace Studio
 {
 	namespace AudioManagerAccessor
 	{	
 		AudioManager* GetInstance();
-		void SetInstance(AudioManager* aInstance);
+		void Construct();
+		void Destruct();
 	}
 }
 

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "AudioManagerAccesor.h"
-
-class AudioManager;
+#include "AudioManager.h"
 
 namespace Studio
 {
@@ -12,14 +11,20 @@ namespace Studio
 			AudioManager* myAudioManager;
 		}
 
+		void Construct()
+		{
+			myAudioManager = new AudioManager();
+		}
+
+		void Destruct()
+		{
+			delete myAudioManager;
+			myAudioManager = nullptr;
+		}
+
 		AudioManager* GetInstance()
 		{
 			return myAudioManager;
-		}
-
-		void SetInstance(AudioManager* aInstance)
-		{
-			myAudioManager = aInstance;
 		}
 	}
 }

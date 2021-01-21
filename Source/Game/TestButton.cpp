@@ -3,6 +3,8 @@
 #include "tga2d/sprite/sprite.h"
 #include "InputManager.h"
 #include <iostream>
+#include "AudioManagerAccesor.h"
+#include "AudioManager.h"
 
 Studio::TestButton::TestButton()
 {
@@ -47,7 +49,6 @@ void Studio::TestButton::Update()
 						OnClick();
 						myIsClicked = true;
 						myIsEnabled = false;
-
 					}
 				}
 			}
@@ -65,4 +66,5 @@ void Studio::TestButton::Update()
 void Studio::TestButton::OnClick()
 {
 	std::cout << "TestButton Pressed" << std::endl;
+	AudioManagerAccessor::GetInstance()->Play2D("Audio/SP3SountrackSample.wav", true, 0.1f);
 }

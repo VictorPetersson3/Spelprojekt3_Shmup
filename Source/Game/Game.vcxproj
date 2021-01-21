@@ -134,6 +134,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AudioClip.h" />
+    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="AudioManagerAccesor.h" />
     <ClInclude Include="BackgroundFactory.h" />
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundManager.h" />
@@ -186,6 +189,9 @@
     <ClInclude Include="UIElement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioClip.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="AudioManagerAccesor.cpp" />
     <ClCompile Include="BackgroundFactory.cpp" />
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundManager.cpp" />
