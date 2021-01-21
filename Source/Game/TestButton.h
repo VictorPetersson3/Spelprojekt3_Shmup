@@ -9,7 +9,7 @@ namespace Studio
 	{
 	public:
 		TestButton();
-		TestButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot);
+		TestButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag);
 		~TestButton();
 
 		void Update() override;

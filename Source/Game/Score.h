@@ -1,4 +1,9 @@
 #pragma once
+#include "MenuObject.h"
+#include "MenuManagerSingleton.h"
+#include "MenuManager.h"
+#include "TextElement.h"
+
 
 namespace Tga2D
 {
@@ -18,12 +23,10 @@ namespace Studio
 		void AddToScore(int aValue);
 		void SetScore(int aValue);
 
-		Tga2D::CText* GetScore();
-
 	private:
 		int myScore;
 		Tga2D::CText* myScoreText;
-
+		TextElement* myTextElement;
 	};
 }
 

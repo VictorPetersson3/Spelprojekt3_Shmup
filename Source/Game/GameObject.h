@@ -3,7 +3,7 @@
 #include "RenderCommand.h"
 #include "Sprite.h"
 #include "Collider.h"
-
+#include "SpriteSheet.h"
 // TODO: ^ Avoid this?
 namespace Tga2D
 {
@@ -18,6 +18,10 @@ namespace Studio
 		Collider myCollider;
 		Health myHealth;
 		RenderCommand myRenderCommand;
+
+		#pragma region New Image Stuff (SpriteBatching)
+		SpriteSheet mySpriteSheet;
+		#pragma endregion
 
 	public:
 		GameObject() = default;
@@ -61,6 +65,10 @@ namespace Studio
 		const bool IsDead();
 
 		void SetGodMode();
+		#pragma endregion
+
+		#pragma region New Image Stuff (SpriteBatching)
+		const SpriteSheet& GetSpriteSheet() const;
 		#pragma endregion
 	};
 }

@@ -104,13 +104,18 @@
       <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="MovementBobbing.cpp">
-    <Filter>Components\Movement</Filter>
+      <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="MovementHoming.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="MovementSeeking.cpp">
       <Filter>Components\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManagerSingleton.cpp" />
+    <ClCompile Include="TextElement.cpp" />
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Components\Visual</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,13 +234,18 @@
       <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="MovementBobbing.h">
-    <Filter>Components\Movement</Filter>
+      <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="MovementHoming.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="MovementSeeking.h">
       <Filter>Components\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManagerSingleton.h" />
+    <ClInclude Include="TextElement.h" />
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Components\Visual</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +296,9 @@
     </Filter>
     <Filter Include="Components\Movement">
       <UniqueIdentifier>{14ecb963-5ec5-4285-86f7-58fb95385bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Visual">
+      <UniqueIdentifier>{65cfdee0-cc21-46b8-bdec-cc830a797082}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

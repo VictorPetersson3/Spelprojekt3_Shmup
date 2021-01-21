@@ -15,6 +15,7 @@ namespace Studio
 	{
 		myRenderCommand.Update(aPos);
 		myCollider.Update(aPos);
+		mySpriteSheet.myPosition = aPos;
 	}
 	void GameObject::Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR)
 	{
@@ -95,6 +96,11 @@ namespace Studio
 	void GameObject::SetGodMode()
 	{
 		myHealth.SetGodMode();
+	}
+
+	const SpriteSheet& GameObject::GetSpriteSheet() const
+	{
+		return mySpriteSheet;
 	}
 
 	Collider& GameObject::GetCollider()
