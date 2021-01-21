@@ -9,7 +9,7 @@ Studio::TestButton::TestButton()
 
 }
 
-Studio::TestButton::TestButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot)
+Studio::TestButton::TestButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -23,6 +23,7 @@ Studio::TestButton::TestButton(const char* aPath, const VECTOR2F aPosition, cons
 	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y * aSize.y / 2);
 
 	myRenderCommand = RenderCommand(mySprite, aSize,aPosition);
+	tag = aTag;
 }
 
 Studio::TestButton::~TestButton()

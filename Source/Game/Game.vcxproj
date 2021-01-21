@@ -147,6 +147,7 @@
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuManagerSingleton.h" />
     <ClInclude Include="MenuObject.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Game.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestButton.h" />
+    <ClInclude Include="TextElement.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TypePattern_Background.h" />
     <ClInclude Include="TypePattern_Bullet.h" />
@@ -195,6 +197,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuManagerSingleton.cpp" />
     <ClCompile Include="MenuObject.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -224,6 +227,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestButton.cpp" />
+    <ClCompile Include="TextElement.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TypePattern_Background.cpp" />
     <ClCompile Include="TypePattern_Bullet.cpp" />

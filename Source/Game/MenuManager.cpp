@@ -6,10 +6,9 @@ namespace Studio
     Studio::MenuManager::MenuManager()
     {
         myMainMenu.Add(myTestButton);
+        myMainMenu.Add(myScoreText);
         myMainMenu.Enable();
     }
-
-
 
     MenuObject* Studio::MenuManager::GetMainMenu()
     {
@@ -30,6 +29,12 @@ namespace Studio
     {
         myMainMenu.Update();
     }
+
+    void MenuManager::Render()
+    {
+        myScoreText->Render();
+    }
+
     bool MenuManager::GameStarted()
     {
         if (!hasStartedGame && myTestButton->myIsClicked == true)
@@ -45,7 +50,6 @@ namespace Studio
         else
         {
             return false;
-        }
-             
+        }            
     }
 }

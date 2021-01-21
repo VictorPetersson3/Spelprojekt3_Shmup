@@ -3,6 +3,7 @@
 #include "MenuObject.h"
 #include "TestButton.h"
 #include "UIElement.h"
+#include "TextElement.h"
 
 namespace Studio
 {
@@ -17,9 +18,9 @@ namespace Studio
 
 		void Update();
 
+		void Render();
+
 		bool GameStarted();
-
-
 
 	private:
 		MenuObject myMainMenu;
@@ -28,7 +29,8 @@ namespace Studio
 
 		bool hasStartedGame = false;
 		
-		TestButton* myTestButton = new TestButton("Sprites/UI/TempPlayButton.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f });
+		TestButton* myTestButton = new TestButton("Sprites/UI/TempPlayButton.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f },"StartButton");
+		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.1,0.2 }, "ScoreText");
 	};
 
 

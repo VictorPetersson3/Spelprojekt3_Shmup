@@ -9,6 +9,7 @@ namespace Studio
 	class Enemy;
 	class LevelManager;
 	class MenuManager;
+	class Score;
 }
 namespace Tga2D
 {
@@ -36,6 +37,8 @@ private:
 	Studio::Player* myPlayer;
 
 	Studio::MenuManager* myMenuManager;
+
+	Studio::Score* myScore;
 
 	Studio::LevelManager* myLevelManager;
 	std::vector<Studio::Enemy*> myEnemies;

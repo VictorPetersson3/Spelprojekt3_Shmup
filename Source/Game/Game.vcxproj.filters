@@ -104,7 +104,7 @@
       <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="MovementBobbing.cpp">
-    <Filter>Components\Movement</Filter>
+      <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="MovementHoming.cpp">
       <Filter>Components\Movement</Filter>
@@ -112,6 +112,8 @@
     <ClCompile Include="MovementSeeking.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
+    <ClCompile Include="MenuManagerSingleton.cpp" />
+    <ClCompile Include="TextElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -229,7 +231,7 @@
       <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="MovementBobbing.h">
-    <Filter>Components\Movement</Filter>
+      <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="MovementHoming.h">
       <Filter>Components\Movement</Filter>
@@ -237,6 +239,8 @@
     <ClInclude Include="MovementSeeking.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
+    <ClInclude Include="MenuManagerSingleton.h" />
+    <ClInclude Include="TextElement.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

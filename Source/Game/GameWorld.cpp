@@ -8,6 +8,8 @@
 #include "RendererAccessor.h"
 #include "LevelManager.h"
 #include "MenuManager.h"
+#include "MenuManagerSingleton.h"
+#include "Score.h"
 
 CGameWorld::CGameWorld()
 {
@@ -27,6 +29,7 @@ CGameWorld::~CGameWorld()
 void CGameWorld::Init()
 {
 	myRenderer.Init();
+	Studio::MenuManagerSingleton::Construct();
 	Studio::RendererAccessor::SetInstance(&myRenderer);
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
@@ -36,7 +39,8 @@ void CGameWorld::Init()
 	myBackgroundManager.CreateTestMapBackground(5120.f);
 
 	SAFE_CREATE(myLevelManager, Studio::LevelManager());
-	SAFE_CREATE(myMenuManager, Studio::MenuManager());
+	myMenuManager = Studio::MenuManagerSingleton::GetInstance();
+	SAFE_CREATE(myScore, Studio::Score());
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
@@ -46,7 +50,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 
 	if (myMenuManager->GameStarted())
 	{
-
+		myScore->Update();
 		myPlayer->Update();
 		myLevelManager->Update(myPlayer);
 	}
@@ -56,8 +60,11 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 
 void CGameWorld::Render()
 {
+
 	//myTga2dLogoSprite->Render();
 	myRenderer.Render();
+	myMenuManager->Render();
+
 }
 
 void CGameWorld::SwapBuffers()
