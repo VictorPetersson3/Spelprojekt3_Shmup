@@ -104,6 +104,9 @@
       <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="MovementBobbing.cpp">
+    <Filter>Components\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementHoming.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="MovementSeeking.cpp">
@@ -226,6 +229,9 @@
       <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="MovementBobbing.h">
+    <Filter>Components\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementHoming.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="MovementSeeking.h">
