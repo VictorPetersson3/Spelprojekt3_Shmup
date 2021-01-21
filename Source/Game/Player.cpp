@@ -19,7 +19,7 @@ namespace Studio
 		mySprite->SetSizeRelativeToImage({ 50, 50 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
-		myParticleFactory.InitParticleType("Sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 3.0f);
+		myParticleFactory.InitParticleType("Sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);
 		GetCollider().AddCircleColliderObject(myPosition, 20);
 	}
 
@@ -30,14 +30,18 @@ namespace Studio
 
 	void Player::Update()
 	{
-		Movement();
+		if (!IsDead())
+		{
+			Movement();
 
-		Player::GameObject::Update(myPosition);
+			Player::GameObject::Update(myPosition);
 
-		UpdateBullets();
+			UpdateBullets();
 
-		Studio::RendererAccessor::GetInstance()->Render(*this);
+			Studio::RendererAccessor::GetInstance()->Render(*this);
 
+		}
+		
 		for (int i = 0; i < myBullets.size(); i++)
 		{
 			Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
@@ -48,6 +52,7 @@ namespace Studio
 			myParticleObjects.at(0)->Update(Timer::GetInstance()->TGetDeltaTime());
 		}
 
+		
 		//Kod som behöver ligga i levelmanager troligen
 		/*for (int i = 0; i < myBullets.size(); i++)
 		{
@@ -71,7 +76,7 @@ namespace Studio
 				myShootCooldown = 0;
 			}
 	}
-
+	//Temp
 	void Player::PlayExplosion()
 	{
 		if (!myHasDied)
@@ -79,6 +84,20 @@ namespace Studio
 			myParticleObjects.push_back(myParticleFactory.CreateParticleObject("Explosion", myPosition));
 			myHasDied = true;
 		}
+	}
+
+	bool Player::IsFinishedExploding()
+	{
+		if (myParticleObjects.size() > 0)
+		{
+			if (myParticleObjects.at(0)->GetHasFinishedAnimation())
+			{
+				myParticleObjects.erase(myParticleObjects.begin());
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	std::vector<Bullet*>& Player::GetBullets()

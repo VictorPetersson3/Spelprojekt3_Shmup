@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "Renderer.h"
+#include "RendererAccessor.h"
 #include "tga2d/sprite/sprite.h"
 #include "MovementStraight.h"
 #include "MovementWave.h"
@@ -39,6 +40,11 @@ namespace Studio
 		UpdateBullets(aDeltaTime);
 
 		Enemy::GameObject::Update(myPosition);
+
+		for (int i = 0; i < myBullets.size(); i++)
+		{
+			Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
+		}
 
 	}
 

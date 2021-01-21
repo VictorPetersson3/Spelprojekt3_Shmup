@@ -130,6 +130,11 @@ namespace Studio
 		}
 		//Pu
 		CheckCollision();
+		if (myPlayer->IsFinishedExploding() && myPlayer->IsDead())
+		{
+			//Reload Level after death explosion is finished
+			//LoadLevel(myCurrentLevelPath); 
+		}
 	}
 	//Pu
 	void LevelManager::CheckCollision()

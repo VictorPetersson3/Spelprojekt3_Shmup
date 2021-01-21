@@ -21,6 +21,8 @@ namespace Studio
 		void Shoot();
 		void PlayExplosion();
 
+		bool IsFinishedExploding();
+
 		std::vector<Bullet*>& GetBullets();
 
 		RenderCommand& GetRenderCommand();
