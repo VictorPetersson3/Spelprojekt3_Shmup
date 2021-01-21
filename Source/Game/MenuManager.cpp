@@ -7,6 +7,7 @@ namespace Studio
     {
         myMainMenu.Add(myTestButton);
         myMainMenu.Add(myScoreText);
+        myMainMenu.Add(myGodModeButton);
         myMainMenu.Enable();
     }
 
@@ -40,8 +41,17 @@ namespace Studio
         if (!hasStartedGame && myTestButton->myIsClicked == true)
         {
             hasStartedGame = true;
-            return myTestButton->myIsClicked;
             myMainMenu.Disable();
+            return myTestButton->myIsClicked;
+
+        }
+        if (!hasStartedGame && myGodModeButton->myIsClicked == true)
+        {
+            hasStartedGame = true;
+            inGodMode = true;
+            myMainMenu.Disable();
+            return myGodModeButton->myIsClicked;
+
         }
         else if(hasStartedGame)
         {
@@ -51,5 +61,9 @@ namespace Studio
         {
             return false;
         }            
+    }
+    bool MenuManager::GetGodMode()
+    {
+        return inGodMode;
     }
 }

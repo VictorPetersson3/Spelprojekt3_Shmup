@@ -52,6 +52,10 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 
 	if (myMenuManager->GameStarted())
 	{
+		if (myMenuManager->GetGodMode() == true)
+		{
+			myPlayer->SetGodMode();
+		}
 		myScore->Update();
 		myPlayer->Update();
 		myLevelManager->Update(myPlayer);
