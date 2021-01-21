@@ -120,6 +120,9 @@
     <ClCompile Include="AudioClip.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioManagerAccesor.cpp" />
+    <ClCompile Include="MovementDiagonal.cpp">
+      <Filter>Components\Movement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -253,6 +256,9 @@
     <ClInclude Include="AudioClip.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioManagerAccesor.h" />
+    <ClInclude Include="MovementDiagonal.h">
+      <Filter>Components\Movement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
