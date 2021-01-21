@@ -177,18 +177,15 @@ namespace Studio
 			{
 				for (int i = myEnemies.size() - 1; i >= 0; i--)
 				{
-					if (!myEnemies[i]->IsDead())
+					for (int j = myPlayer->GetBullets().size() - 1; j >= 0; j--)
 					{
-						for (int j = myPlayer->GetBullets().size() - 1; j >= 0; j--)
+						if (myPlayer->GetBullets()[j]->Intersects(*myEnemies[i]))
 						{
-							if (myPlayer->GetBullets()[j]->Intersects(*myEnemies[i]))
+							myPlayer->GetBullets().erase(myPlayer->GetBullets().begin() + j);
+							myEnemies[i]->TakeDamage(100);
+							if (myEnemies[i]->IsDead())
 							{
-								myPlayer->GetBullets().erase(myPlayer->GetBullets().begin() + j);
-								myEnemies[i]->TakeDamage(100);
-								if (myEnemies[i]->IsDead())
-								{
-									shouldExplode = true;
-								}
+								shouldExplode = true;
 							}
 						}
 					}
