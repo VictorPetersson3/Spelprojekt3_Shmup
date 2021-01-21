@@ -172,6 +172,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="SpriteSheet_AnimationData.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="RendererAccessor.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="SpriteSheet_AnimationData.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

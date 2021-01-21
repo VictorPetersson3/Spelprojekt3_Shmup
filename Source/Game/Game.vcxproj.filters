@@ -114,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="MenuManagerSingleton.cpp" />
     <ClCompile Include="TextElement.cpp" />
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Components\Visual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="MenuManagerSingleton.h" />
     <ClInclude Include="TextElement.h" />
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Components\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -290,6 +296,9 @@
     </Filter>
     <Filter Include="Components\Movement">
       <UniqueIdentifier>{14ecb963-5ec5-4285-86f7-58fb95385bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Visual">
+      <UniqueIdentifier>{65cfdee0-cc21-46b8-bdec-cc830a797082}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
