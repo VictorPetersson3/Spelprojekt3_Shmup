@@ -127,13 +127,11 @@ namespace Studio
 	}
 	bool Collider::AABBToAABBIntersect(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject)
 	{
-		if (aFirstCollisionObject.GetPosition().x - aFirstCollisionObject.GetWidth() / 2 < aSecondCollisionObject.GetPosition().x + aSecondCollisionObject.GetWidth() / 2 &&
-			aFirstCollisionObject.GetPosition().x + aFirstCollisionObject.GetWidth() / 2 > aSecondCollisionObject.GetPosition().x - aSecondCollisionObject.GetWidth() / 2 &&
-			aFirstCollisionObject.GetPosition().y - aFirstCollisionObject.GetHeight() / 2 < aSecondCollisionObject.GetPosition().y + aSecondCollisionObject.GetHeight() / 2 &&
-			aFirstCollisionObject.GetPosition().y + aFirstCollisionObject.GetHeight() / 2 > aSecondCollisionObject.GetPosition().y - aSecondCollisionObject.GetHeight() / 2)
-		{
-			return true;
-		}
-		return false;
+		if (aFirstCollisionObject.GetPosition().x - aFirstCollisionObject.GetWidth() / 2 > aSecondCollisionObject.GetPosition().x + aSecondCollisionObject.GetWidth() / 2) return false;
+		if (aFirstCollisionObject.GetPosition().x + aFirstCollisionObject.GetWidth() / 2 < aSecondCollisionObject.GetPosition().x - aSecondCollisionObject.GetWidth() / 2) return false;
+		if (aFirstCollisionObject.GetPosition().y - aFirstCollisionObject.GetHeight() / 2 > aSecondCollisionObject.GetPosition().y + aSecondCollisionObject.GetHeight() / 2) return false;
+		if (aFirstCollisionObject.GetPosition().y + aFirstCollisionObject.GetHeight() / 2 < aSecondCollisionObject.GetPosition().y - aSecondCollisionObject.GetHeight() / 2) return false;
+
+		return true;
 	}
 }
