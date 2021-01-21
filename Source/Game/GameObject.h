@@ -13,7 +13,7 @@ namespace Studio
 {
 	class GameObject
 	{
-	private:
+	protected:
 		Sprite mySprite;
 		Collider myCollider;
 		Health myHealth;
