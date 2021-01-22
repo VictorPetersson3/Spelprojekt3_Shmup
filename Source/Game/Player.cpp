@@ -16,7 +16,7 @@ namespace Studio
 		mySpeed = 0;
 		myShootCooldown = 0.0f;
 		mySprite = aSprite;
-		mySprite->SetSizeRelativeToImage({ 50, 50 });
+		mySprite->SetSizeRelativeToImage({ 1, 1 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/Bullets/FireBullet.dds"));
 		myParticleFactory.InitParticleType("Sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);

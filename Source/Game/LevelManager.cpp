@@ -25,7 +25,7 @@ namespace Studio
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 
-		myEnemyFactory->InitEnemyType("Sprites/debugpixel.dds", 999, "Default");
+		myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
 		//															    ^ key
 
 		// Load chosen level by Lever Designers

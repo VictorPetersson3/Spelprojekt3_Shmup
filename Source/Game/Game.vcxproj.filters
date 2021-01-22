@@ -123,6 +123,7 @@
     <ClCompile Include="MovementDiagonal.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
+    <ClCompile Include="GodModeButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -259,6 +260,7 @@
     <ClInclude Include="MovementDiagonal.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
+    <ClInclude Include="GodModeButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

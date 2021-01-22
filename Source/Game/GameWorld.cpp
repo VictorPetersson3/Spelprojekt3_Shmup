@@ -36,9 +36,9 @@ void CGameWorld::Init()
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
-	SAFE_CREATE(myPlayer, Studio::Player(new Tga2D::CSprite("sprites/debugpixel.dds")));
+	SAFE_CREATE(myPlayer, Studio::Player(new Tga2D::CSprite("sprites/assets/player/player.dds")));
 	
-	myBackgroundManager.CreateTestMapBackground(5120.f);
+	myBackgroundManager.CreateTestMapBackground(1920.0f);
 
 	SAFE_CREATE(myLevelManager, Studio::LevelManager());
 	myMenuManager = Studio::MenuManagerSingleton::GetInstance();

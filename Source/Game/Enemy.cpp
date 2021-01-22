@@ -18,7 +18,7 @@ namespace Studio
 		myShootCooldown = 0.0f;
 		myScoreValue = 100;
 		mySprite = aSprite;
-		mySprite->SetSizeRelativeToImage({ 50, 50 });
+		mySprite->SetSizeRelativeToImage({ -0.6, 0.6 });
 		mySprite->SetPivot({ 0.5f, 0.5f });
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
 		SAFE_CREATE(myMovement, MovementWave(&myPosition, 100.0f, 500.0f, 500.0f));
