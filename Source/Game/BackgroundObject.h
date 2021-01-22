@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "rapidjson/document.h"
 
 namespace Tga2D
 {
@@ -8,19 +9,23 @@ namespace Tga2D
 
 namespace Studio
 {
+	class TypePattern_Background;
 	class BackgroundObject : public GameObject
 	{
 	public:
-		BackgroundObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aPosition, float aSpeed);
-		BackgroundObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aPosition, float aSpeed, const Tga2D::Vector2f& aSize);
+		BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject);
+		BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject, int aIndex);
 		~BackgroundObject();
 		void Update(float aDeltaTime);
 		const Tga2D::Vector2f& GetPosition() const;
 		void SetPosition(const Tga2D::Vector2f& aPosition);
-	protected:
+		const bool GetIsTiling() const;
+		const TypePattern_Background* GetTypeObject() const;
+
+	private:
+		TypePattern_Background* myTypeObject;
 		Tga2D::Vector2f myPosition;
 		float myScrollSpeed;
-	private:
-		Tga2D::CSprite* mySprite;
+		bool myIsTiling;
 	};
 }

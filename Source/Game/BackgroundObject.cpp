@@ -1,23 +1,41 @@
 #include "stdafx.h"
 #include "BackgroundObject.h"
 #include <tga2d/sprite/sprite.h>
+#include "CommonUtilities/CURandom.h"
+#include "TypePattern_Background.h"
 //#include <iostream>
 namespace Studio
 {
-	BackgroundObject::BackgroundObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aPosition, float aSpeed) :
-		GameObject::GameObject(aSprite),
-		mySprite(aSprite)
+	BackgroundObject::BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject) :
+		GameObject::GameObject(aTypeObject->GetSprite(), {aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()}),
+		myTypeObject(aTypeObject)
 	{
-		myPosition = aPosition;
-		myScrollSpeed = aSpeed;
+		if (aJsonObject["UseRandom"].GetBool())
+		{
+			myPosition.x = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionXmin"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionXmax"].GetFloat());
+			myPosition.y = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionYmin"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionYmax"].GetFloat());
+			myScrollSpeed = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomSpeed"]["Min"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomSpeed"]["Max"].GetFloat());
+		}
+		else
+		{
+			myPosition.x = aJsonObject["Position"]["X"].GetFloat();
+			myPosition.y = aJsonObject["Position"]["Y"].GetFloat();
+			myScrollSpeed = aJsonObject["Speed"].GetFloat();
+		}
+		myIsTiling = aJsonObject["IsTiling"].GetBool();
 	}
 
-	BackgroundObject::BackgroundObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aPosition, float aSpeed, const Tga2D::Vector2f& aSize) :
-		GameObject::GameObject(aSprite, aSize),
-		mySprite(aSprite)
+	BackgroundObject::BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject, int aIndex) :
+		GameObject::GameObject(aTypeObject->GetSprite(), { aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat() }),
+		myTypeObject(aTypeObject)
 	{
-		myPosition = aPosition;
-		myScrollSpeed = aSpeed;
+		myPosition.x = aJsonObject["Position"]["X"].GetFloat() + (aIndex * aTypeObject->GetSprite()->GetImageSize().x);
+		myPosition.y = aJsonObject["Position"]["Y"].GetFloat();
+		myScrollSpeed = aJsonObject["Speed"].GetFloat();
+		myIsTiling = aJsonObject["IsTiling"].GetBool();
 	}
 	
 	BackgroundObject::~BackgroundObject()
@@ -37,5 +55,13 @@ namespace Studio
 	void BackgroundObject::SetPosition(const Tga2D::Vector2f& aPosition)
 	{
 		myPosition = aPosition;
+	}
+	const bool BackgroundObject::GetIsTiling() const
+	{
+		return myIsTiling;
+	}
+	const TypePattern_Background* BackgroundObject::GetTypeObject() const
+	{
+		return myTypeObject;
 	}
 }
