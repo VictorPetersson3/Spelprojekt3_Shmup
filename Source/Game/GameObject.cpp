@@ -2,12 +2,23 @@
 #include "GameObject.h"
 namespace Studio
 {
+	// Deprecated. See GameObject.h for further details
 	GameObject::GameObject(Tga2D::CSprite* aSprite) : myRenderCommand(aSprite),
 		myHealth(100)
+		,mySpriteSheet(nullptr) // This is bad
 	{
 	}
+
+	// Deprecated. See GameObject.h for further details
 	GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize),
 		myHealth(100)
+		,mySpriteSheet(nullptr) // This is bad
+	{
+	}
+
+	GameObject::GameObject(const std::string& anImagePath) :
+		myHealth(100), // Maybe this should be set somewhere???
+		mySpriteSheet(anImagePath.c_str())
 	{
 	}
 	

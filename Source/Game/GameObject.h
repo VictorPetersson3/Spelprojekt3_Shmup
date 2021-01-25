@@ -25,9 +25,13 @@ namespace Studio
 
 	public:
 		GameObject() = default;
+
+		[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
 		GameObject(Tga2D::CSprite* aSprite);
+		[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
 		GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
-		GameObject(const Tga2D::Vector2f& aPosition);
+
+		GameObject(const std::string& anImagePath);
 
 		virtual ~GameObject() = default;
 		virtual void Update(const Tga2D::Vector2f& aPos);
@@ -45,7 +49,8 @@ namespace Studio
 		Health& GetHealth();	 // Temporary accesser
 
 		#pragma region Sprite Specific
-		// TODO: Steal public stuff from Sprite.h
+		[[deprecated("Deprecated method. Use GameObject::SpriteSheet instead")]]
+		// Deprecated, DO NOT USE
 		Studio::RenderCommand& GetRenderCommand();
 		#pragma endregion
 

@@ -1,33 +1,57 @@
 #pragma once
 #include <vector>
 #include <array>
+#include <unordered_map>
+#include <map>
 #include "GameObject.h"
+
+// Batching stuff
+typedef std::vector<Studio::SpriteSheet> SpriteSheetBuffer;
+
+// Batching stuff
+namespace Tga2D
+{
+	class CSpriteBatch;
+}
 
 namespace Studio
 {
 	class GameObject;
 }
 
+// Should Renderer not be a part of namespace Studio??
 class Renderer
 {
 public:
 	Renderer()
 	{
-		myReadFromBuffer = nullptr;
-		myWriteToBuffer = nullptr;
+		// Batching stuff
+		myWriteBuffer = nullptr;
+		myReadBuffer = nullptr;
 	}
-	~Renderer() = default;
+	~Renderer();
 	void Init();
-	void RenderRenderCommand(Studio::RenderCommand aRenderCommand);
 	void Render(Studio::GameObject& aGameObject);
 	void SwapBuffers();
 	void Render();
 
+	// Legacy code
+	void RenderRenderCommand(Studio::RenderCommand aRenderCommand);
+
 private:
-	std::vector<Studio::RenderCommand>& GetReadFromBuffer() const;
-	std::vector<Studio::RenderCommand>& GetWriteToBuffer();
-	std::array<std::vector<Studio::RenderCommand>, 2> myRenderBuffers;
-	std::vector<Studio::RenderCommand>* myWriteToBuffer;
-	std::vector<Studio::RenderCommand>* myReadFromBuffer;
+	SpriteSheetBuffer myBatchBuffer1; // threading
+	SpriteSheetBuffer myBatchBuffer2; // threading
+	SpriteSheetBuffer* myWriteBuffer; // threading
+	SpriteSheetBuffer* myReadBuffer;  // threading
+
+	std::map // Map used for sorting purpses
+	<
+		signed int,			// Signed int for layers (-1 behind, 0 primary, 1 in front)
+		std::unordered_map	// unordered_map since batches do not need to sorted at layer level
+		<		 
+			std::string,		 // String key to differentiate witch image to render
+			Tga2D::CSpriteBatch* // SpriteBatch to reduce draw calls to the GPU
+		>
+	> myCoolMap; // myLayeredBatches
 };
 
