@@ -6,6 +6,7 @@ namespace Studio
 	SpriteSheet::SpriteSheet(const char* aImagePath)
 	{
 		SAFE_CREATE(mySprite, Tga2D::CSprite(aImagePath));
+		mySprite->SetPivot({ 0.5f, 0.5f });
 
 		if (aImagePath != nullptr)
 		{
