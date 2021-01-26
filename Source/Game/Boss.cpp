@@ -2,7 +2,8 @@
 #include "Boss.h"
 namespace Studio
 {
-	Boss::Boss()
+	Boss::Boss() : 
+		GameObject(nullptr)
 	{
 	}
 

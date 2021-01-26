@@ -21,6 +21,12 @@ namespace Studio
 		mySpriteSheet(anImagePath.c_str())
 	{
 	}
+
+	GameObject::GameObject(const std::string& anImagePath, float aHealthAmount) :
+		myHealth(aHealthAmount), 
+		mySpriteSheet(anImagePath.c_str())
+	{
+	}
 	
 	void GameObject::Update(const Tga2D::Vector2f& aPos)
 	{

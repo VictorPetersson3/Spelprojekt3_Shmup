@@ -32,6 +32,7 @@ namespace Studio
 		GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
 
 		GameObject(const std::string& anImagePath);
+		GameObject(const std::string& anImagePath, float aHealthAmount);
 
 		virtual ~GameObject() = default;
 		virtual void Update(const Tga2D::Vector2f& aPos);
