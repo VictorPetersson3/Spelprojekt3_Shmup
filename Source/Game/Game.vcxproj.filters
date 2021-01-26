@@ -124,6 +124,12 @@
       <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="GodModeButton.cpp" />
+    <ClCompile Include="Coin.cpp">
+      <Filter>GameObjects\Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -261,6 +267,12 @@
       <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="GodModeButton.h" />
+    <ClInclude Include="Coin.h">
+      <Filter>GameObjects\Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -313,6 +325,9 @@
     </Filter>
     <Filter Include="Components\Visual">
       <UniqueIdentifier>{65cfdee0-cc21-46b8-bdec-cc830a797082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Coin">
+      <UniqueIdentifier>{1c881ec8-17c6-44bd-a3e3-c8231b46dcf3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

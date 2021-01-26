@@ -143,6 +143,8 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletFactory.h" />
     <ClInclude Include="ButtonElement.h" />
+    <ClInclude Include="Coin.h" />
+    <ClInclude Include="CoinManager.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="Counter.h" />
@@ -200,6 +202,8 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
     <ClCompile Include="ButtonElement.cpp" />
+    <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="CoinManager.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="Counter.cpp" />
