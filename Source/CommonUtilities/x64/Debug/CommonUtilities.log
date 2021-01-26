@@ -2,30 +2,30 @@
   pch.cpp
   CommonUtilities.cpp
   CURandom.cpp
-C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\CommonUtilities\CURandom.cpp(13,22): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\CURandom.cpp(13,22): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
   InputManager.cpp
-C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\CommonUtilities\InputManager.cpp(8,26): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\CommonUtilities\InputManager.cpp(98,28): warning C4244: '=': conversion from 'const T' to 'LONG', possible loss of data
+D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(8,26): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(98,28): warning C4244: '=': conversion from 'const T' to 'LONG', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\CommonUtilities\InputManager.cpp(99,28): warning C4244: '=': conversion from 'const T' to 'LONG', possible loss of data
+D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(99,28): warning C4244: '=': conversion from 'const T' to 'LONG', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\CommonUtilities\InputManager.cpp(154,43): warning C4244: '=': conversion from 'LONG' to 'T', possible loss of data
+D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(154,43): warning C4244: '=': conversion from 'LONG' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\CommonUtilities\InputManager.cpp(155,43): warning C4244: '=': conversion from 'LONG' to 'T', possible loss of data
+D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(155,43): warning C4244: '=': conversion from 'LONG' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\CommonUtilities\InputManager.cpp(183,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(183,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Timer.cpp
   Generating Code...
-  CommonUtilities.vcxproj -> C:\Users\Victor\Desktop\projects\2021\TGA\Spelprojekt3_Git\Source\AdditionalDependencies\Lib\CommonUtilities_Debug_x64.lib
+  CommonUtilities.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\\AdditionalDependencies\Lib\CommonUtilities_Debug_x64.lib

@@ -12,6 +12,10 @@
 #include "Score.h"
 #include "AudioManagerAccesor.h"
 
+// Freeze
+#include "InputManager.h"
+#include "Timer.h"
+
 CGameWorld::CGameWorld()
 {
 	myTga2dLogoSprite = nullptr;
@@ -48,6 +52,19 @@ void CGameWorld::Init()
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('F'))
+	{
+		Studio::Timer::GetInstance()->ToggleFreeze();
+		if (Studio::Timer::GetInstance()->IsFrozen())
+		{
+			printf_s("Froze game\n");
+		}
+		else
+		{
+			printf_s("Resumed game\n");
+		}
+	}
+
 	myBackgroundManager.UpdateBackground(aDeltaTime);
 
 	if (myMenuManager->GameStarted())

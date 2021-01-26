@@ -9,15 +9,33 @@ namespace CommonUtilities
         {
             myFrameStart = std::chrono::high_resolution_clock::now();
             myBegin = std::chrono::high_resolution_clock::now();
+
+            myIsPaused = false;
+            myPreviousSpeed = 0.0f;
+            mySpeed = 1.0f;
         }
         Timer(const Timer& aTimer) = delete;
         Timer& operator=(const Timer& aTimer) = delete;
         void TUpdate();
         float TGetDeltaTime() const;
         double TGetTotalTime() const;
+
+        // skriven av Jesper, du kan ta bort det här till andra projekt
+        // Freezing, slow-mo, etc
+        void SetSpeed(float aSpeed);
+        const float GetSpeed() const;
+        void Freeze();
+        void Resume();
+        void ToggleFreeze();
+        bool IsFrozen() const;
+
     private:
         float myDeltaTime = 0;
         std::chrono::time_point<std::chrono::high_resolution_clock> myFrameStart;
         std::chrono::time_point<std::chrono::high_resolution_clock> myBegin;
+
+        // used in freezing, slow-mo, etc
+        float mySpeed, myPreviousSpeed;
+        bool myIsPaused;
     };
 }
