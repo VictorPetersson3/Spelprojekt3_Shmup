@@ -4,25 +4,25 @@
 
 Studio::TypePattern_Background::TypePattern_Background(rapidjson::Value& aJsonObject)
 {
-	mySprite = nullptr;
-	mySprite = new Tga2D::CSprite(aJsonObject["ImagePath"].GetString());
+	myImagePath = aJsonObject["ImagePath"].GetString();
 	if (aJsonObject["IsCentered"].IsTrue())
 	{
-		mySprite->SetPivot({ 0.5f, 0.5f });
+		mySpritePivot = { 0.5f, 0.5f };
 	}
 	else
 	{
-		mySprite->SetPivot({aJsonObject["Pivot"]["X"].GetFloat(), aJsonObject["Pivot"]["Y"].GetFloat() });
+		mySpritePivot = {aJsonObject["Pivot"]["X"].GetFloat(), aJsonObject["Pivot"]["Y"].GetFloat() };
 	}
 }
 
-Studio::TypePattern_Background::~TypePattern_Background()
+const Tga2D::Vector2f& Studio::TypePattern_Background::GetImagePivot() const
 {
-	delete mySprite;
-	mySprite = nullptr;
+	return mySpritePivot;
 }
 
-Tga2D::CSprite* Studio::TypePattern_Background::GetSprite()
+
+
+const std::string& Studio::TypePattern_Background::GetImagePath() const
 {
-	return mySprite;
+	return myImagePath;
 }

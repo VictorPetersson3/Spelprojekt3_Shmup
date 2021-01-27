@@ -7,7 +7,7 @@
 namespace Studio
 {
 	BackgroundObject::BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject) :
-		GameObject::GameObject(aTypeObject->GetSprite(), {aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()}),
+		GameObject::GameObject(aTypeObject->GetImagePath(), {aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()}, aTypeObject->GetImagePivot()),
 		myTypeObject(aTypeObject)
 	{
 		if (aJsonObject["UseRandom"].GetBool())
@@ -29,10 +29,10 @@ namespace Studio
 	}
 
 	BackgroundObject::BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject, int aIndex) :
-		GameObject::GameObject(aTypeObject->GetSprite(), { aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat() }),
+		GameObject::GameObject(aTypeObject->GetImagePath(), { aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat() }, aTypeObject->GetImagePivot()),
 		myTypeObject(aTypeObject)
 	{
-		myPosition.x = aJsonObject["Position"]["X"].GetFloat() + (aIndex * aTypeObject->GetSprite()->GetImageSize().x);
+		myPosition.x = aJsonObject["Position"]["X"].GetFloat() + (aIndex * GameObject::GetSpriteSheet().mySprite->GetImageSize().x);
 		myPosition.y = aJsonObject["Position"]["Y"].GetFloat();
 		myScrollSpeed = aJsonObject["Speed"].GetFloat();
 		myIsTiling = aJsonObject["IsTiling"].GetBool();

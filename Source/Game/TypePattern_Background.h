@@ -1,5 +1,6 @@
 #pragma once
 #include "rapidjson/document.h"
+#include <string>
 namespace Tga2D
 {
 	class CSprite;
@@ -11,11 +12,13 @@ namespace Studio
 	{
 	public:
 		TypePattern_Background(rapidjson::Value& aJsonObject);
-		~TypePattern_Background();
+		~TypePattern_Background() = default;
 
-		Tga2D::CSprite* GetSprite();
+		const std::string& GetImagePath() const;
+		const Tga2D::Vector2f& GetImagePivot() const;
 	private:
-		Tga2D::CSprite* mySprite;
+		std::string myImagePath;
+		Tga2D::Vector2f mySpritePivot;
 	};
 }
 

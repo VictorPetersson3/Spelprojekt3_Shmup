@@ -150,6 +150,7 @@
     <ClInclude Include="Counter.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="EngineFlame.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GodModeButton.h" />
     <ClInclude Include="MenuManager.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Counter.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="EngineFlame.cpp" />
     <ClCompile Include="GodModeButton.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuManagerSingleton.cpp" />

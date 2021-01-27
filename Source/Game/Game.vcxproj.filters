@@ -130,6 +130,7 @@
     <ClCompile Include="CoinManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="EngineFlame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -273,6 +274,7 @@
     <ClInclude Include="CoinManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="EngineFlame.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Particle_SpriteSheet_Factory.h"
 #include "ParticleObject.h"
+#include "EngineFlame.h"
 #include <vector>
 namespace Tga2D
 {
@@ -11,10 +12,11 @@ namespace Studio
 {
 	class RenderCommand;
 	class Bullet;
+	class EngineFlame;
 	class Player : public GameObject
 	{
 	public:
-		Player(Tga2D::CSprite* aSprite);
+		Player(const char* aImagePath);
 		~Player();
 
 		void Update();
@@ -32,14 +34,21 @@ namespace Studio
 	private:
 		float mySpeed;
 		float myShootCooldown;
+		float myAnimationTurnSpeed;
+		float myAnimationTime;
+		float myCurrentFlame;
 		bool myHasDied = false;
+		bool myIsAnimating = false;
+		bool myIsAnimatingDown = false;
+		bool myIsAnimatingUp = false;
+
 		std::vector<Bullet*> myBullets;
 		std::vector<ParticleObject*> myParticleObjects;
 
-		Tga2D::CSprite* mySprite;
 		Tga2D::CSprite* myBulletSprite;
 		VECTOR2F myPosition;
-
+		VECTOR2F myFrames;
+		EngineFlame myEngineFlame;
 		Particle_SpriteSheet_Factory myParticleFactory;
 		
 	};

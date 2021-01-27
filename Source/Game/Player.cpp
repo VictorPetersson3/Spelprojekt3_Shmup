@@ -9,15 +9,17 @@
 
 namespace Studio
 {
-	Player::Player(Tga2D::CSprite* aSprite) : 
-		Player::GameObject(aSprite)
+	Player::Player(const char* aImagePath) :
+		Player::GameObject(aImagePath, { 1, 8 }, {0.5, 0.5}),
+		myEngineFlame("Sprites/assets/player/Flame.dds", { 1, 4 }, { 300 - 48, 540 - 9 })
 	{
+		myFrames = { 1, 8 };
 		myPosition = { 300, 540 };
 		mySpeed = 0;
 		myShootCooldown = 0.0f;
-		mySprite = aSprite;
-		mySprite->SetSizeRelativeToImage({ 1, 1 });
-		mySprite->SetPivot({ 0.5f, 0.5f });
+		myAnimationTime = 0;
+		myAnimationTurnSpeed = 0.15;
+		myCurrentFlame = 2;
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/Bullets/FireBullet.dds"));
 		myParticleFactory.InitParticleType("Sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);
 		GetCollider().AddCircleColliderObject(myPosition, 20);
@@ -35,11 +37,11 @@ namespace Studio
 			Movement();
 
 			Player::GameObject::Update(myPosition);
+			Player::GameObject::UpdateAnimation(myFrames);
 
 			UpdateBullets();
 
 			Studio::RendererAccessor::GetInstance()->Render(*this);
-
 		}
 		
 		for (int i = 0; i < myBullets.size(); i++)
@@ -129,24 +131,81 @@ namespace Studio
 		
 		if (wKey && myPosition.y > 0)
 		{
+			if (myIsAnimatingDown)
+			{
+				myIsAnimatingDown = false;
+				myFrames.y = 5;
+				myAnimationTime = 0;
+			}
+			else
+			{
+				if (!myIsAnimating)
+				{
+					myFrames.y = 5;
+				}
+				myIsAnimating = true;
+				myIsAnimatingUp = true;
+				myAnimationTime += Studio::Timer::GetInstance()->TGetDeltaTime();
+				if (myAnimationTime > myAnimationTurnSpeed && myFrames.y != 7)
+				{
+					myFrames.y++;
+					myAnimationTime = 0;
+				}
+			}
 			myPosition.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//A
 		if (aKey && myPosition.x > 0)
 		{
 			myPosition.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
+			myCurrentFlame = 1;
 		}
 		//S
 		if (sKey && myPosition.y < 1080)
 		{
+
+			if (myIsAnimatingUp)
+			{
+				myIsAnimatingUp = false;
+				myFrames.y = 2;
+				myAnimationTime = 0;
+			}
+			else
+			{
+				if (!myIsAnimating)
+				{
+					myFrames.y = 2;
+				}
+				myIsAnimating = true;
+				myIsAnimatingDown = true;
+				myAnimationTime += Studio::Timer::GetInstance()->TGetDeltaTime();
+				if (myAnimationTime > myAnimationTurnSpeed && myFrames.y != 4)
+				{
+					myFrames.y++;
+					myAnimationTime = 0;
+				}
+			}
+			
 			myPosition.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//D
 		if (dKey && myPosition.x < 1920)
 		{
 			myPosition.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
+			myCurrentFlame = 3;
 		}
-		
+		if (!sKey && !wKey)
+		{
+			myIsAnimatingUp = false;
+			myIsAnimatingDown = false;
+			myIsAnimating = false;
+			myFrames.y = 1;
+		}
+		if (!aKey && !dKey)
+		{
+			myCurrentFlame = 2;
+		}
+		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 48, myPosition.y - 9 });
 		//Spacebar
 		if (Studio::InputManager::GetInstance()->IsKeyDown(VK_SPACE))
 		{

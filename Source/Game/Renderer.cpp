@@ -59,7 +59,7 @@ void Renderer::Render()
 		if (spriteSheet.myImagePath.empty())
 		{
 			// Same as SpriteSheets safeguard constructor
-			spriteSheet.myImagePath = "debugpixel";
+			spriteSheet.myImagePath = "sprites/debugpixel.dds";
 			spriteSheet.mySize = { 100.0f, 100.0f };
 		}
 
@@ -74,9 +74,12 @@ void Renderer::Render()
 			auto batch = new Tga2D::CSpriteBatch(false);
 
 			// Autoformat the path and init the batch
-			std::string directory = "Sprites/";
-			batch->Init(directory.append(spriteSheet.myImagePath).append(".dds").c_str());
+			//std::string directory = "Sprites/";
+			//batch->Init(directory.append(spriteSheet.myImagePath).append(".dds").c_str());
 
+			//Not Type Safe Init of Sprite Batch
+			batch->Init(spriteSheet.myImagePath.c_str());
+			
 			// Include the batch at correct layer
 			myCoolMap.at(spriteSheet.myLayer)[spriteSheet.myImagePath] = batch;
 

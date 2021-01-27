@@ -28,15 +28,17 @@ namespace Studio
 
 		[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
 		GameObject(Tga2D::CSprite* aSprite);
-		[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
-		GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
+		//[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
+		//GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
 
 		GameObject(const std::string& anImagePath);
+		GameObject(const std::string& anImagePath, const Tga2D::Vector2f& aAmountOfFrames, const Tga2D::Vector2f& aPivot);
 		GameObject(const std::string& anImagePath, float aHealthAmount);
 
 		virtual ~GameObject() = default;
-		virtual void Update(const Tga2D::Vector2f& aPos);
-		virtual void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
+		void Update(const Tga2D::Vector2f& aPos);
+		void UpdateAnimation(const Tga2D::Vector2f& aCurrentFrame);
+		void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
 
 		void Rotate(const float aRotationInRadians);
 		void RotateRight(const float aRotationInRadians);

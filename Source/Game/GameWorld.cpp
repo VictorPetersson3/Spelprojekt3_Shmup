@@ -40,7 +40,7 @@ void CGameWorld::Init()
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
-	SAFE_CREATE(myPlayer, Studio::Player(new Tga2D::CSprite("sprites/assets/player/player.dds")));
+	SAFE_CREATE(myPlayer, Studio::Player("sprites/assets/player/sprites/playerSprite_01.dds"));
 	
 	myBackgroundManager.CreateTestMapBackground(1920.0f);
 
@@ -65,7 +65,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		}
 	}
 
-	myBackgroundManager.UpdateBackground(aDeltaTime);
+	//myBackgroundManager.UpdateBackground(aDeltaTime);
 
 	if (myMenuManager->GameStarted())
 	{

@@ -10,6 +10,8 @@ namespace Studio
 	public:
 
 		SpriteSheet(const char* aImagePath);
+		
+		SpriteSheet(const char* aImagePath, const Tga2D::Vector2f& aAmountOfFrames, const Tga2D::Vector2f& aPivot);
 		~SpriteSheet();
 
 		// Copy constructor
@@ -24,6 +26,9 @@ namespace Studio
 		// Move Assignment operator
 		SpriteSheet& operator=(SpriteSheet&&) = delete;
 
+
+		//Animation Function
+		void UpdateAnimation(const Tga2D::Vector2f& aCurrentFrame);
 		// "Private" fields
 		// TODO: Give setters and getters instead
 		signed int myLayer = 0;
@@ -32,6 +37,8 @@ namespace Studio
 		Tga2D::Vector2<float> myPosition;
 		Tga2D::Vector2<float> mySize;
 
-		// TODO: Add data used to animate this sheet
+	private:
+		Tga2D::Vector2f myRectSize;
+
 	};
 }

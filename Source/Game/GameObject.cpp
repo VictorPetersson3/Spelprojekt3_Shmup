@@ -10,15 +10,21 @@ namespace Studio
 	}
 
 	// Deprecated. See GameObject.h for further details
-	GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize),
-		myHealth(100)
-		,mySpriteSheet(nullptr) // This is bad
-	{
-	}
+	//GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize),
+	//	myHealth(100)
+	//	,mySpriteSheet(nullptr) // This is bad
+	//{
+	//}
 
 	GameObject::GameObject(const std::string& anImagePath) :
 		myHealth(100), // Maybe this should be set somewhere???
 		mySpriteSheet(anImagePath.c_str())
+	{
+	}
+
+	GameObject::GameObject(const std::string& anImagePath, const Tga2D::Vector2f& aAmountOfFrames, const Tga2D::Vector2f& aPivot) :
+		myHealth(100), // Maybe this should be set somewhere???
+		mySpriteSheet(anImagePath.c_str(), aAmountOfFrames, aPivot)
 	{
 	}
 
@@ -33,6 +39,10 @@ namespace Studio
 		myRenderCommand.Update(aPos);
 		myCollider.Update(aPos);
 		mySpriteSheet.myPosition = aPos;
+	}
+	void GameObject::UpdateAnimation(const Tga2D::Vector2f& aCurrentFrame)
+	{
+		mySpriteSheet.UpdateAnimation(aCurrentFrame);
 	}
 	void GameObject::Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR)
 	{
