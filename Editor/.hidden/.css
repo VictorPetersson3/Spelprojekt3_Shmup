@@ -162,3 +162,13 @@ td
     font-size: 1.5em;
     width: 12em;
 }
+
+fieldset {
+    display: inline-block;
+}
+
+.error { color: red;}
+
+#bullet-type {
+    width: 15em;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enemy Editor</title>
+    <link rel="stylesheet" href=".hidden/.css">
+    <link rel="stylesheet" href=".hidden/dragula.css">
+</head>
+<body style="text-align: center;">
+
+    <h2>Enemy Editor</h2>
+    <div class="import-export">
+        <table>
+            <tr>
+                <th>Editing</th>
+            </tr>
+            <tr>
+                <td><input id="file-name" type="text" value="empty.json"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="file" id="input-file" hidden="true" multiple="false" onchange="importEnemy(event)">
+        <label for="input-file" class="button">Import &#129131;</label>
+        <button onclick="exportEnemy()">Export &#129133;</button>
+    </div>
+    <p>
+        Hp <input type="number" value="10" id="health-points" min="0" step="1">
+    </p>
+    <p>
+        <fieldset>
+            <legend>
+                <strong>Movement </strong>
+                <select onchange="changeMovementParameters(event)" id="m-select">
+                    <option>Straight</option>
+                    <option>Diagonal</option>
+                    <option>Wave</option>
+                    <option>Bobbing</option>
+                    <option>Seeking</option>
+                    <option>Homing</option>
+                    <option>U-Turn</option>
+                </select>
+            </legend>
+            <div id="movement-parameters"></div>
+        </fieldset>
+    </p>
+    <p>
+        <fieldset>
+            <legend>
+                <strong>Bullet</strong>
+            </legend>
+            <p>
+                Type <input id="bullet-type" type="text" placeholder="I.e Missile">
+            </p>
+            <p>
+                Speed <input id="bullet-speed" type="number" value="0"> (pixels/second)
+            </p>
+            <p>
+                Shoot towards player
+                <select id="bullet-pattern">
+                    <option>No</option>
+                    <option>Yes</option>
+                </select>
+            </p>
+        </fieldset>
+    </p>
+
+
+<script src=".hidden/clean.js"></script>
+<script src=".hidden/enemy_script.js"></script>
+</body>
+</html>
