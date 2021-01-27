@@ -8,6 +8,7 @@
 #include "RendererAccessor.h"
 #include "LevelManager.h"
 #include "MenuManager.h"
+#include "CoinAccessor.h"
 #include "MenuManagerSingleton.h"
 #include "Score.h"
 #include "AudioManagerAccesor.h"
@@ -41,6 +42,10 @@ void CGameWorld::Init()
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 	SAFE_CREATE(myPlayer, Studio::Player("sprites/assets/player/sprites/playerSprite_01.dds"));
+
+	SAFE_CREATE(myCoinManager, Studio::CoinManager());
+
+	Studio::CoinAccessor::SetInstance(myCoinManager);
 	
 	myBackgroundManager.CreateTestMapBackground(1920.0f);
 
@@ -76,6 +81,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		myScore->Update();
 		myPlayer->Update();
 		myLevelManager->Update(myPlayer);
+		myCoinManager->Update();
 	}
 	
 	myMenuManager->Update();

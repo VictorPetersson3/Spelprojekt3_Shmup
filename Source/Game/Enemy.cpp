@@ -6,6 +6,7 @@
 #include "tga2d/sprite/sprite.h"
 #include "MovementStraight.h"
 #include "MovementWave.h"
+#include "CoinAccessor.h"
 #include "Timer.h"
 
 namespace Studio
@@ -72,6 +73,8 @@ namespace Studio
 		if (!myHasDied)
 		{
 			myParticleObjects.push_back(myParticleFactory.CreateParticleObject("Explosion", myPosition));
+			CoinAccessor::GetInstance()->CreateCoin(myPosition);
+			printf_s("%f", myPosition.x);
 			myHasDied = true;
 		}
 	}
