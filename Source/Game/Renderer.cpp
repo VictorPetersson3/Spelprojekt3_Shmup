@@ -56,36 +56,35 @@ void Renderer::Render()
 		// All sprites must have a file path.
 		// If the current spriteSheet does not
 		// contain one, give it one.
-		if (spriteSheet.myImagePath.empty())
+		if (spriteSheet.GetImagePath().empty())
 		{
 			// Same as SpriteSheets safeguard constructor
-			spriteSheet.myImagePath = "sprites/debugpixel.dds";
-			spriteSheet.mySize = { 100.0f, 100.0f };
+			spriteSheet.SetImagePath("sprites/debugpixel.dds");
+			spriteSheet.GetSprite()->SetSizeRelativeToImage({ 100.0f, 100.0f });
 		}
 
 		// Create layer if it does not already exist
-		myCoolMap[spriteSheet.myLayer];
+		myCoolMap[spriteSheet.GetLayer()];
 
 		// Check if a batch with the same file path already exists on that layer
-		if (myCoolMap.at(spriteSheet.myLayer).count(spriteSheet.myImagePath) == 0)
+		if (myCoolMap.at(spriteSheet.GetLayer()).count(spriteSheet.GetImagePath()) == 0)
 		{
 			// It did not.
 			// Create new batch
 			auto batch = new Tga2D::CSpriteBatch(false);
 
 			// Autoformat the path and init the batch
-			//std::string directory = "Sprites/";
-			//batch->Init(directory.append(spriteSheet.myImagePath).append(".dds").c_str());
+			
 
 			//Not Type Safe Init of Sprite Batch
-			batch->Init(spriteSheet.myImagePath.c_str());
+			batch->Init(spriteSheet.GetImagePath().c_str());
 			
 			// Include the batch at correct layer
-			myCoolMap.at(spriteSheet.myLayer)[spriteSheet.myImagePath] = batch;
+			myCoolMap.at(spriteSheet.GetLayer())[spriteSheet.GetImagePath()] = batch;
 
 			// Inform that a new spritebatch has been created
 			SETCONSOLECOLOR(CONSOLE_COLOR_ONE_TIME);
-			printf_s("Renderer: Created new SpriteBatch at layer %i with Sprite \"%s\"\n", spriteSheet.myLayer, spriteSheet.myImagePath.c_str());
+			printf_s("Renderer: Created new SpriteBatch at layer %i with Sprite \"%s\"\n", spriteSheet.GetLayer(), spriteSheet.GetImagePath().c_str());
 			SETCONSOLECOLOR(CONSOLE_COLOR_NORMAL);
 		}
 	}
@@ -96,18 +95,18 @@ void Renderer::Render()
 	// Add to batches
 	for (auto& spriteSheet : *myReadBuffer)
 	{
-		if (myCoolMap.at(spriteSheet.myLayer).count(spriteSheet.myImagePath) > 0)
+		if (myCoolMap.at(spriteSheet.GetLayer()).count(spriteSheet.GetImagePath()) > 0)
 		{
-			auto sprite = spriteSheet.mySprite;
+			auto sprite = spriteSheet.GetSprite();
 			sprite->SetSizeRelativeToScreen({
-				spriteSheet.mySize.x / SCREEN_HEIGHT, // Use height on both because
-				spriteSheet.mySize.y / SCREEN_HEIGHT  // Tga2D is "special"
+				spriteSheet.GetSize().x / SCREEN_HEIGHT, // Use height on both because
+				spriteSheet.GetSize().y / SCREEN_HEIGHT  // Tga2D is "special"
 			});
-			sprite->SetPosition({ spriteSheet.myPosition.x / SCREEN_WIDTH, spriteSheet.myPosition.y / SCREEN_HEIGHT });
-			myCoolMap.at(spriteSheet.myLayer)[spriteSheet.myImagePath]->AddObject(sprite);
+			sprite->SetPosition({ spriteSheet.GetPosition().x / SCREEN_WIDTH, spriteSheet.GetPosition().y / SCREEN_HEIGHT });
+			myCoolMap.at(spriteSheet.GetLayer())[spriteSheet.GetImagePath()]->AddObject(sprite);
 			
 			// Used in sorting
-			filledLayeredBatches[spriteSheet.myLayer].insert(myCoolMap.at(spriteSheet.myLayer).at(spriteSheet.myImagePath));
+			filledLayeredBatches[spriteSheet.GetLayer()].insert(myCoolMap.at(spriteSheet.GetLayer()).at(spriteSheet.GetImagePath()));
 		}
 	}
 

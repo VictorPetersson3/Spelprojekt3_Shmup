@@ -32,7 +32,7 @@ namespace Studio
 		//GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
 
 		GameObject(const std::string& anImagePath);
-		GameObject(const std::string& anImagePath, const Tga2D::Vector2f& aAmountOfFrames, const Tga2D::Vector2f& aPivot);
+		GameObject(const std::string& anImagePath, const Tga2D::Vector2f& aAmountOfFrames);
 		GameObject(const std::string& anImagePath, float aHealthAmount);
 
 		virtual ~GameObject() = default;
@@ -76,7 +76,7 @@ namespace Studio
 		#pragma endregion
 
 		#pragma region New Image Stuff (SpriteBatching)
-		const SpriteSheet& GetSpriteSheet() const;
+		SpriteSheet& GetSpriteSheet();
 		#pragma endregion
 	};
 }

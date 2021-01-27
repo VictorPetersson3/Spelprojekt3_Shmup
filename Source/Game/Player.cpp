@@ -10,9 +10,10 @@
 namespace Studio
 {
 	Player::Player(const char* aImagePath) :
-		Player::GameObject(aImagePath, { 1, 8 }, {0.5, 0.5}),
-		myEngineFlame("Sprites/assets/player/Flame.dds", { 1, 4 }, { 300 - 48, 540 - 9 })
+		Player::GameObject(aImagePath, { 1, 8 }),
+		myEngineFlame("sprites/assets/player/Flame.dds", { 1, 4 }, { 300 - 48, 540 - 9 })
 	{
+		myEngineFlame.GetSpriteSheet().SetLayer(-1);
 		myFrames = { 1, 8 };
 		myPosition = { 300, 540 };
 		mySpeed = 0;
@@ -21,7 +22,7 @@ namespace Studio
 		myAnimationTurnSpeed = 0.15;
 		myCurrentFlame = 2;
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/Bullets/FireBullet.dds"));
-		myParticleFactory.InitParticleType("Sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);
+		myParticleFactory.InitParticleType("sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);
 		GetCollider().AddCircleColliderObject(myPosition, 20);
 	}
 

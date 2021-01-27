@@ -5,8 +5,9 @@
 #include "RendererAccessor.h"
 
 Studio::EngineFlame::EngineFlame(const char* aImagePath, const Tga2D::Vector2f& aAmountOfFrames, const Tga2D::Vector2f& aPosition):
-	GameObject(aImagePath, aAmountOfFrames, {1.0, 0.5})
+	GameObject(aImagePath, aAmountOfFrames)
 {
+	GameObject::GetSpriteSheet().SetPivot({1.0, 0.5});
 }
 
 void Studio::EngineFlame::Update(int aCurrentState, const Tga2D::Vector2f& aPosition)
