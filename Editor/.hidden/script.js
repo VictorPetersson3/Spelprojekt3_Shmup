@@ -3,6 +3,29 @@ function presetChange(e)
     document.getElementById("input-type").value = e.target.value;
 }
 
+// Load Presets from file
+function loadPresets(e)
+{
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e)
+    {
+        let content = e.target.result;
+        presets = content.split('\n').map(line => line.split('').filter(char => char != '\r').join(''));
+        let selectElement = document.getElementById("presets");
+        selectElement.innerHTML = "";
+
+        presets.forEach(function(line){
+            let option = document.createElement("option");
+            option.value = line;
+            option.textContent = line;
+            selectElement.appendChild(option);
+        });
+
+    }
+    reader.readAsText(file);
+}
+
 function clearParameters()
 {
     document.getElementById("input-type").value = "";
@@ -22,9 +45,16 @@ function createEnemyElement(type, pos, timer)
                 <th>Timer</th>
             </tr>
             <tr>
-                <td>${type}</td>
-                <td>{${pos.X}, ${pos.Y}}</td>
-                <td>${timer}ms</td>
+                <td>
+                    <input onchange="updateValue(event, 'type')" class="enemy-box-input" type="text" value="${type}">
+                </td>
+                <td>
+                    <input onchange="updateValue(event, 'x')" class="enemy-box-input enemy-box-input-position" type="number" value="${pos.X}" placeholder="x">
+                    <input onchange="updateValue(event, 'y')" class="enemy-box-input enemy-box-input-position" type="number" value="${pos.Y}" placeholder="y">
+                </td>
+                <td>
+                    <input onchange="updateValue(event, 'timer')" class="enemy-box-input" type="number" value="${timer}">
+                </td>
             </tr>
         </table>
     `;
@@ -33,6 +63,7 @@ function createEnemyElement(type, pos, timer)
     enemyBox.dataset["y"] = pos.Y;
     enemyBox.dataset["timer"] = timer;
     enemyBox.classList.add("enemy-box");
+    clean(enemyBox);
     return enemyBox;
 }
 
@@ -58,6 +89,21 @@ function createEnemy()
     spawner.appendChild(enemyBox);
 }
 
+// Update values of enemy
+function updateValue(e, key)
+{
+    let value = e.target.value;
+
+    let enemyBox = e.target // input
+        .parentNode // td
+        .parentNode // tr
+        .parentNode // tbody
+        .parentNode // table
+        .parentNode; // div
+
+    enemyBox.dataset[key] = value;
+}
+
 // Download file to Client
 function downloadToFile(content, filename, contentType)
 {
@@ -81,7 +127,7 @@ function exportLevel()
     {
         let pack = {
             "ExitCondition": {
-                "Type": "WaitTillAllEnemiesAreDead"
+                "Type": "None"
             },
             "Enemies": []
         };
@@ -105,14 +151,15 @@ function exportLevel()
         data["Packs"].push(pack);
     });
 
-    downloadToFile(JSON.stringify(data) + "\n", "level_x", "application/json");
+    let name = document.getElementById("file-name").value;
+    downloadToFile(JSON.stringify(data) + "\n", name, "application/json");
 }
 
 // Read file
 function importLevel(e)
 {
     const file = e.target.files[0];
-    document.getElementById("file-name").textContent = file.name;
+    document.getElementById("file-name").value = file.name;
     const reader = new FileReader();
     reader.onload = function (e)
     {
@@ -144,7 +191,14 @@ function importLevel(e)
     reader.readAsText(file);
 }
 
-var dragger = dragula([document.getElementById("enemy-spawner")]);
+// Dragula stuff
+var dragger = dragula(
+        [document.getElementById("enemy-spawner"), document.getElementById("trashcan")]
+    ).on('drop', function (element, container) {
+        if (container.id = "trashcan") {
+            element.remove();
+        }
+    });
 addDragulaToPacks();
 function addDragulaToPacks()
 {

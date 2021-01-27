@@ -16,12 +16,16 @@
                     <th>Editing</th>
                 </tr>
                 <tr>
-                    <td id="file-name"><i>Empty Project</i></td>
+                    <td><input id="file-name" type="text" value="empty.json"></td>
                 </tr>
             </table>
+            <br>
             <input type="file" id="input-file" hidden="true" multiple="false" onchange="importLevel(event)">
             <label for="input-file" class="button">Import &#129131;</label>
             <button onclick="exportLevel()">Export &#129133;</button>
+            -
+            <input type="file" id="presets-file" hidden="true" multiple="false" onchange="loadPresets(event)">
+            <label for="presets-file" class="button">Load Presets &#129131;</label>
         </div>
         <hr>
         <table>
@@ -33,12 +37,11 @@
             <tr>
                 <td contenteditable="true">Enemy </td>
                 <td>
-                    <input type="text" placeholder="Enemy" id="input-type">
+                    <input type="text" id="input-type" value="Null">
                 </td>
                 <td>
-                    <select onchange="presetChange(event)">
+                    <select onchange="presetChange(event)" id="presets">
                         <option value="Default">Default</option>
-                        <option value="Gunner">Gunner</option>
                     </select>
                 </td>
             </tr>
@@ -61,8 +64,8 @@
                 <td><input type="number" value="0" min="0" id="input-timer"></td>
             </tr>
         </table>
-        <button class="green" onclick="createEnemy()">Create Enemy</button>
-        <button class="red" onclick="clearParameters()">Clear</button>
+        <button onclick="createEnemy()">Create Enemy</button>
+        <button onclick="clearParameters()">Clear</button>
         <hr>
         <div id="enemy-spawner"></div>
         <hr>

@@ -149,3 +149,16 @@ td
     margin: 7px 3px;
     padding-bottom: 3em;
 }
+
+.enemy-box-input {
+    width: 7em;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.enemy-box-input-position {
+    width: 4em;
+}
+
+#file-name {
+    font-size: 1.5em;
+    width: 12em;
+}
