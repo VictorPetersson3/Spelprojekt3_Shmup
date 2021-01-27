@@ -195,7 +195,7 @@ function importLevel(e)
 var dragger = dragula(
         [document.getElementById("enemy-spawner"), document.getElementById("trashcan")]
     ).on('drop', function (element, container) {
-        if (container.id = "trashcan") {
+        if (container.id == "trashcan") {
             element.remove();
         }
     });
