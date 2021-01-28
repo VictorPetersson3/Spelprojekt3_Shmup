@@ -35,7 +35,6 @@ namespace Studio
 		float mySpeed;
 		float myShootCooldown;
 		float myAnimationTurnSpeed;
-		float myAnimationTime;
 		float myCurrentFlame;
 		bool myHasDied = false;
 		bool myIsAnimating = false;

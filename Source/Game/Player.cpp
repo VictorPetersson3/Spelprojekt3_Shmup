@@ -23,7 +23,6 @@ namespace Studio
 		myPosition = { 300, 540 };
 		mySpeed = 0;
 		myShootCooldown = 0.0f;
-		myAnimationTime = 0;
 		myAnimationTurnSpeed = 0.075;
 		myCurrentFlame = 2;
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/Bullets/FireBullet.dds"));
@@ -159,11 +158,10 @@ namespace Studio
 			if (myIsAnimatingUp || !myIsAnimating)
 			{
 				myIsAnimatingUp = false;
-				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 2 }, { 1, 4 });
+				GameObject::GetSpriteSheet().LoopAnimationInRange(myAnimationTurnSpeed, { 1, 2 }, { 1, 4 });
 				myIsAnimatingDown = true;
 				myIsAnimating = true;
 			}
-			
 			
 			myPosition.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
