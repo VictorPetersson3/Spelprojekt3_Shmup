@@ -6,7 +6,7 @@ namespace Studio
     Coin::Coin(VECTOR2F aSpawnPosition) : GameObject("Sprites/Pickups/coin1.dds")
     {
         myPosition = aSpawnPosition;
-        mySpriteSheet.myImagePath = "Sprites/Pickups/coin1.dds";
+        mySpriteSheet.SetImagePath("Sprites/Pickups/coin1.dds");
         GameObject::myCollider.AddCircleColliderObject(myPosition, 16);
         myScoreValue = 1;
         printf("Coin Created");
