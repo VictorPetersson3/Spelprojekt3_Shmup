@@ -7,19 +7,22 @@
 #include "RendererAccessor.h"
 #include "Timer.h"
 
+#define SPRITESHEET GameObject::GetSpriteSheet()
+
 namespace Studio
 {
 	Player::Player(const char* aImagePath) :
-		Player::GameObject(aImagePath, { 1, 8 }),
+		Player::GameObject(aImagePath),
 		myEngineFlame("sprites/assets/player/Flame.dds", { 1, 4 }, { 300 - 48, 540 - 9 })
 	{
+		SPRITESHEET.SetAmountOfFrames({ 1, 8 });
 		myEngineFlame.GetSpriteSheet().SetLayer(-1);
 		myFrames = { 1, 8 };
 		myPosition = { 300, 540 };
 		mySpeed = 0;
 		myShootCooldown = 0.0f;
 		myAnimationTime = 0;
-		myAnimationTurnSpeed = 0.15;
+		myAnimationTurnSpeed = 0.075;
 		myCurrentFlame = 2;
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/Bullets/FireBullet.dds"));
 		myParticleFactory.InitParticleType("sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);
@@ -38,7 +41,6 @@ namespace Studio
 			Movement();
 
 			Player::GameObject::Update(myPosition);
-			Player::GameObject::UpdateAnimation(myFrames);
 
 			UpdateBullets();
 
@@ -132,27 +134,15 @@ namespace Studio
 		
 		if (wKey && myPosition.y > 0)
 		{
-			if (myIsAnimatingDown)
+			if (myIsAnimatingDown || !myIsAnimating)
 			{
 				myIsAnimatingDown = false;
-				myFrames.y = 5;
-				myAnimationTime = 0;
-			}
-			else
-			{
-				if (!myIsAnimating)
-				{
-					myFrames.y = 5;
-				}
-				myIsAnimating = true;
+				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 5 }, { 1, 7 });
 				myIsAnimatingUp = true;
-				myAnimationTime += Studio::Timer::GetInstance()->TGetDeltaTime();
-				if (myAnimationTime > myAnimationTurnSpeed && myFrames.y != 7)
-				{
-					myFrames.y++;
-					myAnimationTime = 0;
-				}
+				myIsAnimating = true;
 			}
+			
+
 			myPosition.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
 		//A
@@ -164,28 +154,14 @@ namespace Studio
 		//S
 		if (sKey && myPosition.y < 1080)
 		{
-
-			if (myIsAnimatingUp)
+			if (myIsAnimatingUp || !myIsAnimating)
 			{
 				myIsAnimatingUp = false;
-				myFrames.y = 2;
-				myAnimationTime = 0;
-			}
-			else
-			{
-				if (!myIsAnimating)
-				{
-					myFrames.y = 2;
-				}
-				myIsAnimating = true;
+				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 2 }, { 1, 4 });
 				myIsAnimatingDown = true;
-				myAnimationTime += Studio::Timer::GetInstance()->TGetDeltaTime();
-				if (myAnimationTime > myAnimationTurnSpeed && myFrames.y != 4)
-				{
-					myFrames.y++;
-					myAnimationTime = 0;
-				}
+				myIsAnimating = true;
 			}
+			
 			
 			myPosition.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		}
@@ -197,10 +173,48 @@ namespace Studio
 		}
 		if (!sKey && !wKey)
 		{
-			myIsAnimatingUp = false;
-			myIsAnimatingDown = false;
-			myIsAnimating = false;
-			myFrames.y = 1;
+
+			if (myIsAnimating)
+			{
+				if (myIsAnimatingDown)
+				{
+					if (!myIsRebounding)
+					{
+						SPRITESHEET.ReverseAndStartAnimation();
+						myIsRebounding = true;
+					}
+					else
+					{
+						if (!SPRITESHEET.IsAnimating())
+						{
+							myIsAnimating = false;
+						}
+					}
+				}
+				if (myIsAnimatingUp)
+				{
+					if (!myIsRebounding)
+					{
+						SPRITESHEET.ReverseAndStartAnimation();
+						myIsRebounding = true;
+					}
+					else
+					{
+						if (!SPRITESHEET.IsAnimating())
+						{
+							myIsAnimating = false;
+						}
+					}
+				}
+			}
+			else
+			{
+				myIsAnimatingUp = false;
+				myIsAnimatingDown = false;
+				myIsAnimating = false;
+				myIsRebounding = false;
+				Player::GameObject::SetFrame({ 1, 1 });
+			}
 		}
 		if (!aKey && !dKey)
 		{

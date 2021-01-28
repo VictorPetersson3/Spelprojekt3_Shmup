@@ -2,6 +2,9 @@
 #include "SpriteSheet.h"
 #include <tga2d/sprite/sprite.h>
 #include <string>
+#include "Timer.h"
+
+
 namespace Studio
 {
 	SpriteSheet::SpriteSheet(const char* aImagePath)
@@ -26,16 +29,17 @@ namespace Studio
 			myImagePath = "sprites/debugpixel.dds";
 			mySize = { 100.0f, 100.0f };
 		}
+		myIsAnimating = false;
+		myIsLooping = false;
+		myAnimationIsDone = true;
+		myAnimationSpeed = 0;
+		myAnimationTime = 0;
 	}
 
 	SpriteSheet::SpriteSheet(const char* aImagePath, const Tga2D::Vector2f& aAmountOfFrames) :
 		SpriteSheet(aImagePath)
 	{
-		myRectSize.x = (mySize.x / aAmountOfFrames.x) / mySize.x;
-		myRectSize.y = (mySize.y / aAmountOfFrames.y) / mySize.y;
-		mySprite->SetTextureRect(myRectSize.x - myRectSize.x, myRectSize.y - myRectSize.y, myRectSize.x, myRectSize.y);
-		mySize.x = mySize.x / aAmountOfFrames.x;
-		mySize.y = mySize.y / aAmountOfFrames.y;
+		SetAmountOfFrames(aAmountOfFrames);
 	}
 
 	SpriteSheet::~SpriteSheet()
@@ -74,6 +78,10 @@ namespace Studio
 	{
 		return myPosition;
 	}
+	Tga2D::Vector2<float>& SpriteSheet::GetCurrentFrame()
+	{
+		return myCurrentFrame;
+	}
 	Tga2D::CSprite* SpriteSheet::GetSprite()
 	{
 		return mySprite;
@@ -86,6 +94,10 @@ namespace Studio
 	{
 		return myLayer;
 	}
+	const bool SpriteSheet::IsAnimating() const
+	{
+		return myIsAnimating;
+	}
 	void SpriteSheet::SetAmountOfFrames(const Tga2D::Vector2f& aAmountOfFrames)
 	{
 		myRectSize.x = (mySize.x / aAmountOfFrames.x) / mySize.x;
@@ -93,6 +105,7 @@ namespace Studio
 		mySprite->SetTextureRect(myRectSize.x - myRectSize.x, myRectSize.y - myRectSize.y, myRectSize.x, myRectSize.y);
 		mySize.x = mySize.x / aAmountOfFrames.x;
 		mySize.y = mySize.y / aAmountOfFrames.y;
+		myAmountOfFrames = aAmountOfFrames;
 	}
 	void SpriteSheet::SetPosition(const Tga2D::Vector2f& aPos)
 	{
@@ -125,6 +138,25 @@ namespace Studio
 	{
 		mySize = mySprite->GetImageSize();
 	}
+
+
+
+
+	void SpriteSheet::UpdateAnimation()
+	{
+		if (myIsAnimating)
+		{
+			if (!myIsPlayingBackwards)
+			{
+				PlayForward();
+			}
+			else
+			{
+				PlayBackward();
+			}
+		}
+	}
+
 	void SpriteSheet::SetFrame(const Tga2D::Vector2f& aCurrentFrame)
 	{
 		myCurrentFrame = aCurrentFrame;
@@ -134,4 +166,200 @@ namespace Studio
 			myRectSize.x * myCurrentFrame.x,				//BotLeftX Current Frame
 			myRectSize.y * myCurrentFrame.y);				//BotLeftY Current Frame
 	}
+
+	void SpriteSheet::ReverseAndStartAnimation()
+	{
+		myIsPlayingBackwards = true;
+		myIsAnimating = true;
+	}
+
+	void SpriteSheet::PlayAnimation(float aSpeed, const std::initializer_list<float> aListOfFrames)
+	{
+		myFrameInAnimation = 1;
+		myListOfFramesToPlay.clear();
+		myAnimationSpeed = aSpeed;
+		for (int i = 0; i < aListOfFrames.size(); i + 2)
+		{
+			myListOfFramesToPlay.push_back(std::pair<float, float>(*aListOfFrames.begin() + i, *aListOfFrames.begin() + i + 1));
+		}
+		myIsAnimating = true;
+		myIsLooping = false;
+		myAnimationIsDone = false;
+		myIsPlayingBackwards = false;
+	}
+
+	void SpriteSheet::PlayAnimationInRange(float aSpeed, const Tga2D::Vector2f& aStartFrame, const Tga2D::Vector2f& aEndFrame)
+	{
+		myFrameInAnimation = 1;
+		myListOfFramesToPlay.clear();
+		myAnimationSpeed = aSpeed;
+		myStartFrame = aStartFrame;
+		myCurrentFrame = aStartFrame;
+		myEndFrame = aEndFrame;
+		myIsAnimating = true;
+		myIsLooping = false;
+		myAnimationIsDone = false;
+		myIsPlayingBackwards = false;
+	}
+
+	void SpriteSheet::LoopAnimation(float aSpeed, const std::initializer_list<float> aListOfFrames)
+	{
+		PlayAnimation(aSpeed, aListOfFrames);
+		myIsLooping = true;
+		myIsPlayingBackwards = false;
+	}
+
+	void SpriteSheet::LoopAnimationInRange(float aSpeed, const Tga2D::Vector2f& aStartFrame, const Tga2D::Vector2f& aEndFrame)
+	{
+		PlayAnimationInRange(aSpeed, aStartFrame, aEndFrame);
+		myIsLooping = true;
+		myIsPlayingBackwards = false;
+	}
+
+
+	void SpriteSheet::StopAnimation()
+	{
+		myIsAnimating = false;
+	}
+
+	void SpriteSheet::ResumeAnimation()
+	{
+		if (!myIsAnimating && !myAnimationIsDone)
+		{
+			myIsAnimating = true;
+		}
+	}
+
+	void SpriteSheet::SetFrame()
+	{
+		mySprite->SetTextureRect(
+			myRectSize.x * myCurrentFrame.x - myRectSize.x,	//TopLeftX Current Frame
+			myRectSize.y * myCurrentFrame.y - myRectSize.y,	//TopLeftY Current Frame
+			myRectSize.x * myCurrentFrame.x,				//BotLeftX Current Frame
+			myRectSize.y * myCurrentFrame.y);				//BotLeftY Current Frame
+	}
+
+	void SpriteSheet::PlayForward()
+	{
+		myAnimationTime += Studio::Timer::GetInstance()->TGetDeltaTime();
+		if (myListOfFramesToPlay.empty())
+		{
+			if (myAnimationTime > myAnimationSpeed)
+			{
+				if (myCurrentFrame.x >= myEndFrame.x && myCurrentFrame.y >= myEndFrame.y)
+				{
+					if (myIsLooping)
+					{
+						myCurrentFrame = myStartFrame;
+					}
+					else
+					{
+						myIsAnimating = false; 
+						myAnimationIsDone = true;
+					}
+				}
+				else
+				{
+					if (myCurrentFrame.x >= myAmountOfFrames.x)
+					{
+						myCurrentFrame.y++;
+						myCurrentFrame.x = 1;
+					}
+					else
+					{
+						myCurrentFrame.x++;
+					}
+				}
+				myAnimationTime = 0;
+			}
+		}
+		else
+		{
+			if (myAnimationTime > myAnimationSpeed)
+			{
+				myFrameInAnimation++;
+				if (myFrameInAnimation < myListOfFramesToPlay.size())
+				{
+					myCurrentFrame.x = myListOfFramesToPlay.at(myFrameInAnimation).first;
+					myCurrentFrame.y = myListOfFramesToPlay.at(myFrameInAnimation).second;
+				}
+				else
+				{
+					if (!myIsLooping)
+					{
+						myIsAnimating = false;
+						myAnimationIsDone = true;
+					}
+					myFrameInAnimation = 0;
+				}
+				myAnimationTime = 0;
+			}
+		}
+		SetFrame();
+	}
+
+	void SpriteSheet::PlayBackward()
+	{
+		myAnimationTime += Studio::Timer::GetInstance()->TGetDeltaTime();
+		if (myListOfFramesToPlay.empty())
+		{
+			if (myAnimationTime > myAnimationSpeed)
+			{
+				if (myCurrentFrame.x <= myStartFrame.x && myCurrentFrame.y <= myStartFrame.y)
+				{
+					if (myIsLooping)
+					{
+						myCurrentFrame = myStartFrame;
+					}
+					else
+					{
+						myIsAnimating = false;
+						myAnimationIsDone = true;
+					}
+				}
+				else
+				{
+					if (myCurrentFrame.x <= 1)
+					{
+						myCurrentFrame.y--;
+						myCurrentFrame.x = myAmountOfFrames.x;
+					}
+					else
+					{
+						myCurrentFrame.x--;
+					}
+				}
+				myAnimationTime = 0;
+			}
+		}
+		else
+		{
+			if (myAnimationTime > myAnimationSpeed)
+			{
+				myFrameInAnimation--;
+				if (myFrameInAnimation >= 0)
+				{
+					myCurrentFrame.x = myListOfFramesToPlay.at(myFrameInAnimation).first;
+					myCurrentFrame.y = myListOfFramesToPlay.at(myFrameInAnimation).second;
+				}
+				else
+				{
+					if (!myIsLooping)
+					{
+						myIsAnimating = false;
+						myAnimationIsDone = true;
+					}
+					myFrameInAnimation = myListOfFramesToPlay.size() - 1;
+				}
+				myAnimationTime = 0;
+			}
+		}
+		SetFrame();
+	}
+
+
+
+
+
+
 }

@@ -39,8 +39,9 @@ namespace Studio
 		myRenderCommand.Update(aPos);
 		myCollider.Update(aPos);
 		mySpriteSheet.SetPosition(aPos);
+		mySpriteSheet.UpdateAnimation();
 	}
-	void GameObject::UpdateAnimation(const Tga2D::Vector2f& aCurrentFrame)
+	void GameObject::SetFrame(const Tga2D::Vector2f& aCurrentFrame)
 	{
 		mySpriteSheet.SetFrame(aCurrentFrame);
 	}

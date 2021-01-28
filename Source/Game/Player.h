@@ -41,6 +41,7 @@ namespace Studio
 		bool myIsAnimating = false;
 		bool myIsAnimatingDown = false;
 		bool myIsAnimatingUp = false;
+		bool myIsRebounding = false;
 
 		std::vector<Bullet*> myBullets;
 		std::vector<ParticleObject*> myParticleObjects;

@@ -37,7 +37,7 @@ namespace Studio
 
 		virtual ~GameObject() = default;
 		void Update(const Tga2D::Vector2f& aPos);
-		void UpdateAnimation(const Tga2D::Vector2f& aCurrentFrame);
+		void SetFrame(const Tga2D::Vector2f& aCurrentFrame);
 		void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
 
 		void Rotate(const float aRotationInRadians);

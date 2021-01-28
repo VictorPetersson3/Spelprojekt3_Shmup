@@ -12,7 +12,7 @@ Studio::EngineFlame::EngineFlame(const char* aImagePath, const Tga2D::Vector2f& 
 
 void Studio::EngineFlame::Update(int aCurrentState, const Tga2D::Vector2f& aPosition)
 {
-	GameObject::UpdateAnimation({ 1, static_cast<float>(aCurrentState)});
+	GameObject::SetFrame({ 1, static_cast<float>(aCurrentState)});
 	Studio::RendererAccessor::GetInstance()->Render(*this);
 	GameObject::Update(aPosition);
 }
