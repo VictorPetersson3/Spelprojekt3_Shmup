@@ -100,19 +100,3 @@ void CGameWorld::SwapBuffers()
 {
 	myRenderer.SwapBuffers();
 }
-
-
-void CGameWorld::CheckIfEnemiesHit()
-{
-	for (int i = 0; i < myPlayer->GetBullets().size(); i++)
-	{
-		for (int j = 0; j < myEnemies.size(); j++)
-		{
-			if (myPlayer->GetBullets()[i]->Intersects(*myEnemies[j]))
-			{
-				myEnemies.erase(myEnemies.begin() + j);
-				break;
-			}
-		}
-	}
-}
