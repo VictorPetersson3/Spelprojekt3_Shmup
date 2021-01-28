@@ -24,10 +24,13 @@ namespace Studio
 		myFrames = { 1, 8 };
 		myPosition = { 300, 540 };
 		mySpeed = 0;
-		myShootCooldown = 0.0f;
+		myShootCooldown = 0.5f;
 		myAnimationTime = 0;
 		myAnimationTurnSpeed = 0.075;
 		myCurrentFlame = 2;
+		myRapidFireCurrentlyActiveTime = 0;
+		myRapidFireMaxActiveTime = 5.f;
+		myRapidFireCooldown = 40;
 		GetCollider().AddCircleColliderObject(myPosition, 20);
 	}
 
@@ -65,10 +68,10 @@ namespace Studio
 	void Player::Shoot()
 	{
 			myShootCooldown += Timer::GetInstance()->TGetDeltaTime();
-			if (GetAsyncKeyState(VK_SPACE) && myShootCooldown > 0.1f)
+			if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myShootCooldown)
 			{
 				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", myPosition);
-				myShootCooldown = 0;
+				myTimeSinceLastShot = 0;
 			}
 	}
 
@@ -183,6 +186,19 @@ namespace Studio
 		{
 			Shoot();
 		}
+	}
+	void Player::RapidFireLogic(float aCDReductionPercentage)
+	{
+		if (myRapidFireIsActive)
+		{
+			myShootCooldown *= (1 - aCDReductionPercentage);
+			myRapidFireCurrentlyActiveTime += Timer::GetInstance()->TGetDeltaTime();
+			if ()
+			{
+
+			}
+		}
+
 	}
 }
 

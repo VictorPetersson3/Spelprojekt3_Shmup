@@ -22,16 +22,23 @@ namespace Studio
 
 	private:
 		void Movement();
+
+		void RapidFireLogic(float aCDReductionPercentage);
 	private:
 		float mySpeed;
 		float myShootCooldown;
+		float myTimeSinceLastShot;
 		float myAnimationTurnSpeed;
 		float myAnimationTime;
 		float myCurrentFlame;
+		float myRapidFireCooldown;
+		float myRapidFireActiveTime;
+		float myRapidFireMaxActiveTime;
 		bool myIsAnimating = false;
 		bool myIsAnimatingDown = false;
 		bool myIsAnimatingUp = false;
 		bool myIsRebounding = false;
+		bool myRapidFireIsActive = false;
 
 		VECTOR2F myPosition;
 		VECTOR2F myFrames;
