@@ -32,7 +32,7 @@ namespace Studio
 		float myAnimationTime;
 		float myCurrentFlame;
 		float myRapidFireCooldown;
-		float myRapidFireActiveTime;
+		float myRapidFireCurrentlyActiveTime;
 		float myRapidFireMaxActiveTime;
 		bool myIsAnimating = false;
 		bool myIsAnimatingDown = false;
