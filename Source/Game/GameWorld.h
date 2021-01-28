@@ -9,6 +9,7 @@ namespace Studio
 	class Enemy;
 	class LevelManager;
 	class MenuManager;
+	class CoinManager;
 	class Score;
 	class AudioManager;
 }
@@ -42,6 +43,8 @@ private:
 	Studio::Score* myScore;
 
 	Studio::AudioManager* myAudioManager;
+
+	Studio::CoinManager* myCoinManager;
 
 	Studio::LevelManager* myLevelManager;
 	std::vector<Studio::Enemy*> myEnemies;

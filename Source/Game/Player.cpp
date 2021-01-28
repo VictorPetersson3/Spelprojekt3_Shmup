@@ -5,6 +5,8 @@
 #include "tga2d/sprite/sprite.h"
 #include "Renderer.h"
 #include "RendererAccessor.h"
+#include "CoinAccessor.h"
+#include "Coin.h"
 #include "Timer.h"
 
 #define SPRITESHEET GameObject::GetSpriteSheet()
@@ -57,19 +59,19 @@ namespace Studio
 			myParticleObjects.at(0)->Update(Timer::GetInstance()->TGetDeltaTime());
 		}
 
-		
-		//Kod som behöver ligga i levelmanager troligen
-		/*for (int i = 0; i < myBullets.size(); i++)
+		auto& worldCoins = CoinAccessor::GetInstance()->GetWorldCoins();
+
+		for (int i = 0; i < worldCoins.size(); i++)
 		{
-			for (int j = 0; j < myBullets; j++)
+			if (worldCoins[i]->Intersects(*this))
 			{
-				if (myBullets[i]->Intersects(*myEnemies[j]))
-				{
-					myEnemies.erase(myEnemies.begin() + j);
-					break;
-				}
+				CoinAccessor::GetInstance()->AddCoins(1);
+				worldCoins.erase(worldCoins.begin() + i);
+				printf_s("bruh");
 			}
-		}*/
+		}
+		
+
 	}
 
 	void Player::Shoot()

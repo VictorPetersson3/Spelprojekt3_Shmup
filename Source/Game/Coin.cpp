@@ -3,16 +3,19 @@
 
 namespace Studio
 {
-    Coin::Coin(Tga2D::CSprite* aSprite, VECTOR2F aSpawnPosition) : Coin::GameObject(aSprite)
+    Coin::Coin(VECTOR2F aSpawnPosition) : GameObject("Sprites/Pickups/coin1.dds")
     {
-        mySprite = aSprite;
         myPosition = aSpawnPosition;
+        mySpriteSheet.myImagePath = "Sprites/Pickups/coin1.dds";
+        GameObject::myCollider.AddCircleColliderObject(myPosition, 16);
         myScoreValue = 1;
+        printf("Coin Created");
     }
 
     Coin::~Coin()
     {
-        SAFE_DELETE(mySprite);
+        printf("Deleted");
+
     }
 
     int Coin::GetScoreValue()
@@ -20,9 +23,9 @@ namespace Studio
         return myScoreValue;
     }
 
-    RenderCommand& Coin::GetRenderCommand()
+    VECTOR2F Coin::GetPosition()
     {
-        return myRenderCommand;
+        return myPosition;
     }
 }
 
