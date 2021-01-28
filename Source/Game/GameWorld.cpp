@@ -9,8 +9,9 @@
 #include "LevelManager.h"
 #include "MenuManager.h"
 #include "CoinAccessor.h"
+#include "LevelAccessor.h"
 #include "MenuManagerSingleton.h"
-#include "Score.h"
+#include "ScoreAccessor.h"
 #include "AudioManagerAccesor.h"
 
 // Freeze
@@ -44,14 +45,17 @@ void CGameWorld::Init()
 	SAFE_CREATE(myPlayer, Studio::Player("sprites/assets/player/sprites/playerSprite_01.dds"));
 
 	SAFE_CREATE(myCoinManager, Studio::CoinManager());
-
 	Studio::CoinAccessor::SetInstance(myCoinManager);
+	SAFE_CREATE(myScoreManager, Studio::ScoreManager());
+	Studio::ScoreAccessor::SetInstance(myScoreManager);
+
 	
 	myBackgroundManager.CreateTestMapBackground(1920.0f);
 
 	SAFE_CREATE(myLevelManager, Studio::LevelManager());
 	myMenuManager = Studio::MenuManagerSingleton::GetInstance();
-	SAFE_CREATE(myScore, Studio::Score());
+
+	Studio::LevelAccessor::SetInstance(myLevelManager);
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
@@ -78,7 +82,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		{
 			myPlayer->SetGodMode();
 		}
-		myScore->Update();
+		myScoreManager->Update();
 		myPlayer->Update();
 		myLevelManager->Update(myPlayer);
 		myCoinManager->Update();

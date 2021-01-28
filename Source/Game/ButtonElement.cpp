@@ -25,5 +25,5 @@ void Studio::ButtonElement::OnClick()
 void Studio::ButtonElement::Update()
 {
 	std::cout << "Test button updating" << std::endl;
-
+	
 }

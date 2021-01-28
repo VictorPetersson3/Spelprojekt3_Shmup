@@ -33,7 +33,8 @@ namespace Studio
 		bool inGodMode = false;
 
 		TestButton* myTestButton = new TestButton("Sprites/UI/TempPlayButton.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f },"StartButton");
-		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.1,0.2 }, "ScoreText");
+		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.2,0.2 }, "ScoreText");
+		TextElement* myCoinText = new TextElement(Tga2D::EFontSize_18, { 0.8,0.2 }, "CoinText");
 		GodModeButton* myGodModeButton = new GodModeButton("Sprites/UI/GodmodeButton.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "StartButton");
 	};
 

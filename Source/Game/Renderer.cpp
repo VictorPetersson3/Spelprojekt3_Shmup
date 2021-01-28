@@ -47,6 +47,11 @@ void Renderer::Render(Studio::GameObject& aGameObject)
 	myWriteBuffer->push_back(aGameObject.GetSpriteSheet());
 }
 
+void Renderer::Render(Studio::SpriteSheet& aSpriteSheet)
+{
+	myWriteBuffer->push_back(aSpriteSheet);
+}
+
 // Batching stuff
 void Renderer::Render()
 {

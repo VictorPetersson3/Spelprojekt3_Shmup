@@ -7,6 +7,7 @@ namespace Studio
     {
         myMainMenu.Add(myTestButton);
         myMainMenu.Add(myScoreText);
+        myMainMenu.Add(myCoinText);
         myMainMenu.Add(myGodModeButton);
         myMainMenu.Enable();
     }
@@ -34,6 +35,7 @@ namespace Studio
     void MenuManager::Render()
     {
         myScoreText->Render();
+        myCoinText->Render();
     }
 
     bool MenuManager::GameStarted()

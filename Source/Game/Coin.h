@@ -6,7 +6,7 @@ namespace Studio
 	{
 	public:
 		Coin(VECTOR2F aSpawnPosition);
-		~Coin();
+		void Animate();
 
 		int GetScoreValue();
 

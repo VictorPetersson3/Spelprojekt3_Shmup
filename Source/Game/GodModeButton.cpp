@@ -19,13 +19,16 @@ Studio::GodModeButton::GodModeButton(const char* aPath, const VECTOR2F aPosition
 	mySprite->SetSizeRelativeToImage(aSize);
 	mySprite->SetPosition(aPosition);
 
+	mySpriteSheet = new SpriteSheet(aPath);
+	mySpriteSheet->SetPivot(aPivot);
+	mySpriteSheet->SetPosition(aPosition);
+	mySpriteSheet->SetSizeRelativeToImage(aSize);
 
-	myLeft = mySprite->GetPosition().x - (mySprite->GetImageSize().x * aSize.x / 2);
-	myRight = mySprite->GetPosition().x + (mySprite->GetImageSize().x * aSize.x / 2);
-	myTop = mySprite->GetPosition().y - (mySprite->GetImageSize().y * aSize.y / 2);
-	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y * aSize.y / 2);
+	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
+	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
+	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
+	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
 
-	myRenderCommand = RenderCommand(mySprite, aSize, aPosition);
 	tag = aTag;
 }
 
@@ -35,13 +38,19 @@ Studio::GodModeButton::~GodModeButton()
 
 void Studio::GodModeButton::Update()
 {
+	myWindowHandle = GetForegroundWindow();
+
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(myWindowHandle, &pt);
+
 	if (myIsEnabled == true)
 	{
 		if (myIsClicked == false)
 		{
-			if (Studio::InputManager::GetInstance()->GetMousePosition().x * renderAspect >= myLeft && Studio::InputManager::GetInstance()->GetMousePosition().x * renderAspect <= myRight)
+			if (pt.x >= myLeft && pt.x <= myRight)
 			{
-				if (Studio::InputManager::GetInstance()->GetMousePosition().y * renderAspect >= myTop && Studio::InputManager::GetInstance()->GetMousePosition().y * renderAspect <= myBottom)
+				if (pt.y >= myTop && pt.y <= myBottom)
 				{
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
@@ -57,10 +66,8 @@ void Studio::GodModeButton::Update()
 			myIsClicked = false;
 		}
 
-		if (myIsEnabled == true)
-		{
-			Studio::RendererAccessor::GetInstance()->RenderRenderCommand(myRenderCommand);
-		}
+		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
+
 	}
 }
 

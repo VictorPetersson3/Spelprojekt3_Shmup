@@ -1,31 +1,26 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "tga2d/sprite/sprite.h"
+#include "TypePattern_Bullet.h"
 #include "Timer.h"
 namespace Studio
 {
-	Bullet::Bullet(VECTOR2F aPosition, const float& aSpeed, Tga2D::CSprite* aSprite) : 
-		Bullet::GameObject(aSprite)
+	Bullet::Bullet(VECTOR2F aPosition, TypePattern_Bullet* aTypePattern) :
+		Bullet::GameObject(aTypePattern->GetImagePath()),
+		myTypePattern(aTypePattern)
 	{
 		myPosition = aPosition;
-		mySpeed = aSpeed;
-
-		Bullet::GameObject::GetCollider().AddCircleColliderObject(myPosition, 0.005f);
-
-		SAFE_CREATE(mySprite, Tga2D::CSprite(*aSprite));
-
-		aSprite->SetSizeRelativeToScreen({ 0.01f, 0.01f });
-		aSprite->SetPivot({ 0.5f, 0.5f });
+		Bullet::GetSpriteSheet().SetSize({20.0f, 20.0f});
+		Bullet::GameObject::GetCollider().AddCircleColliderObject(myPosition, 2.0f);
 	}
 
 	Bullet::~Bullet()
 	{
-		SAFE_DELETE(mySprite);
 	}
 
 	void Bullet::Update()
 	{
-		myPosition.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
+		myPosition.x += myTypePattern->GetSpeed() * Timer::GetInstance()->TGetDeltaTime();
 
 		Bullet::GameObject::Update(myPosition);
 	}
@@ -34,9 +29,9 @@ namespace Studio
 	{
 		return myPosition;
 	}
-	Studio::RenderCommand Bullet::GetRenderCommand()
+	Enums::BulletOwner Bullet::GetOwner()
 	{
-		return Bullet::GameObject::GetRenderCommand();
+		return myTypePattern->GetOwner();
 	}
 }
 

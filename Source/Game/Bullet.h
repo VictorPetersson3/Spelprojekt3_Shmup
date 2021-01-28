@@ -1,29 +1,24 @@
 #pragma once
 #include "GameObject.h"
-namespace Tga2D
-{
-	class CSprite;
-}
+#include "Enums.h"
+
 namespace Studio
 {
-	class RenderCommand;
+	class TypePattern_Bullet;
 	class Bullet : public GameObject
 	{
 	public:
 		Bullet() = default;
-		Bullet(VECTOR2F aPosition, const float& aSpeed, Tga2D::CSprite* aSprite);
+		Bullet(VECTOR2F aPosition, TypePattern_Bullet* aTypePattern);
 		~Bullet();
 		void Update();
 
 		VECTOR2F GetPosition();
-
-		Studio::RenderCommand GetRenderCommand();
+		Enums::BulletOwner GetOwner();
 
 	private:
-		float mySpeed;
 
-		Tga2D::CSprite* mySprite;
-
+		TypePattern_Bullet* myTypePattern;
 		VECTOR2F myPosition;
 	};
 }

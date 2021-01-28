@@ -12,7 +12,9 @@
 #include "Bullet.h"
 #include "Pack.h"
 #include "EnemyFactory.h"
+#include "BulletFactory.h"
 #include "Player.h"
+#include "Boss.h"
 
 // Rendering
 #include "RendererAccessor.h"
@@ -24,9 +26,14 @@ namespace Studio
 	LevelManager::LevelManager()
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
-
+		SAFE_CREATE(myBulletFactory, BulletFactory());
+		SAFE_CREATE(myBoss, Boss("", { 1500.0f, 520.0f }, 1000.0f));
 		myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
 		//															    ^ key
+
+		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
+		myBulletFactory->InitBulletType("", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
+		myBulletFactory->InitBulletType("", 12, "Player", 800.0f, Enums::BulletOwner::Player);
 
 		// Load chosen level by Lever Designers
 		std::fstream file;
@@ -49,6 +56,7 @@ namespace Studio
 		printf_s("PATH %s\n", path.c_str());
 
 		LoadLevel(path.c_str());
+
 	}
 
 	LevelManager::~LevelManager()
@@ -58,6 +66,7 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myPacks);
 		SAFE_DELETE_VECTOR(myEnemies);
 		SAFE_DELETE_VECTOR(myBullets);
+		SAFE_DELETE(myBoss);
 	}
 
 	void LevelManager::Update(Player* aPlayer)
@@ -66,9 +75,11 @@ namespace Studio
 		myPlayer = aPlayer;
 		if (myLevelIsCleared)
 		{
-			SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
+			/*SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
 			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
-			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
+			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);*/
+			myBoss->Update();
+			LevelLogic();
 		}
 		else
 		{
@@ -104,11 +115,16 @@ namespace Studio
 		myEnemies.push_back(anEnemy);
 	}
 
+	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition)
+	{
+		myBullets.push_back(myBulletFactory->CreateBulletObject(aType, aPosition));
+	}
+
 	bool LevelManager::LevelIsCleared()
 	{
 		return myLevelIsCleared;
 	}
-	
+
 	//Pu
 	void LevelManager::LevelLogic()
 	{
@@ -129,19 +145,30 @@ namespace Studio
 		}
 		for (Bullet* bullet : myBullets)
 		{
+			bullet->Update();
+
 			Studio::RendererAccessor::GetInstance()->Render(*bullet);
 		}
+
+		for (int i = myBullets.size() - 1; i >= 0; i--)
+		{
+			if (myBullets[i]->GetPosition().x > 1920 || myBullets[i]->GetPosition().x < 0 || myBullets[i]->GetPosition().y < 0 || myBullets[i]->GetPosition().y > 1080)
+			{
+				myBullets.erase(myBullets.begin() + i);
+			}
+		}
+
 		//Pu
 		CheckCollision();
 
 		for (int i = myEnemies.size() - 1; i >= 0; i--)
 		{
-			if (myEnemies[i]->HasFinishedExplosion() && myEnemies[i]->IsDead())
+			if (myEnemies[i]->IsDead())
 			{
 				myEnemies.erase(myEnemies.begin() + i);
 			}
 		}
-		if (myPlayer->IsFinishedExploding() && myPlayer->IsDead())
+		if (myPlayer->IsDead())
 		{
 			//Reload Level after death explosion is finished
 			//LoadLevel(myCurrentLevelPath); 
@@ -150,52 +177,65 @@ namespace Studio
 	//Pu
 	void LevelManager::CheckCollision()
 	{
-		bool shouldExplode = false;
-		if (myEnemies.size() > 0)
+		if (myLevelIsCleared)
 		{
-			for (int i = 0; i < myEnemies.size(); i++)
+			if (!myBullets.empty())
 			{
-				if (myEnemies[i]->GetBullets().size() > 0)
+				for (int i = myBullets.size() - 1; i >= 0; i--)
 				{
-					for (int j = myEnemies[i]->GetBullets().size() - 1; j >= 0; j--)
+					if (!myBoss->IsDead() && myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player)
 					{
-						if (myPlayer->Intersects(*myEnemies[i]->GetBullets()[j]))
+						if (myBoss->Intersects(*myBullets[i]))
 						{
-							myPlayer->TakeDamage(25);
-							printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
-							if (myPlayer->IsDead())
-							{
-								myPlayer->PlayExplosion();
-							}
-							myEnemies[i]->GetBullets().erase(myEnemies[i]->GetBullets().begin() + j);
+							myBoss->TakeDamage(25.0f);
+							printf_s("BossHealth: %f\n", myBoss->GetCurrentHealth());
+							myBullets.erase(myBullets.begin() + i);
 						}
+					}
+					//When the boss dies?
+					else
+					{
+
 					}
 				}
 			}
+		}
+		if (!myBullets.empty())
+		{
+			for (int j = myBullets.size() - 1; j >= 0; j--)
+			{
+				if (myBullets[j]->GetOwner() == Studio::Enums::BulletOwner::Enemy)
+				{
+					if (myPlayer->Intersects(*myBullets[j]))
+					{
+						myPlayer->TakeDamage(25);
+						printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
 
-			if (myPlayer->GetBullets().size() > 0)
+						myBullets.erase(myBullets.begin() + j);
+					}
+				}
+			}
+		}
+
+		if (myEnemies.size() > 0)
+		{
+			if (myBullets.size() > 0)
 			{
 				for (int i = myEnemies.size() - 1; i >= 0; i--)
 				{
 					if (!myEnemies[i]->IsDead())
 					{
-						for (int j = myPlayer->GetBullets().size() - 1; j >= 0; j--)
+						for (int j = myBullets.size() - 1; j >= 0; j--)
 						{
-							if (myPlayer->GetBullets()[j]->Intersects(*myEnemies[i]))
+							if (myBullets[j]->GetOwner() == Studio::Enums::BulletOwner::Player)
 							{
-								myPlayer->GetBullets().erase(myPlayer->GetBullets().begin() + j);
-								myEnemies[i]->TakeDamage(100);
-								if (myEnemies[i]->IsDead())
+								if (myEnemies[i]->Intersects(*myBullets[j]))
 								{
-									shouldExplode = true;
+									myBullets.erase(myBullets.begin() + j);
+									myEnemies[i]->TakeDamage(100);
 								}
 							}
 						}
-					}
-					if (shouldExplode)
-					{
-						myEnemies[i]->PlayExplosion();
-						shouldExplode = false;
 					}
 				}
 			}
