@@ -9,13 +9,6 @@ namespace Studio
         mySpriteSheet.SetImagePath("Sprites/Pickups/coin1.dds");
         GameObject::myCollider.AddCircleColliderObject(myPosition, 16);
         myScoreValue = 1;
-        printf("Coin Created");
-    }
-
-    Coin::~Coin()
-    {
-        printf("Deleted");
-
     }
 
     int Coin::GetScoreValue()

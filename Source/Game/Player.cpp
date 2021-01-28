@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include "RendererAccessor.h"
 #include "CoinAccessor.h"
+#include "ScoreAccessor.h"
 #include "Coin.h"
 #include "Timer.h"
 
@@ -65,8 +66,9 @@ namespace Studio
 		{
 			if (worldCoins[i]->Intersects(*this))
 			{
-				CoinAccessor::GetInstance()->AddCoins(1);
+				ScoreAccessor::GetInstance()->AddCoinScore(1);
 				worldCoins.erase(worldCoins.begin() + i);
+
 				printf_s("bruh");
 			}
 		}

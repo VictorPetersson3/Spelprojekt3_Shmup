@@ -9,6 +9,7 @@ namespace Studio
 	class Enemy;
 	class LevelManager;
 	class MenuManager;
+	class ScoreManager;
 	class CoinManager;
 	class Score;
 	class AudioManager;
@@ -40,7 +41,7 @@ private:
 
 	Studio::MenuManager* myMenuManager;
 
-	Studio::Score* myScore;
+	Studio::ScoreManager* myScoreManager;
 
 	Studio::AudioManager* myAudioManager;
 

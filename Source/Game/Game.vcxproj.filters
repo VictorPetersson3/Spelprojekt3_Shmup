@@ -131,7 +131,15 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="EngineFlame.cpp" />
-    <ClCompile Include="CoinAccessor.cpp" />
+    <ClCompile Include="CoinAccessor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreAccessor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -276,7 +284,15 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="EngineFlame.h" />
-    <ClInclude Include="CoinAccessor.h" />
+    <ClInclude Include="CoinAccessor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreAccessor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

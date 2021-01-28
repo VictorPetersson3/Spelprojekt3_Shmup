@@ -180,6 +180,8 @@
     <ClInclude Include="RendererAccessor.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Score.h" />
+    <ClInclude Include="ScoreAccessor.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="SpriteSheet_AnimationData.h" />
@@ -238,6 +240,8 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RendererAccessor.cpp" />
     <ClCompile Include="Score.cpp" />
+    <ClCompile Include="ScoreAccessor.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="SpriteSheet_AnimationData.cpp" />

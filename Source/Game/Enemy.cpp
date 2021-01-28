@@ -7,6 +7,7 @@
 #include "MovementStraight.h"
 #include "MovementWave.h"
 #include "CoinAccessor.h"
+#include "ScoreAccessor.h"
 #include "Timer.h"
 
 namespace Studio
@@ -74,6 +75,7 @@ namespace Studio
 		{
 			myParticleObjects.push_back(myParticleFactory.CreateParticleObject("Explosion", myPosition));
 			CoinAccessor::GetInstance()->CreateCoin(myPosition);
+			ScoreAccessor::GetInstance()->AddKillScore(1);
 			printf_s("%f", myPosition.x);
 			myHasDied = true;
 		}
