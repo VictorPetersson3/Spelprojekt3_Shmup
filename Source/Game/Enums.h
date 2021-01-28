@@ -16,5 +16,13 @@ namespace Studio
 			Seeking,
 			Count
 		};
+
+		enum class BulletOwner
+		{
+			Player,
+			Enemy,
+			Boss,
+			None
+		};
 	}
 }

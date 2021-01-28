@@ -9,6 +9,7 @@
 #include "LevelManager.h"
 #include "MenuManager.h"
 #include "CoinAccessor.h"
+#include "LevelAccessor.h"
 #include "MenuManagerSingleton.h"
 #include "ScoreAccessor.h"
 #include "AudioManagerAccesor.h"
@@ -47,11 +48,14 @@ void CGameWorld::Init()
 	Studio::CoinAccessor::SetInstance(myCoinManager);
 	SAFE_CREATE(myScoreManager, Studio::ScoreManager());
 	Studio::ScoreAccessor::SetInstance(myScoreManager);
+
 	
 	myBackgroundManager.CreateTestMapBackground(1920.0f);
 
 	SAFE_CREATE(myLevelManager, Studio::LevelManager());
 	myMenuManager = Studio::MenuManagerSingleton::GetInstance();
+
+	Studio::LevelAccessor::SetInstance(myLevelManager);
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread

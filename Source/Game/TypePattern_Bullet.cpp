@@ -2,18 +2,16 @@
 #include "TypePattern_Bullet.h"
 #include "tga2d/sprite/sprite.h"
 
-Studio::TypePattern_Bullet::TypePattern_Bullet(const std::string& aPath, const unsigned int aLayerOrder) :
-	myLayerOrder(aLayerOrder)
+Studio::TypePattern_Bullet::TypePattern_Bullet(const std::string& aPath, const unsigned int aLayerOrder, const float aSpeed, const Studio::Enums::BulletOwner aOwner) :
+	myLayerOrder(aLayerOrder),
+	myImagePath(aPath),
+	mySpeed(aSpeed),
+	myOwner(aOwner)
 {
-	mySprite = nullptr;
-	mySprite = new Tga2D::CSprite(aPath.c_str());
-	mySprite->SetPivot({ 0.5f, 0.5f });
 }
 
 Studio::TypePattern_Bullet::~TypePattern_Bullet()
 {
-	delete mySprite;
-	mySprite = nullptr;
 }
 
 const unsigned int Studio::TypePattern_Bullet::GetLayerOrder() const
@@ -21,7 +19,18 @@ const unsigned int Studio::TypePattern_Bullet::GetLayerOrder() const
 	return myLayerOrder;
 }
 
-Tga2D::CSprite* Studio::TypePattern_Bullet::GetSprite()
+const std::string& Studio::TypePattern_Bullet::GetImagePath()
 {
-	return mySprite;
+	return myImagePath;
 }
+
+const float Studio::TypePattern_Bullet::GetSpeed()
+{
+	return mySpeed;
+}
+
+const Studio::Enums::BulletOwner Studio::TypePattern_Bullet::GetOwner()
+{
+	return myOwner;
+}
+

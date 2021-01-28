@@ -134,12 +134,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Ability.h" />
     <ClInclude Include="AudioClip.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioManagerAccesor.h" />
     <ClInclude Include="BackgroundFactory.h" />
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundManager.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletFactory.h" />
     <ClInclude Include="ButtonElement.h" />
@@ -154,6 +156,8 @@
     <ClInclude Include="EngineFlame.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GodModeButton.h" />
+    <ClInclude Include="HealthBar.h" />
+    <ClInclude Include="LevelAccessor.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuManagerSingleton.h" />
     <ClInclude Include="MenuObject.h" />
@@ -197,12 +201,14 @@
     <ClInclude Include="UIElement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ability.cpp" />
     <ClCompile Include="AudioClip.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioManagerAccesor.cpp" />
     <ClCompile Include="BackgroundFactory.cpp" />
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundManager.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
     <ClCompile Include="ButtonElement.cpp" />
@@ -216,6 +222,8 @@
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EngineFlame.cpp" />
     <ClCompile Include="GodModeButton.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
+    <ClCompile Include="LevelAccessor.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuManagerSingleton.cpp" />
     <ClCompile Include="MenuObject.cpp" />

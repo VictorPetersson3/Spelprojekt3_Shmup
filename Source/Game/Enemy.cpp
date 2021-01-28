@@ -8,7 +8,9 @@
 #include "MovementWave.h"
 #include "CoinAccessor.h"
 #include "ScoreAccessor.h"
+#include "LevelAccessor.h"
 #include "Timer.h"
+#include <string>
 
 namespace Studio
 {
@@ -26,7 +28,7 @@ namespace Studio
 		SAFE_CREATE(myMovement, MovementWave(&myPosition, 100.0f, 500.0f, 500.0f));
 
 		myParticleFactory.InitParticleType("Sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);
-		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 25);
+		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 50);
 	}
 
 	Enemy::~Enemy()
@@ -52,11 +54,6 @@ namespace Studio
 		{
 			Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
 		}
-
-		if (myParticleObjects.size() > 0)
-		{
-			myParticleObjects.at(0)->Update(Timer::GetInstance()->TGetDeltaTime());
-		}
 	}
 
 	void Enemy::Shoot(float aDeltaTime)
@@ -64,35 +61,9 @@ namespace Studio
 		myShootCooldown += aDeltaTime;
 		if (myShootCooldown > 0.7f)
 		{
-			myBullets.push_back(new Bullet(myPosition, -500, myBulletSprite));
+			Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition);
 			myShootCooldown = 0;
 		}
-	}
-
-	void Enemy::PlayExplosion()
-	{
-		if (!myHasDied)
-		{
-			myParticleObjects.push_back(myParticleFactory.CreateParticleObject("Explosion", myPosition));
-			CoinAccessor::GetInstance()->CreateCoin(myPosition);
-			ScoreAccessor::GetInstance()->AddKillScore(1);
-			printf_s("%f", myPosition.x);
-			myHasDied = true;
-		}
-	}
-
-	bool Enemy::HasFinishedExplosion()
-	{
-		if (myParticleObjects.size() > 0)
-		{
-			if (myParticleObjects.at(0)->GetHasFinishedAnimation())
-			{
-				myParticleObjects.erase(myParticleObjects.begin());
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	int Enemy::GetScoreValue()

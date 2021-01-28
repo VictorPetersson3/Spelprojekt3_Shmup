@@ -140,6 +140,11 @@
     <ClCompile Include="ScoreManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="CoinAccessor.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
+    <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="LevelAccessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -293,6 +298,11 @@
     <ClInclude Include="ScoreManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="CoinAccessor.h" />
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="HealthBar.h" />
+    <ClInclude Include="Ability.h" />
+    <ClInclude Include="LevelAccessor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

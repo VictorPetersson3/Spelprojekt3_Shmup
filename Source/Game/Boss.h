@@ -1,24 +1,39 @@
 #pragma once
 #include "GameObject.h"
+#include "Enums.h"
+#include "HealthBar.h"
 namespace Studio
 {
 	//Forward Declaring Classes
 	class RenderCommand;
 	class Bullet;
 	class Movement;
-
+	
+	//Boss Class Implementation
 	class Boss : public GameObject
 	{
 	public:
 		Boss();
-		Boss(Tga2D::CSprite* aSprite, VECTOR2F aSpawnPosition);
+		Boss(const char* aImagePath, VECTOR2F aSpawnPosition, float aHealthAmount);
 		~Boss();
 
 		void Update();
 
-		//Boss "Actions" / "Abilities", Temp shell functions.
-		void SpawnMinions();
+		//Phase One Functions
+		void PhaseOne();
+		void Shoot();
+		void GetSpawnEnemiesCooldown();
+
+
+		//Phase Two Functions
+		void PhaseTwo();
 		void ShootLaser();
+
+		//Phase Three Functions
+		void PhaseThree();
+
+		//Shared Phase Functions
+		void UpdateHealthBar();
 
 		//Boss "Swedish Abilities"
 		void SendInTheCaroleans(float anAmountOfCanonFodder);
@@ -34,9 +49,21 @@ namespace Studio
 	protected:
 
 	private:
-		VECTOR2F myPosition;
+		
+		int myCurrentPhase;
+		int myLaserCooldown;
+		int myTotalFightTime;
 
-		int myPhaseCount;
+		float myPhase1Condition;
+		float myPhase2Condition;
+		float myEnrageTimer;
+		float myEnrageTimeCondition;
+
+		VECTOR2F myPosition;
+		
+		Movement* myMovement;
+
+		HealthBar myHealthBar;
 	};
 
 
