@@ -15,10 +15,10 @@ namespace Studio
 		~TypePattern_Background() = default;
 
 		const std::string& GetImagePath() const;
-		const Tga2D::Vector2f& GetImagePivot() const;
+		const int GetAmount() const;
 	private:
 		std::string myImagePath;
-		Tga2D::Vector2f mySpritePivot;
+		int myAmount;
 	};
 }
 

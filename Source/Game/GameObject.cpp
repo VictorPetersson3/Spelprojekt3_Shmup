@@ -9,12 +9,6 @@ namespace Studio
 	{
 	}
 
-	// Deprecated. See GameObject.h for further details
-	//GameObject::GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize) : myRenderCommand(aSprite, aSize),
-	//	myHealth(100)
-	//	,mySpriteSheet(nullptr) // This is bad
-	//{
-	//}
 
 	GameObject::GameObject(const std::string& anImagePath) :
 		myHealth(100), // Maybe this should be set somewhere???
@@ -66,9 +60,26 @@ namespace Studio
 	{
 		myRenderCommand.SetRotation(aRotationInRadians);
 	}
+	void GameObject::SetPosition(const Tga2D::Vector2f& aPos)
+	{
+		myPosition = aPos;
+	}
+	void GameObject::SetPositionX(const float aXVal)
+	{
+		myPosition.x = aXVal;
+	}
+	void GameObject::SetPositionY(const float aYVal)
+	{
+		myPosition.y = aYVal;
+	}
 	const float GameObject::GetRotation() const
 	{
 		return myRenderCommand.GetRotation();
+	}
+
+	const Tga2D::Vector2f& GameObject::GetPosition()
+	{
+		return myPosition;
 	}
 
 	Sprite& Studio::GameObject::GetSprite()

@@ -74,7 +74,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		}
 	}
 
-	//myBackgroundManager.UpdateBackground(aDeltaTime);
+	myBackgroundManager.UpdateBackground(aDeltaTime);
 
 	if (myMenuManager->GameStarted())
 	{
@@ -87,17 +87,14 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		myLevelManager->Update(myPlayer);
 		myCoinManager->Update();
 	}
-	
 	myMenuManager->Update();
 }
 
 void CGameWorld::Render()
 {
-
 	//myTga2dLogoSprite->Render();
 	myRenderer.Render();
 	myMenuManager->Render();
-
 }
 
 void CGameWorld::SwapBuffers()

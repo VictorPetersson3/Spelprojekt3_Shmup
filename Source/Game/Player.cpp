@@ -60,8 +60,6 @@ namespace Studio
 				printf_s("bruh");
 			}
 		}
-		
-
 	}
 
 	void Player::Shoot()

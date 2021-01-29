@@ -18,6 +18,7 @@ namespace Studio
 		Collider myCollider;
 		Health myHealth;
 		RenderCommand myRenderCommand;
+		Tga2D::Vector2f myPosition;
 
 		#pragma region New Image Stuff (SpriteBatching)
 		SpriteSheet mySpriteSheet;
@@ -28,9 +29,7 @@ namespace Studio
 
 		[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
 		GameObject(Tga2D::CSprite* aSprite);
-		//[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
-		//GameObject(Tga2D::CSprite* aSprite, const Tga2D::Vector2f& aSize);
-
+		
 		GameObject(const std::string& anImagePath);
 		GameObject(const std::string& anImagePath, const Tga2D::Vector2f& aAmountOfFrames);
 		GameObject(const std::string& anImagePath, float aHealthAmount);
@@ -40,11 +39,17 @@ namespace Studio
 		void SetFrame(const Tga2D::Vector2f& aCurrentFrame);
 		void Update(const Tga2D::Vector2f& aPos, const Tga2D::Vector2f& aTexRecTopL, const Tga2D::Vector2f& aTexRecBotR);
 
+		const float GetRotation() const;
+		const Tga2D::Vector2f& GetPosition();
+
 		void Rotate(const float aRotationInRadians);
 		void RotateRight(const float aRotationInRadians);
 		void RotateLeft(const float aRotationInRadians);
 		void SetRotation(float aRotationInRadians);
-		const float GetRotation() const;
+		void SetPosition(const Tga2D::Vector2f& aPos);
+		void SetPositionX(const float aXVal);
+		void SetPositionY(const float aYVal);
+
 
 		// Temporary accessor for mySprite. DO NOT USE IN RETAIL
 		Sprite& GetSprite();	 // Temporary accesser
@@ -71,7 +76,7 @@ namespace Studio
 		const float GetMaxHealth();
 		const float GetCurrentHealth();
 		const bool IsDead();
-
+		
 		void SetGodMode();
 		#pragma endregion
 

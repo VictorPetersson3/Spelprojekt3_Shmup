@@ -7,35 +7,54 @@
 namespace Studio
 {
 	BackgroundObject::BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject) :
-		GameObject::GameObject(aTypeObject->GetImagePath(), {aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()}),
+		GameObject::GameObject(aTypeObject->GetImagePath()),
 		myTypeObject(aTypeObject)
 	{
 		if (aJsonObject["UseRandom"].GetBool())
 		{
-			myPosition.x = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionXmin"].GetFloat(),
-				aJsonObject["RandomAtributes"]["RandomPositionXmax"].GetFloat());
-			myPosition.y = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionYmin"].GetFloat(),
-				aJsonObject["RandomAtributes"]["RandomPositionYmax"].GetFloat());
+			GameObject::SetPositionX(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionXmin"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionXmax"].GetFloat()));
+			GameObject::SetPositionY(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionYmin"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionYmax"].GetFloat()));
 			myScrollSpeed = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomSpeed"]["Min"].GetFloat(),
 				aJsonObject["RandomAtributes"]["RandomSpeed"]["Max"].GetFloat());
 		}
 		else
 		{
-			myPosition.x = aJsonObject["Position"]["X"].GetFloat();
-			myPosition.y = aJsonObject["Position"]["Y"].GetFloat();
+			GameObject::SetPosition({ aJsonObject["Position"]["X"].GetFloat(), aJsonObject["Position"]["Y"].GetFloat() });
+			GameObject::GetSpriteSheet().SetLayer(aJsonObject["LayerOrder"].GetFloat());
 			myScrollSpeed = aJsonObject["Speed"].GetFloat();
 		}
+		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()});
 		myIsTiling = aJsonObject["IsTiling"].GetBool();
+		if (aJsonObject["IsCentered"].IsTrue())
+		{
+			GameObject::GetSpriteSheet().SetPivot({ 0.5f, 0.5f });
+		}
+		else
+		{
+			GameObject::GetSpriteSheet().SetPivot({ aJsonObject["Pivot"]["X"].GetFloat(), aJsonObject["Pivot"]["Y"].GetFloat() });
+		}
+
 	}
 
 	BackgroundObject::BackgroundObject(TypePattern_Background* aTypeObject, rapidjson::Value& aJsonObject, int aIndex) :
-		GameObject::GameObject(aTypeObject->GetImagePath(), { aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat() }),
+		GameObject::GameObject(aTypeObject->GetImagePath()),
 		myTypeObject(aTypeObject)
 	{
-		myPosition.x = aJsonObject["Position"]["X"].GetFloat() + (aIndex * GameObject::GetSpriteSheet().GetSprite()->GetImageSize().x);
-		myPosition.y = aJsonObject["Position"]["Y"].GetFloat();
+		GameObject::SetPosition({ aJsonObject["Position"]["X"].GetFloat() + (aIndex * GameObject::GetSpriteSheet().GetSprite()->GetImageSize().x), aJsonObject["Position"]["Y"].GetFloat() });
+		GameObject::GetSpriteSheet().SetLayer(aJsonObject["LayerOrder"].GetFloat());
+		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()});
 		myScrollSpeed = aJsonObject["Speed"].GetFloat();
 		myIsTiling = aJsonObject["IsTiling"].GetBool();
+		if (aJsonObject["IsCentered"].IsTrue())
+		{
+			GameObject::GetSpriteSheet().SetPivot({ 0.5f, 0.5f });
+		}
+		else
+		{
+			GameObject::GetSpriteSheet().SetPivot({ aJsonObject["Pivot"]["X"].GetFloat(), aJsonObject["Pivot"]["Y"].GetFloat() });
+		}
 	}
 	
 	BackgroundObject::~BackgroundObject()
@@ -44,7 +63,7 @@ namespace Studio
 	}
 	void BackgroundObject::Update(float aDeltaTime)
 	{
-		myPosition.x = myPosition.x + myScrollSpeed * aDeltaTime;
+		GameObject::SetPositionX(GameObject::GetPosition().x + myScrollSpeed * aDeltaTime);
 		//std::cout << "Cloud XPosition" << myPosition.x << std::endl;
 		GameObject::Update(myPosition);
 	}
@@ -54,7 +73,7 @@ namespace Studio
 	}
 	void BackgroundObject::SetPosition(const Tga2D::Vector2f& aPosition)
 	{
-		myPosition = aPosition;
+		GameObject::SetPosition(aPosition);
 	}
 	const bool BackgroundObject::GetIsTiling() const
 	{

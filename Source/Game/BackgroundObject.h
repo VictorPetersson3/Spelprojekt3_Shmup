@@ -24,7 +24,6 @@ namespace Studio
 
 	private:
 		TypePattern_Background* myTypeObject;
-		Tga2D::Vector2f myPosition;
 		float myScrollSpeed;
 		bool myIsTiling;
 	};

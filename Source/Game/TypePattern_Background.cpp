@@ -5,19 +5,14 @@
 Studio::TypePattern_Background::TypePattern_Background(rapidjson::Value& aJsonObject)
 {
 	myImagePath = aJsonObject["ImagePath"].GetString();
-	if (aJsonObject["IsCentered"].IsTrue())
+	if (aJsonObject["CreateMany"].GetBool())
 	{
-		mySpritePivot = { 0.5f, 0.5f };
+		myAmount = aJsonObject["Amount"].GetFloat();
 	}
 	else
 	{
-		mySpritePivot = {aJsonObject["Pivot"]["X"].GetFloat(), aJsonObject["Pivot"]["Y"].GetFloat() };
+		myAmount = 1;
 	}
-}
-
-const Tga2D::Vector2f& Studio::TypePattern_Background::GetImagePivot() const
-{
-	return mySpritePivot;
 }
 
 
@@ -25,4 +20,9 @@ const Tga2D::Vector2f& Studio::TypePattern_Background::GetImagePivot() const
 const std::string& Studio::TypePattern_Background::GetImagePath() const
 {
 	return myImagePath;
+}
+
+const int Studio::TypePattern_Background::GetAmount() const
+{
+	return myAmount;
 }
