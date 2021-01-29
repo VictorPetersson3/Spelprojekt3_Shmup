@@ -24,13 +24,17 @@ namespace Studio
 		void Movement();
 
 		void RapidFireLogic(float aCDReductionPercentage);
+		void ActivateRapidFire(float aCDReductionPercentage);
+		void RapidFireIsActive();
+		void DeactivateRapidFire(float aCDReductionPercentage);
 	private:
 		float mySpeed;
 		float myShootCooldown;
 		float myTimeSinceLastShot;
 		float myAnimationTurnSpeed;
 		float myCurrentFlame;
-		float myRapidFireCooldown;
+		float myRapidFireMaxCooldown;
+		float myRapidFireCurrentCooldown;
 		float myRapidFireCurrentlyActiveTime;
 		float myRapidFireMaxActiveTime;
 		bool myIsAnimating = false;
