@@ -247,7 +247,7 @@ legend, fieldset {
 }
 
 .tk-con {
-    background: white linear-gradient(90deg, transparent 0.5em, orange 0.5em, orange 1.5em, transparent 1em, transparent 100%);
+    background: white linear-gradient(90deg, whitesmoke 0.5em, orange 0.5em, orange 1.5em, whitesmoke 1em);
 }
 .tk-mod {   
     background: white linear-gradient(90deg, transparent 0.5em, dodgerblue 0.5em, dodgerblue 1.5em, transparent 1em, transparent 100%);
