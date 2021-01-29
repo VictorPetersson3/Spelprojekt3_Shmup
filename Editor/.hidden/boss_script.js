@@ -31,7 +31,7 @@ function exportBoss()
     data["Phases"] = ExportPhases();
 
     // Save HTML
-    //data["LazyHTML"] = document.getElementById("container").innerHTML;
+    data["LazyHTML"] = document.getElementById("container").innerHTML;
 
     let name = valueOf("file-name");
     downloadToFile(JSON.stringify(data) + "\n", name, "application/json");
