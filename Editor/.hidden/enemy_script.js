@@ -66,6 +66,7 @@ function exportEnemy()
     bullet["Type"] = valueOf("bullet-type");
     bullet["Speed"] = ~~valueOf("bullet-speed");
     bullet["ShootTowardsPlayer"] = valueOf("bullet-pattern") == "Yes" ? true : false;
+    bullet["Interval"] = Number(valueOf("bullet-interval"));
     data["Bullet"] = bullet;
 
     let name = valueOf("file-name");
@@ -127,6 +128,7 @@ function importEnemy(e)
         valueOf("bullet-type", bullet["Type"]);
         valueOf("bullet-speed", bullet["Speed"]);
         valueOf("bullet-pattern", bullet["ShootTowardsPlayer"] ? "Yes" : "No");
+        valueOf("bullet-interval", bullet["Interval"]);
     }
     reader.readAsText(file);
 }
