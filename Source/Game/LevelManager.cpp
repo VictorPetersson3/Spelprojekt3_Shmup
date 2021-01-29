@@ -27,13 +27,13 @@ namespace Studio
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 		SAFE_CREATE(myBulletFactory, BulletFactory());
-		SAFE_CREATE(myBoss, Boss("", { 1500.0f, 520.0f }, 1000.0f));
+		SAFE_CREATE(myBoss, Boss("sprites/debugpixel.dds", { 1500.0f, 520.0f }, 1000.0f));
 		myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
 		//															    ^ key
 
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
-		myBulletFactory->InitBulletType("", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
-		myBulletFactory->InitBulletType("", 12, "Player", 800.0f, Enums::BulletOwner::Player);
+		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
+		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
 
 		// Load chosen level by Lever Designers
 		std::fstream file;
@@ -66,6 +66,7 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myPacks);
 		SAFE_DELETE_VECTOR(myEnemies);
 		SAFE_DELETE_VECTOR(myBullets);
+		SAFE_DELETE(myBulletFactory);
 		SAFE_DELETE(myBoss);
 	}
 
@@ -208,7 +209,7 @@ namespace Studio
 				{
 					if (myPlayer->Intersects(*myBullets[j]))
 					{
-						myPlayer->TakeDamage(25);
+						myPlayer->TakeDamage(1.0f);
 						printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
 
 						myBullets.erase(myBullets.begin() + j);
