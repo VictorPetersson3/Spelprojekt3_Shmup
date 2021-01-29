@@ -1,22 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-/* .box {
-    display: block;
-    min-width: 5em;
-    min-height: 5em;
-    border: 3px solid rgba(0,0,0,0.25);
-    border-radius: 0.5em;
-    margin: 0.25em;
-    padding: 0.5em;
-    cursor: move;
-}
-.over {
-    border-style: dashed;
-    border-color: black;
-}
-.component { background-color: red; }
-.container { background-color: gold; } */
-
 *
 {
     box-sizing: border-box;
@@ -80,9 +63,9 @@ button:active::after, .button:active::after
 input, select
 {
     width: 9em;
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.5);
     border: none;
-    border-bottom: 2px solid silver;
+    border-bottom: 2px solid  rgba(0, 0, 0, 0.25);
     text-align: center;
 }
 
@@ -171,4 +154,122 @@ fieldset {
 
 #bullet-type {
     width: 15em;
+}
+
+
+legend, fieldset {
+    border: groove 2px whitesmoke;
+    border-radius: 0.5em 0 0.5em 0;
+    padding: 0.5em 0.7em;
+}
+
+.module, .condition {
+    width: 100%;
+
+    background-color: gold;
+    border: 2px solid;
+    border-color: rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+
+    padding: 0.5em 0.7em;
+    margin: 0.25em 0;
+}
+
+.percentage-input {
+    width: 5em;
+}
+
+.condition {
+    position: relative;
+}
+
+.timed {
+    background-image: url("blood.png");
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+    text-shadow:
+         1px  0px black,
+        -1px  0px black,
+         0px  1px black,
+         0px -1px black,
+         1px  1px black,
+        -1px  1px black,
+         1px -1px black,
+        -1px -1px black;
+}
+
+.delete {
+    position: absolute;
+    top: -.75em;
+    right: -.75em;
+
+    background-color: #fd3a69;
+    border: 2px solid #d7385e;
+    color: white;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 100%;
+}
+.delete::before {
+    content: "\00D7";
+    text-shadow: none;
+}
+
+#conditions {
+    margin: 1em;
+}
+#conditions-container, .phase {
+    padding-top: 0.5em;
+}
+#fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.toolkit {
+    display: block;
+    border: 0.125em solid;
+    border-color: rgba(0, 0, 0, 0.25);
+    border-radius: 1.25em;
+    padding: 0.75em 1em 0.75em 2em;
+    margin: 0.5em;
+    background-color: white;
+}
+
+#conditions-legend {
+    background: white linear-gradient(135deg, orange 0.75em, transparent 0.75em);
+}
+#phases-legend {
+    background: white linear-gradient(135deg, dodgerblue 0.75em, transparent 0.75em);
+}
+
+.tk-con {
+    background: white linear-gradient(90deg, transparent 0.5em, orange 0.5em, orange 1.5em, transparent 1em, transparent 100%);
+}
+.tk-mod {   
+    background: white linear-gradient(90deg, transparent 0.5em, dodgerblue 0.5em, dodgerblue 1.5em, transparent 1em, transparent 100%);
+}
+
+#tk-delay,          .mod-delay      { background-color: #a3ddcb; }
+#tk-enemy,          .mod-enemy      { background-color: greenyellow; }
+#tk-ability,        .mod-ability    { background-color: lightskyblue; }
+#tk-movement,       .mod-movement   { background-color: lightpink; }
+#tk-shoot,          .mod-shoot      { background-color: #ffd31d; }
+#tk-immunity,       .mod-immunity   { background-color: orangered; }
+
+.bad {
+    background-color: #ff4646;
+    border-color: #c70039;
+}
+
+.phase-fieldset {
+    display: block;
+    margin: 1em 0;
+}
+
+#phases {
+    margin-bottom: 5em;
 }
