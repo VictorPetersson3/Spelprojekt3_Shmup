@@ -7,7 +7,7 @@ Studio::TextElement::TextElement(Tga2D::EFontSize aFontSize, VECTOR2F aPosition,
 	myText = new Tga2D::CText("Text/arial.ttf", aFontSize);
 	myText->SetPosition(aPosition);
 
-
+	myText->SetColor(Tga2D::CColor{ 0,0,0,1 });
 	tag = aTag;
 }
 

@@ -10,6 +10,7 @@
 
 Studio::GodModeButton::GodModeButton()
 {
+
 }
 
 Studio::GodModeButton::GodModeButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag)
@@ -34,6 +35,7 @@ Studio::GodModeButton::GodModeButton(const char* aPath, const VECTOR2F aPosition
 
 Studio::GodModeButton::~GodModeButton()
 {
+
 }
 
 void Studio::GodModeButton::Update()

@@ -1,6 +1,6 @@
 #pragma once
 #include "MenuManager.h"
-
+#include "Player.h"
 
 namespace Studio
 {
@@ -8,7 +8,7 @@ namespace Studio
 	{
 		MenuManager* GetInstance();
 
-		void Construct();
+		void Construct(Studio::Player* aPlayer);
 		void Destruct();
 	}
 }

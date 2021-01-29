@@ -16,7 +16,7 @@
 namespace Studio
 {
 	Player::Player(const char* aImagePath) :
-		Player::GameObject(aImagePath),
+		Player::GameObject(aImagePath,4.0f),
 		myEngineFlame("sprites/assets/player/Flame.dds", { 1, 4 }, { 300 - 48, 540 - 9 })
 	{
 		SPRITESHEET.SetAmountOfFrames({ 1, 8 });

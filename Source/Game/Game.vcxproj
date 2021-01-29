@@ -157,6 +157,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GodModeButton.h" />
     <ClInclude Include="HealthBar.h" />
+    <ClInclude Include="ImageElement.h" />
     <ClInclude Include="LevelAccessor.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuManagerSingleton.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="EngineFlame.cpp" />
     <ClCompile Include="GodModeButton.cpp" />
     <ClCompile Include="HealthBar.cpp" />
+    <ClCompile Include="ImageElement.cpp" />
     <ClCompile Include="LevelAccessor.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuManagerSingleton.cpp" />

@@ -1,15 +1,26 @@
 #include "stdafx.h"
 #include "MenuManager.h"
+#include "Player.h"
+#include <iostream>
 
 namespace Studio
 {
-    Studio::MenuManager::MenuManager()
+    Studio::MenuManager::MenuManager(Studio::Player* aPlayer)
     {
         myMainMenu.Add(myTestButton);
         myMainMenu.Add(myScoreText);
         myMainMenu.Add(myCoinText);
         myMainMenu.Add(myGodModeButton);
         myMainMenu.Enable();
+
+        myHud.Add(myTestElement);
+        myHud.Add(myHeart1Element);
+        myHud.Add(myHeart2Element);
+        myHud.Add(myHeart3Element);
+        myHud.Add(myHeart4Element);
+        myHud.Disable();
+
+        myPlayer = aPlayer;
     }
 
     MenuObject* Studio::MenuManager::GetMainMenu()
@@ -30,6 +41,25 @@ namespace Studio
     void MenuManager::Update()
     {
         myMainMenu.Update();
+        myHud.Update();
+
+       
+        if (myPlayer->GetCurrentHealth() == 3)
+        {
+            myHud.GetElementWithTag("Heart4")->SetActive(false);
+        }
+        else if (myPlayer->GetCurrentHealth() == 2)
+        {
+            myHud.GetElementWithTag("Heart3")->SetActive(false);
+        }
+        else if (myPlayer->GetCurrentHealth() == 1)
+        {
+            myHud.GetElementWithTag("Heart2")->SetActive(false);
+        }
+        else if (myPlayer->GetCurrentHealth() == 0)
+        {
+            myHud.GetElementWithTag("Heart1")->SetActive(false);
+        }
     }
 
     void MenuManager::Render()
@@ -44,6 +74,7 @@ namespace Studio
         {
             hasStartedGame = true;
             myMainMenu.Disable();
+            myHud.Enable();
             return myTestButton->myIsClicked;
 
         }
@@ -52,6 +83,7 @@ namespace Studio
             hasStartedGame = true;
             inGodMode = true;
             myMainMenu.Disable();
+            myHud.Enable();
             return myGodModeButton->myIsClicked;
 
         }

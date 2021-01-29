@@ -5,13 +5,15 @@
 #include "UIElement.h"
 #include "TextElement.h"
 #include "GodModeButton.h"
+#include "ImageElement.h"
+#include "Player.h"
 
 namespace Studio
 {
 	class MenuManager
 	{
 	public:
-		MenuManager();
+		MenuManager(Studio::Player* aPlayer);
 
 		MenuObject* GetMainMenu();
 		MenuObject* GetHUD();
@@ -29,13 +31,21 @@ namespace Studio
 		MenuObject myHud;
 		MenuObject myPausMenu;
 
+		Studio::Player* myPlayer;
+
 		bool hasStartedGame = false;
 		bool inGodMode = false;
 
 		TestButton* myTestButton = new TestButton("Sprites/UI/TempPlayButton.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f },"StartButton");
-		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.2,0.2 }, "ScoreText");
-		TextElement* myCoinText = new TextElement(Tga2D::EFontSize_18, { 0.8,0.2 }, "CoinText");
+		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_14, { 0.135,0.117 }, "ScoreText");
+		TextElement* myCoinText = new TextElement(Tga2D::EFontSize_14, { 0.11,0.153 }, "CoinText");
 		GodModeButton* myGodModeButton = new GodModeButton("Sprites/UI/GodmodeButton.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "StartButton");
+		ImageElement* myTestElement = new ImageElement("Sprites/UI/IGUI/IGUI_Banners.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 2, "HUD");
+		ImageElement* myHeart1Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3,"Heart1");
+		ImageElement* myHeart2Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1000,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart2");
+		ImageElement* myHeart3Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1040,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart3");
+		ImageElement* myHeart4Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1080,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart4");
+
 	};
 
 

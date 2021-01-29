@@ -166,6 +166,7 @@
     <ClCompile Include="HealthBar.cpp">
       <Filter>Components\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="ImageElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -345,6 +346,7 @@
     <ClInclude Include="HealthBar.h">
       <Filter>Components\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="ImageElement.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

@@ -20,10 +20,10 @@ namespace Studio
 	void ScoreManager::Update()
 	{
 		std::string coinScoreString = std::to_string(myCoinScore);
-		myCoinTextElement->SetText("COIN SCORE: " + coinScoreString);
+		myCoinTextElement->SetText("x" + coinScoreString);
 
 		std::string killScoreString = std::to_string(myKillScore);
-		myKillTextElement->SetText("KILL SCORE: " + killScoreString);
+		myKillTextElement->SetText("x" + killScoreString);
 	}
 	void ScoreManager::AddCoinScore(int anAmount)
 	{

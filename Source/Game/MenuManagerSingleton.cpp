@@ -11,9 +11,9 @@ namespace Studio
 			MenuManager* myMenuManager;
 		}
 
-		void Construct()
+		void Construct(Studio::Player* aPlayer)
 		{
-			myMenuManager = new MenuManager();
+			myMenuManager = new MenuManager(aPlayer);
 		}
 
 		MenuManager* GetInstance()
