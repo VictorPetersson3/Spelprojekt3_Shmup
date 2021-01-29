@@ -36,13 +36,13 @@ CGameWorld::~CGameWorld()
 void CGameWorld::Init()
 {
 	myRenderer.Init();
-	Studio::MenuManagerSingleton::Construct();
 	Studio::AudioManagerAccessor::Construct();
 	Studio::RendererAccessor::SetInstance(&myRenderer);
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
 	SAFE_CREATE(myPlayer, Studio::Player("sprites/assets/player/sprites/playerSprite_01.dds"));
+	Studio::MenuManagerSingleton::Construct(myPlayer);
 
 	SAFE_CREATE(myCoinManager, Studio::CoinManager());
 	Studio::CoinAccessor::SetInstance(myCoinManager);

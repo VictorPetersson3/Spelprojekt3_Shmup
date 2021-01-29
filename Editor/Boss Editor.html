@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Editor</title>
+    <link rel="stylesheet" href=".hidden/.css">
+    <link rel="stylesheet" href=".hidden/dragula.css">
+</head>
+<body style="text-align: center;">
+    
+    <h2>Boss Editor</h2>
+    <div class="import-export">
+        <table>
+            <tr>
+                <th>Editing</th>
+            </tr>
+            <tr>
+                <td><input id="file-name" type="text" value="empty.json"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="file" id="input-file" hidden="true" multiple="false" onchange="importBoss(event)">
+        <label for="input-file" class="button">Import &#129131;</label>
+        <button onclick="exportBoss()">Export &#129133;</button>
+    </div>
+
+    <div id="fixed">
+        <div id="toolbox">
+            <!-- Text -->
+            <div class="toolkit tk-all" id="tk-text" data-target="tk-con tk-mod">
+                Text
+            </div>
+            <!-- Below % of total HP -->
+            <div class="toolkit tk-con" id="tk-below-hp" data-target="tk-con">
+                Below % HP
+            </div>
+            <!-- Time -->
+            <div class="toolkit tk-con" id="tk-time" data-target="tk-con">
+                Time
+            </div>
+            <!-- Timed -->
+            <div class="toolkit tk-con" id="tk-timed" data-target="tk-con">
+                Timed
+            </div>
+            <!-- Do Once -->
+            <div class="toolkit tk-con" id="tk-once" data-target="tk-con">
+                Do Once
+            </div>
+            <!-- Delay -->
+            <div class="toolkit tk-mod" id="tk-delay" data-target="tk-mod">
+                Delay
+            </div>
+            <!-- Enemy -->
+            <div class="toolkit tk-mod" id="tk-enemy" data-target="tk-mod">
+                Enemy
+            </div>
+            <!-- Ability -->
+            <div class="toolkit tk-mod" id="tk-ability" data-target="tk-mod">
+                Ability
+            </div>
+            <!-- Movement -->
+            <div class="toolkit tk-mod" id="tk-movement" data-target="tk-mod">
+                Movement
+            </div>
+            <!-- Shoot -->
+            <div class="toolkit tk-mod" id="tk-shoot" data-target="tk-mod">
+                Shoot
+            </div>
+            <!-- Immunity -->
+            <div class="toolkit tk-mod" id="tk-immunity" data-target="tk-mod">
+                Immunity
+            </div>
+        </div>
+        <!-- Trashcan -->
+        <div class="trashcan" id="trashcan">
+            Trashcan
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="conditions">
+            <fieldset>
+                <legend id="conditions-legend"><strong>Conditions</strong></legend>
+                <div id="conditions-container" data-accept="tk-con">
+                    <!-- Here Conditions will be placed -->
+                </div>
+            </fieldset>
+        </div>
+        <div id="phases">
+            <fieldset>
+                <legend id="phases-legend"><strong>Phases</strong></legend>
+                <div id="phase-container">
+                    <!-- Here Phases will be added -->
+                </div>
+                <hr style="border: inset 1px whitesmoke">
+                <button onclick="addPhase()">Add Phase</button>
+            </fieldset>
+            
+        </div>
+    </div>
+
+<script src=".hidden/clean.js"></script>
+<script src=".hidden/dragula.js"></script>
+<script src=".hidden/boss_script.js"></script>
+</body>
+</html>

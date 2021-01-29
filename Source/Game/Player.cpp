@@ -16,20 +16,22 @@
 namespace Studio
 {
 	Player::Player(const char* aImagePath) :
-		Player::GameObject(aImagePath),
+		Player::GameObject(aImagePath,4.0f),
 		myEngineFlame("sprites/assets/player/Flame.dds", { 1, 4 }, { 300 - 48, 540 - 9 })
 	{
 		SPRITESHEET.SetAmountOfFrames({ 1, 8 });
 		myEngineFlame.GetSpriteSheet().SetLayer(-1);
 		myFrames = { 1, 8 };
 		myPosition = { 300, 540 };
-		mySpeed = 0;
+		mySpeed = 0.f;
 		myShootCooldown = 0.5f;
-		myAnimationTurnSpeed = 0.075;
-		myCurrentFlame = 2;
-		myRapidFireCurrentlyActiveTime = 0;
+		myAnimationTurnSpeed = 0.075f;
+		myCurrentFlame = 2.f;
+		myRapidFireCurrentlyActiveTime = 0.f;
+		myTimeSinceLastShot = 0.f;
 		myRapidFireMaxActiveTime = 5.f;
-		myRapidFireCooldown = 40;
+		myRapidFireMaxCooldown = 30.f;
+		myRapidFireCurrentCooldown = myRapidFireMaxCooldown;
 		GetCollider().AddCircleColliderObject(myPosition, 20);
 	}
 
@@ -44,6 +46,10 @@ namespace Studio
 			Movement();
 
 			Player::GameObject::Update(myPosition);
+
+			Shoot();
+
+			RapidFireLogic(100);
 
 			Studio::RendererAccessor::GetInstance()->Render(*this);
 		}
@@ -64,12 +70,12 @@ namespace Studio
 
 	void Player::Shoot()
 	{
-			myShootCooldown += Timer::GetInstance()->TGetDeltaTime();
-			if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myShootCooldown)
-			{
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", myPosition);
-				myTimeSinceLastShot = 0;
-			}
+		myTimeSinceLastShot += Timer::GetInstance()->TGetDeltaTime();
+		if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myShootCooldown)
+		{
+    		Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", myPosition);
+			myTimeSinceLastShot = 0.f;
+		}
 	}
 
 	void Player::Movement()
@@ -178,23 +184,54 @@ namespace Studio
 		}
 		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 48, myPosition.y - 9 });
 		//Spacebar
-		if (Studio::InputManager::GetInstance()->IsKeyDown(VK_SPACE))
-		{
-			Shoot();
-		}
+		
 	}
 	void Player::RapidFireLogic(float aCDReductionPercentage)
 	{
+		printf_s("%f\n", myShootCooldown);
+
+		ActivateRapidFire(aCDReductionPercentage);
+
+		RapidFireIsActive();
+
+		DeactivateRapidFire(aCDReductionPercentage);
+
+	}
+	//Check if key is pressed and cooldown has expired
+	void Player::ActivateRapidFire(float aCDReductionPercentage)
+	{
+		if (InputManager::GetInstance()->IsKeyPressed('1') && myRapidFireCurrentCooldown > myRapidFireMaxCooldown)
+		{
+			myRapidFireCurrentCooldown = 0.f;
+
+			myRapidFireIsActive = true;
+
+			myShootCooldown *= (1 - aCDReductionPercentage * 0.01);
+		}
+	}
+	//Check if Rapidfire is active
+	void Player::RapidFireIsActive()
+	{
 		if (myRapidFireIsActive)
 		{
-			myShootCooldown *= (1 - aCDReductionPercentage);
 			myRapidFireCurrentlyActiveTime += Timer::GetInstance()->TGetDeltaTime();
-			//if ()
-			//{
-			//
-			//}
 		}
+		else
+		{
+			myRapidFireCurrentlyActiveTime = 0.f;
 
+			myRapidFireCurrentCooldown += Timer::GetInstance()->TGetDeltaTime();
+		}
+	}
+	//check if RapidFire is active for as long as it is allowed to be active, then deactive itand bring back baseline attack speed.
+	void Player::DeactivateRapidFire(float aCDReductionPercentage)
+	{
+		if (myRapidFireCurrentlyActiveTime > myRapidFireMaxActiveTime)
+		{
+			myRapidFireIsActive = false;
+
+			myShootCooldown /= (1.f - aCDReductionPercentage * 0.01f);
+		}
 	}
 }
 
