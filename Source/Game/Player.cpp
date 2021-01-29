@@ -25,7 +25,6 @@ namespace Studio
 		myPosition = { 300, 540 };
 		mySpeed = 0;
 		myShootCooldown = 0.5f;
-		myAnimationTime = 0;
 		myAnimationTurnSpeed = 0.075;
 		myCurrentFlame = 2;
 		myRapidFireCurrentlyActiveTime = 0;
@@ -97,7 +96,7 @@ namespace Studio
 			if (myIsAnimatingDown || !myIsAnimating)
 			{
 				myIsAnimatingDown = false;
-				GameObject::GetSpriteSheet().LoopAnimationInRange(myAnimationTurnSpeed, { 1, 5 }, { 1, 7 });
+				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 5 }, { 1, 7 });
 				myIsAnimatingUp = true;
 				myIsAnimating = true;
 			}
@@ -192,10 +191,10 @@ namespace Studio
 		{
 			myShootCooldown *= (1 - aCDReductionPercentage);
 			myRapidFireCurrentlyActiveTime += Timer::GetInstance()->TGetDeltaTime();
-			if ()
-			{
-
-			}
+			//if ()
+			//{
+			//
+			//}
 		}
 
 	}
