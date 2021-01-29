@@ -138,7 +138,7 @@ namespace Studio
 			if (myIsAnimatingDown || !myIsAnimating)
 			{
 				myIsAnimatingDown = false;
-				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 5 }, { 1, 7 });
+				GameObject::GetSpriteSheet().LoopAnimationInRange(myAnimationTurnSpeed, { 1, 5 }, { 1, 7 });
 				myIsAnimatingUp = true;
 				myIsAnimating = true;
 			}
@@ -158,7 +158,7 @@ namespace Studio
 			if (myIsAnimatingUp || !myIsAnimating)
 			{
 				myIsAnimatingUp = false;
-				GameObject::GetSpriteSheet().LoopAnimationInRange(myAnimationTurnSpeed, { 1, 2 }, { 1, 4 });
+				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 2 }, { 1, 4 });
 				myIsAnimatingDown = true;
 				myIsAnimating = true;
 			}
