@@ -252,6 +252,9 @@ legend, fieldset {
 .tk-mod {   
     background: white linear-gradient(90deg, transparent 0.5em, dodgerblue 0.5em, dodgerblue 1.5em, transparent 1em, transparent 100%);
 }
+.tk-all {   
+    background: white linear-gradient(90deg, transparent 0.5em, orange 0.5em, orange 1em, dodgerblue 1em, dodgerblue 1.5em, transparent 1em, transparent 100%);
+}
 
 #tk-delay,          .mod-delay      { background-color: #a3ddcb; }
 #tk-enemy,          .mod-enemy      { background-color: greenyellow; }
@@ -259,6 +262,10 @@ legend, fieldset {
 #tk-movement,       .mod-movement   { background-color: lightpink; }
 #tk-shoot,          .mod-shoot      { background-color: #ffd31d; }
 #tk-immunity,       .mod-immunity   { background-color: orangered; }
+.tk-text {
+    color: white;
+    background-color: green;
+}
 
 .bad {
     background-color: #ff4646;

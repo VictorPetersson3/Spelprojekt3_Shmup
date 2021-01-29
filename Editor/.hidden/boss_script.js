@@ -63,7 +63,7 @@ var toolbox = dragula(
         document.getElementById("conditions-container")
     ],
     {
-        revertOnSpill: true,
+        revertOnSpill: false,
         copy: function (el, source) {
             return source === document.getElementById("toolbox");
         },
@@ -74,7 +74,8 @@ var toolbox = dragula(
                 el.remove();
                 return true;
             }
-            return el.dataset["target"] === target.dataset["accept"];
+
+            return el.dataset["target"].split(" ").indexOf(target.dataset["accept"]) >= 0;
         }
     }
 ).on("drop", function (el, target, source) {
@@ -116,6 +117,22 @@ function updatePhaseDragula()
     document.querySelectorAll(".phase").forEach(el => toolbox.containers.push(el));
 }
 
+//* Comments
+function Text()
+{
+    let text = document.createElement("div");
+    text.classList.add("module");
+    text.classList.add("tk-text");
+    text.dataset.target = "tk-con tk-mod";
+    text.dataset.keep = true;
+    text.dataset["module"] = "Text";
+    text.dataset["type"] = "Text";
+    text.setAttribute("spellcheck", false);
+    text.setAttribute("contenteditable", true);
+    text.textContent = "Text";
+    return text;
+}
+
 //* Conditions
 function GetCondition(id)
 {
@@ -130,7 +147,7 @@ function GetCondition(id)
             return ConditionTimed();
             break;
         default:
-            return Condition();
+            return Text();
             break;
     }
 }
@@ -170,7 +187,6 @@ function ConditionTimed()
     return condition;
 }
 
-
 //* Modules
 function GetModule(id)
 {
@@ -194,7 +210,7 @@ function GetModule(id)
             return ModuleDelay();
             break;
         default:
-            return Module();
+            return Text();
             break;
     }
 }
@@ -219,6 +235,7 @@ function ModuleEnemy()
             <tr class="enemy-table-header-row">
                 <th>Type</th>
                 <th>Position</th>
+                <th>Style</th>
             </tr>
             <tr>
                 <td>
@@ -228,6 +245,12 @@ function ModuleEnemy()
                     <input data-input="X" class="enemy-box-input enemy-box-input-position" type="number" value="0" placeholder="x">
                     <input data-input="Y" class="enemy-box-input enemy-box-input-position" type="number" value="0" placeholder="y">
                 </td>
+                <td>
+                    <select data-input="Style">
+                        <option>Absolute</option>
+                        <option>Relative</option>
+                    </select>
+                </th>
             </tr>
         </table>`;
     return module;
@@ -241,14 +264,13 @@ function ModuleAbility()
     module.innerHTML = `
         <p>
             Ability
-            <select data-input="Ability">
+            <select data-input="Ability" onchange="changeAbility(event.target)">
                 <option>Shield</option>
+                <option>Missile</option>
             </select>
         </p>
-        <p>
-            Duration <input data-input="Duration" type="number" min="0" value="0" step="0.1"> (seconds)
-        </p>
-    `;
+        <div></div>`;
+    changeAbility(module.querySelector("select"));
     return module;
 }
 
@@ -270,8 +292,7 @@ function ModuleMovement()
                 <option>U-Turn</option>
             </select>
         </p>
-        <div class="m-parameters"></div>
-    `;
+        <div class="m-parameters"></div>`;
     changeMovementParameters(module.querySelector("select"));
     return module;
 }
@@ -300,7 +321,20 @@ function ModuleShoot()
         </p>
         <p>
             Duration <input data-input="Duration" type="number" min="0" value="0" step="0.1"> (seconds)
-        </p>`;
+        </p>
+        <p>
+            Spawn Position
+            <input data-input="X" class="enemy-box-input enemy-box-input-position" type="number" value="0" placeholder="x">
+            <input data-input="Y" class="enemy-box-input enemy-box-input-position" type="number" value="0" placeholder="y">
+        </p>
+        <p>
+            Style
+            <select data-input="Style">
+                <option>Absolute</option>
+                <option>Relative</option>
+            </select>
+        </p>
+        `;
     return module;
 }
 
@@ -444,7 +478,47 @@ function changeMovementParameters(element)
     next.innerHTML = template;
 }
 
-
+function changeAbility(element)
+{
+    let template = "Unknown Ability";
+    switch (element.value)
+    {
+        case "Shield":
+            template = `
+                <p>
+                    HitPoints <input data-input="HitPoints" type="number" min="0" value="0" step="1">
+                </p>`;
+            break;
+        case "Missile":
+            template = `
+                <p>
+                    Init Speed <input data-input="InitialSpeed" type=number" value="0"> (pixels/second)
+                </p>
+                <p>
+                    Deacceleration <input data-input="Deacceleration" type=number" value="0"> (pixels/second&sup2;)
+                </p>
+                <p>
+                    Acceleration <input data-input="Acceleration" type=number" value="0"> (pixels/second&sup2;)
+                </p>
+                <p>
+                    Spawn Position
+                    <input data-input="X" class="enemy-box-input enemy-box-input-position" type="number" value="0" placeholder="x">
+                    <input data-input="Y" class="enemy-box-input enemy-box-input-position" type="number" value="0" placeholder="y">
+                </p>
+                <p>
+                    Style
+                    <select data-input="Style">
+                        <option>Absolute</option>
+                        <option>Relative</option>
+                    </select>
+                </p>
+            `;
+            break;
+        default: break;
+    }
+    let next = element.parentElement.nextElementSibling;
+    next.innerHTML = template;
+}
 
 function ExportConditions()
 {
