@@ -16,15 +16,14 @@ namespace Studio
 	class Boss : public GameObject
 	{
 	public:
-		Boss();
+		Boss() = default;
 		Boss(const char* aImagePath, VECTOR2F aSpawnPosition, float aHealthAmount);
 		Boss(const char* aImagePath, rapidjson::Value& aBossParameters);
 		~Boss();
 
 		void Update();
 
-		//Phase One Functions
-		void PhaseOne();
+		void CheckCurrentPhaseCondition();
 
 		//Legacy Boss "Swedish Abilities"
 		/*void SendInTheCaroleans(float anAmountOfCanonFodder);
@@ -34,17 +33,17 @@ namespace Studio
 		void EnforceAlleMansRätt();*/
 		
 		VECTOR2F GetPosition();
+		std::vector<VECTOR2F*> GetBulletSpawnPositions();
 		
 	protected:
 
 	private:
 		
 		int myCurrentPhase;
+		int myPhaseAmount;
 		int myLaserCooldown;
 		int myTotalFightTime;
 
-		float myPhase1Condition;
-		float myPhase2Condition;
 		float myEnrageTimer;
 		float myEnrageTimeCondition;
 

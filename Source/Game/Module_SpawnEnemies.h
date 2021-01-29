@@ -11,8 +11,8 @@ namespace Studio
 		bool DoStuff() override;
 
 	private:
-
-
+		const char* myType;
+		VECTOR2F mySpawnPosition;
 	};
 
 }

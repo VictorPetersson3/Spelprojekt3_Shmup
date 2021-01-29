@@ -14,8 +14,7 @@ namespace Studio
 
 
 	private:
-		float myDuration;
-
+		bool myGodmodeChoice;
 	};
 }
 

@@ -1,10 +1,11 @@
 #pragma once
 #include "rapidjson/document.h"
 #include <vector>
+
 namespace Studio
 {
 	class Module;
-
+	class Boss;
 
 	class Phase
 	{
@@ -13,7 +14,7 @@ namespace Studio
 		~Phase();
 
 		void InitPhase();
-		void PlayModules();
+		void PlayModules(Boss* aBossObject);
 
 
 	protected:
@@ -22,7 +23,8 @@ namespace Studio
 		
 	private:
 		std::vector<Module*> myModules;
-
+		int myModuleAmount;
+		int myCurrentModule;
 	};
 }
 

@@ -9,6 +9,9 @@
 #include "Module_Shoot.h"
 #include "Module_SpawnEnemies.h"
 
+//Gameplay
+#include "Boss.h"
+
 Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 {
 	if (aPhaseParameters.IsArray())
@@ -36,13 +39,39 @@ Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 			{
 				myModules.push_back(new Module_Shoot(modules[i]));
 			}
+			else
+			{
+				printf("That Module Type is either wrong or not implemented ");
+			}
 		}
-
 		//Read whether the phase is looped or just done once
 	}
-
+	else
+	{
+		printf_s("Phase Is Not Correctly Read Through Json");
+	}
+	myModuleAmount = static_cast<int>(myModules.size());
+	myCurrentModule = 0;
 }
 
 Studio::Phase::~Phase()
 {
+}
+
+void Studio::Phase::PlayModules(Boss* aBossObject)
+{
+	//TODO
+	// - Change Name For Module Function
+	// - Add Boss Parameter to DoStuff()
+	if (myModules[myCurrentModule]->DoStuff())
+	{
+		if (myCurrentModule < myModuleAmount /*&& if looped phase and not do once*/)
+		{
+			myCurrentModule++;
+		}
+		else
+		{
+			myCurrentModule = 0;
+		}
+	}
 }

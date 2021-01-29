@@ -19,11 +19,11 @@
 #include "Renderer.h"
 namespace Studio
 {
-	Boss::Boss() :
+	/*Boss::Boss() :
 		GameObject(nullptr),
 		myHealthBar(nullptr, { 0.0f, 0.0f })
 	{
-	}
+	}*/
 
 	Boss::Boss(const char* aImagePath, VECTOR2F aSpawnPosition, float aHealthAmount) :
 		Boss::GameObject(aImagePath, aHealthAmount),
@@ -31,8 +31,6 @@ namespace Studio
 	{
 		myPosition = aSpawnPosition;
 		myCurrentPhase = 0;
-		myPhase1Condition = 0.8f;
-		myPhase2Condition = 0.35f;
 		SAFE_CREATE(myMovement, MovementBobbing(&myPosition, 20.0f, 200.0f));
 		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 100.0f);
 	}
@@ -73,7 +71,11 @@ namespace Studio
 			{
 				myPhases.push_back(new Phase(phases[i]));
 			}
+			myCurrentPhase = 0;
+			myPhaseAmount = myPhases.size();
 		}
+
+		myBulletSpawnPositions.push_back(&myPosition);
 
 	}
 
@@ -83,44 +85,31 @@ namespace Studio
 
 	void Boss::Update()
 	{
-		PhaseOne();
-		//Phase 1 temp
-		/*if (Boss::GameObject::GetCurrentHealth() / Boss::GameObject::GetMaxHealth() > myPhase1Condition)
-		{
-			PhaseOne();
-		}*/
-		////Phase 2 temp
-		//if (Boss::GameObject::GetCurrentHealth() / Boss::GameObject::GetMaxHealth() <= myPhase1Condition && Boss::GameObject::GetCurrentHealth() / Boss::GameObject::GetMaxHealth() >= myPhase2Condition)
-		//{
-		//	PhaseTwo();
-		//}
-		////Phase 3 temp
-		//else
-		//{
-		//	PhaseThree();
-		//}
-		myHealthBar.Update(GetHealth());
-
-		RendererAccessor::GetInstance()->Render(*this);
-	}
-
-	void Boss::PhaseOne()
-	{
 		myMovement->Update();
 
 		Boss::GameObject::Update(myPosition);
+		myHealthBar.Update(GetHealth());
 
-		//if (myTotalFightTime % myLaserCooldown == 0)
-		//{
-		//	ShootLaser();
-		//}
-
-		//UpdateHealthBar();
+		RendererAccessor::GetInstance()->Render(*this);
+		/*if (Condition != true)
+		{
+			myPhases[myCurrentPhase]->PlayModules();
+		}*/
 	}
+
+	void Boss::CheckCurrentPhaseCondition()
+	{
+	}
+
 
 	VECTOR2F Boss::GetPosition()
 	{
 		return myPosition;
+	}
+
+	std::vector<VECTOR2F*> Boss::GetBulletSpawnPositions()
+	{
+		return myBulletSpawnPositions;
 	}
 
 }

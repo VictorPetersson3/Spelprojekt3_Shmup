@@ -11,10 +11,12 @@ Studio::Module_Shield::Module_Shield(rapidjson::Value& aModuleParameters) :
 	else
 	{
 		printf("Duration is not valid in Shield Module");
+		myDuration = 0.5f;
 	}
 }
 
 bool Studio::Module_Shield::DoStuff()
 {
-	return false;
+	//TODO Add Shield Object
+	return true;
 }

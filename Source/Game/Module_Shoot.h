@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "rapidjson/document.h"
+#include "Counter.h"
 #include <vector>
 namespace Studio
 {
@@ -16,10 +17,11 @@ namespace Studio
 
 	private:
 		std::vector<VECTOR2F*> myBulletSpawnPositions;
-		float myShootInterval;
+		float myElapsedTime;
 		float myActiveDuration;
 		bool myShootTowardsPlayer;
 		const char* myBulletType;
+		Counter myCounter;
 	};
 }
 

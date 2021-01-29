@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Module_Shoot.h"
 #include "LevelAccessor.h"
+#include "Timer.h"
 
 Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	Module_Shoot::Module(aModuleParameter)
@@ -15,11 +16,11 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	}
 	if (aModuleParameter.HasMember("Interval") && aModuleParameter["Interval"].IsFloat())
 	{
-		myShootInterval = aModuleParameter["Interval"].GetFloat();
+		myCounter.SetInterval(aModuleParameter["Interval"].GetFloat());
 	}
 	else
 	{
-		myShootInterval = 0.1f;
+		myCounter.SetInterval(0.1f);
 	}
 	if (aModuleParameter.HasMember("ShootTowardsPlayer") && aModuleParameter["ShootTowardsPlayer"].IsString())
 	{
@@ -44,13 +45,24 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	{
 		myBulletType = "Enemy";
 	}
+	myElapsedTime = 0.0f;
 }
 
 bool Studio::Module_Shoot::DoStuff()
 {
-	for (VECTOR2F* position : myBulletSpawnPositions)
+	myCounter.Tick();
+	myElapsedTime += Studio::Timer::GetInstance()->TGetDeltaTime();
+	if (myCounter.PastInterval())
 	{
-		Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, *position);
+		for (VECTOR2F* position : myBulletSpawnPositions)
+		{
+			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, *position);
+		}
+	}
+	if (myElapsedTime >= myActiveDuration)
+	{
+		myElapsedTime = 0.0f;
+		return true;
 	}
 	return false;
 }
