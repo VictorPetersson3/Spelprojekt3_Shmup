@@ -139,16 +139,14 @@ function GetCondition(id)
     switch (id) {
         case "tk-below-hp":
             return ConditionBelowHealth();
-            break;
         case "tk-time":
             return ConditionTime();
-            break;
         case "tk-timed":
             return ConditionTimed();
-            break;
+        case "tk-once":
+            return ConditionOnce();
         default:
             return Text();
-            break;
     }
 }
 //? BaseClass
@@ -159,6 +157,14 @@ function Condition()
     condition.dataset.keep = true;
     condition.classList.add("condition");
     condition.textContent = "[Error] Condition";
+    return condition;
+}
+
+function ConditionOnce()
+{
+    let condition = Condition();
+    condition.dataset["type"] = "Once";
+    condition.innerHTML = `Do Once`;
     return condition;
 }
 
