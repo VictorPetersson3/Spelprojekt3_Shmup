@@ -1,5 +1,24 @@
-Rad 1
-Rad 3x
-Rad 3
-Rad 213
-Rad 12312312
+PCSt
+PCDt
+PCDb
+PCW
+PCB
+PCS
+PCH
+PCU
+GSt
+GDt
+GDb
+GW
+GB
+GS
+GH
+GU
+TASt
+TADt
+TADb
+TAW
+TAB
+TAS
+TAH
+TAU

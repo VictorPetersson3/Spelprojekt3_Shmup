@@ -40,7 +40,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>GameObjects\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="TypePattern_Background.cpp">
       <Filter>GameObjects\TypePatterns</Filter>
     </ClCompile>
@@ -89,11 +88,7 @@
     </ClCompile>
     <ClCompile Include="SpriteSheet_AnimationData.cpp" />
     <ClCompile Include="Pack.cpp" />
-    <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuObject.cpp" />
-    <ClCompile Include="UIElement.cpp" />
-    <ClCompile Include="ButtonElement.cpp" />
-    <ClCompile Include="TestButton.cpp" />
     <ClCompile Include="Movement.cpp">
       <Filter>Components\BaseObjects</Filter>
     </ClCompile>
@@ -112,18 +107,13 @@
     <ClCompile Include="MovementSeeking.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
-    <ClCompile Include="MenuManagerSingleton.cpp" />
-    <ClCompile Include="TextElement.cpp" />
     <ClCompile Include="SpriteSheet.cpp">
       <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="AudioClip.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="AudioManagerAccesor.cpp" />
     <ClCompile Include="MovementDiagonal.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
-    <ClCompile Include="GodModeButton.cpp" />
     <ClCompile Include="Coin.cpp">
       <Filter>GameObjects\Coin</Filter>
     </ClCompile>
@@ -131,7 +121,51 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="EngineFlame.cpp" />
+    <ClCompile Include="ScoreAccessor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
     <ClCompile Include="CoinAccessor.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManagerAccesor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelAccessor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManagerSingleton.cpp">
+      <Filter>Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="TestButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GodModeButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinAccessor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>Components\Visual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -176,7 +210,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>GameObjects\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Score.h" />
     <ClInclude Include="TypePattern_Background.h">
       <Filter>GameObjects\TypePatterns</Filter>
     </ClInclude>
@@ -231,11 +264,7 @@
     <ClInclude Include="Counter.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuObject.h" />
-    <ClInclude Include="UIElement.h" />
-    <ClInclude Include="ButtonElement.h" />
-    <ClInclude Include="TestButton.h" />
     <ClInclude Include="Enums.h">
       <Filter>Utility</Filter>
     </ClInclude>
@@ -257,18 +286,13 @@
     <ClInclude Include="MovementSeeking.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
-    <ClInclude Include="MenuManagerSingleton.h" />
-    <ClInclude Include="TextElement.h" />
     <ClInclude Include="SpriteSheet.h">
       <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="AudioClip.h" />
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="AudioManagerAccesor.h" />
     <ClInclude Include="MovementDiagonal.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
-    <ClInclude Include="GodModeButton.h" />
     <ClInclude Include="Coin.h">
       <Filter>GameObjects\Coin</Filter>
     </ClInclude>
@@ -276,7 +300,51 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="EngineFlame.h" />
+    <ClInclude Include="ScoreAccessor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
     <ClInclude Include="CoinAccessor.h" />
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="Ability.h" />
+    <ClInclude Include="AudioManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManagerAccesor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelAccessor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManagerSingleton.h">
+      <Filter>Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="TestButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GodModeButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinAccessor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>Components\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -332,6 +400,9 @@
     </Filter>
     <Filter Include="GameObjects\Coin">
       <UniqueIdentifier>{1c881ec8-17c6-44bd-a3e3-c8231b46dcf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{89221cde-0de4-4eeb-bc2d-3cb62787dd2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

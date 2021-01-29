@@ -9,6 +9,7 @@ namespace Studio
 	class Enemy;
 	class LevelManager;
 	class MenuManager;
+	class ScoreManager;
 	class CoinManager;
 	class Score;
 	class AudioManager;
@@ -31,8 +32,6 @@ public:
 	void Render();
 	void SwapBuffers();
 private:
-	void CheckIfEnemiesHit();
-private:
 	Studio::BackgroundManager myBackgroundManager;
 	Renderer myRenderer;
 	Tga2D::CSprite* myTga2dLogoSprite;
@@ -40,7 +39,7 @@ private:
 
 	Studio::MenuManager* myMenuManager;
 
-	Studio::Score* myScore;
+	Studio::ScoreManager* myScoreManager;
 
 	Studio::AudioManager* myAudioManager;
 

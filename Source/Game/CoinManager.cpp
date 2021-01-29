@@ -7,10 +7,7 @@
 
 namespace Studio
 {
-	CoinManager::CoinManager()
-	{
-		myPlayerCoins = 0;
-	}
+
 
 	void CoinManager::Update()
 	{
@@ -19,22 +16,6 @@ namespace Studio
 			myWorldCoins[i]->Update(myWorldCoins[i]->GetPosition());
 			RendererAccessor::GetInstance()->Render(*myWorldCoins[i]);
 		}
-	}
-
-	void CoinManager::AddCoins(int anAmount)
-	{
-		myPlayerCoins += anAmount;
-	}
-
-	void CoinManager::RemoveCoins(int anAmount)
-	{
-		myPlayerCoins -= anAmount;
-
-	}
-
-	void CoinManager::SetCoins(int anAmount)
-	{
-		myPlayerCoins = anAmount;
 	}
 
 	void CoinManager::CreateCoin(VECTOR2F aPosition)

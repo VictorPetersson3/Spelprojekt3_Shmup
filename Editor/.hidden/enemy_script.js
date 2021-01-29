@@ -38,7 +38,6 @@ function exportEnemy()
             movement["SpawnInCorner"] = valueOf("mp-corner");
             break;
         case "Wave":
-            movement["Speed"] = ~~valueOf("mp-speed");
             movement["HorizontalSpeed"] = ~~valueOf("mp-horizontal-speed");
             movement["VerticalSpeed"] = ~~valueOf("mp-vertical-speed");
             movement["Height"] = ~~valueOf("mp-height");

@@ -32,6 +32,7 @@ public:
 	~Renderer();
 	void Init();
 	void Render(Studio::GameObject& aGameObject);
+	void Render(Studio::SpriteSheet& aSpriteSheet);
 	void SwapBuffers();
 	void Render();
 

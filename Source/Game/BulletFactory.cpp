@@ -12,14 +12,14 @@ Studio::BulletFactory::~BulletFactory()
 	}
 }
 
-void Studio::BulletFactory::InitBulletType(const std::string& aPath, const unsigned int aLayerOrder, const std::string& aType)
+void Studio::BulletFactory::InitBulletType(const std::string& aPath, const unsigned int aLayerOrder, const std::string& aType, float aSpeed, Enums::BulletOwner aOwner)
 {
-	std::pair<std::string, Studio::TypePattern_Bullet*> temp_pair(aType, new Studio::TypePattern_Bullet(aPath, aLayerOrder));
+	std::pair<std::string, Studio::TypePattern_Bullet*> temp_pair(aType, new Studio::TypePattern_Bullet(aPath, aLayerOrder, aSpeed, aOwner));
 	myBullets.insert(temp_pair);
 }
 
-Studio::Bullet* Studio::BulletFactory::CreateBulletObject(const std::string& aType, float aSpeed, const Tga2D::Vector2f& aPosition)
+Studio::Bullet* Studio::BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition)
 {
-	Studio::Bullet* tempObject = new Studio::Bullet(aPosition, aSpeed, myBullets.at(aType)->GetSprite());
+	Studio::Bullet* tempObject = new Studio::Bullet(aPosition, myBullets.at(aType));
 	return tempObject;
 }

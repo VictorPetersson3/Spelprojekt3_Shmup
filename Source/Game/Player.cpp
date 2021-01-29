@@ -6,6 +6,8 @@
 #include "Renderer.h"
 #include "RendererAccessor.h"
 #include "CoinAccessor.h"
+#include "ScoreAccessor.h"
+#include "LevelAccessor.h"
 #include "Coin.h"
 #include "Timer.h"
 
@@ -22,17 +24,18 @@ namespace Studio
 		myFrames = { 1, 8 };
 		myPosition = { 300, 540 };
 		mySpeed = 0;
-		myShootCooldown = 0.0f;
+		myShootCooldown = 0.5f;
+		myAnimationTime = 0;
 		myAnimationTurnSpeed = 0.075;
 		myCurrentFlame = 2;
-		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/Bullets/FireBullet.dds"));
-		myParticleFactory.InitParticleType("sprites/Particles/Explosion_01_Temp.dds", 0, "Explosion", 6, 1.5f);
+		myRapidFireCurrentlyActiveTime = 0;
+		myRapidFireMaxActiveTime = 5.f;
+		myRapidFireCooldown = 40;
 		GetCollider().AddCircleColliderObject(myPosition, 20);
 	}
 
 	Player::~Player()
 	{
-		SAFE_DELETE(myBulletSprite);
 	}
 
 	void Player::Update()
@@ -43,19 +46,7 @@ namespace Studio
 
 			Player::GameObject::Update(myPosition);
 
-			UpdateBullets();
-
 			Studio::RendererAccessor::GetInstance()->Render(*this);
-		}
-		
-		for (int i = 0; i < myBullets.size(); i++)
-		{
-			Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
-		}
-
-		if (myParticleObjects.size() > 0)
-		{
-			myParticleObjects.at(0)->Update(Timer::GetInstance()->TGetDeltaTime());
 		}
 
 		auto& worldCoins = CoinAccessor::GetInstance()->GetWorldCoins();
@@ -64,8 +55,9 @@ namespace Studio
 		{
 			if (worldCoins[i]->Intersects(*this))
 			{
-				CoinAccessor::GetInstance()->AddCoins(1);
+				ScoreAccessor::GetInstance()->AddCoinScore(1);
 				worldCoins.erase(worldCoins.begin() + i);
+
 				printf_s("bruh");
 			}
 		}
@@ -76,44 +68,11 @@ namespace Studio
 	void Player::Shoot()
 	{
 			myShootCooldown += Timer::GetInstance()->TGetDeltaTime();
-			if (GetAsyncKeyState(VK_SPACE) && myShootCooldown > 0.1f)
+			if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myShootCooldown)
 			{
-				myBullets.push_back(new Bullet(myPosition, 800, myBulletSprite));
-				myShootCooldown = 0;
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", myPosition);
+				myTimeSinceLastShot = 0;
 			}
-	}
-	//Temp
-	void Player::PlayExplosion()
-	{
-		if (!myHasDied)
-		{
-			myParticleObjects.push_back(myParticleFactory.CreateParticleObject("Explosion", myPosition));
-			myHasDied = true;
-		}
-	}
-
-	bool Player::IsFinishedExploding()
-	{
-		if (myParticleObjects.size() > 0)
-		{
-			if (myParticleObjects.at(0)->GetHasFinishedAnimation())
-			{
-				myParticleObjects.erase(myParticleObjects.begin());
-				return true;
-			}
-		}
-		
-		return false;
-	}
-
-	std::vector<Bullet*>& Player::GetBullets()
-	{
-		return myBullets;
-	}
-
-	RenderCommand& Player::GetRenderCommand()
-	{
-		return Player::GameObject::GetRenderCommand();
 	}
 
 	void Player::Movement()
@@ -227,19 +186,18 @@ namespace Studio
 			Shoot();
 		}
 	}
-
-	void Player::UpdateBullets()
+	void Player::RapidFireLogic(float aCDReductionPercentage)
 	{
-		for (int i = 0; i < myBullets.size(); i++)
+		if (myRapidFireIsActive)
 		{
-			myBullets[i]->Update();
-
-			if (myBullets[i]->GetPosition().x > 1920)
+			myShootCooldown *= (1 - aCDReductionPercentage);
+			myRapidFireCurrentlyActiveTime += Timer::GetInstance()->TGetDeltaTime();
+			if ()
 			{
-				myBullets.erase(myBullets.begin() + i);
-			}
 
+			}
 		}
+
 	}
 }
 
