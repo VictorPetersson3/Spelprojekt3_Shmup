@@ -1,15 +1,19 @@
 #pragma once
-#include "Module.h"
+#include "rapidjson/document.h"
 #include <vector>
 namespace Studio
 {
+	class Module;
+
+
 	class Phase
 	{
 	public:
-		Phase();
+		Phase(rapidjson::Value& aPhaseParameters);
 		~Phase();
 
 		void InitPhase();
+		void PlayModules();
 
 
 	protected:

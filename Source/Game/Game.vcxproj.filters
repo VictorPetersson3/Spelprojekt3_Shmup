@@ -128,7 +128,6 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="CoinAccessor.cpp" />
-    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="AudioManager.cpp">
       <Filter>Managers</Filter>
@@ -167,6 +166,45 @@
       <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="ImageElement.cpp" />
+    <ClCompile Include="Boss.cpp">
+      <Filter>GameObjects\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Module.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Module_SpawnEnemies.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Module_Shield.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Module_Shoot.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Phase.cpp">
+      <Filter>GameObjects\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Module_Immunity.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Module_Delay.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition.cpp">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition_Timed.cpp">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition_DoOnce.cpp">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition_BelowHealth.cpp">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition_Time.cpp">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -308,7 +346,6 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="CoinAccessor.h" />
-    <ClInclude Include="Boss.h" />
     <ClInclude Include="Ability.h" />
     <ClInclude Include="AudioManager.h">
       <Filter>Managers</Filter>
@@ -347,6 +384,45 @@
       <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="ImageElement.h" />
+    <ClInclude Include="Boss.h">
+      <Filter>GameObjects\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Module_SpawnEnemies.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Module_Shield.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Module_Shoot.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Phase.h">
+      <Filter>GameObjects\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Module_Immunity.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Module_Delay.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition_Timed.h">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition_DoOnce.h">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition_BelowHealth.h">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition.h">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition_Time.h">
+      <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -405,6 +481,15 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{89221cde-0de4-4eeb-bc2d-3cb62787dd2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Boss">
+      <UniqueIdentifier>{1b0f8b18-f337-4879-9005-a6d0d210fa33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Boss\Modules">
+      <UniqueIdentifier>{0f2fef58-024d-43b7-b7d5-0e6b5df2b7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Boss\Conditions">
+      <UniqueIdentifier>{9634c74f-a157-40da-9bb5-8a512865c591}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -3,17 +3,16 @@
 #include "rapidjson/document.h"
 namespace Studio
 {
-	class Module_SpawnEnemies : public Module
+	class Module_Delay : public Module
 	{
 	public:
-		Module_SpawnEnemies(rapidjson::Value& aModuleParameters);
-
+		Module_Delay(rapidjson::Value& aModuleParameters);
+		
 		bool DoStuff() override;
-
 	private:
-
+		float myDelayTime;
+		float myElapsedTime;
 
 	};
-
 }
 
