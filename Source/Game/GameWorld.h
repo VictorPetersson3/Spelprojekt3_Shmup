@@ -13,6 +13,7 @@ namespace Studio
 	class CoinManager;
 	class Score;
 	class AudioManager;
+	class Player_JsonParser;
 }
 namespace Tga2D
 {
@@ -47,4 +48,5 @@ private:
 
 	Studio::LevelManager* myLevelManager;
 	std::vector<Studio::Enemy*> myEnemies;
+	Studio::Player_JsonParser* myPlayerData;
 };

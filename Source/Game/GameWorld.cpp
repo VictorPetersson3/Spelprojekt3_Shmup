@@ -13,6 +13,7 @@
 #include "MenuManagerSingleton.h"
 #include "ScoreAccessor.h"
 #include "AudioManagerAccesor.h"
+#include "Player_JsonParser.h"
 
 // Freeze
 #include "InputManager.h"
@@ -31,6 +32,7 @@ CGameWorld::~CGameWorld()
 	SAFE_DELETE(myPlayer);
 	SAFE_DELETE(myLevelManager);
 	SAFE_DELETE(myMenuManager);
+	SAFE_DELETE(myPlayerData);
 }
 
 void CGameWorld::Init()
@@ -41,7 +43,8 @@ void CGameWorld::Init()
 	myTga2dLogoSprite = new Tga2D::CSprite("sprites/tga_logo.dds");
 	myTga2dLogoSprite->SetPivot({ 0.5f, 0.5f });
 	myTga2dLogoSprite->SetPosition({ 0.5f, 0.5f });
-	SAFE_CREATE(myPlayer, Studio::Player("sprites/assets/player/sprites/playerSprite_01.dds"));
+	SAFE_CREATE(myPlayerData, Studio::Player_JsonParser("json/player/player.json"));
+	SAFE_CREATE(myPlayer, Studio::Player(myPlayerData));
 	Studio::MenuManagerSingleton::Construct(myPlayer);
 
 	SAFE_CREATE(myCoinManager, Studio::CoinManager());

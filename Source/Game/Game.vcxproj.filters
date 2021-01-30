@@ -167,6 +167,7 @@
       <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="ImageElement.cpp" />
+    <ClCompile Include="Player_JsonParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -347,6 +348,7 @@
       <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="ImageElement.h" />
+    <ClInclude Include="Player_JsonParser.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

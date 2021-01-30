@@ -1,0 +1,42 @@
+{
+  "MinSpeed": 240.0,
+  "MaxSpeed": 300.0,
+  "ShootCoolDown": 0.50,
+  "ShootCDReductionPercentage": 50.0,
+  "RapidFireMaxCooldown": 10.0,
+  "RapidFireMaxActiveTime": 4.0,
+  "AnimationTurnSpeed": 0.0125,
+  "ImagePath": "sprites/assets/player/sprites/playerSprite_01.dds",
+  "AmountOfFrames": {
+    "X": 1.0,
+    "Y": 8.0
+  },
+  "LayerOrder": 0.0,
+  "UpAnimationRange": {
+    "FrameStartX": 1.0,
+    "FrameStartY": 5.0,
+    "FrameEndX": 1.0,
+    "FrameEndY": 7.0
+  },
+  "DownAnimationRange": {
+    "FrameStartX": 1.0,
+    "FrameStartY": 2.0,
+    "FrameEndX": 1.0,
+    "FrameEndY": 4.0
+  },
+  "IdleAnimationRange": {
+    "FrameStartX": 1.0,
+    "FrameStartY": 1.0,
+    "FrameEndX": 1.0,
+    "FrameEndY": 1.0
+  },
+  "FlameImagePath": "sprites/assets/player/Flame.dds",
+  "AmountOfFramesFlame": {
+    "X": 1.0,
+    "Y": 4.0
+  }
+
+
+
+
+}

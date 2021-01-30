@@ -8,13 +8,14 @@ namespace Tga2D
 }
 namespace Studio
 {
+	class Player_JsonParser;
 	class RenderCommand;
 	class Bullet;
 	class EngineFlame;
 	class Player : public GameObject
 	{
 	public:
-		Player(const char* aImagePath);
+		Player(Player_JsonParser* somePlayerData);
 		~Player();
 
 		void Update();
@@ -29,11 +30,9 @@ namespace Studio
 		void DeactivateRapidFire(float aCDReductionPercentage);
 	private:
 		float mySpeed;
-		float myShootCooldown;
 		float myTimeSinceLastShot;
 		float myAnimationTurnSpeed;
 		float myCurrentFlame;
-		float myRapidFireMaxCooldown;
 		float myRapidFireCurrentCooldown;
 		float myRapidFireCurrentlyActiveTime;
 		float myRapidFireMaxActiveTime;
@@ -44,9 +43,8 @@ namespace Studio
 		bool myRapidFireIsActive = false;
 
 		VECTOR2F myPosition;
-		VECTOR2F myFrames;
 		EngineFlame myEngineFlame;
-		
+		Player_JsonParser* myPlayerData;
 	};
 }
 

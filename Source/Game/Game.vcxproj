@@ -179,6 +179,7 @@
     <ClInclude Include="ParticleObject.h" />
     <ClInclude Include="Particle_SpriteSheet_Factory.h" />
     <ClInclude Include="Pack.h" />
+    <ClInclude Include="Player_JsonParser.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="ParticleObject.cpp" />
     <ClCompile Include="Particle_SpriteSheet_Factory.cpp" />
     <ClCompile Include="Pack.cpp" />
+    <ClCompile Include="Player_JsonParser.cpp" />
     <ClCompile Include="RenderCommand.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />

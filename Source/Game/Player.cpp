@@ -10,33 +10,37 @@
 #include "LevelAccessor.h"
 #include "Coin.h"
 #include "Timer.h"
+#include "Player_JsonParser.h"
+
 
 #define SPRITESHEET GameObject::GetSpriteSheet()
 
 namespace Studio
 {
-	Player::Player(const char* aImagePath) :
-		Player::GameObject(aImagePath,4.0f),
-		myEngineFlame("sprites/assets/player/Flame.dds", { 1, 4 }, { 300 - 48, 540 - 9 })
+	Player::Player(Player_JsonParser* somePlayerData) :
+		Player::GameObject(somePlayerData->GetImagePath(), 4.0f),
+		myEngineFlame(somePlayerData->GetFlameImagePath().c_str(), somePlayerData->GetAmountOfFlameFrames(), { 300 - 48, 540 - 9 }),
+		myPlayerData(somePlayerData)
 	{
-		SPRITESHEET.SetAmountOfFrames({ 1, 8 });
-		myEngineFlame.GetSpriteSheet().SetLayer(-1);
-		myFrames = { 1, 8 };
+		SPRITESHEET.SetImagePath(myPlayerData->GetImagePath());
+		SPRITESHEET.SetAmountOfFrames(somePlayerData->GetAmountOfFrames());
+		SPRITESHEET.SetLayer(somePlayerData->GetLayer());
+		myEngineFlame.GetSpriteSheet().SetLayer(somePlayerData->GetLayer() -1);
 		myPosition = { 300, 540 };
-		mySpeed = 0.f;
-		myShootCooldown = 0.5f;
 		myAnimationTurnSpeed = 0.075f;
 		myCurrentFlame = 2.f;
 		myRapidFireCurrentlyActiveTime = 0.f;
 		myTimeSinceLastShot = 0.f;
-		myRapidFireMaxActiveTime = 5.f;
-		myRapidFireMaxCooldown = 30.f;
-		myRapidFireCurrentCooldown = myRapidFireMaxCooldown;
+		mySpeed = somePlayerData->GetMinSpeed();
+		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
+		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
 		GetCollider().AddCircleColliderObject(myPosition, 20);
 	}
 
 	Player::~Player()
 	{
+		delete myPlayerData;
+		myPlayerData = nullptr;
 	}
 
 	void Player::Update()
@@ -49,7 +53,7 @@ namespace Studio
 
 			Shoot();
 
-			RapidFireLogic(100);
+			RapidFireLogic(myPlayerData->GetCDReductionPercentage());
 
 			Studio::RendererAccessor::GetInstance()->Render(*this);
 		}
@@ -71,7 +75,7 @@ namespace Studio
 	void Player::Shoot()
 	{
 		myTimeSinceLastShot += Timer::GetInstance()->TGetDeltaTime();
-		if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myShootCooldown)
+		if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
 		{
     		Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", myPosition);
 			myTimeSinceLastShot = 0.f;
@@ -88,11 +92,11 @@ namespace Studio
 
 		if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
 		{
-			mySpeed = 200;
+			mySpeed = myPlayerData->GetMinSpeed();
 		}
 		else
 		{
-			mySpeed = 300; //Temp value, change to default value provided by json when added
+			mySpeed = myPlayerData->GetMaxSpeed(); 
 		}
 		
 		if (wKey && myPosition.y > 0)
@@ -100,7 +104,7 @@ namespace Studio
 			if (myIsAnimatingDown || !myIsAnimating)
 			{
 				myIsAnimatingDown = false;
-				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 5 }, { 1, 7 });
+				SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
 				myIsAnimatingUp = true;
 				myIsAnimating = true;
 			}
@@ -120,7 +124,7 @@ namespace Studio
 			if (myIsAnimatingUp || !myIsAnimating)
 			{
 				myIsAnimatingUp = false;
-				GameObject::GetSpriteSheet().PlayAnimationInRange(myAnimationTurnSpeed, { 1, 2 }, { 1, 4 });
+				SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
 				myIsAnimatingDown = true;
 				myIsAnimating = true;
 			}
@@ -175,7 +179,7 @@ namespace Studio
 				myIsAnimatingDown = false;
 				myIsAnimating = false;
 				myIsRebounding = false;
-				Player::GameObject::SetFrame({ 1, 1 });
+				Player::GameObject::SetFrame(myPlayerData->GetIdleAnimationRange().first);
 			}
 		}
 		if (!aKey && !dKey)
@@ -188,7 +192,7 @@ namespace Studio
 	}
 	void Player::RapidFireLogic(float aCDReductionPercentage)
 	{
-		printf_s("%f\n", myShootCooldown);
+		printf_s("%f\n", myPlayerData->GetShootCoolDown());
 
 		ActivateRapidFire(aCDReductionPercentage);
 
@@ -200,13 +204,13 @@ namespace Studio
 	//Check if key is pressed and cooldown has expired
 	void Player::ActivateRapidFire(float aCDReductionPercentage)
 	{
-		if (InputManager::GetInstance()->IsKeyPressed('1') && myRapidFireCurrentCooldown > myRapidFireMaxCooldown)
+		if (InputManager::GetInstance()->IsKeyPressed('1') && myRapidFireCurrentCooldown > myPlayerData->GetRapidFireMaxCooldown())
 		{
 			myRapidFireCurrentCooldown = 0.f;
 
 			myRapidFireIsActive = true;
 
-			myShootCooldown *= (1 - aCDReductionPercentage * 0.01);
+			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() * (1 - aCDReductionPercentage * 0.01));
 		}
 	}
 	//Check if Rapidfire is active
@@ -226,11 +230,11 @@ namespace Studio
 	//check if RapidFire is active for as long as it is allowed to be active, then deactive itand bring back baseline attack speed.
 	void Player::DeactivateRapidFire(float aCDReductionPercentage)
 	{
-		if (myRapidFireCurrentlyActiveTime > myRapidFireMaxActiveTime)
+		if (myRapidFireCurrentlyActiveTime > myPlayerData->GetRapidFireMaxActiveTime())
 		{
 			myRapidFireIsActive = false;
 
-			myShootCooldown /= (1.f - aCDReductionPercentage * 0.01f);
+			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() * (1 - aCDReductionPercentage * 0.01));
 		}
 	}
 }
