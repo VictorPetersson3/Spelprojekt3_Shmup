@@ -119,7 +119,7 @@ namespace Studio
 
 		float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
 
-		if (distance < aCircleCollisionObject.GetRadius() + ((anAABBCollisionObject.GetWidth() + anAABBCollisionObject.GetHeight()) / 2))
+		if (distance < aCircleCollisionObject.GetRadius() + ((anAABBCollisionObject.GetWidth()/2.0f + anAABBCollisionObject.GetHeight()/2.0f) / 2))
 		{
 			return true;
 		}

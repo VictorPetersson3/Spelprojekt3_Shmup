@@ -3,19 +3,18 @@
 #include "rapidjson/document.h"
 namespace Studio
 {
-	class Module_Shield : public Module
+	class Module_Immunity : public Module
 	{
 	public:
-		Module_Shield(rapidjson::Value& aModuleParameters);
+		Module_Immunity(rapidjson::Value& aModuleParameters);
 
 		bool DoStuff() override;
 
 	protected:
 
+
 	private:
-		VECTOR2F myShieldCenter;
-		float myDuration;
+		bool myGodmodeChoice;
 	};
 }
-
 

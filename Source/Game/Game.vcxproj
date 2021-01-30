@@ -150,6 +150,11 @@
     <ClInclude Include="CoinManager.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionObject.h" />
+    <ClInclude Include="Condition.h" />
+    <ClInclude Include="Condition_BelowHealth.h" />
+    <ClInclude Include="Condition_DoOnce.h" />
+    <ClInclude Include="Condition_Time.h" />
+    <ClInclude Include="Condition_Timed.h" />
     <ClInclude Include="Counter.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
@@ -162,6 +167,12 @@
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuManagerSingleton.h" />
     <ClInclude Include="MenuObject.h" />
+    <ClInclude Include="Module.h" />
+    <ClInclude Include="Module_Delay.h" />
+    <ClInclude Include="Module_Immunity.h" />
+    <ClInclude Include="Module_Shield.h" />
+    <ClInclude Include="Module_Shoot.h" />
+    <ClInclude Include="Module_SpawnEnemies.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -180,6 +191,7 @@
     <ClInclude Include="Particle_SpriteSheet_Factory.h" />
     <ClInclude Include="Pack.h" />
     <ClInclude Include="Player_JsonParser.h" />
+    <ClInclude Include="Phase.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
@@ -218,6 +230,11 @@
     <ClCompile Include="CoinManager.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
+    <ClCompile Include="Condition.cpp" />
+    <ClCompile Include="Condition_BelowHealth.cpp" />
+    <ClCompile Include="Condition_DoOnce.cpp" />
+    <ClCompile Include="Condition_Time.cpp" />
+    <ClCompile Include="Condition_Timed.cpp" />
     <ClCompile Include="Counter.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
@@ -229,6 +246,12 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuManagerSingleton.cpp" />
     <ClCompile Include="MenuObject.cpp" />
+    <ClCompile Include="Module.cpp" />
+    <ClCompile Include="Module_Delay.cpp" />
+    <ClCompile Include="Module_Immunity.cpp" />
+    <ClCompile Include="Module_Shield.cpp" />
+    <ClCompile Include="Module_Shoot.cpp" />
+    <ClCompile Include="Module_SpawnEnemies.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -246,6 +269,7 @@
     <ClCompile Include="Particle_SpriteSheet_Factory.cpp" />
     <ClCompile Include="Pack.cpp" />
     <ClCompile Include="Player_JsonParser.cpp" />
+    <ClCompile Include="Phase.cpp" />
     <ClCompile Include="RenderCommand.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />

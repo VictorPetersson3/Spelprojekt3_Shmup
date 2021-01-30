@@ -2,60 +2,48 @@
 #include "GameObject.h"
 #include "Enums.h"
 #include "HealthBar.h"
+#include "rapidjson/document.h"
+#include <vector>
 namespace Studio
 {
 	//Forward Declaring Classes
 	class RenderCommand;
 	class Bullet;
 	class Movement;
-	
+	class Phase;
+	class Condition;
 	//Boss Class Implementation
 	class Boss : public GameObject
 	{
 	public:
-		Boss();
+		Boss() = default;
 		Boss(const char* aImagePath, VECTOR2F aSpawnPosition, float aHealthAmount);
+		Boss(const char* aImagePath, rapidjson::Value& aBossParameters);
 		~Boss();
 
 		void Update();
 
-		//Phase One Functions
-		void PhaseOne();
-		void Shoot();
-		void GetSpawnEnemiesCooldown();
+		void CheckCurrentPhaseCondition();
 
-
-		//Phase Two Functions
-		void PhaseTwo();
-		void ShootLaser();
-
-		//Phase Three Functions
-		void PhaseThree();
-
-		//Shared Phase Functions
-		void UpdateHealthBar();
-
-		//Boss "Swedish Abilities"
-		void SendInTheCaroleans(float anAmountOfCanonFodder);
+		//Legacy Boss "Swedish Abilities"
+		/*void SendInTheCaroleans(float anAmountOfCanonFodder);
 		void ActivateWelfare(float aTaxAmount);
 		float SellGuns(float aMoralLimit);
 		bool ActPassive(float aInternationalNotoriety);
-		void EnforceAlleMansRätt();
+		void EnforceAlleMansRätt();*/
 		
 		VECTOR2F GetPosition();
+		std::vector<VECTOR2F*> GetBulletSpawnPositions();
 		
-
-
 	protected:
 
 	private:
 		
 		int myCurrentPhase;
+		int myPhaseAmount;
 		int myLaserCooldown;
 		int myTotalFightTime;
 
-		float myPhase1Condition;
-		float myPhase2Condition;
 		float myEnrageTimer;
 		float myEnrageTimeCondition;
 
@@ -64,6 +52,9 @@ namespace Studio
 		Movement* myMovement;
 
 		HealthBar myHealthBar;
+		std::vector<Condition*> myConditions;
+		std::vector<Phase*> myPhases;
+		std::vector<VECTOR2F*> myBulletSpawnPositions;
 	};
 
 

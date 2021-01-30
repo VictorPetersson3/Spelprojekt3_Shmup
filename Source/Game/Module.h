@@ -1,11 +1,18 @@
 #pragma once
-class Module
+#include "rapidjson/document.h"
+namespace Studio
 {
-	Module();
-	~Module();
+	class Module
+	{
+	public:
+		Module(rapidjson::Value& aModuleParameters);
+		virtual ~Module();
+		//TODO Change this stupid function name
+		virtual bool DoStuff() = 0;
+	protected:
 
-	virtual void DoStuff() = 0;
+	private:
+	};
 
-
-};
+}
 
