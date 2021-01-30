@@ -12,7 +12,7 @@ namespace Studio
 	{
 		if (myTime >= myInterval)
 		{
-			myTime = 0.0f;
+			myTime -= myInterval;
 			return true;
 		}
 		return false;
