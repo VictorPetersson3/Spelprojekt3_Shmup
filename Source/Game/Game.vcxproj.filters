@@ -79,14 +79,6 @@
     <ClCompile Include="BackgroundManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleObject.cpp" />
-    <ClCompile Include="TypePattern_Particle_SpriteSheet.cpp">
-      <Filter>GameObjects\TypePatterns</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle_SpriteSheet_Factory.cpp">
-      <Filter>Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheet_AnimationData.cpp" />
     <ClCompile Include="Pack.cpp" />
     <ClCompile Include="MenuObject.cpp" />
     <ClCompile Include="Movement.cpp">
@@ -120,7 +112,6 @@
     <ClCompile Include="CoinManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="EngineFlame.cpp" />
     <ClCompile Include="ScoreAccessor.cpp">
       <Filter>Accessors</Filter>
     </ClCompile>
@@ -166,7 +157,6 @@
       <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="ImageElement.cpp" />
-    <ClCompile Include="Player_JsonParser.cpp" />
     <ClCompile Include="Boss.cpp">
       <Filter>GameObjects\Boss</Filter>
     </ClCompile>
@@ -205,6 +195,12 @@
     </ClCompile>
     <ClCompile Include="Condition_Time.cpp">
       <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_JsonParser.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineFlame.cpp">
+      <Filter>GameObjects\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,14 +288,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Tga2D</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleObject.h" />
-    <ClInclude Include="TypePattern_Particle_SpriteSheet.h">
-      <Filter>GameObjects\TypePatterns</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle_SpriteSheet_Factory.h">
-      <Filter>Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheet_AnimationData.h" />
     <ClInclude Include="Pack.h" />
     <ClInclude Include="Counter.h">
       <Filter>Utility</Filter>
@@ -339,7 +327,6 @@
     <ClInclude Include="CoinManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="EngineFlame.h" />
     <ClInclude Include="ScoreAccessor.h">
       <Filter>Accessors</Filter>
     </ClInclude>
@@ -385,7 +372,6 @@
       <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="ImageElement.h" />
-    <ClInclude Include="Player_JsonParser.h" />
     <ClInclude Include="Boss.h">
       <Filter>GameObjects\Boss</Filter>
     </ClInclude>
@@ -424,6 +410,12 @@
     </ClInclude>
     <ClInclude Include="Condition_Time.h">
       <Filter>GameObjects\Boss\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_JsonParser.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineFlame.h">
+      <Filter>GameObjects\Effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,6 +484,9 @@
     </Filter>
     <Filter Include="GameObjects\Boss\Conditions">
       <UniqueIdentifier>{9634c74f-a157-40da-9bb5-8a512865c591}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effects">
+      <UniqueIdentifier>{08bcf401-d3a6-4008-bbf7-82ffe9bb2dcf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

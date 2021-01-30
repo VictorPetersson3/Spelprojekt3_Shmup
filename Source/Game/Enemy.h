@@ -1,7 +1,5 @@
 #pragma once
 #include "GameObject.h"
-#include "Particle_SpriteSheet_Factory.h"
-#include "ParticleObject.h"
 #include <vector>
 #include "Enums.h"
 
@@ -47,7 +45,6 @@ namespace Studio
 		float myShootCooldown;
 
 		std::vector<Bullet*> myBullets;
-		std::vector<ParticleObject*> myParticleObjects;
 
 		Tga2D::CSprite* mySprite;
 		Tga2D::CSprite* myBulletSprite;
@@ -56,7 +53,6 @@ namespace Studio
 
 		Movement* myMovement;
 
-		Particle_SpriteSheet_Factory myParticleFactory;
 
 		VECTOR2F myPosition;
 
