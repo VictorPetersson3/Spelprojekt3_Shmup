@@ -18,7 +18,7 @@ namespace Studio
 		LevelManager();
 		~LevelManager();
 		void Update(Player* aPlayer);
-		const char* CurrentLevelPath();
+		const std::string& CurrentLevelPath();
 
 		EnemyFactory* myEnemyFactory;
 		BulletFactory* myBulletFactory;
@@ -26,8 +26,8 @@ namespace Studio
 		void AddEnemy(Enemy* anEnemy);
 		void SpawnBullet(const std::string& aType, VECTOR2F aPosition);
 		bool LevelIsCleared();
-		void LoadLevel(const char* aLevelPath);
-		const char* GetCurrentLevelPath() const;
+		void LoadLevel(const std::string& aLevelPath);
+		const std::string& GetCurrentLevelPath() const;
 
 	private:
 		void LevelLogic();
@@ -35,7 +35,7 @@ namespace Studio
 		void CheckIfLevelIsCleared();
 
 		bool myLevelIsCleared;
-		const char* myCurrentLevelPath;
+		std::string myCurrentLevelPath;
 		int myPackIndex;
 		Pack* myCurrentPack;
 		Player* myPlayer = nullptr;
@@ -43,5 +43,6 @@ namespace Studio
 		std::vector<Pack*> myPacks;
 		std::vector<Enemy*> myEnemies;
 		std::vector<Bullet*> myBullets;
+		std::vector<std::string> myLevelPaths;
 	};
 }
