@@ -23,6 +23,7 @@ namespace Studio
 		const float GetRapidFireMaxCooldown() const;
 		const float GetRapidFireMaxActiveTime() const;
 		const float GetLayer() const;
+		const float GetAcceleration() const;
 
 		const Tga2D::Vector2f& GetAmountOfFrames() const;
 		const std::pair<VECTOR2F, VECTOR2F>& GetUpAnimationRange() const;
@@ -52,7 +53,7 @@ namespace Studio
 		bool validateJsonDataString(const rapidjson::Document& aJsonObject, const char* someData);
 		bool validateNestedJsonDataString(const rapidjson::Document& aJsonObject, const char* someData, const char* someNestedData);
 
-
+		float myAcceleration;
 		float myMinSpeed;
 		float myMaxSpeed;
 		float myShootCoolDown;

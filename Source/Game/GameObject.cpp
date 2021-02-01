@@ -34,6 +34,7 @@ namespace Studio
 		myCollider.Update(aPos);
 		mySpriteSheet.SetPosition(aPos);
 		mySpriteSheet.UpdateAnimation();
+		myPosition = aPos;
 	}
 	void GameObject::SetFrame(const Tga2D::Vector2f& aCurrentFrame)
 	{
@@ -134,7 +135,7 @@ namespace Studio
 
 	void GameObject::SetGodMode()
 	{
-		myHealth.SetGodMode();
+		myHealth.SetGodMode(true);
 	}
 
 	SpriteSheet& GameObject::GetSpriteSheet()
