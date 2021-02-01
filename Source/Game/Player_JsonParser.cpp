@@ -15,7 +15,7 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 		while (std::getline(file, line))
 		{
 			text.append(line);
-			printf("%s\n", line.c_str());
+			//printf("%s\n", line.c_str());
 		}
 	}
 	file.close();
@@ -62,6 +62,10 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 		myCDReductionPercentage = document["ShootCDReductionPercentage"].GetFloat();
 	}
 
+	if (validateJsonDataFloat(document, "Acceleration"))
+	{
+		myAcceleration = document["Acceleration"].GetFloat();
+	}
 
 	///-------- STRINGS
 	if (validateJsonDataString(document, "ImagePath"))
@@ -182,6 +186,8 @@ const float Studio::Player_JsonParser::GetRapidFireMaxCooldown() const { return 
 const float Studio::Player_JsonParser::GetRapidFireMaxActiveTime() const { return myRapidFireMaxActiveTime; }
 
 const float Studio::Player_JsonParser::GetLayer() const { return myLayer; }
+
+const float Studio::Player_JsonParser::GetAcceleration() const { return myAcceleration; }
 
 const Tga2D::Vector2f& Studio::Player_JsonParser::GetAmountOfFrames() const { return myAmountOfFrames; }
 

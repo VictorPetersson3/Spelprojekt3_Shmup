@@ -24,7 +24,7 @@ namespace Studio
 		void PlayExplosion();
 		
 		bool HasFinishedExplosion();
-
+		const bool GetIsTerrain();
 		int GetScoreValue();
 
 		VECTOR2F GetPosition();
@@ -38,7 +38,7 @@ namespace Studio
 		void UpdateBullets(float aDeltaTime);
 	private:
 		int myScoreValue;
-
+		bool myIsTerrain = false;
 		bool myHasDied = false;
 
 		float mySpeed;

@@ -64,6 +64,11 @@ namespace Studio
 		}
 	}
 
+	const bool Enemy::GetIsTerrain()
+	{
+		return myIsTerrain;
+	}
+
 	int Enemy::GetScoreValue()
 	{
 		return myScoreValue;

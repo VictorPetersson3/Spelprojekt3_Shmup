@@ -133,7 +133,13 @@ namespace Studio
 		// Copy & Paste from Jimmi
 		for (size_t i = 0; i < myEnemies.size(); i++)
 		{
+
 			myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
+			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsTerrain())
+			{
+				myPlayer->Bounce(myEnemies[i]->GetPosition());
+			}
+
 			if (!myEnemies[i]->IsDead())
 			{
 				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
@@ -189,7 +195,7 @@ namespace Studio
 						if (myBoss->Intersects(*myBullets[i]))
 						{
 							myBoss->TakeDamage(25.0f);
-							printf_s("BossHealth: %f\n", myBoss->GetCurrentHealth());
+							//printf_s("BossHealth: %f\n", myBoss->GetCurrentHealth());
 							myBullets.erase(myBullets.begin() + i);
 						}
 					}
@@ -210,7 +216,7 @@ namespace Studio
 					if (myPlayer->Intersects(*myBullets[j]))
 					{
 						myPlayer->TakeDamage(1.0f);
-						printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
+						//printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
 
 						myBullets.erase(myBullets.begin() + j);
 					}

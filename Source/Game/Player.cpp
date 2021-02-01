@@ -31,10 +31,13 @@ namespace Studio
 		myCurrentFlame = 2.f;
 		myRapidFireCurrentlyActiveTime = 0.f;
 		myTimeSinceLastShot = 0.f;
+		myBounceBackTime = 0.25;
+
 		mySpeed = somePlayerData->GetMinSpeed();
 		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
 		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
 		GetCollider().AddCircleColliderObject(myPosition, 20);
+		GameObject::SetGodMode();
 	}
 
 	Player::~Player()
@@ -49,7 +52,7 @@ namespace Studio
 		{
 			Movement();
 
-			Player::GameObject::Update(myPosition);
+			Player::GameObject::Update(myPosition + myDirection);
 
 			Shoot();
 
@@ -70,6 +73,7 @@ namespace Studio
 				printf_s("bruh");
 			}
 		}
+		//GameObject::GetCollider().Render();
 	}
 
 	void Player::Shoot()
@@ -82,117 +86,202 @@ namespace Studio
 		}
 	}
 
+	void Player::Bounce(const Tga2D::Vector2f aObjectPosition)
+	{
+		//myBounceDirection = myDirection * -1.0f;
+		myBounceDirection = aObjectPosition - myPosition;
+		myBounceDirection.Normalize();
+		myBounceDirection = myBounceDirection * -1;
+		myDirection = myBounceDirection;
+		myHasCollided = true;
+	}
+
+	const Tga2D::Vector2f Player::GetDirection() const
+	{
+		return myDirection;
+	}
+
+	const bool Player::GetHasCollided() const
+	{
+		return myHasCollided;
+	}
+
 	void Player::Movement()
 	{
-		bool wKey = Studio::InputManager::GetInstance()->IsKeyDown('W');
-		bool aKey = Studio::InputManager::GetInstance()->IsKeyDown('A');
-		bool sKey = Studio::InputManager::GetInstance()->IsKeyDown('S');
-		bool dKey = Studio::InputManager::GetInstance()->IsKeyDown('D');
-		//W
-
-		if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
+		myDirection = myDirection.Zero;
+		if (myHasCollided)
 		{
-			mySpeed = myPlayerData->GetMinSpeed();
+			myCurrentFlame = 1;
+			if (mySpeed >= myPlayerData->GetMaxSpeed() + 300)
+			{
+				mySpeed = myPlayerData->GetMaxSpeed() + 300;
+			}
+			else
+			{
+				mySpeed += myPlayerData->GetAcceleration() * 5;
+			}
+			myCurrentBounceTime += Timer::GetInstance()->TGetDeltaTime();
+			myDirection = myBounceDirection;
+			if (myCurrentBounceTime >= myBounceBackTime)
+			{
+				myHasCollided = false;
+				myCurrentBounceTime = 0;
+				myBounceDirection = myBounceDirection.Zero;
+			}
 		}
 		else
 		{
-			mySpeed = myPlayerData->GetMaxSpeed(); 
-		}
-		
-		if (wKey && myPosition.y > 0)
-		{
-			if (myIsAnimatingDown || !myIsAnimating)
-			{
-				myIsAnimatingDown = false;
-				SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
-				myIsAnimatingUp = true;
-				myIsAnimating = true;
-			}
-			
+			myHasCollided = false;
+			myCurrentBounceTime = 0;
+			myBounceDirection = myBounceDirection.Zero;
 
-			myPosition.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
-		}
-		//A
-		if (aKey && myPosition.x > 0)
-		{
-			myPosition.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
-			myCurrentFlame = 1;
-		}
-		//S
-		if (sKey && myPosition.y < 1080)
-		{
-			if (myIsAnimatingUp || !myIsAnimating)
+			bool wKey = Studio::InputManager::GetInstance()->IsKeyDown('W');
+			bool aKey = Studio::InputManager::GetInstance()->IsKeyDown('A');
+			bool sKey = Studio::InputManager::GetInstance()->IsKeyDown('S');
+			bool dKey = Studio::InputManager::GetInstance()->IsKeyDown('D');
+			//W
+			/*if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
 			{
-				myIsAnimatingUp = false;
-				SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
-				myIsAnimatingDown = true;
-				myIsAnimating = true;
-			}
-			
-			myPosition.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
-		}
-		//D
-		if (dKey && myPosition.x < 1920)
-		{
-			myPosition.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
-			myCurrentFlame = 3;
-		}
-		if (!sKey && !wKey)
-		{
 
-			if (myIsAnimating)
-			{
-				if (myIsAnimatingDown)
+				if (mySpeed <= myPlayerData->GetMinSpeed())
 				{
-					if (!myIsRebounding)
-					{
-						SPRITESHEET.ReverseAndStartAnimation();
-						myIsRebounding = true;
-					}
-					else
-					{
-						if (!SPRITESHEET.IsAnimating())
-						{
-							myIsAnimating = false;
-						}
-					}
+					mySpeed = myPlayerData->GetMinSpeed();
 				}
-				if (myIsAnimatingUp)
+				else
 				{
-					if (!myIsRebounding)
-					{
-						SPRITESHEET.ReverseAndStartAnimation();
-						myIsRebounding = true;
-					}
-					else
-					{
-						if (!SPRITESHEET.IsAnimating())
-						{
-							myIsAnimating = false;
-						}
-					}
+					mySpeed -= myAcceleration * 2;
 				}
 			}
 			else
 			{
-				myIsAnimatingUp = false;
-				myIsAnimatingDown = false;
-				myIsAnimating = false;
-				myIsRebounding = false;
-				Player::GameObject::SetFrame(myPlayerData->GetIdleAnimationRange().first);
+				if (mySpeed >= myPlayerData->GetMaxSpeed())
+				{
+					mySpeed = myPlayerData->GetMaxSpeed();
+				}
+				else
+				{
+					mySpeed += myAcceleration;
+				}
+			}*/
+
+			if (!wKey && !aKey && !sKey && !dKey)
+			{
+				if (mySpeed <= myPlayerData->GetMinSpeed())
+				{
+					mySpeed = myPlayerData->GetMinSpeed();
+				}
+				else
+				{
+					mySpeed -= myPlayerData->GetAcceleration();
+				}
 			}
+			else
+			{
+				if (mySpeed >= myPlayerData->GetMaxSpeed())
+				{
+					mySpeed = myPlayerData->GetMaxSpeed();
+				}
+				else
+				{
+					mySpeed += myPlayerData->GetAcceleration();
+				}
+			}
+			printf("Player Speed: %f\n", mySpeed);
+			if (wKey && myPosition.y > 0)
+			{
+				if (myIsAnimatingDown || !myIsAnimating)
+				{
+					myIsAnimatingDown = false;
+					SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
+					myIsAnimatingUp = true;
+					myIsAnimating = true;
+				}
+				myDirection.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
+			}
+			//A
+			if (aKey && myPosition.x > 0)
+			{
+				myDirection.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
+				myCurrentFlame = 1;
+			}
+			//S
+			if (sKey && myPosition.y < 1080)
+			{
+				if (myIsAnimatingUp || !myIsAnimating)
+				{
+					myIsAnimatingUp = false;
+					SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
+					myIsAnimatingDown = true;
+					myIsAnimating = true;
+				}
+
+				myDirection.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
+			}
+			//D
+			if (dKey && myPosition.x < 1920)
+			{
+				myDirection.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
+				myCurrentFlame = 3;
+			}
+			if (!sKey && !wKey)
+			{
+
+				if (myIsAnimating)
+				{
+					if (myIsAnimatingDown)
+					{
+						if (!myIsRebounding)
+						{
+							SPRITESHEET.ReverseAndStartAnimation();
+							myIsRebounding = true;
+						}
+						else
+						{
+							if (!SPRITESHEET.IsAnimating())
+							{
+								myIsAnimating = false;
+							}
+						}
+					}
+					if (myIsAnimatingUp)
+					{
+						if (!myIsRebounding)
+						{
+							SPRITESHEET.ReverseAndStartAnimation();
+							myIsRebounding = true;
+						}
+						else
+						{
+							if (!SPRITESHEET.IsAnimating())
+							{
+								myIsAnimating = false;
+							}
+						}
+					}
+				}
+				else
+				{
+					myIsAnimatingUp = false;
+					myIsAnimatingDown = false;
+					myIsAnimating = false;
+					myIsRebounding = false;
+					Player::GameObject::SetFrame(myPlayerData->GetIdleAnimationRange().first);
+				}
+			}
+			if (!aKey && !dKey)
+			{
+				myCurrentFlame = 2;
+			}
+			//Spacebar
 		}
-		if (!aKey && !dKey)
-		{
-			myCurrentFlame = 2;
-		}
+		myPosition += myDirection.Normalize() * mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 48, myPosition.y - 9 });
-		//Spacebar
+		//printf_s("Player Direction X: %f Y: %f \n", myDirection.x, myDirection.y);
 		
 	}
 	void Player::RapidFireLogic(float aCDReductionPercentage)
 	{
-		printf_s("%f\n", myPlayerData->GetShootCoolDown());
+		//printf_s("%f\n", myPlayerData->GetShootCoolDown());
 
 		ActivateRapidFire(aCDReductionPercentage);
 

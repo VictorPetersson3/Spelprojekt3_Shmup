@@ -27,7 +27,7 @@ void Studio::BackgroundManager::CreateBackground(const char* aBackgroundPath)
 		while (std::getline(file, line))
 		{
 			text.append(line);
-			printf("%s\n", line.c_str());
+			//printf("%s\n", line.c_str());
 		}
 	}
 	file.close();
@@ -44,7 +44,7 @@ void Studio::BackgroundManager::CreateBackground(const char* aBackgroundPath)
 				for (int j = 0; j < objects[i].GetArray().Size(); j++)
 				{
 					auto backgroundObjects = objects[i].GetArray();
-					printf_s("===JSON===\n%s\n==========\n", text.c_str());
+					//printf_s("===JSON===\n%s\n==========\n", text.c_str());
 					for (rapidjson::SizeType iterator = 0; iterator < backgroundObjects.Size(); iterator++)
 					{
 						int myTypeIndex = 0;
@@ -81,7 +81,7 @@ void Studio::BackgroundManager::CreateBackground(const char* aBackgroundPath)
 			}
 			else
 			{
-				printf_s("===JSON===\n%s\n==========\n", text.c_str());
+				//printf_s("===JSON===\n%s\n==========\n", text.c_str());
 				int myTypeIndex = 0;
 				bool isNewType = true;
 				DebugJsonDocNonIterator(objects[i]);
