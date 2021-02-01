@@ -13,7 +13,6 @@ namespace Studio
 		GameObject::GetSpriteSheet().SetPosition(aPosition);
 		GameObject::GetSpriteSheet().GetSprite()->SetColor({ 1.0f,0.0f,0.0f,1.0f });
 		GameObject::GetSpriteSheet().SetPivot({0.0f, 0.5f});
-		SetGodMode();
 	}
 
 	HealthBar::~HealthBar()

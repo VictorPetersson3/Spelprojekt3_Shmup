@@ -133,9 +133,9 @@ namespace Studio
 		return myHealth.IsDead();
 	}
 
-	void GameObject::SetGodMode()
+	void GameObject::SetGodMode(bool aGodMode)
 	{
-		myHealth.SetGodMode(true);
+		myHealth.SetGodMode(aGodMode);
 	}
 
 	SpriteSheet& GameObject::GetSpriteSheet()

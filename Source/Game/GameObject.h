@@ -77,7 +77,7 @@ namespace Studio
 		const float GetCurrentHealth();
 		const bool IsDead();
 		
-		void SetGodMode();
+		void SetGodMode(bool aGodMode);
 		#pragma endregion
 
 		#pragma region New Image Stuff (SpriteBatching)

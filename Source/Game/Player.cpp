@@ -37,7 +37,6 @@ namespace Studio
 		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
 		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
 		GetCollider().AddCircleColliderObject(myPosition, 20);
-		GameObject::SetGodMode();
 	}
 
 	Player::~Player()
