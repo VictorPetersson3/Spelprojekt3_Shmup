@@ -13,7 +13,8 @@ namespace Studio
 		const float GetCurrentHealth();
 		const bool IsDead();
 
-		void SetGodMode();
+		bool GetGodMode();
+		void SetGodMode(bool aChoice);
 	private:
 		float myMaxHealth = 0;
 		float myCurrentHealth = 0;

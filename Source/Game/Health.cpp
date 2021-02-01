@@ -35,8 +35,12 @@ const bool Studio::Health::IsDead()
 {
 	return myIsDead;
 }
-//Call Function to activate if deactivated and vice versa.
-void Studio::Health::SetGodMode()
+bool Studio::Health::GetGodMode()
 {
-	myIsGodMode = !myIsGodMode;
+	return myIsGodMode;
+}
+//Call Function to activate if deactivated and vice versa.
+void Studio::Health::SetGodMode(bool aChoice)
+{
+	myIsGodMode = aChoice;
 }
