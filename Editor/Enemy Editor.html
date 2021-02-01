@@ -66,6 +66,71 @@
             </p>
         </fieldset>
     </p>
+    <div id="lazyHTMLAnimation">
+        <fieldset>
+            <legend>Animation</legend>
+            <p>
+                ImagePath <input type="text" id="anim-image-path" class="long-input">
+            </p>
+            <p>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>X</th>
+                        <th>Y</th>
+                    </tr>
+                    <tr>
+                        <td>Amount of Frames</td>
+                        <td>
+                            <input type="number" id="anim-frames-x" class="enemy-box-input-position" placeholder="X">
+                        </td>
+                        <td>
+                            <input type="number" id="anim-frames-y" class="enemy-box-input-position" placeholder="Y">
+                        </td>
+                    </tr>
+                </table>
+            </p>
+            <p>
+                <fieldset id="anim-idle">
+                    <legend>Idling</legend>
+                    <p>
+                        Type
+                        <select data-input="Type" onchange="updateAnim(event.target)">
+                            <option>Start/End</option>
+                            <option>Custom</option>
+                        </select>
+                        <div></div>
+                    </p>
+                </fieldset>
+            </p>
+            <p>
+                <fieldset id="anim-upwards">
+                    <legend>Moving Upwards</legend>
+                    <p>
+                        Type
+                        <select data-input="Type" onchange="updateAnim(event.target)">
+                            <option>Start/End</option>
+                            <option>Custom</option>
+                        </select>
+                        <div></div>
+                    </p>
+                </fieldset>
+            </p>
+            <p>
+                <fieldset id="anim-downwards">
+                    <legend>Moving Downwards</legend>
+                    <p>
+                        Type
+                        <select data-input="Type" onchange="updateAnim(event.target)">
+                            <option>Start/End</option>
+                            <option>Custom</option>
+                        </select>
+                        <div></div>
+                    </p>
+                </fieldset>
+            </p>
+        </fieldset>
+    </div>
 
 
 <script src=".hidden/clean.js"></script>

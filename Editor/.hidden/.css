@@ -280,3 +280,7 @@ legend, fieldset {
 #phases {
     margin-bottom: 5em;
 }
+
+.long-input {
+    width: 20em;
+}
