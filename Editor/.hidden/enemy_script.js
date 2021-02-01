@@ -69,6 +69,40 @@ function exportEnemy()
     bullet["Interval"] = Number(valueOf("bullet-interval"));
     data["Bullet"] = bullet;
 
+
+    // animation
+    animation = {};
+
+    animation["ImagePath"] = document.getElementById("anim-image-path").value;
+    animation["AmountOfFrames"] = {
+        "X": Number(document.getElementById("anim-frames-x").value),
+        "Y": Number(document.getElementById("anim-frames-y").value)
+    };
+    // All three could be 
+    animation["IdleAnimationRange"] = {};
+
+    [ //      Key                  Id
+        ["IdleAnimationRange", "anim-idle"],
+        ["UpAnimationRange", "anim-upwards"],
+        ["DownAnimationRange", "anim-downwards"]
+    ].forEach(function(pair) {
+        animation[pair[0]] = {};
+        console.log(pair[1]);
+        console.log(document.getElementById(pair[1]));
+        [...document.getElementById(pair[1]).querySelectorAll("[data-input]")].forEach(function(elem) {
+            console.log(elem);
+            let value = elem.value;
+            if (value !== "" && !isNaN(value))
+            {
+                value = Number(value);
+            };
+            animation[pair[0]][elem.dataset["input"]] = value;
+        });
+        console.log(animation[pair[0]]);
+    });
+
+    data["Animation"] = animation;
+
     let name = valueOf("file-name");
     downloadToFile(JSON.stringify(data) + "\n", name, "application/json");
 
@@ -129,6 +163,43 @@ function importEnemy(e)
         valueOf("bullet-speed", bullet["Speed"]);
         valueOf("bullet-pattern", bullet["ShootTowardsPlayer"] ? "Yes" : "No");
         valueOf("bullet-interval", bullet["Interval"]);
+
+        let animation = content["Animation"];
+        // Animation
+        [ //      Key                  Id
+            ["IdleAnimationRange", "anim-idle"],
+            ["UpAnimationRange", "anim-upwards"],
+            ["DownAnimationRange", "anim-downwards"]
+        ].forEach(function(pair) {
+
+            let container = document.getElementById(pair[1]);
+
+            let select = container.querySelector("select");
+            select.value = animation[pair[0]]["Type"];
+            updateAnim(select);
+
+            let anim = animation[pair[0]];
+            if (select.value === "Custom")
+            {
+                select.parentElement.nextSibling.innerHTML = `
+                    Frames <input type="text" class="long-input" data-input="Frames" placeholder="x1 y1 x2 y2 x3 y3 ... xN yN" value=${anim["Frames"]}>
+                `;
+            }
+            else
+            {
+                select.parentElement.nextSibling.innerHTML = `
+                    <p>
+                        Start
+                        <input type="number" min="0" data-input="FrameStartX" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameStartX"]}>
+                        <input type="number" min="0" data-input="FrameStartY" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameStartY"]}>
+                    </p>
+                    <p>
+                        End
+                        <input type="number" min="0" data-input="FrameEndX" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameEndX"]}>
+                        <input type="number" min="0" data-input="FrameEndY" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameEndY"]}>
+                    </p>`;
+            }
+        });
     }
     reader.readAsText(file);
 }
@@ -256,4 +327,31 @@ function changeMovementParameters(e)
 function updateBobbingPercentage(e)
 {
     document.getElementById("mp-bobbing-range-indicator").textContent = `${e.target.value}%`;
+}
+
+updateAnim(document.getElementById("anim-idle").querySelector("select"));
+updateAnim(document.getElementById("anim-upwards").querySelector("select"));
+updateAnim(document.getElementById("anim-downwards").querySelector("select"));
+function updateAnim(element)
+{
+    if (element.value === "Custom")
+    {
+        element.parentElement.nextSibling.innerHTML = `
+            Frames <input type="text" class="long-input" data-input="Frames" placeholder="x1 y1 x2 y2 x3 y3 ... xN yN">
+        `;
+    }
+    else
+    {
+        element.parentElement.nextSibling.innerHTML = `
+            <p>
+                Start
+                <input type="number" min="0" data-input="FrameStartX" class="enemy-box-input-position" placeholder="Y">
+                <input type="number" min="0" data-input="FrameStartY" class="enemy-box-input-position" placeholder="Y">
+            </p>
+            <p>
+                End
+                <input type="number" min="0" data-input="FrameEndX" class="enemy-box-input-position" placeholder="Y">
+                <input type="number" min="0" data-input="FrameEndY" class="enemy-box-input-position" placeholder="Y">
+            </p>`;
+    }
 }
