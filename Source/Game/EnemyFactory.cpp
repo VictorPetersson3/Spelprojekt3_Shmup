@@ -2,6 +2,11 @@
 #include "EnemyFactory.h"
 #include "Enemy.h"
 
+#include <filesystem> // Hitta alla filer i ett directory
+#include <fstream>
+#include <sstream>
+#include "rapidjson/document.h"
+
 Studio::EnemyFactory::~EnemyFactory()
 {
 	/*using enemyMap = std::map<std::string, TypePattern_Enemy*>;
@@ -28,5 +33,34 @@ Studio::Enemy* Studio::EnemyFactory::CreateEnemyObject(const std::string& aType,
 {
 	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjects.at(aType)->GetSprite(), aPosition);
 	return tempObject;
+}
+
+void Studio::EnemyFactory::InitAllEnemyTypes()
+{
+	std::string directory = "JSON/Enemies";
+	for (const auto& entry : std::filesystem::directory_iterator(directory))
+	{
+		auto file = entry.path().string();
+		printf_s("File %s", file.c_str());
+
+		if (entry.path().extension().string() == ".json")
+		{
+			auto path = entry.path().string();
+
+			rapidjson::Document document;
+			std::string text;
+			std::fstream file;
+			file.open(path);
+			{
+				std::string line;
+				while (std::getline(file, line))
+				{
+					text.append(line);
+				}
+			}
+			file.close();
+			document.Parse(text.c_str());
+		}
+	}
 }
 
