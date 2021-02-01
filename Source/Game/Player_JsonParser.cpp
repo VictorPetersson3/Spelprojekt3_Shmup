@@ -91,7 +91,7 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 		myShootingCDReductionPercentage = document["ShootCDReductionPercentage"].GetFloat();
 	}
 
-	if (validateJsonDataFloat(document, "Acceleration"))
+	if (ValidateJsonDataFloat(document, "Acceleration"))
 	{
 		myAcceleration = document["Acceleration"].GetFloat();
 	}
