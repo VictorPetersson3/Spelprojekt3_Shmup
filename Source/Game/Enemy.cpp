@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include <string>
 
+
 namespace Studio
 {
 	Enemy::Enemy(Tga2D::CSprite* aSprite, VECTOR2F aSpawnPosition) :
@@ -67,6 +68,17 @@ namespace Studio
 	const bool Enemy::GetIsTerrain()
 	{
 		return myIsTerrain;
+	}
+	void Enemy::DeathLogic()
+	{
+		if (!myHasDied)
+		{
+
+			CoinAccessor::GetInstance()->CreateCoin(myPosition);
+			ScoreAccessor::GetInstance()->AddKillScore(1);
+			printf_s("%f", myPosition.x);
+			myHasDied = true;
+		}
 	}
 
 	int Enemy::GetScoreValue()
