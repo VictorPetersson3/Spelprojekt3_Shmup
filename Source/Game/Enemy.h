@@ -21,7 +21,7 @@ namespace Studio
 
 		void Update(float aDeltaTime);
 		void Shoot(float aDeltaTime);
-		void PlayExplosion();
+		void DeathLogic();
 		
 		bool HasFinishedExplosion();
 		const bool GetIsTerrain();

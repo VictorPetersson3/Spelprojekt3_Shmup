@@ -118,7 +118,7 @@ namespace Studio
 		}
 	}
 
-	const char* LevelManager::CurrentLevelPath()
+	const std::string& LevelManager::CurrentLevelPath()
 	{
 		return myCurrentLevelPath;
 	}
@@ -185,6 +185,7 @@ namespace Studio
 		{
 			if (myEnemies[i]->IsDead())
 			{
+				myEnemies[i]->DeathLogic();
 				myEnemies.erase(myEnemies.begin() + i);
 			}
 		}
@@ -262,8 +263,9 @@ namespace Studio
 		}
 	}
 
-	void LevelManager::LoadLevel(const char* aLevelPath)
+	void LevelManager::LoadLevel(const std::string& aLevelPath)
 	{
+
 		myCurrentLevelPath = aLevelPath;
 		myLevelIsCleared = false;
 
@@ -303,7 +305,7 @@ namespace Studio
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
 	}
-	const char* LevelManager::GetCurrentLevelPath() const
+	const std::string& LevelManager::GetCurrentLevelPath() const
 	{
 		return myCurrentLevelPath;
 	}

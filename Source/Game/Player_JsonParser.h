@@ -15,15 +15,20 @@ namespace Studio
 		~Player_JsonParser() = default;
 		Player_JsonParser(const Player_JsonParser&) = default;
 
+		//Movement
 		const float GetMinSpeed() const;
 		const float GetMaxSpeed() const;
+		//Basic Attacks
 		const float GetShootCoolDown() const;
 		const float GetCDReductionPercentage() const;
-		const float GetAnimationTurnSpeed() const;
+		//Rapid Fire
 		const float GetRapidFireMaxCooldown() const;
 		const float GetRapidFireMaxActiveTime() const;
+		const float GetRapidFireAttackSpeed() const;
+
 		const float GetLayer() const;
 		const float GetAcceleration() const;
+		const float GetAnimationTurnSpeed() const;
 
 		const Tga2D::Vector2f& GetAmountOfFrames() const;
 		const std::pair<VECTOR2F, VECTOR2F>& GetUpAnimationRange() const;
@@ -46,20 +51,39 @@ namespace Studio
 		void SetCDReductionPercentage(const float aCDReduction);
 		void AddToCDReductionPercentage(const float aCDReduction);
 
+		void UpgradeRapidFireCooldownT1();
+		void UpgradeRapidFireAttackSpeedT1();
+		void UpgradeRapidFireAttackSpeedT2();
+		void UpgradeRapidFireDurationT1();
+		void UpgradeRapidFireDurationT2();
+		void UpgradeRapidFirePenetrate();
+
 	private:
 
-		bool validateJsonDataFloat(const rapidjson::Document& aJsonObject, const std::string& someData);
-		bool validateNestedJsonDataFloat(const rapidjson::Document& aJsonObject, const char* someData, const char* someNestedData);
-		bool validateJsonDataString(const rapidjson::Document& aJsonObject, const char* someData);
-		bool validateNestedJsonDataString(const rapidjson::Document& aJsonObject, const char* someData, const char* someNestedData);
+		bool ValidateJsonDataFloat(const rapidjson::Document& aJsonObject, const std::string& someData);
+		bool ValidateNestedJsonDataFloat(const rapidjson::Document& aJsonObject, const char* someData, const char* someNestedData);
+		bool ValidateJsonDataString(const rapidjson::Document& aJsonObject, const char* someData);
+		bool ValidateNestedJsonDataString(const rapidjson::Document& aJsonObject, const char* someData, const char* someNestedData);
 
 		float myAcceleration;
 		float myMinSpeed;
 		float myMaxSpeed;
+
+		//Auto attacks
 		float myShootCoolDown;
-		float myCDReductionPercentage;
+		float myShootingCDReductionPercentage;
+
+		//Rapid fire
+		float myRapidFireAttackSpeed;
 		float myRapidFireMaxCooldown;
 		float myRapidFireMaxActiveTime;
+		//Rapid Fire Upgrades
+		float myRapidFireCDReductionT1;
+		float myRapidFireAttackSpeedIncreaseT1;
+		float myRapidFireAttackSpeedIncreaseT2;
+		float myRapidFireDurationT1;
+		float myRapidFireDurationT2;
+
 		float myAnimationTurnSpeed;
 		float myLayer;
 
