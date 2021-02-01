@@ -5,6 +5,7 @@
 // Filhantering
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 // Spelfiler
 #include "Timer.h"
@@ -36,6 +37,9 @@ namespace Studio
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
 
 		// Load chosen level by Lever Designers
+
+		
+
 		std::fstream file;
 		std::string levelPath;
 		file.open("JSON/Levels/level.txt");
@@ -53,10 +57,19 @@ namespace Studio
 		path.append(levelPath);
 		path.append(".json");
 
-		printf_s("PATH %s\n", path.c_str());
+		//printf_s("PATH %s\n", path.c_str());
 
 		LoadLevel(path.c_str());
-
+		std::string directory = "JSON/Levels";
+		for (const auto& entry : std::filesystem::directory_iterator(directory))
+		{
+			if (entry.path().extension().string() == ".json")
+			{
+				auto file = entry.path().string();
+				myLevelPaths.push_back(file);
+				printf("LevelPath: %s\n", file.c_str());
+			}
+		}
 	}
 
 	LevelManager::~LevelManager()

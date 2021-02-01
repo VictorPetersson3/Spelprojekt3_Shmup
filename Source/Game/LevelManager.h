@@ -43,5 +43,6 @@ namespace Studio
 		std::vector<Pack*> myPacks;
 		std::vector<Enemy*> myEnemies;
 		std::vector<Bullet*> myBullets;
+		std::vector<std::string> myLevelPaths;
 	};
 }
