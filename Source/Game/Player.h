@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "EngineFlame.h"
+#include "Enums.h"
 #include <vector>
 namespace Tga2D
 {
@@ -24,14 +25,15 @@ namespace Studio
 		const Tga2D::Vector2f GetDirection() const;
 		const bool GetHasCollided() const;
 
+		void UpgradeRapidFire(Enums::RapidFireUpgrades aRapidFireUpgrade);
+
 	private:
 		void Movement();
-		void RapidFireLogic(float aCDReductionPercentage);
-		void ActivateRapidFire(float aCDReductionPercentage);
+
+		void RapidFireLogic();
+		void ActivateRapidFire();
 		void RapidFireIsActive();
-		void DeactivateRapidFire(float aCDReductionPercentage);
-
-
+		void DeactivateRapidFire();
 	private:
 		float mySpeed;
 		float myTimeSinceLastShot;

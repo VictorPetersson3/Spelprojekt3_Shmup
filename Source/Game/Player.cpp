@@ -56,7 +56,7 @@ namespace Studio
 
 			Shoot();
 
-			RapidFireLogic(myPlayerData->GetCDReductionPercentage());
+			RapidFireLogic();
 
 			Studio::RendererAccessor::GetInstance()->Render(*this);
 		}
@@ -100,6 +100,40 @@ namespace Studio
 	{
 		return myDirection;
 	}
+	void Player::UpgradeRapidFire(Enums::RapidFireUpgrades aRapidFireUpgrade)
+	{
+		switch (aRapidFireUpgrade)
+		{
+		case Studio::Enums::RapidFireUpgrades::CooldownT1:
+			myPlayerData->UpgradeRapidFireCooldownT1();
+			break;
+		case Studio::Enums::RapidFireUpgrades::AttackSpeedT1:
+			myPlayerData->UpgradeRapidFireAttackSpeedT1();
+			break;
+		case Studio::Enums::RapidFireUpgrades::AttackSpeedT2:
+			myPlayerData->UpgradeRapidFireAttackSpeedT2();
+			break;
+		case Studio::Enums::RapidFireUpgrades::DurationT1:
+			myPlayerData->UpgradeRapidFireDurationT1();
+			break;
+		case Studio::Enums::RapidFireUpgrades::DurationT2:
+			myPlayerData->UpgradeRapidFireDurationT2();
+			break;
+		case Studio::Enums::RapidFireUpgrades::PenetratingT3:
+			//Not implemented yet
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Player::Movement()
+	{
+		bool wKey = InputManager::GetInstance()->IsKeyDown('W');
+		bool aKey = InputManager::GetInstance()->IsKeyDown('A');
+		bool sKey = InputManager::GetInstance()->IsKeyDown('S');
+		bool dKey = InputManager::GetInstance()->IsKeyDown('D');
+		//W
 
 	const bool Player::GetHasCollided() const
 	{
@@ -279,19 +313,17 @@ namespace Studio
 		//printf_s("Player Direction X: %f Y: %f \n", myDirection.x, myDirection.y);
 		
 	}
-	void Player::RapidFireLogic(float aCDReductionPercentage)
+	void Player::RapidFireLogic()
 	{
-		//printf_s("%f\n", myPlayerData->GetShootCoolDown());
-
-		ActivateRapidFire(aCDReductionPercentage);
+		ActivateRapidFire();
 
 		RapidFireIsActive();
 
-		DeactivateRapidFire(aCDReductionPercentage);
+		DeactivateRapidFire();
 
 	}
 	//Check if key is pressed and cooldown has expired
-	void Player::ActivateRapidFire(float aCDReductionPercentage)
+	void Player::ActivateRapidFire()
 	{
 		if (InputManager::GetInstance()->IsKeyPressed('1') && myRapidFireCurrentCooldown > myPlayerData->GetRapidFireMaxCooldown())
 		{
@@ -299,7 +331,7 @@ namespace Studio
 
 			myRapidFireIsActive = true;
 
-			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() * (1 - aCDReductionPercentage * 0.01));
+			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() * (1 - myPlayerData->GetRapidFireAttackSpeed() * 0.01));
 		}
 	}
 	//Check if Rapidfire is active
@@ -317,13 +349,13 @@ namespace Studio
 		}
 	}
 	//check if RapidFire is active for as long as it is allowed to be active, then deactive itand bring back baseline attack speed.
-	void Player::DeactivateRapidFire(float aCDReductionPercentage)
+	void Player::DeactivateRapidFire()
 	{
 		if (myRapidFireCurrentlyActiveTime > myPlayerData->GetRapidFireMaxActiveTime())
 		{
 			myRapidFireIsActive = false;
 
-			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() * (1 - aCDReductionPercentage * 0.01));
+			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() / (1 - myPlayerData->GetRapidFireAttackSpeed() * 0.01));
 		}
 	}
 }

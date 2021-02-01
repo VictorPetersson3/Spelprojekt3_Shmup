@@ -188,6 +188,7 @@
     <ClInclude Include="MovementStraight.h" />
     <ClInclude Include="MovementWave.h" />
     <ClInclude Include="Pack.h" />
+    <ClInclude Include="PlayerAccessor.h" />
     <ClInclude Include="Player_JsonParser.h" />
     <ClInclude Include="Phase.h" />
     <ClInclude Include="RenderCommand.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="MovementStraight.cpp" />
     <ClCompile Include="MovementWave.cpp" />
     <ClCompile Include="Pack.cpp" />
+    <ClCompile Include="PlayerAccessor.cpp" />
     <ClCompile Include="Player_JsonParser.cpp" />
     <ClCompile Include="Phase.cpp" />
     <ClCompile Include="RenderCommand.cpp" />
