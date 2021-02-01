@@ -127,14 +127,6 @@ namespace Studio
 		}
 	}
 
-	void Player::Movement()
-	{
-		bool wKey = InputManager::GetInstance()->IsKeyDown('W');
-		bool aKey = InputManager::GetInstance()->IsKeyDown('A');
-		bool sKey = InputManager::GetInstance()->IsKeyDown('S');
-		bool dKey = InputManager::GetInstance()->IsKeyDown('D');
-		//W
-
 	const bool Player::GetHasCollided() const
 	{
 		return myHasCollided;
@@ -142,6 +134,11 @@ namespace Studio
 
 	void Player::Movement()
 	{
+		bool wKey = InputManager::GetInstance()->IsKeyDown('W');
+		bool aKey = InputManager::GetInstance()->IsKeyDown('A');
+		bool sKey = InputManager::GetInstance()->IsKeyDown('S');
+		bool dKey = InputManager::GetInstance()->IsKeyDown('D');
+		//W
 		myDirection = myDirection.Zero;
 		if (myHasCollided)
 		{
