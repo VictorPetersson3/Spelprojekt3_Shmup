@@ -172,6 +172,7 @@ namespace Studio
 		{
 			if (myEnemies[i]->IsDead())
 			{
+				myEnemies[i]->DeathLogic();
 				myEnemies.erase(myEnemies.begin() + i);
 			}
 		}
