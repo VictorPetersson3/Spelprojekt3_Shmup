@@ -12,7 +12,7 @@ namespace Studio
         myMainMenu.Add(myTestButton);
         myMainMenu.Add(myGodModeButton);
         myMainMenu.Enable();
-
+        
         myHud.Add(myTestElement);
         myHud.Add(myHeart1Element);
         myHud.Add(myHeart2Element);

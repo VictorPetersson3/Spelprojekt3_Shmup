@@ -96,11 +96,13 @@ namespace Studio
 
 		if (Studio::InputManager::GetInstance()->IsKeyDown('Y'))
 		{
-			myLevelIsCleared = true;
+			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 		}
 
 		if (Studio::InputManager::GetInstance()->IsKeyDown('I'))
 		{
+			MenuManagerSingleton::GetInstance()->GetShop()->Disable();
 			MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
 		}
 
@@ -289,12 +291,15 @@ namespace Studio
 								{
 									if (myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
 									{
+
+										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
+										myEnemies[i]->TakeDamage(100);
+
 										if (myBullets[j]->GetIsPenetrating() == false)
 										{
 											myBullets.erase(myBullets.begin() + j);
 										}
-										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
-										myEnemies[i]->TakeDamage(100);
+										
 									}
 								}
 							}

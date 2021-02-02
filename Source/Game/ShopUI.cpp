@@ -3,6 +3,8 @@
 #include "ShopButton.h"
 #include <cstdlib>
 #include "CommonUtilities\CURandom.h"
+#include "PlayerAccessor.h"
+#include "Enums.h"
 
 int Studio::ShopUI::GetRandomNumberInRange(int max)
 {
@@ -11,12 +13,18 @@ int Studio::ShopUI::GetRandomNumberInRange(int max)
 
 Studio::ShopUI::ShopUI()
 {
-	for (size_t i = 0; i < 10; i++)
-	{
-		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000));
-		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000));
-		myTier3Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000));
-	}																											  
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000,Enums::RapidFireUpgrades::AttackSpeedT1,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::CooldownT1,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::DurationT1,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::AttackSpeedT1,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::CooldownT1,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::DurationT1,5));
+
+		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000,Enums::RapidFireUpgrades::AttackSpeedT2,10));
+		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000, Enums::RapidFireUpgrades::DurationT2,10));
+		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000, Enums::RapidFireUpgrades::AttackSpeedT2,10));
+
+		myTier3Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000,Enums::RapidFireUpgrades::PenetratingT3,15));																											  
 }
 
 Studio::ShopUI::~ShopUI()
@@ -31,7 +39,7 @@ std::vector<Studio::ShopButton*> Studio::ShopUI::GetShopButtons()
 
 	for (size_t i = 0; i < 6; i++)
 	{
-		int temp = GetRandomNumberInRange(myTier1ButtonsTemp.size());
+		int temp = GetRandomNumberInRange(myTier1ButtonsTemp.size()-1);
 		ShopButton* buttonToPushBack = myTier1ButtonsTemp[temp];
 		myTier1ButtonsTemp.erase(myTier1ButtonsTemp.begin()+temp);
 
@@ -64,7 +72,7 @@ std::vector<Studio::ShopButton*> Studio::ShopUI::GetShopButtons()
 
 	for (float i = 0; i < 3; i++)
 	{		
-		int temp = GetRandomNumberInRange(myTier2ButtonsTemp.size());
+		int temp = GetRandomNumberInRange(myTier2ButtonsTemp.size()-1);
 
 		ShopButton* buttonToPushBack = myTier2ButtonsTemp[temp];
 
@@ -76,7 +84,7 @@ std::vector<Studio::ShopButton*> Studio::ShopUI::GetShopButtons()
 		myActiveButtonPtrs.push_back(buttonToPushBack);
 	}
 
-	ShopButton* buttonToPushBack = myTier3Buttons[GetRandomNumberInRange(10)];
+	ShopButton* buttonToPushBack = myTier3Buttons[GetRandomNumberInRange(1)];
 
 	buttonToPushBack->SetPosition({ 960,200 + 135 + 135 + 135 });
 
