@@ -192,12 +192,12 @@ function importEnemy(e)
                     <p>
                         Start
                         <input type="number" min="0" data-input="FrameStartX" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameStartX"]}>
-                        <input type="number" min="0" data-input="FrameStartY" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameStartY"]}>
+                        <input type="number" min="0" data-input="FrameStartY" class="enemy-box-input-position" placeholder="X" value=${anim["FrameStartY"]}>
                     </p>
                     <p>
                         End
                         <input type="number" min="0" data-input="FrameEndX" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameEndX"]}>
-                        <input type="number" min="0" data-input="FrameEndY" class="enemy-box-input-position" placeholder="Y" value=${anim["FrameEndY"]}>
+                        <input type="number" min="0" data-input="FrameEndY" class="enemy-box-input-position" placeholder="X" value=${anim["FrameEndY"]}>
                     </p>`;
             }
         });
@@ -347,12 +347,12 @@ function updateAnim(element)
             <p>
                 Start
                 <input type="number" min="0" data-input="FrameStartX" class="enemy-box-input-position" placeholder="Y">
-                <input type="number" min="0" data-input="FrameStartY" class="enemy-box-input-position" placeholder="Y">
+                <input type="number" min="0" data-input="FrameStartY" class="enemy-box-input-position" placeholder="X">
             </p>
             <p>
                 End
                 <input type="number" min="0" data-input="FrameEndX" class="enemy-box-input-position" placeholder="Y">
-                <input type="number" min="0" data-input="FrameEndY" class="enemy-box-input-position" placeholder="Y">
+                <input type="number" min="0" data-input="FrameEndY" class="enemy-box-input-position" placeholder="X">
             </p>`;
     }
 }
