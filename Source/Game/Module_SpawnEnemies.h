@@ -8,11 +8,12 @@ namespace Studio
 	public:
 		Module_SpawnEnemies(rapidjson::Value& aModuleParameters);
 
-		bool DoStuff() override;
+		bool DoStuff(Boss& aBoss) override;
 
 	private:
-		const char* myType;
+		std::string myType;
 		VECTOR2F mySpawnPosition;
+		bool mySpawnIsRelative;
 	};
 
 }

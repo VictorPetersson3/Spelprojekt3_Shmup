@@ -10,7 +10,7 @@ namespace Studio
 		void Tick();
 
 	private:
-		float myTime;
+		float myTime = 0.0f;
 		float myInterval;
 	};
 }

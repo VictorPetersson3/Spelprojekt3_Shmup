@@ -31,6 +31,7 @@ namespace Studio
 	{
 		myPosition = aSpawnPosition;
 		myCurrentPhase = 0;
+		myEnrageCondition = nullptr;
 		SAFE_CREATE(myMovement, MovementBobbing(&myPosition, 20.0f, 200.0f));
 		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 100.0f);
 	}
@@ -39,26 +40,41 @@ namespace Studio
 		Boss::GameObject(aImagePath, 1000.0f),
 		myHealthBar("", { 700.0f, 100.0f })
 	{
+		myEnrageCondition = nullptr;
+		myPosition = { 1500.0f, 520.0f };
+		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 100.0f);
 		if (aBossParameters.HasMember("Conditions") && aBossParameters["Conditions"].IsArray())
 		{
 			auto conditions = aBossParameters["Conditions"].GetArray();
 			for (size_t i = 0; i < conditions.Size(); i++)
 			{
-				if (conditions[i]["Type"].GetString() == "Timed")
+				std::string type = conditions[i]["Type"].GetString();
+				if (type == "Timed")
 				{
-					myConditions.push_back(new Condition_Timed(conditions[i]));
+					if (myEnrageCondition == nullptr)
+					{
+						myEnrageCondition = new Condition_Timed(conditions[i]);
+					}
+					else
+					{
+						printf_s("Timed Condition is only for enrage timer and you cant have two enrage Condition\n");
+					}
 				}
-				if (conditions[i]["Type"].GetString() == "BelowHealth")
+				else if (type.compare("BelowHealth") == 0)
 				{
 					myConditions.push_back(new Condition_BelowHealth(conditions[i]));
 				}
-				if (conditions[i]["Type"].GetString() == "DoOnce")
+				else if (type == "Once")
 				{
 					myConditions.push_back(new Condition_DoOnce(conditions[i]));
 				}
-				if (conditions[i]["Type"].GetString() == "Time")
+				else if (type == "Time")
 				{
 					myConditions.push_back(new Condition_Time(conditions[i]));
+				}
+				else
+				{
+					printf("Condition type: %s Is corrupted or not implemented yet\n", conditions[i]["Type"].GetString());
 				}
 			}
 		}
@@ -75,39 +91,69 @@ namespace Studio
 			myPhaseAmount = myPhases.size();
 		}
 
-		myBulletSpawnPositions.push_back(&myPosition);
-
+		myBulletSpawnPositions.push_back(myPosition);
+		myTotalFightTime = 0.0f;
+		SAFE_CREATE(myMovement, MovementBobbing(&myPosition, 20.0f, 200.0f));
 	}
 
 	Boss::~Boss()
 	{
+		SAFE_DELETE(myMovement);
+		SAFE_DELETE(myEnrageCondition);
+		myConditions.clear();
+		myPhases.clear();
 	}
 
 	void Boss::Update()
 	{
+		myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
 		myMovement->Update();
 
 		Boss::GameObject::Update(myPosition);
 		myHealthBar.Update(GetHealth());
 
 		RendererAccessor::GetInstance()->Render(*this);
-		/*if (Condition != true)
+
+		myPhases[myCurrentPhase]->PlayModules(*this);
+
+		if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 2)
 		{
-			myPhases[myCurrentPhase]->PlayModules();
-		}*/
+			++myCurrentPhase;
+			printf("Changed to Phase: %i\n", myCurrentPhase);
+		}
 	}
 
-	void Boss::CheckCurrentPhaseCondition()
+	bool Boss::CheckCurrentPhaseCondition()
+	{
+		return myConditions.at(myCurrentPhase)->IsDone(*this);
+	}
+
+	bool Boss::GetCurrentPhaseHasPlayedOnce()
+	{
+		return myPhases[myCurrentPhase]->HavePlayedOnce();
+	}
+
+	bool Boss::CheckEnrageCondition(float aElapsedTime)
+	{
+		return myEnrageCondition->IsDone(*this);
+	}
+
+
+	void Boss::UpdateMovement()
 	{
 	}
 
+	float Boss::GetTotalBossTime()
+	{
+		return myTotalFightTime;
+	}
 
 	VECTOR2F Boss::GetPosition()
 	{
 		return myPosition;
 	}
 
-	std::vector<VECTOR2F*> Boss::GetBulletSpawnPositions()
+	std::vector<VECTOR2F> Boss::GetBulletSpawnPositions()
 	{
 		return myBulletSpawnPositions;
 	}

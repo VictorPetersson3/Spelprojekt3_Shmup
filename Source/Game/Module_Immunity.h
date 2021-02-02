@@ -8,7 +8,7 @@ namespace Studio
 	public:
 		Module_Immunity(rapidjson::Value& aModuleParameters);
 
-		bool DoStuff() override;
+		bool DoStuff(Boss& aBoss) override;
 
 	protected:
 

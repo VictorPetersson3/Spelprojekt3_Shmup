@@ -8,7 +8,7 @@ namespace Studio
 	public:
 		Module_Delay(rapidjson::Value& aModuleParameters);
 		
-		bool DoStuff() override;
+		bool DoStuff(Boss& aBoss) override;
 	private:
 		float myDelayTime;
 		float myElapsedTime;

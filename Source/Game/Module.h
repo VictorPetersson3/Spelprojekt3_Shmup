@@ -1,4 +1,5 @@
 #pragma once
+#include "Boss.h"
 #include "rapidjson/document.h"
 namespace Studio
 {
@@ -8,7 +9,7 @@ namespace Studio
 		Module(rapidjson::Value& aModuleParameters);
 		virtual ~Module();
 		//TODO Change this stupid function name
-		virtual bool DoStuff() = 0;
+		virtual bool DoStuff(Boss& aBoss) = 0;
 	protected:
 
 	private:

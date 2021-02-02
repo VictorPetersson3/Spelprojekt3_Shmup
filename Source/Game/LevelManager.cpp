@@ -16,6 +16,7 @@
 #include "BulletFactory.h"
 #include "Player.h"
 #include "Boss.h"
+#include "BossManager.h"
 
 // Rendering
 #include "RendererAccessor.h"
@@ -36,14 +37,15 @@ namespace Studio
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 		SAFE_CREATE(myBulletFactory, BulletFactory());
-		SAFE_CREATE(myBoss, Boss("sprites/debugpixel.dds", { 1500.0f, 520.0f }, 1000.0f));
 		myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
 		//															    ^ key
+
+		SAFE_CREATE(myBossManager, BossManager());
 
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
-
+		myBossManager->LoadBosses();
 		// Load chosen level by Lever Designers
 
 		
@@ -88,7 +90,7 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myEnemies);
 		SAFE_DELETE_VECTOR(myBullets);
 		SAFE_DELETE(myBulletFactory);
-		SAFE_DELETE(myBoss);
+		SAFE_DELETE(myBossManager);
 	}
 
 	void LevelManager::Update(Player* aPlayer)
@@ -108,6 +110,7 @@ namespace Studio
 		myPlayer = aPlayer;
 		if (myLevelIsCleared == true)
 		{
+
 			/*SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
 			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);*/
@@ -228,9 +231,9 @@ namespace Studio
 	{
 		if (myLevelIsCleared)
 		{
-			if (!myBullets.empty())
+			for (int i = myBullets.size() - 1; i >= 0; i--)
 			{
-				for (int i = myBullets.size() - 1; i >= 0; i--)
+				if (myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player)
 				{
 					if (!myBoss->IsDead() && myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player)
 					{
@@ -251,7 +254,8 @@ namespace Studio
 					//When the boss dies?
 					else
 					{
-
+						myBoss->TakeDamage(1.0f);
+						myBullets.erase(myBullets.begin() + i);
 					}
 				}
 			}
@@ -358,6 +362,10 @@ namespace Studio
 
 		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0)
 		{
+			if (!myLevelIsCleared)
+			{
+				myBoss = myBossManager->GetLevelBoss(0);
+			}
 			myLevelIsCleared = true;
 		}
 	}

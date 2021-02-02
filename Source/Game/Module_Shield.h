@@ -8,13 +8,13 @@ namespace Studio
 	public:
 		Module_Shield(rapidjson::Value& aModuleParameters);
 
-		bool DoStuff() override;
+		bool DoStuff(Boss& aBoss) override;
 
 	protected:
 
 	private:
 		VECTOR2F myShieldCenter;
-		float myDuration;
+		float myHitPoints;
 	};
 }
 

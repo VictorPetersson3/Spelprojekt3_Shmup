@@ -1,4 +1,5 @@
 #pragma once
+#include "Boss.h"
 #include "rapidjson/document.h"
 namespace Studio
 {
@@ -8,7 +9,7 @@ namespace Studio
 		Condition(rapidjson::Value& aConditionParameters);
 		virtual ~Condition();
 
-		virtual bool IsDone() = 0;
+		virtual bool IsDone(Boss& aBoss) = 0;
 
 	private:
 
