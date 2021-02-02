@@ -5,8 +5,10 @@
 #include <iostream>
 #include "AudioManagerAccesor.h"
 #include "AudioManager.h"
+#include <string>
 
-Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer)
+
+Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::RapidFireUpgrades aUpgradeType, int aCost)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -18,6 +20,10 @@ Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, cons
 	mySpriteSheet->SetPosition(aPosition);
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
+
+	myUpgradeType = aUpgradeType;
+
+	myCost = aCost;
 
 	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
 	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
@@ -32,6 +38,13 @@ Studio::ShopButton::~ShopButton()
 
 void Studio::ShopButton::Update()
 {
+
+	myLeft = mySpriteSheet->GetPosition().x - (128 / 2);
+	myRight = mySpriteSheet->GetPosition().x + (128 / 2);
+	myTop = mySpriteSheet->GetPosition().y - (128 / 2);
+	myBottom = mySpriteSheet->GetPosition().y + (128 / 2);
+
+
 	if (myIsEnabled == true)
 	{
 
@@ -41,39 +54,39 @@ void Studio::ShopButton::Update()
 		GetCursorPos(&pt);
 		ScreenToClient(myWindowHandle, &pt);
 
-
-		if (myIsEnabled == true)
+		
+		if (myIsClicked == false)
 		{
-			if (myIsClicked == false)
+			if (pt.x >= myLeft && pt.x <= myRight)
 			{
-				if (pt.x >= myLeft && pt.x <= myRight)
+				if (pt.y >= myTop && pt.y <= myBottom)
 				{
-					if (pt.y >= myTop && pt.y <= myBottom)
+					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
-						if (Studio::InputManager::GetInstance()->GetMouseLPressed())
-						{
-							OnClick();
-							myIsClicked = true;
-							myIsEnabled = false;
-						}
+						OnClick();
+						myIsClicked = true;
 					}
 				}
 			}
-
-			if (Studio::InputManager::GetInstance()->GetMouseLReleased() && myIsClicked)
-			{
-				myIsClicked = false;
-			}
-
-			Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
-
 		}
+
+		if (Studio::InputManager::GetInstance()->GetMouseLReleased() && myIsClicked)
+		{
+			myIsClicked = false;
+		}
+
+		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 	}
 }
 
 void Studio::ShopButton::OnClick()
 {
-
+	if (ScoreAccessor::GetInstance()->GetCoinScore() >= myCost)
+	{
+		PlayerAccessor::GetInstance()->UpgradeRapidFire(myUpgradeType);
+		std::cout << "Shop button pressed" << std::endl;
+		ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
+	}
 }
 
 //void Studio::ShopButton::SetPosition(VECTOR2F aPosition)

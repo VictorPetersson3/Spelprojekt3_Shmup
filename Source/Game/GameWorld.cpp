@@ -17,6 +17,7 @@
 #include "InputManager.h"
 #include "Enums.h"
 #include "Timer.h"
+#include "PlayerAccessor.h"
 
 CGameWorld::CGameWorld()
 {
@@ -60,6 +61,8 @@ void CGameWorld::Init()
 	SAFE_CREATE(myPlayerData, Studio::Player_JsonParser("json/player/player.json"));
 	SAFE_CREATE(myPlayer, Studio::Player(myPlayerData));
 	Studio::MenuManagerSingleton::Construct(myPlayer);
+
+	Studio::PlayerAccessor::SetInstance(myPlayer);
 
 	SAFE_CREATE(myCoinManager, Studio::CoinManager());
 	Studio::CoinAccessor::SetInstance(myCoinManager);
