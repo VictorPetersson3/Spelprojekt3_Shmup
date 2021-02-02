@@ -64,7 +64,7 @@ function exportEnemy()
 
     let bullet = {};
     bullet["Type"] = valueOf("bullet-type");
-    bullet["Speed"] = ~~valueOf("bullet-speed");
+    bullet["Speed"] = Number(valueOf("bullet-speed"));
     bullet["ShootTowardsPlayer"] = valueOf("bullet-pattern") == "Yes" ? true : false;
     bullet["Interval"] = Number(valueOf("bullet-interval"));
     data["Bullet"] = bullet;
@@ -72,15 +72,12 @@ function exportEnemy()
 
     // animation
     animation = {};
-
     animation["ImagePath"] = document.getElementById("anim-image-path").value;
     animation["AmountOfFrames"] = {
         "X": Number(document.getElementById("anim-frames-x").value),
         "Y": Number(document.getElementById("anim-frames-y").value)
     };
-    // All three could be 
-    animation["IdleAnimationRange"] = {};
-
+    animation["Frames/Second"] = Number(valueOf("anim-speed"));
     [ //      Key                  Id
         ["IdleAnimationRange", "anim-idle"],
         ["UpAnimationRange", "anim-upwards"],
@@ -165,6 +162,10 @@ function importEnemy(e)
         valueOf("bullet-interval", bullet["Interval"]);
 
         let animation = content["Animation"];
+        valueOf("anim-image-path", animation["ImagePath"]);
+        valueOf("anim-frames-x", animation["AmountOfFrames"]["X"]);
+        valueOf("anim-frames-y", animation["AmountOfFrames"]["Y"]);
+        valueOf("anim-speed", animation["Frames/Second"]);
         // Animation
         [ //      Key                  Id
             ["IdleAnimationRange", "anim-idle"],

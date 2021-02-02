@@ -73,22 +73,14 @@
                 ImagePath <input type="text" id="anim-image-path" class="long-input">
             </p>
             <p>
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>X</th>
-                        <th>Y</th>
-                    </tr>
-                    <tr>
-                        <td>Amount of Frames</td>
-                        <td>
-                            <input type="number" id="anim-frames-x" class="enemy-box-input-position" placeholder="X">
-                        </td>
-                        <td>
-                            <input type="number" id="anim-frames-y" class="enemy-box-input-position" placeholder="Y">
-                        </td>
-                    </tr>
-                </table>
+                Amount of Frames
+                <input type="number" id="anim-frames-x" class="enemy-box-input-position" placeholder="X">
+                <input type="number" id="anim-frames-y" class="enemy-box-input-position" placeholder="Y">
+            </p>
+            <p>
+                Speed
+                <input type="number" min="0" id="anim-speed" placeholder="i.e 12" value="12">
+                (Frames/Second)
             </p>
             <p>
                 <fieldset id="anim-idle">
