@@ -3,9 +3,12 @@
 #include <Windows.h>
 #include "Vector2.hpp"
 
+// Spelprojektbaserat - Spel 3 Grupp 5
+#include <string>
+#include <vector>
+
 namespace CommonUtilities
 {
-
 	enum class eMouseInput
 	{
 		eLPressed,
@@ -20,14 +23,11 @@ namespace CommonUtilities
 		eEnd
 	};
 
-
 	class InputManager
 	{
 	public:
 
 		InputManager();
-
-
 
 		bool IsKeyPressed(const int aKeyCode) const;
 		bool IsKeyUp(const int aKeyCode) const;
@@ -55,6 +55,10 @@ namespace CommonUtilities
 		void LockMouseToWindow(bool aLockMouse);
 		bool UpdateMouseInputEvents(HWND hwndMain, UINT message, WPARAM wParam, LPARAM lParam);
 
+		// Spelprojektbaserat - Spel 3 Grupp 5
+		void BindCustomKeys(int aCustomKey, std::initializer_list<int> aKeyCodes);
+		bool IsCustomKeyDown(int aCustomKey) const;
+		bool IsCustomKeyPressed(int aCustomKey) const;
 
 	private:
 		Vector2f myMousePosition;
@@ -64,6 +68,8 @@ namespace CommonUtilities
 		std::map<int, bool> myPreviousKeyMap;
 		std::map<eMouseInput, bool> myMouseMap;
 
+		// Spelprojektbaserat - Spel 3 Grupp 5
+		std::map<int, std::vector<int>> myCustomKeyBindings;
 	};
 }
 

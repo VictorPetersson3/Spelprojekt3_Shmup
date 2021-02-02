@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GameWorld.h"
-#include<iostream>
+#include <iostream>
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
@@ -14,9 +14,8 @@
 #include "ScoreAccessor.h"
 #include "AudioManagerAccesor.h"
 #include "Player_JsonParser.h"
-
-// Freeze
 #include "InputManager.h"
+#include "Enums.h"
 #include "Timer.h"
 
 CGameWorld::CGameWorld()
@@ -37,6 +36,21 @@ CGameWorld::~CGameWorld()
 
 void CGameWorld::Init()
 {
+	//// Custom Key Bindings
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_FlyUp,     { 'W', 38, 'I' });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_FlyDown,   { 'S', 40, 'K' });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_FlyRight,  { 'D', 39, 'L' });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_FlyLeft,   { 'A', 37, 'J' });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_RapidFire, { '1', 'Z' });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_Explosive, { '2', 'X' });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_Shield,    { '3', 'C' });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_Shoot,     { KEY_SPACE });
+	Studio::InputManager::GetInstance()->BindCustomKeys(Studio::Enums::CustomKey_Pause,     { KEY_ESCAPE, 'P' });
+	//// Example on how to use CustomKeys
+	// InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKey_Explosive)
+	//// Or
+	// InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Explosive)
+
 	myRenderer.Init();
 	Studio::AudioManagerAccessor::Construct();
 	Studio::RendererAccessor::SetInstance(&myRenderer);

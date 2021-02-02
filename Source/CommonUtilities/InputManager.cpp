@@ -187,4 +187,38 @@ bool CommonUtilities::InputManager::UpdateMouseInputEvents(HWND hwndMain, UINT m
     return false;
 }
 
+void CommonUtilities::InputManager::BindCustomKeys(int aCustomKey, std::initializer_list<int> aKeyCodes)
+{
+    for (auto& keyCode : aKeyCodes)
+    {
+        myCustomKeyBindings[aCustomKey].push_back(keyCode);
+    }
+}
 
+bool CommonUtilities::InputManager::IsCustomKeyDown(int aCustomKey) const
+{
+    for (auto& keyCode : myCustomKeyBindings.at(aCustomKey))
+    {
+        if (IsKeyDown(keyCode))
+        {
+            return true;
+        }
+    }
+
+    // None of the keys were held down
+    return false;
+}
+
+bool CommonUtilities::InputManager::IsCustomKeyPressed(int aCustomKey) const
+{
+    for (auto& keyCode : myCustomKeyBindings.at(aCustomKey))
+    {
+        if (IsKeyPressed(keyCode))
+        {
+            return true;
+        }
+    }
+
+    // None of the keys were pressed
+    return false;
+}

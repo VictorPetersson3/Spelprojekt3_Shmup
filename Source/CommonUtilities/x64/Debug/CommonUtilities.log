@@ -1,8 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  pch.cpp
-  CommonUtilities.cpp
-  CURandom.cpp
-D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\CURandom.cpp(13,22): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
   InputManager.cpp
 D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(8,26): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
 D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(98,28): warning C4244: '=': conversion from 'const T' to 'LONG', possible loss of data
@@ -26,6 +22,4 @@ D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(155,43): wa
               T=float
           ]
 D:\Github\Spelprojekt3_Shmup\Source\CommonUtilities\InputManager.cpp(183,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Timer.cpp
-  Generating Code...
   CommonUtilities.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\\AdditionalDependencies\Lib\CommonUtilities_Debug_x64.lib
