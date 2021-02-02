@@ -68,8 +68,6 @@ namespace Studio
 			{
 				ScoreAccessor::GetInstance()->AddCoinScore(1);
 				worldCoins.erase(worldCoins.begin() + i);
-
-				printf_s("bruh");
 			}
 		}
 		//GameObject::GetCollider().Render();
@@ -119,11 +117,16 @@ namespace Studio
 			myPlayerData->UpgradeRapidFireDurationT2();
 			break;
 		case Studio::Enums::RapidFireUpgrades::PenetratingT3:
-			//Not implemented yet
+			myHasPurchasedPenetratingRounds = true;
 			break;
 		default:
 			break;
 		}
+	}
+
+	bool Player::HasPenetratingRounds()
+	{
+		return myHasPenetratingRounds;
 	}
 
 	const bool Player::GetHasCollided() const
@@ -133,6 +136,10 @@ namespace Studio
 
 	void Player::Movement()
 	{
+		if (InputManager::GetInstance()->IsKeyPressed('4'))
+		{
+			UpgradeRapidFire(Enums::RapidFireUpgrades::PenetratingT3);
+		}
 		bool wKey = InputManager::GetInstance()->IsKeyDown('W');
 		bool aKey = InputManager::GetInstance()->IsKeyDown('A');
 		bool sKey = InputManager::GetInstance()->IsKeyDown('S');
@@ -326,6 +333,10 @@ namespace Studio
 			myRapidFireCurrentCooldown = 0.f;
 
 			myRapidFireIsActive = true;
+			if (myHasPurchasedPenetratingRounds)
+			{
+				myHasPenetratingRounds = true;
+			}
 
 			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() * (1 - myPlayerData->GetRapidFireAttackSpeed() * 0.01));
 		}
@@ -350,7 +361,7 @@ namespace Studio
 		if (myRapidFireCurrentlyActiveTime > myPlayerData->GetRapidFireMaxActiveTime())
 		{
 			myRapidFireIsActive = false;
-
+			myHasPenetratingRounds = false;
 			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() / (1 - myPlayerData->GetRapidFireAttackSpeed() * 0.01));
 		}
 	}

@@ -309,10 +309,6 @@ void Studio::Player_JsonParser::UpgradeRapidFireDurationT2()
 	myRapidFireMaxActiveTime += myRapidFireDurationT2;
 }
 
-void Studio::Player_JsonParser::UpgradeRapidFirePenetrate()
-{
-	//Not implemented yet
-}
 
 
 

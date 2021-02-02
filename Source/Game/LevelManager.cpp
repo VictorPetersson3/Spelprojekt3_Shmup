@@ -154,7 +154,12 @@ namespace Studio
 
 	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition)
 	{
-		myBullets.push_back(myBulletFactory->CreateBulletObject(aType, aPosition));
+		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition);
+		if (myPlayer->HasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
+		{
+			bullet->SetIsPenetrating();
+		}
+		myBullets.push_back(bullet);
 	}
 
 	bool LevelManager::LevelIsCleared()
@@ -231,9 +236,16 @@ namespace Studio
 					{
 						if (myBoss->Intersects(*myBullets[i]))
 						{
-							myBoss->TakeDamage(25.0f);
-							//printf_s("BossHealth: %f\n", myBoss->GetCurrentHealth());
-							myBullets.erase(myBullets.begin() + i);
+							if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
+							{
+								if (myBullets[i]->GetIsPenetrating() == false)
+								{
+									myBullets.erase(myBullets.begin() + i);
+								}
+								myBullets[i]->RegisterEnemyHit(myBoss);
+								myBoss->TakeDamage(25.0f);
+
+							}
 						}
 					}
 					//When the boss dies?
@@ -275,8 +287,15 @@ namespace Studio
 							{
 								if (myEnemies[i]->Intersects(*myBullets[j]))
 								{
-									myBullets.erase(myBullets.begin() + j);
-									myEnemies[i]->TakeDamage(100);
+									if (myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
+									{
+										if (myBullets[j]->GetIsPenetrating() == false)
+										{
+											myBullets.erase(myBullets.begin() + j);
+										}
+										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
+										myEnemies[i]->TakeDamage(100);
+									}
 								}
 							}
 						}
