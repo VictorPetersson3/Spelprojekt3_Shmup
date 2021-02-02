@@ -10,8 +10,9 @@ namespace Studio
 		myCoinScore = 0;
 		myKillScore = 0;
 
-		myCoinTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetMainMenu()->GetElementWithTag("CoinText"));
-		myKillTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetMainMenu()->GetElementWithTag("ScoreText"));
+		myCoinTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetHUD()->GetElementWithTag("CoinText"));
+		myKillTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetHUD()->GetElementWithTag("ScoreText"));
+		myShopCoinTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetShop()->GetElementWithTag("ShopCoinText"));
 		if (myCoinTextElement != nullptr)
 		{
 			std::cout << "Score text found" << std::endl;
@@ -24,6 +25,8 @@ namespace Studio
 
 		std::string killScoreString = std::to_string(myKillScore);
 		myKillTextElement->SetText("x" + killScoreString);
+
+		myShopCoinTextElement->SetText("Your score: " + coinScoreString);
 	}
 	void ScoreManager::AddCoinScore(int anAmount)
 	{

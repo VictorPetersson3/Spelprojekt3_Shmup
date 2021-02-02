@@ -203,6 +203,8 @@
       <Filter>GameObjects\Effects</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAccessor.cpp" />
+    <ClCompile Include="ShopButton.cpp" />
+    <ClCompile Include="ShopUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -419,6 +421,8 @@
       <Filter>GameObjects\Effects</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAccessor.h" />
+    <ClInclude Include="ShopButton.h" />
+    <ClInclude Include="ShopUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

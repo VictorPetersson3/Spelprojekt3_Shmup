@@ -19,7 +19,10 @@ Studio::TextElement::~TextElement()
 
 void Studio::TextElement::Render()
 {
-	myText->Render();
+	if (myIsEnabled == true)
+	{
+		myText->Render();
+	}
 }
 
 void Studio::TextElement::SetText(std::string& aText)

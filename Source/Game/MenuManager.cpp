@@ -7,9 +7,9 @@ namespace Studio
 {
     Studio::MenuManager::MenuManager(Studio::Player* aPlayer)
     {
+        myShopUI = new Studio::ShopUI();
+
         myMainMenu.Add(myTestButton);
-        myMainMenu.Add(myScoreText);
-        myMainMenu.Add(myCoinText);
         myMainMenu.Add(myGodModeButton);
         myMainMenu.Enable();
 
@@ -18,7 +18,19 @@ namespace Studio
         myHud.Add(myHeart2Element);
         myHud.Add(myHeart3Element);
         myHud.Add(myHeart4Element);
+        myHud.Add(myScoreText);
+        myHud.Add(myCoinText);
         myHud.Disable();
+
+        myShop.Add(myShopBackground);
+        for (ShopButton* b : myShopUI->GetShopButtons())
+        {
+            myShop.Add((b));
+        }
+
+        myShop.Add(myShopCoinText);
+
+        myShop.Disable();
 
         myPlayer = aPlayer;
     }
@@ -37,12 +49,17 @@ namespace Studio
     {
         return &myPausMenu;
     }
+
+    MenuObject* MenuManager::GetShop()
+    {
+        return &myShop;
+    }
  
     void MenuManager::Update()
     {
         myMainMenu.Update();
         myHud.Update();
-
+        myShop.Update();
        
         if (myPlayer->GetCurrentHealth() == 3)
         {
@@ -66,6 +83,7 @@ namespace Studio
     {
         myScoreText->Render();
         myCoinText->Render();
+        myShopCoinText->Render();
     }
 
     bool MenuManager::GameStarted()

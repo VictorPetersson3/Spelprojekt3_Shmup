@@ -33,8 +33,8 @@ void Studio::MenuObject::Add(UIElement* aElementToAdd)
 void Studio::MenuObject::Update()
 {
 	for (UIElement* e : myElements)
-	{
-		e->Update();
+	{		
+		e->Update();	
 	}
 }
 

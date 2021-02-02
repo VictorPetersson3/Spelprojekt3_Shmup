@@ -7,6 +7,8 @@
 #include "GodModeButton.h"
 #include "ImageElement.h"
 #include "Player.h"
+#include "ShopUI.h"
+#include "ShopButton.h"
 
 namespace Studio
 {
@@ -14,10 +16,13 @@ namespace Studio
 	{
 	public:
 		MenuManager(Studio::Player* aPlayer);
+		
+		std::vector<UIElement*> myShopButtons;
 
 		MenuObject* GetMainMenu();
 		MenuObject* GetHUD();
 		MenuObject* GetPauseMenu();
+		MenuObject* GetShop();
 
 		void Update();
 
@@ -30,6 +35,9 @@ namespace Studio
 		MenuObject myMainMenu;
 		MenuObject myHud;
 		MenuObject myPausMenu;
+		MenuObject myShop;
+
+		ShopUI* myShopUI;
 
 		Studio::Player* myPlayer;
 
@@ -45,7 +53,8 @@ namespace Studio
 		ImageElement* myHeart2Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1000,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart2");
 		ImageElement* myHeart3Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1040,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart3");
 		ImageElement* myHeart4Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1080,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart4");
-
+		ImageElement* myShopBackground = new ImageElement("Sprites/UI/ShopBackground.dds", { 960,540 }, { 10,10 }, { 0.5f,0.5f }, 0, "ShopBackground");
+		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.1,0.5 }, "ShopCoinText");
 	};
 
 

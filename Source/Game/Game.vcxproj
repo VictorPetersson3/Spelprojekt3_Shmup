@@ -198,6 +198,8 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScoreAccessor.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="ShopButton.h" />
+    <ClInclude Include="ShopUI.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="stdafx.h" />
@@ -272,6 +274,8 @@
     <ClCompile Include="RendererAccessor.cpp" />
     <ClCompile Include="ScoreAccessor.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="ShopButton.cpp" />
+    <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="stdafx.cpp">

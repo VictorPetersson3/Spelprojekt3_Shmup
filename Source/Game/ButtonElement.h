@@ -19,6 +19,8 @@ namespace Studio
 		virtual void OnClick();
 		virtual void Update();
 
+		void SetPosition(VECTOR2F aPosition);
+
 	protected:
 		Tga2D::CSprite* mySprite;
 		SpriteSheet* mySpriteSheet;

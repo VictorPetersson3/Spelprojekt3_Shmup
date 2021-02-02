@@ -22,6 +22,14 @@
 #include "Renderer.h"
 #include <tga2d/sprite/sprite.h>
 
+// Menu
+#include "MenuManagerSingleton.h"
+#include "MenuManager.h"
+#include "MenuObject.h"
+
+// Input
+#include "InputManager.h"
+
 namespace Studio
 {
 	LevelManager::LevelManager()
@@ -85,14 +93,29 @@ namespace Studio
 
 	void LevelManager::Update(Player* aPlayer)
 	{
+
+		if (Studio::InputManager::GetInstance()->IsKeyDown('Y'))
+		{
+			myLevelIsCleared = true;
+		}
+
+		if (Studio::InputManager::GetInstance()->IsKeyDown('I'))
+		{
+			MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
+		}
+
 		//Pu som kommer drömma mardrömmar av denna rad
 		myPlayer = aPlayer;
-		if (myLevelIsCleared)
+		if (myLevelIsCleared == true)
 		{
 			/*SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
 			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);*/
-			myBoss->Update();
+			//myBoss->Update();
+
+			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+
 			LevelLogic();
 		}
 		else
