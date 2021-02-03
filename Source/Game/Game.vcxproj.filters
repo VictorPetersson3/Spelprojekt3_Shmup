@@ -209,6 +209,9 @@
     <ClCompile Include="ShopButtonTier2.cpp" />
     <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="GenericButton.cpp" />
+    <ClCompile Include="Module_Movement.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -431,6 +434,9 @@
     <ClInclude Include="ShopButtonTier2.h" />
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="GenericButton.h" />
+    <ClInclude Include="Module_Movement.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
