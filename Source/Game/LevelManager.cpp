@@ -81,6 +81,9 @@ namespace Studio
 				printf("LevelPath: %s\n", file.c_str());
 			}
 		}
+		myLevelBossSpawned = false;
+		myLevelEnemiesCleared = false;
+		myLevelIsCleared = false;
 	}
 
 	LevelManager::~LevelManager()
