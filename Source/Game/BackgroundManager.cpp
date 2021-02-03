@@ -14,7 +14,7 @@
 void Studio::BackgroundManager::CreateBackground(const int aLevelIndex)
 {
 	const char* levelPath = myLevelPaths[aLevelIndex].c_str();
-
+	myBackgroundObjects.clear();
 	rapidjson::Document document;
 
 	std::string text;

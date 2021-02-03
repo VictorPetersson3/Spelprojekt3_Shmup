@@ -82,21 +82,7 @@ void CGameWorld::Init()
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
 	myMenuManager->Load();
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('F'))
-	{
-		Studio::Timer::GetInstance()->ToggleFreeze();
-		if (Studio::Timer::GetInstance()->IsFrozen())
-		{
-			printf_s("Froze game\n");
-			myMenuManager->GetPauseMenu()->Enable();
-		}
-		else
-		{
-			myMenuManager->GetPauseMenu()->Disable();
-			printf_s("Resumed game\n");
-		}
-	}
-
+	InputStuff();
 	if (myMenuManager->GameStarted())
 	{
 		if (myMenuManager->GetGodMode() == true)
@@ -122,4 +108,37 @@ void CGameWorld::Render()
 void CGameWorld::SwapBuffers()
 {
 	myRenderer.SwapBuffers();
+}
+void CGameWorld::InputStuff()
+{
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('F'))
+	{
+		Studio::Timer::GetInstance()->ToggleFreeze();
+		if (Studio::Timer::GetInstance()->IsFrozen())
+		{
+			printf_s("Froze game\n");
+			myMenuManager->GetPauseMenu()->Enable();
+		}
+		else
+		{
+			myMenuManager->GetPauseMenu()->Disable();
+			printf_s("Resumed game\n");
+		}
+	}
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('L'))
+	{
+		myLevelManager->ReloadLevel();
+	}
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('K'))
+	{
+		Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 2);
+	}
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('J'))
+	{
+		Studio::Timer::GetInstance()->SetSpeed(1);
+	}
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('H'))
+	{
+		Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 0.5);
+	}
 }

@@ -340,7 +340,9 @@ namespace Studio
 
 	void LevelManager::LoadLevel(int aLevelIndex)
 	{
-
+		myPacks.clear();
+		myEnemies.clear();
+		myBullets.clear();
 		myCurrentLevel = aLevelIndex;
 		myLevelIsCleared = false;
 
@@ -387,6 +389,11 @@ namespace Studio
 		{
 			myBackgroundManager->CreateBackground(myCurrentLevel);
 		}
+	}
+
+	void LevelManager::ReloadLevel()
+	{
+		LoadLevel(myCurrentLevel);
 	}
 
 	const int LevelManager::GetCurrentLevelIndex() const { return myCurrentLevel; }

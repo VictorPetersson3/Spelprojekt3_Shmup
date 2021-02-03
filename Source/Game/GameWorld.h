@@ -33,6 +33,7 @@ public:
 	void Render();
 	void SwapBuffers();
 private:
+	void InputStuff();
 	Studio::BackgroundManager myBackgroundManager;
 	Renderer myRenderer;
 	Tga2D::CSprite* myTga2dLogoSprite;

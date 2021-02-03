@@ -30,6 +30,7 @@ namespace Studio
 		void SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition);
 		bool LevelIsCleared();
 		void LoadLevel(const int aLevelIndex);
+		void ReloadLevel();
 		const int GetCurrentLevelIndex() const;
 		const std::vector<std::string>& GetLevelPaths() const;
 
