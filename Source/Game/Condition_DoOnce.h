@@ -7,7 +7,7 @@ namespace Studio
 	public:
 		Condition_DoOnce(rapidjson::Value& aConditionParameters);
 
-		bool IsDone() override;
+		bool IsDone(Boss& aBoss) override;
 	private:
 
 	};

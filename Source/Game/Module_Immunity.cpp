@@ -4,21 +4,31 @@
 Studio::Module_Immunity::Module_Immunity(rapidjson::Value& aModuleParameters) :
 	Module(aModuleParameters)
 {
-	if (aModuleParameters.HasMember("On") && aModuleParameters["On"].IsString())
+	if (aModuleParameters["On"].IsString())
 	{
-		if (aModuleParameters["On"].GetString() == "On")
+		std::string name = aModuleParameters["On"].GetString();
+		if (name == "On")
 		{
 			myGodmodeChoice = true;
 		}
-		else
+		else if (name == "Off")
 		{
 			myGodmodeChoice = false;
 		}
+		else
+		{
+			printf("Module immunity is not read correctly\n");
+		}
+	}
+	else
+	{
+		printf("Module immunity is not read correctly\n");
 	}
 }
 
-bool Studio::Module_Immunity::DoStuff()
+bool Studio::Module_Immunity::DoStuff(Boss& aBoss)
 {
-	//Set Boss GodMode here TODO also change in health so you can send in a parameter for what you want.
+	aBoss.SetGodMode(myGodmodeChoice);
+	printf("immunity set\n");
 	return true;
 }

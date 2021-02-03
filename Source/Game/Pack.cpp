@@ -34,7 +34,7 @@ namespace Studio
 				myTimedIntervals.push_back(enemies[i]["Timer"].GetFloat() / 1000.0f);
 
 				// Create enemy and store it
-				auto enemy = myLevelManager->myEnemyFactory->CreateEnemyObject("Default", { x, y });
+				auto enemy = myLevelManager->myEnemyFactory->CreateEnemyObject(enemies[i]["Type"].GetString(), { x, y });
 				myStoredEnemies.push_back(enemy);
 				c++;
 			}

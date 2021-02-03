@@ -56,7 +56,6 @@ namespace Studio
 		void UpgradeRapidFireAttackSpeedT2();
 		void UpgradeRapidFireDurationT1();
 		void UpgradeRapidFireDurationT2();
-		void UpgradeRapidFirePenetrate();
 
 	private:
 

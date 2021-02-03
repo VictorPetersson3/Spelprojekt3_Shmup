@@ -142,6 +142,7 @@
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossManager.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletFactory.h" />
     <ClInclude Include="ButtonElement.h" />
@@ -198,6 +199,8 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScoreAccessor.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="ShopButton.h" />
+    <ClInclude Include="ShopUI.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="stdafx.h" />
@@ -219,6 +222,7 @@
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
     <ClCompile Include="ButtonElement.cpp" />
@@ -272,6 +276,8 @@
     <ClCompile Include="RendererAccessor.cpp" />
     <ClCompile Include="ScoreAccessor.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="ShopButton.cpp" />
+    <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="stdafx.cpp">

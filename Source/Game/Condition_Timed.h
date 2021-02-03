@@ -8,7 +8,11 @@ namespace Studio
 	public:
 		Condition_Timed(rapidjson::Value& aConditionParameters);
 
-		bool IsDone() override;
+		bool IsDone(Boss& aBoss) override;
+
+	private:
+
+		float myCondition;
 	};
 
 }

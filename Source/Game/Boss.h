@@ -23,7 +23,10 @@ namespace Studio
 
 		void Update();
 
-		void CheckCurrentPhaseCondition();
+		bool CheckCurrentPhaseCondition();
+		//Tänk på en ny lösning när du får tid
+		bool GetCurrentPhaseHasPlayedOnce();
+		bool CheckEnrageCondition(float aElapsedTime);
 
 		//Legacy Boss "Swedish Abilities"
 		/*void SendInTheCaroleans(float anAmountOfCanonFodder);
@@ -32,8 +35,11 @@ namespace Studio
 		bool ActPassive(float aInternationalNotoriety);
 		void EnforceAlleMansRätt();*/
 		
+		void UpdateMovement(); 
+
+		float GetTotalBossTime();
 		VECTOR2F GetPosition();
-		std::vector<VECTOR2F*> GetBulletSpawnPositions();
+		std::vector<VECTOR2F> GetBulletSpawnPositions();
 		
 	protected:
 
@@ -41,11 +47,7 @@ namespace Studio
 		
 		int myCurrentPhase;
 		int myPhaseAmount;
-		int myLaserCooldown;
 		int myTotalFightTime;
-
-		float myEnrageTimer;
-		float myEnrageTimeCondition;
 
 		VECTOR2F myPosition;
 		
@@ -53,8 +55,9 @@ namespace Studio
 
 		HealthBar myHealthBar;
 		std::vector<Condition*> myConditions;
+		Condition* myEnrageCondition;
 		std::vector<Phase*> myPhases;
-		std::vector<VECTOR2F*> myBulletSpawnPositions;
+		std::vector<VECTOR2F> myBulletSpawnPositions;
 	};
 
 

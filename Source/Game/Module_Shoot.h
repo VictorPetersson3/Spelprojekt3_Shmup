@@ -10,17 +10,18 @@ namespace Studio
 	public:
 		Module_Shoot(rapidjson::Value& aModuleParameter);
 
-		bool DoStuff() override;
+		bool DoStuff(Boss& aBoss) override;
 
 	protected:
 		
 
 	private:
-		std::vector<VECTOR2F*> myBulletSpawnPositions;
+		VECTOR2F mySpawnPosition;
 		float myElapsedTime;
 		float myActiveDuration;
 		bool myShootTowardsPlayer;
-		const char* myBulletType;
+		bool mySpawnIsRelative;
+		std::string myBulletType;
 		Counter myCounter;
 	};
 }

@@ -9,10 +9,12 @@ namespace Studio
 	public:
 		Condition_Time(rapidjson::Value& aConditionParameters);
 
-		bool IsDone() override;
+		bool IsDone(Boss& aBoss) override;
 
 
 	private:
+		float myCondition;
+		float myElapsedTime;
 	};
 
 }
