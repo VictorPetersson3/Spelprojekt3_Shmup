@@ -168,6 +168,7 @@
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuManagerSingleton.h" />
     <ClInclude Include="MenuObject.h" />
+    <ClInclude Include="Missile.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_Delay.h" />
     <ClInclude Include="Module_Immunity.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuManagerSingleton.cpp" />
     <ClCompile Include="MenuObject.cpp" />
+    <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Module_Delay.cpp" />
     <ClCompile Include="Module_Immunity.cpp" />

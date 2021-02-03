@@ -11,6 +11,7 @@
 #include "Timer.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Missile.h"
 #include "Pack.h"
 #include "EnemyFactory.h"
 #include "BulletFactory.h"
@@ -126,7 +127,7 @@ namespace Studio
 		//Boss Logic
 		else if (myLevelBossSpawned)
 		{
-			myBoss->Update();
+			//myBoss->Update();
 			LevelLogic();
 		}
 		else
@@ -249,12 +250,12 @@ namespace Studio
 						{
 							if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
 							{
+								myBullets[i]->RegisterEnemyHit(myBoss);
+								myBoss->TakeDamage(25.0f);
 								if (myBullets[i]->GetIsPenetrating() == false)
 								{
 									myBullets.erase(myBullets.begin() + i);
 								}
-								myBullets[i]->RegisterEnemyHit(myBoss);
-								myBoss->TakeDamage(25.0f);
 
 							}
 						}
@@ -386,5 +387,12 @@ namespace Studio
 				myLevelBossSpawned = false;
 			}
 		}
+	}
+
+	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+	{
+		Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
+
+		myBullets.push_back(missile);
 	}
 }

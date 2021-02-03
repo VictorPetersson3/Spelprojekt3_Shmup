@@ -2,6 +2,9 @@
 #include "GameObject.h"
 namespace Studio
 {
+	GameObject::GameObject() : mySpriteSheet(nullptr)
+	{
+	}
 	// Deprecated. See GameObject.h for further details
 	GameObject::GameObject(Tga2D::CSprite* aSprite) : myRenderCommand(aSprite),
 		myHealth(100)

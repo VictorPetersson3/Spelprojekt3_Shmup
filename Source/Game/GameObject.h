@@ -25,7 +25,7 @@ namespace Studio
 		#pragma endregion
 
 	public:
-		GameObject() = default;
+		GameObject();
 
 		[[deprecated("Deprecated constructor. Use GameObject(const std::string& anImagePath) instead")]]
 		GameObject(Tga2D::CSprite* aSprite);
