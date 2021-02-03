@@ -31,18 +31,28 @@ void Studio::EnemyFactory::InitEnemyType(rapidjson::Document& someJsonData, cons
 
 Studio::Enemy* Studio::EnemyFactory::CreateEnemyObject(const std::string& aType, const Tga2D::Vector2f& aSpawnPosition)
 {
-	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjects.at(aType), aSpawnPosition);
+	std::string type = "Default";
+	for (auto types : myEnemyObjects)
+	{
+		if (aType == types.first)
+		{
+			type = aType;
+			break;
+		}
+	}
+	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjects.at(type), aSpawnPosition);
 	return tempObject;
 }
 
 void Studio::EnemyFactory::InitAllEnemyTypes()
 {
 	std::string directory = "JSON/Enemies";
+	int iterator = 0;
 	for (const auto& entry : std::filesystem::directory_iterator(directory))
 	{
 		auto file = entry.path().string();
 		printf_s("File %s\n", file.c_str());
-
+		
 		if (entry.path().extension().string() == ".json")
 		{
 			auto path = entry.path().string();
@@ -63,7 +73,10 @@ void Studio::EnemyFactory::InitAllEnemyTypes()
 
 			std::string type = path.substr(13);
 			type.erase(type.end()-5, type.end());
-
+			if (iterator == 0)
+			{
+				InitEnemyType(document, "Default");
+			}
 			InitEnemyType(document, type);
 		}
 	}

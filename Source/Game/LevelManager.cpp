@@ -38,10 +38,7 @@ namespace Studio
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 		SAFE_CREATE(myBulletFactory, BulletFactory());
 		SAFE_CREATE(myBoss, Boss("sprites/debugpixel.dds", { 1500.0f, 520.0f }, 1000.0f));
-		//myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
 		myEnemyFactory->InitAllEnemyTypes();
-		myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
-		//															    ^ key
 
 		SAFE_CREATE(myBossManager, BossManager());
 
@@ -288,7 +285,7 @@ namespace Studio
 			{
 				for (int i = myEnemies.size() - 1; i >= 0; i--)
 				{
-					if (!myEnemies[i]->IsDead())
+					if (!myEnemies[i]->IsDead() && !myEnemies[i]->GetIsTerrain())
 					{
 						for (int j = myBullets.size() - 1; j >= 0; j--)
 						{
