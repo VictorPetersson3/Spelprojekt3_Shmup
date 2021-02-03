@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Player.h"
 #include "Bullet.h"
 #include "InputManager.h"
@@ -11,7 +11,6 @@
 #include "Coin.h"
 #include "Timer.h"
 #include "Player_JsonParser.h"
-
 
 #define SPRITESHEET GameObject::GetSpriteSheet()
 
@@ -112,6 +111,10 @@ namespace Studio
 				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y + 20.f });
 			}
 			myTimeSinceLastShot = 0.f;
+
+			// Launch
+			// TODO: Don't do this all the time
+			LaunchMissile();
 		}
 	}
 
@@ -246,10 +249,7 @@ namespace Studio
 
 	void Player::Movement()
 	{
-		if (InputManager::GetInstance()->IsKeyPressed('4'))
-		{
-			UpgradeRapidFire(Enums::RapidFireUpgrades::PenetratingT3);
-		}
+
 		bool wKey = InputManager::GetInstance()->IsKeyDown('W');
 		bool aKey = InputManager::GetInstance()->IsKeyDown('A');
 		bool sKey = InputManager::GetInstance()->IsKeyDown('S');
@@ -333,7 +333,7 @@ namespace Studio
 					mySpeed += myPlayerData->GetAcceleration();
 				}
 			}
-			printf("Player Speed: %f\n", mySpeed);
+			//printf("Player Speed: %f\n", mySpeed);
 			if (wKey && myPosition.y > 0)
 			{
 				if (myIsAnimatingDown || !myIsAnimating)
@@ -482,5 +482,9 @@ namespace Studio
 			myAmountOfProjectiles = 3;
 		}
 	}
-}
 
+	void Player::LaunchMissile()
+	{
+		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition);
+	}
+}

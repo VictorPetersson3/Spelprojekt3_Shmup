@@ -33,13 +33,14 @@ namespace Studio
 
 	private:
 		void Movement();
-
 		void RapidFireLogic();
 		void ActivateRapidFire();
 		void RapidFireIsActive();
 		void DeactivateRapidFire();
 		void AddAnotherProjectile();
+		void LaunchMissile();
 	private:
+
 		float mySpeed;
 		float myTimeSinceLastShot;
 		float myAnimationTurnSpeed;
