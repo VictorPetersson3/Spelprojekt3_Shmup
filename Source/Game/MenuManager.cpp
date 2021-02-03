@@ -11,6 +11,7 @@ namespace Studio
 
         myMainMenu.Add(myTestButton);
         myMainMenu.Add(myGodModeButton);
+        myMainMenu.Add(myStartButton);
         myMainMenu.Enable();
         
         myHud.Add(myTestElement);
@@ -29,8 +30,11 @@ namespace Studio
         }
 
         myShop.Add(myShopCoinText);
-
+        myShop.Add(myNextLevelButton);
         myShop.Disable();
+
+        myPausMenu.Add(myPausMenuBackground);
+        myPausMenu.Disable();
 
         myPlayer = aPlayer;
     }
@@ -60,6 +64,7 @@ namespace Studio
         myMainMenu.Update();
         myHud.Update();
         myShop.Update();
+        myPausMenu.Update();
        
         if (myPlayer->GetCurrentHealth() == 3)
         {

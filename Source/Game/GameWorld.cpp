@@ -18,6 +18,7 @@
 #include "Enums.h"
 #include "Timer.h"
 #include "PlayerAccessor.h"
+#include "MenuObject.h"
 
 CGameWorld::CGameWorld()
 {
@@ -87,9 +88,11 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		if (Studio::Timer::GetInstance()->IsFrozen())
 		{
 			printf_s("Froze game\n");
+			myMenuManager->GetPauseMenu()->Enable();
 		}
 		else
 		{
+			myMenuManager->GetPauseMenu()->Disable();
 			printf_s("Resumed game\n");
 		}
 	}
