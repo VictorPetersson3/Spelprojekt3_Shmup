@@ -36,6 +36,51 @@ namespace Studio
 			
 		};
 
+		enum class Tier1Upgrades
+		{
+			RapidFireCooldown,
+			RapidFireAttackSpeed,
+			RapidFireDuration,
+
+			MovementSpeed,
+
+			BasicAttackSpeed,
+
+			MissileExplosionRadius,
+			MissileCooldown,
+			MissileDamage,
+
+			ShieldDuration,
+			ShieldHealth,
+			ShieldCooldown
+		};
+		enum class Tier2Upgrades
+		{
+			RapidFireAttackSpeed,
+			RapidFireDuration,
+
+			BasicAttackSpeed,
+			BasicAttackAdditionalProjectile,
+
+			MissileExplosionRadius,
+			MissileCooldown,
+			MissileDamage,
+
+			ShieldDuration,
+			ShieldHealth,
+			ShieldCooldown
+		};
+		enum class Tier3Upgrades
+		{
+			RapidFirePenetrating,
+
+			BasicAttackSpeed,
+
+			MissileCluster,
+
+			ShieldExplosion
+		};
+
 		// InputManager
 		// ============
 		// Note that enum class is not used.

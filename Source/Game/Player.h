@@ -26,6 +26,9 @@ namespace Studio
 		const bool GetHasCollided() const;
 
 		void UpgradeRapidFire(Enums::RapidFireUpgrades aRapidFireUpgrade);
+		void UpgradeT1(Enums::Tier1Upgrades aTier1Upgrade);
+		void UpgradeT2(Enums::Tier2Upgrades aTier2Upgrade);
+		void UpgradeT3(Enums::Tier3Upgrades aTier3Upgrade);
 		bool HasPenetratingRounds();
 
 	private:
@@ -35,6 +38,7 @@ namespace Studio
 		void ActivateRapidFire();
 		void RapidFireIsActive();
 		void DeactivateRapidFire();
+		void AddAnotherProjectile();
 	private:
 		float mySpeed;
 		float myTimeSinceLastShot;
@@ -43,6 +47,9 @@ namespace Studio
 		float myRapidFireCurrentCooldown;
 		float myRapidFireCurrentlyActiveTime;
 		float myRapidFireMaxActiveTime;
+
+		//BasicAttacks
+		float myAmountOfProjectiles;
 
 		float myBounceBackTime;
 		float myCurrentBounceTime;

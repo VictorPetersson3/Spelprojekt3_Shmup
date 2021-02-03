@@ -20,7 +20,6 @@ namespace Studio
 		const float GetMaxSpeed() const;
 		//Basic Attacks
 		const float GetShootCoolDown() const;
-		const float GetCDReductionPercentage() const;
 		//Rapid Fire
 		const float GetRapidFireMaxCooldown() const;
 		const float GetRapidFireMaxActiveTime() const;
@@ -48,14 +47,17 @@ namespace Studio
 		void SetAnimationTurnSpeed(const float aAnimSpeed);
 		void SetRapidFireMaxCooldown(const float aRapidCoolDown);
 		void SetRapidFireMaxActiveTime(const float aMaxActiveTime);
-		void SetCDReductionPercentage(const float aCDReduction);
-		void AddToCDReductionPercentage(const float aCDReduction);
 
 		void UpgradeRapidFireCooldownT1();
 		void UpgradeRapidFireAttackSpeedT1();
 		void UpgradeRapidFireAttackSpeedT2();
 		void UpgradeRapidFireDurationT1();
 		void UpgradeRapidFireDurationT2();
+
+		void UpgradeBasicAttackSpeedT1();
+		void UpgradeBasicAttackSpeedT2();
+		void UpgradeBasicAttackSpeedT3();
+		void UpgradeProjectileAmountT2();
 
 	private:
 
@@ -68,9 +70,12 @@ namespace Studio
 		float myMinSpeed;
 		float myMaxSpeed;
 
-		//Auto attacks
+		//Basic attacks
 		float myShootCoolDown;
-		float myShootingCDReductionPercentage;
+		//Basic Attack Upgrades
+		float myBasicAttackSpeedIncreaseT1;
+		float myBasicAttackSpeedIncreaseT2;
+		float myBasicAttackSpeedIncreaseT3;
 
 		//Rapid fire
 		float myRapidFireAttackSpeed;

@@ -33,6 +33,8 @@ namespace Studio
 		myTimeSinceLastShot = 0.f;
 		myBounceBackTime = 0.25;
 
+		myAmountOfProjectiles = 1;
+
 		mySpeed = somePlayerData->GetMinSpeed();
 		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
 		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
@@ -49,6 +51,20 @@ namespace Studio
 	{
 		if (!IsDead())
 		{
+			if (InputManager::GetInstance()->IsKeyPressed('2'))
+			{
+				UpgradeT1(Enums::Tier1Upgrades::BasicAttackSpeed);
+			}
+			if (InputManager::GetInstance()->IsKeyPressed('3'))
+			{
+				UpgradeT2(Enums::Tier2Upgrades::BasicAttackSpeed);
+
+			}
+			if (InputManager::GetInstance()->IsKeyPressed('4'))
+			{
+				UpgradeT3(Enums::Tier3Upgrades::BasicAttackSpeed);
+			}
+			printf_s("%f", myPlayerData->GetShootCoolDown());
 			Movement();
 
 			Player::GameObject::Update(myPosition + myDirection);
@@ -78,7 +94,23 @@ namespace Studio
 		myTimeSinceLastShot += Timer::GetInstance()->TGetDeltaTime();
 		if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
 		{
-    		Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", myPosition);
+			if (myAmountOfProjectiles == 1)
+			{
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 5.f });
+
+			}
+			else if (myAmountOfProjectiles == 2)
+			{
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 20.f });
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y + 10.f });
+
+			}
+			else if (myAmountOfProjectiles == 3)
+			{
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 5.f });
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 30.f });
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y + 20.f });
+			}
 			myTimeSinceLastShot = 0.f;
 		}
 	}
@@ -119,7 +151,85 @@ namespace Studio
 		case Studio::Enums::RapidFireUpgrades::PenetratingT3:
 			myHasPurchasedPenetratingRounds = true;
 			break;
-		default:
+		}
+	}
+
+	void Player::UpgradeT1(Enums::Tier1Upgrades aTier1Upgrade)
+	{
+		switch (aTier1Upgrade)
+		{
+		case Studio::Enums::Tier1Upgrades::RapidFireCooldown:
+			myPlayerData->UpgradeRapidFireCooldownT1();
+			break;
+		case Studio::Enums::Tier1Upgrades::RapidFireAttackSpeed:
+			myPlayerData->UpgradeRapidFireAttackSpeedT1();
+			break;
+		case Studio::Enums::Tier1Upgrades::RapidFireDuration:
+			myPlayerData->UpgradeRapidFireDurationT1();
+			break;
+		case Studio::Enums::Tier1Upgrades::MovementSpeed:
+			break;
+		case Studio::Enums::Tier1Upgrades::BasicAttackSpeed:
+			myPlayerData->UpgradeBasicAttackSpeedT1();
+			break;
+		case Studio::Enums::Tier1Upgrades::MissileExplosionRadius:
+			break;
+		case Studio::Enums::Tier1Upgrades::MissileCooldown:
+			break;
+		case Studio::Enums::Tier1Upgrades::MissileDamage:
+			break;
+		case Studio::Enums::Tier1Upgrades::ShieldDuration:
+			break;
+		case Studio::Enums::Tier1Upgrades::ShieldHealth:
+			break;
+		case Studio::Enums::Tier1Upgrades::ShieldCooldown:
+			break;
+		}
+	}
+
+	void Player::UpgradeT2(Enums::Tier2Upgrades aTier2Upgrade)
+	{
+		switch (aTier2Upgrade)
+		{
+		case Studio::Enums::Tier2Upgrades::RapidFireAttackSpeed:
+			myPlayerData->UpgradeRapidFireAttackSpeedT2();
+			break;
+		case Studio::Enums::Tier2Upgrades::RapidFireDuration:
+			myPlayerData->UpgradeRapidFireDurationT2();
+			break;
+		case Studio::Enums::Tier2Upgrades::BasicAttackSpeed:
+			myPlayerData->UpgradeBasicAttackSpeedT2();
+			break;
+		case Studio::Enums::Tier2Upgrades::BasicAttackAdditionalProjectile:
+			break;
+		case Studio::Enums::Tier2Upgrades::MissileExplosionRadius:
+			break;
+		case Studio::Enums::Tier2Upgrades::MissileCooldown:
+			break;
+		case Studio::Enums::Tier2Upgrades::MissileDamage:
+			break;
+		case Studio::Enums::Tier2Upgrades::ShieldDuration:
+			break;
+		case Studio::Enums::Tier2Upgrades::ShieldHealth:
+			break;
+		case Studio::Enums::Tier2Upgrades::ShieldCooldown:
+			break;
+		}
+	}
+
+	void Player::UpgradeT3(Enums::Tier3Upgrades aTier3Upgrade)
+	{
+		switch (aTier3Upgrade)
+		{
+		case Studio::Enums::Tier3Upgrades::RapidFirePenetrating:
+			myHasPurchasedPenetratingRounds = true;
+			break;
+		case Studio::Enums::Tier3Upgrades::BasicAttackSpeed:
+			myPlayerData->UpgradeBasicAttackSpeedT3();
+			break;
+		case Studio::Enums::Tier3Upgrades::MissileCluster:
+			break;
+		case Studio::Enums::Tier3Upgrades::ShieldExplosion:
 			break;
 		}
 	}
@@ -363,6 +473,13 @@ namespace Studio
 			myRapidFireIsActive = false;
 			myHasPenetratingRounds = false;
 			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() / (1 - myPlayerData->GetRapidFireAttackSpeed() * 0.01));
+		}
+	}
+	void Player::AddAnotherProjectile()
+	{
+		if (myAmountOfProjectiles > 3)
+		{
+			myAmountOfProjectiles = 3;
 		}
 	}
 }

@@ -24,6 +24,19 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 
 	//----------- FLOATS
 
+	if (ValidateJsonDataFloat(document, "BasicAttackSpeedIncreaseT1"))
+	{
+		myBasicAttackSpeedIncreaseT1 = document["BasicAttackSpeedIncreaseT1"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "BasicAttackSpeedIncreaseT2"))
+	{
+		myBasicAttackSpeedIncreaseT2 = document["BasicAttackSpeedIncreaseT2"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "BasicAttackSpeedIncreaseT3"))
+	{
+		myBasicAttackSpeedIncreaseT3 = document["BasicAttackSpeedIncreaseT3"].GetFloat();
+	}
+
 	if (ValidateJsonDataFloat(document, "RapidFireAttackSpeed"))
 	{
 		myRapidFireAttackSpeed = document["RapidFireAttackSpeed"].GetFloat();
@@ -84,11 +97,6 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 	if (ValidateJsonDataFloat(document, "LayerOrder"))
 	{
 		myLayer = document["LayerOrder"].GetFloat();
-	}
-
-	if (ValidateJsonDataFloat(document, "ShootCDReductionPercentage"))
-	{
-		myShootingCDReductionPercentage = document["ShootCDReductionPercentage"].GetFloat();
 	}
 
 	if (ValidateJsonDataFloat(document, "Acceleration"))
@@ -206,8 +214,6 @@ const float Studio::Player_JsonParser::GetMaxSpeed() const { return myMaxSpeed; 
 
 const float Studio::Player_JsonParser::GetShootCoolDown() const { return myShootCoolDown; }
 
-const float Studio::Player_JsonParser::GetCDReductionPercentage() const { return myShootingCDReductionPercentage; }
-
 const float Studio::Player_JsonParser::GetAnimationTurnSpeed() const { return myAnimationTurnSpeed; }
 
 const float Studio::Player_JsonParser::GetRapidFireMaxCooldown() const { return myRapidFireMaxCooldown; }
@@ -274,16 +280,6 @@ void Studio::Player_JsonParser::SetRapidFireMaxActiveTime(const float aMaxActive
 	myRapidFireMaxActiveTime = aMaxActiveTime;
 }
 
-void Studio::Player_JsonParser::SetCDReductionPercentage(const float aCDReduction)
-{
-	myShootingCDReductionPercentage = aCDReduction;
-}
-
-void Studio::Player_JsonParser::AddToCDReductionPercentage(const float aCDReduction)
-{
-	myShootingCDReductionPercentage += aCDReduction;
-}
-
 void Studio::Player_JsonParser::UpgradeRapidFireCooldownT1()
 {
 	myRapidFireMaxCooldown -= myRapidFireCDReductionT1;
@@ -307,6 +303,26 @@ void Studio::Player_JsonParser::UpgradeRapidFireDurationT1()
 void Studio::Player_JsonParser::UpgradeRapidFireDurationT2()
 {
 	myRapidFireMaxActiveTime += myRapidFireDurationT2;
+}
+
+void Studio::Player_JsonParser::UpgradeBasicAttackSpeedT1()
+{
+	myShootCoolDown -= myBasicAttackSpeedIncreaseT1;
+}
+
+void Studio::Player_JsonParser::UpgradeBasicAttackSpeedT2()
+{
+	myShootCoolDown -= myBasicAttackSpeedIncreaseT2;
+}
+
+void Studio::Player_JsonParser::UpgradeBasicAttackSpeedT3()
+{
+	myShootCoolDown -= myBasicAttackSpeedIncreaseT3;
+}
+
+void Studio::Player_JsonParser::UpgradeProjectileAmountT2()
+{
+	
 }
 
 
