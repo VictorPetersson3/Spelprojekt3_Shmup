@@ -41,6 +41,7 @@ namespace Studio
 
 		const float GetRotation() const;
 		const Tga2D::Vector2f& GetPosition();
+		Tga2D::Vector2f* GetPositionPointer();
 
 		void Rotate(const float aRotationInRadians);
 		void RotateRight(const float aRotationInRadians);

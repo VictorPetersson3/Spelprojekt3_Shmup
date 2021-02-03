@@ -83,6 +83,11 @@ namespace Studio
 		return myPosition;
 	}
 
+	Tga2D::Vector2f* GameObject::GetPositionPointer()
+	{
+		return &myPosition;
+	}
+
 	Sprite& Studio::GameObject::GetSprite()
 	{
 		return mySprite;

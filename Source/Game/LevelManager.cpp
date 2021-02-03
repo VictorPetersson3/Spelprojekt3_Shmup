@@ -29,7 +29,8 @@ namespace Studio
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 		SAFE_CREATE(myBulletFactory, BulletFactory());
 		SAFE_CREATE(myBoss, Boss("sprites/debugpixel.dds", { 1500.0f, 520.0f }, 1000.0f));
-		myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
+		//myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
+		myEnemyFactory->InitAllEnemyTypes();
 		//															    ^ key
 
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu

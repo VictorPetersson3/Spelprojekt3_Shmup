@@ -13,17 +13,16 @@ namespace Studio
 	class Bullet;
 	class Movement; 
 	enum class MovementType;
+	class TypePattern_Enemy;
 	class Enemy : public GameObject
 	{
 	public:
-		Enemy(Tga2D::CSprite* aSprite, VECTOR2F aSpawnPosition);
+		Enemy(TypePattern_Enemy* aEnemyType, const Tga2D::Vector2f& aSpawnPosition);
 		~Enemy();
 
 		void Update(float aDeltaTime);
 		void Shoot(float aDeltaTime);
 		void DeathLogic();
-		
-		bool HasFinishedExplosion();
 		const bool GetIsTerrain();
 		int GetScoreValue();
 
@@ -31,31 +30,19 @@ namespace Studio
 
 		std::vector<Bullet*>& GetBullets();
 
-		Studio::RenderCommand& GetRenderCommand();
-
-
 	private:
 		void UpdateBullets(float aDeltaTime);
 	private:
 		int myScoreValue;
-		bool myIsTerrain = false;
 		bool myHasDied = false;
-
-		float mySpeed;
-		float myShootCooldown;
-
+		float myShootTimer;
 		std::vector<Bullet*> myBullets;
-
-		Tga2D::CSprite* mySprite;
 		Tga2D::CSprite* myBulletSprite;
 
-		Studio::Enums::MovementPattern aMovementType;
+		Studio::Enums::MovementPattern myMovementType;
 
 		Movement* myMovement;
-
-
-		VECTOR2F myPosition;
-
+		TypePattern_Enemy* myType;
 	};
 }
 

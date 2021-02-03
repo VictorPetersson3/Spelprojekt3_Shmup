@@ -23,15 +23,15 @@ Studio::EnemyFactory::~EnemyFactory()
 	}
 }
 
-void Studio::EnemyFactory::InitEnemyType(const std::string& aPath, const unsigned int aLayerOrder, const std::string& aType)
+void Studio::EnemyFactory::InitEnemyType(rapidjson::Document& someJsonData, const std::string& aType)
 {
-	std::pair<std::string, Studio::TypePattern_Enemy*> temp_pair(aType, new Studio::TypePattern_Enemy(aPath, aLayerOrder));
+	std::pair<std::string, Studio::TypePattern_Enemy*> temp_pair(aType, new Studio::TypePattern_Enemy(someJsonData, aType));
 	myEnemyObjects.insert(temp_pair);
 }
 
-Studio::Enemy* Studio::EnemyFactory::CreateEnemyObject(const std::string& aType, const Tga2D::Vector2f& aPosition)
+Studio::Enemy* Studio::EnemyFactory::CreateEnemyObject(const std::string& aType, const Tga2D::Vector2f& aSpawnPosition)
 {
-	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjects.at(aType)->GetSprite(), aPosition);
+	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjects.at(aType), aSpawnPosition);
 	return tempObject;
 }
 
@@ -41,7 +41,7 @@ void Studio::EnemyFactory::InitAllEnemyTypes()
 	for (const auto& entry : std::filesystem::directory_iterator(directory))
 	{
 		auto file = entry.path().string();
-		printf_s("File %s", file.c_str());
+		printf_s("File %s\n", file.c_str());
 
 		if (entry.path().extension().string() == ".json")
 		{
@@ -60,6 +60,11 @@ void Studio::EnemyFactory::InitAllEnemyTypes()
 			}
 			file.close();
 			document.Parse(text.c_str());
+
+			std::string type = path.substr(13);
+			type.erase(type.end()-5, type.end());
+
+			InitEnemyType(document, type);
 		}
 	}
 }

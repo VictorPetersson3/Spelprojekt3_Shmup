@@ -35,6 +35,7 @@ namespace Tga2D
 		bool operator!=(const Vector2<Type>& aVector) const { return !(*this == aVector); }
 
 		Vector2<Type> Normal() const { return Vector2<Type>(y, -x); }
+		Vector2<Type> GetNormalized();
 		Vector2<Type>& Normalize();
 		inline Type Dot(const Vector2<Type>& aVector) const
 		{
@@ -56,7 +57,21 @@ namespace Tga2D
 			UnitY,
 			One;
 	};
-
+	template <class Type>
+	Vector2<Type> Vector2<Type>::GetNormalized()
+	{
+		const Type squaredLength = x * x + y * y;
+		Vector2<Type> Normalized;
+		Normalized.x = x;
+		Normalized.y = y;
+		if (squaredLength > 0)
+		{
+			const Type invLen = Type(1) / (Type)sqrt(squaredLength);
+			Normalized.x *= invLen;
+			Normalized.y *= invLen;
+		}
+		return Normalized;
+	}
 
 	template <class Type>
 	Vector2<Type>& Vector2<Type>::Normalize()

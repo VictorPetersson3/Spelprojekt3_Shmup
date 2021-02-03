@@ -6,28 +6,61 @@
 #include "tga2d/sprite/sprite.h"
 #include "MovementStraight.h"
 #include "MovementWave.h"
+#include "MovementDiagonal.h"
+#include "MovementBobbing.h"
+#include "MovementSeeking.h"
 #include "CoinAccessor.h"
 #include "ScoreAccessor.h"
 #include "LevelAccessor.h"
 #include "Timer.h"
 #include <string>
-
+#include "TypePattern_Enemy.h"
 
 namespace Studio
 {
-	Enemy::Enemy(Tga2D::CSprite* aSprite, VECTOR2F aSpawnPosition) :
-		Enemy::GameObject(aSprite)
+	Enemy::Enemy(TypePattern_Enemy* aEnemyType, const Tga2D::Vector2f& aSpawnPosition) :
+		Enemy::GameObject(aEnemyType->GetImagePath())
 	{
-		myPosition = aSpawnPosition;
-		mySpeed = 300;
-		myShootCooldown = 0.0f;
+		myType = aEnemyType;
+		GameObject::SetPosition(aSpawnPosition);
 		myScoreValue = 100;
-		mySprite = aSprite;
-		mySprite->SetSizeRelativeToImage({ -0.6, 0.6 });
-		mySprite->SetPivot({ 0.5f, 0.5f });
+		myShootTimer = 0;
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
-		SAFE_CREATE(myMovement, MovementWave(&myPosition, 100.0f, 500.0f, 500.0f));
 		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 50);
+		switch (aEnemyType->GetMovementType())
+		{
+		case Studio::Enums::MovementPattern::Bobbing :
+			SAFE_CREATE(myMovement, MovementBobbing(GameObject::GetPositionPointer(), myType->GetSpeed(), myType->GetBobbingHeigth()));
+			break;
+		case Studio::Enums::MovementPattern::Wave:
+			SAFE_CREATE(myMovement, MovementWave(GameObject::GetPositionPointer(), myType->GetHorizontalSpeed()
+				, myType->GetVerticalSpeed(), myType->GetWaveHeigth()));
+			break;
+		case Studio::Enums::MovementPattern::Straight:
+			SAFE_CREATE(myMovement, MovementStraight(GameObject::GetPositionPointer(), myType->GetSpeed()));
+			break;
+		case Studio::Enums::MovementPattern::Seeking:
+			SAFE_CREATE(myMovement, MovementSeeking(GameObject::GetPositionPointer(), Tga2D::Vector2f::Zero,
+				myType->GetSpeed(), myType->GetAcceleration() ));
+			break;
+		case Studio::Enums::MovementPattern::Diagonal:
+			if (myType->GetDiagonalIsTop())
+			{
+				Tga2D::Vector2f angle = GameObject::GetPosition() * -1;
+				float theta = atan(GameObject::GetPosition().y / GameObject::GetPosition().x);
+				SAFE_CREATE(myMovement, MovementDiagonal(GameObject::GetPositionPointer(),
+					myType->GetSpeed(), angle));
+			}
+			else
+			{
+				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 1080}) - GameObject::GetPosition();
+				SAFE_CREATE(myMovement, MovementDiagonal(GameObject::GetPositionPointer(),
+					myType->GetSpeed(), angle.GetNormalized()));
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	Enemy::~Enemy()
@@ -57,23 +90,25 @@ namespace Studio
 
 	void Enemy::Shoot(float aDeltaTime)
 	{
-		myShootCooldown += aDeltaTime;
-		if (myShootCooldown > 0.7f)
+		if (!myType->GetIsTerrain())
 		{
-			Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition);
-			myShootCooldown = 0;
+			myShootTimer += aDeltaTime;
+			if (myShootTimer > myType->GetShootInterval())
+			{
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition);
+				myShootTimer = 0;
+			}
 		}
 	}
 
 	const bool Enemy::GetIsTerrain()
 	{
-		return myIsTerrain;
+		return myType->GetIsTerrain();
 	}
 	void Enemy::DeathLogic()
 	{
 		if (!myHasDied)
 		{
-
 			CoinAccessor::GetInstance()->CreateCoin(myPosition);
 			ScoreAccessor::GetInstance()->AddKillScore(1);
 			printf_s("%f", myPosition.x);
@@ -96,10 +131,6 @@ namespace Studio
 		return myBullets;
 	}
 
-	RenderCommand& Enemy::GetRenderCommand()
-	{
-		return Enemy::GameObject::GetRenderCommand();
-	}
 	void Enemy::UpdateBullets(float aDeltaTime)
 	{
 		for (int i = 0; i < myBullets.size(); i++)
