@@ -13,6 +13,11 @@ namespace Studio
 		myTargetObjectsPosition = aTargetObjectsPosition;
 	}
 
+	void MovementSeeking::SetMovementStartPosition(VECTOR2F* aPosition)
+	{
+		this->myObjectsPosition = aPosition;
+	}
+
 	void MovementSeeking::Update()
 	{
 		myObjectsPosition->x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();

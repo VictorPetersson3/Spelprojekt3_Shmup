@@ -1,9 +1,11 @@
 {
-  "Acceleration": 1.0,
+  "Acceleration": 100.0,
   "MinSpeed": 10.0,
   "MaxSpeed": 500.0,
   "ShootCoolDown": 0.50,
-  "ShootCDReductionPercentage": 50.0,
+  "BasicAttackSpeedIncreaseT1": 0.075,
+  "BasicAttackSpeedIncreaseT2": 0.15,
+  "BasicAttackSpeedIncreaseT3": 0.275,
   "RapidFireMaxCooldown": 20.0,
   "RapidFireAttackSpeed": 40.0,
   "RapidFireMaxActiveTime": 4.0,

@@ -2,6 +2,7 @@
 #include "BulletFactory.h"
 #include "TypePattern_Bullet.h"
 #include "Bullet.h"
+#include "Missile.h"
 
 Studio::BulletFactory::~BulletFactory()
 {
@@ -22,4 +23,11 @@ Studio::Bullet* Studio::BulletFactory::CreateBulletObject(const std::string& aTy
 {
 	Studio::Bullet* tempObject = new Studio::Bullet(aPosition, myBullets.at(aType));
 	return tempObject;
+}
+
+Studio::Missile* Studio::BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+{
+	Studio::Missile* missile = new Studio::Missile(aOwner, aPosition);
+	missile->SetOwner(aOwner);
+	return missile;
 }

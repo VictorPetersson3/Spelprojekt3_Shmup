@@ -9,6 +9,9 @@ namespace Studio
 	{
 	public:
 		MovementHoming(GameObject* anObject, VECTOR2F* anObjectsPosition, float aSpeed, float aRotationSpeed, float aDirection = 0.0f);
+
+		void SetMovementStartPosition(VECTOR2F* aPosition) override;
+
 		void Update() override;
 	private:
 		float myRotationSpeed;

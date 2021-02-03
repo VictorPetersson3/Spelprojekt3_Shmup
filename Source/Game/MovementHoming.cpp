@@ -16,6 +16,11 @@ namespace Studio
 		myDirection = aDirection;
 	}
 
+	void MovementHoming::SetMovementStartPosition(VECTOR2F* aPosition)
+	{
+		this->myObjectsPosition = aPosition;
+	}
+
 	void MovementHoming::Update()
 	{
 		float deltaTime = Timer::GetInstance()->TGetDeltaTime();

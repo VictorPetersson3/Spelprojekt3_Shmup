@@ -34,3 +34,8 @@ const Studio::Enums::BulletOwner Studio::TypePattern_Bullet::GetOwner()
 	return myOwner;
 }
 
+void Studio::TypePattern_Bullet::SetOwner(const Enums::BulletOwner& aNewOwner)
+{
+	myOwner = aNewOwner;
+}
+

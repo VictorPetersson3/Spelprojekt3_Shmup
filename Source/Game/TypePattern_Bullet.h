@@ -18,11 +18,12 @@ namespace Studio
 		const std::string& GetImagePath();
 		const float GetSpeed();
 		const Enums::BulletOwner GetOwner();
+		void SetOwner(const Enums::BulletOwner& aNewOwner);
 	private:
 		const unsigned int myLayerOrder;
 		const std::string myImagePath;
 		const float mySpeed;
-		const Enums::BulletOwner myOwner;
+		Enums::BulletOwner myOwner;
 	};
 }
 

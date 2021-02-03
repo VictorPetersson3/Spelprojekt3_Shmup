@@ -26,6 +26,7 @@ namespace Studio
 		
 		void AddEnemy(Enemy* anEnemy);
 		void SpawnBullet(const std::string& aType, VECTOR2F aPosition);
+		void SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition);
 		bool LevelIsCleared();
 		void LoadLevel(const int aLevelIndex);
 		const std::string& GetCurrentLevelPath() const;

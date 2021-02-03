@@ -5,6 +5,9 @@
 #include "Timer.h"
 namespace Studio
 {
+	Bullet::Bullet()
+	{
+	}
 	Bullet::Bullet(VECTOR2F aPosition, TypePattern_Bullet* aTypePattern) :
 		Bullet::GameObject(aTypePattern->GetImagePath()),
 		myTypePattern(aTypePattern)
@@ -53,7 +56,11 @@ namespace Studio
 	{
 		return myPosition;
 	}
-	Enums::BulletOwner Bullet::GetOwner()
+	void Bullet::SetOwner(const Enums::BulletOwner& aNewOwner)
+	{
+		myTypePattern->SetOwner(aNewOwner);
+	}
+	Enums::BulletOwner Bullet::GetOwner() const
 	{
 		return myTypePattern->GetOwner();
 	}

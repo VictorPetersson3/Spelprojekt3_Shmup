@@ -8,6 +8,7 @@ namespace Studio
 		Movement() = default;
 		virtual ~Movement();
 		virtual void Update() = 0; // pure virtual
+		virtual void  SetMovementStartPosition(VECTOR2F* aPosition) = 0;
 		const Enums::MovementPattern& GetPattern();
 
 	protected:
