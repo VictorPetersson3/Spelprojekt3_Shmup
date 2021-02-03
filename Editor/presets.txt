@@ -20,8 +20,12 @@ TADb
 TAW
 TAB
 TAS
-TAH
-TAU
+TASt_turret
+TADt_turret
+TADb_turret
+TAW_turret
+TAB_turret
+TAS_turret
 T_bunker1
 T_bunker1wave
 T_bunker2
