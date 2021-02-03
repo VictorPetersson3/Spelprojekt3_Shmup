@@ -29,6 +29,7 @@ namespace Studio
 
 		TextElement* myCoinTextElement;
 		TextElement* myKillTextElement;
+		TextElement* myShopCoinTextElement;
 	};
 }
 

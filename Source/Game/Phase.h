@@ -12,19 +12,15 @@ namespace Studio
 	public:
 		Phase(rapidjson::Value& aPhaseParameters);
 		~Phase();
-
-		void InitPhase();
-		void PlayModules(Boss* aBossObject);
-
-
+		bool HavePlayedOnce();
+		void PlayModules(Boss& aBossObject);
 	protected:
-
-
 		
 	private:
 		std::vector<Module*> myModules;
 		int myModuleAmount;
 		int myCurrentModule;
+		bool myHasPlayedOnce;
 	};
 }
 

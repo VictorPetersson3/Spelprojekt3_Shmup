@@ -25,6 +25,30 @@ namespace Studio
 		Bullet::GameObject::Update(myPosition);
 	}
 
+	void Bullet::RegisterEnemyHit(GameObject* anEnemy)
+	{
+		myHitEnemies.push_back(anEnemy);
+	}
+
+	void Bullet::SetIsPenetrating()
+	{
+		myIsPenetrating = true;
+	}
+
+	bool Bullet::GetIsPenetrating()
+	{
+		return myIsPenetrating;
+	}
+
+	bool Bullet::IsEnemyAlreadyHit(GameObject* anEnemy)
+	{
+		for (int i = 0; i < myHitEnemies.size(); i++)
+		{
+			if (myHitEnemies[i] == anEnemy) return true;
+		}
+		return false;
+	}
+
 	VECTOR2F Bullet::GetPosition()
 	{
 		return myPosition;

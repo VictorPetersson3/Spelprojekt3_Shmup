@@ -16,11 +16,20 @@
 #include "BulletFactory.h"
 #include "Player.h"
 #include "Boss.h"
+#include "BossManager.h"
 
 // Rendering
 #include "RendererAccessor.h"
 #include "Renderer.h"
 #include <tga2d/sprite/sprite.h>
+
+// Menu
+#include "MenuManagerSingleton.h"
+#include "MenuManager.h"
+#include "MenuObject.h"
+
+// Input
+#include "InputManager.h"
 
 namespace Studio
 {
@@ -31,12 +40,15 @@ namespace Studio
 		SAFE_CREATE(myBoss, Boss("sprites/debugpixel.dds", { 1500.0f, 520.0f }, 1000.0f));
 		//myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
 		myEnemyFactory->InitAllEnemyTypes();
+		myEnemyFactory->InitEnemyType("Sprites/assets/enemies/enemyShip1/enemyShip1.dds", 999, "Default");
 		//															    ^ key
+
+		SAFE_CREATE(myBossManager, BossManager());
 
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
-
+		myBossManager->LoadBosses();
 		// Load chosen level by Lever Designers
 
 		
@@ -81,19 +93,37 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myEnemies);
 		SAFE_DELETE_VECTOR(myBullets);
 		SAFE_DELETE(myBulletFactory);
-		SAFE_DELETE(myBoss);
+		SAFE_DELETE(myBossManager);
 	}
 
 	void LevelManager::Update(Player* aPlayer)
 	{
-		//Pu som kommer drömma mardrömmar av denna rad
-		myPlayer = aPlayer;
-		if (myLevelIsCleared)
+
+		if (Studio::InputManager::GetInstance()->IsKeyDown('Y'))
 		{
+			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+		}
+
+		if (Studio::InputManager::GetInstance()->IsKeyDown('I'))
+		{
+			MenuManagerSingleton::GetInstance()->GetShop()->Disable();
+			MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
+		}
+
+		//Pu som kommer drï¿½mma mardrï¿½mmar av denna rad
+		myPlayer = aPlayer;
+		if (myLevelIsCleared == true)
+		{
+
 			/*SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
 			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);*/
-			myBoss->Update();
+			//myBoss->Update();
+
+			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+
 			LevelLogic();
 		}
 		else
@@ -132,7 +162,12 @@ namespace Studio
 
 	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition)
 	{
-		myBullets.push_back(myBulletFactory->CreateBulletObject(aType, aPosition));
+		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition);
+		if (myPlayer->HasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
+		{
+			bullet->SetIsPenetrating();
+		}
+		myBullets.push_back(bullet);
 	}
 
 	bool LevelManager::LevelIsCleared()
@@ -201,23 +236,31 @@ namespace Studio
 	{
 		if (myLevelIsCleared)
 		{
-			if (!myBullets.empty())
+			for (int i = myBullets.size() - 1; i >= 0; i--)
 			{
-				for (int i = myBullets.size() - 1; i >= 0; i--)
+				if (myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player)
 				{
 					if (!myBoss->IsDead() && myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player)
 					{
 						if (myBoss->Intersects(*myBullets[i]))
 						{
-							myBoss->TakeDamage(25.0f);
-							//printf_s("BossHealth: %f\n", myBoss->GetCurrentHealth());
-							myBullets.erase(myBullets.begin() + i);
+							if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
+							{
+								if (myBullets[i]->GetIsPenetrating() == false)
+								{
+									myBullets.erase(myBullets.begin() + i);
+								}
+								myBullets[i]->RegisterEnemyHit(myBoss);
+								myBoss->TakeDamage(25.0f);
+
+							}
 						}
 					}
 					//When the boss dies?
 					else
 					{
-
+						myBoss->TakeDamage(1.0f);
+						myBullets.erase(myBullets.begin() + i);
 					}
 				}
 			}
@@ -253,8 +296,18 @@ namespace Studio
 							{
 								if (myEnemies[i]->Intersects(*myBullets[j]))
 								{
-									myBullets.erase(myBullets.begin() + j);
-									myEnemies[i]->TakeDamage(100);
+									if (myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
+									{
+
+										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
+										myEnemies[i]->TakeDamage(100);
+
+										if (myBullets[j]->GetIsPenetrating() == false)
+										{
+											myBullets.erase(myBullets.begin() + j);
+										}
+										
+									}
 								}
 							}
 						}
@@ -317,6 +370,10 @@ namespace Studio
 
 		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0)
 		{
+			if (!myLevelIsCleared)
+			{
+				myBoss = myBossManager->GetLevelBoss(0);
+			}
 			myLevelIsCleared = true;
 		}
 	}

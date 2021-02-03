@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "UIElement.h"
+#include "ShopButton.h"
 
 namespace Studio
 {

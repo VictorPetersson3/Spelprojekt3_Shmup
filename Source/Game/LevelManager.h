@@ -10,6 +10,7 @@ namespace Studio
 	class EnemyFactory;
 	class BulletFactory;
 	class Boss;
+	class BossManager;
 	
 	class LevelManager
 	{
@@ -40,6 +41,7 @@ namespace Studio
 		Pack* myCurrentPack;
 		Player* myPlayer = nullptr;
 		Boss* myBoss = nullptr;
+		BossManager* myBossManager = nullptr;
 		std::vector<Pack*> myPacks;
 		std::vector<Enemy*> myEnemies;
 		std::vector<Bullet*> myBullets;

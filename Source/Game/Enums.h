@@ -36,5 +36,24 @@ namespace Studio
 			
 		};
 
+		// InputManager
+		// ============
+		// Note that enum class is not used.
+		// That is because I do not want to force us to use 
+		// static_cast<int> all the time when using the
+		// input manager when checking for custom keys
+		enum CustomKeys {
+			CustomKey_None = 0,
+			CustomKey_FlyUp,
+			CustomKey_FlyDown,
+			CustomKey_FlyRight,
+			CustomKey_FlyLeft,
+			CustomKey_RapidFire,
+			CustomKey_Explosive,
+			CustomKey_Shield,
+			CustomKey_Shoot,
+			CustomKey_Pause,
+			CustomKey_Count
+		};
 	}
 }

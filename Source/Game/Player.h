@@ -26,6 +26,7 @@ namespace Studio
 		const bool GetHasCollided() const;
 
 		void UpgradeRapidFire(Enums::RapidFireUpgrades aRapidFireUpgrade);
+		bool HasPenetratingRounds();
 
 	private:
 		void Movement();
@@ -56,6 +57,8 @@ namespace Studio
 		bool myIsRebounding = false;
 		bool myRapidFireIsActive = false;
 		bool myHasCollided = false;
+		bool myHasPenetratingRounds = false;
+		bool myHasPurchasedPenetratingRounds = false;
 
 		EngineFlame myEngineFlame;
 		Player_JsonParser* myPlayerData;

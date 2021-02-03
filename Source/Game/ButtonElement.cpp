@@ -24,6 +24,10 @@ void Studio::ButtonElement::OnClick()
 
 void Studio::ButtonElement::Update()
 {
-	std::cout << "Test button updating" << std::endl;
-	
+		
+}
+
+void Studio::ButtonElement::SetPosition(VECTOR2F aPosition)
+{
+	mySpriteSheet->SetPosition(aPosition);
 }

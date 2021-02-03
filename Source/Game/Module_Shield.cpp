@@ -4,19 +4,20 @@
 Studio::Module_Shield::Module_Shield(rapidjson::Value& aModuleParameters) :
 	Module_Shield::Module(aModuleParameters)
 {
-	if (aModuleParameters.HasMember("Duration") && aModuleParameters["Duration"].IsFloat())
+	if (aModuleParameters.HasMember("HitPoints"))
 	{
-		myDuration = aModuleParameters["Duration"].GetFloat();
+		myHitPoints = aModuleParameters["HitPoints"].GetFloat();
 	}
 	else
 	{
-		printf("Duration is not valid in Shield Module");
-		myDuration = 0.5f;
+		printf("Duration is not valid in Shield Module\n");
+		myHitPoints = 0.5f;
 	}
 }
 
-bool Studio::Module_Shield::DoStuff()
+bool Studio::Module_Shield::DoStuff(Boss& aBoss)
 {
 	//TODO Add Shield Object
+	printf("Shield not implemented\n");
 	return true;
 }
