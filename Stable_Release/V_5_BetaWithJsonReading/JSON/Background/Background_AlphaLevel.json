@@ -15,8 +15,8 @@
         "Y": 540
       },
       "Scale": {
-        "X": 1.0,
-        "Y": 1.1
+        "X": 2.0,
+        "Y": 2.1
       },
       "Speed": 0,
       "CreateMany": false,
@@ -25,8 +25,8 @@
     [
       {
         "Type": "MountainRangeTileAble",
-        "ImagePath": "sprites/Background/AlphaLevel/BG_Mountains.dds",
-        "IsTiling": true,
+        "ImagePath": "sprites/Background/AlphaLevel/BG_NorthernLight.dds",
+        "IsTiling": false,
         "IsCentered": true,
         "Pivot": {
           "X": 0.5,
@@ -35,24 +35,24 @@
         "LayerOrder": -19,
         "Position": {
           "X": -960,
-          "Y": 870
+          "Y": 600
         },
         "Scale": {
-          "X": 1,
-          "Y": 1
+          "X": 2,
+          "Y": 2
         },
-        "Speed": -10.5,
+        "Speed": -1000.5,
         "CreateMany": true,
         "Amount": 3,
-        "UseRandom": false,
+        "UseRandom": true,
         "RandomAtributes": {
           "RandomPositionX": {
-            "X": 0,
-            "Y": 1920
+            "Min": 0,
+            "Max": 1920
           },
           "RandomPositionY": {
-            "X": 0,
-            "Y": 1920
+            "Min": 0,
+            "Max": 1920
           },
           "RandomSpeed": {
             "Min": -20,

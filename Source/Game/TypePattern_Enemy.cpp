@@ -110,6 +110,24 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 				{
 					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
 				}
+
+				if (!JSON["IdleAnimationRange"]["FrameStartX"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartX"].GetFloat();
+				}
+				if (!JSON["IdleAnimationRange"]["FrameStartY"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartY"].GetFloat();
+				}
+				if (!JSON["IdleAnimationRange"]["FrameEndX"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndX"].GetFloat();
+				}
+				if (!JSON["IdleAnimationRange"]["FrameEndY"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
+				}
+
 			}
 
 		}
@@ -121,7 +139,7 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 	else
 	{
 		myIsAnimating = false;
-		myImagePath = "sprites/debugpixel.dds";
+		myImagePath = "sprites/assets/enemies/enemyShip1/enemyShip1.dds";
 	}
 
 }
@@ -163,6 +181,11 @@ const std::vector<float> Studio::TypePattern_Enemy::GetIdleAnimationCustomFrames
 const bool Studio::TypePattern_Enemy::GetIsAnimating() const { return myIsAnimating;}
 
 const bool Studio::TypePattern_Enemy::GetIsTerrain() const { return myIsTerrain; }
+
+const bool Studio::TypePattern_Enemy::GetIsPopcorn() const
+{
+	return myIsPopcorn;
+}
 
 const bool Studio::TypePattern_Enemy::GetUsingCustomUpFrames() const { return myUsingCustomUpFrames;}
 

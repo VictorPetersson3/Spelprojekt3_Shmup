@@ -2,6 +2,11 @@
 #include "MenuManager.h"
 #include "Player.h"
 #include <iostream>
+#include "LevelManager.h"
+#include "LevelAccessor.h"
+#include "LevelManager.h"
+
+#define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
 namespace Studio
 {
@@ -9,7 +14,6 @@ namespace Studio
     {
         myShopUI = new Studio::ShopUI();
 
-        myMainMenu.Add(myTestButton);
         myMainMenu.Add(myGodModeButton);
         myMainMenu.Add(myStartButton);
         myMainMenu.Enable();
@@ -37,6 +41,10 @@ namespace Studio
         myPausMenu.Disable();
 
         myPlayer = aPlayer;
+        myIsLoading = false;
+        myLoadingScreen = new SpriteSheet("Sprites/UI/LoadingScreen.dds");
+        myLoadingScreen->SetPosition({ 960, 540 });
+        myLoadingScreen->SetLayer(10);
     }
 
     MenuObject* Studio::MenuManager::GetMainMenu()
@@ -65,7 +73,10 @@ namespace Studio
         myHud.Update();
         myShop.Update();
         myPausMenu.Update();
-       
+        if (myIsLoading && hasStartedGame)
+        {
+            RendererAccessor::GetInstance()->Render(*myLoadingScreen);
+        }
         if (myPlayer->GetCurrentHealth() == 3)
         {
             myHud.GetElementWithTag("Heart4")->SetActive(false);
@@ -93,22 +104,26 @@ namespace Studio
 
     bool MenuManager::GameStarted()
     {
-        if (!hasStartedGame && myTestButton->myIsClicked == true)
+        if (!hasStartedGame && myStartButton->myIsClicked == true)
         {
             hasStartedGame = true;
             myMainMenu.Disable();
             myHud.Enable();
-            return myTestButton->myIsClicked;
-
+            myIsLoading = true;
+            myLevelToLoad = LEVELMANAGER->GetCurrentLevelIndex();
+            RendererAccessor::GetInstance()->Render(*myLoadingScreen);
+            return myStartButton->myIsClicked;
         }
         if (!hasStartedGame && myGodModeButton->myIsClicked == true)
         {
             hasStartedGame = true;
             inGodMode = true;
             myMainMenu.Disable();
+            myIsLoading = true;
             myHud.Enable();
+            myLevelToLoad = LEVELMANAGER->GetCurrentLevelIndex();
+            RendererAccessor::GetInstance()->Render(*myLoadingScreen);
             return myGodModeButton->myIsClicked;
-
         }
         else if(hasStartedGame)
         {
@@ -122,5 +137,22 @@ namespace Studio
     bool MenuManager::GetGodMode()
     {
         return inGodMode;
+    }
+  
+    void MenuManager::SetPlayButtonIndex(const int aIndex)
+    {
+        myStartButton->SetLevelToLoad(aIndex);
+    }
+    void MenuManager::SetNextLevelIndex(const int aIndex)
+    {
+        myNextLevelButton->SetLevelToLoad(aIndex);
+    }
+    void MenuManager::Load()
+    {
+        if (myIsLoading)
+        {
+            myIsLoading = false;
+            LEVELMANAGER->LoadLevel(myLevelToLoad);
+        }
     }
 }

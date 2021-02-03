@@ -40,6 +40,7 @@ namespace Studio
 
 		const bool GetIsAnimating() const;
 		const bool GetIsTerrain() const;
+		const bool GetIsPopcorn() const;
 		const bool GetUsingCustomUpFrames() const;
 		const bool GetUsingCustomDownFrames() const;
 		const bool GetUsingCustomIdleFrames() const;

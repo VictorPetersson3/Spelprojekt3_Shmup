@@ -11,12 +11,13 @@ namespace Studio
 	class BulletFactory;
 	class Boss;
 	class BossManager;
+	class BackgroundManager;
 	
 	class LevelManager
 	{
 	public:
 
-		LevelManager();
+		LevelManager(BackgroundManager* aBackgroundManager);
 		~LevelManager();
 		void Update(Player* aPlayer);
 		const std::string& CurrentLevelPath();
@@ -28,8 +29,9 @@ namespace Studio
 		void SpawnBullet(const std::string& aType, VECTOR2F aPosition);
 		void SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition);
 		bool LevelIsCleared();
-		void LoadLevel(const std::string& aLevelPath);
-		const std::string& GetCurrentLevelPath() const;
+		void LoadLevel(const int aLevelIndex);
+		const int GetCurrentLevelIndex() const;
+		const std::vector<std::string>& GetLevelPaths() const;
 
 	private:
 		void LevelLogic();
@@ -39,8 +41,8 @@ namespace Studio
 		bool myLevelIsCleared;
 		bool myLevelEnemiesCleared;
 		bool myLevelBossSpawned;
-		std::string myCurrentLevelPath;
 		int myPackIndex;
+		int myCurrentLevel;
 		Pack* myCurrentPack;
 		Player* myPlayer = nullptr;
 		Boss* myBoss = nullptr;
@@ -49,5 +51,6 @@ namespace Studio
 		std::vector<Enemy*> myEnemies;
 		std::vector<Bullet*> myBullets;
 		std::vector<std::string> myLevelPaths;
+		BackgroundManager* myBackgroundManager;
 	};
 }
