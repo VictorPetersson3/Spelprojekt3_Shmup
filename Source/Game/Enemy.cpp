@@ -19,10 +19,12 @@
 namespace Studio
 {
 	Enemy::Enemy(TypePattern_Enemy* aEnemyType, const Tga2D::Vector2f& aSpawnPosition) :
-		Enemy::GameObject(aEnemyType->GetImagePath())
+		Enemy::GameObject(aEnemyType->GetImagePath()),
+		myMovementType(aEnemyType->GetMovementType())
 	{
+		myMovement = nullptr;
 		myType = aEnemyType;
-		GameObject::SetPosition(aSpawnPosition);
+		myPosition = aSpawnPosition;
 		myScoreValue = 100;
 		myShootTimer = 0;
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
@@ -30,30 +32,32 @@ namespace Studio
 		switch (aEnemyType->GetMovementType())
 		{
 		case Studio::Enums::MovementPattern::Bobbing :
-			SAFE_CREATE(myMovement, MovementBobbing(GameObject::GetPositionPointer(), myType->GetSpeed(), myType->GetBobbingHeigth()));
+			SAFE_CREATE(myMovement, MovementBobbing(&myPosition, myType->GetSpeed(), myType->GetBobbingHeigth()));
 			break;
 		case Studio::Enums::MovementPattern::Wave:
-			SAFE_CREATE(myMovement, MovementWave(GameObject::GetPositionPointer(), myType->GetHorizontalSpeed()
+			SAFE_CREATE(myMovement, MovementWave(&myPosition, myType->GetHorizontalSpeed()
 				, myType->GetVerticalSpeed(), myType->GetWaveHeigth()));
 			break;
 		case Studio::Enums::MovementPattern::Straight:
-			SAFE_CREATE(myMovement, MovementStraight(GameObject::GetPositionPointer(), myType->GetSpeed()));
+			SAFE_CREATE(myMovement, MovementStraight(&myPosition, myType->GetSpeed()));
 			break;
 		case Studio::Enums::MovementPattern::Seeking:
-			SAFE_CREATE(myMovement, MovementSeeking(GameObject::GetPositionPointer(), Tga2D::Vector2f::Zero,
+			SAFE_CREATE(myMovement, MovementSeeking(&myPosition, Tga2D::Vector2f::Zero,
 				myType->GetSpeed(), myType->GetAcceleration() ));
 			break;
 		case Studio::Enums::MovementPattern::Diagonal:
 			if (myType->GetDiagonalIsTop())
 			{
-				Tga2D::Vector2f angle = GameObject::GetPosition() * -1;
-				SAFE_CREATE(myMovement, MovementDiagonal(GameObject::GetPositionPointer(),
+				//GameObject::SetPosition({ 1920,0 });
+				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 1080}) - GameObject::GetPosition();
+				SAFE_CREATE(myMovement, MovementDiagonal(&myPosition,
 					myType->GetSpeed(), angle.GetNormalized()));
 			}
 			else
 			{
-				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 1080}) - GameObject::GetPosition();
-				SAFE_CREATE(myMovement, MovementDiagonal(GameObject::GetPositionPointer(),
+				//GameObject::SetPosition({ 1920, 1080 });
+				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 0}) - GameObject::GetPosition();
+				SAFE_CREATE(myMovement, MovementDiagonal(&myPosition,
 					myType->GetSpeed(), angle.GetNormalized()));
 			}
 			break;
@@ -100,7 +104,7 @@ namespace Studio
 		}
 	}
 
-	const bool Enemy::GetIsTerrain()
+	const bool Enemy::GetIsTerrain() const
 	{
 		return myType->GetIsTerrain();
 	}
@@ -113,6 +117,11 @@ namespace Studio
 			printf_s("%f", myPosition.x);
 			myHasDied = true;
 		}
+	}
+
+	const bool Enemy::GetIsPopcorn() const
+	{
+		return myType->GetIsPopcorn();
 	}
 
 	int Enemy::GetScoreValue()

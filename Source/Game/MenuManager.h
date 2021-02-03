@@ -13,6 +13,7 @@
 
 namespace Studio
 {
+	class LevelManager;
 	class MenuManager
 	{
 	public:
@@ -31,8 +32,12 @@ namespace Studio
 
 		bool GameStarted();
 		bool GetGodMode();
+		void SetPlayButtonIndex(const int aIndex);
+		void SetNextLevelIndex(const int aIndex);
+		void Load();
 
 	private:
+
 		MenuObject myMainMenu;
 		MenuObject myHud;
 		MenuObject myPausMenu;
@@ -45,9 +50,12 @@ namespace Studio
 		bool hasStartedGame = false;
 		bool inGodMode = false;
 
-		TestButton* myTestButton = new TestButton("Sprites/UI/TempPlayButton.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f },"StartButton");
-		StartButton* myStartButton = new StartButton("Sprites/UI/TempPlayButton.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton",10, "");
-		StartButton* myNextLevelButton = new StartButton("Sprites/UI/NextLevelButtonTemp.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton",10, "");
+		bool myIsLoading;
+		int myLevelToLoad;
+		SpriteSheet* myLoadingScreen;
+
+		StartButton* myStartButton = new StartButton("Sprites/UI/TempPlayButton.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton",10);
+		StartButton* myNextLevelButton = new StartButton("Sprites/UI/NextLevelButtonTemp.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton",10);
 
 		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_14, { 0.135,0.117 }, "ScoreText");
 		TextElement* myCoinText = new TextElement(Tga2D::EFontSize_14, { 0.11,0.153 }, "CoinText");

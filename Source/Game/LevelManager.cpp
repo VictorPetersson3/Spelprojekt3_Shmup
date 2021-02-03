@@ -18,6 +18,7 @@
 #include "Player.h"
 #include "Boss.h"
 #include "BossManager.h"
+#include "BackgroundManager.h"
 
 // Rendering
 #include "RendererAccessor.h"
@@ -34,7 +35,8 @@
 
 namespace Studio
 {
-	LevelManager::LevelManager()
+	LevelManager::LevelManager(BackgroundManager* aBackgroundManager):
+		myBackgroundManager(aBackgroundManager)
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 		SAFE_CREATE(myBulletFactory, BulletFactory());
@@ -91,7 +93,7 @@ namespace Studio
 				levelIterator++;
 			}
 		}
-		LoadLevel(levelToStart);
+		myCurrentLevel = levelToStart;
 		myLevelBossSpawned = false;
 		myLevelEnemiesCleared = false;
 		myLevelIsCleared = false;
@@ -165,8 +167,10 @@ namespace Studio
 
 	const std::string& LevelManager::CurrentLevelPath()
 	{
-		return myCurrentLevelPath;
+		return myLevelPaths[myCurrentLevel];
 	}
+
+	
 
 	void LevelManager::AddEnemy(Enemy* anEnemy)
 	{
@@ -202,13 +206,16 @@ namespace Studio
 			{
 				myPlayer->Bounce(myEnemies[i]->GetPosition());
 			}
-
+			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsPopcorn())
+			{
+				//My Player take damage, blow up mine
+			}
 			if (!myEnemies[i]->IsDead())
 			{
 				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
 			}
 
-			if (myEnemies[i]->GetPosition().x < 0.0f)
+			if (myEnemies[i]->GetPosition().x < -50.0f || myEnemies[i]->GetPosition().y < -50.0f || myEnemies[i]->GetPosition().y > 1130.0f)
 			{
 				myEnemies.erase(myEnemies.begin() + i);
 			}
@@ -334,14 +341,14 @@ namespace Studio
 	void LevelManager::LoadLevel(int aLevelIndex)
 	{
 
-		myCurrentLevelPath = myLevelPaths[aLevelIndex];
+		myCurrentLevel = aLevelIndex;
 		myLevelIsCleared = false;
 
 		rapidjson::Document document;
 
 		std::string text;
 		std::fstream file;
-		file.open(myCurrentLevelPath);
+		file.open(myLevelPaths[myCurrentLevel]);
 		{
 			std::string line;
 			while (std::getline(file, line))
@@ -369,14 +376,23 @@ namespace Studio
 		else
 		{
 			SETCONSOLECOLOR(CONSOLE_COLOR_RED);
-			printf_s("ERROR: \"%s\" is missing packs\n", myCurrentLevelPath);
+			printf_s("ERROR: \"%s\" is missing packs\n", myLevelPaths[myCurrentLevel]);
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
+		if (myCurrentLevel >= myBackgroundManager->GetPathsSize() -1)
+		{
+			myBackgroundManager->CreateBackground(myBackgroundManager->GetPathsSize() - 1);
+		}
+		else
+		{
+			myBackgroundManager->CreateBackground(myCurrentLevel);
+		}
 	}
-	const std::string& LevelManager::GetCurrentLevelPath() const
-	{
-		return myCurrentLevelPath;
-	}
+
+	const int LevelManager::GetCurrentLevelIndex() const { return myCurrentLevel; }
+
+	const std::vector<std::string>& LevelManager::GetLevelPaths() const { return myLevelPaths; }
+
 	void LevelManager::CheckIfLevelIsCleared()
 	{
 		// This is NOT how to check if a level has been cleared.

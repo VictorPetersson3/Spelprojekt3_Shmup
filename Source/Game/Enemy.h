@@ -23,7 +23,8 @@ namespace Studio
 		void Update(float aDeltaTime);
 		void Shoot(float aDeltaTime);
 		void DeathLogic();
-		const bool GetIsTerrain();
+		const bool GetIsTerrain() const;
+		const bool GetIsPopcorn() const;
 		int GetScoreValue();
 
 		VECTOR2F GetPosition();

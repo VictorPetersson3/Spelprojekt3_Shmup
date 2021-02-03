@@ -1,0 +1,1 @@
+{"HealthPoints":3,"Movement":{"Type":"Diagonal","Speed":100,"SpawnInCorner":"Top"},"Bullet":{"Type":"","Speed":200,"ShootTowardsPlayer":false,"Interval":500}}

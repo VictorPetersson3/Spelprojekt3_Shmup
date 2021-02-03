@@ -11,9 +11,9 @@
 #include "Renderer.h"
 #include "BackgroundObject.h"
 
-void Studio::BackgroundManager::CreateBackground(const char* aBackgroundPath)
+void Studio::BackgroundManager::CreateBackground(const int aLevelIndex)
 {
-	const char* levelPath = aBackgroundPath;
+	const char* levelPath = myLevelPaths[aLevelIndex].c_str();
 
 	rapidjson::Document document;
 
@@ -110,16 +110,12 @@ void Studio::BackgroundManager::Init(float LevelWidth)
 	for (const auto& entry : std::filesystem::directory_iterator(directory))
 	{
 		auto file = entry.path().string();
-		printf_s("File %s\n", file.c_str());
-
-		if (entry.path().extension().string() == ".json")
-		{
-			std::string path = entry.path().string();
-			printf("LevelPath Background: %s\n", path.c_str());
-			
-		}
+		std::string type = file.substr(16);
+		std::string levelPathStitched = "JSON/Background/";
+		levelPathStitched.append(type);
+		myLevelPaths.push_back(levelPathStitched);
+		printf("Level Background Path: %s\n", levelPathStitched.c_str());
 	}
-	CreateBackground("JSON/Background/Background_AlphaLevel.json");
 }
 
 void Studio::BackgroundManager::UpdateBackground(float aDeltaTime)
@@ -133,6 +129,11 @@ void Studio::BackgroundManager::UpdateBackground(float aDeltaTime)
 		}
 		Studio::RendererAccessor::GetInstance()->Render(*myBackgroundObjects.at(i));
 	}
+}
+
+const int Studio::BackgroundManager::GetPathsSize() const
+{
+	return myLevelPaths.size();
 }
 
 void Studio::BackgroundManager::DebugJsonDoc(rapidjson::Value& aJsonObject, const int aIterator)

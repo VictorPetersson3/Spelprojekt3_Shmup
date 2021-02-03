@@ -139,7 +139,7 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 	else
 	{
 		myIsAnimating = false;
-		myImagePath = "sprites/debugpixel.dds";
+		myImagePath = "sprites/assets/enemies/enemyShip1/enemyShip1.dds";
 	}
 
 }
@@ -181,6 +181,11 @@ const std::vector<float> Studio::TypePattern_Enemy::GetIdleAnimationCustomFrames
 const bool Studio::TypePattern_Enemy::GetIsAnimating() const { return myIsAnimating;}
 
 const bool Studio::TypePattern_Enemy::GetIsTerrain() const { return myIsTerrain; }
+
+const bool Studio::TypePattern_Enemy::GetIsPopcorn() const
+{
+	return myIsPopcorn;
+}
 
 const bool Studio::TypePattern_Enemy::GetUsingCustomUpFrames() const { return myUsingCustomUpFrames;}
 

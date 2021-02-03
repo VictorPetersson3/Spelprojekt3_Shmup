@@ -72,16 +72,16 @@ void CGameWorld::Init()
 
 	
 	myBackgroundManager.Init(1920.0f);
-
-	SAFE_CREATE(myLevelManager, Studio::LevelManager());
+	SAFE_CREATE(myLevelManager, Studio::LevelManager(&myBackgroundManager));
 	myMenuManager = Studio::MenuManagerSingleton::GetInstance();
-
 	Studio::LevelAccessor::SetInstance(myLevelManager);
+	myMenuManager->SetPlayButtonIndex(myLevelManager->GetCurrentLevelIndex());
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
+	myMenuManager->Load();
 	if (Studio::InputManager::GetInstance()->IsKeyPressed('F'))
 	{
 		Studio::Timer::GetInstance()->ToggleFreeze();
@@ -97,8 +97,6 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		}
 	}
 
-	myBackgroundManager.UpdateBackground(aDeltaTime);
-
 	if (myMenuManager->GameStarted())
 	{
 		if (myMenuManager->GetGodMode() == true)
@@ -109,6 +107,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		myPlayer->Update();
 		myLevelManager->Update(myPlayer);
 		myCoinManager->Update();
+		myBackgroundManager.UpdateBackground(aDeltaTime);
 	}
 	myMenuManager->Update();
 }

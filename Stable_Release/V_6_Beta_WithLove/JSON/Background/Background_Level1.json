@@ -1,0 +1,295 @@
+{
+  "Json": [
+    {
+      "Type": "BackgroundImage",
+      "ImagePath": "Sprites/UI/LoadingScreen.dds",
+      "IsTiling": false,
+      "IsCentered": true,
+      "Pivot": {
+        "X": 0.5,
+        "Y": 0.5
+      },
+      "LayerOrder": -20,
+      "Position": {
+        "X": 960,
+        "Y": 540
+      },
+      "Scale": {
+        "X": 1.0,
+        "Y": 1.1
+      },
+      "Speed": 0,
+      "CreateMany": false,
+      "UseRandom": false
+    },
+    [
+      {
+        "Type": "MountainRangeTileAble",
+        "ImagePath": "sprites/Background/AlphaLevel/BG_Mountains.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -19,
+        "Position": {
+          "X": -960,
+          "Y": 870
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -10.5,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "NorthernLight",
+        "ImagePath": "sprites/Background/AlphaLevel/BG_NorthernLight.dds",
+        "IsTiling": true,
+        "IsCentered": false,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.0
+        },
+        "LayerOrder": -18,
+        "Position": {
+          "X": -960,
+          "Y": 0
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -0.15,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": 20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "RockReflection",
+        "ImagePath": "sprites/Background/AlphaLevel/MG_RockReflection.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -17,
+        "Position": {
+          "X": -1360,
+          "Y": 1000
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -30.1,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": 20,
+            "Max": 100
+          }
+        }
+      }
+    ],
+    {
+      "Type": "GradientImage",
+      "ImagePath": "sprites/Background/AlphaLevel/Background_SkySea.dds",
+      "IsTiling": false,
+      "IsCentered": true,
+      "Pivot": {
+        "X": 0.5,
+        "Y": 0.5
+      },
+      "LayerOrder": -17,
+      "Position": {
+        "X": 960,
+        "Y": 540
+      },
+      "Scale": {
+        "X": 0,
+        "Y": 0
+      },
+      "Speed": 0,
+      "CreateMany": false,
+      "Amount": 10,
+      "UseRandom": false,
+      "RandomAtributes": {
+        "RandomPositionX": {
+          "X": 0,
+          "Y": 1920
+        },
+        "RandomPositionY": {
+          "X": 0,
+          "Y": 1920
+        },
+        "RandomSpeed": {
+          "Min": 20,
+          "Max": 100
+        }
+      }
+    },
+    [
+      {
+        "Type": "GroundIce",
+        "ImagePath": "sprites/Background/AlphaLevel/BG_GroundPlane.dds",
+        "IsTiling": true,
+        "IsCentered": false,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 1.0
+        },
+        "LayerOrder": -16,
+        "Position": {
+          "X": 960,
+          "Y": 1080
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -30.1,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": 20,
+            "Max": 100
+          }
+        }
+      }
+    ],
+    [
+      {
+        "Type": "MG_Rock",
+        "ImagePath": "sprites/Background/AlphaLevel/MG_Rock.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -15,
+        "Position": {
+          "X": -1360,
+          "Y": 860
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -30.1,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": 20,
+            "Max": 100
+          }
+        }
+      }
+    ],    
+    [
+      {
+        "Type": "Foreground",
+        "ImagePath": "sprites/Background/Background_GradientBackground_01.dds",
+        "IsTiling": false,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -15,
+        "Position": {
+          "X": 960,
+          "Y": 400
+        },
+        "Scale": {
+          "X": 0,
+          "Y": 0
+        },
+        "Speed": 0,
+        "CreateMany": false,
+        "Amount": 10,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": 20,
+            "Max": 100
+          }
+        }
+      }
+    ]
+  ]
+
+}
+
