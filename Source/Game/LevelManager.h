@@ -36,6 +36,8 @@ namespace Studio
 		void CheckIfLevelIsCleared();
 
 		bool myLevelIsCleared;
+		bool myLevelEnemiesCleared;
+		bool myLevelBossSpawned;
 		std::string myCurrentLevelPath;
 		int myPackIndex;
 		Pack* myCurrentPack;
