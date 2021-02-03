@@ -58,6 +58,7 @@ Studio::Module_Movement::Module_Movement(rapidjson::Value& aModuleParameters) :
 
 Studio::Module_Movement::~Module_Movement()
 {
+	SAFE_DELETE(myModuleMovement);
 }
 
 bool Studio::Module_Movement::DoStuff(Boss& aBoss)
@@ -67,6 +68,6 @@ bool Studio::Module_Movement::DoStuff(Boss& aBoss)
 		myModuleMovement->SetMovementStartPosition(aBoss.GetPositionPointer());
 	}
 	aBoss.UpdateMovement(myModuleMovement);
-	printf("Changed Movement\n");
+	//printf("Changed Movement\n");
 	return true;
 }

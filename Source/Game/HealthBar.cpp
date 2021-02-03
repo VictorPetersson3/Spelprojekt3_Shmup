@@ -7,12 +7,23 @@
 
 namespace Studio
 {
-	HealthBar::HealthBar(const char* aImagePath, const VECTOR2F& aPosition) :
+	HealthBar::HealthBar(const char* aImagePath, const VECTOR2F& aPosition, const int aLayer) :
 		HealthBar::GameObject(aImagePath)
 	{
 		GameObject::GetSpriteSheet().SetPosition(aPosition);
 		GameObject::GetSpriteSheet().GetSprite()->SetColor({ 1.0f,0.0f,0.0f,1.0f });
 		GameObject::GetSpriteSheet().SetPivot({0.0f, 0.5f});
+		GameObject::GetSpriteSheet().SetLayer(aLayer);
+		SetGodMode(true);
+	}
+
+	HealthBar::HealthBar(const char* aImagePath, const VECTOR2F& aPosition, const int aLayer, Tga2D::CColor aColor) :
+		HealthBar::GameObject(aImagePath)
+	{
+		GameObject::GetSpriteSheet().SetPosition(aPosition);
+		GameObject::GetSpriteSheet().GetSprite()->SetColor({ aColor });
+		GameObject::GetSpriteSheet().SetPivot({ 0.0f, 0.5f });
+		GameObject::GetSpriteSheet().SetLayer(aLayer);
 		SetGodMode(true);
 	}
 

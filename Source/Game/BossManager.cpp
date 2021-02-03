@@ -9,10 +9,16 @@
 Studio::BossManager::BossManager()
 {
 	myCurrentBoss = 0.0f;
+	myAmountOfBosses = 0;
 }
 
 Studio::BossManager::~BossManager()
 {
+	for (Boss* boss : myBosses)
+	{
+		SAFE_DELETE(boss);
+	}
+	myBosses.clear();
 }
 
 void Studio::BossManager::LoadBosses()
@@ -34,11 +40,16 @@ void Studio::BossManager::LoadBosses()
 		}
 		file.close();
 		document.Parse(text.c_str());
-		myBosses.push_back(new Boss("", document));
+		myBosses.push_back(new Boss("Sprites/assets/enemies/boss/globePhase_01.dds", document));
 	}
+	myAmountOfBosses = static_cast<int>(myBosses.size());
 }
 
 Studio::Boss* Studio::BossManager::GetLevelBoss(int aLevelCount)
 {
-	return myBosses[aLevelCount];
+	if (aLevelCount < myAmountOfBosses)
+	{
+		return myBosses[aLevelCount];
+	}
+	return nullptr;
 }

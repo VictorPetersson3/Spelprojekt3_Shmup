@@ -19,6 +19,7 @@ namespace Studio
 	private:
 		std::vector<Boss*> myBosses;
 		int myCurrentBoss;
+		int myAmountOfBosses;
 	};
 }
 

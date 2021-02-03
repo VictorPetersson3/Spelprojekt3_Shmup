@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "Shield.h"
 #include "rapidjson/document.h"
 namespace Studio
 {
@@ -13,7 +14,7 @@ namespace Studio
 	protected:
 
 	private:
-		VECTOR2F myShieldCenter;
+		bool myHasCreatedShield;
 		float myHitPoints;
 	};
 }

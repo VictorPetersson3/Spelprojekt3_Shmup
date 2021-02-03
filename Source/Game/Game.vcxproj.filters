@@ -212,6 +212,8 @@
     <ClCompile Include="Module_Movement.cpp">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Missile.cpp" />
+    <ClCompile Include="Shield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -437,6 +439,8 @@
     <ClInclude Include="Module_Movement.h">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Missile.h" />
+    <ClInclude Include="Shield.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

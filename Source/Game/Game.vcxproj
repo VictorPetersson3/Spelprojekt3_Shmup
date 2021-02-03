@@ -202,6 +202,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScoreAccessor.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="Shield.h" />
     <ClInclude Include="ShopButton.h" />
     <ClInclude Include="ShopButtonTier2.h" />
     <ClInclude Include="ShopUI.h" />
@@ -284,6 +285,7 @@
     <ClCompile Include="RendererAccessor.cpp" />
     <ClCompile Include="ScoreAccessor.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="ShopButton.cpp" />
     <ClCompile Include="ShopButtonTier2.cpp" />
     <ClCompile Include="ShopUI.cpp" />
