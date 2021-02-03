@@ -17,6 +17,10 @@ namespace Studio
 		myAccelerationSpeed = 100.0f;
 
 		myVelocity = { myInitialSpeed, 0.0f };
+
+		myCollider.AddBoxColliderObject(myPosition, { 5,5 });
+
+		mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
 	}
 
 	void Missile::Update()

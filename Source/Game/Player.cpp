@@ -50,20 +50,6 @@ namespace Studio
 	{
 		if (!IsDead())
 		{
-			if (InputManager::GetInstance()->IsKeyPressed('2'))
-			{
-				UpgradeT1(Enums::Tier1Upgrades::BasicAttackSpeed);
-			}
-			if (InputManager::GetInstance()->IsKeyPressed('3'))
-			{
-				UpgradeT2(Enums::Tier2Upgrades::BasicAttackSpeed);
-
-			}
-			if (InputManager::GetInstance()->IsKeyPressed('4'))
-			{
-				UpgradeT3(Enums::Tier3Upgrades::BasicAttackSpeed);
-			}
-			printf_s("%f", myPlayerData->GetShootCoolDown());
 			Movement();
 
 			Player::GameObject::Update(myPosition + myDirection);
@@ -114,6 +100,10 @@ namespace Studio
 
 			// Launch
 			// TODO: Don't do this all the time
+
+		}
+		if (InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Explosive))
+		{
 			LaunchMissile();
 		}
 	}
