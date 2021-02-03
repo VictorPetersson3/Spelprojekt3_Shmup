@@ -62,6 +62,13 @@ void Studio::TestButton::Update()
 			{
 				if (pt.y >= myTop && pt.y <= myBottom)
 				{
+					if (!hasBeenHoveredOver)
+					{
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						hasBeenHoveredOver = true;
+					}
+
+
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
 						OnClick();
@@ -69,6 +76,14 @@ void Studio::TestButton::Update()
 						myIsEnabled = false;
 					}
 				}
+				else
+				{
+					hasBeenHoveredOver = false;
+				}
+			}
+			else
+			{
+				hasBeenHoveredOver = false;
 			}
 		}
 

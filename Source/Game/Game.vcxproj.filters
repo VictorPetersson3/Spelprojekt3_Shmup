@@ -206,6 +206,9 @@
     <ClCompile Include="ShopButton.cpp" />
     <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="BossManager.cpp" />
+    <ClCompile Include="ShopButtonTier2.cpp" />
+    <ClCompile Include="StartButton.cpp" />
+    <ClCompile Include="GenericButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -425,6 +428,9 @@
     <ClInclude Include="ShopButton.h" />
     <ClInclude Include="ShopUI.h" />
     <ClInclude Include="BossManager.h" />
+    <ClInclude Include="ShopButtonTier2.h" />
+    <ClInclude Include="StartButton.h" />
+    <ClInclude Include="GenericButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

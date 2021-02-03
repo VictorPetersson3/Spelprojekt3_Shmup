@@ -161,6 +161,7 @@
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EngineFlame.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="GenericButton.h" />
     <ClInclude Include="GodModeButton.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="ImageElement.h" />
@@ -201,9 +202,11 @@
     <ClInclude Include="ScoreAccessor.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ShopButton.h" />
+    <ClInclude Include="ShopButtonTier2.h" />
     <ClInclude Include="ShopUI.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />
+    <ClInclude Include="StartButton.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestButton.h" />
@@ -241,6 +244,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EngineFlame.cpp" />
+    <ClCompile Include="GenericButton.cpp" />
     <ClCompile Include="GodModeButton.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="ImageElement.cpp" />
@@ -279,9 +283,11 @@
     <ClCompile Include="ScoreAccessor.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ShopButton.cpp" />
+    <ClCompile Include="ShopButtonTier2.cpp" />
     <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
+    <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

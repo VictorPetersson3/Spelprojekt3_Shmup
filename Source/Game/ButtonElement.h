@@ -29,6 +29,8 @@ namespace Studio
 		float myTop;
 		float myBottom;
 
+		bool hasBeenHoveredOver = false;
+
 		HWND myWindowHandle;
 	};
 }

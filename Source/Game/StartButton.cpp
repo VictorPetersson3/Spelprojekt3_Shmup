@@ -1,60 +1,55 @@
 #include "stdafx.h"
-#include "ShopButton.h"
+#include "StartButton.h"
 #include "tga2d/sprite/sprite.h"
 #include "InputManager.h"
 #include <iostream>
 #include "AudioManagerAccesor.h"
 #include "AudioManager.h"
-#include <string>
+#include "LevelAccessor.h"
 
 
-Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::RapidFireUpgrades aUpgradeType, int aCost)
+Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer, char* aLevelToLoadPath)
 {
-	mySprite = new Tga2D::CSprite(aPath);
+	mySprite = new Tga2D::CSprite(aSpritePath);
 	mySprite->SetPivot(aPivot);
 	mySprite->SetSizeRelativeToImage(aSize);
 	mySprite->SetPosition(aPosition);
 
-	mySpriteSheet = new SpriteSheet(aPath);
+	mySpriteSheet = new SpriteSheet(aSpritePath);
 	mySpriteSheet->SetPivot(aPivot);
 	mySpriteSheet->SetPosition(aPosition);
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
-
-	myUpgradeType = aUpgradeType;
-
-	myCost = aCost;
 
 	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
 	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
 	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
 	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
 
+	tag = aTag;
+
+	myLevelToLoadPath = aLevelToLoadPath;
 }
 
-Studio::ShopButton::~ShopButton()
+Studio::StartButton::~StartButton()
 {
+	delete mySprite;
+	delete mySpriteSheet;
+	mySprite = nullptr;
+	mySpriteSheet = nullptr;
 }
 
-void Studio::ShopButton::Update()
+void Studio::StartButton::Update()
 {
+	myWindowHandle = GetForegroundWindow();
 
-	myLeft = mySpriteSheet->GetPosition().x - (128 / 2);
-	myRight = mySpriteSheet->GetPosition().x + (128 / 2);
-	myTop = mySpriteSheet->GetPosition().y - (128 / 2);
-	myBottom = mySpriteSheet->GetPosition().y + (128 / 2);
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(myWindowHandle, &pt);
 
 
 	if (myIsEnabled == true)
 	{
-
-		myWindowHandle = GetForegroundWindow();
-
-		POINT pt;
-		GetCursorPos(&pt);
-		ScreenToClient(myWindowHandle, &pt);
-
-		
 		if (myIsClicked == false)
 		{
 			if (pt.x >= myLeft && pt.x <= myRight)
@@ -67,10 +62,12 @@ void Studio::ShopButton::Update()
 						hasBeenHoveredOver = true;
 					}
 
+
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
 						OnClick();
 						myIsClicked = true;
+						myIsEnabled = false;
 					}
 				}
 				else
@@ -93,18 +90,12 @@ void Studio::ShopButton::Update()
 	}
 }
 
-void Studio::ShopButton::OnClick()
+void Studio::StartButton::OnClick()
 {
-	if (ScoreAccessor::GetInstance()->GetCoinScore() >= myCost)
-	{
-		PlayerAccessor::GetInstance()->UpgradeRapidFire(myUpgradeType);
-		std::cout << "Shop button pressed" << std::endl;
-		ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
-	}
+	LevelAccessor::GetInstance()->LoadLevel(myLevelToLoadPath);
 }
 
-//void Studio::ShopButton::SetPosition(VECTOR2F aPosition)
-//{
-//	mySpriteSheet->SetPosition(aPosition);
-//}
-//
+void Studio::StartButton::SetLevelToLoad(char* aNewLevelToLoadPath)
+{
+	myLevelToLoadPath = aNewLevelToLoadPath;
+}
