@@ -1,0 +1,1 @@
+{"HealthPoints":3,"Movement":{"Type":"Seeking","Speed":100,"Acceleration":5},"Bullet":{"Type":"","Speed":250,"ShootTowardsPlayer":true,"Interval":250}}

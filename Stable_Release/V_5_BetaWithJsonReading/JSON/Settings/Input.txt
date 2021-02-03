@@ -1,0 +1,10 @@
+FlyUp W ArrowUp I
+FlyDown S ArrowDown K
+FlyRight D ArrownRight L
+FlyLeft A ArrowLeft J
+RapidFire 1 Z
+Explosive 2 X
+Shield 3 C
+Shoot Spacebar
+PauseMenu Esc P
+Freeze F
