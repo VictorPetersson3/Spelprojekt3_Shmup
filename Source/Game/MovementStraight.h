@@ -6,6 +6,9 @@ namespace Studio
 	{
 	public:
 		MovementStraight(VECTOR2F* anObjectsPosition, float aSpeed);
+
+		void SetMovementStartPosition(VECTOR2F* aPosition) override;
+
 		void Update() override;
 	};
 }

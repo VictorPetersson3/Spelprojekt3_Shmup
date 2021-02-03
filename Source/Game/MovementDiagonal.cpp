@@ -12,6 +12,10 @@ namespace Studio
 		myAngle = anAngle;
 		myTotalTime = 0.0f;
 	}
+	void MovementDiagonal::SetMovementStartPosition(VECTOR2F* aPosition)
+	{
+		this->myObjectsPosition = aPosition;
+	}
 	void MovementDiagonal::Update()
 	{
 		myTotalTime += Timer::GetInstance()->TGetDeltaTime();

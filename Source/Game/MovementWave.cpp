@@ -17,6 +17,12 @@ namespace Studio
 
 	}
 
+	void MovementWave::SetMovementStartPosition(VECTOR2F* aPosition)
+	{
+		this->myObjectsPosition = aPosition;
+		mySpawnYPos = aPosition->y;
+	}
+
 	void MovementWave::Update()
 	{
 		myTotalTime += Timer::GetInstance()->TGetDeltaTime();

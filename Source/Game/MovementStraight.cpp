@@ -11,6 +11,11 @@ namespace Studio
 		mySpeed = aSpeed;
 	}
 
+	void MovementStraight::SetMovementStartPosition(VECTOR2F* aPosition)
+	{
+		this->myObjectsPosition = aPosition;
+	}
+
 	void MovementStraight::Update()
 	{
 		float deltaTime = Timer::GetInstance()->TGetDeltaTime();

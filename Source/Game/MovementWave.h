@@ -7,6 +7,9 @@ namespace Studio
 	{
 	public:
 		MovementWave(VECTOR2F* anObjectsPosition, float aHorizontalSpeed, float aVerticalSpeed, float aWaveHeight);
+
+		void SetMovementStartPosition(VECTOR2F* aPosition) override;
+
 		void Update() override;
 	private:
 		float myWaveHeight;
