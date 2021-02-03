@@ -5,13 +5,11 @@
 // Filhantering
 #include <fstream>
 #include <sstream>
-
+#include <filesystem> // Hitta alla filer i ett directory
 
 #include "RendererAccessor.h"
 #include "Renderer.h"
 #include "BackgroundObject.h"
-
-#include <iostream>
 
 void Studio::BackgroundManager::CreateBackground(const char* aBackgroundPath)
 {
@@ -105,9 +103,22 @@ void Studio::BackgroundManager::CreateBackground(const char* aBackgroundPath)
 	}
 }
 
-void Studio::BackgroundManager::CreateTestMapBackground(float LevelWidth)
+void Studio::BackgroundManager::Init(float LevelWidth)
 {
 	myLevelWidth = 1920;
+	std::string directory = "JSON/Background";
+	for (const auto& entry : std::filesystem::directory_iterator(directory))
+	{
+		auto file = entry.path().string();
+		printf_s("File %s\n", file.c_str());
+
+		if (entry.path().extension().string() == ".json")
+		{
+			std::string path = entry.path().string();
+			printf("LevelPath Background: %s\n", path.c_str());
+			
+		}
+	}
 	CreateBackground("JSON/Background/Background_AlphaLevel.json");
 }
 

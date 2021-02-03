@@ -47,9 +47,8 @@ namespace Studio
 			if (myType->GetDiagonalIsTop())
 			{
 				Tga2D::Vector2f angle = GameObject::GetPosition() * -1;
-				float theta = atan(GameObject::GetPosition().y / GameObject::GetPosition().x);
 				SAFE_CREATE(myMovement, MovementDiagonal(GameObject::GetPositionPointer(),
-					myType->GetSpeed(), angle));
+					myType->GetSpeed(), angle.GetNormalized()));
 			}
 			else
 			{

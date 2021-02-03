@@ -110,6 +110,24 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 				{
 					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
 				}
+
+				if (!JSON["IdleAnimationRange"]["FrameStartX"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartX"].GetFloat();
+				}
+				if (!JSON["IdleAnimationRange"]["FrameStartY"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartY"].GetFloat();
+				}
+				if (!JSON["IdleAnimationRange"]["FrameEndX"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndX"].GetFloat();
+				}
+				if (!JSON["IdleAnimationRange"]["FrameEndY"].IsString())
+				{
+					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
+				}
+
 			}
 
 		}

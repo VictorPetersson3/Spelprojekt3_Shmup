@@ -15,7 +15,7 @@ namespace Studio
 	void MovementDiagonal::Update()
 	{
 		myTotalTime += Timer::GetInstance()->TGetDeltaTime();
-		myObjectsPosition->x -= myAngle.x * mySpeed * Timer::GetInstance()->TGetDeltaTime();
-		myObjectsPosition->y -= myAngle.y * mySpeed * Timer::GetInstance()->TGetDeltaTime();
+		myObjectsPosition->x = myAngle.x + mySpeed * Timer::GetInstance()->TGetDeltaTime();
+		myObjectsPosition->y = myAngle.y + mySpeed * Timer::GetInstance()->TGetDeltaTime();
 	}
 }

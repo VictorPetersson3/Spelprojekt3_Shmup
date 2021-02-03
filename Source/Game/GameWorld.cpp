@@ -70,7 +70,7 @@ void CGameWorld::Init()
 	Studio::ScoreAccessor::SetInstance(myScoreManager);
 
 	
-	myBackgroundManager.CreateTestMapBackground(1920.0f);
+	myBackgroundManager.Init(1920.0f);
 
 	SAFE_CREATE(myLevelManager, Studio::LevelManager());
 	myMenuManager = Studio::MenuManagerSingleton::GetInstance();

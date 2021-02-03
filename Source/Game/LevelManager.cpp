@@ -48,11 +48,10 @@ namespace Studio
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "MissilePlayer", 800.0f, Enums::BulletOwner::Player);
 		myBossManager->LoadBosses();
 		// Load chosen level by Lever Designers
-
-
-
 		std::fstream file;
 		std::string levelPath;
+		int levelIterator = 0;
+		int levelToStart = 0;
 		file.open("JSON/Levels/level.txt");
 		{
 			bool lineIsComment = true;
@@ -70,17 +69,28 @@ namespace Studio
 
 		//printf_s("PATH %s\n", path.c_str());
 
-		LoadLevel(path.c_str());
 		std::string directory = "JSON/Levels";
 		for (const auto& entry : std::filesystem::directory_iterator(directory))
 		{
 			if (entry.path().extension().string() == ".json")
 			{
+				
 				auto file = entry.path().string();
-				myLevelPaths.push_back(file);
-				printf("LevelPath: %s\n", file.c_str());
+
+				std::string type = file.substr(12);
+				std::string levelPathStitched = "JSON/Levels/";
+				levelPathStitched.append(type);
+				myLevelPaths.push_back(levelPathStitched);
+				printf("LevelPath: %s\n", levelPathStitched.c_str());
+
+				if (path == levelPathStitched)
+				{
+					levelToStart = levelIterator;
+				}
+				levelIterator++;
 			}
 		}
+		LoadLevel(levelToStart);
 	}
 
 	LevelManager::~LevelManager()
@@ -317,17 +327,17 @@ namespace Studio
 		}
 	}
 
-	void LevelManager::LoadLevel(const std::string& aLevelPath)
+	void LevelManager::LoadLevel(int aLevelIndex)
 	{
 
-		myCurrentLevelPath = aLevelPath;
+		myCurrentLevelPath = myLevelPaths[aLevelIndex];
 		myLevelIsCleared = false;
 
 		rapidjson::Document document;
 
 		std::string text;
 		std::fstream file;
-		file.open(aLevelPath);
+		file.open(myCurrentLevelPath);
 		{
 			std::string line;
 			while (std::getline(file, line))

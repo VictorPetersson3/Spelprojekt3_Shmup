@@ -27,7 +27,7 @@ namespace Studio
 		void AddEnemy(Enemy* anEnemy);
 		void SpawnBullet(const std::string& aType, VECTOR2F aPosition);
 		bool LevelIsCleared();
-		void LoadLevel(const std::string& aLevelPath);
+		void LoadLevel(const int aLevelIndex);
 		const std::string& GetCurrentLevelPath() const;
 
 	private:
@@ -38,7 +38,6 @@ namespace Studio
 		bool myLevelIsCleared;
 		bool myLevelEnemiesCleared;
 		bool myLevelBossSpawned;
-		std::string myCurrentLevelPath;
 		int myPackIndex;
 		Pack* myCurrentPack;
 		Player* myPlayer = nullptr;
@@ -47,6 +46,8 @@ namespace Studio
 		std::vector<Pack*> myPacks;
 		std::vector<Enemy*> myEnemies;
 		std::vector<Bullet*> myBullets;
+
+		std::string myCurrentLevelPath;
 		std::vector<std::string> myLevelPaths;
 	};
 }
