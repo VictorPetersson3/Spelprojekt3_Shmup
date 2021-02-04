@@ -80,7 +80,6 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Pack.cpp" />
-    <ClCompile Include="MenuObject.cpp" />
     <ClCompile Include="Movement.cpp">
       <Filter>Components\BaseObjects</Filter>
     </ClCompile>
@@ -156,7 +155,6 @@
     <ClCompile Include="HealthBar.cpp">
       <Filter>Components\Visual</Filter>
     </ClCompile>
-    <ClCompile Include="ImageElement.cpp" />
     <ClCompile Include="Boss.cpp">
       <Filter>GameObjects\Boss</Filter>
     </ClCompile>
@@ -202,18 +200,39 @@
     <ClCompile Include="EngineFlame.cpp">
       <Filter>GameObjects\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAccessor.cpp" />
-    <ClCompile Include="ShopButton.cpp" />
-    <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="BossManager.cpp" />
-    <ClCompile Include="ShopButtonTier2.cpp" />
-    <ClCompile Include="StartButton.cpp" />
-    <ClCompile Include="GenericButton.cpp" />
     <ClCompile Include="Module_Movement.cpp">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Shield.cpp" />
+    <ClCompile Include="GenericButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuObject.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopButtonTier2.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAccessor.cpp">
+      <Filter>Accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectExplosionLarge.cpp">
+      <Filter>GameObjects\Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -304,7 +323,6 @@
     <ClInclude Include="Counter.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="MenuObject.h" />
     <ClInclude Include="Enums.h">
       <Filter>Utility</Filter>
     </ClInclude>
@@ -383,7 +401,6 @@
     <ClInclude Include="HealthBar.h">
       <Filter>Components\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="ImageElement.h" />
     <ClInclude Include="Boss.h">
       <Filter>GameObjects\Boss</Filter>
     </ClInclude>
@@ -429,18 +446,39 @@
     <ClInclude Include="EngineFlame.h">
       <Filter>GameObjects\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAccessor.h" />
-    <ClInclude Include="ShopButton.h" />
-    <ClInclude Include="ShopUI.h" />
     <ClInclude Include="BossManager.h" />
-    <ClInclude Include="ShopButtonTier2.h" />
-    <ClInclude Include="StartButton.h" />
-    <ClInclude Include="GenericButton.h" />
     <ClInclude Include="Module_Movement.h">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Missile.h" />
     <ClInclude Include="Shield.h" />
+    <ClInclude Include="GenericButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopButtonTier2.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAccessor.h">
+      <Filter>Accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectExplosionLarge.h">
+      <Filter>GameObjects\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

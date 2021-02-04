@@ -63,6 +63,7 @@ Studio::Module_Movement::~Module_Movement()
 
 bool Studio::Module_Movement::DoStuff(Boss& aBoss)
 {
+
 	if (!myHasSetStartPos)
 	{
 		myModuleMovement->SetMovementStartPosition(aBoss.GetPositionPointer());

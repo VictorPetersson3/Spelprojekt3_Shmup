@@ -157,6 +157,7 @@
     <ClInclude Include="Condition_Time.h" />
     <ClInclude Include="Condition_Timed.h" />
     <ClInclude Include="Counter.h" />
+    <ClInclude Include="EffectExplosionLarge.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EngineFlame.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="Condition_Time.cpp" />
     <ClCompile Include="Condition_Timed.cpp" />
     <ClCompile Include="Counter.cpp" />
+    <ClCompile Include="EffectExplosionLarge.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EngineFlame.cpp" />

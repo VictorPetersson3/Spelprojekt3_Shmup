@@ -21,7 +21,11 @@ namespace Studio
 	void CoinManager::CreateCoin(VECTOR2F aPosition)
 	{
 		myWorldCoins.push_back(new Coin(aPosition));
+	}
 
+	void CoinManager::ResetWorldCoins()
+	{
+		myWorldCoins.clear();
 	}
 
 	std::vector<Coin*>& CoinManager::GetWorldCoins()

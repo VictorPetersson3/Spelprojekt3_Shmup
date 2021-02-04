@@ -12,6 +12,7 @@ namespace Studio
 	class Boss;
 	class BossManager;
 	class BackgroundManager;
+	class EffectExplosionLarge;
 	
 	class LevelManager
 	{
@@ -38,16 +39,19 @@ namespace Studio
 		void LevelLogic();
 		void CheckCollision();
 		void CheckIfLevelIsCleared();
+		void UpdateExplosions();
 
 		bool myLevelIsCleared;
 		bool myLevelEnemiesCleared;
 		bool myLevelBossSpawned;
+		bool myHasReloaded;
 		int myPackIndex;
 		int myCurrentLevel;
 		Pack* myCurrentPack;
 		Player* myPlayer = nullptr;
 		Boss* myBoss = nullptr;
 		BossManager* myBossManager = nullptr;
+		std::vector<EffectExplosionLarge*> myExplosions;
 		std::vector<Pack*> myPacks;
 		std::vector<Enemy*> myEnemies;
 		std::vector<Bullet*> myBullets;

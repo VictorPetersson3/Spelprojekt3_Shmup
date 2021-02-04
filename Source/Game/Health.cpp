@@ -44,3 +44,9 @@ void Studio::Health::SetGodMode(bool aChoice)
 {
 	myIsGodMode = aChoice;
 }
+
+void Studio::Health::ResetHealth()
+{
+	myCurrentHealth = myMaxHealth;
+	myIsDead = false;
+}

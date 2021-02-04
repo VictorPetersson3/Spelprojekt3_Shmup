@@ -29,6 +29,7 @@ namespace Studio
 		void UpgradeT1(Enums::Tier1Upgrades aTier1Upgrade);
 		void UpgradeT2(Enums::Tier2Upgrades aTier2Upgrade);
 		void UpgradeT3(Enums::Tier3Upgrades aTier3Upgrade);
+		void ResetPlayerCurrentLevel();
 		bool HasPenetratingRounds();
 
 	private:

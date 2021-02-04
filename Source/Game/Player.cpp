@@ -227,6 +227,13 @@ namespace Studio
 		}
 	}
 
+	void Studio::Player::ResetPlayerCurrentLevel()
+	{
+		GameObject::GetHealth().ResetHealth();
+		myPosition = { 300, 540 };
+		GameObject::SetPosition(myPosition);
+	}
+
 	bool Player::HasPenetratingRounds()
 	{
 		return myHasPenetratingRounds;

@@ -58,6 +58,12 @@ namespace Studio
 		myKillScore = anAmount;
 	}
 
+	void ScoreManager::ResetScore()
+	{
+		SetCoinScore(0);
+		SetKillScore(0);
+	}
+
 	int ScoreManager::GetCoinScore()
 	{
 		return myCoinScore;

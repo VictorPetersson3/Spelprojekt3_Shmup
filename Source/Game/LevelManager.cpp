@@ -19,6 +19,8 @@
 #include "Boss.h"
 #include "BossManager.h"
 #include "BackgroundManager.h"
+#include "EffectExplosionLarge.h"
+#include "CoinAccessor.h"
 
 // Rendering
 #include "RendererAccessor.h"
@@ -96,6 +98,7 @@ namespace Studio
 		myLevelBossSpawned = false;
 		myLevelEnemiesCleared = false;
 		myLevelIsCleared = false;
+		myHasReloaded = false;
 	}
 
 	LevelManager::~LevelManager()
@@ -214,7 +217,9 @@ namespace Studio
 			}
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsPopcorn())
 			{
-
+				myPlayer->TakeDamage(1.0f);
+				myEnemies[i]->TakeDamage(100);
+				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", {8,1}, myEnemies[i]->GetPosition()));
 				//My Player take damage, blow up mine
 			}
 			if (!myEnemies[i]->IsDead())
@@ -250,15 +255,18 @@ namespace Studio
 			if (myEnemies[i]->IsDead())
 			{
 				myEnemies[i]->DeathLogic();
+				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
 				myEnemies.erase(myEnemies.begin() + i);
 			}
 		}
-		if (myPlayer->IsDead())
+		if (myPlayer->IsDead() && !myHasReloaded)
 		{
 			ReloadLevel();
+			myHasReloaded = true;
 			//Reload Level after death explosion is finished
 			//LoadLevel(myCurrentLevelPath);  <-- Det h�r krashar allt till 10fps
 		}
+		UpdateExplosions();
 	}
 	//Pu
 	void LevelManager::CheckCollision()
@@ -397,11 +405,16 @@ namespace Studio
 		{
 			myBackgroundManager->CreateBackground(myCurrentLevel);
 		}
+		myHasReloaded = false;
 	}
 
 	void LevelManager::ReloadLevel()
 	{
 		LoadLevel(myCurrentLevel);
+		myPlayer->ResetPlayerCurrentLevel();
+		ScoreAccessor::GetInstance()->ResetScore();
+		CoinAccessor::GetInstance()->ResetWorldCoins();
+		myExplosions.clear();
 	}
 
 	const int LevelManager::GetCurrentLevelIndex() const { return myCurrentLevel; }
@@ -427,6 +440,26 @@ namespace Studio
 				myLevelIsCleared = true;
 				myLevelEnemiesCleared = false;
 				myLevelBossSpawned = false;
+			}
+		}
+	}
+
+	void LevelManager::UpdateExplosions()
+	{
+		for (int i = 0; i < myExplosions.size(); i++)
+		{
+			if (myExplosions[i]->IsAnimating())
+			{
+				myExplosions[i]->Update();
+				RendererAccessor::GetInstance()->Render(*myExplosions[i]);
+			}
+			else
+			{
+				if (i != myExplosions.size() -1)
+				{
+					std::swap(myExplosions[i], myExplosions.back());
+				}
+				myExplosions.pop_back();
 			}
 		}
 	}

@@ -77,6 +77,14 @@ namespace Studio
         {
             RendererAccessor::GetInstance()->Render(*myLoadingScreen);
         }
+        if (myPlayer->GetCurrentHealth() == myPlayer->GetMaxHealth() && hasStartedGame)
+        {
+            myHud.GetElementWithTag("Heart4")->SetActive(true);
+            myHud.GetElementWithTag("Heart3")->SetActive(true);
+            myHud.GetElementWithTag("Heart2")->SetActive(true);
+            myHud.GetElementWithTag("Heart1")->SetActive(true);
+
+        }
         if (myPlayer->GetCurrentHealth() == 3)
         {
             myHud.GetElementWithTag("Heart4")->SetActive(false);
