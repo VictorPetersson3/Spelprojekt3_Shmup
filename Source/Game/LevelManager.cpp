@@ -129,7 +129,7 @@ namespace Studio
 			MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
 		}
 
-		//Pu som kommer dr�mma mardr�mmar av denna rad
+		//Can this be removed mybe?
 		myPlayer = aPlayer;
 		if (myLevelIsCleared == true)
 		{
@@ -169,8 +169,10 @@ namespace Studio
 					printf_s("Size of new pack: %i\n", myCurrentPack->myStoredEnemies.size());
 				}
 			}
+
 			//Pu
 			LevelLogic();
+
 			// Check if Player cleared the level
 			CheckIfLevelIsCleared();
 		}
