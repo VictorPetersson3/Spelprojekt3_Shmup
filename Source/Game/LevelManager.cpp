@@ -208,6 +208,7 @@ namespace Studio
 			}
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsPopcorn())
 			{
+
 				//My Player take damage, blow up mine
 			}
 			if (!myEnemies[i]->IsDead())
@@ -248,6 +249,7 @@ namespace Studio
 		}
 		if (myPlayer->IsDead())
 		{
+			ReloadLevel();
 			//Reload Level after death explosion is finished
 			//LoadLevel(myCurrentLevelPath);  <-- Det h�r krashar allt till 10fps
 		}

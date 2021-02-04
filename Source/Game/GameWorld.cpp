@@ -125,19 +125,19 @@ void CGameWorld::InputStuff()
 			printf_s("Resumed game\n");
 		}
 	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('L'))
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('0'))
 	{
 		myLevelManager->ReloadLevel();
 	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('K'))
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('7'))
 	{
 		Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 2);
 	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('J'))
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('8'))
 	{
 		Studio::Timer::GetInstance()->SetSpeed(1);
 	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('H'))
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('9'))
 	{
 		Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 0.5);
 	}
