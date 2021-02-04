@@ -16,8 +16,16 @@ namespace Studio
 
 	private:
 		bool myHasSetStartPos;
+		bool myHasChangedPhaseMovement;
+
+		float mySpeed;
+		float myHeight;
+		float myHorizontalSpeed;
+		float myVerticalSpeed;
+
 		VECTOR2F myStartPosition;
 		Movement* myModuleMovement;
+		Enums::MovementPattern myMovementPattern;
 	};
 
 }

@@ -38,7 +38,7 @@
 
 namespace Studio
 {
-	LevelManager::LevelManager(BackgroundManager* aBackgroundManager):
+	LevelManager::LevelManager(BackgroundManager* aBackgroundManager) :
 		myBackgroundManager(aBackgroundManager)
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
@@ -79,7 +79,7 @@ namespace Studio
 		{
 			if (entry.path().extension().string() == ".json")
 			{
-				
+
 				auto file = entry.path().string();
 
 				std::string type = file.substr(12);
@@ -136,14 +136,15 @@ namespace Studio
 			/*SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
 			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);*/
-				MenuManagerSingleton::GetInstance()->GetShop()->Enable();
-				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 		}
 		//Boss Logic
 		else if (myLevelBossSpawned && myBoss != nullptr)
 		{
 			myBoss->Update();
 			LevelLogic();
+			CheckIfLevelIsCleared();
 		}
 		else if (myLevelBossSpawned && myBoss == nullptr)
 		{
@@ -180,7 +181,7 @@ namespace Studio
 		return myLevelPaths[myCurrentLevel];
 	}
 
-	
+
 
 	void LevelManager::AddEnemy(Enemy* anEnemy)
 	{
@@ -220,7 +221,7 @@ namespace Studio
 			{
 				myPlayer->TakeDamage(1.0f);
 				myEnemies[i]->TakeDamage(100);
-				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", {8,1}, myEnemies[i]->GetPosition()));
+				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
 				//My Player take damage, blow up mine
 			}
 			if (!myEnemies[i]->IsDead())
@@ -410,7 +411,7 @@ namespace Studio
 			printf_s("ERROR: \"%s\" is missing packs\n", myLevelPaths[myCurrentLevel]);
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
-		if (myCurrentLevel >= myBackgroundManager->GetPathsSize() -1)
+		if (myCurrentLevel >= myBackgroundManager->GetPathsSize() - 1)
 		{
 			myBackgroundManager->CreateBackground(myBackgroundManager->GetPathsSize() - 1);
 		}
@@ -439,7 +440,7 @@ namespace Studio
 		// This is NOT how to check if a level has been cleared.
 		// TODO: Fix this in beta (maybe check if packs is past mypacks size??)
 
-		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0)
+		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0 || myLevelBossSpawned)
 		{
 
 			if (!myLevelBossSpawned)
@@ -468,7 +469,7 @@ namespace Studio
 			}
 			else
 			{
-				if (i != myExplosions.size() -1)
+				if (i != myExplosions.size() - 1)
 				{
 					std::swap(myExplosions[i], myExplosions.back());
 				}
