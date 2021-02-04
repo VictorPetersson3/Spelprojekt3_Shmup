@@ -16,6 +16,11 @@ namespace Studio
 
         myMainMenu.Add(myGodModeButton);
         myMainMenu.Add(myStartButton);
+        myMainMenu.Add(myMainMenuBackground);
+        myMainMenu.Add(myMainMenuLogo);
+        myMainMenu.Add(mySettingsButton);
+        myMainMenu.Add(myCreditsButton);
+        myMainMenu.Add(myExitButton);
         myMainMenu.Enable();
         
         myHud.Add(myTestElement);
@@ -38,6 +43,7 @@ namespace Studio
         myShop.Disable();
 
         myPausMenu.Add(myPausMenuBackground);
+        myPausMenu.Add(myPausMenuResumeButton);
         myPausMenu.Disable();
 
         myPlayer = aPlayer;

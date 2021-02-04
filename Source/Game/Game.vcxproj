@@ -162,6 +162,7 @@
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EngineFlame.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="GenericButton.h" />
     <ClInclude Include="GodModeButton.h" />
     <ClInclude Include="HealthBar.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EngineFlame.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="GenericButton.cpp" />
     <ClCompile Include="GodModeButton.cpp" />
     <ClCompile Include="HealthBar.cpp" />

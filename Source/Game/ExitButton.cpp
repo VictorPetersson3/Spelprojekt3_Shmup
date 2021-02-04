@@ -1,41 +1,36 @@
 #include "stdafx.h"
-#include "TestButton.h"
+#include "ExitButton.h"
 #include "tga2d/sprite/sprite.h"
 #include "InputManager.h"
 #include <iostream>
 #include "AudioManagerAccesor.h"
 #include "AudioManager.h"
+#include "Renderer.h"
+#include "RendererAccessor.h"
+#include <stdlib.h>
 
-Studio::TestButton::TestButton()
+Studio::ExitButton::ExitButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer)
 {
-
-}
-
-Studio::TestButton::TestButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag)
-{
-	mySprite = new Tga2D::CSprite(aPath);
+	mySprite = new Tga2D::CSprite(aSpritePath);
 	mySprite->SetPivot(aPivot);
 	mySprite->SetSizeRelativeToImage(aSize);
 	mySprite->SetPosition(aPosition);
 
-	mySpriteSheet = new SpriteSheet(aPath);
+	mySpriteSheet = new SpriteSheet(aSpritePath);
 	mySpriteSheet->SetPivot(aPivot);
 	mySpriteSheet->SetPosition(aPosition);
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
-	
-	
+	mySpriteSheet->SetLayer(aLayer);
 
-	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x/2);
-	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x/2);
-	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y/2);
-	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y/2);
-
-
+	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
+	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
+	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
+	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
 
 	tag = aTag;
 }
 
-Studio::TestButton::~TestButton()
+Studio::ExitButton::~ExitButton()
 {
 	delete mySprite;
 	delete mySpriteSheet;
@@ -43,7 +38,7 @@ Studio::TestButton::~TestButton()
 	mySpriteSheet = nullptr;
 }
 
-void Studio::TestButton::Update()
+void Studio::ExitButton::Update()
 {
 	myWindowHandle = GetForegroundWindow();
 
@@ -94,8 +89,7 @@ void Studio::TestButton::Update()
 	}
 }
 
-void Studio::TestButton::OnClick()
+void Studio::ExitButton::OnClick()
 {
-	std::cout << "TestButton Pressed" << std::endl;
-	AudioManagerAccessor::GetInstance()->Play2D("Audio/SP3SountrackSample.wav", true, 0.1f);
+	//exit(0);
 }

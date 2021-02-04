@@ -8,7 +8,7 @@
 #include "LevelAccessor.h"
 
 
-Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer)
+Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer,const bool aShouldStartnextLevel)
 {
 	mySprite = new Tga2D::CSprite(aSpritePath);
 	mySprite->SetPivot(aPivot);
@@ -28,6 +28,7 @@ Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPositi
 
 	tag = aTag;
 
+	myShouldLoadNextLevel = aShouldStartnextLevel;
 	myLevelToLoadPath = 0;
 }
 
@@ -92,7 +93,22 @@ void Studio::StartButton::Update()
 
 void Studio::StartButton::OnClick()
 {
-	LevelAccessor::GetInstance()->LoadLevel(myLevelToLoadPath);
+	if (myShouldLoadNextLevel)
+	{
+		myLevelToLoadPath = LevelAccessor::GetInstance()->GetCurrentLevelIndex() + 1;
+		if (myLevelToLoadPath <= LevelAccessor::GetInstance()->GetLevelPaths().size())
+		{
+			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoadPath);
+		}
+	}
+	else
+	{
+		if (myLevelToLoadPath <= LevelAccessor::GetInstance()->GetLevelPaths().size())
+		{
+			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoadPath);
+		}
+	}
+
 }
 
 void Studio::StartButton::SetLevelToLoad(const int aIndex)
