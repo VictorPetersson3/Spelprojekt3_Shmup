@@ -31,7 +31,9 @@ namespace Studio
 		myRapidFireCurrentlyActiveTime = 0.f;
 		myTimeSinceLastShot = 0.f;
 		myBounceBackTime = 0.25;
-
+		myShieldCurrentActiveTime = 0.f;
+		myShieldCurrentCooldown = myPlayerData->GetShieldCooldown();
+		myShieldHealth = somePlayerData->GetShieldHealth();
 		myAmountOfProjectiles = 1;
 
 		mySpeed = somePlayerData->GetMinSpeed();
@@ -57,6 +59,8 @@ namespace Studio
 			Shoot();
 
 			RapidFireLogic();
+
+			ShieldLogic();
 
 			Studio::RendererAccessor::GetInstance()->Render(*this);
 		}
@@ -172,10 +176,13 @@ namespace Studio
 		case Studio::Enums::Tier1Upgrades::MissileDamage:
 			break;
 		case Studio::Enums::Tier1Upgrades::ShieldDuration:
+			myPlayerData->UpgradeShieldDurationT1();
 			break;
 		case Studio::Enums::Tier1Upgrades::ShieldHealth:
+			myPlayerData->UpgradeShieldHealthT1();
 			break;
 		case Studio::Enums::Tier1Upgrades::ShieldCooldown:
+			myPlayerData->UpgradeShieldCooldownT1();
 			break;
 		}
 	}
@@ -194,6 +201,7 @@ namespace Studio
 			myPlayerData->UpgradeBasicAttackSpeedT2();
 			break;
 		case Studio::Enums::Tier2Upgrades::BasicAttackAdditionalProjectile:
+			AddAnotherProjectile();
 			break;
 		case Studio::Enums::Tier2Upgrades::MissileExplosionRadius:
 			break;
@@ -202,10 +210,13 @@ namespace Studio
 		case Studio::Enums::Tier2Upgrades::MissileDamage:
 			break;
 		case Studio::Enums::Tier2Upgrades::ShieldDuration:
+			myPlayerData->UpgradeShieldDurationT2();
 			break;
 		case Studio::Enums::Tier2Upgrades::ShieldHealth:
+			myPlayerData->UpgradeShieldHealthT2();
 			break;
 		case Studio::Enums::Tier2Upgrades::ShieldCooldown:
+			myPlayerData->UpgradeShieldCooldownT2();
 			break;
 		}
 	}
@@ -469,6 +480,7 @@ namespace Studio
 	}
 	void Player::AddAnotherProjectile()
 	{
+		myAmountOfProjectiles++;
 		if (myAmountOfProjectiles > 3)
 		{
 			myAmountOfProjectiles = 3;
@@ -478,5 +490,53 @@ namespace Studio
 	void Player::LaunchMissile()
 	{
 		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition);
+	}
+	void Studio::Player::ShieldLogic()
+	{
+		if (InputManager::GetInstance()->IsKeyPressed('3') && myShieldCurrentCooldown >= myPlayerData->GetShieldCooldown())
+		{
+			ActivateShield();
+		}
+		if (myShieldIsActive)
+		{
+			ShieldIsActive();
+		}
+		else
+		{
+			myShieldCurrentCooldown += Timer::GetInstance()->TGetDeltaTime();
+		}
+		if (myShieldHealth <= 0)
+		{
+			DeactivateShield();
+		}
+	}
+	void Studio::Player::ActivateShield()
+	{
+		myShieldHealth = myPlayerData->GetShieldHealth();
+		myShieldIsActive = true;
+		myShieldCurrentCooldown = 0.f;
+	}
+	void Studio::Player::ShieldIsActive()
+	{
+		myShieldCurrentActiveTime += Timer::GetInstance()->TGetDeltaTime();
+		printf("\nShield active");
+		
+	}
+	void Studio::Player::DeactivateShield()
+	{
+		myShieldIsActive = false;
+		myShieldCurrentActiveTime = 0.f;
+		myShieldCurrentCooldown = 0.f;
+		myShieldHealth = myPlayerData->GetShieldHealth();
+		
+	}
+	void Studio::Player::TakeShieldDamage(int someDamage)
+	{
+		myShieldHealth -= someDamage;
+
+	}
+	bool Studio::Player::GetIsShieldActive()
+	{
+		return myShieldIsActive;
 	}
 }
