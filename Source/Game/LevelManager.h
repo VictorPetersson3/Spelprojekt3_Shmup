@@ -37,14 +37,20 @@ namespace Studio
 		const std::vector<std::string>& GetLevelPaths() const;
 
 	private:
+		void UpdateEnemies();
 		void LevelLogic();
 		void CheckCollision();
 		void CheckIfLevelIsCleared();
 		void UpdateExplosions();
+		void ClearEnemies();
+		void ClearPacks();
+		void ClearBullets();
+
 
 		bool myLevelIsCleared;
 		bool myLevelEnemiesCleared;
 		bool myLevelBossSpawned;
+		bool mySpawnedBoss;
 		bool myHasReloaded;
 		int myPackIndex;
 		int myCurrentLevel;

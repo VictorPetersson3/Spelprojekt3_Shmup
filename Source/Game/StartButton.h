@@ -20,7 +20,7 @@ namespace Studio
 		bool myIsClicked = false;
 
 	private:
-		int myLevelToLoadPath;
+		int myLevelToLoad;
 		bool myShouldLoadNextLevel = false;
 	};
 }

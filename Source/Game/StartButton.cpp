@@ -29,7 +29,7 @@ Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPositi
 	tag = aTag;
 
 	myShouldLoadNextLevel = aShouldStartnextLevel;
-	myLevelToLoadPath = 0;
+	myLevelToLoad = 0;
 }
 
 Studio::StartButton::~StartButton()
@@ -95,23 +95,27 @@ void Studio::StartButton::OnClick()
 {
 	if (myShouldLoadNextLevel)
 	{
-		myLevelToLoadPath = LevelAccessor::GetInstance()->GetCurrentLevelIndex() + 1;
-		if (myLevelToLoadPath <= LevelAccessor::GetInstance()->GetLevelPaths().size())
+		myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex() + 1;
+		if (myLevelToLoad >= LevelAccessor::GetInstance()->GetLevelPaths().size() -1)
 		{
-			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoadPath);
+			myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex();
+		}
+		if (myLevelToLoad <= LevelAccessor::GetInstance()->GetLevelPaths().size())
+		{
+			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoad);
 		}
 	}
 	else
 	{
-		if (myLevelToLoadPath <= LevelAccessor::GetInstance()->GetLevelPaths().size())
+		if (myLevelToLoad <= LevelAccessor::GetInstance()->GetLevelPaths().size())
 		{
-			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoadPath);
+			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoad);
 		}
 	}
-
+	printf("I have started level: %f", myLevelToLoad);
 }
 
 void Studio::StartButton::SetLevelToLoad(const int aIndex)
 {
-	myLevelToLoadPath = aIndex;
+	myLevelToLoad = aIndex;
 }

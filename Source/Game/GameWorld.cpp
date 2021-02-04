@@ -125,6 +125,10 @@ void CGameWorld::InputStuff()
 			printf_s("Resumed game\n");
 		}
 	}
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('G'))
+	{
+		myPlayer->SetGodMode(true);
+	}
 
 	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))
 	{

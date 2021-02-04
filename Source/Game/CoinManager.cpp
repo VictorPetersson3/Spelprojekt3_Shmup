@@ -7,14 +7,18 @@
 
 namespace Studio
 {
-
-
 	void CoinManager::Update()
 	{
-		for (size_t i = 0; i < myWorldCoins.size(); i++)
+		for (int i = myWorldCoins.size(); --i > 0;)
 		{
-			myWorldCoins[i]->Update(myWorldCoins[i]->GetPosition());
+			myWorldCoins[i]->Update();
 			RendererAccessor::GetInstance()->Render(*myWorldCoins[i]);
+			if (myWorldCoins[i]->GetLifeTime() > 5)
+			{
+				SAFE_DELETE(myWorldCoins[i]);
+				std::swap(myWorldCoins[i], myWorldCoins.back());
+				myWorldCoins.pop_back();
+			}
 		}
 	}
 
@@ -25,6 +29,10 @@ namespace Studio
 
 	void CoinManager::ResetWorldCoins()
 	{
+		for (int i = 0; i < myWorldCoins.size(); i++)
+		{
+			SAFE_DELETE(myWorldCoins[i]);
+		}
 		myWorldCoins.clear();
 	}
 
