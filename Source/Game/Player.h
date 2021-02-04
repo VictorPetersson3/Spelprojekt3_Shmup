@@ -30,7 +30,9 @@ namespace Studio
 		void UpgradeT2(Enums::Tier2Upgrades aTier2Upgrade);
 		void UpgradeT3(Enums::Tier3Upgrades aTier3Upgrade);
 		void ResetPlayerCurrentLevel();
+		void TakeShieldDamage(int someDamage);
 		bool HasPenetratingRounds();
+		bool GetIsShieldActive();
 
 	private:
 		void Movement();
@@ -40,6 +42,11 @@ namespace Studio
 		void DeactivateRapidFire();
 		void AddAnotherProjectile();
 		void LaunchMissile();
+		//Shield
+		void ShieldLogic();
+		void ActivateShield();
+		void ShieldIsActive();
+		void DeactivateShield();
 	private:
 
 		float mySpeed;
@@ -56,6 +63,11 @@ namespace Studio
 		float myBounceBackTime;
 		float myCurrentBounceTime;
 
+		//Shield
+		float myShieldCurrentActiveTime;
+		float myShieldCurrentCooldown;
+		int myShieldHealth;
+
 		VECTOR2F myPosition;
 		VECTOR2F myDirection;
 		VECTOR2F myBounceDirection;
@@ -68,6 +80,9 @@ namespace Studio
 		bool myHasCollided = false;
 		bool myHasPenetratingRounds = false;
 		bool myHasPurchasedPenetratingRounds = false;
+
+		//Shield
+		bool myShieldIsActive = false;
 
 		EngineFlame myEngineFlame;
 		Player_JsonParser* myPlayerData;

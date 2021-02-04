@@ -23,7 +23,42 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 	//printf("Path: %s \nDocument%s", levelPath, text.c_str());
 
 	//----------- FLOATS
-
+	if (ValidateJsonDataFloat(document, "ShieldDuration"))
+	{
+		myShieldDuration = document["ShieldDuration"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldHealth"))
+	{
+		myShieldHealth = document["ShieldHealth"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldCooldown"))
+	{
+		myShieldCooldown = document["ShieldCooldown"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldDurationUpgradeT1"))
+	{
+		myShieldDurationUpgradeT1 = document["ShieldDurationUpgradeT1"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldDurationUpgradeT2"))
+	{
+		myShieldDurationUpgradeT2 = document["ShieldDurationUpgradeT2"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldHealthUpgradeT1"))
+	{
+		myShieldHealthUpgradeT1 = document["ShieldHealthUpgradeT1"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldHealthUpgradeT2"))
+	{
+		myShieldHealthUpgradeT2 = document["ShieldHealthUpgradeT2"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldCooldownUpgradeT1"))
+	{
+		myShieldCooldownUpgradeT1 = document["ShieldCooldownUpgradeT1"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "ShieldCooldownUpgradeT2"))
+	{
+		myShieldCooldownUpgradeT2 = document["ShieldCooldownUpgradeT2"].GetFloat();
+	}
 	if (ValidateJsonDataFloat(document, "BasicAttackSpeedIncreaseT1"))
 	{
 		myBasicAttackSpeedIncreaseT1 = document["BasicAttackSpeedIncreaseT1"].GetFloat();
@@ -222,6 +257,12 @@ const float Studio::Player_JsonParser::GetRapidFireMaxActiveTime() const { retur
 
 const float Studio::Player_JsonParser::GetRapidFireAttackSpeed() const { return myRapidFireAttackSpeed; }
 
+const float Studio::Player_JsonParser::GetShieldDuration() const { return myShieldDuration; }
+
+const float Studio::Player_JsonParser::GetShieldHealth() const { return myShieldHealth; }
+
+const float Studio::Player_JsonParser::GetShieldCooldown() const{ return myShieldCooldown; }
+
 const float Studio::Player_JsonParser::GetLayer() const { return myLayer; }
 
 const float Studio::Player_JsonParser::GetAcceleration() const { return myAcceleration; }
@@ -320,11 +361,36 @@ void Studio::Player_JsonParser::UpgradeBasicAttackSpeedT3()
 	myShootCoolDown -= myBasicAttackSpeedIncreaseT3;
 }
 
-void Studio::Player_JsonParser::UpgradeProjectileAmountT2()
+void Studio::Player_JsonParser::UpgradeShieldDurationT1()
 {
-	
+	myShieldDuration += myShieldDurationUpgradeT1;
 }
 
+void Studio::Player_JsonParser::UpgradeShieldDurationT2()
+{
+	myShieldDuration += myShieldDurationUpgradeT2;
+
+}
+
+void Studio::Player_JsonParser::UpgradeShieldHealthT1()
+{
+	myShieldHealth += myShieldHealthUpgradeT1;
+}
+
+void Studio::Player_JsonParser::UpgradeShieldHealthT2()
+{
+	myShieldHealth += myShieldHealthUpgradeT2;
+}
+
+void Studio::Player_JsonParser::UpgradeShieldCooldownT1()
+{
+	myShieldCooldown -= myShieldCooldownUpgradeT1;
+}
+
+void Studio::Player_JsonParser::UpgradeShieldCooldownT2()
+{
+	myShieldCooldown -= myShieldCooldownUpgradeT2;
+}
 
 
 

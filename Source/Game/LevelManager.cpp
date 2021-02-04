@@ -217,13 +217,25 @@ namespace Studio
 			{
 				myPlayer->Bounce(myEnemies[i]->GetPosition());
 			}
+			//If enemy collides with player, take shield damage first, if no shield, take normal damage.
+			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided())
+			{
+				if (myPlayer->GetIsShieldActive())
+				{
+					myPlayer->TakeShieldDamage(1);
+				}
+				else
+				{
+					myPlayer->TakeDamage(1.0f);
+				}
+			}
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsPopcorn())
 			{
-				myPlayer->TakeDamage(1.0f);
 				myEnemies[i]->TakeDamage(100);
 				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
 				//My Player take damage, blow up mine
 			}
+			
 			if (!myEnemies[i]->IsDead())
 			{
 				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
@@ -325,7 +337,14 @@ namespace Studio
 				{
 					if (myPlayer->Intersects(*myBullets[j]))
 					{
-						myPlayer->TakeDamage(1.0f);
+						if (myPlayer->GetIsShieldActive())
+						{
+							myPlayer->TakeShieldDamage(1);
+						}
+						else
+						{
+							myPlayer->TakeDamage(1.0f);
+						}
 						//printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
 
 						myBullets.erase(myBullets.begin() + j);
