@@ -24,26 +24,75 @@ namespace Studio
 		mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
 	}
 
+	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, float aDirection)
+	{
+		myTypePattern = new TypePattern_Bullet("sprites/bullets/missilelvl1.dds", 12, 0.0f, aOwner);
+		myPosition = aPosition;
+
+		myIsSlowingDown = true;
+
+		// TODO: Make JSON??
+		myInitialSpeed = 400.0f * aDirection;
+		myDeaccelerationSpeed = 500.0f * aDirection;
+		myAccelerationSpeed = 100.0f * aDirection;
+
+		myVelocity = { myInitialSpeed, 0.0f };
+
+		myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
+
+		mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
+
+		if (aDirection >= 0.0f)
+		{
+			myIsReversed = false;
+		}
+		else
+		{
+			myIsReversed = true;
+		}
+	}
+
 	void Missile::Update()
 	{
 		auto deltaTime = Timer::GetInstance()->TGetDeltaTime();
 
-		if (myIsSlowingDown)
+		if (!myIsReversed)
 		{
-			myVelocity.x -= myDeaccelerationSpeed * deltaTime;
-
-			if (myVelocity.x <= 0.0f)
+			if (myIsSlowingDown)
 			{
-				myIsSlowingDown = false;
-				myVelocity.x = 0.0f;
-				myVelocity.y = 0.0f;
+				myVelocity.x -= myDeaccelerationSpeed * deltaTime;
+
+				if (myVelocity.x <= 0.0f)
+				{
+					myIsSlowingDown = false;
+					myVelocity.x = 0.0f;
+					myVelocity.y = 0.0f;
+				}
+			}
+			else
+			{
+				myVelocity.x += myAccelerationSpeed;
 			}
 		}
 		else
 		{
-			myVelocity.x += myAccelerationSpeed;
+			if (myIsSlowingDown)
+			{
+				myVelocity.x -= myDeaccelerationSpeed * deltaTime;
+
+				if (myVelocity.x >= 0.0f)
+				{
+					myIsSlowingDown = false;
+					myVelocity.x = 0.0f;
+					myVelocity.y = 0.0f;
+				}
+			}
+			else
+			{
+				myVelocity.x += myAccelerationSpeed;
+			}
 		}
-		
+
 		myPosition += myVelocity * deltaTime;
 		GameObject::Update(myPosition);
 	}

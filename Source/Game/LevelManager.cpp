@@ -117,11 +117,11 @@ namespace Studio
 
 	void LevelManager::Update(Player* aPlayer)
 	{
-		
+
 		myPlayer = aPlayer;
 		if (myLevelIsCleared == true)
 		{
-			if (myCurrentLevel > myLevelPaths.size() -1)
+			if (myCurrentLevel > myLevelPaths.size() - 1)
 			{
 				//StartCredits
 			}
@@ -132,7 +132,7 @@ namespace Studio
 				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 			}
 		}
-	
+
 		else
 		{
 			CheckIfLevelIsCleared();
@@ -283,7 +283,7 @@ namespace Studio
 			ReloadLevel();
 		}
 		UpdateExplosions();
-		if (mySpawnedBoss)
+		if (mySpawnedBoss && myBoss != nullptr)
 		{
 			myBoss->Update();
 		}
@@ -291,13 +291,12 @@ namespace Studio
 	//Pu
 	void LevelManager::CheckCollision()
 	{
-		if (mySpawnedBoss)
+		if (mySpawnedBoss && myBoss != nullptr)
 		{
 			if (!myBoss->IsDead())
 			{
 				for (int i = myBullets.size() - 1; i >= 0; i--)
 				{
-
 					if (myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player && myBoss->Intersects(*myBullets[i]))
 					{
 						if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
@@ -344,7 +343,7 @@ namespace Studio
 							myPlayer->TakeDamage(1.0f);
 						}
 						//printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
-
+						myBullets[j]->Impact();
 						myBullets.erase(myBullets.begin() + j);
 					}
 				}
@@ -396,7 +395,7 @@ namespace Studio
 		CoinAccessor::GetInstance()->ResetWorldCoins();
 		SAFE_DELETE(myBoss);
 		myBoss = nullptr;
-		
+
 		myCurrentLevel = aLevelIndex;
 		myLevelIsCleared = false;
 
@@ -490,7 +489,7 @@ namespace Studio
 				myLevelIsCleared = true;
 				myLevelEnemiesCleared = false;
 				myLevelBossSpawned = false;
-				if (myCurrentLevel >= myLevelPaths.size() -1)
+				if (myCurrentLevel >= myLevelPaths.size() - 1)
 				{
 					myCurrentLevel = myLevelPaths.size() - 1;
 				}
@@ -551,10 +550,26 @@ namespace Studio
 		myBullets.clear();
 	}
 
-	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aDirection)
 	{
-		Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
-		myBullets.push_back(missile);
+		switch (aOwner)
+		{
+		case Enums::BulletOwner::Player:
+		{
+			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aDirection);
+			myBullets.push_back(missile);
+		}
+		break;
+		case Enums::BulletOwner::Enemy:
+		{
+			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aDirection);
+			myBullets.push_back(missile);
+		}
+		break;
+		default:
+			break;
+		}
+
 	}
 
 	void LevelManager::SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius)

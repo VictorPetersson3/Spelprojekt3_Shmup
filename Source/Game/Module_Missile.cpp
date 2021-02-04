@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Module_Missile.h"
+#include "LevelAccessor.h"
 
 Studio::Module_Missile::Module_Missile(rapidjson::Value& aModuleParameters) :
 	Module(aModuleParameters)
@@ -13,8 +14,7 @@ Studio::Module_Missile::Module_Missile(rapidjson::Value& aModuleParameters) :
 		float x = aModuleParameters["X"].GetFloat();
 		float y = aModuleParameters["Y"].GetFloat();
 
-		x = SCREEN_WIDTH - x;
-		y = y + SCREEN_HEIGHT * 0.5f;
+		
 		mySpawnPosition = { x, y };
 
 		if (aModuleParameters.HasMember("Style"))
@@ -39,7 +39,15 @@ bool Studio::Module_Missile::DoStuff(Boss& aBoss)
 		mySpawnPosition.x = aBoss.GetPosition()->x - mySpawnPosition.x;
 		mySpawnPosition.y = aBoss.GetPosition()->y - mySpawnPosition.y;
 	}
+	else
+	{
+		mySpawnPosition.x = SCREEN_WIDTH - mySpawnPosition.x;
+		mySpawnPosition.y = mySpawnPosition.y + SCREEN_HEIGHT * 0.5f;
+	}
 
-	//Spawn Missile here
+	Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Enemy, mySpawnPosition, -1.0f);
+
+	printf("Missile Launched from boss\n");
+
 	return true;
 }

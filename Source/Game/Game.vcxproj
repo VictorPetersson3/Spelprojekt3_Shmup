@@ -176,6 +176,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_Delay.h" />
     <ClInclude Include="Module_Immunity.h" />
+    <ClInclude Include="Module_Missile.h" />
     <ClInclude Include="Module_Movement.h" />
     <ClInclude Include="Module_Shield.h" />
     <ClInclude Include="Module_Shoot.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Module_Delay.cpp" />
     <ClCompile Include="Module_Immunity.cpp" />
+    <ClCompile Include="Module_Missile.cpp" />
     <ClCompile Include="Module_Movement.cpp" />
     <ClCompile Include="Module_Shield.cpp" />
     <ClCompile Include="Module_Shoot.cpp" />

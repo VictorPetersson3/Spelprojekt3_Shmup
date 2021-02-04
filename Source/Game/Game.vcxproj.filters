@@ -235,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="AOEBullet.cpp" />
+    <ClCompile Include="Module_Missile.cpp">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -483,6 +486,9 @@
     </ClInclude>
     <ClInclude Include="ExitButton.h" />
     <ClInclude Include="AOEBullet.h" />
+    <ClInclude Include="Module_Missile.h">
+      <Filter>GameObjects\Boss\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

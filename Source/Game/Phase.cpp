@@ -6,6 +6,7 @@
 #include "Module_Immunity.h"
 #include "Module_Delay.h"
 #include "Module_Shield.h"
+#include "Module_Missile.h"
 #include "Module_Shoot.h"
 #include "Module_SpawnEnemies.h"
 #include "Module_Movement.h"
@@ -47,7 +48,7 @@ Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 						}
 						if (ability == "Missile")
 						{
-							printf("Missile is not implemented yet");
+							//myModules.push_back(new Module_Missile(modules[i]));
 						}
 					}
 				}
