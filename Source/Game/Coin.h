@@ -6,14 +6,14 @@ namespace Studio
 	{
 	public:
 		Coin(VECTOR2F aSpawnPosition);
-		void Animate();
-
+		void Update();
 		int GetScoreValue();
-
+		const float GetLifeTime() const;
 		VECTOR2F GetPosition();
 	private:
 		int myScoreValue;
-
+		float myLifeTime{};
+		float mySpeed;
 		VECTOR2F myPosition;
 
 	};

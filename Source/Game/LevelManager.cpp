@@ -117,45 +117,25 @@ namespace Studio
 
 	void LevelManager::Update(Player* aPlayer)
 	{
-
-		if (Studio::InputManager::GetInstance()->IsKeyDown('Y'))
-		{
-			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
-			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
-		}
-
-		if (Studio::InputManager::GetInstance()->IsKeyDown('I'))
-		{
-			MenuManagerSingleton::GetInstance()->GetShop()->Disable();
-			MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
-		}
-
-		//Can this be removed mybe?
+		
 		myPlayer = aPlayer;
 		if (myLevelIsCleared == true)
 		{
-			/*SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
-			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
-			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);*/
-			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
-			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+			if (myCurrentLevel > myLevelPaths.size() -1)
+			{
+				//StartCredits
+			}
+			else
+			{
+				MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+				MenuManagerSingleton::GetInstance()->SetNextLevelIndex(myCurrentLevel);
+				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+			}
 		}
-		//Boss Logic
-		else if (myLevelBossSpawned && myBoss != nullptr)
-		{
-			myBoss->Update();
-			LevelLogic();
-			CheckIfLevelIsCleared();
-		}
-		else if (myLevelBossSpawned && myBoss == nullptr)
-		{
-			printf("There is no Boss here :( \n");
-			myLevelIsCleared = true;
-			myLevelEnemiesCleared = false;
-			myLevelBossSpawned = false;
-		}
+	
 		else
 		{
+			CheckIfLevelIsCleared();
 			// Pack
 			if (!myCurrentPack->ExitConditionIsMet())
 			{
@@ -170,12 +150,9 @@ namespace Studio
 					printf_s("Size of new pack: %i\n", myCurrentPack->myStoredEnemies.size());
 				}
 			}
-
 			//Pu
 			LevelLogic();
-
 			// Check if Player cleared the level
-			CheckIfLevelIsCleared();
 		}
 	}
 
@@ -183,8 +160,6 @@ namespace Studio
 	{
 		return myLevelPaths[myCurrentLevel];
 	}
-
-
 
 	void LevelManager::AddEnemy(Enemy* anEnemy)
 	{
@@ -207,11 +182,8 @@ namespace Studio
 		return myLevelIsCleared;
 	}
 
-	//Pu
-	void LevelManager::LevelLogic()
+	void LevelManager::UpdateEnemies()
 	{
-
-		// Copy & Paste from Jimmi
 		for (size_t i = 0; i < myEnemies.size(); i++)
 		{
 
@@ -238,7 +210,7 @@ namespace Studio
 				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
 				//My Player take damage, blow up mine
 			}
-			
+
 			if (!myEnemies[i]->IsDead())
 			{
 				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
@@ -249,6 +221,14 @@ namespace Studio
 				myEnemies.erase(myEnemies.begin() + i);
 			}
 		}
+
+	}
+
+	//Pu
+	void LevelManager::LevelLogic()
+	{
+		UpdateEnemies();
+		// Copy & Paste from Jimmi
 		for (Bullet* bullet : myBullets)
 		{
 			bullet->Update();
@@ -260,7 +240,12 @@ namespace Studio
 		{
 			if (myBullets[i]->GetPosition().x > 1920 || myBullets[i]->GetPosition().x < 0 || myBullets[i]->GetPosition().y < 0 || myBullets[i]->GetPosition().y > 1080)
 			{
-				myBullets.erase(myBullets.begin() + i);
+				if (i != myBullets.size() - 1)
+				{
+					std::swap(myBullets[i], myBullets.back());
+					SAFE_DELETE(myBullets.back());
+					myBullets.pop_back();
+				}
 			}
 		}
 
@@ -276,6 +261,7 @@ namespace Studio
 				{
 					std::swap(myBullets[i], myBullets.back());
 				}
+				SAFE_DELETE(myBullets.back());
 				myBullets.pop_back();
 			}
 		}
@@ -286,6 +272,7 @@ namespace Studio
 			{
 				myEnemies[i]->DeathLogic();
 				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
+				SAFE_DELETE(myEnemies[i]);
 				myEnemies.erase(myEnemies.begin() + i);
 			}
 		}
@@ -296,40 +283,48 @@ namespace Studio
 			ReloadLevel();
 		}
 		UpdateExplosions();
+		if (mySpawnedBoss)
+		{
+			myBoss->Update();
+		}
 	}
 	//Pu
 	void LevelManager::CheckCollision()
 	{
-		if (myLevelBossSpawned)
+		if (mySpawnedBoss)
 		{
-			for (int i = myBullets.size() - 1; i >= 0; i--)
+			if (!myBoss->IsDead())
 			{
-				if (myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player)
+				for (int i = myBullets.size() - 1; i >= 0; i--)
 				{
-					if (!myBoss->IsDead() && myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player)
-					{
-						if (myBoss->Intersects(*myBullets[i]))
-						{
-							if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
-							{
-								myBullets[i]->RegisterEnemyHit(myBoss);
-								myBoss->HitLogic(25.0f);
-								myBullets[i]->Impact();
 
-								if (myBullets[i]->GetIsPenetrating() == false)
-								{
-									myBullets.erase(myBullets.begin() + i);
-								}
+					if (myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player && myBoss->Intersects(*myBullets[i]))
+					{
+						if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
+						{
+							myBullets[i]->RegisterEnemyHit(myBoss);
+							myBoss->HitLogic(25.0f);
+							myBullets[i]->Impact();
+
+							if (myBullets[i]->GetIsPenetrating() == false)
+							{
+								myBullets.erase(myBullets.begin() + i);
 							}
 						}
 					}
-					//When the boss dies?
-					else
-					{
-						myBoss->TakeDamage(1.0f);
-						myBullets.erase(myBullets.begin() + i);
-					}
 				}
+			}
+			//When the boss dies?
+			else
+			{
+				for (int i = 0; i < myEnemies.size(); i++)
+				{
+					myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
+				}
+				myEnemies.clear();
+				myBullets.clear();
+				SAFE_DELETE(myBoss);
+				myBoss = nullptr;
 			}
 		}
 		if (!myBullets.empty())
@@ -395,9 +390,13 @@ namespace Studio
 
 	void LevelManager::LoadLevel(int aLevelIndex)
 	{
-		myPacks.clear();
-		myEnemies.clear();
-		myBullets.clear();
+		ClearEnemies();
+		ClearBullets();
+		ClearPacks();
+		CoinAccessor::GetInstance()->ResetWorldCoins();
+		SAFE_DELETE(myBoss);
+		myBoss = nullptr;
+		
 		myCurrentLevel = aLevelIndex;
 		myLevelIsCleared = false;
 
@@ -445,6 +444,16 @@ namespace Studio
 			myBackgroundManager->CreateBackground(myCurrentLevel);
 		}
 		myHasReloaded = false;
+		// When to spawn Bossies
+		if (myCurrentLevel == myLevelPaths.size() - 1)
+		{
+			myLevelBossSpawned = true;
+		}
+		mySpawnedBoss = false;
+		MenuManagerSingleton::GetInstance()->GetShop()->Disable();
+		MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
+		MenuManagerSingleton::GetInstance()->GetMainMenu()->Disable();
+		MenuManagerSingleton::GetInstance()->GetPauseMenu()->Disable();
 	}
 
 	void LevelManager::ReloadLevel()
@@ -453,6 +462,10 @@ namespace Studio
 		myPlayer->ResetPlayerCurrentLevel();
 		ScoreAccessor::GetInstance()->ResetScore();
 		CoinAccessor::GetInstance()->ResetWorldCoins();
+		for (int i = 0; i < myExplosions.size(); i++)
+		{
+			SAFE_DELETE(myExplosions[i]);
+		}
 		myExplosions.clear();
 	}
 
@@ -462,23 +475,30 @@ namespace Studio
 
 	void LevelManager::CheckIfLevelIsCleared()
 	{
-		// This is NOT how to check if a level has been cleared.
-		// TODO: Fix this in beta (maybe check if packs is past mypacks size??)
 
-		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0 || myLevelBossSpawned)
+		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0 && myBoss == nullptr)
 		{
-
-			if (!myLevelBossSpawned)
+			if (myLevelBossSpawned)
 			{
 				myBoss = myBossManager->GetLevelBoss(0);
 				printf("Boss Spawned");
-				myLevelBossSpawned = true;
+				myLevelBossSpawned = false;
+				mySpawnedBoss = true;
 			}
-			if (myLevelBossSpawned && myBoss->IsDead())
+			else
 			{
 				myLevelIsCleared = true;
 				myLevelEnemiesCleared = false;
 				myLevelBossSpawned = false;
+				if (myCurrentLevel >= myLevelPaths.size() -1)
+				{
+					myCurrentLevel = myLevelPaths.size() - 1;
+				}
+				else
+				{
+					CoinAccessor::GetInstance()->ResetWorldCoins();
+					myCurrentLevel++;
+				}
 			}
 		}
 	}
@@ -498,9 +518,37 @@ namespace Studio
 				{
 					std::swap(myExplosions[i], myExplosions.back());
 				}
+				SAFE_DELETE(myExplosions.back());
 				myExplosions.pop_back();
 			}
 		}
+	}
+
+	void LevelManager::ClearEnemies()
+	{
+		for (int i = 0; i < myEnemies.size(); i++)
+		{
+			SAFE_DELETE(myEnemies[i]);
+		}
+		myEnemies.clear();
+	}
+
+	void LevelManager::ClearPacks()
+	{
+		for (int i = 0; i < myPacks.size(); i++)
+		{
+			SAFE_DELETE(myPacks[i]);
+		}
+		myPacks.clear();
+	}
+
+	void LevelManager::ClearBullets()
+	{
+		for (int i = 0; i < myBullets.size(); i++)
+		{
+			SAFE_DELETE(myBullets[i]);
+		}
+		myBullets.clear();
 	}
 
 	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)

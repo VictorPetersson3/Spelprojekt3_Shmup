@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Coin.h"
-
+#include "Timer.h"
 #define SPRITESHEET GameObject::GetSpriteSheet()
 
 namespace Studio
@@ -13,12 +13,25 @@ namespace Studio
         GameObject::myCollider.AddCircleColliderObject({0,0}, 16);
         mySpriteSheet.LoopAnimationInRange(0.1f, { 1,1 }, { 6,1 });
         myScoreValue = 1;
+        mySpeed = 100;
+    }
+
+    void Coin::Update()
+    {
+        myLifeTime += Studio::Timer::GetInstance()->TGetDeltaTime();
+        myPosition.x += -Studio::Timer::GetInstance()->TGetDeltaTime() * mySpeed;
+        GameObject::Update(myPosition);
     }
 
 
     int Coin::GetScoreValue()
     {
         return myScoreValue;
+    }
+
+    const float Coin::GetLifeTime() const
+    {
+        return myLifeTime;
     }
 
     VECTOR2F Coin::GetPosition()
