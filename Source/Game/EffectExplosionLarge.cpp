@@ -14,7 +14,7 @@ Studio::EffectExplosionLarge::EffectExplosionLarge(const std::string& aImagePath
 void Studio::EffectExplosionLarge::Update()
 {
 	GameObject::Update(GameObject::GetPosition());
-	printf("Exploding Right now\n");
+	//printf("Exploding Right now\n");
 
 }
 

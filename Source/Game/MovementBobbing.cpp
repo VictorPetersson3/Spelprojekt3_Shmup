@@ -19,7 +19,6 @@ namespace Studio
 	void MovementBobbing::SetMovementStartPosition(VECTOR2F* aPosition)
 	{
 		this->myObjectsPosition = aPosition;
-		mySpawnYPos = aPosition->y;
 	}
 
 	void MovementBobbing::Update()

@@ -19,6 +19,8 @@
 #include "Timer.h"
 #include "PlayerAccessor.h"
 #include "MenuObject.h"
+#include "ButtonElement.h"
+#include "GenericButton.h"
 
 CGameWorld::CGameWorld()
 {
@@ -117,15 +119,34 @@ void CGameWorld::InputStuff()
 		if (Studio::Timer::GetInstance()->IsFrozen())
 		{
 			printf_s("Froze game\n");
+		}
+		else
+		{
+			printf_s("Resumed game\n");
+		}
+	}
+
+	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))
+	{
+		Studio::Timer::GetInstance()->ToggleFreeze();
+		if (Studio::Timer::GetInstance()->IsFrozen())
+		{
 			myMenuManager->GetPauseMenu()->Enable();
 		}
 		else
 		{
 			myMenuManager->GetPauseMenu()->Disable();
-			printf_s("Resumed game\n");
 		}
 	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('0'))
+
+	if ((myMenuManager->GetPauseMenu()->GetElementWithTag("ResumeButton")->myIsClicked == true && Studio::Timer::GetInstance()->IsFrozen()))
+	{
+		Studio::Timer::GetInstance()->ToggleFreeze();
+		myMenuManager->GetPauseMenu()->Disable();
+		myMenuManager->GetPauseMenu()->GetElementWithTag("ResumeButton")->myIsClicked = false;
+	}
+
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('L'))
 	{
 		myLevelManager->ReloadLevel();
 	}

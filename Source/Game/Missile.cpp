@@ -2,11 +2,12 @@
 #include "Missile.h"
 #include "TypePattern_Bullet.h"
 #include "Timer.h"
+#include "LevelAccessor.h"
 namespace Studio
 {
 	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	{
-		myTypePattern = new TypePattern_Bullet("sprites/debugpixel.dds", 12, 0.0f, aOwner);
+		myTypePattern = new TypePattern_Bullet("sprites/bullets/missilelvl1.dds", 12, 0.0f, aOwner);
 		myPosition = aPosition;
 
 		myIsSlowingDown = true;
@@ -45,5 +46,11 @@ namespace Studio
 		
 		myPosition += myVelocity * deltaTime;
 		GameObject::Update(myPosition);
+	}
+
+	void Missile::Impact()
+	{
+		printf_s("Missile impacted!\n");
+		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, 250.0f);
 	}
 }

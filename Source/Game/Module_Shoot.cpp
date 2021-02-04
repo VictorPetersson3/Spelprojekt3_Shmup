@@ -89,8 +89,8 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 {
 	if (mySpawnIsRelative)
 	{
-		mySpawnPosition.x = aBoss.GetPosition().x - mySpawnPosition.x;
-		mySpawnPosition.y = aBoss.GetPosition().y - mySpawnPosition.y;
+		mySpawnPosition.x = aBoss.GetPosition()->x - mySpawnPosition.x;
+		mySpawnPosition.y = aBoss.GetPosition()->y - mySpawnPosition.y;
 	}
 	else
 	{

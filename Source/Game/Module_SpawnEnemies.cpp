@@ -53,8 +53,8 @@ bool Studio::Module_SpawnEnemies::DoStuff(Boss& aBoss)
 {
 	if (mySpawnIsRelative)
 	{
-		mySpawnPosition.x = aBoss.GetPosition().x - mySpawnPosition.x;
-		mySpawnPosition.y = aBoss.GetPosition().y - mySpawnPosition.y;
+		mySpawnPosition.x = aBoss.GetPosition()->x - mySpawnPosition.x;
+		mySpawnPosition.y = aBoss.GetPosition()->y - mySpawnPosition.y;
 	}
 	auto enemy = Studio::LevelAccessor::GetInstance()->myEnemyFactory->CreateEnemyObject(myType, mySpawnPosition);
 	Studio::LevelAccessor::GetInstance()->AddEnemy(enemy);

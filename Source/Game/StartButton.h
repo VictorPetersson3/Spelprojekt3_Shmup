@@ -8,7 +8,7 @@ namespace Studio
 	class StartButton : public ButtonElement
 	{
 	public: 
-		StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer);
+		StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer,const bool aShouldStartnextLevel);
 		~StartButton();
 
 
@@ -21,6 +21,6 @@ namespace Studio
 
 	private:
 		int myLevelToLoadPath;
-
+		bool myShouldLoadNextLevel = false;
 	};
 }

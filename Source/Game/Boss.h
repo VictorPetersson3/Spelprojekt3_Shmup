@@ -44,7 +44,7 @@ namespace Studio
 		void HitLogic(float aDamage);
 
 		float GetTotalBossTime();
-		VECTOR2F GetPosition();
+		VECTOR2F* GetPosition();
 		std::vector<VECTOR2F> GetBulletSpawnPositions();
 		
 	protected:

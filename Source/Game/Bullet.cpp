@@ -28,6 +28,9 @@ namespace Studio
 		Bullet::GameObject::Update(myPosition);
 	}
 
+	// Overrideable by Missile etc
+	void Bullet::Impact() {}
+
 	void Bullet::RegisterEnemyHit(GameObject* anEnemy)
 	{
 		myHitEnemies.push_back(anEnemy);
@@ -59,6 +62,10 @@ namespace Studio
 	void Bullet::SetOwner(const Enums::BulletOwner& aNewOwner)
 	{
 		myTypePattern->SetOwner(aNewOwner);
+	}
+	const bool Bullet::ShouldDeleteThis() const
+	{
+		return myDeleteMeThisFrame;
 	}
 	Enums::BulletOwner Bullet::GetOwner() const
 	{

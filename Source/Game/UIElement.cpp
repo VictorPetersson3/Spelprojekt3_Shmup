@@ -8,7 +8,7 @@ Studio::UIElement::UIElement()
 
 bool Studio::UIElement::IsClicked()
 {
-    return false;
+    return myIsClicked;
 }
 
 void Studio::UIElement::Render()

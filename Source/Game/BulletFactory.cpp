@@ -3,31 +3,40 @@
 #include "TypePattern_Bullet.h"
 #include "Bullet.h"
 #include "Missile.h"
-
-Studio::BulletFactory::~BulletFactory()
+#include "AOEBullet.h"
+namespace Studio
 {
-	for (auto it = myBullets.begin(); it != myBullets.end(); ++it)
+	BulletFactory::~BulletFactory()
 	{
-		delete (*it).second;
-		SAFE_DELETE((*it).second);
+		for (auto it = myBullets.begin(); it != myBullets.end(); ++it)
+		{
+			delete (*it).second;
+			SAFE_DELETE((*it).second);
+		}
 	}
-}
 
-void Studio::BulletFactory::InitBulletType(const std::string& aPath, const unsigned int aLayerOrder, const std::string& aType, float aSpeed, Enums::BulletOwner aOwner)
-{
-	std::pair<std::string, Studio::TypePattern_Bullet*> temp_pair(aType, new Studio::TypePattern_Bullet(aPath, aLayerOrder, aSpeed, aOwner));
-	myBullets.insert(temp_pair);
-}
+	void BulletFactory::InitBulletType(const std::string& aPath, const unsigned int aLayerOrder, const std::string& aType, float aSpeed, Enums::BulletOwner aOwner)
+	{
+		std::pair<std::string, TypePattern_Bullet*> temp_pair(aType, new TypePattern_Bullet(aPath, aLayerOrder, aSpeed, aOwner));
+		myBullets.insert(temp_pair);
+	}
 
-Studio::Bullet* Studio::BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition)
-{
-	Studio::Bullet* tempObject = new Studio::Bullet(aPosition, myBullets.at(aType));
-	return tempObject;
-}
+	Bullet* BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition)
+	{
+		auto tempObject = new Bullet(aPosition, myBullets.at(aType));
+		return tempObject;
+	}
 
-Studio::Missile* Studio::BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
-{
-	Studio::Missile* missile = new Studio::Missile(aOwner, aPosition);
-	missile->SetOwner(aOwner);
-	return missile;
+	Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+	{
+		auto missile = new Missile(aOwner, aPosition);
+		missile->SetOwner(aOwner);
+		return missile;
+	}
+
+	AOEBullet* BulletFactory::CreateAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius)
+	{
+		auto aoeBullet = new AOEBullet(aOwner, aPosition, aRadius);
+		return aoeBullet;
+	}
 }

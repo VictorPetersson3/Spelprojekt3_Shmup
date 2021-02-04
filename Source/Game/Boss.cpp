@@ -91,9 +91,8 @@ namespace Studio
 			myCurrentPhase = 0;
 			myPhaseAmount = myPhases.size();
 		}
-
+		myMovement = nullptr;
 		myTotalFightTime = 0.0f;
-		SAFE_CREATE(myMovement, MovementBobbing(&myPosition, 20.0f, 200.0f));
 		myShield = nullptr;
 	}
 
@@ -110,14 +109,16 @@ namespace Studio
 		if (!IsDead())
 		{
 			myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
-			myMovement->Update();
+			if (myMovement != nullptr)
+			{
+				myMovement->Update();
+			}
 
 			Boss::GameObject::Update(myPosition);
 			myHealthBar.Update(GetHealth());
 
-			RendererAccessor::GetInstance()->Render(*this);
 
-			myPhases[myCurrentPhase]->PlayModules(*this);
+			myPhases[myCurrentPhase]->PlayModules(this);
 
 			if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 2)
 			{
@@ -132,17 +133,19 @@ namespace Studio
 			{
 				myShield->Update();
 			}
+			RendererAccessor::GetInstance()->Render(*this);
 		}
 	}
 
 	void Boss::UpdateMovement(Movement* aMovement)
 	{
+		SAFE_DELETE(myMovement);
 		myMovement = aMovement;
 	}
 
 	void Boss::ActivateShield(Shield* aShield)
 	{
-		if (myShield == nullptr && aShield->GetCurrentHealth() > 0.0f)
+		if (myShield == nullptr)
 		{
 			myShield = aShield;
 		}
@@ -197,9 +200,9 @@ namespace Studio
 		return myTotalFightTime;
 	}
 
-	VECTOR2F Boss::GetPosition()
+	VECTOR2F* Boss::GetPosition()
 	{
-		return myPosition;
+		return &myPosition;
 	}
 
 	std::vector<VECTOR2F> Boss::GetBulletSpawnPositions()

@@ -57,7 +57,8 @@ Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 				}
 				else if (type == "Movement")
 				{
-					//myModules.push_back(new Module_Movement(modules[i]));
+					myModules.push_back(new Module_Movement(modules[i]));
+
 				}
 				else
 				{
@@ -93,13 +94,13 @@ bool Studio::Phase::HavePlayedOnce()
 	return myHasPlayedOnce;
 }
 
-void Studio::Phase::PlayModules(Boss& aBossObject)
+void Studio::Phase::PlayModules(Boss* aBossObject)
 {
 	//TODO
 	// - Change Name For Module Function
 	if (!myModules.empty())
 	{
-		if (myModules[myCurrentModule]->DoStuff(aBossObject))
+		if (myModules[myCurrentModule]->DoStuff(*aBossObject))
 		{
 			if (myCurrentModule < myModuleAmount - 1)
 			{
@@ -113,4 +114,8 @@ void Studio::Phase::PlayModules(Boss& aBossObject)
 		}
 	}
 
+}
+
+void Studio::Phase::UpdateModuleMovement()
+{
 }
