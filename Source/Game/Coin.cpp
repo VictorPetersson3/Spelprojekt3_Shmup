@@ -10,7 +10,7 @@ namespace Studio
         SPRITESHEET.SetAmountOfFrames({ 8, 1 });
         myPosition = aSpawnPosition;
         mySpriteSheet.SetImagePath("Sprites/Pickups/coinsprite.dds");
-        GameObject::myCollider.AddCircleColliderObject(myPosition, 16);
+        GameObject::myCollider.AddCircleColliderObject({0,0}, 16);
         mySpriteSheet.LoopAnimationInRange(0.1f, { 1,1 }, { 6,1 });
         myScoreValue = 1;
     }

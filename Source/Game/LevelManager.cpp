@@ -362,7 +362,7 @@ namespace Studio
 			{
 				for (int i = myEnemies.size() - 1; i >= 0; i--)
 				{
-					if (!myEnemies[i]->IsDead() && !myEnemies[i]->GetIsTerrain())
+					if (!myEnemies[i]->IsDead())
 					{
 						for (int j = myBullets.size() - 1; j >= 0; j--)
 						{
@@ -373,7 +373,10 @@ namespace Studio
 									if (myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
 									{
 										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
-										myEnemies[i]->TakeDamage(100);
+										if (!myEnemies[i]->GetIsTerrain())
+										{
+											myEnemies[i]->TakeDamage(100);
+										}
 										myBullets[j]->Impact();
 
 										if (myBullets[j]->GetIsPenetrating() == false)
