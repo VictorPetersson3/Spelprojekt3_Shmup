@@ -14,7 +14,6 @@ namespace Studio
 		bool IsClicked();
 
 	private:
-		bool myIsClicked = false;
 
 	};
 }

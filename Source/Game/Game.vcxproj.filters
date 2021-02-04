@@ -233,6 +233,8 @@
     <ClCompile Include="EffectExplosionLarge.cpp">
       <Filter>GameObjects\Effects</Filter>
     </ClCompile>
+    <ClCompile Include="ExitButton.cpp" />
+    <ClCompile Include="AOEBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -479,6 +481,8 @@
     <ClInclude Include="EffectExplosionLarge.h">
       <Filter>GameObjects\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="ExitButton.h" />
+    <ClInclude Include="AOEBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

@@ -135,6 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
+    <ClInclude Include="AOEBullet.h" />
     <ClInclude Include="AudioClip.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioManagerAccesor.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EngineFlame.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="GenericButton.h" />
     <ClInclude Include="GodModeButton.h" />
     <ClInclude Include="HealthBar.h" />
@@ -222,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="AOEBullet.cpp" />
     <ClCompile Include="AudioClip.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioManagerAccesor.cpp" />
@@ -248,6 +251,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EngineFlame.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="GenericButton.cpp" />
     <ClCompile Include="GodModeButton.cpp" />
     <ClCompile Include="HealthBar.cpp" />

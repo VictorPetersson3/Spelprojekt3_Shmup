@@ -12,6 +12,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "Missile.h"
+#include "AOEBullet.h"
 #include "Pack.h"
 #include "EnemyFactory.h"
 #include "BulletFactory.h"
@@ -37,7 +38,7 @@
 
 namespace Studio
 {
-	LevelManager::LevelManager(BackgroundManager* aBackgroundManager):
+	LevelManager::LevelManager(BackgroundManager* aBackgroundManager) :
 		myBackgroundManager(aBackgroundManager)
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
@@ -78,7 +79,7 @@ namespace Studio
 		{
 			if (entry.path().extension().string() == ".json")
 			{
-				
+
 				auto file = entry.path().string();
 
 				std::string type = file.substr(12);
@@ -135,14 +136,15 @@ namespace Studio
 			/*SETCONSOLECOLOR(CONSOLE_COLOR_YELLOW);
 			printf_s("Warning: Level is cleared but LevelManager.Update() is still being called.\n");
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);*/
-				MenuManagerSingleton::GetInstance()->GetShop()->Enable();
-				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+			MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 		}
 		//Boss Logic
 		else if (myLevelBossSpawned && myBoss != nullptr)
 		{
 			myBoss->Update();
 			LevelLogic();
+			CheckIfLevelIsCleared();
 		}
 		else if (myLevelBossSpawned && myBoss == nullptr)
 		{
@@ -179,7 +181,7 @@ namespace Studio
 		return myLevelPaths[myCurrentLevel];
 	}
 
-	
+
 
 	void LevelManager::AddEnemy(Enemy* anEnemy)
 	{
@@ -219,7 +221,7 @@ namespace Studio
 			{
 				myPlayer->TakeDamage(1.0f);
 				myEnemies[i]->TakeDamage(100);
-				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", {8,1}, myEnemies[i]->GetPosition()));
+				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
 				//My Player take damage, blow up mine
 			}
 			if (!myEnemies[i]->IsDead())
@@ -249,6 +251,19 @@ namespace Studio
 
 		//Pu
 		CheckCollision();
+
+		// Remove bullets that's supposed to be deleted
+		for (size_t i = 0; i < myBullets.size(); i++)
+		{
+			if (myBullets[i]->ShouldDeleteThis())
+			{
+				if (i != myBullets.size() - 1)
+				{
+					std::swap(myBullets[i], myBullets.back());
+				}
+				myBullets.pop_back();
+			}
+		}
 
 		for (int i = myEnemies.size() - 1; i >= 0; i--)
 		{
@@ -284,11 +299,12 @@ namespace Studio
 							{
 								myBullets[i]->RegisterEnemyHit(myBoss);
 								myBoss->HitLogic(25.0f);
+								myBullets[i]->Impact();
+
 								if (myBullets[i]->GetIsPenetrating() == false)
 								{
 									myBullets.erase(myBullets.begin() + i);
 								}
-
 							}
 						}
 					}
@@ -334,15 +350,14 @@ namespace Studio
 								{
 									if (myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
 									{
-
 										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
 										myEnemies[i]->TakeDamage(100);
+										myBullets[j]->Impact();
 
 										if (myBullets[j]->GetIsPenetrating() == false)
 										{
 											myBullets.erase(myBullets.begin() + j);
 										}
-
 									}
 								}
 							}
@@ -396,7 +411,7 @@ namespace Studio
 			printf_s("ERROR: \"%s\" is missing packs\n", myLevelPaths[myCurrentLevel]);
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
-		if (myCurrentLevel >= myBackgroundManager->GetPathsSize() -1)
+		if (myCurrentLevel >= myBackgroundManager->GetPathsSize() - 1)
 		{
 			myBackgroundManager->CreateBackground(myBackgroundManager->GetPathsSize() - 1);
 		}
@@ -425,7 +440,7 @@ namespace Studio
 		// This is NOT how to check if a level has been cleared.
 		// TODO: Fix this in beta (maybe check if packs is past mypacks size??)
 
-		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0)
+		if (myPackIndex == myPacks.size() - 1 && myEnemies.size() == 0 || myLevelBossSpawned)
 		{
 
 			if (!myLevelBossSpawned)
@@ -454,7 +469,7 @@ namespace Studio
 			}
 			else
 			{
-				if (i != myExplosions.size() -1)
+				if (i != myExplosions.size() - 1)
 				{
 					std::swap(myExplosions[i], myExplosions.back());
 				}
@@ -466,7 +481,12 @@ namespace Studio
 	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	{
 		Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
-
 		myBullets.push_back(missile);
+	}
+
+	void LevelManager::SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius)
+	{
+		auto aoeBullet = myBulletFactory->CreateAOEBullet(aOwner, aPosition, aRadius);
+		myBullets.push_back(aoeBullet);
 	}
 }
