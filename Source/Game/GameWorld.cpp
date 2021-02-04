@@ -119,12 +119,23 @@ void CGameWorld::InputStuff()
 		if (Studio::Timer::GetInstance()->IsFrozen())
 		{
 			printf_s("Froze game\n");
+		}
+		else
+		{
+			printf_s("Resumed game\n");
+		}
+	}
+
+	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))
+	{
+		Studio::Timer::GetInstance()->ToggleFreeze();
+		if (Studio::Timer::GetInstance()->IsFrozen())
+		{
 			myMenuManager->GetPauseMenu()->Enable();
 		}
 		else
 		{
 			myMenuManager->GetPauseMenu()->Disable();
-			printf_s("Resumed game\n");
 		}
 	}
 
