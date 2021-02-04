@@ -12,6 +12,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "Missile.h"
+#include "AOEBullet.h"
 #include "Pack.h"
 #include "EnemyFactory.h"
 #include "BulletFactory.h"
@@ -250,6 +251,19 @@ namespace Studio
 		//Pu
 		CheckCollision();
 
+		// Remove bullets that's supposed to be deleted
+		for (size_t i = 0; i < myBullets.size(); i++)
+		{
+			if (myBullets[i]->ShouldDeleteThis())
+			{
+				if (i != myBullets.size() - 1)
+				{
+					std::swap(myBullets[i], myBullets.back());
+				}
+				myBullets.pop_back();
+			}
+		}
+
 		for (int i = myEnemies.size() - 1; i >= 0; i--)
 		{
 			if (myEnemies[i]->IsDead())
@@ -284,11 +298,12 @@ namespace Studio
 							{
 								myBullets[i]->RegisterEnemyHit(myBoss);
 								myBoss->HitLogic(25.0f);
+								myBullets[i]->Impact();
+
 								if (myBullets[i]->GetIsPenetrating() == false)
 								{
 									myBullets.erase(myBullets.begin() + i);
 								}
-
 							}
 						}
 					}
@@ -334,15 +349,14 @@ namespace Studio
 								{
 									if (myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
 									{
-
 										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
 										myEnemies[i]->TakeDamage(100);
+										myBullets[j]->Impact();
 
 										if (myBullets[j]->GetIsPenetrating() == false)
 										{
 											myBullets.erase(myBullets.begin() + j);
 										}
-
 									}
 								}
 							}
@@ -466,7 +480,12 @@ namespace Studio
 	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	{
 		Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
-
 		myBullets.push_back(missile);
+	}
+
+	void LevelManager::SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius)
+	{
+		auto aoeBullet = myBulletFactory->CreateAOEBullet(aOwner, aPosition, aRadius);
+		myBullets.push_back(aoeBullet);
 	}
 }

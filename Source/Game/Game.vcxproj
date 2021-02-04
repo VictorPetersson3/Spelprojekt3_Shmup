@@ -135,6 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
+    <ClInclude Include="AOEBullet.h" />
     <ClInclude Include="AudioClip.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioManagerAccesor.h" />
@@ -223,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="AOEBullet.cpp" />
     <ClCompile Include="AudioClip.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioManagerAccesor.cpp" />

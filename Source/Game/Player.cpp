@@ -77,7 +77,7 @@ namespace Studio
 	void Player::Shoot()
 	{
 		myTimeSinceLastShot += Timer::GetInstance()->TGetDeltaTime();
-		if (GetAsyncKeyState(VK_SPACE) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_Shoot) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
 		{
 			if (myAmountOfProjectiles == 1)
 			{
@@ -102,7 +102,7 @@ namespace Studio
 			// TODO: Don't do this all the time
 
 		}
-		if (InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Explosive))
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_Explosive))
 		{
 			LaunchMissile();
 		}

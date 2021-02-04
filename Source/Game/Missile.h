@@ -7,6 +7,7 @@ namespace Studio
 	public:
 		Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition);
 		void Update() override;
+		void Impact() override;
 
 	private:
 
