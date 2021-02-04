@@ -16,6 +16,8 @@ namespace Studio
 		TypePattern_Enemy(rapidjson::Document& aJsonDoc, const std::string& aType);
 		~TypePattern_Enemy() = default;
 
+		void CreateCollissionObjects(rapidjson::Document& aJsonDoc);
+
 		const Enums::MovementPattern GetMovementType() const;
 		const float GetStartHealth() const;
 		const float GetSpeed() const;
@@ -46,6 +48,12 @@ namespace Studio
 		const bool GetUsingCustomIdleFrames() const;
 		
 		const bool GetDiagonalIsTop() const;
+
+		const bool GetHasExtraCollission() const;
+
+		const std::vector<std::pair<float, VECTOR2F>>& GetCircleColliders() const;
+		const std::vector<std::pair<VECTOR2F, VECTOR2F>>& GetBoxColliders() const;
+
 
 		const std::string& GetImagePath() const;
 
@@ -90,6 +98,12 @@ namespace Studio
 		//Key for Bullet Types as well as imagePath
 		std::string myBulletImagePath;
 		//Sätta in support för alla olika Types av Movement
+
+		//Kollission
+		bool myHasExtraColliders;
+
+		std::vector<std::pair<float, VECTOR2F>> myCircleColliders;
+		std::vector<std::pair<VECTOR2F, VECTOR2F>> myBoxColliders;
 
 	};
 }

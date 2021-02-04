@@ -108,6 +108,7 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myPacks);
 		SAFE_DELETE_VECTOR(myEnemies);
 		SAFE_DELETE_VECTOR(myBullets);
+		SAFE_DELETE_VECTOR(myExplosions);
 		SAFE_DELETE(myBulletFactory);
 		SAFE_DELETE(myBossManager);
 		SAFE_DELETE(myBoss);
