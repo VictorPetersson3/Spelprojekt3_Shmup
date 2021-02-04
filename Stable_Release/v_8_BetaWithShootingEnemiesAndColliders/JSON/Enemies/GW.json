@@ -1,0 +1,1 @@
+{"HealthPoints":3,"Movement":{"Type":"Wave","HorizontalSpeed":175,"VerticalSpeed":100,"Height":150},"Bullet":{"Type":"","Speed":225,"ShootTowardsPlayer":true,"Interval":250}}
