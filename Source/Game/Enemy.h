@@ -33,6 +33,7 @@ namespace Studio
 
 	private:
 		void UpdateBullets(float aDeltaTime);
+		void AddColliders();
 	private:
 		int myScoreValue;
 		bool myHasDied = false;

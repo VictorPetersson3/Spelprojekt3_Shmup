@@ -41,9 +41,10 @@ namespace Studio
 		Boss::GameObject(aImagePath, 1000.0f),
 		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
+		GameObject::GetSpriteSheet().SetSizeRelativeToImage({0.5f, 0.5f});
 		myEnrageCondition = nullptr;
 		myPosition = { 1500.0f, 520.0f };
-		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 100.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 125.0f);
 		if (aBossParameters.HasMember("Conditions") && aBossParameters["Conditions"].IsArray())
 		{
 			auto conditions = aBossParameters["Conditions"].GetArray();

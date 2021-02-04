@@ -24,6 +24,10 @@ namespace Studio
 		const float GetRapidFireMaxCooldown() const;
 		const float GetRapidFireMaxActiveTime() const;
 		const float GetRapidFireAttackSpeed() const;
+		//Shield
+		const float GetShieldDuration() const;
+		const float GetShieldHealth() const;
+		const float GetShieldCooldown() const;
 
 		const float GetLayer() const;
 		const float GetAcceleration() const;
@@ -57,7 +61,13 @@ namespace Studio
 		void UpgradeBasicAttackSpeedT1();
 		void UpgradeBasicAttackSpeedT2();
 		void UpgradeBasicAttackSpeedT3();
-		void UpgradeProjectileAmountT2();
+
+		void UpgradeShieldDurationT1();
+		void UpgradeShieldDurationT2();
+		void UpgradeShieldHealthT1();
+		void UpgradeShieldHealthT2();
+		void UpgradeShieldCooldownT1();
+		void UpgradeShieldCooldownT2();
 
 	private:
 
@@ -87,6 +97,18 @@ namespace Studio
 		float myRapidFireAttackSpeedIncreaseT2;
 		float myRapidFireDurationT1;
 		float myRapidFireDurationT2;
+
+		//Shield
+		float myShieldDuration;
+		float myShieldHealth;
+		float myShieldCooldown;
+		//Shield Upgrades
+		float myShieldDurationUpgradeT1;
+		float myShieldDurationUpgradeT2;
+		float myShieldHealthUpgradeT1;
+		float myShieldHealthUpgradeT2;
+		float myShieldCooldownUpgradeT1;
+		float myShieldCooldownUpgradeT2;
 
 		float myAnimationTurnSpeed;
 		float myLayer;

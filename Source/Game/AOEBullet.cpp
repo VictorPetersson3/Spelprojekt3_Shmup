@@ -8,7 +8,7 @@ namespace Studio
 		myTypePattern = new TypePattern_Bullet("Sprites/Particles/AOE_Temp.dds", 12, 0.0f, aOwner);
 		myPosition = aPosition;
 
-		myCollider.AddCircleColliderObject(myPosition, aRadius);
+		myCollider.AddCircleColliderObject({ 0, 0 }, aRadius);
 		mySpriteSheet.SetSize({ aRadius * 2, aRadius * 2 });
 
 		mySpriteSheet.SetImagePath("Sprites/Particles/AOE_Temp.dds");

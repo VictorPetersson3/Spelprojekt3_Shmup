@@ -6,11 +6,11 @@ namespace Studio
 	class Collider
 	{
 	public:
-		Collider();
+		Collider() = default;
 
-		void AddBoxColliderObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize);
+		void AddBoxColliderObject(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aColliderSize);
 
-		void AddCircleColliderObject(Tga2D::Vector2f aPosition, float aRadius);
+		void AddCircleColliderObject(const Tga2D::Vector2f& aPosition, float aRadius);
 
 		void Update(const Tga2D::Vector2f& aPosition);
 		// Not implemented

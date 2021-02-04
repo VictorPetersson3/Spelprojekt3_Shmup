@@ -11,8 +11,8 @@ namespace Studio
 	{
 	public:
 		CollisionObject();
-		CollisionObject(Tga2D::Vector2f aPosition, float aRadius);
-		CollisionObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize);
+		CollisionObject(const Tga2D::Vector2f& aPosition, float aRadius);
+		CollisionObject(const Tga2D::Vector2f& aPosition, Tga2D::Vector2f aColliderSize);
 		~CollisionObject() = default;
 		void Update(const Tga2D::Vector2f& aPosition);
 		float const GetWidth();
@@ -25,6 +25,7 @@ namespace Studio
 		float myHeight = 0;
 		float myRadius = 0;
 		Tga2D::Vector2f myPosition;
+		Tga2D::Vector2f mySpawnPosition;
 		ColliderType myColliderType;
 	};
 }

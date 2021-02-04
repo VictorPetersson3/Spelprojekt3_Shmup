@@ -17,7 +17,7 @@ namespace Studio
 		void InitAllEnemyTypes();
 
 	private:
-		std::map<std::string, TypePattern_Enemy*> myEnemyObjects;
+		std::map<std::string, TypePattern_Enemy*> myEnemyObjectTypes;
 	};
 }
 

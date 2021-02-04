@@ -16,7 +16,7 @@ Studio::EnemyFactory::~EnemyFactory()
 		auto& value = it->second;
 		SAFE_DELETE(value);
 	}*/
-	for (auto it = myEnemyObjects.begin(); it != myEnemyObjects.end(); ++it)
+	for (auto it = myEnemyObjectTypes.begin(); it != myEnemyObjectTypes.end(); ++it)
 	{
 		delete (*it).second;
 		SAFE_DELETE((*it).second);
@@ -26,13 +26,13 @@ Studio::EnemyFactory::~EnemyFactory()
 void Studio::EnemyFactory::InitEnemyType(rapidjson::Document& someJsonData, const std::string& aType)
 {
 	std::pair<std::string, Studio::TypePattern_Enemy*> temp_pair(aType, new Studio::TypePattern_Enemy(someJsonData, aType));
-	myEnemyObjects.insert(temp_pair);
+	myEnemyObjectTypes.insert(temp_pair);
 }
 
 Studio::Enemy* Studio::EnemyFactory::CreateEnemyObject(const std::string& aType, const Tga2D::Vector2f& aSpawnPosition)
 {
 	std::string type = "Default";
-	for (auto types : myEnemyObjects)
+	for (auto types : myEnemyObjectTypes)
 	{
 		if (aType == types.first)
 		{
@@ -40,7 +40,7 @@ Studio::Enemy* Studio::EnemyFactory::CreateEnemyObject(const std::string& aType,
 			break;
 		}
 	}
-	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjects.at(type), aSpawnPosition);
+	Studio::Enemy* tempObject = new Studio::Enemy(myEnemyObjectTypes.at(type), aSpawnPosition);
 	return tempObject;
 }
 
@@ -48,6 +48,7 @@ void Studio::EnemyFactory::InitAllEnemyTypes()
 {
 	std::string directory = "JSON/Enemies";
 	int iterator = 0;
+	std::string previousPath;
 	for (const auto& entry : std::filesystem::directory_iterator(directory))
 	{
 		auto file = entry.path().string();
@@ -71,13 +72,29 @@ void Studio::EnemyFactory::InitAllEnemyTypes()
 			file.close();
 			document.Parse(text.c_str());
 
-			std::string type = path.substr(13);
-			type.erase(type.end()-5, type.end());
+			//Checking if it is a collission Object
+			std::string pathMinusCollision = path;
+			pathMinusCollision.erase(pathMinusCollision.end() - 15, pathMinusCollision.end());
+
+			if (pathMinusCollision != previousPath)
+			{
+				std::string type = path.substr(13);
+				type.erase(type.end() - 5, type.end());
+				InitEnemyType(document, type);
+			}
+			else
+			{
+				std::string type = path.substr(13);
+				type.erase(type.end() - 15, type.end());
+				myEnemyObjectTypes.at(type)->CreateCollissionObjects(document);
+			}
 			if (iterator == 0)
 			{
 				InitEnemyType(document, "Default");
 			}
-			InitEnemyType(document, type);
+			iterator++;
+			previousPath = path;
+			previousPath.erase(previousPath.end() - 5, previousPath.end());
 		}
 	}
 }

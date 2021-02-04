@@ -14,7 +14,7 @@ namespace Studio
 	{
 		myPosition = aPosition;
 		Bullet::GetSpriteSheet().SetSize({20.0f, 20.0f});
-		Bullet::GameObject::GetCollider().AddCircleColliderObject(myPosition, 2.0f);
+		Bullet::GameObject::GetCollider().AddCircleColliderObject({0, 0}, 2.0f);
 	}
 
 	Bullet::~Bullet()
