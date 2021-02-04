@@ -77,7 +77,7 @@ namespace Studio
 	void Player::Shoot()
 	{
 		myTimeSinceLastShot += Timer::GetInstance()->TGetDeltaTime();
-		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_Shoot) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
+		if (InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Shoot) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
 		{
 			if (myAmountOfProjectiles == 1)
 			{
@@ -247,10 +247,10 @@ namespace Studio
 	void Player::Movement()
 	{
 
-		bool wKey = InputManager::GetInstance()->IsKeyDown('W');
-		bool aKey = InputManager::GetInstance()->IsKeyDown('A');
-		bool sKey = InputManager::GetInstance()->IsKeyDown('S');
-		bool dKey = InputManager::GetInstance()->IsKeyDown('D');
+		bool wKey = InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_FlyUp);
+		bool aKey = InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_FlyLeft);
+		bool sKey = InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_FlyDown);
+		bool dKey = InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_FlyRight);
 		//W
 		myDirection = myDirection.Zero;
 		if (myHasCollided)
@@ -278,11 +278,6 @@ namespace Studio
 			myHasCollided = false;
 			myCurrentBounceTime = 0;
 			myBounceDirection = myBounceDirection.Zero;
-
-			bool wKey = Studio::InputManager::GetInstance()->IsKeyDown('W');
-			bool aKey = Studio::InputManager::GetInstance()->IsKeyDown('A');
-			bool sKey = Studio::InputManager::GetInstance()->IsKeyDown('S');
-			bool dKey = Studio::InputManager::GetInstance()->IsKeyDown('D');
 			//W
 			/*if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
 			{
