@@ -261,10 +261,9 @@ namespace Studio
 		}
 		if (myPlayer->IsDead() && !myHasReloaded)
 		{
-			ReloadLevel();
+			// Lägg till en meny här en callback eller liknande
 			myHasReloaded = true;
-			//Reload Level after death explosion is finished
-			//LoadLevel(myCurrentLevelPath);  <-- Det h�r krashar allt till 10fps
+			ReloadLevel();
 		}
 		UpdateExplosions();
 	}
