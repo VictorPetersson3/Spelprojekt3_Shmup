@@ -12,6 +12,8 @@ namespace Studio
 	class Movement;
 	class Phase;
 	class Condition;
+	class Sprite;
+	class Shield;
 	//Boss Class Implementation
 	class Boss : public GameObject
 	{
@@ -26,7 +28,7 @@ namespace Studio
 		bool CheckCurrentPhaseCondition();
 		//Tänk på en ny lösning när du får tid
 		bool GetCurrentPhaseHasPlayedOnce();
-		bool CheckEnrageCondition(float aElapsedTime);
+		bool CheckEnrageCondition();
 
 		//Legacy Boss "Swedish Abilities"
 		/*void SendInTheCaroleans(float anAmountOfCanonFodder);
@@ -35,7 +37,11 @@ namespace Studio
 		bool ActPassive(float aInternationalNotoriety);
 		void EnforceAlleMansRätt();*/
 		
-		void UpdateMovement(); 
+		void UpdateMovement(Movement* aMovement);
+
+		void ActivateShield(Shield* aShield);
+
+		void HitLogic(float aDamage);
 
 		float GetTotalBossTime();
 		VECTOR2F GetPosition();
@@ -54,6 +60,7 @@ namespace Studio
 		Movement* myMovement;
 
 		HealthBar myHealthBar;
+		Shield* myShield;
 		std::vector<Condition*> myConditions;
 		Condition* myEnrageCondition;
 		std::vector<Phase*> myPhases;

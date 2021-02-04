@@ -8,7 +8,7 @@ Studio::Module_SpawnEnemies::Module_SpawnEnemies(rapidjson::Value& aModuleParame
 {
 	if (aModuleParameters.HasMember("Type"))
 	{
-		myType = "Default"/*aModuleParameters["Type"].GetString()*/;
+		myType = aModuleParameters["Type"].GetString();
 	}
 	else
 	{
@@ -58,6 +58,6 @@ bool Studio::Module_SpawnEnemies::DoStuff(Boss& aBoss)
 	}
 	auto enemy = Studio::LevelAccessor::GetInstance()->myEnemyFactory->CreateEnemyObject(myType, mySpawnPosition);
 	Studio::LevelAccessor::GetInstance()->AddEnemy(enemy);
-	printf("Spawned Enemy Done\n");
+	//printf("Spawned Enemy Done\n");
 	return true;
 }

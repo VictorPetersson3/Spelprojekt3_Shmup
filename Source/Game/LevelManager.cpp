@@ -48,7 +48,6 @@ namespace Studio
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
 		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
-		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "MissilePlayer", 800.0f, Enums::BulletOwner::Player);
 		myBossManager->LoadBosses();
 		// Load chosen level by Lever Designers
 		std::fstream file;
@@ -137,10 +136,17 @@ namespace Studio
 				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 		}
 		//Boss Logic
-		else if (myLevelBossSpawned)
+		else if (myLevelBossSpawned && myBoss != nullptr)
 		{
-			//myBoss->Update();
+			myBoss->Update();
 			LevelLogic();
+		}
+		else if (myLevelBossSpawned && myBoss == nullptr)
+		{
+			printf("There is no Boss here :( \n");
+			myLevelIsCleared = true;
+			myLevelEnemiesCleared = false;
+			myLevelBossSpawned = false;
 		}
 		else
 		{
@@ -270,7 +276,7 @@ namespace Studio
 							if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
 							{
 								myBullets[i]->RegisterEnemyHit(myBoss);
-								myBoss->TakeDamage(25.0f);
+								myBoss->HitLogic(25.0f);
 								if (myBullets[i]->GetIsPenetrating() == false)
 								{
 									myBullets.erase(myBullets.begin() + i);
@@ -413,6 +419,7 @@ namespace Studio
 			if (!myLevelBossSpawned)
 			{
 				myBoss = myBossManager->GetLevelBoss(0);
+				printf("Boss Spawned");
 				myLevelBossSpawned = true;
 			}
 			if (myLevelBossSpawned && myBoss->IsDead())

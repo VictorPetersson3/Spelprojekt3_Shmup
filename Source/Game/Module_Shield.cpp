@@ -13,11 +13,16 @@ Studio::Module_Shield::Module_Shield(rapidjson::Value& aModuleParameters) :
 		printf("Duration is not valid in Shield Module\n");
 		myHitPoints = 0.5f;
 	}
+	myHasCreatedShield = false;
 }
 
 bool Studio::Module_Shield::DoStuff(Boss& aBoss)
 {
-	//TODO Add Shield Object
-	printf("Shield not implemented\n");
+	if (!myHasCreatedShield)
+	{
+		aBoss.ActivateShield(new Shield(myHitPoints));
+		myHasCreatedShield = true;
+		printf("Shield Activated\n");
+	}
 	return true;
 }

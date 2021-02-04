@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Boss.h"
-
+#include "tga2d/sprite/sprite.h"
 //Gameplay
 #include "Timer.h"
 #include "MovementBobbing.h"
@@ -10,6 +10,7 @@
 #include "Condition_Timed.h"
 #include "Condition_Time.h"
 #include "Phase.h"
+#include "Shield.h"
 
 //Json
 #include "rapidjson/document.h"
@@ -27,18 +28,18 @@ namespace Studio
 
 	Boss::Boss(const char* aImagePath, VECTOR2F aSpawnPosition, float aHealthAmount) :
 		Boss::GameObject(aImagePath, aHealthAmount),
-		myHealthBar("", { 700.0f, 100.0f })
+		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
 		myPosition = aSpawnPosition;
 		myCurrentPhase = 0;
 		myEnrageCondition = nullptr;
 		SAFE_CREATE(myMovement, MovementBobbing(&myPosition, 20.0f, 200.0f));
-		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 100.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 200.0f);
 	}
 
 	Boss::Boss(const char* aImagePath, rapidjson::Value& aBossParameters) :
 		Boss::GameObject(aImagePath, 1000.0f),
-		myHealthBar("", { 700.0f, 100.0f })
+		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
 		myEnrageCondition = nullptr;
 		myPosition = { 1500.0f, 520.0f };
@@ -91,9 +92,9 @@ namespace Studio
 			myPhaseAmount = myPhases.size();
 		}
 
-		myBulletSpawnPositions.push_back(myPosition);
 		myTotalFightTime = 0.0f;
 		SAFE_CREATE(myMovement, MovementBobbing(&myPosition, 20.0f, 200.0f));
+		myShield = nullptr;
 	}
 
 	Boss::~Boss()
@@ -106,21 +107,67 @@ namespace Studio
 
 	void Boss::Update()
 	{
-		myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
-		myMovement->Update();
-
-		Boss::GameObject::Update(myPosition);
-		myHealthBar.Update(GetHealth());
-
-		RendererAccessor::GetInstance()->Render(*this);
-
-		myPhases[myCurrentPhase]->PlayModules(*this);
-
-		if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 2)
+		if (!IsDead())
 		{
-			++myCurrentPhase;
-			printf("Changed to Phase: %i\n", myCurrentPhase);
+			myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
+			myMovement->Update();
+
+			Boss::GameObject::Update(myPosition);
+			myHealthBar.Update(GetHealth());
+
+			RendererAccessor::GetInstance()->Render(*this);
+
+			myPhases[myCurrentPhase]->PlayModules(*this);
+
+			if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 2)
+			{
+				++myCurrentPhase;
+				printf("Changed to Phase: %i\n", myCurrentPhase);
+			}
+			if (CheckEnrageCondition())
+			{
+				myCurrentPhase = myPhaseAmount - 1;
+			}
+			if (myShield != nullptr)
+			{
+				myShield->Update();
+			}
 		}
+	}
+
+	void Boss::UpdateMovement(Movement* aMovement)
+	{
+		myMovement = aMovement;
+	}
+
+	void Boss::ActivateShield(Shield* aShield)
+	{
+		if (myShield == nullptr && aShield->GetCurrentHealth() > 0.0f)
+		{
+			myShield = aShield;
+		}
+	}
+
+	void Boss::HitLogic(float aDamage)
+	{
+		if (myShield == nullptr)
+		{
+			TakeDamage(aDamage);
+
+			//Test for some feedback on boss hit
+			auto color = GameObject::GetSpriteSheet().GetSprite()->GetColor();
+			GameObject::GetSpriteSheet().GetSprite()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
+			GameObject::GetSpriteSheet().GetSprite()->SetColor(color);
+		}
+		else
+		{
+			myShield->HitLogic(aDamage);
+			if (myShield->IsDead())
+			{
+				SAFE_DELETE(myShield);
+			}
+		}
+
 	}
 
 	bool Boss::CheckCurrentPhaseCondition()
@@ -133,14 +180,16 @@ namespace Studio
 		return myPhases[myCurrentPhase]->HavePlayedOnce();
 	}
 
-	bool Boss::CheckEnrageCondition(float aElapsedTime)
+	bool Boss::CheckEnrageCondition()
 	{
-		return myEnrageCondition->IsDone(*this);
-	}
-
-
-	void Boss::UpdateMovement()
-	{
+		if (myEnrageCondition != nullptr)
+		{
+			return myEnrageCondition->IsDone(*this);
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	float Boss::GetTotalBossTime()
