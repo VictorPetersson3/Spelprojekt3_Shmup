@@ -3,17 +3,12 @@
 #include <iostream>
 namespace Studio
 {
-	Collider::Collider()
-	{
-
-	}
-
-	void Collider::AddBoxColliderObject(Tga2D::Vector2f aPosition, Tga2D::Vector2f aColliderSize)
+	void Collider::AddBoxColliderObject(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aColliderSize)
 	{
 		myCollisionObjects.push_back(CollisionObject(aPosition, aColliderSize));
 	}
 
-	void Collider::AddCircleColliderObject(Tga2D::Vector2f aPosition, float aRadius)
+	void Collider::AddCircleColliderObject(const Tga2D::Vector2f& aPosition, float aRadius)
 	{
 		myCollisionObjects.push_back(CollisionObject(aPosition, aRadius));
 	}
@@ -24,8 +19,6 @@ namespace Studio
 		{
 			collision.Update(aPosition);
 		}
-
-
 	}
 
 	bool Collider::Intersects(Collider& aCollider)

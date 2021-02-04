@@ -27,8 +27,8 @@ namespace Studio
 		myPosition = aSpawnPosition;
 		myScoreValue = 100;
 		myShootTimer = 0;
+		AddColliders();
 		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
-		Enemy::GameObject::GetCollider().AddCircleColliderObject(myPosition, 50);
 		switch (aEnemyType->GetMovementType())
 		{
 		case Studio::Enums::MovementPattern::Bobbing :
@@ -149,6 +149,24 @@ namespace Studio
 			{
 				myBullets.erase(myBullets.begin() + i);
 			}
+		}
+	}
+	void Enemy::AddColliders()
+	{
+		if (myType->GetHasExtraCollission())
+		{
+			for (int i = 0; i < myType->GetCircleColliders().size(); i++)
+			{
+				Enemy::GameObject::GetCollider().AddCircleColliderObject(myType->GetCircleColliders().at(i).second, myType->GetCircleColliders().at(i).first);
+			}
+			for (int i = 0; i < myType->GetBoxColliders().size(); i++)
+			{
+				Enemy::GameObject::GetCollider().AddBoxColliderObject(myType->GetBoxColliders().at(i).first, myType->GetBoxColliders().at(i).second);
+			}
+		}
+		else
+		{
+			Enemy::GameObject::GetCollider().AddCircleColliderObject({0, 0}, 50);
 		}
 	}
 }

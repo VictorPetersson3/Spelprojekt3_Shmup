@@ -51,8 +51,8 @@ namespace Studio
 
 		const bool GetHasExtraCollission() const;
 
-		const std::vector<std::pair<float, VECTOR2F>>& GetCircleColliders() const;
-		const std::vector<std::pair<VECTOR2F, VECTOR2F>>& GetBoxColliders() const;
+		const std::vector<std::pair<float, VECTOR2F>>& GetCircleColliders();
+		const std::vector<std::pair<VECTOR2F, VECTOR2F>>& GetBoxColliders();
 
 
 		const std::string& GetImagePath() const;

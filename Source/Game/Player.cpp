@@ -37,7 +37,7 @@ namespace Studio
 		mySpeed = somePlayerData->GetMinSpeed();
 		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
 		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
-		GetCollider().AddCircleColliderObject(myPosition, 20);
+		GetCollider().AddCircleColliderObject({0,0}, 20);
 	}
 
 	Player::~Player()

@@ -245,8 +245,8 @@ const bool Studio::TypePattern_Enemy::GetDiagonalIsTop() const { return myDiagon
 
 const bool Studio::TypePattern_Enemy::GetHasExtraCollission() const { return myHasExtraColliders; }
 
-const std::vector<std::pair<float, VECTOR2F>>& Studio::TypePattern_Enemy::GetCircleColliders() const { return myCircleColliders; }
+const std::vector<std::pair<float, VECTOR2F>>& Studio::TypePattern_Enemy::GetCircleColliders() { return myCircleColliders; }
 
-const std::vector<std::pair<VECTOR2F, VECTOR2F>>& Studio::TypePattern_Enemy::GetBoxColliders() const { return myBoxColliders; }
+const std::vector<std::pair<VECTOR2F, VECTOR2F>>& Studio::TypePattern_Enemy::GetBoxColliders() { return myBoxColliders; }
 
 const std::string& Studio::TypePattern_Enemy::GetImagePath() const { return myImagePath; }
