@@ -15,7 +15,7 @@
   "RapidFireDurationT1": 2.0,
   "RapidFireDurationT2": 4.0,
   "AnimationTurnSpeed": 0.0125,
-  "ImagePath": "sprites/assets/player/sprites/playerSprite_01.dds",
+  "ImagePath": "sprites/assets/player/sprites/playerSprite_02.dds",
   "AmountOfFrames": {
     "X": 1.0,
     "Y": 8.0
