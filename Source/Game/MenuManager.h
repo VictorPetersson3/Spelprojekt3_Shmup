@@ -12,6 +12,9 @@
 #include "StartButton.h"
 #include "GenericButton.h"
 #include "ExitButton.h"
+#include "ReturnToMainMenuButton.h"
+#include "SliderElement.h"
+#include "GoToMainMenuButton.h"
 
 namespace Studio
 {
@@ -27,6 +30,7 @@ namespace Studio
 		MenuObject* GetHUD();
 		MenuObject* GetPauseMenu();
 		MenuObject* GetShop();
+		MenuObject* GetOptionsMenu();
 
 		void Update();
 
@@ -44,6 +48,7 @@ namespace Studio
 		MenuObject myHud;
 		MenuObject myPausMenu;
 		MenuObject myShop;
+		MenuObject myOptionsMenu;
 
 		ShopUI* myShopUI;
 
@@ -58,13 +63,12 @@ namespace Studio
 
 		StartButton* myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton",10,false);
 		StartButton* myNextLevelButton = new StartButton("Sprites/UI/NextLevelButtonTemp.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton",10,true);
-		GenericButton* mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "OptionsButton", 10);
-		GenericButton* myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,860 }, { 1,1 }, { 0.5f,0.5f }, "CreditsButton", 10);
+		GenericButton* mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "OptionsButton", 12);
+		GenericButton* myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,860 }, { 1,1 }, { 0.5f,0.5f }, "CreditsButton", 12);
 		ExitButton* myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 10);
 
 		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_14, { 0.135,0.117 }, "ScoreText");
 		TextElement* myCoinText = new TextElement(Tga2D::EFontSize_14, { 0.11,0.153 }, "CoinText");
-		GodModeButton* myGodModeButton = new GodModeButton("Sprites/UI/GodmodeButton.dds", { 200,800 }, { 1,1 }, { 0.5f,0.5f }, "StartButton");
 
 		ImageElement* myTestElement = new ImageElement("Sprites/UI/IGUI/IGUI_Banners.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 2, "HUD");
 		ImageElement* myHeart1Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3,"Heart1");
@@ -74,12 +78,19 @@ namespace Studio
 		ImageElement* myShopBackground = new ImageElement("Sprites/UI/ShopBackground.dds", { 960,540 }, { 10,10 }, { 0.5f,0.5f }, 0, "ShopBackground");
 
 		ImageElement* myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
+		ImageElement* myOptionsMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "OptionsMenuBackground");
+
 		ImageElement* myMainMenuLogo = new ImageElement("Sprites/UI/UI_gamelogo.dds", { 960,250 }, { 1,1 }, { 0.5f,0.5f }, 6, "MainMenuBackground");
 
 		ImageElement* myPausMenuBackground = new ImageElement("Sprites/UI/TempPausMenuBackground.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 10, "PausMenuBackground");
 		GenericButton* myPausMenuResumeButton = new GenericButton("Sprites/UI/ResumeButtonTemp.dds", { 960,600 }, { 1,1 }, { 0.5f,0.5f }, "ResumeButton", 11);
+		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
 		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.1,0.5 }, "ShopCoinText");
+
+		TextElement* myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.2 }, "OptionsTitle");
+		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960-250,540 }, { 500,50 }, 15);
+		GoToMainMenuButton* myOptionsMenuReturnButton = new GoToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 	};
 
 

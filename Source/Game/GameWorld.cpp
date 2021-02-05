@@ -132,6 +132,7 @@ void CGameWorld::InputStuff()
 
 	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))
 	{
+		myMenuManager->GetOptionsMenu()->Disable();
 		Studio::Timer::GetInstance()->ToggleFreeze();
 		if (Studio::Timer::GetInstance()->IsFrozen())
 		{

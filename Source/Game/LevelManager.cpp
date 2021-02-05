@@ -144,7 +144,10 @@ namespace Studio
 			}
 			else
 			{
-				if (myPackIndex < myPacks.size() - 1)
+
+				 int packSize = myPacks.size()-1;
+
+				if (myPackIndex < (packSize))
 				{
 					printf_s("changing to next pack from pack %i ...\n", myPackIndex + 1);
 					myCurrentPack = myPacks[++myPackIndex];

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MenuObject.h"
+#include <Windows.h>
 
 Studio::MenuObject::MenuObject()
 {
@@ -11,6 +12,7 @@ Studio::MenuObject::~MenuObject()
 
 void Studio::MenuObject::Enable()
 {
+	//Sleep(50);
 	for (UIElement* e : myElements)
 	{
 		e->SetActive(true);

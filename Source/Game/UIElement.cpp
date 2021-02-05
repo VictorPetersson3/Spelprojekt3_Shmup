@@ -28,6 +28,7 @@ void Studio::UIElement::Update()
 void Studio::UIElement::SetActive(bool aState)
 {
     myIsEnabled = aState;
+    myIsClicked = false;
 }
 
 void Studio::UIElement::SetTag(const char* aTag)

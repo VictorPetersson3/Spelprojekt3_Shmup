@@ -5,6 +5,8 @@
 #include "LevelManager.h"
 #include "LevelAccessor.h"
 #include "LevelManager.h"
+#include <string>
+#include "InputManager.h"
 
 #define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
@@ -14,7 +16,6 @@ namespace Studio
     {
         myShopUI = new Studio::ShopUI();
 
-        myMainMenu.Add(myGodModeButton);
         myMainMenu.Add(myStartButton);
         myMainMenu.Add(myMainMenuBackground);
         myMainMenu.Add(myMainMenuLogo);
@@ -44,7 +45,18 @@ namespace Studio
 
         myPausMenu.Add(myPausMenuBackground);
         myPausMenu.Add(myPausMenuResumeButton);
+        myPausMenu.Add(myPausMenuQuitButton);
         myPausMenu.Disable();
+
+        myOptionsMenu.Add(myOptionsMenuBackground);
+        myOptionsMenu.Add(myVolumeSlider);
+
+
+        std::string optionsMenuLabel = "Options";
+        myOptionsMenuTitleText->SetText(optionsMenuLabel);
+        myOptionsMenu.Add(myOptionsMenuTitleText);
+        myOptionsMenu.Add(myOptionsMenuReturnButton);
+        myOptionsMenu.Disable();
 
         myPlayer = aPlayer;
         myIsLoading = false;
@@ -72,6 +84,11 @@ namespace Studio
     {
         return &myShop;
     }
+
+    MenuObject* MenuManager::GetOptionsMenu()
+    {
+        return &myOptionsMenu;
+    }
  
     void MenuManager::Update()
     {
@@ -79,6 +96,8 @@ namespace Studio
         myHud.Update();
         myShop.Update();
         myPausMenu.Update();
+        myOptionsMenu.Update();
+
         if (myIsLoading && hasStartedGame)
         {
             RendererAccessor::GetInstance()->Render(*myLoadingScreen);
@@ -89,7 +108,6 @@ namespace Studio
             myHud.GetElementWithTag("Heart3")->SetActive(true);
             myHud.GetElementWithTag("Heart2")->SetActive(true);
             myHud.GetElementWithTag("Heart1")->SetActive(true);
-
         }
         if (myPlayer->GetCurrentHealth() == 3)
         {
@@ -107,6 +125,21 @@ namespace Studio
         {
             myHud.GetElementWithTag("Heart1")->SetActive(false);
         }
+
+        if (mySettingsButton->IsClicked())
+        {
+            myMainMenu.Disable();
+            myOptionsMenu.Enable();
+            mySettingsButton->SetActive(false);
+        }
+
+        
+
+        //if (myOptionsMenuReturnButton->IsClicked())
+        //{
+        //    myMainMenu.Enable();
+        //    myOptionsMenu.Disable();
+        //}
     }
 
     void MenuManager::Render()
@@ -114,6 +147,7 @@ namespace Studio
         myScoreText->Render();
         myCoinText->Render();
         myShopCoinText->Render();
+        myOptionsMenuTitleText->Render();
     }
 
     bool MenuManager::GameStarted()
@@ -127,17 +161,6 @@ namespace Studio
             myLevelToLoad = LEVELMANAGER->GetCurrentLevelIndex();
             RendererAccessor::GetInstance()->Render(*myLoadingScreen);
             return myStartButton->myIsClicked;
-        }
-        if (!hasStartedGame && myGodModeButton->myIsClicked == true)
-        {
-            hasStartedGame = true;
-            inGodMode = true;
-            myMainMenu.Disable();
-            myIsLoading = true;
-            myHud.Enable();
-            myLevelToLoad = LEVELMANAGER->GetCurrentLevelIndex();
-            RendererAccessor::GetInstance()->Render(*myLoadingScreen);
-            return myGodModeButton->myIsClicked;
         }
         else if(hasStartedGame)
         {

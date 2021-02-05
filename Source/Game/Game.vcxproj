@@ -166,6 +166,7 @@
     <ClInclude Include="ExitButton.h" />
     <ClInclude Include="GenericButton.h" />
     <ClInclude Include="GodModeButton.h" />
+    <ClInclude Include="GoToMainMenuButton.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="ImageElement.h" />
     <ClInclude Include="LevelAccessor.h" />
@@ -205,12 +206,14 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RendererAccessor.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ReturnToMainMenuButton.h" />
     <ClInclude Include="ScoreAccessor.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="Shield.h" />
     <ClInclude Include="ShopButton.h" />
     <ClInclude Include="ShopButtonTier2.h" />
     <ClInclude Include="ShopUI.h" />
+    <ClInclude Include="SliderElement.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="StartButton.h" />
@@ -256,6 +259,7 @@
     <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="GenericButton.cpp" />
     <ClCompile Include="GodModeButton.cpp" />
+    <ClCompile Include="GoToMainMenuButton.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="ImageElement.cpp" />
     <ClCompile Include="LevelAccessor.cpp" />
@@ -293,12 +297,14 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RendererAccessor.cpp" />
+    <ClCompile Include="ReturnToMainMenuButton.cpp" />
     <ClCompile Include="ScoreAccessor.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="Shield.cpp" />
     <ClCompile Include="ShopButton.cpp" />
     <ClCompile Include="ShopButtonTier2.cpp" />
     <ClCompile Include="ShopUI.cpp" />
+    <ClCompile Include="SliderElement.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="StartButton.cpp" />
