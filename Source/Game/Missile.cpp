@@ -32,10 +32,10 @@ namespace Studio
 			myTypePattern = new TypePattern_Bullet("sprites/bullets/missilelvl1.dds", 12, 0.0f, aOwner);
 			myPosition = aPosition;
 
-			myIsSlowingDown = true;
+			myIsSlowingDown = false;
 
 			// TODO: Make JSON??
-			myInitialSpeed = -40.0f;
+			myInitialSpeed = -10.0f;
 			myDeaccelerationSpeed = -50.0f;
 			myAccelerationSpeed = -2.0f;
 

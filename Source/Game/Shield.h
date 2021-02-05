@@ -10,6 +10,7 @@ namespace Studio
 		~Shield();
 		void Update();
 		void HitLogic(float aDamage);
+		HealthBar* GetHealthBar();
 
 	private:
 		HealthBar myHealthBar;

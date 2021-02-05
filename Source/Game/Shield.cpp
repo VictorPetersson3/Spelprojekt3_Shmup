@@ -5,7 +5,7 @@
 
 Studio::Shield::Shield(float aHitPoints) :
 	GameObject("Sprites/debugpixel.dds", aHitPoints),
-	myHealthBar("Sprites/debugpixel.dds", { 700.0f, 150.0f }, 14, { 0.0f,0.0f,1.0f,1.0f })
+	myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 14, { 0.0f,0.0f,1.0f,0.5f })
 {
 	GameObject::GetSpriteSheet().GetSprite()->SetColor({ 0.0f, 0.0f, 1.0f, 1.0f });
 }
@@ -22,4 +22,9 @@ void Studio::Shield::Update()
 void Studio::Shield::HitLogic(float aDamage)
 {
 	TakeDamage(aDamage);
+}
+
+Studio::HealthBar* Studio::Shield::GetHealthBar()
+{
+	return &myHealthBar;
 }

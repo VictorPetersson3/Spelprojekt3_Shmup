@@ -25,6 +25,7 @@ namespace Studio
 		Boss::GameObject(aImagePath, 1000.0f),
 		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
+		mySpriteSheet.SetLayer(-1);
 		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ 1.0f,1.0f });
 		myEnrageCondition = nullptr;
 		myPosition = { 2050.0f, 540.0f };
@@ -181,6 +182,8 @@ namespace Studio
 		if (myShield == nullptr)
 		{
 			myShield = aShield;
+			myShield->GetHealthBar()->SetSizeX(500.0f);
+			myShield->GetHealthBar()->SetSizeY(70.0f);
 		}
 	}
 
@@ -229,6 +232,18 @@ namespace Studio
 		return true;
 	}
 
+	void Boss::PhaseTransition()
+	{
+		if (myCurrentPhase == 3)
+		{
+			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_02.dds");
+		}
+		if (myCurrentPhase == 6)
+		{
+			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_03.dds");
+		}
+	}
+
 	float Boss::GetTotalBossTime()
 	{
 		return myTotalFightTime;
@@ -261,18 +276,6 @@ namespace Studio
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
 		mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_01.dds");
-	}
-
-	void Boss::PhaseTransition()
-	{
-		if (myCurrentPhase == 3)
-		{
-			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_02.dds");
-		}
-		if (myCurrentPhase == 5)
-		{
-			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_03.dds");
-		}
 	}
 
 }

@@ -15,12 +15,16 @@ namespace Studio
 		HealthBar(const char* aImagePath, const VECTOR2F& aPosition, const int aLayer, Tga2D::CColor aColor);
 		~HealthBar();
 
+		void SetSizeX(const float aValue);
+		void SetSizeY(const float aValue);
 		void Update(Health& aHealthVariabel);
 	protected:
 
 
 	private:
 		VECTOR2F myPosition;
+		float myOriginalX;
+		float myOriginalY;
 
 	};
 }
