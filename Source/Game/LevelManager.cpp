@@ -322,7 +322,6 @@ namespace Studio
 				}
 				myEnemies.clear();
 				myBullets.clear();
-				SAFE_DELETE(myBoss);
 				myBoss = nullptr;
 			}
 		}
@@ -389,10 +388,7 @@ namespace Studio
 
 	void LevelManager::LoadLevel(int aLevelIndex)
 	{
-		ClearEnemies();
-		ClearBullets();
-		ClearPacks();
-		CoinAccessor::GetInstance()->ResetWorldCoins();
+		ClearLevel();
 		SAFE_DELETE(myBoss);
 		myBoss = nullptr;
 
@@ -458,7 +454,6 @@ namespace Studio
 	void LevelManager::ReloadLevel()
 	{
 		LoadLevel(myCurrentLevel);
-		myPlayer->ResetPlayerCurrentLevel();
 		ScoreAccessor::GetInstance()->ResetScore();
 		CoinAccessor::GetInstance()->ResetWorldCoins();
 		for (int i = 0; i < myExplosions.size(); i++)
@@ -466,6 +461,16 @@ namespace Studio
 			SAFE_DELETE(myExplosions[i]);
 		}
 		myExplosions.clear();
+	}
+
+	void LevelManager::ClearLevel()
+	{
+		ClearEnemies();
+		ClearPacks();
+		ClearBullets();
+		myBackgroundManager->ClearBackground();
+		CoinAccessor::GetInstance()->ResetWorldCoins();
+		myPlayer->ResetPlayerCurrentLevel();
 	}
 
 	const int LevelManager::GetCurrentLevelIndex() const { return myCurrentLevel; }

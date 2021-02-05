@@ -33,6 +33,7 @@ namespace Studio
 		bool LevelIsCleared();
 		void LoadLevel(const int aLevelIndex);
 		void ReloadLevel();
+		void ClearLevel();
 		const int GetCurrentLevelIndex() const;
 		const std::vector<std::string>& GetLevelPaths() const;
 
