@@ -61,6 +61,7 @@ namespace Studio
 		const bool IsDead();
 		
 		void SetGodMode(bool aGodMode);
+		float myTimeSinceHit = 100.0f;
 		#pragma endregion
 
 		#pragma region New Image Stuff (SpriteBatching)
