@@ -38,8 +38,10 @@
 
 namespace Studio
 {
-	LevelManager::LevelManager(BackgroundManager* aBackgroundManager) :
-		myBackgroundManager(aBackgroundManager)
+	LevelManager::LevelManager(BackgroundManager* aBackgroundManager, Player* aPlayer) :
+		myBackgroundManager(aBackgroundManager),
+		myPlayer(aPlayer)
+
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 		SAFE_CREATE(myBulletFactory, BulletFactory());
@@ -115,10 +117,9 @@ namespace Studio
 		SAFE_DELETE(myBoss);
 	}
 
-	void LevelManager::Update(Player* aPlayer)
+	void LevelManager::Update()
 	{
 
-		myPlayer = aPlayer;
 		if (myLevelIsCleared == true)
 		{
 			if (myCurrentLevel > myLevelPaths.size() - 1)

@@ -18,9 +18,9 @@ namespace Studio
 	{
 	public:
 
-		LevelManager(BackgroundManager* aBackgroundManager);
+		LevelManager(BackgroundManager* aBackgroundManager, Player* aPlayer);
 		~LevelManager();
-		void Update(Player* aPlayer);
+		void Update();
 		const std::string& CurrentLevelPath();
 
 		EnemyFactory* myEnemyFactory;

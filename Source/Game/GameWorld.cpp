@@ -74,7 +74,7 @@ void CGameWorld::Init()
 
 	
 	myBackgroundManager.Init(1920.0f);
-	SAFE_CREATE(myLevelManager, Studio::LevelManager(&myBackgroundManager));
+	SAFE_CREATE(myLevelManager, Studio::LevelManager(&myBackgroundManager, myPlayer));
 	myMenuManager = Studio::MenuManagerSingleton::GetInstance();
 	Studio::LevelAccessor::SetInstance(myLevelManager);
 	myMenuManager->SetPlayButtonIndex(myLevelManager->GetCurrentLevelIndex());
@@ -93,7 +93,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 		}
 		myScoreManager->Update();
 		myPlayer->Update();
-		myLevelManager->Update(myPlayer);
+		myLevelManager->Update();
 		myCoinManager->Update();
 		myBackgroundManager.UpdateBackground(aDeltaTime);
 	}
