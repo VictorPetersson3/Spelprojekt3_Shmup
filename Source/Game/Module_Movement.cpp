@@ -57,6 +57,7 @@ bool Studio::Module_Movement::DoStuff(Boss& aBoss)
 {
 	if (!myHasChangedPhaseMovement)
 	{
+		aBoss.SetPosition({myStartPosition});
 		switch (myMovementPattern)
 		{
 		case Studio::Enums::MovementPattern::Straight:

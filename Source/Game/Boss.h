@@ -28,6 +28,7 @@ namespace Studio
 		//Tänk på en ny lösning när du får tid
 		bool GetCurrentPhaseHasPlayedOnce();
 		bool CheckEnrageCondition();
+		bool ShouldTransition();
 
 		//Legacy Boss "Swedish Abilities"
 		/*void SendInTheCaroleans(float anAmountOfCanonFodder);
@@ -45,11 +46,11 @@ namespace Studio
 
 		float GetTotalBossTime();
 		VECTOR2F* GetPosition();
+		void SetPosition(const VECTOR2F aPosition);
 
 		void ResetBoss();
 
-		//void SwitchSprite();
-
+		void PhaseTransition();
 
 		
 	protected:
@@ -63,6 +64,7 @@ namespace Studio
 		float myTargetYPosition = 540.0f;
 
 		bool myIntroMovementPlayed;
+		bool myIsTransitioning;
 
 		VECTOR2F myPosition;
 		

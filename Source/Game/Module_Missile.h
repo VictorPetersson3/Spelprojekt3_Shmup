@@ -18,6 +18,7 @@ namespace Studio
 		bool myIsRelative;
 
 		VECTOR2F mySpawnPosition;
+		VECTOR2F myOriginalSpawnPosition;
 	};
 }
 

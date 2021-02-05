@@ -89,6 +89,7 @@ namespace Studio
 		myShield = nullptr;
 		myMovement = nullptr;
 		myIntroMovementPlayed = false;
+		myIsTransitioning = false;
 		SetGodMode(true);
 	}
 
@@ -131,7 +132,11 @@ namespace Studio
 			{
 				++myCurrentPhase;
 				printf("Changed to Phase: %i\n", myCurrentPhase);
-
+				if (ShouldTransition())
+				{
+					//TODO Call transition between phase sprites or animations
+					PhaseTransition();
+				}
 				SetGodMode(false);
 			}
 			if (CheckEnrageCondition())
@@ -184,11 +189,6 @@ namespace Studio
 		if (myShield == nullptr)
 		{
 			TakeDamage(aDamage);
-
-			//Test for some feedback on boss hit
-			//auto color = GameObject::GetSpriteSheet().GetSprite()->GetColor();
-			//GameObject::GetSpriteSheet().GetSprite()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
-			//GameObject::GetSpriteSheet().GetSprite()->SetColor(color);
 		}
 		else
 		{
@@ -223,6 +223,12 @@ namespace Studio
 		}
 	}
 
+	bool Boss::ShouldTransition()
+	{
+		//TODO - Check if this phase has a transition!
+		return true;
+	}
+
 	float Boss::GetTotalBossTime()
 	{
 		return myTotalFightTime;
@@ -231,6 +237,11 @@ namespace Studio
 	VECTOR2F* Boss::GetPosition()
 	{
 		return &myPosition;
+	}
+
+	void Boss::SetPosition(const VECTOR2F aPosition)
+	{
+		myPosition = aPosition;
 	}
 
 	void Boss::ResetBoss()
@@ -249,6 +260,19 @@ namespace Studio
 		}
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
+		mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_01.dds");
+	}
+
+	void Boss::PhaseTransition()
+	{
+		if (myCurrentPhase == 3)
+		{
+			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_02.dds");
+		}
+		if (myCurrentPhase == 5)
+		{
+			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_03.dds");
+		}
 	}
 
 }

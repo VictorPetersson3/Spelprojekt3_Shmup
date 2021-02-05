@@ -3,6 +3,7 @@
 #include "TypePattern_Bullet.h"
 #include "Timer.h"
 #include "LevelAccessor.h"
+#include "tga2d/sprite/sprite.h"
 namespace Studio
 {
 	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
@@ -36,13 +37,16 @@ namespace Studio
 			// TODO: Make JSON??
 			myInitialSpeed = -40.0f;
 			myDeaccelerationSpeed = -50.0f;
-			myAccelerationSpeed = -20.0f;
+			myAccelerationSpeed = -2.0f;
 
 			myVelocity = { myInitialSpeed, 0.0f };
 
 			myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
 
 			mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
+
+			mySpriteSheet.GetSprite()->SetTextureRect(1.0f, 0.0f, 0.0f, 1.0f);
+
 			myIsReversed = true;
 		}
 	}

@@ -17,6 +17,7 @@ namespace Studio
 
 	private:
 		VECTOR2F mySpawnPosition;
+		VECTOR2F myOriginalSpawnPosition;
 		float myElapsedTime;
 		float myActiveDuration;
 		bool myShootTowardsPlayer;

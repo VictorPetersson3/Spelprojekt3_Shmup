@@ -390,7 +390,6 @@ namespace Studio
 	void LevelManager::LoadLevel(int aLevelIndex)
 	{
 		ClearLevel();
-		SAFE_DELETE(myBoss);
 		myBoss = nullptr;
 
 		myCurrentLevel = aLevelIndex;

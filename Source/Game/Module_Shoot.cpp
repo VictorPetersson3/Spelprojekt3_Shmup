@@ -77,7 +77,7 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 
 
 		
-		mySpawnPosition = { x , y };
+		myOriginalSpawnPosition = { x , y };
 
 	}
 	else
@@ -92,13 +92,15 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 {
 	if (mySpawnIsRelative)
 	{
-		mySpawnPosition.x = aBoss.GetPosition()->x - mySpawnPosition.x;
-		mySpawnPosition.y = aBoss.GetPosition()->y - mySpawnPosition.y;
+		//printf("mySpawnPositionX: %f, %f\n", mySpawnPosition.x, mySpawnPosition.y);
+		mySpawnPosition.x = aBoss.GetPosition()->x + myOriginalSpawnPosition.x;
+		mySpawnPosition.y = aBoss.GetPosition()->y - myOriginalSpawnPosition.y;
+		//printf("----------------- %f, %f\n", mySpawnPosition.x, mySpawnPosition.y);
 	}
 	else
 	{
-		mySpawnPosition.x = SCREEN_WIDTH - mySpawnPosition.x;
-		mySpawnPosition.y = mySpawnPosition.y + SCREEN_HEIGHT * 0.5f;
+		mySpawnPosition.x = SCREEN_WIDTH - myOriginalSpawnPosition.x;
+		mySpawnPosition.y = myOriginalSpawnPosition.y + SCREEN_HEIGHT * 0.5f;
 	}
 	myCounter.Tick();
 	myElapsedTime += Studio::Timer::GetInstance()->TGetDeltaTime();

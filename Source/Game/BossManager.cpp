@@ -49,6 +49,7 @@ Studio::Boss* Studio::BossManager::GetLevelBoss(int aLevelCount)
 {
 	if (aLevelCount < myAmountOfBosses)
 	{
+		myBosses[aLevelCount]->ResetBoss();
 		return myBosses[aLevelCount];
 	}
 	return nullptr;
