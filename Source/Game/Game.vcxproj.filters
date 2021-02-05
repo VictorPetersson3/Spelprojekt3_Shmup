@@ -238,6 +238,7 @@
     <ClCompile Include="Module_Missile.cpp">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUpModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -489,6 +490,7 @@
     <ClInclude Include="Module_Missile.h">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="PowerUpModule.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

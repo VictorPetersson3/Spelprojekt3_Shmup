@@ -199,6 +199,7 @@
     <ClInclude Include="PlayerAccessor.h" />
     <ClInclude Include="Player_JsonParser.h" />
     <ClInclude Include="Phase.h" />
+    <ClInclude Include="PowerUpModule.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="PlayerAccessor.cpp" />
     <ClCompile Include="Player_JsonParser.cpp" />
     <ClCompile Include="Phase.cpp" />
+    <ClCompile Include="PowerUpModule.cpp" />
     <ClCompile Include="RenderCommand.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />

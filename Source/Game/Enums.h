@@ -100,5 +100,12 @@ namespace Studio
 			CustomKey_Pause,
 			CustomKey_Count
 		};
+
+		enum class PowerUpModules
+		{
+			BasicAttack,
+			RapidFire,
+			Shield
+		};
 	}
 }
