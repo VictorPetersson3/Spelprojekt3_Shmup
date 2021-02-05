@@ -14,6 +14,7 @@ namespace Studio
 		void Init(float LevelWidth);
 		void UpdateBackground(float aDeltaTime);
 		const int GetPathsSize() const;
+		void ClearBackground();
 
 	private:
 		std::vector<std::string> myLevelPaths;

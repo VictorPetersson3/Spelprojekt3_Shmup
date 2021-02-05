@@ -136,6 +136,15 @@ const int Studio::BackgroundManager::GetPathsSize() const
 	return myLevelPaths.size();
 }
 
+void Studio::BackgroundManager::ClearBackground()
+{
+	for (int i = 0; i < myBackgroundObjects.size(); i++)
+	{
+		SAFE_DELETE(myBackgroundObjects[i]);
+	}
+	myBackgroundObjects.clear();
+}
+
 void Studio::BackgroundManager::DebugJsonDoc(rapidjson::Value& aJsonObject, const int aIterator)
 {
 	if (!aJsonObject.HasMember("Type") && !aJsonObject["Type"].IsString())
