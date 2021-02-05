@@ -489,7 +489,7 @@ namespace Studio
 
 	void Player::LaunchMissile()
 	{
-		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition, 1.0f);
+		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition);
 	}
 	void Studio::Player::ShieldLogic()
 	{

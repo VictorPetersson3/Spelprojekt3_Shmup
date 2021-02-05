@@ -4,6 +4,7 @@
 //Gameplay
 #include "Timer.h"
 #include "MovementBobbing.h"
+#include "MovementWave.h"
 #include "Condition.h"
 #include "Condition_BelowHealth.h"
 #include "Condition_DoOnce.h"
@@ -20,30 +21,13 @@
 #include "Renderer.h"
 namespace Studio
 {
-	/*Boss::Boss() :
-		GameObject(nullptr),
-		myHealthBar(nullptr, { 0.0f, 0.0f })
-	{
-	}*/
-
-	Boss::Boss(const char* aImagePath, VECTOR2F aSpawnPosition, float aHealthAmount) :
-		Boss::GameObject(aImagePath, aHealthAmount),
-		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
-	{
-		myPosition = aSpawnPosition;
-		myCurrentPhase = 0;
-		myEnrageCondition = nullptr;
-		SAFE_CREATE(myMovement, MovementBobbing(&myPosition, 20.0f, 200.0f));
-		Boss::GameObject::GetCollider().AddCircleColliderObject(myPosition, 200.0f);
-	}
-
 	Boss::Boss(const char* aImagePath, rapidjson::Value& aBossParameters) :
 		Boss::GameObject(aImagePath, 1000.0f),
 		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
-		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ 0.5f, 0.5f });
+		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ 1.0f,1.0f });
 		myEnrageCondition = nullptr;
-		myPosition = { 1500.0f, 520.0f };
+		myPosition = { 2050.0f, 540.0f };
 		Boss::GameObject::GetCollider().AddCircleColliderObject({ 0.0f,0.0f }, 125.0f);
 		if (aBossParameters.HasMember("Conditions") && aBossParameters["Conditions"].IsArray())
 		{
@@ -89,26 +73,48 @@ namespace Studio
 			{
 				myPhases.push_back(new Phase(phases[i]));
 			}
-			myCurrentPhase = 0;
+		}
+		SAFE_CREATE(myIntroMovement, MovementWave(&myPosition, 20.0f, 20.0f, 150.0f));
+
+		myTotalFightTime = 0.0f;
+		myCurrentPhase = 0;
+		if (myEnrageCondition != nullptr)
+		{
+			myPhaseAmount = myPhases.size() - 1;
+		}
+		else
+		{
 			myPhaseAmount = myPhases.size();
 		}
-		myMovement = nullptr;
-		myTotalFightTime = 0.0f;
 		myShield = nullptr;
+		myMovement = nullptr;
+		myIntroMovementPlayed = false;
+		SetGodMode(true);
 	}
 
 	Boss::~Boss()
 	{
 		SAFE_DELETE(myMovement);
+		SAFE_DELETE(myIntroMovement);
 		SAFE_DELETE(myEnrageCondition);
+		for (Condition* condition : myConditions)
+		{
+			SAFE_DELETE(condition);
+		}
 		myConditions.clear();
+		for (Phase* phase : myPhases)
+		{
+			SAFE_DELETE(phase);
+		}
 		myPhases.clear();
 	}
 
 	void Boss::Update()
 	{
-		if (!IsDead())
+
+		if (!IsDead() && myIntroMovementPlayed)
 		{
+			
 			myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
 			if (myMovement != nullptr)
 			{
@@ -118,13 +124,15 @@ namespace Studio
 			Boss::GameObject::Update(myPosition);
 			myHealthBar.Update(GetHealth());
 
-
+			//Plays the Modules in the current phase
 			myPhases[myCurrentPhase]->PlayModules(this);
 
-			if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 2)
+			if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 1)
 			{
 				++myCurrentPhase;
 				printf("Changed to Phase: %i\n", myCurrentPhase);
+
+				SetGodMode(false);
 			}
 			if (CheckEnrageCondition())
 			{
@@ -136,12 +144,31 @@ namespace Studio
 			}
 			RendererAccessor::GetInstance()->Render(*this);
 		}
+		else if (!myIntroMovementPlayed)
+		{
+			PlayIntroMovement();
+		}
 	}
 
 	void Boss::UpdateMovement(Movement* aMovement)
 	{
-		SAFE_DELETE(myMovement);
+		if (myMovement != nullptr)
+		{
+			SAFE_DELETE(myMovement);
+		}
 		myMovement = aMovement;
+	}
+
+	void Boss::PlayIntroMovement()
+	{
+		myIntroMovement->Update();
+		Boss::GameObject::Update(myPosition);
+		if (myPosition.x <= 1500.0f)
+		{
+			myIntroMovementPlayed = true;
+			SetGodMode(false);
+		}
+		RendererAccessor::GetInstance()->Render(*this);
 	}
 
 	void Boss::ActivateShield(Shield* aShield)
@@ -159,9 +186,9 @@ namespace Studio
 			TakeDamage(aDamage);
 
 			//Test for some feedback on boss hit
-			auto color = GameObject::GetSpriteSheet().GetSprite()->GetColor();
-			GameObject::GetSpriteSheet().GetSprite()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
-			GameObject::GetSpriteSheet().GetSprite()->SetColor(color);
+			//auto color = GameObject::GetSpriteSheet().GetSprite()->GetColor();
+			//GameObject::GetSpriteSheet().GetSprite()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
+			//GameObject::GetSpriteSheet().GetSprite()->SetColor(color);
 		}
 		else
 		{
@@ -206,9 +233,22 @@ namespace Studio
 		return &myPosition;
 	}
 
-	std::vector<VECTOR2F> Boss::GetBulletSpawnPositions()
+	void Boss::ResetBoss()
 	{
-		return myBulletSpawnPositions;
+		myHealth.ResetHealth();
+		for (Phase* phase : myPhases)
+		{
+			phase->ResetPhase();
+		}
+		SetGodMode(true);
+		myPosition = { 2000.0f, 540.0f };
+		myIntroMovementPlayed = false;
+		if (myShield != nullptr)
+		{
+			SAFE_DELETE(myShield);
+		}
+		myTotalFightTime = 0.0f;
+		myCurrentPhase = 0;
 	}
 
 }

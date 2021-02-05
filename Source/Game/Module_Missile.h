@@ -8,7 +8,7 @@ namespace Studio
 		Module_Missile(rapidjson::Value& aModuleParameters);
 
 		bool DoStuff(Boss& aBoss) override;
-
+		void ResetModule() override;
 	private:
 
 		float myInitialSpeed;

@@ -57,11 +57,14 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 		{
 			mySpawnIsRelative = true;
 		}
+		else
+		{
+			mySpawnIsRelative = false;
+		}
 	}
 	else
 	{
 		printf("Style in Shoot Module is not read correctly\n");
-		mySpawnIsRelative = false;
 	}
 
 	if (aModuleParameter.HasMember("X"))
@@ -111,4 +114,8 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 		return true;
 	}
 	return false;
+}
+
+void Studio::Module_Shoot::ResetModule()
+{
 }

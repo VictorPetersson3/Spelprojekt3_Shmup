@@ -45,7 +45,7 @@ namespace Studio
 	{
 		SAFE_CREATE(myEnemyFactory, EnemyFactory());
 		SAFE_CREATE(myBulletFactory, BulletFactory());
-		SAFE_CREATE(myBoss, Boss("sprites/debugpixel.dds", { 1500.0f, 520.0f }, 1000.0f));
+		myBoss = nullptr;
 		myEnemyFactory->InitAllEnemyTypes();
 
 		SAFE_CREATE(myBossManager, BossManager());
@@ -556,19 +556,19 @@ namespace Studio
 		myBullets.clear();
 	}
 
-	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aDirection)
+	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	{
 		switch (aOwner)
 		{
 		case Enums::BulletOwner::Player:
 		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aDirection);
+			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
 			myBullets.push_back(missile);
 		}
 		break;
 		case Enums::BulletOwner::Enemy:
 		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aDirection);
+			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
 			myBullets.push_back(missile);
 		}
 		break;

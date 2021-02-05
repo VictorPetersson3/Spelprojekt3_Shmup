@@ -15,8 +15,7 @@ namespace Studio
 		~BulletFactory();
 		void InitBulletType(const std::string & aPath, const unsigned int aLayerOrder, const std::string & aType, float aSpeed, Enums::BulletOwner aBulletOwner);
 		Bullet* CreateBulletObject(const std::string & aType, const Tga2D::Vector2f & aPosition);
-		//Missile* CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition);
-		Missile* CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aDirection);
+		Missile* CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition);
 		AOEBullet* CreateAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius);
 
 	private:

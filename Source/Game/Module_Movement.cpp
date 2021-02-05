@@ -11,7 +11,7 @@
 Studio::Module_Movement::Module_Movement(rapidjson::Value& aModuleParameters) :
 	Module_Movement::Module(aModuleParameters)
 {
-	myStartPosition = { 1500.0f, 520.0f };
+	myStartPosition = { 1500.0f, 540.0f };
 	if (aModuleParameters.HasMember("Type"))
 	{
 		std::string type = aModuleParameters["Type"].GetString();
@@ -51,7 +51,6 @@ Studio::Module_Movement::Module_Movement(rapidjson::Value& aModuleParameters) :
 
 Studio::Module_Movement::~Module_Movement()
 {
-	SAFE_DELETE(myModuleMovement);
 }
 
 bool Studio::Module_Movement::DoStuff(Boss& aBoss)
@@ -78,4 +77,9 @@ bool Studio::Module_Movement::DoStuff(Boss& aBoss)
 		myHasChangedPhaseMovement = true;
 	}
 	return true;
+}
+
+void Studio::Module_Movement::ResetModule()
+{
+	myHasChangedPhaseMovement = false;
 }

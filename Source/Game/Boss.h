@@ -19,7 +19,6 @@ namespace Studio
 	{
 	public:
 		Boss() = default;
-		Boss(const char* aImagePath, VECTOR2F aSpawnPosition, float aHealthAmount);
 		Boss(const char* aImagePath, rapidjson::Value& aBossParameters);
 		~Boss();
 
@@ -38,6 +37,7 @@ namespace Studio
 		void EnforceAlleMansRätt();*/
 		
 		void UpdateMovement(Movement* aMovement);
+		void PlayIntroMovement();
 
 		void ActivateShield(Shield* aShield);
 
@@ -45,7 +45,12 @@ namespace Studio
 
 		float GetTotalBossTime();
 		VECTOR2F* GetPosition();
-		std::vector<VECTOR2F> GetBulletSpawnPositions();
+
+		void ResetBoss();
+
+		//void SwitchSprite();
+
+
 		
 	protected:
 
@@ -54,17 +59,21 @@ namespace Studio
 		int myCurrentPhase;
 		int myPhaseAmount;
 		int myTotalFightTime;
+		float myTargetXPosition = 1500.0f;
+		float myTargetYPosition = 540.0f;
+
+		bool myIntroMovementPlayed;
 
 		VECTOR2F myPosition;
 		
 		Movement* myMovement;
+		Movement* myIntroMovement;
 
 		HealthBar myHealthBar;
 		Shield* myShield;
 		std::vector<Condition*> myConditions;
 		Condition* myEnrageCondition;
 		std::vector<Phase*> myPhases;
-		std::vector<VECTOR2F> myBulletSpawnPositions;
 	};
 
 
