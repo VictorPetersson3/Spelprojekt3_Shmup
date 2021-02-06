@@ -15,6 +15,7 @@
 #include "Timer.h"
 #include <string>
 #include "TypePattern_Enemy.h"
+#include "TurretPipe.h"
 
 namespace Studio
 {
@@ -22,6 +23,7 @@ namespace Studio
 		Enemy::GameObject(aEnemyType->GetImagePath()),
 		myMovementType(aEnemyType->GetMovementType())
 	{
+		myTurretPipe = nullptr;
 		myMovement = nullptr;
 		myType = aEnemyType;
 		myPosition = aSpawnPosition;
@@ -48,14 +50,12 @@ namespace Studio
 		case Studio::Enums::MovementPattern::Diagonal:
 			if (myType->GetDiagonalIsTop())
 			{
-				//GameObject::SetPosition({ 1920,0 });
 				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 1080}) - GameObject::GetPosition();
 				SAFE_CREATE(myMovement, MovementDiagonal(&myPosition,
 					myType->GetSpeed(), angle.GetNormalized()));
 			}
 			else
 			{
-				//GameObject::SetPosition({ 1920, 1080 });
 				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 0}) - GameObject::GetPosition();
 				SAFE_CREATE(myMovement, MovementDiagonal(&myPosition,
 					myType->GetSpeed(), angle.GetNormalized()));
@@ -63,6 +63,10 @@ namespace Studio
 			break;
 		default:
 			break;
+		}
+		if (aEnemyType->GetIsTurret())
+		{
+			myTurretPipe = new TurretPipe(this, aEnemyType);
 		}
 	}
 
@@ -76,10 +80,15 @@ namespace Studio
 	{
 		if (!IsDead())
 		{
+			if (myType->GetIsTurret())
+			{
+				TurretLogic();
+			}
+			else
+			{
+				Shoot(aDeltaTime);
+			}
 			myMovement->Update();
-
-			Shoot(aDeltaTime);
-
 			Enemy::GameObject::Update(myPosition);
 		}
 
@@ -89,6 +98,11 @@ namespace Studio
 		{
 			Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
 		}
+	}
+
+	void Enemy::TurretLogic()
+	{
+		myTurretPipe->Update();
 	}
 
 	void Enemy::Shoot(float aDeltaTime)

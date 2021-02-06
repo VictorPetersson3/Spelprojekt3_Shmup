@@ -27,6 +27,12 @@ namespace Studio
 		return tempObject;
 	}
 
+	Bullet* BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aDirection)
+	{
+		auto tempObject = new Bullet(aPosition, aDirection, myBullets.at(aType));
+		return tempObject;
+	}
+
 	/*Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	{
 		auto missile = new Missile(aOwner, aPosition);

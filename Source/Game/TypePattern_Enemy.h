@@ -18,6 +18,8 @@ namespace Studio
 
 		void CreateCollissionObjects(rapidjson::Document& aJsonDoc);
 
+		void CreateTurretObject(rapidjson::Document& aJsonDoc);
+
 		const Enums::MovementPattern GetMovementType() const;
 		const float GetStartHealth() const;
 		const float GetSpeed() const;
@@ -31,6 +33,12 @@ namespace Studio
 		const float GetBobbingHeigth() const;
 
 		const float GetAcceleration() const;
+
+		const float GetTurretRotationSpeed() const;
+		const Tga2D::Vector2f& GetTurretPivot() const;
+		const Tga2D::Vector2f& GetTurretSpawnPoint() const;
+		const Tga2D::Vector2f& GetTurretBulletSpawnPoint() const;
+
 
 		const Tga2D::Vector2f& GetAmountOfFrames() const;
 		const std::pair<VECTOR2F, VECTOR2F>& GetUpAnimationRange() const;
@@ -51,11 +59,14 @@ namespace Studio
 
 		const bool GetHasExtraCollission() const;
 
+		const bool GetIsTurret() const;
+
 		const std::vector<std::pair<float, VECTOR2F>>& GetCircleColliders();
 		const std::vector<std::pair<VECTOR2F, VECTOR2F>>& GetBoxColliders();
 
 
 		const std::string& GetImagePath() const;
+		const std::string& GetTurretPipeImagePath() const;
 
 	private:
 		Enums::MovementPattern myMovementType;
@@ -75,6 +86,13 @@ namespace Studio
 		//Seeking Variables
 		float myAcceleration;
 
+		//TurretVariables
+		float myTurretRotationSpeed;
+		Tga2D::Vector2f myTurretPivot;
+		Tga2D::Vector2f myTurretSpawnPoint;
+		Tga2D::Vector2f myTurretBulletSpawnPoint;
+
+
 		//Animation
 		Tga2D::Vector2f myAmountOfFrames;
 		std::pair<VECTOR2F, VECTOR2F>myUpAnimationRange;
@@ -90,20 +108,21 @@ namespace Studio
 		bool myIsAnimating = false;
 
 		bool myIsTerrain = false;
-		bool myIsPopcorn = false; // Make Getter
+		bool myIsPopcorn = false;
 
 		bool myDiagonalIsTop;
+		bool myHasExtraColliders;
+		bool myIsTurret;  // Getter
 
 		std::string myImagePath;
 		//Key for Bullet Types as well as imagePath
 		std::string myBulletImagePath;
-		//Sätta in support för alla olika Types av Movement
+		std::string myTurretPath; // Getter
 
-		//Kollission
-		bool myHasExtraColliders;
 
 		std::vector<std::pair<float, VECTOR2F>> myCircleColliders;
 		std::vector<std::pair<VECTOR2F, VECTOR2F>> myBoxColliders;
+
 
 	};
 }

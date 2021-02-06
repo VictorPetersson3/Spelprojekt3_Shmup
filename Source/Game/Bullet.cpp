@@ -15,6 +15,18 @@ namespace Studio
 		myPosition = aPosition;
 		Bullet::GetSpriteSheet().SetSize({20.0f, 20.0f});
 		Bullet::GameObject::GetCollider().AddCircleColliderObject({0, 0}, 2.0f);
+		myHasDirection = false;
+	}
+
+	Bullet::Bullet(const VECTOR2F& aPosition, const VECTOR2F& aDirection, TypePattern_Bullet* aTypePattern):
+		Bullet::GameObject(aTypePattern->GetImagePath()),
+		myTypePattern(aTypePattern)
+	{
+		myPosition = aPosition;
+		Bullet::GetSpriteSheet().SetSize({ 10.0f, 10.0f });
+		Bullet::GameObject::GetCollider().AddCircleColliderObject({ 0, 0 }, 2.0f);
+		myDirection = aDirection;
+		myHasDirection = true;
 	}
 
 	Bullet::~Bullet()
@@ -23,7 +35,15 @@ namespace Studio
 
 	void Bullet::Update()
 	{
-		myPosition.x += myTypePattern->GetSpeed() * Timer::GetInstance()->TGetDeltaTime();
+		if (myHasDirection)
+		{
+			myPosition = myPosition + (myDirection * myTypePattern->GetSpeed() * Timer::GetInstance()->TGetDeltaTime());
+			//printf("Turret Bullet Position X: %f Y: %f\n", myPosition.x, myPosition.y);
+		}
+		else
+		{
+			myPosition.x += myTypePattern->GetSpeed() * Timer::GetInstance()->TGetDeltaTime();
+		}
 
 		Bullet::GameObject::Update(myPosition);
 	}

@@ -7,6 +7,7 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 {
 	myHasExtraColliders = false;
 	myIsTerrain = false;
+	myIsTurret = false;
 	if (aType[0] == 'T' && aType[1] == '_')
 	{
 		myIsTerrain = true;
@@ -195,6 +196,19 @@ void Studio::TypePattern_Enemy::CreateCollissionObjects(rapidjson::Document& aJs
 	}
 }
 
+void Studio::TypePattern_Enemy::CreateTurretObject(rapidjson::Document& aJsonDoc)
+{
+	myIsTurret = true;
+	myTurretRotationSpeed = aJsonDoc["RotationSpeed"].GetFloat();
+	myTurretPivot.x = aJsonDoc["PivotX"].GetFloat();
+	myTurretPivot.y = aJsonDoc["PivotY"].GetFloat();
+	myTurretPath = aJsonDoc["ImagePath"].GetString();
+	myTurretSpawnPoint.x = aJsonDoc["SpawnPositionX"].GetFloat();
+	myTurretSpawnPoint.y = aJsonDoc["SpawnPositionY"].GetFloat();
+	myTurretBulletSpawnPoint.x = aJsonDoc["BulletSpawnPositionX"].GetFloat();
+	myTurretBulletSpawnPoint.y = aJsonDoc["BulletSpawnPositionY"].GetFloat();
+}
+
 const Studio::Enums::MovementPattern Studio::TypePattern_Enemy::GetMovementType() const { return myMovementType; }
 
 const float Studio::TypePattern_Enemy::GetStartHealth() const { return myStartingHealth; }
@@ -214,6 +228,14 @@ const float Studio::TypePattern_Enemy::GetWaveHeigth() const { return myWaveHeig
 const float Studio::TypePattern_Enemy::GetBobbingHeigth() const { return myBobbingHeigth; }
 
 const float Studio::TypePattern_Enemy::GetAcceleration() const { return myAcceleration; }
+
+const float Studio::TypePattern_Enemy::GetTurretRotationSpeed() const { return myTurretRotationSpeed; }
+
+const Tga2D::Vector2f& Studio::TypePattern_Enemy::GetTurretPivot() const { return myTurretPivot; }
+
+const Tga2D::Vector2f& Studio::TypePattern_Enemy::GetTurretSpawnPoint() const { return myTurretSpawnPoint; }
+
+const Tga2D::Vector2f& Studio::TypePattern_Enemy::GetTurretBulletSpawnPoint() const { return myTurretBulletSpawnPoint; }
 
 const Tga2D::Vector2f& Studio::TypePattern_Enemy::GetAmountOfFrames() const{ return myAmountOfFrames;}
 
@@ -245,8 +267,12 @@ const bool Studio::TypePattern_Enemy::GetDiagonalIsTop() const { return myDiagon
 
 const bool Studio::TypePattern_Enemy::GetHasExtraCollission() const { return myHasExtraColliders; }
 
+const bool Studio::TypePattern_Enemy::GetIsTurret() const {return myIsTurret; }
+
 const std::vector<std::pair<float, VECTOR2F>>& Studio::TypePattern_Enemy::GetCircleColliders() { return myCircleColliders; }
 
 const std::vector<std::pair<VECTOR2F, VECTOR2F>>& Studio::TypePattern_Enemy::GetBoxColliders() { return myBoxColliders; }
 
 const std::string& Studio::TypePattern_Enemy::GetImagePath() const { return myImagePath; }
+
+const std::string& Studio::TypePattern_Enemy::GetTurretPipeImagePath() const { return myTurretPath; }

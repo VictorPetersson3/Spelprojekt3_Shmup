@@ -56,7 +56,8 @@ namespace Studio
 		void SetFrame(const Tga2D::Vector2f& aCurrentFrame);
 
 		void ReverseAndStartAnimation();
-
+		const float GetRotation() const;
+		void SetRotation(const float aRotationInRadians);
 
 
 		void PlayAnimation(float aSpeed, const std::initializer_list<float> aListOfFrames);

@@ -14,6 +14,7 @@ namespace Studio
 	class Movement; 
 	enum class MovementType;
 	class TypePattern_Enemy;
+	class TurretPipe;
 	class Enemy : public GameObject
 	{
 	public:
@@ -21,6 +22,7 @@ namespace Studio
 		~Enemy();
 
 		void Update(float aDeltaTime);
+		void TurretLogic();
 		void Shoot(float aDeltaTime);
 		void DeathLogic();
 		const bool GetIsTerrain() const;
@@ -42,7 +44,7 @@ namespace Studio
 		Tga2D::CSprite* myBulletSprite;
 
 		Studio::Enums::MovementPattern myMovementType;
-
+		TurretPipe* myTurretPipe;
 		Movement* myMovement;
 		TypePattern_Enemy* myType;
 	};

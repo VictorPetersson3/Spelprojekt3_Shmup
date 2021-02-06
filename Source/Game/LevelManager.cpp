@@ -178,6 +178,16 @@ namespace Studio
 		myBullets.push_back(bullet);
 	}
 
+	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition, const VECTOR2F& aDirection)
+	{
+		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition, aDirection);
+		if (myPlayer->HasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
+		{
+			bullet->SetIsPenetrating();
+		}
+		myBullets.push_back(bullet);
+	}
+
 	bool LevelManager::LevelIsCleared()
 	{
 		return myLevelIsCleared;
