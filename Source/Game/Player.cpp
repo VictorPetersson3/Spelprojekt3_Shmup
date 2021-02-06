@@ -11,6 +11,8 @@
 #include "Coin.h"
 #include "Timer.h"
 #include "Player_JsonParser.h"
+#include "PowerUpModule.h"
+
 
 #define SPRITESHEET GameObject::GetSpriteSheet()
 
@@ -40,12 +42,19 @@ namespace Studio
 		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
 		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
 		GetCollider().AddCircleColliderObject({0,0}, 20);
+
+		myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::RapidFire));
 	}
 
 	Player::~Player()
 	{
 		delete myPlayerData;
 		myPlayerData = nullptr;
+		for (PowerUpModule* module : myPowerUpModules)
+		{
+			SAFE_DELETE(module);
+		}
+		myPowerUpModules.clear();
 	}
 
 	void Player::Update()
@@ -55,6 +64,11 @@ namespace Studio
 			Movement();
 
 			Player::GameObject::Update(myPosition + myDirection);
+
+			for (PowerUpModule* module : myPowerUpModules)
+			{
+				module->Update();
+			}
 
 			Shoot();
 
@@ -342,7 +356,12 @@ namespace Studio
 				if (myIsAnimatingDown || !myIsAnimating)
 				{
 					myIsAnimatingDown = false;
-					SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
+					SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
+
+					for (PowerUpModule* module : myPowerUpModules)
+					{
+						module->GetSpriteSheet().PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
+					}
 					myIsAnimatingUp = true;
 					myIsAnimating = true;
 				}
@@ -360,7 +379,12 @@ namespace Studio
 				if (myIsAnimatingUp || !myIsAnimating)
 				{
 					myIsAnimatingUp = false;
-					SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
+					SPRITESHEET.PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
+
+					for (PowerUpModule* module : myPowerUpModules)
+					{
+						module->GetSpriteSheet().PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
+					}
 					myIsAnimatingDown = true;
 					myIsAnimating = true;
 				}
@@ -383,6 +407,10 @@ namespace Studio
 						if (!myIsRebounding)
 						{
 							SPRITESHEET.ReverseAndStartAnimation();
+							for (PowerUpModule* module : myPowerUpModules)
+							{
+								module->GetSpriteSheet().ReverseAndStartAnimation();
+							}
 							myIsRebounding = true;
 						}
 						else
@@ -398,6 +426,10 @@ namespace Studio
 						if (!myIsRebounding)
 						{
 							SPRITESHEET.ReverseAndStartAnimation();
+							for (PowerUpModule* module : myPowerUpModules)
+							{
+								module->GetSpriteSheet().ReverseAndStartAnimation();
+							}
 							myIsRebounding = true;
 						}
 						else
@@ -416,6 +448,10 @@ namespace Studio
 					myIsAnimating = false;
 					myIsRebounding = false;
 					Player::GameObject::SetFrame(myPlayerData->GetIdleAnimationRange().first);
+					for (PowerUpModule* module : myPowerUpModules)
+					{
+						module->SetFrame({1, 1});
+					}
 				}
 			}
 			if (!aKey && !dKey)
@@ -489,7 +525,7 @@ namespace Studio
 
 	void Player::LaunchMissile()
 	{
-		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition, 1.0f);
+		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition);
 	}
 	void Studio::Player::ShieldLogic()
 	{

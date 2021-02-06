@@ -13,6 +13,7 @@ namespace Studio
 	class RenderCommand;
 	class Bullet;
 	class EngineFlame;
+	class PowerUpModule;
 	class Player : public GameObject
 	{
 	public:
@@ -86,6 +87,8 @@ namespace Studio
 
 		EngineFlame myEngineFlame;
 		Player_JsonParser* myPlayerData;
+
+		std::vector<PowerUpModule*> myPowerUpModules;
 	};
 }
 

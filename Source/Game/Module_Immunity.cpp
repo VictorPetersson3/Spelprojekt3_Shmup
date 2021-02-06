@@ -32,3 +32,7 @@ bool Studio::Module_Immunity::DoStuff(Boss& aBoss)
 	printf("immunity set\n");
 	return true;
 }
+
+void Studio::Module_Immunity::ResetModule()
+{
+}

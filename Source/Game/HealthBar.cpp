@@ -15,6 +15,8 @@ namespace Studio
 		GameObject::GetSpriteSheet().SetPivot({0.0f, 0.5f});
 		GameObject::GetSpriteSheet().SetLayer(aLayer);
 		SetGodMode(true);
+		myOriginalX = 450.0f;
+		myOriginalY = 50.0f;
 	}
 
 	HealthBar::HealthBar(const char* aImagePath, const VECTOR2F& aPosition, const int aLayer, Tga2D::CColor aColor) :
@@ -31,10 +33,20 @@ namespace Studio
 	{
 	}
 
+	void HealthBar::SetSizeX(const float aValue)
+	{
+		myOriginalX = aValue;
+	}
+
+	void HealthBar::SetSizeY(const float aValue)
+	{
+		myOriginalY = aValue;
+	}
+
 	void HealthBar::Update(Health& aHealthVariabel)
 	{
 		float percentage = aHealthVariabel.GetCurrentHealth() / aHealthVariabel.GetMaxHealth();
-		GameObject::GetSpriteSheet().SetSize({ 450.0f * percentage, 50.0f });
+		GameObject::GetSpriteSheet().SetSize({ myOriginalX * percentage, myOriginalY });
 		Studio::RendererAccessor::GetInstance()->Render(*this);
 	}
 

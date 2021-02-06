@@ -58,3 +58,5 @@ for (auto& PP_CONCAT(aMacroPointerAtLine, __LINE__) : anStdVector) {	\
 #define CONSOLE_COLOR_ONE_TIME	CONSOLE_COLOR_CYAN
 
 #define MATH_PI std::acos(-1.0f)
+
+#define DELTA_TIME Timer::GetInstance()->TGetDeltaTime()

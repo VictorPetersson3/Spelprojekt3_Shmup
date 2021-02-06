@@ -3,51 +3,50 @@
 #include "TypePattern_Bullet.h"
 #include "Timer.h"
 #include "LevelAccessor.h"
+#include "tga2d/sprite/sprite.h"
 namespace Studio
 {
 	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	{
-		myTypePattern = new TypePattern_Bullet("sprites/bullets/missilelvl1.dds", 12, 0.0f, aOwner);
-		myPosition = aPosition;
-
-		myIsSlowingDown = true;
-
-		// TODO: Make JSON??
-		myInitialSpeed = 400.0f;
-		myDeaccelerationSpeed = 500.0f;
-		myAccelerationSpeed = 100.0f;
-
-		myVelocity = { myInitialSpeed, 0.0f };
-
-		myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
-
-		mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
-	}
-
-	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, float aDirection)
-	{
-		myTypePattern = new TypePattern_Bullet("sprites/bullets/missilelvl1.dds", 12, 0.0f, aOwner);
-		myPosition = aPosition;
-
-		myIsSlowingDown = true;
-
-		// TODO: Make JSON??
-		myInitialSpeed = 400.0f * aDirection;
-		myDeaccelerationSpeed = 500.0f * aDirection;
-		myAccelerationSpeed = 100.0f * aDirection;
-
-		myVelocity = { myInitialSpeed, 0.0f };
-
-		myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
-
-		mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
-
-		if (aDirection >= 0.0f)
+		if (aOwner == Enums::BulletOwner::Player)
 		{
+			myTypePattern = new TypePattern_Bullet("sprites/bullets/missilelvl1.dds", 12, 0.0f, aOwner);
+			myPosition = aPosition;
+
+			myIsSlowingDown = true;
+
+			// TODO: Make JSON??
+			myInitialSpeed = 400.0f;
+			myDeaccelerationSpeed = 500.0f;
+			myAccelerationSpeed = 100.0f;
+
+			myVelocity = { myInitialSpeed, 0.0f };
+
+			myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
+
+			mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
 			myIsReversed = false;
 		}
-		else
+		if (aOwner == Enums::BulletOwner::Enemy)
 		{
+			myTypePattern = new TypePattern_Bullet("sprites/bullets/missilelvl1.dds", 12, 0.0f, aOwner);
+			myPosition = aPosition;
+
+			myIsSlowingDown = false;
+
+			// TODO: Make JSON??
+			myInitialSpeed = -10.0f;
+			myDeaccelerationSpeed = -50.0f;
+			myAccelerationSpeed = -2.0f;
+
+			myVelocity = { myInitialSpeed, 0.0f };
+
+			myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
+
+			mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
+
+			mySpriteSheet.GetSprite()->SetTextureRect(1.0f, 0.0f, 0.0f, 1.0f);
+
 			myIsReversed = true;
 		}
 	}

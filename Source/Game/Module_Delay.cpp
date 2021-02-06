@@ -29,3 +29,8 @@ bool Studio::Module_Delay::DoStuff(Boss& aBoss)
 	}
 	return false;
 }
+
+void Studio::Module_Delay::ResetModule()
+{
+
+}

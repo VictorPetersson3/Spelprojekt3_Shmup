@@ -48,7 +48,7 @@ Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 						}
 						if (ability == "Missile")
 						{
-							//myModules.push_back(new Module_Missile(modules[i]));
+							myModules.push_back(new Module_Missile(modules[i]));
 						}
 					}
 				}
@@ -85,7 +85,7 @@ Studio::Phase::~Phase()
 {
 	for (Module* module : myModules)
 	{
-		module->~Module();
+		SAFE_DELETE(module);
 	}
 	myModules.clear();
 }
@@ -117,6 +117,13 @@ void Studio::Phase::PlayModules(Boss* aBossObject)
 
 }
 
-void Studio::Phase::UpdateModuleMovement()
+void Studio::Phase::ResetPhase()
 {
+	for (Module* module : myModules)
+	{
+		module->ResetModule();
+	}
+
+	myHasPlayedOnce = false;
+	myCurrentModule = 0;
 }

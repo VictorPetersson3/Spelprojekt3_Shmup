@@ -13,7 +13,7 @@ namespace Studio
 		~Module_Movement();
 
 		bool DoStuff(Boss& aBoss) override;
-
+		void ResetModule() override;
 	private:
 		bool myHasSetStartPos;
 		bool myHasChangedPhaseMovement;

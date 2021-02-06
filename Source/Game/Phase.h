@@ -14,7 +14,7 @@ namespace Studio
 		~Phase();
 		bool HavePlayedOnce();
 		void PlayModules(Boss* aBossObject);
-		void UpdateModuleMovement();
+		void ResetPhase();
 	protected:
 		
 	private:

@@ -15,7 +15,7 @@ Studio::Module_Missile::Module_Missile(rapidjson::Value& aModuleParameters) :
 		float y = aModuleParameters["Y"].GetFloat();
 
 		
-		mySpawnPosition = { x, y };
+		myOriginalSpawnPosition = { x, y };
 
 		if (aModuleParameters.HasMember("Style"))
 		{
@@ -36,18 +36,22 @@ bool Studio::Module_Missile::DoStuff(Boss& aBoss)
 {
 	if (myIsRelative)
 	{
-		mySpawnPosition.x = aBoss.GetPosition()->x - mySpawnPosition.x;
-		mySpawnPosition.y = aBoss.GetPosition()->y - mySpawnPosition.y;
+		mySpawnPosition.x = aBoss.GetPosition()->x - myOriginalSpawnPosition.x;
+		mySpawnPosition.y = aBoss.GetPosition()->y - myOriginalSpawnPosition.y;
 	}
 	else
 	{
-		mySpawnPosition.x = SCREEN_WIDTH - mySpawnPosition.x;
-		mySpawnPosition.y = mySpawnPosition.y + SCREEN_HEIGHT * 0.5f;
+		mySpawnPosition.x = SCREEN_WIDTH - myOriginalSpawnPosition.x;
+		mySpawnPosition.y = myOriginalSpawnPosition.y + SCREEN_HEIGHT * 0.5f;
 	}
 
-	Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Enemy, mySpawnPosition, -1.0f);
+	Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Enemy, mySpawnPosition);
 
 	printf("Missile Launched from boss\n");
 
 	return true;
+}
+
+void Studio::Module_Missile::ResetModule()
+{
 }

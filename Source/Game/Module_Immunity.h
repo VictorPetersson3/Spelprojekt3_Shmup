@@ -9,7 +9,7 @@ namespace Studio
 		Module_Immunity(rapidjson::Value& aModuleParameters);
 
 		bool DoStuff(Boss& aBoss) override;
-
+		void ResetModule() override;
 	protected:
 
 

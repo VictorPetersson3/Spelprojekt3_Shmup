@@ -10,7 +10,7 @@ namespace Studio
 		Module_Shield(rapidjson::Value& aModuleParameters);
 
 		bool DoStuff(Boss& aBoss) override;
-
+		void ResetModule() override;
 	protected:
 
 	private:

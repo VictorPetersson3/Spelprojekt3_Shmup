@@ -26,3 +26,8 @@ bool Studio::Module_Shield::DoStuff(Boss& aBoss)
 	}
 	return true;
 }
+
+void Studio::Module_Shield::ResetModule()
+{
+	myHasCreatedShield = false;
+}

@@ -233,12 +233,17 @@
     <ClCompile Include="EffectExplosionLarge.cpp">
       <Filter>GameObjects\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="AOEBullet.cpp" />
     <ClCompile Include="Module_Missile.cpp">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClCompile>
     <ClCompile Include="TurretPipe.cpp" />
+    <ClCompile Include="PowerUpModule.cpp" />
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnToMainMenuButton.cpp" />
+    <ClCompile Include="SliderElement.cpp" />
+    <ClCompile Include="GoToMainMenuButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -485,12 +490,18 @@
     <ClInclude Include="EffectExplosionLarge.h">
       <Filter>GameObjects\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="AOEBullet.h" />
     <ClInclude Include="Module_Missile.h">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClInclude>
     <ClInclude Include="TurretPipe.h" />
+    <ClInclude Include="PowerUpModule.h" />
+    <ClInclude Include="ExitButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnToMainMenuButton.h" />
+    <ClInclude Include="SliderElement.h" />
+    <ClInclude Include="GoToMainMenuButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
