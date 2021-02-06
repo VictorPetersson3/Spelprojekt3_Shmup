@@ -33,7 +33,7 @@ namespace Studio
 		return tempObject;
 	}
 
-	/*Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+	//Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
 	{
 		auto missile = new Missile(aOwner, aPosition);
