@@ -103,7 +103,8 @@ namespace Studio
 
 		enum class PowerUpModules
 		{
-			BasicAttack,
+			BasicAttackFirst,
+			BasicAttackSecond,
 			RapidFire,
 			Shield
 		};

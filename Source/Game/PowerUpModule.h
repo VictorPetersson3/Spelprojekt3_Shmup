@@ -8,6 +8,9 @@ namespace Studio
 	public:
 		PowerUpModule(Enums::PowerUpModules aPowerUpModule);
 		void Update();
+		bool GetIsShield();
+	private:
+		bool myIsShield = false;
 	};
 }
 

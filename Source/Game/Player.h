@@ -89,6 +89,7 @@ namespace Studio
 		Player_JsonParser* myPlayerData;
 
 		std::vector<PowerUpModule*> myPowerUpModules;
+		PowerUpModule* myShieldModule;
 	};
 }
 

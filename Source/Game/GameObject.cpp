@@ -37,13 +37,13 @@ namespace Studio
 		myTimeSinceHit += DELTA_TIME;
 		if (myTimeSinceHit < 1.0f)
 		{
-			auto color = Tga2D::CColor(1.0, 1.0, 1.0, 1.0);
+			auto color = Tga2D::CColor(1.0f, 1.0f, 1.0f, 1.0f);
 			color.myR = 1.0f / myTimeSinceHit;
 			mySpriteSheet.GetSprite()->SetColor(color);
 		}
 		else
 		{
-			mySpriteSheet.GetSprite()->SetColor({ 1.0, 1.0, 1.0, 1.0 });
+			mySpriteSheet.GetSprite()->SetColor({ 1.0f, 1.0f, 1.0f, 1.f });
 		}
 	}
 	void GameObject::SetFrame(const Tga2D::Vector2f& aCurrentFrame)

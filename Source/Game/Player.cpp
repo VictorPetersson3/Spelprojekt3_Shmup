@@ -43,7 +43,8 @@ namespace Studio
 		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
 		GetCollider().AddCircleColliderObject({0,0}, 20);
 
-		myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::RapidFire));
+		myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::Shield));
+		myShieldModule = myPowerUpModules[0]; 
 	}
 
 	Player::~Player()
@@ -59,13 +60,28 @@ namespace Studio
 	{
 		if (!IsDead())
 		{
+			if (InputManager::GetInstance()->IsKeyPressed('5'))
+			{
+				UpgradeT2(Enums::Tier2Upgrades::BasicAttackAdditionalProjectile);
+			}
+			if (InputManager::GetInstance()->IsKeyPressed('6'))
+			{
+				UpgradeT3(Enums::Tier3Upgrades::RapidFirePenetrating);
+
+			}
 			Movement();
 
 			Player::GameObject::Update(myPosition + myDirection);
 
 			for (PowerUpModule* module : myPowerUpModules)
 			{
-				module->Update();
+				if (module->GetIsShield())
+				{
+					if (myShieldIsActive)
+						module->Update();
+				}	
+				else
+					module->Update();
 			}
 
 			Shoot();
@@ -213,6 +229,11 @@ namespace Studio
 			myPlayerData->UpgradeBasicAttackSpeedT2();
 			break;
 		case Studio::Enums::Tier2Upgrades::BasicAttackAdditionalProjectile:
+			if (myAmountOfProjectiles == 1)
+				myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::BasicAttackFirst));
+			else if (myAmountOfProjectiles == 2)
+				myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::BasicAttackSecond));
+
 			AddAnotherProjectile();
 			break;
 		case Studio::Enums::Tier2Upgrades::MissileExplosionRadius:
@@ -239,6 +260,7 @@ namespace Studio
 		{
 		case Studio::Enums::Tier3Upgrades::RapidFirePenetrating:
 			myHasPurchasedPenetratingRounds = true;
+			myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::RapidFire));
 			break;
 		case Studio::Enums::Tier3Upgrades::BasicAttackSpeed:
 			myPlayerData->UpgradeBasicAttackSpeedT3();
@@ -246,6 +268,13 @@ namespace Studio
 		case Studio::Enums::Tier3Upgrades::MissileCluster:
 			break;
 		case Studio::Enums::Tier3Upgrades::ShieldExplosion:
+			for (PowerUpModule* module : myPowerUpModules)
+			{
+				if (module->GetIsShield())
+				{
+					module->GetSpriteSheet().SetImagePath("Sprites/assets/player/upgrades/effects/shieldSprite_02.dds");
+				}
+			}
 			break;
 		}
 	}
@@ -358,7 +387,8 @@ namespace Studio
 
 					for (PowerUpModule* module : myPowerUpModules)
 					{
-						module->GetSpriteSheet().PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
+						if (!module->GetIsShield())
+							module->GetSpriteSheet().PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetDownAnimationRange().first, myPlayerData->GetDownAnimationRange().second);
 					}
 					myIsAnimatingUp = true;
 					myIsAnimating = true;
@@ -381,7 +411,8 @@ namespace Studio
 
 					for (PowerUpModule* module : myPowerUpModules)
 					{
-						module->GetSpriteSheet().PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
+						if (!module->GetIsShield())
+							module->GetSpriteSheet().PlayAnimationInRange(myPlayerData->GetAnimationTurnSpeed(), myPlayerData->GetUpAnimationRange().first, myPlayerData->GetUpAnimationRange().second);
 					}
 					myIsAnimatingDown = true;
 					myIsAnimating = true;
@@ -407,7 +438,8 @@ namespace Studio
 							SPRITESHEET.ReverseAndStartAnimation();
 							for (PowerUpModule* module : myPowerUpModules)
 							{
-								module->GetSpriteSheet().ReverseAndStartAnimation();
+								if (!module->GetIsShield())
+									module->GetSpriteSheet().ReverseAndStartAnimation();
 							}
 							myIsRebounding = true;
 						}
@@ -426,7 +458,8 @@ namespace Studio
 							SPRITESHEET.ReverseAndStartAnimation();
 							for (PowerUpModule* module : myPowerUpModules)
 							{
-								module->GetSpriteSheet().ReverseAndStartAnimation();
+								if (!module->GetIsShield())
+									module->GetSpriteSheet().ReverseAndStartAnimation();
 							}
 							myIsRebounding = true;
 						}
@@ -448,7 +481,8 @@ namespace Studio
 					Player::GameObject::SetFrame(myPlayerData->GetIdleAnimationRange().first);
 					for (PowerUpModule* module : myPowerUpModules)
 					{
-						module->SetFrame({1, 1});
+						if (!module->GetIsShield())
+							module->SetFrame({1, 1});
 					}
 				}
 			}
@@ -459,7 +493,7 @@ namespace Studio
 			//Spacebar
 		}
 		myPosition += myDirection.Normalize() * mySpeed * Timer::GetInstance()->TGetDeltaTime();
-		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 48, myPosition.y - 9 });
+		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 48, myPosition.y });
 		//printf_s("Player Direction X: %f Y: %f \n", myDirection.x, myDirection.y);
 		
 	}
@@ -475,7 +509,7 @@ namespace Studio
 	//Check if key is pressed and cooldown has expired
 	void Player::ActivateRapidFire()
 	{
-		if (InputManager::GetInstance()->IsKeyPressed('1') && myRapidFireCurrentCooldown > myPlayerData->GetRapidFireMaxCooldown())
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_RapidFire) && myRapidFireCurrentCooldown > myPlayerData->GetRapidFireMaxCooldown())
 		{
 			myRapidFireCurrentCooldown = 0.f;
 
@@ -527,7 +561,7 @@ namespace Studio
 	}
 	void Studio::Player::ShieldLogic()
 	{
-		if (InputManager::GetInstance()->IsKeyPressed('3') && myShieldCurrentCooldown >= myPlayerData->GetShieldCooldown())
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown >= myPlayerData->GetShieldCooldown())
 		{
 			ActivateShield();
 		}
@@ -539,22 +573,31 @@ namespace Studio
 		{
 			myShieldCurrentCooldown += Timer::GetInstance()->TGetDeltaTime();
 		}
-		if (myShieldHealth <= 0)
+		if (myShieldHealth <= 0 || myShieldCurrentActiveTime > myPlayerData->GetShieldDuration())
 		{
 			DeactivateShield();
 		}
 	}
 	void Studio::Player::ActivateShield()
 	{
+		for (PowerUpModule* module : myPowerUpModules)
+		{
+			if (module->GetIsShield())
+			{
+				module->GetSpriteSheet().PlayAnimationInRange(0.2f, { 2,2 }, { 2,3 });
+			}
+		}
 		myShieldHealth = myPlayerData->GetShieldHealth();
 		myShieldIsActive = true;
 		myShieldCurrentCooldown = 0.f;
 	}
 	void Studio::Player::ShieldIsActive()
 	{
+		if (!myShieldModule->GetSpriteSheet().IsAnimating())
+		{
+			myShieldModule->GetSpriteSheet().LoopAnimationInRange(0.2f, { 1,1 }, { 1,4 });
+		}
 		myShieldCurrentActiveTime += Timer::GetInstance()->TGetDeltaTime();
-		printf("\nShield active");
-		
 	}
 	void Studio::Player::DeactivateShield()
 	{
