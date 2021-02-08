@@ -13,18 +13,18 @@ int Studio::ShopUI::GetRandomNumberInRange(int max)
 
 Studio::ShopUI::ShopUI()
 {
-		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000,Enums::RapidFireUpgrades::AttackSpeedT1,5));
-		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::CooldownT1,5));
-		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::DurationT1,5));
-		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::AttackSpeedT1,5));
-		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::CooldownT1,5));
-		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::RapidFireUpgrades::DurationT1,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::RapidFireAttackSpeed,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::RapidFireDuration,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::RapidFireCooldown,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::ShieldCooldown , 5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::ShieldDuration,5));
+		myTier1Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::ShieldHealth ,5));
 
-		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000,Enums::RapidFireUpgrades::AttackSpeedT2,10));
-		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000, Enums::RapidFireUpgrades::DurationT2,10));
-		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000, Enums::RapidFireUpgrades::AttackSpeedT2,10));
+		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000, Enums::Tier1Upgrades::RapidFireAttackSpeed, 10));
+		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000, Enums::Tier1Upgrades::RapidFireDuration, 10));
+		myTier2Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 500000, Enums::Tier1Upgrades::ShieldCooldown, 10));
 
-		myTier3Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000,Enums::RapidFireUpgrades::PenetratingT3,15));																											  
+		myTier3Buttons.push_back(new ShopButton("Sprites/debugpixel.dds", { 0,0 }, { 128,128 }, { 0.5f,0.5f }, 5000000,Enums::Tier1Upgrades::ShieldCooldown,15));
 }
 
 Studio::ShopUI::~ShopUI()

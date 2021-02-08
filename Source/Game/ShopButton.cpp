@@ -8,7 +8,7 @@
 #include <string>
 
 
-Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::RapidFireUpgrades aUpgradeType, int aCost)
+Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier1Upgrades aUpgradeType, int aCost)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -97,7 +97,7 @@ void Studio::ShopButton::OnClick()
 {
 	if (ScoreAccessor::GetInstance()->GetCoinScore() >= myCost)
 	{
-		PlayerAccessor::GetInstance()->UpgradeRapidFire(myUpgradeType);
+		PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
 		std::cout << "Shop button pressed" << std::endl;
 		ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 	}

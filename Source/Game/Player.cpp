@@ -553,7 +553,7 @@ namespace Studio
 		{
 			if (module->GetIsShield())
 			{
-				module->GetSpriteSheet().PlayAnimationInRange(0.2f, { 2,2 }, { 2,3 });
+				module->GetSpriteSheet().PlayAnimationInRange(0.2f, { 1,2 }, { 3,2 });
 			}
 		}
 		myShieldHealth = myPlayerData->GetShieldHealth();
@@ -564,7 +564,7 @@ namespace Studio
 	{
 		if (!myShieldModule->GetSpriteSheet().IsAnimating())
 		{
-			myShieldModule->GetSpriteSheet().LoopAnimationInRange(0.2f, { 1,1 }, { 1,4 });
+			myShieldModule->GetSpriteSheet().LoopAnimationInRange(0.2f, { 1,1 }, { 4,1 });
 		}
 		myShieldCurrentActiveTime += Timer::GetInstance()->TGetDeltaTime();
 	}

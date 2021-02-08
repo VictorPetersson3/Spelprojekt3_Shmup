@@ -6,7 +6,7 @@ namespace Studio
 {
 	class ShopButtonTier2 : public ButtonElement
 	{
-		ShopButtonTier2(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::RapidFireUpgrades aUpgradeType, int aCost);
+		ShopButtonTier2(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier2Upgrades aUpgradeType, int aCost);
 		~ShopButtonTier2();
 
 		void Update() override;
@@ -14,7 +14,7 @@ namespace Studio
 
 	private:
 		bool myIsClicked = false;
-		Enums::RapidFireUpgrades myUpgradeType;
+		Enums::Tier2Upgrades myUpgradeType;
 
 		int myCost;
 	};
