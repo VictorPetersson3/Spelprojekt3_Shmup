@@ -8,10 +8,9 @@ namespace Studio
 {
 	BulletFactory::~BulletFactory()
 	{
-		for (auto it = myBullets.begin(); it != myBullets.end(); ++it)
+		for (auto& it : myBullets)
 		{
-			delete (*it).second;
-			SAFE_DELETE((*it).second);
+			SAFE_DELETE((it).second);
 		}
 	}
 

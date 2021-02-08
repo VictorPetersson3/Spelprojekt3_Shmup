@@ -106,7 +106,6 @@ namespace Studio
 
 	LevelManager::~LevelManager()
 	{
-		myEnemyFactory->~EnemyFactory();
 		SAFE_DELETE(myEnemyFactory);
 		SAFE_DELETE_VECTOR(myPacks);
 		SAFE_DELETE_VECTOR(myEnemies);

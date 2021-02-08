@@ -9,9 +9,8 @@
 
 Studio::EnemyFactory::~EnemyFactory()
 {
-	for (auto it = myEnemyObjectTypes.begin(); it != myEnemyObjectTypes.end(); ++it)
+	for (auto& it = myEnemyObjectTypes.begin(); it != myEnemyObjectTypes.end(); ++it)
 	{
-		delete (*it).second;
 		SAFE_DELETE((*it).second);
 	}
 }

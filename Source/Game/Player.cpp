@@ -48,8 +48,6 @@ namespace Studio
 
 	Player::~Player()
 	{
-		delete myPlayerData;
-		myPlayerData = nullptr;
 		for (PowerUpModule* module : myPowerUpModules)
 		{
 			SAFE_DELETE(module);

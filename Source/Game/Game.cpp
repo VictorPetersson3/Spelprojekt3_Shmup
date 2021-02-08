@@ -33,6 +33,7 @@ CGame::~CGame()
 	Studio::InputManager::Deconstruct();
 	myHasStarted = false;
 	myIsPlaying = false;
+	myHasSwappedBuffers = true;
 	myGameLogic.join();
 }
 
@@ -110,10 +111,6 @@ void CGame::UpdateCallBack()
 	myGameWorld.SwapBuffers();
 	myGamePlayDone = false;
 	myHasSwappedBuffers = true;
-
-	if (!myIsPlaying) {
-		//close application properly
-	}
 }
 
 void CGame::GamePlayThread()
@@ -131,10 +128,6 @@ void CGame::GamePlayThread()
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
 			}
 			myHasSwappedBuffers = false;
-			if (!myIsPlaying)
-			{
-				myHasStarted = true;
-			}
 		}
 	}
 }

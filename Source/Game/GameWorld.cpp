@@ -150,7 +150,10 @@ void CGameWorld::InputStuff()
 		myMenuManager->GetPauseMenu()->Disable();
 		myMenuManager->GetPauseMenu()->GetElementWithTag("ResumeButton")->myIsClicked = false;
 	}
-
+	if (Studio::InputManager::GetInstance()->IsKeyPressed('B'))
+	{
+		Tga2D::CEngine::GetInstance()->Shutdown();
+	}
 	if (Studio::InputManager::GetInstance()->IsKeyPressed('L'))
 	{
 		myLevelManager->ReloadLevel();
