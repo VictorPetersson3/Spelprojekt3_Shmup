@@ -238,7 +238,7 @@
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClCompile>
     <ClCompile Include="TurretPipe.cpp" />
-    <ClCompile Include="PowerUpModule.cpp" />
+    <ClCompile Include="PowerUpModule.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="ReturnToMainMenuButton.cpp" />
