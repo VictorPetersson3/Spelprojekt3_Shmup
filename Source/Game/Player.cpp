@@ -242,7 +242,9 @@ namespace Studio
 		case Studio::Enums::Tier3Upgrades::MissileCluster:
 			break;
 		case Studio::Enums::Tier3Upgrades::ShieldExplosion:
-			myShieldModule->GetSpriteSheet().SetImagePath("Sprites/assets/player/upgrades/effects/shieldSprite_02.dds");
+			myShieldModule->GetSpriteSheet().SetImagePath("Sprites/assets/player/upgrades/effects/shieldSpriteRed.dds");
+			myShieldModule->GetSpriteSheet().SetSize({ 512.f,512.f });
+			myShieldModule->GetSpriteSheet().SetAmountOfFrames({ 4,4 });
 			myHasPurchasedShieldExplosion = true;
 			break;
 		}
@@ -481,7 +483,7 @@ namespace Studio
 		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_RapidFire) && myRapidFireCurrentCooldown > myPlayerData->GetRapidFireMaxCooldown())
 		{
 			myRapidFireCurrentCooldown = 0.f;
-
+			UpgradeT3(Enums::Tier3Upgrades::ShieldExplosion);
 			myRapidFireIsActive = true;
 			if (myHasPurchasedPenetratingRounds)
 			{
@@ -530,7 +532,7 @@ namespace Studio
 	}
 	void Studio::Player::ShieldLogic()
 	{
-		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown >= myPlayerData->GetShieldCooldown())
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown >= 6)
 		{
 			ActivateShield();
 		}
@@ -553,7 +555,7 @@ namespace Studio
 		{
 			if (module->GetIsShield())
 			{
-				module->GetSpriteSheet().PlayAnimationInRange(0.2f, { 1,2 }, { 3,2 });
+				module->GetSpriteSheet().PlayAnimationInRange(0.1f, { 1,2 }, { 3,2 });
 			}
 		}
 		myShieldHealth = myPlayerData->GetShieldHealth();
@@ -564,7 +566,7 @@ namespace Studio
 	{
 		if (!myShieldModule->GetSpriteSheet().IsAnimating())
 		{
-			myShieldModule->GetSpriteSheet().LoopAnimationInRange(0.2f, { 1,1 }, { 4,1 });
+			myShieldModule->GetSpriteSheet().LoopAnimationInRange(0.1f, { 1,1 }, { 4,1 });
 		}
 		myShieldCurrentActiveTime += Timer::GetInstance()->TGetDeltaTime();
 	}

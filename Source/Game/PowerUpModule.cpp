@@ -27,9 +27,9 @@ namespace Studio
 			break;
 		case Studio::Enums::PowerUpModules::Shield:
 			myIsShield = true;
-			mySpriteSheet.SetImagePath("Sprites/assets/player/upgrades/effects/shieldSpriteRed.dds");
-			mySpriteSheet.SetSize({ 512.f,512.f });
-			mySpriteSheet.SetAmountOfFrames({ 4,4 });
+			mySpriteSheet.SetImagePath("Sprites/assets/player/upgrades/effects/shieldSpriteBlue_02.dds");
+			mySpriteSheet.SetSize({ 512.f,256.f });
+			mySpriteSheet.SetAmountOfFrames({ 4,2 });
 
 			break;
 		}
