@@ -68,6 +68,9 @@ namespace Studio
 		float myShieldCurrentCooldown;
 		int myShieldHealth;
 
+		//Missile
+		float myMissileCurrentCooldown;
+
 		VECTOR2F myPosition;
 		VECTOR2F myDirection;
 		VECTOR2F myBounceDirection;

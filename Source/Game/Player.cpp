@@ -38,6 +38,8 @@ namespace Studio
 		myShieldHealth = somePlayerData->GetShieldHealth();
 		myAmountOfProjectiles = 1;
 
+		myMissileCurrentCooldown = myPlayerData->GetMissileCooldown();
+
 		mySpeed = somePlayerData->GetMinSpeed();
 		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
 		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
@@ -134,9 +136,11 @@ namespace Studio
 			// TODO: Don't do this all the time
 
 		}
-		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_Explosive))
+		myMissileCurrentCooldown += Timer::GetInstance()->TGetDeltaTime();
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_Explosive) && myMissileCurrentCooldown > myPlayerData->GetMissileCooldown())
 		{
 			LaunchMissile();
+			myMissileCurrentCooldown = 0.f;
 		}
 	}
 

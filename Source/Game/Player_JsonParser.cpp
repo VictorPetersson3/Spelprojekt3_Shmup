@@ -23,6 +23,45 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 	//printf("Path: %s \nDocument%s", levelPath, text.c_str());
 
 	//----------- FLOATS
+	if (ValidateJsonDataFloat(document, "MissileDamage"))
+	{
+		myMissileDamage = document["MissileDamage"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "MissileRadius"))
+	{
+		myMissileRadius = document["MissileRadius"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "MissileCooldown"))
+	{
+		myMissileCooldown = document["MissileCooldown"].GetFloat();
+	}
+
+	if (ValidateJsonDataFloat(document, "MissileDamageUpgradeT1"))
+	{
+		myMissileDamageUpgradeT1 = document["MissileDamageUpgradeT1"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "MissileRadiusUpgradeT1"))
+	{
+		myMissileRadiusUpgradeT1 = document["MissileRadiusUpgradeT1"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "MissileCooldownUpgradeT1"))
+	{
+		myMissileCooldownUpgradeT1 = document["MissileCooldownUpgradeT1"].GetFloat();
+	}
+
+	if (ValidateJsonDataFloat(document, "MissileDamageUpgradeT2"))
+	{
+		myMissileDamageUpgradeT2 = document["MissileDamageUpgradeT2"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "MissileRadiusUpgradeT2"))
+	{
+		myMissileRadiusUpgradeT2 = document["MissileRadiusUpgradeT2"].GetFloat();
+	}
+	if (ValidateJsonDataFloat(document, "MissileCooldownUpgradeT2"))
+	{
+		myMissileCooldownUpgradeT2 = document["MissileCooldownUpgradeT2"].GetFloat();
+	}
+
 	if (ValidateJsonDataFloat(document, "ShieldDuration"))
 	{
 		myShieldDuration = document["ShieldDuration"].GetFloat();
@@ -263,6 +302,12 @@ const float Studio::Player_JsonParser::GetShieldHealth() const { return myShield
 
 const float Studio::Player_JsonParser::GetShieldCooldown() const{ return myShieldCooldown; }
 
+const float Studio::Player_JsonParser::GetMissileDamage() const { return myMissileDamage; }
+
+const float Studio::Player_JsonParser::GetMissileRadius() const { return myMissileRadius; }
+
+const float Studio::Player_JsonParser::GetMissileCooldown() const { return myMissileCooldown; }
+
 const float Studio::Player_JsonParser::GetLayer() const { return myLayer; }
 
 const float Studio::Player_JsonParser::GetAcceleration() const { return myAcceleration; }
@@ -390,6 +435,30 @@ void Studio::Player_JsonParser::UpgradeShieldCooldownT1()
 void Studio::Player_JsonParser::UpgradeShieldCooldownT2()
 {
 	myShieldCooldown -= myShieldCooldownUpgradeT2;
+}
+
+void Studio::Player_JsonParser::UpgradeMissileDamageT1()
+{
+}
+
+void Studio::Player_JsonParser::UpgradeMissileDamageT2()
+{
+}
+
+void Studio::Player_JsonParser::UpgradeMissileRadiusT1()
+{
+}
+
+void Studio::Player_JsonParser::UpgradeMissileRadiusT2()
+{
+}
+
+void Studio::Player_JsonParser::UpgradeMissileCooldownT1()
+{
+}
+
+void Studio::Player_JsonParser::UpgradeMissileCooldownT2()
+{
 }
 
 

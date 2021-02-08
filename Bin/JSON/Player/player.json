@@ -23,6 +23,17 @@
   "ShieldHealthUpgradeT2": 2.0,
   "ShieldCooldownUpgradeT1": 5.0,
   "ShieldCooldownUpgradeT2": 10.0,
+
+  "MissileDamage": 200.0,
+  "MissileRadius": 100.0,
+  "MissileCooldown": 12.0,
+  "MissileDamageUpgradeT1": 100.0,
+  "MissileDamageUpgradeT2": 200.0,
+  "MissileRadiusUpgradeT1": 20.0,
+  "MissileRadiusUpgradeT2": 40.0,
+  "MissileCooldownUpgradeT1": 2.0,
+  "MissileCooldownUpgradeT2": 4.0,
+
   "AnimationTurnSpeed": 0.0125,
   "ImagePath": "sprites/assets/player/sprites/playerSprite_02.dds",
   "AmountOfFrames": {

@@ -28,7 +28,10 @@ namespace Studio
 		const float GetShieldDuration() const;
 		const float GetShieldHealth() const;
 		const float GetShieldCooldown() const;
-
+		//Missile
+		const float GetMissileDamage() const;
+		const float GetMissileRadius() const;
+		const float GetMissileCooldown() const;
 		const float GetLayer() const;
 		const float GetAcceleration() const;
 		const float GetAnimationTurnSpeed() const;
@@ -68,6 +71,13 @@ namespace Studio
 		void UpgradeShieldHealthT2();
 		void UpgradeShieldCooldownT1();
 		void UpgradeShieldCooldownT2();
+
+		void UpgradeMissileDamageT1();
+		void UpgradeMissileDamageT2();
+		void UpgradeMissileRadiusT1();
+		void UpgradeMissileRadiusT2();
+		void UpgradeMissileCooldownT1();
+		void UpgradeMissileCooldownT2();
 
 	private:
 
@@ -109,6 +119,18 @@ namespace Studio
 		float myShieldHealthUpgradeT2;
 		float myShieldCooldownUpgradeT1;
 		float myShieldCooldownUpgradeT2;
+
+		//Missile
+		float myMissileDamage;
+		float myMissileCooldown;
+		float myMissileRadius;
+		//MissileUpgrades
+		float myMissileDamageUpgradeT1;
+		float myMissileDamageUpgradeT2;
+		float myMissileCooldownUpgradeT1;
+		float myMissileCooldownUpgradeT2;
+		float myMissileRadiusUpgradeT1;
+		float myMissileRadiusUpgradeT2;
 
 		float myAnimationTurnSpeed;
 		float myLayer;
