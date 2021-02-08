@@ -107,5 +107,12 @@ namespace Studio
 			RapidFire,
 			Shield
 		};
+
+		enum class Cutscene
+		{
+			Logos,
+			Intro,
+			Outro
+		};
 	}
 }

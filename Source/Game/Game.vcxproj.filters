@@ -246,6 +246,7 @@
     <ClCompile Include="GoToMainMenuButton.cpp" />
     <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="LevelSelectButton.cpp" />
+    <ClCompile Include="Cutscenes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -505,6 +506,7 @@
     <ClInclude Include="SliderElement.h" />
     <ClInclude Include="GoToMainMenuButton.h" />
     <ClInclude Include="LevelSelectButton.h" />
+    <ClInclude Include="Cutscenes.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

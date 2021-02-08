@@ -21,6 +21,7 @@
 #include "MenuObject.h"
 #include "ButtonElement.h"
 #include "GenericButton.h"
+#include "Cutscenes.h"
 
 CGameWorld::CGameWorld()
 {
@@ -36,6 +37,7 @@ CGameWorld::~CGameWorld()
 	SAFE_DELETE(myLevelManager);
 	SAFE_DELETE(myMenuManager);
 	SAFE_DELETE(myPlayerData);
+	SAFE_DELETE(myCutscenes);
 }
 
 void CGameWorld::Init()
@@ -78,6 +80,9 @@ void CGameWorld::Init()
 	myMenuManager = Studio::MenuManagerSingleton::GetInstance();
 	Studio::LevelAccessor::SetInstance(myLevelManager);
 	myMenuManager->SetPlayButtonIndex(myLevelManager->GetCurrentLevelIndex());
+
+	SAFE_CREATE(myCutscenes, Studio::Cutscenes());
+	myCutscenes->PlayScene(Studio::Enums::Cutscene::Logos);
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
@@ -85,19 +90,26 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
 	myMenuManager->Load();
 	InputStuff();
-	if (myMenuManager->GameStarted())
+	if (myCutscenes->IsCurrentyPlaying())
 	{
-		if (myMenuManager->GetGodMode() == true)
-		{
-			myPlayer->SetGodMode(true);
-		}
-		myScoreManager->Update();
-		myPlayer->Update();
-		myLevelManager->Update();
-		myCoinManager->Update();
-		myBackgroundManager.UpdateBackground(aDeltaTime);
+		myCutscenes->UpdateCurrentScene();
 	}
-	myMenuManager->Update();
+	else
+	{
+		if (myMenuManager->GameStarted())
+		{
+			if (myMenuManager->GetGodMode() == true)
+			{
+				myPlayer->SetGodMode(true);
+			}
+			myScoreManager->Update();
+			myPlayer->Update();
+			myLevelManager->Update();
+			myCoinManager->Update();
+			myBackgroundManager.UpdateBackground(aDeltaTime);
+		}
+		myMenuManager->Update();
+	}
 }
 
 void CGameWorld::Render()

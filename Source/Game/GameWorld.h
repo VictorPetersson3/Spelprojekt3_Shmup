@@ -14,6 +14,7 @@ namespace Studio
 	class Score;
 	class AudioManager;
 	class Player_JsonParser;
+	class Cutscenes;
 }
 namespace Tga2D
 {
@@ -50,4 +51,6 @@ private:
 	Studio::LevelManager* myLevelManager;
 	std::vector<Studio::Enemy*> myEnemies;
 	Studio::Player_JsonParser* myPlayerData;
+
+	Studio::Cutscenes* myCutscenes;
 };
