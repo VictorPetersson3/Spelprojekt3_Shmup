@@ -17,7 +17,7 @@ Studio::CollisionObject::CollisionObject(const Tga2D::Vector2f& aPosition, Tga2D
 {
 	myColliderType = ColliderType::BoxCollider;
 	myWidth = aColliderSize.x;
-	myHeight = aColliderSize.y * (16.0f / 9.0f);
+	myHeight = aColliderSize.y/* * (9.0f / 16.0f)*/;
 	mySpawnPosition = aPosition;
 }
 

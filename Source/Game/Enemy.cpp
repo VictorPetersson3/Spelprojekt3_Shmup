@@ -30,7 +30,6 @@ namespace Studio
 		myScoreValue = 100;
 		myShootTimer = 0;
 		AddColliders();
-		SAFE_CREATE(myBulletSprite, Tga2D::CSprite("sprites/debugpixel.dds"));
 		switch (aEnemyType->GetMovementType())
 		{
 		case Studio::Enums::MovementPattern::Bobbing :
@@ -72,7 +71,6 @@ namespace Studio
 
 	Enemy::~Enemy()
 	{
-		SAFE_DELETE(myBulletSprite);
 		SAFE_DELETE(myMovement);
 	}
 

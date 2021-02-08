@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "MovementBobbing.h"
 #include "MovementWave.h"
+#include "MovementStraight.h"
 #include "Condition.h"
 #include "Condition_BelowHealth.h"
 #include "Condition_DoOnce.h"
@@ -29,7 +30,9 @@ namespace Studio
 		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ 1.0f,1.0f });
 		myEnrageCondition = nullptr;
 		myPosition = { 2050.0f, 540.0f };
-		Boss::GameObject::GetCollider().AddCircleColliderObject({ 0.0f,0.0f }, 125.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject({0,-20.0f }, 280.0f);
+		Boss::GameObject::GetCollider().AddBoxColliderObject({ 220.0f, 257.0f }, { 135.0f, 305.0f });
+		Boss::GameObject::GetCollider().AddBoxColliderObject({ -182.0f, 257.0f }, { 135.0f, 305.0f });
 		if (aBossParameters.HasMember("Conditions") && aBossParameters["Conditions"].IsArray())
 		{
 			auto conditions = aBossParameters["Conditions"].GetArray();
@@ -75,10 +78,12 @@ namespace Studio
 				myPhases.push_back(new Phase(phases[i]));
 			}
 		}
-		SAFE_CREATE(myIntroMovement, MovementWave(&myPosition, 20.0f, 20.0f, 150.0f));
+		SAFE_CREATE(myIntroMovement, MovementStraight(&myPosition, 50.0f));
 
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
+
+
 		if (myEnrageCondition != nullptr)
 		{
 			myPhaseAmount = myPhases.size() - 1;
@@ -89,7 +94,7 @@ namespace Studio
 		}
 		myShield = nullptr;
 		myMovement = nullptr;
-		myIntroMovementPlayed = false;
+		myIntroMovementPlayed = true;
 		myIsTransitioning = false;
 		SetGodMode(true);
 	}
@@ -114,10 +119,17 @@ namespace Studio
 	void Boss::Update()
 	{
 
-		if (!IsDead() && myIntroMovementPlayed)
+		if (!IsDead() && myIntroMovementPlayed/* && !myIsTransitioning*/)
 		{
-			
+
 			myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
+			if (CheckEnrageCondition())
+			{
+				myCurrentPhase = myPhaseAmount - 1;
+			}
+
+
+			myPhases[myCurrentPhase]->PlayModules(this);
 			if (myMovement != nullptr)
 			{
 				myMovement->Update();
@@ -127,7 +139,6 @@ namespace Studio
 			myHealthBar.Update(GetHealth());
 
 			//Plays the Modules in the current phase
-			myPhases[myCurrentPhase]->PlayModules(this);
 
 			if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 1)
 			{
@@ -135,14 +146,10 @@ namespace Studio
 				printf("Changed to Phase: %i\n", myCurrentPhase);
 				if (ShouldTransition())
 				{
-					//TODO Call transition between phase sprites or animations
-					PhaseTransition();
+					//TODO Call transition between phase sprites or animations not SpriteSwitch
+					SwitchSprite();
+					//myIsTransitioning = true;
 				}
-				SetGodMode(false);
-			}
-			if (CheckEnrageCondition())
-			{
-				myCurrentPhase = myPhaseAmount - 1;
 			}
 			if (myShield != nullptr)
 			{
@@ -153,6 +160,10 @@ namespace Studio
 		else if (!myIntroMovementPlayed)
 		{
 			PlayIntroMovement();
+		}
+		else if (myIsTransitioning)
+		{
+			PlayTransition();
 		}
 	}
 
@@ -169,7 +180,7 @@ namespace Studio
 	{
 		myIntroMovement->Update();
 		Boss::GameObject::Update(myPosition);
-		if (myPosition.x <= 1500.0f)
+		if (myPosition.x <= myOriginalPosition.x)
 		{
 			myIntroMovementPlayed = true;
 			SetGodMode(false);
@@ -228,11 +239,34 @@ namespace Studio
 
 	bool Boss::ShouldTransition()
 	{
-		//TODO - Check if this phase has a transition!
-		return true;
+		if (myCurrentPhase == 3 || myCurrentPhase == 6)
+		{
+			return true;
+		}
+		return false;
 	}
 
-	void Boss::PhaseTransition()
+	void Boss::PlayTransition()
+	{
+		SetGodMode(true);
+		VECTOR2F aDirection = myOriginalPosition - myPosition;
+
+		if (aDirection.y > myOriginalPosition.y - 10.0f && aDirection.y < myOriginalPosition.y + 10.0f)
+		{
+			SwitchSprite();
+			myIsTransitioning = false;
+			SetGodMode(false);
+		}
+		else
+		{
+			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
+		}
+		Boss::GameObject::Update(myPosition);
+		RendererAccessor::GetInstance()->Render(*this);
+		//TODO add playing of correct transition
+	}
+
+	void Boss::SwitchSprite()
 	{
 		if (myCurrentPhase == 3)
 		{
@@ -261,18 +295,18 @@ namespace Studio
 
 	void Boss::ResetBoss()
 	{
-		myHealth.ResetHealth();
 		for (Phase* phase : myPhases)
 		{
 			phase->ResetPhase();
 		}
-		SetGodMode(true);
-		myPosition = { 2000.0f, 540.0f };
-		myIntroMovementPlayed = false;
 		if (myShield != nullptr)
 		{
 			SAFE_DELETE(myShield);
 		}
+		myHealth.ResetHealth();
+		SetGodMode(true);
+		myPosition = { 2000.0f, 540.0f };
+		myIntroMovementPlayed = false;
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
 		mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_01.dds");

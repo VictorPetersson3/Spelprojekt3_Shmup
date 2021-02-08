@@ -51,8 +51,8 @@ namespace Studio
 		SAFE_CREATE(myBossManager, BossManager());
 
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
-		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
-		myBulletFactory->InitBulletType("sprites/debugpixel.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
+		myBulletFactory->InitBulletType("Sprites/debugpixel.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
+		myBulletFactory->InitBulletType("Sprites/debugpixel.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
 		myBossManager->LoadBosses();
 		// Load chosen level by Lever Designers
 		std::fstream file;
@@ -113,7 +113,6 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myExplosions);
 		SAFE_DELETE(myBulletFactory);
 		SAFE_DELETE(myBossManager);
-		SAFE_DELETE(myBoss);
 	}
 
 	void LevelManager::Update()

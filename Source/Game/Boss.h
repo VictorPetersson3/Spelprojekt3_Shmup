@@ -14,6 +14,7 @@ namespace Studio
 	class Condition;
 	class Sprite;
 	class Shield;
+	class EngineFlame;
 	//Boss Class Implementation
 	class Boss : public GameObject
 	{
@@ -38,21 +39,25 @@ namespace Studio
 		void EnforceAlleMansRätt();*/
 		
 		void UpdateMovement(Movement* aMovement);
+
 		void PlayIntroMovement();
 
 		void ActivateShield(Shield* aShield);
 
 		void HitLogic(float aDamage);
 
-		float GetTotalBossTime();
-		VECTOR2F* GetPosition();
 		void SetPosition(const VECTOR2F aPosition);
 
 		void ResetBoss();
 
-		void PhaseTransition();
+		void PlayTransition();
 
+		//Temp function until
+		void SwitchSprite();
+
+		float GetTotalBossTime();
 		
+		VECTOR2F* GetPosition();
 	protected:
 
 	private:
@@ -60,17 +65,18 @@ namespace Studio
 		int myCurrentPhase;
 		int myPhaseAmount;
 		int myTotalFightTime;
-		float myTargetXPosition = 1500.0f;
-		float myTargetYPosition = 540.0f;
+		
 
 		bool myIntroMovementPlayed;
 		bool myIsTransitioning;
 
 		VECTOR2F myPosition;
+		VECTOR2F myOriginalPosition = { 1500.0f , 540.0f};
 		
 		Movement* myMovement;
 		Movement* myIntroMovement;
 
+		
 		HealthBar myHealthBar;
 		Shield* myShield;
 		std::vector<Condition*> myConditions;

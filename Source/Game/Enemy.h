@@ -41,7 +41,6 @@ namespace Studio
 		bool myHasDied = false;
 		float myShootTimer;
 		std::vector<Bullet*> myBullets;
-		Tga2D::CSprite* myBulletSprite;
 
 		Studio::Enums::MovementPattern myMovementType;
 		TurretPipe* myTurretPipe;
