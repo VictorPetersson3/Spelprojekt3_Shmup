@@ -88,11 +88,10 @@ void CGameWorld::Init()
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
-	myMenuManager->Load();
 	InputStuff();
-	if (myCutscenes->IsCurrentyPlaying())
+	if (!myCutscenes->IsCurrentyPlaying())
 	{
-		myCutscenes->UpdateCurrentScene();
+		//myCutscenes->UpdateCurrentScene();
 	}
 	else
 	{

@@ -161,6 +161,7 @@ namespace Studio
             myIsLoading = true;
             myLevelToLoad = LEVELMANAGER->GetCurrentLevelIndex();
             RendererAccessor::GetInstance()->Render(*myLoadingScreen);
+            Load();
             return myStartButton->myIsClicked;
         }
         else if(hasStartedGame)
