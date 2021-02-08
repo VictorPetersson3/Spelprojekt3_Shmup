@@ -170,6 +170,7 @@
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="ImageElement.h" />
     <ClInclude Include="LevelAccessor.h" />
+    <ClInclude Include="LevelSelectButton.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuManagerSingleton.h" />
     <ClInclude Include="MenuObject.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="ImageElement.cpp" />
     <ClCompile Include="LevelAccessor.cpp" />
+    <ClCompile Include="LevelSelectButton.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuManagerSingleton.cpp" />
     <ClCompile Include="MenuObject.cpp" />

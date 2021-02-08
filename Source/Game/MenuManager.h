@@ -15,6 +15,7 @@
 #include "ReturnToMainMenuButton.h"
 #include "SliderElement.h"
 #include "GoToMainMenuButton.h"
+#include "LevelSelectButton.h"
 
 namespace Studio
 {
@@ -87,10 +88,17 @@ namespace Studio
 		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
 		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.1,0.5 }, "ShopCoinText");
+		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.515 }, "myMasterVolumePercentageText");
+		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.4 }, "myMasterVolumeLabelText");
 
 		TextElement* myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.2 }, "OptionsTitle");
 		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960-250,540 }, { 500,50 }, 15);
 		GoToMainMenuButton* myOptionsMenuReturnButton = new GoToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
+
+
+
+
+		LevelSelectButton* myLevelSelectButton = new LevelSelectButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	};
 
 

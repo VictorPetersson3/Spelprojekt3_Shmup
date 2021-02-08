@@ -12,13 +12,13 @@ namespace Studio
         ~SliderElement();
 
         void Update() override;
-        
+        float fillPercentage = 1.0f;
+
     private:
         SpriteSheet* mySpriteSheet;
 
         VECTOR2F mySize;
 
-        float fillPercentage = 1.0f;
 
         float myLeft;
         float myRight;

@@ -22,6 +22,7 @@ namespace Studio
         myMainMenu.Add(mySettingsButton);
         myMainMenu.Add(myCreditsButton);
         myMainMenu.Add(myExitButton);
+        myMainMenu.Add(myLevelSelectButton);
         myMainMenu.Enable();
         
         myHud.Add(myTestElement);
@@ -48,12 +49,15 @@ namespace Studio
         myPausMenu.Add(myPausMenuQuitButton);
         myPausMenu.Disable();
 
+        myOptionsMenu.Add(myMasterVolumeSliderText);
         myOptionsMenu.Add(myOptionsMenuBackground);
         myOptionsMenu.Add(myVolumeSlider);
-
+        myOptionsMenu.Add(myMasterVolumeLabelText);
 
         std::string optionsMenuLabel = "Options";
+        std::string masterVolumeLabel = "Master Volume";
         myOptionsMenuTitleText->SetText(optionsMenuLabel);
+        myMasterVolumeLabelText->SetText(masterVolumeLabel);
         myOptionsMenu.Add(myOptionsMenuTitleText);
         myOptionsMenu.Add(myOptionsMenuReturnButton);
         myOptionsMenu.Disable();
@@ -133,13 +137,7 @@ namespace Studio
             mySettingsButton->SetActive(false);
         }
 
-        
-
-        //if (myOptionsMenuReturnButton->IsClicked())
-        //{
-        //    myMainMenu.Enable();
-        //    myOptionsMenu.Disable();
-        //}
+        myMasterVolumeSliderText->SetText(std::to_string( static_cast<int>(myVolumeSlider->fillPercentage * 100)));
     }
 
     void MenuManager::Render()
@@ -148,6 +146,9 @@ namespace Studio
         myCoinText->Render();
         myShopCoinText->Render();
         myOptionsMenuTitleText->Render();
+        myMasterVolumeSliderText->Render();
+        myMasterVolumeLabelText->Render();
+
     }
 
     bool MenuManager::GameStarted()
