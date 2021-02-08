@@ -22,6 +22,7 @@
 #include "ButtonElement.h"
 #include "GenericButton.h"
 #include "Cutscenes.h"
+#include "VideoPlayer.h"
 
 CGameWorld::CGameWorld()
 {
@@ -83,6 +84,8 @@ void CGameWorld::Init()
 
 	SAFE_CREATE(myCutscenes, Studio::Cutscenes());
 	//myCutscenes->PlayScene(Studio::Enums::Cutscene::Logos);
+
+	SAFE_CREATE(myVideoPlayer, Studio::VideoPlayer());
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread

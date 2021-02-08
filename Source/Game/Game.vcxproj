@@ -229,6 +229,7 @@
     <ClInclude Include="TypePattern_Bullet.h" />
     <ClInclude Include="TypePattern_Enemy.h" />
     <ClInclude Include="UIElement.h" />
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
@@ -326,6 +327,7 @@
     <ClCompile Include="TypePattern_Bullet.cpp" />
     <ClCompile Include="TypePattern_Enemy.cpp" />
     <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,6 +15,7 @@ namespace Studio
 	class AudioManager;
 	class Player_JsonParser;
 	class Cutscenes;
+	class VideoPlayer;
 }
 namespace Tga2D
 {
@@ -53,4 +54,5 @@ private:
 	Studio::Player_JsonParser* myPlayerData;
 
 	Studio::Cutscenes* myCutscenes;
+	Studio::VideoPlayer* myVideoPlayer;
 };
