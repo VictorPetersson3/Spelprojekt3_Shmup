@@ -483,7 +483,6 @@ namespace Studio
 		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_RapidFire) && myRapidFireCurrentCooldown > myPlayerData->GetRapidFireMaxCooldown())
 		{
 			myRapidFireCurrentCooldown = 0.f;
-			UpgradeT3(Enums::Tier3Upgrades::ShieldExplosion);
 			myRapidFireIsActive = true;
 			if (myHasPurchasedPenetratingRounds)
 			{
@@ -532,7 +531,7 @@ namespace Studio
 	}
 	void Studio::Player::ShieldLogic()
 	{
-		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown >= 6)
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown >= myPlayerData->GetShieldCooldown())
 		{
 			ActivateShield();
 		}
