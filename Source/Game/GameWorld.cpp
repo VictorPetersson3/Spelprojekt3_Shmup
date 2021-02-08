@@ -82,7 +82,7 @@ void CGameWorld::Init()
 	myMenuManager->SetPlayButtonIndex(myLevelManager->GetCurrentLevelIndex());
 
 	SAFE_CREATE(myCutscenes, Studio::Cutscenes());
-	myCutscenes->PlayScene(Studio::Enums::Cutscene::Logos);
+	//myCutscenes->PlayScene(Studio::Enums::Cutscene::Logos);
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread

@@ -25,24 +25,11 @@ namespace Studio
 			None
 		};
 
-		enum class RapidFireUpgrades
-		{
-			CooldownT1,
-			AttackSpeedT1,
-			AttackSpeedT2,
-			DurationT1,
-			DurationT2,
-			PenetratingT3
-			
-		};
-
 		enum class Tier1Upgrades
 		{
 			RapidFireCooldown,
 			RapidFireAttackSpeed,
 			RapidFireDuration,
-
-			MovementSpeed,
 
 			BasicAttackSpeed,
 

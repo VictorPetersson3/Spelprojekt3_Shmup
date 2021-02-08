@@ -154,30 +154,6 @@ namespace Studio
 	{
 		return myDirection;
 	}
-	void Player::UpgradeRapidFire(Enums::RapidFireUpgrades aRapidFireUpgrade)
-	{
-		switch (aRapidFireUpgrade)
-		{
-		case Studio::Enums::RapidFireUpgrades::CooldownT1:
-			myPlayerData->UpgradeRapidFireCooldownT1();
-			break;
-		case Studio::Enums::RapidFireUpgrades::AttackSpeedT1:
-			myPlayerData->UpgradeRapidFireAttackSpeedT1();
-			break;
-		case Studio::Enums::RapidFireUpgrades::AttackSpeedT2:
-			myPlayerData->UpgradeRapidFireAttackSpeedT2();
-			break;
-		case Studio::Enums::RapidFireUpgrades::DurationT1:
-			myPlayerData->UpgradeRapidFireDurationT1();
-			break;
-		case Studio::Enums::RapidFireUpgrades::DurationT2:
-			myPlayerData->UpgradeRapidFireDurationT2();
-			break;
-		case Studio::Enums::RapidFireUpgrades::PenetratingT3:
-			myHasPurchasedPenetratingRounds = true;
-			break;
-		}
-	}
 
 	void Player::UpgradeT1(Enums::Tier1Upgrades aTier1Upgrade)
 	{
@@ -191,8 +167,6 @@ namespace Studio
 			break;
 		case Studio::Enums::Tier1Upgrades::RapidFireDuration:
 			myPlayerData->UpgradeRapidFireDurationT1();
-			break;
-		case Studio::Enums::Tier1Upgrades::MovementSpeed:
 			break;
 		case Studio::Enums::Tier1Upgrades::BasicAttackSpeed:
 			myPlayerData->UpgradeBasicAttackSpeedT1();
@@ -268,13 +242,8 @@ namespace Studio
 		case Studio::Enums::Tier3Upgrades::MissileCluster:
 			break;
 		case Studio::Enums::Tier3Upgrades::ShieldExplosion:
-			for (PowerUpModule* module : myPowerUpModules)
-			{
-				if (module->GetIsShield())
-				{
-					module->GetSpriteSheet().SetImagePath("Sprites/assets/player/upgrades/effects/shieldSprite_02.dds");
-				}
-			}
+			myShieldModule->GetSpriteSheet().SetImagePath("Sprites/assets/player/upgrades/effects/shieldSprite_02.dds");
+			myHasPurchasedShieldExplosion = true;
 			break;
 		}
 	}
@@ -605,6 +574,10 @@ namespace Studio
 		myShieldCurrentActiveTime = 0.f;
 		myShieldCurrentCooldown = 0.f;
 		myShieldHealth = myPlayerData->GetShieldHealth();
+		if (myHasPurchasedShieldExplosion)
+		{
+			LevelAccessor::GetInstance()->SpawnAOEBullet(Enums::BulletOwner::Player, myPosition, 300.0f);
+		}
 		
 	}
 	void Studio::Player::TakeShieldDamage(int someDamage)
