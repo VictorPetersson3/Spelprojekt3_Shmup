@@ -574,14 +574,11 @@ namespace Studio
 		myShieldCurrentActiveTime = 0.f;
 		myShieldCurrentCooldown = 0.f;
 		myShieldHealth = myPlayerData->GetShieldHealth();
-<<<<<<< HEAD
-=======
 		if (myHasPurchasedShieldExplosion)
 		{
 			LevelAccessor::GetInstance()->SpawnAOEBullet(Enums::BulletOwner::Player, myPosition, 300.0f);
 		}
 		
->>>>>>> ef407cb3444bc41bd7c5ad98ecfb0aa1caf4803c
 	}
 	void Studio::Player::TakeShieldDamage(int someDamage)
 	{

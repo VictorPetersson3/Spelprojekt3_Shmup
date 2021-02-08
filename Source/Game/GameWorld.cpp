@@ -89,9 +89,9 @@ void CGameWorld::Init()
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
 	InputStuff();
-	if (!myCutscenes->IsCurrentyPlaying())
+	if (myCutscenes->IsCurrentyPlaying())
 	{
-		//myCutscenes->UpdateCurrentScene();
+		myCutscenes->UpdateCurrentScene();
 	}
 	else
 	{
