@@ -251,7 +251,7 @@ namespace Studio
 		SetGodMode(true);
 		VECTOR2F aDirection = myOriginalPosition - myPosition;
 
-		if (aDirection.y > myOriginalPosition.y - 100.0f && aDirection.y < myOriginalPosition.y + 100.0f)
+		if (aDirection.y < 10.0f && aDirection.y > -10.0f)
 		{
 			SwitchSprite();
 			myIsTransitioning = false;
@@ -307,6 +307,7 @@ namespace Studio
 		SetGodMode(true);
 		myPosition = { 2000.0f, 540.0f };
 		myIntroMovementPlayed = false;
+		myIsTransitioning = false;
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
 		mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_01.dds");
