@@ -34,6 +34,7 @@ namespace Studio
 		bool HasPenetratingRounds();
 		bool GetIsShieldActive();
 
+		Player_JsonParser* GetPlayerData();
 	private:
 		void Movement();
 		void RapidFireLogic();

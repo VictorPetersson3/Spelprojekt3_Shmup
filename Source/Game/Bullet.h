@@ -9,14 +9,15 @@ namespace Studio
 	{
 	public:
 		Bullet();
-		Bullet(VECTOR2F aPosition, TypePattern_Bullet* aTypePattern);
-		Bullet(const VECTOR2F& aPosition, const VECTOR2F& aDirection, TypePattern_Bullet* aTypePattern);
+		Bullet(VECTOR2F aPosition, TypePattern_Bullet* aTypePattern, const float aDamage);
+		Bullet(const VECTOR2F& aPosition, const VECTOR2F& aDirection, TypePattern_Bullet* aTypePattern, const float aDamage);
 		virtual ~Bullet();
 		virtual void Update();
 		virtual void Impact();
 
 		void RegisterEnemyHit(GameObject* anEnemy);
 		void SetIsPenetrating();
+		float GetDamage();
 		bool GetIsPenetrating();
 		bool IsEnemyAlreadyHit(GameObject* anEnemy);
 		VECTOR2F GetPosition();
@@ -27,6 +28,7 @@ namespace Studio
 	protected:
 		std::vector<GameObject*> myHitEnemies;
 		TypePattern_Bullet* myTypePattern;
+		float myDamage;
 		bool myIsPenetrating = false;
 		bool myHasDirection;
 		VECTOR2F myPosition;

@@ -6,7 +6,7 @@
 #include "tga2d/sprite/sprite.h"
 namespace Studio
 {
-	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius)
 	{
 		if (aOwner == Enums::BulletOwner::Player)
 		{
@@ -19,6 +19,8 @@ namespace Studio
 			myInitialSpeed = 400.0f;
 			myDeaccelerationSpeed = 500.0f;
 			myAccelerationSpeed = 100.0f;
+			myExplosionRadius = aExplosionRadius;
+			myDamage = 0;
 
 			myVelocity = { myInitialSpeed, 0.0f };
 
@@ -99,6 +101,6 @@ namespace Studio
 	void Missile::Impact()
 	{
 		printf_s("Missile impacted!\n");
-		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, 250.0f);
+		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
 	}
 }

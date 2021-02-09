@@ -45,7 +45,8 @@ bool Studio::Module_Missile::DoStuff(Boss& aBoss)
 		mySpawnPosition.y = myOriginalSpawnPosition.y + SCREEN_HEIGHT * 0.5f;
 	}
 
-	Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Enemy, mySpawnPosition);
+	Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Enemy, mySpawnPosition, 250.f, 1.f, 1.f);
+
 	//printf("Missile Launched from boss\n");
 	return true;
 }

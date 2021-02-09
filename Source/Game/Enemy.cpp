@@ -110,7 +110,7 @@ namespace Studio
 			myShootTimer += aDeltaTime;
 			if (myShootTimer > myType->GetShootInterval())
 			{
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition);
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition, 1);
 				myShootTimer = 0;
 			}
 		}

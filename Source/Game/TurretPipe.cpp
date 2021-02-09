@@ -61,7 +61,7 @@ void Studio::TurretPipe::Update()
 	myShootTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
 	if (myShootTimer > myEnemyType->GetShootInterval() && allowedToShoot)
 	{
-		Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition - ((myPosition - PlayerAccessor::GetInstance()->GetPosition()).GetNormalized() * myPipeLength), ((myPosition + myTurretDirection) - PlayerAccessor::GetInstance()->GetPosition()).GetNormalized());
+		Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition - ((myPosition - PlayerAccessor::GetInstance()->GetPosition()).GetNormalized() * myPipeLength), ((myPosition + myTurretDirection) - PlayerAccessor::GetInstance()->GetPosition()).GetNormalized(), 1);
 		myShootTimer = 0;
 	}
 	Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);

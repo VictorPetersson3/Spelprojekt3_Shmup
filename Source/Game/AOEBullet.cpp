@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "AOEBullet.h"
 #include "TypePattern_Bullet.h"
+#include "PlayerAccessor.h"
+#include "Player_JsonParser.h"
 namespace Studio
 {
 	AOEBullet::AOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, float aRadius)
@@ -16,6 +18,15 @@ namespace Studio
 
 		// Arbitrary explosion time (hitbox)
 		myCounter.SetInterval(0.1f);
+
+		if (aOwner == Enums::BulletOwner::Player)
+		{
+			myDamage = PlayerAccessor::GetInstance()->GetPlayerData()->GetMissileDamage();
+		}
+		else
+		{
+			myDamage = 1;
+		}
 	}
 
 	void AOEBullet::Update()

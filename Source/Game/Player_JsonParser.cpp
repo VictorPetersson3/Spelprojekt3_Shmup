@@ -439,26 +439,32 @@ void Studio::Player_JsonParser::UpgradeShieldCooldownT2()
 
 void Studio::Player_JsonParser::UpgradeMissileDamageT1()
 {
+	myMissileDamage += myMissileDamageUpgradeT1;
 }
 
 void Studio::Player_JsonParser::UpgradeMissileDamageT2()
 {
+	myMissileDamage += myMissileDamageUpgradeT2;
 }
 
 void Studio::Player_JsonParser::UpgradeMissileRadiusT1()
 {
+	myMissileRadius += myMissileRadiusUpgradeT1;
 }
 
 void Studio::Player_JsonParser::UpgradeMissileRadiusT2()
 {
+	myMissileRadius += myMissileRadiusUpgradeT2;
 }
 
 void Studio::Player_JsonParser::UpgradeMissileCooldownT1()
 {
+	myMissileCooldown -= myMissileCooldownUpgradeT1;
 }
 
 void Studio::Player_JsonParser::UpgradeMissileCooldownT2()
 {
+	myMissileCooldown -= myMissileCooldownUpgradeT2;
 }
 
 

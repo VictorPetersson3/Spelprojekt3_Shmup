@@ -8,7 +8,7 @@ namespace Studio
 	Bullet::Bullet()
 	{
 	}
-	Bullet::Bullet(VECTOR2F aPosition, TypePattern_Bullet* aTypePattern) :
+	Bullet::Bullet(VECTOR2F aPosition, TypePattern_Bullet* aTypePattern, const float aDamage) :
 		Bullet::GameObject(aTypePattern->GetImagePath()),
 		myTypePattern(aTypePattern)
 	{
@@ -16,9 +16,11 @@ namespace Studio
 		Bullet::GetSpriteSheet().SetSize({20.0f, 20.0f});
 		Bullet::GameObject::GetCollider().AddCircleColliderObject({0, 0}, 2.0f);
 		myHasDirection = false;
+
+		myDamage = aDamage;
 	}
 
-	Bullet::Bullet(const VECTOR2F& aPosition, const VECTOR2F& aDirection, TypePattern_Bullet* aTypePattern):
+	Bullet::Bullet(const VECTOR2F& aPosition, const VECTOR2F& aDirection, TypePattern_Bullet* aTypePattern, const float aDamage):
 		Bullet::GameObject(aTypePattern->GetImagePath()),
 		myTypePattern(aTypePattern)
 	{
@@ -27,6 +29,8 @@ namespace Studio
 		Bullet::GameObject::GetCollider().AddCircleColliderObject({ 0, 0 }, 2.0f);
 		myDirection = aDirection;
 		myHasDirection = true;
+
+		myDamage = aDamage;
 	}
 
 	Bullet::~Bullet()
@@ -59,6 +63,11 @@ namespace Studio
 	void Bullet::SetIsPenetrating()
 	{
 		myIsPenetrating = true;
+	}
+
+	float Bullet::GetDamage()
+	{
+		return myDamage;
 	}
 
 	bool Bullet::GetIsPenetrating()

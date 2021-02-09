@@ -110,11 +110,11 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 		if (myShootTowardsPlayer)
 		{
 			VECTOR2F direction = Studio::PlayerAccessor::GetInstance()->GetPosition() - *aBoss.GetPosition();
-			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition, direction);
+			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition, direction, 1);
 		}
 		else
 		{
-			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition);
+			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition, 1);
 		}
 		//printf("Spawned Bullet\n");
 	}

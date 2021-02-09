@@ -20,22 +20,22 @@ namespace Studio
 		myBullets.insert(temp_pair);
 	}
 
-	Bullet* BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition)
+	Bullet* BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition, const float aDamage)
 	{
-		auto tempObject = new Bullet(aPosition, myBullets.at(aType));
+		auto tempObject = new Bullet(aPosition, myBullets.at(aType), aDamage);
 		return tempObject;
 	}
 
-	Bullet* BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aDirection)
+	Bullet* BulletFactory::CreateBulletObject(const std::string& aType, const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aDirection, const float aDamage)
 	{
-		auto tempObject = new Bullet(aPosition, aDirection, myBullets.at(aType));
+		auto tempObject = new Bullet(aPosition, aDirection, myBullets.at(aType), aDamage);
 		return tempObject;
 	}
 
 	//Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
-	Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+	Missile* BulletFactory::CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius)
 	{
-		auto missile = new Missile(aOwner, aPosition);
+		auto missile = new Missile(aOwner, aPosition, aExplosionRadius);
 		missile->SetOwner(aOwner);
 		return missile;
 	}

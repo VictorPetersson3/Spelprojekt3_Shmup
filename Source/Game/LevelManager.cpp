@@ -169,9 +169,9 @@ namespace Studio
 		myEnemies.push_back(anEnemy);
 	}
 
-	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition)
+	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition, const float aDamage)
 	{
-		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition);
+		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition, aDamage);
 		if (myPlayer->HasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
 		{
 			bullet->SetIsPenetrating();
@@ -179,9 +179,9 @@ namespace Studio
 		myBullets.push_back(bullet);
 	}
 
-	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition, const VECTOR2F& aDirection)
+	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition, const VECTOR2F& aDirection, const float aDamage)
 	{
-		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition, aDirection);
+		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition, aDirection, aDamage);
 		if (myPlayer->HasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
 		{
 			bullet->SetIsPenetrating();
@@ -314,7 +314,7 @@ namespace Studio
 						if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
 						{
 							myBullets[i]->RegisterEnemyHit(myBoss);
-							myBoss->HitLogic(25.0f);
+							myBoss->HitLogic(myBullets[i]->GetDamage());
 							myBullets[i]->Impact();
 
 							if (myBullets[i]->GetIsPenetrating() == false)
@@ -347,11 +347,11 @@ namespace Studio
 					{
 						if (myPlayer->GetIsShieldActive())
 						{
-							myPlayer->TakeShieldDamage(1);
+							myPlayer->TakeShieldDamage(myBullets[j]->GetDamage());
 						}
 						else
 						{
-							myPlayer->TakeDamage(1.0f);
+							myPlayer->TakeDamage(myBullets[j]->GetDamage());
 						}
 						//printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
 						myBullets[j]->Impact();
@@ -380,7 +380,7 @@ namespace Studio
 										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
 										if (!myEnemies[i]->GetIsTerrain())
 										{
-											myEnemies[i]->TakeDamage(100);
+											myEnemies[i]->TakeDamage(myBullets[j]->GetDamage());
 										}
 										myBullets[j]->Impact();
 
@@ -567,19 +567,19 @@ namespace Studio
 		myBullets.clear();
 	}
 
-	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition)
+	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius, const float aDamageAmount, const float aExplosionDamageAmount)
 	{
 		switch (aOwner)
 		{
 		case Enums::BulletOwner::Player:
 		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
+			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
 			myBullets.push_back(missile);
 		}
 		break;
 		case Enums::BulletOwner::Enemy:
 		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition);
+			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
 			myBullets.push_back(missile);
 		}
 		break;

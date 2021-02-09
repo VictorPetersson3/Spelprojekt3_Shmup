@@ -115,20 +115,20 @@ namespace Studio
 		{
 			if (myAmountOfProjectiles == 1)
 			{
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 5.f });
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 5.f }, 1);
 
 			}
 			else if (myAmountOfProjectiles == 2)
 			{
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 20.f });
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y + 10.f });
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 20.f }, 1);
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y + 10.f }, 1);
 
 			}
 			else if (myAmountOfProjectiles == 3)
 			{
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 5.f });
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 30.f });
-				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y + 20.f });
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 5.f }, 1);
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 30.f }, 1);
+				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y + 20.f }, 1);
 			}
 			myTimeSinceLastShot = 0.f;
 
@@ -176,10 +176,13 @@ namespace Studio
 			myPlayerData->UpgradeBasicAttackSpeedT1();
 			break;
 		case Studio::Enums::Tier1Upgrades::MissileExplosionRadius:
+			myPlayerData->UpgradeMissileRadiusT1();
 			break;
 		case Studio::Enums::Tier1Upgrades::MissileCooldown:
+			myPlayerData->UpgradeMissileCooldownT1();
 			break;
 		case Studio::Enums::Tier1Upgrades::MissileDamage:
+			myPlayerData->UpgradeMissileDamageT1();
 			break;
 		case Studio::Enums::Tier1Upgrades::ShieldDuration:
 			myPlayerData->UpgradeShieldDurationT1();
@@ -215,10 +218,13 @@ namespace Studio
 			AddAnotherProjectile();
 			break;
 		case Studio::Enums::Tier2Upgrades::MissileExplosionRadius:
+			myPlayerData->UpgradeMissileRadiusT2();
 			break;
 		case Studio::Enums::Tier2Upgrades::MissileCooldown:
+			myPlayerData->UpgradeMissileCooldownT2();
 			break;
 		case Studio::Enums::Tier2Upgrades::MissileDamage:
+			myPlayerData->UpgradeMissileDamageT2();
 			break;
 		case Studio::Enums::Tier2Upgrades::ShieldDuration:
 			myPlayerData->UpgradeShieldDurationT2();
@@ -531,7 +537,7 @@ namespace Studio
 
 	void Player::LaunchMissile()
 	{
-		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition);
+		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition, myPlayerData->GetMissileRadius(), myPlayerData->GetMissileDamage(), myPlayerData->GetMissileDamage());
 	}
 	void Studio::Player::ShieldLogic()
 	{
@@ -592,5 +598,9 @@ namespace Studio
 	bool Studio::Player::GetIsShieldActive()
 	{
 		return myShieldIsActive;
+	}
+	Player_JsonParser* Studio::Player::GetPlayerData()
+	{
+		return myPlayerData;
 	}
 }
