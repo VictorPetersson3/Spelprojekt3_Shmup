@@ -32,6 +32,14 @@ void Studio::MenuObject::Add(UIElement* aElementToAdd)
 	myElements.push_back(aElementToAdd);
 }
 
+void Studio::MenuObject::Clear()
+{
+	for (size_t i = 0; i < myElements.size(); i++)
+	{
+		myElements.erase(myElements.begin() + i);
+	}
+}
+
 void Studio::MenuObject::Update()
 {
 	for (UIElement* e : myElements)

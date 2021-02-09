@@ -97,10 +97,19 @@ void Studio::ShopButton::OnClick()
 {
 	if (ScoreAccessor::GetInstance()->GetCoinScore() >= myCost)
 	{
-		PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
-		std::cout << "Shop button pressed" << std::endl;
-		ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
+		if (!myHasBeenPurchased)
+		{
+			PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
+			std::cout << "Shop button pressed" << std::endl;
+			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
+			myHasBeenPurchased = true;
+		}
 	}
+}
+
+void Studio::ShopButton::Reset()
+{
+	myHasBeenPurchased = false;
 }
 
 //void Studio::ShopButton::SetPosition(VECTOR2F aPosition)

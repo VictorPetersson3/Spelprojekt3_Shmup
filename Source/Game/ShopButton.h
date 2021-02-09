@@ -16,9 +16,11 @@ namespace Studio
 
 		void Update() override;
 		void OnClick() override;
+		void Reset();
 
 	private:
 		bool myIsClicked = false;
+		bool myHasBeenPurchased = false;
 		Enums::Tier1Upgrades myUpgradeType;
 
 		int myCost;

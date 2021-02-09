@@ -215,6 +215,7 @@
     <ClInclude Include="Shield.h" />
     <ClInclude Include="ShopButton.h" />
     <ClInclude Include="ShopButtonTier2.h" />
+    <ClInclude Include="ShopButtonTier3.h" />
     <ClInclude Include="ShopUI.h" />
     <ClInclude Include="SliderElement.h" />
     <ClInclude Include="Sprite.h" />
@@ -312,6 +313,7 @@
     <ClCompile Include="Shield.cpp" />
     <ClCompile Include="ShopButton.cpp" />
     <ClCompile Include="ShopButtonTier2.cpp" />
+    <ClCompile Include="ShopButtonTier3.cpp" />
     <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="SliderElement.cpp" />
     <ClCompile Include="Sprite.cpp" />
