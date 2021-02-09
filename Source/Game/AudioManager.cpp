@@ -27,7 +27,7 @@ void Studio::AudioManager::Play2D(const char* aPath, bool aLooping, float volume
 	irrklang::ISoundSource* sound = myAudioEngine->addSoundSourceFromFile(aPath);
 	if (sound != nullptr)
 	{
-		sound->setDefaultVolume(volume);
+		sound->setDefaultVolume(volume*volumeMultiplier);
 
 		myAudioEngine->play2D(sound, aLooping, false, true);
 	}
@@ -43,7 +43,7 @@ void Studio::AudioManager::Play2D(AudioClip* aClip)
 	irrklang::ISoundSource* sound = myAudioEngine->addSoundSourceFromFile(aClip->GetSoundFromFile());
 	if (sound != nullptr)
 	{
-		sound->setDefaultVolume(aClip->GetSoundVolume());
+		sound->setDefaultVolume(aClip->GetSoundVolume()*volumeMultiplier);
 
 		myAudioEngine->play2D(sound, aClip->IsLooping(), false, true);
 	}
@@ -93,6 +93,11 @@ void Studio::AudioManager::RemoveFileFromEngine(AudioClip* aClip)
 void Studio::AudioManager::RemoveAllAudioFromEngine()
 {
 	myAudioEngine->removeAllSoundSources();
+}
+
+void Studio::AudioManager::SetVolumeMultiplier(float aNewMultiplier)
+{
+	volumeMultiplier = aNewMultiplier;
 }
 
 bool Studio::AudioManager::IsCurrentlyPlaying(const char* aPath)

@@ -117,6 +117,11 @@ namespace Studio
 
 	void LevelManager::Update()
 	{
+		if (Studio::InputManager::GetInstance()->IsKeyPressed('H'))
+		{
+			ScoreAccessor::GetInstance()->AddCoinScore(100000);
+		}
+
 
 		if (myLevelIsCleared == true)
 		{
@@ -127,6 +132,11 @@ namespace Studio
 			else
 			{
 				MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+				if (myHasResetShop == false)
+				{
+					MenuManagerSingleton::GetInstance()->ResetShop();
+					myHasResetShop = true;
+				}
 				MenuManagerSingleton::GetInstance()->SetNextLevelIndex(myCurrentLevel);
 				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 			}
@@ -135,6 +145,7 @@ namespace Studio
 		else
 		{
 			CheckIfLevelIsCleared();
+			myHasResetShop = false;
 			// Pack
 			if (!myCurrentPack->ExitConditionIsMet())
 			{

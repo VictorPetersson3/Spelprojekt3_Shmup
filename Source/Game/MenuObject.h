@@ -16,6 +16,8 @@ namespace Studio
 
 		void Add(UIElement* aElementToAdd);
 
+		void Clear();
+
 		void Update();
 
 		UIElement* GetElementWithTag(const char* aTag);

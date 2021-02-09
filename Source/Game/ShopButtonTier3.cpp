@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ShopButtonTier2.h"
+#include "ShopButtonTier3.h"
 #include "tga2d/sprite/sprite.h"
 #include "InputManager.h"
 #include <iostream>
@@ -13,7 +13,7 @@
 #include "PlayerAccessor.h"
 #include "Player.h"
 
-Studio::ShopButtonTier2::ShopButtonTier2(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier2Upgrades aUpgradeType, int aCost)
+Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -36,11 +36,11 @@ Studio::ShopButtonTier2::ShopButtonTier2(const char* aPath, const VECTOR2F aPosi
 	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
 }
 
-Studio::ShopButtonTier2::~ShopButtonTier2()
+Studio::ShopButtonTier3::~ShopButtonTier3()
 {
 }
 
-void Studio::ShopButtonTier2::Update()
+void Studio::ShopButtonTier3::Update()
 {
 	myLeft = mySpriteSheet->GetPosition().x - (128 / 2);
 	myRight = mySpriteSheet->GetPosition().x + (128 / 2);
@@ -96,22 +96,17 @@ void Studio::ShopButtonTier2::Update()
 	}
 }
 
-void Studio::ShopButtonTier2::OnClick()
+void Studio::ShopButtonTier3::OnClick()
 {
 	if (ScoreAccessor::GetInstance()->GetCoinScore() >= myCost)
 	{
 		if (!myHasBeenPurchased)
 		{
-			PlayerAccessor::GetInstance()->UpgradeT2(myUpgradeType);
+			PlayerAccessor::GetInstance()->UpgradeT3(myUpgradeType);
 			std::cout << "Shop button pressed" << std::endl;
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			myHasBeenPurchased = true;
 		}
 		
 	}
-}
-
-void Studio::ShopButtonTier2::Reset()
-{
-	myHasBeenPurchased = false;
 }

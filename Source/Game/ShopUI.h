@@ -4,6 +4,8 @@
 #include "ButtonElement.h"
 #include "TextElement.h"
 #include "ShopButton.h"
+#include "ShopButtonTier2.h"
+#include "ShopButtonTier3.h"
 
 #include <vector>
 
@@ -12,11 +14,11 @@ namespace Studio
 	class ShopUI
 	{
 		std::vector<ButtonElement> myActiveButtons;
-		std::vector<ShopButton*> myActiveButtonPtrs;
+		std::vector<ButtonElement*> myActiveButtonPtrs;
 
 		std::vector<ShopButton*> myTier1Buttons;
-		std::vector<ShopButton*> myTier2Buttons;
-		std::vector<ShopButton*> myTier3Buttons;
+		std::vector<ShopButtonTier2*> myTier2Buttons;
+		std::vector<ShopButtonTier3*> myTier3Buttons;
 
 		int GetRandomNumberInRange(int max);
 
@@ -24,7 +26,9 @@ namespace Studio
 		ShopUI();
 		~ShopUI();
 
-		std::vector<ShopButton*> GetShopButtons();
+		void ResetButtons();
+
+		std::vector<ButtonElement*> GetShopButtons();
 	};
 }
 

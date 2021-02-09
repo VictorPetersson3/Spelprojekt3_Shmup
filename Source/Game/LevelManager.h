@@ -54,6 +54,7 @@ namespace Studio
 		bool myLevelBossSpawned;
 		bool mySpawnedBoss;
 		bool myHasReloaded;
+		bool myHasResetShop = false;
 		int myPackIndex;
 		int myCurrentLevel;
 		Pack* myCurrentPack;

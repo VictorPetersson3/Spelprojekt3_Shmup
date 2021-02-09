@@ -35,13 +35,14 @@ namespace Studio
         myHud.Disable();
 
         myShop.Add(myShopBackground);
-        for (ShopButton* b : myShopUI->GetShopButtons())
+        for (ButtonElement* b : myShopUI->GetShopButtons())
         {
             myShop.Add((b));
         }
 
         myShop.Add(myShopCoinText);
         myShop.Add(myNextLevelButton);
+        myShop.Add(myShopFrames);
         myShop.Disable();
 
         myPausMenu.Add(myPausMenuBackground);
@@ -53,6 +54,7 @@ namespace Studio
         myOptionsMenu.Add(myOptionsMenuBackground);
         myOptionsMenu.Add(myVolumeSlider);
         myOptionsMenu.Add(myMasterVolumeLabelText);
+        myOptionsMenu.Add(myVolumeSliderBackground);
 
         std::string optionsMenuLabel = "Options";
         std::string masterVolumeLabel = "Master Volume";
@@ -137,6 +139,12 @@ namespace Studio
             mySettingsButton->SetActive(false);
         }
 
+        if (myNextLevelButton->IsClicked())
+        {
+            ResetShop();
+            myNextLevelButton->SetActive(false);
+        }
+
         myMasterVolumeSliderText->SetText(std::to_string( static_cast<int>(myVolumeSlider->fillPercentage * 100)));
     }
 
@@ -149,6 +157,22 @@ namespace Studio
         myMasterVolumeSliderText->Render();
         myMasterVolumeLabelText->Render();
 
+    }
+
+    void MenuManager::ResetShop()
+    {
+        myShopUI->ResetButtons();
+
+        myShop.Clear();
+        myShop.Add(myShopBackground);
+        for (ButtonElement* b : myShopUI->GetShopButtons())
+        {
+            myShop.Add((b));
+        }
+        myShop.Add(myShopFrames);
+        myShop.Add(myShopCoinText);
+        myShop.Add(myNextLevelButton);
+        myShop.Disable();
     }
 
     bool MenuManager::GameStarted()

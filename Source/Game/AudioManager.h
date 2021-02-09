@@ -28,7 +28,12 @@ namespace Studio
 		void RemoveFileFromEngine(AudioClip* aClip);
 		void RemoveAllAudioFromEngine();
 
+		void SetVolumeMultiplier(float aNewMultiplier);
+
 		bool IsCurrentlyPlaying(const char* aPath);
+
+	private:
+		float volumeMultiplier = 1;
 	};
 }
 

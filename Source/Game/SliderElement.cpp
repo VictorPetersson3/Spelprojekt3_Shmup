@@ -25,8 +25,6 @@ Studio::SliderElement::SliderElement(const char* aSpritePath, const VECTOR2F& aP
 	mySpriteSheet->SetPivot({ 0.0f,0.5f });
 	mySpriteSheet->SetLayer(aLayer);
 
-	
-
 	std::cout << myLeft << "" << myRight << std::endl;
 }
 
@@ -63,6 +61,7 @@ void Studio::SliderElement::Update()
 		mySpriteSheet->SetSize({ mySize.x * fillPercentage,mySize.y });
 
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
+		AudioManagerAccessor::GetInstance()->SetVolumeMultiplier(fillPercentage);
 	}
 
 }
