@@ -46,9 +46,7 @@ bool Studio::Module_Missile::DoStuff(Boss& aBoss)
 	}
 
 	Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Enemy, mySpawnPosition);
-
 	//printf("Missile Launched from boss\n");
-
 	return true;
 }
 

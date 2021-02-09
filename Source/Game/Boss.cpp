@@ -23,7 +23,7 @@
 namespace Studio
 {
 	Boss::Boss(const char* aImagePath, rapidjson::Value& aBossParameters) :
-		Boss::GameObject(aImagePath, 1000.0f),
+		Boss::GameObject(aImagePath, 200.0f),
 		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
 		mySpriteSheet.SetLayer(-1);
@@ -119,7 +119,7 @@ namespace Studio
 	void Boss::Update()
 	{
 
-		if (!IsDead() && myIntroMovementPlayed/* && !myIsTransitioning*/)
+		if (!IsDead() && myIntroMovementPlayed && !myIsTransitioning)
 		{
 
 			myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
@@ -147,8 +147,8 @@ namespace Studio
 				if (ShouldTransition())
 				{
 					//TODO Call transition between phase sprites or animations not SpriteSwitch
-					SwitchSprite();
-					//myIsTransitioning = true;
+					//SwitchSprite();
+					myIsTransitioning = true;
 				}
 			}
 			if (myShield != nullptr)
@@ -193,8 +193,8 @@ namespace Studio
 		if (myShield == nullptr)
 		{
 			myShield = aShield;
-			myShield->GetHealthBar()->SetSizeX(500.0f);
-			myShield->GetHealthBar()->SetSizeY(70.0f);
+			//myShield->GetHealthBar()->SetSizeX(450.0f);
+			//myShield->GetHealthBar()->SetSizeY(25.0f);
 		}
 	}
 
@@ -251,7 +251,7 @@ namespace Studio
 		SetGodMode(true);
 		VECTOR2F aDirection = myOriginalPosition - myPosition;
 
-		if (aDirection.y > myOriginalPosition.y - 10.0f && aDirection.y < myOriginalPosition.y + 10.0f)
+		if (aDirection.y > myOriginalPosition.y - 100.0f && aDirection.y < myOriginalPosition.y + 100.0f)
 		{
 			SwitchSprite();
 			myIsTransitioning = false;

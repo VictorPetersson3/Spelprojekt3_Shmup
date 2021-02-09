@@ -482,6 +482,7 @@ namespace Studio
 		myBackgroundManager->ClearBackground();
 		CoinAccessor::GetInstance()->ResetWorldCoins();
 		myPlayer->ResetPlayerCurrentLevel();
+		myBoss = nullptr;
 	}
 
 	const int LevelManager::GetCurrentLevelIndex() const { return myCurrentLevel; }

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Module_Shoot.h"
 #include "LevelAccessor.h"
+#include "PlayerAccessor.h"
 #include "Timer.h"
 
 Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
@@ -106,7 +107,15 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 	myElapsedTime += Studio::Timer::GetInstance()->TGetDeltaTime();
 	if (myCounter.PastInterval())
 	{
-		Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition);
+		if (myShootTowardsPlayer)
+		{
+			VECTOR2F direction = Studio::PlayerAccessor::GetInstance()->GetPosition() - *aBoss.GetPosition();
+			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition, direction);
+		}
+		else
+		{
+			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition);
+		}
 		//printf("Spawned Bullet\n");
 	}
 	if (myElapsedTime >= myActiveDuration)

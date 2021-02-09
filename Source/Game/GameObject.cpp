@@ -9,13 +9,13 @@ namespace Studio
 	}
 
 	GameObject::GameObject(const std::string& anImagePath) :
-		myHealth(100), // Maybe this should be set somewhere???
+		myHealth(1), // Maybe this should be set somewhere???
 		mySpriteSheet(anImagePath.c_str())
 	{
 	}
 
 	GameObject::GameObject(const std::string& anImagePath, const Tga2D::Vector2f& aAmountOfFrames) :
-		myHealth(100),
+		myHealth(1),
 		mySpriteSheet(anImagePath.c_str(), aAmountOfFrames)
 	{
 	}

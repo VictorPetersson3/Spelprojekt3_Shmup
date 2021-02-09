@@ -16,7 +16,7 @@ namespace Studio
 		GameObject::GetSpriteSheet().SetLayer(aLayer);
 		SetGodMode(true);
 		myOriginalX = 450.0f;
-		myOriginalY = 50.0f;
+		myOriginalY = 25.0f;
 	}
 
 	HealthBar::HealthBar(const char* aImagePath, const VECTOR2F& aPosition, const int aLayer, Tga2D::CColor aColor) :
@@ -27,6 +27,8 @@ namespace Studio
 		GameObject::GetSpriteSheet().SetPivot({ 0.0f, 0.5f });
 		GameObject::GetSpriteSheet().SetLayer(aLayer);
 		SetGodMode(true);
+		myOriginalX = 450.0f;
+		myOriginalY = 25.0f;
 	}
 
 	HealthBar::~HealthBar()
