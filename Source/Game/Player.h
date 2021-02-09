@@ -31,8 +31,10 @@ namespace Studio
 		void UpgradeT3(Enums::Tier3Upgrades aTier3Upgrade);
 		void ResetPlayerCurrentLevel();
 		void TakeShieldDamage(int someDamage);
-		bool HasPenetratingRounds();
+		bool GetHasPenetratingRounds();
 		bool GetIsShieldActive();
+		bool GetHasClusterBombs();
+		bool GetHasExplodingShield();
 
 		Player_JsonParser* GetPlayerData();
 	private:
@@ -85,6 +87,7 @@ namespace Studio
 		bool myHasPenetratingRounds = false;
 		bool myHasPurchasedPenetratingRounds = false;
 		bool myHasPurchasedShieldExplosion = false;
+		bool myHasPurchasedClusterBombs = false;
 
 		//Shield
 		bool myShieldIsActive = false;

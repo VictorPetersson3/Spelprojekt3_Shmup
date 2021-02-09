@@ -267,7 +267,7 @@ namespace Studio
 		GameObject::SetPosition(myPosition);
 	}
 
-	bool Player::HasPenetratingRounds()
+	bool Player::GetHasPenetratingRounds()
 	{
 		return myHasPenetratingRounds;
 	}
@@ -598,6 +598,14 @@ namespace Studio
 	bool Studio::Player::GetIsShieldActive()
 	{
 		return myShieldIsActive;
+	}
+	bool Studio::Player::GetHasClusterBombs()
+	{
+		return myHasPurchasedClusterBombs;
+	}
+	bool Studio::Player::GetHasExplodingShield()
+	{
+		return myHasPurchasedShieldExplosion;
 	}
 	Player_JsonParser* Studio::Player::GetPlayerData()
 	{

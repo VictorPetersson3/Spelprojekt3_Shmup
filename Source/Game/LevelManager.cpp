@@ -172,7 +172,7 @@ namespace Studio
 	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition, const float aDamage)
 	{
 		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition, aDamage);
-		if (myPlayer->HasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
+		if (myPlayer->GetHasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
 		{
 			bullet->SetIsPenetrating();
 		}
@@ -182,7 +182,7 @@ namespace Studio
 	void LevelManager::SpawnBullet(const std::string& aType, VECTOR2F aPosition, const VECTOR2F& aDirection, const float aDamage)
 	{
 		Bullet* bullet = myBulletFactory->CreateBulletObject(aType, aPosition, aDirection, aDamage);
-		if (myPlayer->HasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
+		if (myPlayer->GetHasPenetratingRounds() && bullet->GetOwner() == Enums::BulletOwner::Player)
 		{
 			bullet->SetIsPenetrating();
 		}
