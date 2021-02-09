@@ -7,7 +7,8 @@
 #include "LevelManager.h"
 #include <string>
 #include "InputManager.h"
-
+#include "LevelSelect.h"
+#include "Timer.h"
 #define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
 namespace Studio
@@ -15,7 +16,7 @@ namespace Studio
     Studio::MenuManager::MenuManager(Studio::Player* aPlayer)
     {
         myShopUI = new Studio::ShopUI();
-
+        myLevelSelect = new Studio::LevelSelect(this);
         myMainMenu.Add(myStartButton);
         myMainMenu.Add(myMainMenuBackground);
         myMainMenu.Add(myMainMenuLogo);
@@ -101,6 +102,7 @@ namespace Studio
         myShop.Update();
         myPausMenu.Update();
         myOptionsMenu.Update();
+        myLevelSelect->Update();
 
         if (myIsLoading && hasStartedGame)
         {
@@ -136,7 +138,15 @@ namespace Studio
             myOptionsMenu.Enable();
             mySettingsButton->SetActive(false);
         }
-
+        if (myLevelSelectButton->IsClicked())
+        {
+            myLevelSelect->Enable();
+            myMainMenu.Disable();
+        }
+        if (myExitButton->IsClicked())
+        {
+            Tga2D::CEngine::GetInstance()->Shutdown();
+        }
         myMasterVolumeSliderText->SetText(std::to_string( static_cast<int>(myVolumeSlider->fillPercentage * 100)));
     }
 
@@ -148,7 +158,6 @@ namespace Studio
         myOptionsMenuTitleText->Render();
         myMasterVolumeSliderText->Render();
         myMasterVolumeLabelText->Render();
-
     }
 
     bool MenuManager::GameStarted()
@@ -194,4 +203,28 @@ namespace Studio
             LEVELMANAGER->LoadLevel(myLevelToLoad);
         }
     }
+    void MenuManager::StartGame()
+    {
+        hasStartedGame = true;
+        myHud.Enable();
+        myMainMenu.Disable();
+        if (Studio::Timer::GetInstance()->IsFrozen())
+        {
+            Studio::Timer::GetInstance()->ToggleFreeze();
+        }
+    }
+
+    void MenuManager::QuitGameSession()
+    {
+        myMainMenu.Enable();
+        myPausMenu.Disable();
+        myOptionsMenu.Disable();
+        myHud.Disable();
+        hasStartedGame = false;
+        if (Studio::Timer::GetInstance()->IsFrozen())
+        {
+            Studio::Timer::GetInstance()->ToggleFreeze();
+        }
+    }
+
 }

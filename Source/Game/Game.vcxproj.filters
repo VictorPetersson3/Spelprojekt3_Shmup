@@ -247,10 +247,11 @@
     <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="LevelSelectButton.cpp" />
     <ClCompile Include="Cutscenes.cpp" />
-    <ClCompile Include="VideoPlayer.cpp">
-      <Filter>Components\Visual</Filter>
-    </ClCompile>
+    <ClCompile Include="VideoPlayer.cpp" />
     <ClCompile Include="VideoPlayerAccessor.cpp" />
+    <ClCompile Include="LevelSelect.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -511,10 +512,11 @@
     <ClInclude Include="GoToMainMenuButton.h" />
     <ClInclude Include="LevelSelectButton.h" />
     <ClInclude Include="Cutscenes.h" />
-    <ClInclude Include="VideoPlayer.h">
-      <Filter>Components\Visual</Filter>
-    </ClInclude>
+    <ClInclude Include="VideoPlayer.h" />
     <ClInclude Include="VideoPlayerAccessor.h" />
+    <ClInclude Include="LevelSelect.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

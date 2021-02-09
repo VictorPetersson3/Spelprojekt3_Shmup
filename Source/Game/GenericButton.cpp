@@ -7,7 +7,9 @@
 #include "AudioManager.h"
 #include "Renderer.h"
 #include "RendererAccessor.h"
+#include "Timer.h"
 
+#define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::GenericButton::GenericButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer)
 {
 	mySprite = new Tga2D::CSprite(aSpritePath);
@@ -21,12 +23,17 @@ Studio::GenericButton::GenericButton(const char* aSpritePath, const VECTOR2F aPo
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
 
-	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
-	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
-	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
-	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
+	Tga2D::Vector2f spawnPos;
+	spawnPos.x = aPosition.x + (static_cast<float>(mySprite->GetImageSize().x) * (aPivot.x - 0.5)) * -1.0f;
+	spawnPos.y = aPosition.y + (static_cast<float>(mySprite->GetImageSize().y) * (aPivot.y - 0.5)) * -1.0f;
+	myLeft = spawnPos.x - (mySprite->GetImageSize().x * 0.45f);
+	myRight = spawnPos.x + (mySprite->GetImageSize().x * 0.45f);
+	myTop = spawnPos.y - (mySprite->GetImageSize().y * 0.45f);
+	myBottom = spawnPos.y + (mySprite->GetImageSize().y * 0.45f);
 
 	tag = aTag;
+	mySize = 1;
+	mySizeTimer = 0;
 }
 
 Studio::GenericButton::~GenericButton()
@@ -39,27 +46,25 @@ Studio::GenericButton::~GenericButton()
 
 void Studio::GenericButton::Update()
 {
-	myWindowHandle = GetForegroundWindow();
-
-	POINT pt;
-	GetCursorPos(&pt);
-	ScreenToClient(myWindowHandle, &pt);
-
+	if (mySizeTimer <= 0.05f && hasBeenHoveredOver)
+	{
+		mySize += Studio::Timer::GetInstance()->TGetDeltaTime();
+		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
+	}
 
 	if (myIsEnabled == true)
 	{
 		if (myIsClicked == false)
 		{
-			if (pt.x >= myLeft && pt.x <= myRight)
+			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
-				if (pt.y >= myTop && pt.y <= myBottom)
+				if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
 				{
 					if (!hasBeenHoveredOver)
 					{
 						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
 						hasBeenHoveredOver = true;
 					}
-
 
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
@@ -70,12 +75,16 @@ void Studio::GenericButton::Update()
 				}
 				else
 				{
+					mySize = 1; 
+					mySizeTimer = 0;
 					hasBeenHoveredOver = false;
 				}
 			}
 			else
 			{
-				hasBeenHoveredOver = false;
+				hasBeenHoveredOver = false; 
+				mySize = 1;
+				mySizeTimer = 0;
 			}
 		}
 
@@ -83,7 +92,7 @@ void Studio::GenericButton::Update()
 		{
 			myIsClicked = false;
 		}
-
+		mySpriteSheet->SetSizeRelativeToImage({ mySize, mySize });
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 	}
 }

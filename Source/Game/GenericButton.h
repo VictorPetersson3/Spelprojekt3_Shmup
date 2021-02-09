@@ -14,7 +14,8 @@ namespace Studio
 		bool IsClicked();
 
 	private:
-
+		float mySizeTimer;
+		float mySize;
 	};
 }
 

@@ -19,6 +19,7 @@
 
 namespace Studio
 {
+	class LevelSelect;
 	class LevelManager;
 	class MenuManager
 	{
@@ -42,6 +43,8 @@ namespace Studio
 		void SetPlayButtonIndex(const int aIndex);
 		void SetNextLevelIndex(const int aIndex);
 		void Load();
+		void StartGame();
+		void QuitGameSession();
 
 	private:
 
@@ -98,7 +101,9 @@ namespace Studio
 
 
 
-		LevelSelectButton* myLevelSelectButton = new LevelSelectButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
+		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
+	
+		LevelSelect* myLevelSelect;
 	};
 
 

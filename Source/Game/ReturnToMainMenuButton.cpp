@@ -92,14 +92,6 @@ void Studio::ReturnToMainMenuButton::Update()
 
 void Studio::ReturnToMainMenuButton::OnClick()
 {
-	MenuManagerSingleton::GetInstance()->GetPauseMenu()->Disable();
-	//MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
-	//MenuManagerSingleton::GetInstance()->GetOptionsMenu()->Disable();
-
-	MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
-	MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
-	MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
-
+	MenuManagerSingleton::GetInstance()->QuitGameSession();
 	LevelAccessor::GetInstance()->ClearLevel();
-	MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
 }
