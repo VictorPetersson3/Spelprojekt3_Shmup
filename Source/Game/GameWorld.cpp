@@ -21,8 +21,7 @@
 #include "MenuObject.h"
 #include "ButtonElement.h"
 #include "GenericButton.h"
-#include "Cutscenes.h"
-#include "VideoPlayer.h"
+#include "VideoPlayerAccessor.h"
 
 CGameWorld::CGameWorld()
 {
@@ -38,7 +37,6 @@ CGameWorld::~CGameWorld()
 	SAFE_DELETE(myLevelManager);
 	SAFE_DELETE(myMenuManager);
 	SAFE_DELETE(myPlayerData);
-	SAFE_DELETE(myCutscenes);
 }
 
 void CGameWorld::Init()
@@ -82,19 +80,19 @@ void CGameWorld::Init()
 	Studio::LevelAccessor::SetInstance(myLevelManager);
 	myMenuManager->SetPlayButtonIndex(myLevelManager->GetCurrentLevelIndex());
 
-	SAFE_CREATE(myCutscenes, Studio::Cutscenes());
-	//myCutscenes->PlayScene(Studio::Enums::Cutscene::Logos);
-
 	SAFE_CREATE(myVideoPlayer, Studio::VideoPlayer());
+	Studio::VideoPlayerAccessor::SetInstance(myVideoPlayer);
+	//myVideoPlayer->PlayVideo(Studio::Enums::Video::Logos);
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 {
 	InputStuff();
-	if (myCutscenes->IsCurrentyPlaying())
+
+	if (myVideoPlayer->IsPlaying())
 	{
-		myCutscenes->UpdateCurrentScene();
+		myVideoPlayer->Update();
 	}
 	else
 	{
@@ -116,9 +114,15 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
 
 void CGameWorld::Render()
 {
-	//myTga2dLogoSprite->Render();
-	myRenderer.Render();
-	myMenuManager->Render();
+	if (myVideoPlayer->IsPlaying())
+	{
+		myVideoPlayer->Render();
+	}
+	else
+	{
+		myRenderer.Render();
+		myMenuManager->Render();
+	}
 }
 
 void CGameWorld::SwapBuffers()

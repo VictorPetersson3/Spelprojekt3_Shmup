@@ -250,6 +250,7 @@
     <ClCompile Include="VideoPlayer.cpp">
       <Filter>Components\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="VideoPlayerAccessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -513,6 +514,7 @@
     <ClInclude Include="VideoPlayer.h">
       <Filter>Components\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="VideoPlayerAccessor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

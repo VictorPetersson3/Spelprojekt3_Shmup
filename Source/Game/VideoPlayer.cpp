@@ -7,7 +7,8 @@ namespace Studio
 {
 	VideoPlayer::VideoPlayer()
 	{
-		SAFE_CREATE(myVideo, Tga2D::CVideo());
+		myVideo = nullptr;
+		myIsPlaying = false;
 	}
 	VideoPlayer::~VideoPlayer()
 	{
@@ -15,8 +16,15 @@ namespace Studio
 	}
 	void VideoPlayer::Update()
 	{
-		myVideo->Update(DELTA_TIME);
 		myIsPlaying = myVideo->GetStatus() == Tga2D::VideoStatus_Playing;
+		if (myIsPlaying)
+		{
+			myVideo->Update(DELTA_TIME);
+		}
+		else
+		{
+			UnloadVideo();
+		}
 	}
 	void VideoPlayer::Render()
 	{
@@ -26,16 +34,55 @@ namespace Studio
 	{
 		return myIsPlaying;
 	}
+	void VideoPlayer::PlayVideo(const Enums::Video& aVideoToPlay)
+	{
+		switch (aVideoToPlay)
+		{
+		case Enums::Video::Logos:
+		{
+			// TODO: Change to correct .mp4
+			PlayVideo("Vidoes/Look At All Those Chickens.mp4");
+			break;
+		}
+		case Enums::Video::Intro:
+		{
+			// TODO: Change to correct .mp4
+			PlayVideo("Vidoes/Shortest Video on Youtube.mp4");
+			break;
+		}
+		case Enums::Video::Outro:
+		{
+			// TODO: Change to correct .mp4
+			PlayVideo("Vidoes/Dog Sleep Farting Makes Cat Angry.mp4");
+			break;
+		}
+		default:
+			break;
+		}
+	}
 	void VideoPlayer::PlayVideo(const std::string& aVideoPath)
 	{
+		printf_s("Video: Tries to play \"%s\"\n", aVideoPath.c_str());
+
 		myIsPlaying = true;
 		LoadVideo(aVideoPath);
 		myVideo->Play();
+
+		printf_s("Video: %s\n", IsPlaying() ? "Succeeded" : "Failed");
 	}
 	void VideoPlayer::LoadVideo(const std::string& aVideoPath)
 	{
+		UnloadVideo();
+		SAFE_CREATE(myVideo, Tga2D::CVideo());
 		myVideo->Init(aVideoPath.c_str());
 		myVideo->GetSprite()->SetPosition({ 0.0f, 0.0f });
 		myVideo->GetSprite()->SetSizeRelativeToScreen({ 16.0f / 9.0f, 1.0f });
+	}
+	void VideoPlayer::UnloadVideo()
+	{
+		if (myVideo != nullptr)
+		{
+			SAFE_DELETE(myVideo);
+		}
 	}
 }

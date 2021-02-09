@@ -96,7 +96,15 @@ namespace Studio
 			Shield
 		};
 
+		// TODO: Remove this
 		enum class Cutscene
+		{
+			Logos,
+			Intro,
+			Outro
+		};
+
+		enum class Video
 		{
 			Logos,
 			Intro,
