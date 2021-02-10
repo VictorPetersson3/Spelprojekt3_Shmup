@@ -27,9 +27,14 @@ namespace Studio
 		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
 		mySpriteSheet.SetLayer(-1);
-		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ 1.0f,1.0f });
+
+		//incase there is no enrage condition
 		myEnrageCondition = nullptr;
+
+		//StartPosition outside of screen for intro movement
 		myPosition = { 2050.0f, 540.0f };
+
+		//CollisionObjects
 		Boss::GameObject::GetCollider().AddCircleColliderObject({10.0f,-20.0f }, 280.0f);
 		Boss::GameObject::GetCollider().AddCircleColliderObject({90.0f,-310.0f }, 30.0f);
 		Boss::GameObject::GetCollider().AddBoxColliderObject({ 220.0f, 257.0f }, { 135.0f, 305.0f });
@@ -51,22 +56,22 @@ namespace Studio
 						printf_s("Timed Condition is only for enrage timer and you cant have two enrage Condition\n");
 					}
 				}
-				else if (type.compare("BelowHealth") == 0)
+				if (type.compare("BelowHealth") == 0)
 				{
 					myConditions.push_back(new Condition_BelowHealth(conditions[i]));
 				}
-				else if (type == "Once")
+				if (type == "Once")
 				{
 					myConditions.push_back(new Condition_DoOnce(conditions[i]));
 				}
-				else if (type == "Time")
+				if (type == "Time")
 				{
 					myConditions.push_back(new Condition_Time(conditions[i]));
 				}
-				else
-				{
-					printf("Condition type: %s Is corrupted or not implemented yet\n", conditions[i]["Type"].GetString());
-				}
+				//else
+				//{
+				//	printf("Condition type: %s Is not implemented\n", conditions[i]["Type"].GetString());
+				//}
 			}
 		}
 
@@ -81,10 +86,6 @@ namespace Studio
 		}
 		SAFE_CREATE(myIntroMovement, MovementStraight(&myPosition, 50.0f));
 
-		myTotalFightTime = 0.0f;
-		myCurrentPhase = 0;
-
-
 		if (myEnrageCondition != nullptr)
 		{
 			myPhaseAmount = myPhases.size() - 1;
@@ -93,11 +94,16 @@ namespace Studio
 		{
 			myPhaseAmount = myPhases.size();
 		}
+
 		myShield = nullptr;
 		myMovement = nullptr;
 		myIntroMovementPlayed = true;
 		myIsTransitioning = false;
 		SetGodMode(true);
+
+		myTotalFightTime = 0.0f;
+		myCurrentPhase = 0;
+
 	}
 
 	Boss::~Boss()
@@ -120,73 +126,55 @@ namespace Studio
 	void Boss::Update()
 	{
 
-		if (!IsDead() && myIntroMovementPlayed && !myIsTransitioning)
+		if (!IsDead())
 		{
-
-			myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
-			if (CheckEnrageCondition())
+			if (!myIntroMovementPlayed)
 			{
-				myCurrentPhase = myPhaseAmount - 1;
+				SetGodMode(true);
+
+				PlayIntroMovement();
 			}
-
-
-			myPhases[myCurrentPhase]->PlayModules(this);
-			if (myMovement != nullptr)
+			else if (myIsTransitioning)
 			{
-				myMovement->Update();
+				SetGodMode(true);
+
+				PlayTransition();
 			}
-
-			Boss::GameObject::Update(myPosition);
-			myHealthBar.Update(GetHealth());
-
-			//Plays the Modules in the current phase
-
-			if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 1)
+			else
 			{
-				++myCurrentPhase;
-				printf("Changed to Phase: %i\n", myCurrentPhase);
-				if (ShouldTransition())
+				myTotalFightTime += Timer::GetInstance()->TGetDeltaTime();
+				if (CheckEnrageCondition())
 				{
-					//TODO Call transition between phase sprites or animations not SpriteSwitch
-					//SwitchSprite();
-					myIsTransitioning = true;
+					myCurrentPhase = myPhaseAmount - 1;
+				}
+
+				if (myMovement != nullptr)
+				{
+					myMovement->Update();
+				}
+
+				myPhases[myCurrentPhase]->PlayModules(this);
+
+				if (CheckCurrentPhaseCondition() && myCurrentPhase < myPhaseAmount - 1)
+				{
+					CheckTransition();
+				}
+				
+				//Om bossen försvinner skyll på det här...
+				if (myPosition.x < -150.0f)
+				{
+					SetPosition({ 2050.0f , myPosition.y });
 				}
 			}
+			//Update to render everything
+			RendererAccessor::GetInstance()->Render(*this);
+			Boss::GameObject::Update(myPosition);
+			myHealthBar.Update(GetHealth());
 			if (myShield != nullptr)
 			{
 				myShield->Update();
 			}
-			RendererAccessor::GetInstance()->Render(*this);
 		}
-		else if (!myIntroMovementPlayed)
-		{
-			PlayIntroMovement();
-		}
-		else if (myIsTransitioning)
-		{
-			PlayTransition();
-		}
-	}
-
-	void Boss::UpdateMovement(Movement* aMovement)
-	{
-		if (myMovement != nullptr)
-		{
-			SAFE_DELETE(myMovement);
-		}
-		myMovement = aMovement;
-	}
-
-	void Boss::PlayIntroMovement()
-	{
-		myIntroMovement->Update();
-		Boss::GameObject::Update(myPosition);
-		if (myPosition.x <= myOriginalPosition.x)
-		{
-			myIntroMovementPlayed = true;
-			SetGodMode(false);
-		}
-		RendererAccessor::GetInstance()->Render(*this);
 	}
 
 	void Boss::ActivateShield(Shield* aShield)
@@ -194,8 +182,6 @@ namespace Studio
 		if (myShield == nullptr)
 		{
 			myShield = aShield;
-			//myShield->GetHealthBar()->SetSizeX(450.0f);
-			//myShield->GetHealthBar()->SetSizeY(25.0f);
 		}
 	}
 
@@ -216,49 +202,44 @@ namespace Studio
 
 	}
 
-	bool Boss::CheckCurrentPhaseCondition()
+	void Boss::UpdateMovement(Movement* aMovement)
 	{
-		return myConditions.at(myCurrentPhase)->IsDone(*this);
-	}
-
-	bool Boss::GetCurrentPhaseHasPlayedOnce()
-	{
-		return myPhases[myCurrentPhase]->HavePlayedOnce();
-	}
-
-	bool Boss::CheckEnrageCondition()
-	{
-		if (myEnrageCondition != nullptr)
+		if (myMovement != nullptr)
 		{
-			return myEnrageCondition->IsDone(*this);
+			SAFE_DELETE(myMovement);
 		}
-		else
+		myMovement = aMovement;
+	}
+
+	void Boss::PlayIntroMovement()
+	{
+		myIntroMovement->Update();
+		if (myPosition.x <= myOriginalPosition.x)
 		{
-			return false;
+			myIntroMovementPlayed = true;
+			SetGodMode(false);
 		}
 	}
 
-	bool Boss::ShouldTransition()
+	void Boss::CheckTransition()
 	{
+		++myCurrentPhase;
+		printf("Changed to Phase: %i\n", myCurrentPhase);
+
 		if (myCurrentPhase == 3 || myCurrentPhase == 6)
 		{
-			return true;
+			myIsTransitioning = true;
 		}
-		return false;
 	}
 
 	void Boss::PlayTransition()
 	{
-		SetGodMode(true);
-		
 		if (ReturnToOriginalPosition())
 		{
 			SwitchSprite();
 			myIsTransitioning = false;
 			SetGodMode(false);
 		}
-		Boss::GameObject::Update(myPosition);
-		RendererAccessor::GetInstance()->Render(*this);
 		//TODO add playing of correct transition
 	}
 
@@ -286,6 +267,25 @@ namespace Studio
 		{
 			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_03.dds");
 		}
+	}
+
+	bool Boss::CheckCurrentPhaseCondition()
+	{
+		return myConditions.at(myCurrentPhase)->IsDone(*this);
+	}
+
+	bool Boss::GetCurrentPhaseHasPlayedOnce()
+	{
+		return myPhases[myCurrentPhase]->HavePlayedOnce();
+	}
+
+	bool Boss::CheckEnrageCondition()
+	{
+		if (myEnrageCondition != nullptr)
+		{
+			return myEnrageCondition->IsDone(*this);
+		}
+		return false;
 	}
 
 	float Boss::GetTotalBossTime()

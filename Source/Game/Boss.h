@@ -29,7 +29,7 @@ namespace Studio
 		//Tänk på en ny lösning när du får tid
 		bool GetCurrentPhaseHasPlayedOnce();
 		bool CheckEnrageCondition();
-		bool ShouldTransition();
+		void CheckTransition();
 
 
 		//Legacy Boss "Swedish Abilities"

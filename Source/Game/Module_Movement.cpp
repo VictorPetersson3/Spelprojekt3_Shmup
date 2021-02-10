@@ -74,7 +74,6 @@ bool Studio::Module_Movement::DoStuff(Boss& aBoss)
 		default:
 			break;
 		}
-		printf("Changed Movement\n");
 		myHasChangedPhaseMovement = true;
 	}
 	return true;
