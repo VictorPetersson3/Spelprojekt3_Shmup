@@ -574,6 +574,7 @@ namespace Studio
 		myShieldHealth = myPlayerData->GetShieldHealth();
 		myShieldIsActive = true;
 		myShieldCurrentCooldown = 0.f;
+		AudioManagerAccessor::GetInstance()->Play2D("Audio/Shield.mp3", false, 0.2f);
 	}
 	void Studio::Player::ShieldIsActive()
 	{
