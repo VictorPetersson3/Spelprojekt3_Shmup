@@ -31,6 +31,7 @@ namespace Studio
 		void SpawnBullet(const std::string& aType, VECTOR2F aPosition, const VECTOR2F& aDirection, const float aDamage);
 		void SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius, const float aDamageAmount, const float aExplosionDamageAmount);
 		void SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius);
+		void SpawnTimedBomb(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aVelocity, const float aBlastRadius, const float aDamage);
 		bool LevelIsCleared();
 		void LoadLevel(const int aLevelIndex);
 		void ReloadLevel();

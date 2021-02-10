@@ -3,7 +3,8 @@
 #include "TypePattern_Bullet.h"
 #include "Timer.h"
 #include "LevelAccessor.h"
-#include "tga2d/sprite/sprite.h"
+#include "PlayerAccessor.h"
+#include <tga2d/sprite/sprite.h>
 namespace Studio
 {
 	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius)
@@ -102,5 +103,24 @@ namespace Studio
 	{
 		printf_s("Missile impacted!\n");
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
+
+		if (myTypePattern->GetOwner() == Enums::BulletOwner::Player
+			//&& PlayerAccessor::GetInstance()->GetHasClusterBombs()
+			)
+		{
+			float angle = 180.0f / MATH_PI * 90.0f;
+			for (float degree = 0.0f; degree < 6.0f; degree++)
+			{
+				float angle = (2.0f * MATH_PI) / 6.0f * degree;
+
+				LevelAccessor::GetInstance()->SpawnTimedBomb(myPosition,
+					{
+						cos(angle) * 250.0f,
+						sin(angle) * 250.0f
+					},
+					myExplosionRadius * 0.5f,
+					myDamage * 0.5f);
+			}
+		}
 	}
 }

@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "Missile.h"
 #include "AOEBullet.h"
+#include "TimedBomb.h"
 namespace Studio
 {
 	BulletFactory::~BulletFactory()
@@ -45,5 +46,9 @@ namespace Studio
 	{
 		auto aoeBullet = new AOEBullet(aOwner, aPosition, aRadius);
 		return aoeBullet;
+	}
+	TimedBomb* BulletFactory::CreateTimedBomb(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aVelocity, const float aBlastRadius, const float aDamage)
+	{
+		return new TimedBomb(aPosition, aVelocity, aBlastRadius, aDamage);
 	}
 }

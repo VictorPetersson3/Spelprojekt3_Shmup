@@ -24,6 +24,7 @@ namespace Studio
 		Enums::BulletOwner GetOwner() const;
 		void SetOwner(const Enums::BulletOwner& aNewOwner);
 		const bool ShouldDeleteThis() const;
+		void ShouldDeleteThis(const bool aDeleteIt);
 
 	protected:
 		std::vector<GameObject*> myHitEnemies;

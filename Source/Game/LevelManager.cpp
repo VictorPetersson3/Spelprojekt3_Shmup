@@ -13,6 +13,7 @@
 #include "Bullet.h"
 #include "Missile.h"
 #include "AOEBullet.h"
+#include "TimedBomb.h"
 #include "Pack.h"
 #include "EnemyFactory.h"
 #include "BulletFactory.h"
@@ -255,41 +256,43 @@ namespace Studio
 	void LevelManager::LevelLogic()
 	{
 		UpdateEnemies();
-		// Copy & Paste from Jimmi
-		for (Bullet* bullet : myBullets)
-		{
-			bullet->Update();
-
-			Studio::RendererAccessor::GetInstance()->Render(*bullet);
-		}
-
 		for (int i = myBullets.size() - 1; i >= 0; i--)
 		{
-			if (myBullets[i]->GetPosition().x > 1920 || myBullets[i]->GetPosition().x < 0 || myBullets[i]->GetPosition().y < 0 || myBullets[i]->GetPosition().y > 1080)
-			{
-				if (i != myBullets.size() - 1)
-				{
-					std::swap(myBullets[i], myBullets.back());
-					SAFE_DELETE(myBullets.back());
-					myBullets.pop_back();
-				}
-			}
+			myBullets[i]->Update();
 		}
 
 		//Pu
 		CheckCollision();
 
+		for (int i = myBullets.size() - 1; i >= 0; i--)
+		{
+			if (myBullets[i]->GetPosition().x > 1920 || myBullets[i]->GetPosition().x < 0 || myBullets[i]->GetPosition().y < 0 || myBullets[i]->GetPosition().y > 1080)
+			{
+				myBullets[i]->ShouldDeleteThis(true);
+				/*if (i != myBullets.size() - 1)
+				{
+					std::swap(myBullets[i], myBullets.back());
+				}
+				SAFE_DELETE(myBullets.back());
+				myBullets.pop_back();*/
+			}
+		}
+
 		// Remove bullets that's supposed to be deleted
-		for (size_t i = 0; i < myBullets.size(); i++)
+		for (int i = myBullets.size() - 1; i >= 0; i--)
 		{
 			if (myBullets[i]->ShouldDeleteThis())
 			{
-				if (i != myBullets.size() - 1)
+				if ((i) != myBullets.size() - 1)
 				{
 					std::swap(myBullets[i], myBullets.back());
 				}
 				SAFE_DELETE(myBullets.back());
 				myBullets.pop_back();
+			}
+			else
+			{
+				Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
 			}
 		}
 
@@ -609,5 +612,10 @@ namespace Studio
 	{
 		auto aoeBullet = myBulletFactory->CreateAOEBullet(aOwner, aPosition, aRadius);
 		myBullets.push_back(aoeBullet);
+	}
+	void LevelManager::SpawnTimedBomb(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aVelocity, const float aBlastRadius, const float aDamage)
+	{
+		auto bomb = myBulletFactory->CreateTimedBomb(aPosition, aVelocity, aBlastRadius, aDamage);
+		myBullets.push_back(bomb);
 	}
 }

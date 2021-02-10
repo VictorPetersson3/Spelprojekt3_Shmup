@@ -252,6 +252,9 @@
     <ClCompile Include="LevelSelect.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="ShopButtonTier3.cpp" />
+    <ClCompile Include="CutsceneAccessor.cpp" />
+    <ClCompile Include="TimedBomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -517,6 +520,9 @@
     <ClInclude Include="LevelSelect.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="ShopButtonTier3.h" />
+    <ClInclude Include="CutsceneAccessor.h" />
+    <ClInclude Include="TimedBomb.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
