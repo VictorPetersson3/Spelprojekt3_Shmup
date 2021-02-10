@@ -14,6 +14,8 @@
 #include "PowerUpModule.h"
 #include "AudioManagerAccesor.h"
 #include "AudioManager.h"
+#include "MenuManagerSingleton.h"
+
 
 #define SPRITESHEET GameObject::GetSpriteSheet()
 
@@ -35,15 +37,15 @@ namespace Studio
 		myTimeSinceLastShot = 0.f;
 		myBounceBackTime = 0.25;
 		myShieldCurrentActiveTime = 0.f;
-		myShieldCurrentCooldown = myPlayerData->GetShieldCooldown();
+		myShieldCurrentCooldown = 0.f;
 		myShieldHealth = somePlayerData->GetShieldHealth();
 		myAmountOfProjectiles = 1;
 
-		myMissileCurrentCooldown = myPlayerData->GetMissileCooldown();
+		myMissileCurrentCooldown = 0.f;
 
 		mySpeed = somePlayerData->GetMinSpeed();
 		myRapidFireMaxActiveTime = somePlayerData->GetRapidFireMaxActiveTime();
-		myRapidFireCurrentCooldown = somePlayerData->GetRapidFireMaxCooldown();
+		myRapidFireCurrentCooldown = 0.f;
 		GetCollider().AddCircleColliderObject({0,0}, 20);
 
 		myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::Shield));
@@ -93,6 +95,8 @@ namespace Studio
 
 			ShieldLogic();
 
+			MenuManagerSingleton::GetInstance()->GreyOutAbilitiesOnCooldown(myRapidFireCurrentCooldown, myMissileCurrentCooldown, myShieldCurrentCooldown);
+
 			Studio::RendererAccessor::GetInstance()->Render(*this);
 		}
 
@@ -140,11 +144,11 @@ namespace Studio
 			// TODO: Don't do this all the time
 
 		}
-		myMissileCurrentCooldown += Timer::GetInstance()->TGetDeltaTime();
-		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_Explosive) && myMissileCurrentCooldown > myPlayerData->GetMissileCooldown())
+		myMissileCurrentCooldown -= Timer::GetInstance()->TGetDeltaTime();
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_Explosive) && myMissileCurrentCooldown <= 0)
 		{
 			LaunchMissile();
-			myMissileCurrentCooldown = 0.f;
+			myMissileCurrentCooldown = myPlayerData->GetMissileCooldown();
 		}
 	}
 
@@ -494,9 +498,9 @@ namespace Studio
 	//Check if key is pressed and cooldown has expired
 	void Player::ActivateRapidFire()
 	{
-		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_RapidFire) && myRapidFireCurrentCooldown > myPlayerData->GetRapidFireMaxCooldown())
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKeys::CustomKey_RapidFire) && myRapidFireCurrentCooldown <= 0)
 		{
-			myRapidFireCurrentCooldown = 0.f;
+			myRapidFireCurrentCooldown = myPlayerData->GetRapidFireMaxCooldown() + myPlayerData->GetRapidFireMaxActiveTime();
 			myRapidFireIsActive = true;
 			if (myHasPurchasedPenetratingRounds)
 			{
@@ -516,9 +520,9 @@ namespace Studio
 		else
 		{
 			myRapidFireCurrentlyActiveTime = 0.f;
-
-			myRapidFireCurrentCooldown += Timer::GetInstance()->TGetDeltaTime();
 		}
+		myRapidFireCurrentCooldown -= Timer::GetInstance()->TGetDeltaTime();
+
 	}
 	//check if RapidFire is active for as long as it is allowed to be active, then deactive itand bring back baseline attack speed.
 	void Player::DeactivateRapidFire()
@@ -545,7 +549,7 @@ namespace Studio
 	}
 	void Studio::Player::ShieldLogic()
 	{
-		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown >= myPlayerData->GetShieldCooldown())
+		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown <= 0)
 		{
 			ActivateShield();
 		}
@@ -553,14 +557,12 @@ namespace Studio
 		{
 			ShieldIsActive();
 		}
-		else
-		{
-			myShieldCurrentCooldown += Timer::GetInstance()->TGetDeltaTime();
-		}
 		if (myShieldHealth <= 0 || myShieldCurrentActiveTime > myPlayerData->GetShieldDuration())
 		{
 			DeactivateShield();
 		}
+		myShieldCurrentCooldown -= Timer::GetInstance()->TGetDeltaTime();
+
 	}
 	void Studio::Player::ActivateShield()
 	{
@@ -573,6 +575,7 @@ namespace Studio
 		}
 		myShieldHealth = myPlayerData->GetShieldHealth();
 		myShieldIsActive = true;
+		myShieldCurrentCooldown = myPlayerData->GetShieldCooldown() + myPlayerData->GetShieldDuration();
 		myShieldCurrentCooldown = 0.f;
 		AudioManagerAccessor::GetInstance()->Play2D("Audio/Shield.mp3", false, 0.2f);
 	}
@@ -588,7 +591,6 @@ namespace Studio
 	{
 		myShieldIsActive = false;
 		myShieldCurrentActiveTime = 0.f;
-		myShieldCurrentCooldown = 0.f;
 		myShieldHealth = myPlayerData->GetShieldHealth();
 		if (myHasPurchasedShieldExplosion)
 		{

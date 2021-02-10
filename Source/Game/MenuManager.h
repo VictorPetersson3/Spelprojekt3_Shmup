@@ -16,6 +16,7 @@
 #include "SliderElement.h"
 #include "GoToMainMenuButton.h"
 #include "LevelSelectButton.h"
+#include "macros.h"
 
 namespace Studio
 {
@@ -50,7 +51,11 @@ namespace Studio
 
 		TextElement* GetShopDescriptionText();
 
+		//Jimmikod
+		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
 	private:
+
+		
 
 		MenuObject myMainMenu;
 		MenuObject myHud;
@@ -85,6 +90,19 @@ namespace Studio
 		ImageElement* myHeart4Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1080,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart4");
 		ImageElement* myShopBackground = new ImageElement("Sprites/UI/ShopUI/shopUI_BG.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 0, "ShopBackground");
 		ImageElement* myShopFrames = new ImageElement("Sprites/UI/ShopUI/shopUI_frames.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "ShopFrames");
+
+		int myRapidCooldown;
+		int myMissileCooldown;
+		int myShieldCooldown;
+
+		TextElement* myRapidCooldownText = new TextElement(Tga2D::EFontSize_14, { 0.4479 , 0.925 }, "RapidText");
+		TextElement* myMissileCooldownText = new TextElement(Tga2D::EFontSize_14, { 0.5  , 0.925 }, "MissileText");
+		TextElement* myShieldCooldownText = new TextElement(Tga2D::EFontSize_14, { 0.552 , 0.925 }, "ShieldText");
+
+		ImageElement* myAbilityFrame = new ImageElement("Sprites/UI/IGUI/IGUI_TempBorder.dds" , { 960, 1000 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityFrame");
+		ImageElement* myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_TempRapid.dds" , { 860, 1000 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
+		ImageElement* myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_TempMissile.dds" , { 960, 1000 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
+		ImageElement* myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_TempShield.dds" , { 1060, 1000 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
 
 
 		ImageElement* myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");

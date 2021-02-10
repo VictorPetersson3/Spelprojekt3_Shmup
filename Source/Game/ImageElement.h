@@ -13,7 +13,7 @@ namespace Studio
 		~ImageElement();
 		void Update() override;
 
-
+		SpriteSheet* GetSpriteSheet();
 	private:
 		SpriteSheet* mySpriteSheet;
 
