@@ -412,7 +412,6 @@ namespace Studio
 	void LevelManager::LoadLevel(int aLevelIndex)
 	{
 		ClearLevel();
-		myBoss = nullptr;
 
 		myCurrentLevel = aLevelIndex;
 		myLevelIsCleared = false;
@@ -517,11 +516,11 @@ namespace Studio
 				myLevelIsCleared = true;
 				myLevelEnemiesCleared = false;
 				myLevelBossSpawned = false;
-				if (myCurrentLevel >= myLevelPaths.size() - 1)
+				/*if (myCurrentLevel >= myLevelPaths.size() - 1)
 				{
 					myCurrentLevel = myLevelPaths.size() - 1;
-				}
-				else
+				}*/
+				//else
 				{
 					CoinAccessor::GetInstance()->ResetWorldCoins();
 					myCurrentLevel++;
