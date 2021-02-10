@@ -16,6 +16,8 @@
 #include <string>
 #include "TypePattern_Enemy.h"
 #include "TurretPipe.h"
+#include "AudioManager.h"
+#include "AudioManagerAccesor.h"
 
 namespace Studio
 {
@@ -76,6 +78,8 @@ namespace Studio
 
 	Enemy::~Enemy()
 	{
+		AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.2f);
+
 		SAFE_DELETE(myMovement);
 	}
 
@@ -115,6 +119,8 @@ namespace Studio
 			myShootTimer += aDeltaTime;
 			if (myShootTimer > myType->GetShootInterval())
 			{
+				AudioManagerAccessor::GetInstance()->Play2D("Audio/EnemyBasicAttack.mp3", false, 0.05f);
+				
 				Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition, 1);
 				myShootTimer = 0;
 			}

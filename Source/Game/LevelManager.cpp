@@ -36,6 +36,10 @@
 // Input
 #include "InputManager.h"
 
+//Audio
+#include "AudioManager.h"
+#include "AudioManagerAccesor.h"
+
 namespace Studio
 {
 	LevelManager::LevelManager(BackgroundManager* aBackgroundManager, Player* aPlayer) :
@@ -302,6 +306,7 @@ namespace Studio
 		if (myPlayer->IsDead() && !myHasReloaded)
 		{
 			// Lägg till en meny här en callback eller liknande
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.1f);
 			myHasReloaded = true;
 			ReloadLevel();
 		}
@@ -412,6 +417,7 @@ namespace Studio
 	void LevelManager::LoadLevel(int aLevelIndex)
 	{
 		ClearLevel();
+
 
 		myCurrentLevel = aLevelIndex;
 		myLevelIsCleared = false;

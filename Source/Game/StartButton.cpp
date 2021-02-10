@@ -113,6 +113,10 @@ void Studio::StartButton::OnClick()
 			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoad);
 		}
 	}
+
+	AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
+
+
 	printf("I have started level: %f", myLevelToLoad);
 }
 
