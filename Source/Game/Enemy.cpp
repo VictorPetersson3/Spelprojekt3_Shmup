@@ -67,6 +67,11 @@ namespace Studio
 		{
 			myTurretPipe = new TurretPipe(this, aEnemyType);
 		}
+		if (aEnemyType->GetIsPopcorn())
+		{
+			GameObject::GetSpriteSheet().SetAmountOfFrames({ 4, 1 });
+			GameObject::GetSpriteSheet().LoopAnimationInRange(0.083f, { 1,1 }, {3,1});
+		}
 	}
 
 	Enemy::~Enemy()
@@ -105,7 +110,7 @@ namespace Studio
 
 	void Enemy::Shoot(float aDeltaTime)
 	{
-		if (!myType->GetIsTerrain())
+		if (!myType->GetIsTerrain() && !myType->GetIsPopcorn())
 		{
 			myShootTimer += aDeltaTime;
 			if (myShootTimer > myType->GetShootInterval())
