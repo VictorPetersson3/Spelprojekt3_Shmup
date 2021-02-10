@@ -5,13 +5,14 @@
 #include "PlayerAccessor.h"
 #include "Enums.h"
 #include "ScoreAccessor.h"
+#include <string>
 
 namespace Studio
 {
 	class ShopButton : public ButtonElement
 	{
 	public:
-		ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer,Enums::Tier1Upgrades aUpgradeType,int aCost);
+		ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer,Enums::Tier1Upgrades aUpgradeType,int aCost, const char* aDescription);
 		~ShopButton();
 
 		void Update() override;
@@ -22,7 +23,7 @@ namespace Studio
 		bool myIsClicked = false;
 		bool myHasBeenPurchased = false;
 		Enums::Tier1Upgrades myUpgradeType;
-
+		std::string myDescription;
 		int myCost;
 	};
 }

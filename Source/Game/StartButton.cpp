@@ -96,6 +96,7 @@ void Studio::StartButton::OnClick()
 	if (myShouldLoadNextLevel)
 	{
 		myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex() + 1;
+
 		if (myLevelToLoad >= LevelAccessor::GetInstance()->GetLevelPaths().size() -1)
 		{
 			myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex();

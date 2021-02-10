@@ -12,7 +12,8 @@
 #include "Timer.h"
 #include "Player_JsonParser.h"
 #include "PowerUpModule.h"
-
+#include "AudioManagerAccesor.h"
+#include "AudioManager.h"
 
 #define SPRITESHEET GameObject::GetSpriteSheet()
 
@@ -113,6 +114,9 @@ namespace Studio
 		myTimeSinceLastShot += Timer::GetInstance()->TGetDeltaTime();
 		if (InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Shoot) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
 		{
+
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/BasicAttack.mp3", false, 0.2f);
+
 			if (myAmountOfProjectiles == 1)
 			{
 				Studio::LevelAccessor::GetInstance()->SpawnBullet("Player", { myPosition.x, myPosition.y - 5.f }, 1);

@@ -261,4 +261,9 @@ namespace Studio
         }
     }
 
+    TextElement* MenuManager::GetShopDescriptionText()
+    {
+        return myShopDescriptionText;
+    }
+
 }
