@@ -44,6 +44,7 @@ namespace Studio
         myShop.Add(myShopCoinText);
         myShop.Add(myNextLevelButton);
         myShop.Add(myShopFrames);
+        myShop.Add(myShopDescriptionText);
         myShop.Disable();
 
         myPausMenu.Add(myPausMenuBackground);
@@ -156,6 +157,13 @@ namespace Studio
             myNextLevelButton->SetActive(false);
         }
 
+        if (Studio::InputManager::GetInstance()->IsKeyPressed('N'))
+        {
+            myNextLevelButton->OnClick();
+            ResetShop();
+            myNextLevelButton->SetActive(false);
+        }
+
         myMasterVolumeSliderText->SetText(std::to_string( static_cast<int>(myVolumeSlider->fillPercentage * 100)));
     }
 
@@ -167,6 +175,7 @@ namespace Studio
         myOptionsMenuTitleText->Render();
         myMasterVolumeSliderText->Render();
         myMasterVolumeLabelText->Render();
+        myShopDescriptionText->Render();
     }
 
     void MenuManager::ResetShop()

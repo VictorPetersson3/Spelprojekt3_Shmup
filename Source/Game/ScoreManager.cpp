@@ -26,7 +26,7 @@ namespace Studio
 		std::string killScoreString = std::to_string(myKillScore);
 		myKillTextElement->SetText("x" + killScoreString);
 
-		myShopCoinTextElement->SetText("Your score: " + coinScoreString);
+		myShopCoinTextElement->SetText(coinScoreString);
 	}
 	void ScoreManager::AddCoinScore(int anAmount)
 	{

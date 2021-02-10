@@ -75,22 +75,22 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 		switch (i)
 		{
 		case 0:
-			buttonToPushBack->SetPosition({ 400, 440 });
+			buttonToPushBack->SetPosition({ 420, 440 });
 			break;								
 		case 1:									 
-			buttonToPushBack->SetPosition({ 550, 440 });
+			buttonToPushBack->SetPosition({ 570, 440 });
 			break;								
 		case 2:									 
-			buttonToPushBack->SetPosition({ 700, 440 });
+			buttonToPushBack->SetPosition({ 720, 440 });
 			break;								 
 		case 3:									
-			buttonToPushBack->SetPosition({ 850, 440 });
+			buttonToPushBack->SetPosition({ 870, 440 });
 			break;
 		case 4:
-			buttonToPushBack->SetPosition({ 1000, 440 });
+			buttonToPushBack->SetPosition({ 1020, 440 });
 			break;
 		case 5:
-			buttonToPushBack->SetPosition({ 400, 600  });
+			buttonToPushBack->SetPosition({ 420, 600  });
 			break;
 		default:
 			break;
@@ -107,7 +107,7 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 
 		myTier2ButtonsTemp.erase(myTier2ButtonsTemp.begin() + temp);
 
-		buttonToPushBack->SetPosition({ 550+i*150, 600 });
+		buttonToPushBack->SetPosition({ 570+i*150, 600 });
 
 		myActiveButtonPtrs.push_back(buttonToPushBack);
 	}
@@ -137,7 +137,7 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 
 	ShopButtonTier3* buttonToPushBack = myTier3Buttons[GetRandomNumberInRange(myTier3Buttons.size() - 1)];
 
-	buttonToPushBack->SetPosition({ 1000,600 });
+	buttonToPushBack->SetPosition({ 1020,600 });
 
 	myActiveButtonPtrs.push_back(buttonToPushBack);
 

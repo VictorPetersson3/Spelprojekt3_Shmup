@@ -11,6 +11,15 @@ Studio::TextElement::TextElement(Tga2D::EFontSize aFontSize, VECTOR2F aPosition,
 	tag = aTag;
 }
 
+Studio::TextElement::TextElement(Tga2D::EFontSize aFontSize, VECTOR2F aPosition, const char* aTag, Tga2D::CColor aTextColor)
+{
+	myText = new Tga2D::CText("Text/arial.ttf", aFontSize);
+	myText->SetPosition(aPosition);
+
+	myText->SetColor(aTextColor);
+	tag = aTag;
+}
+
 Studio::TextElement::~TextElement()
 {
 	delete myText;
