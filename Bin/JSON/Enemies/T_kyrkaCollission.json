@@ -1,0 +1,23 @@
+{
+  "Circle": [
+    {
+      "PositionX": 10,
+      "PositionY": 10,
+      "Radius": 20
+    }
+  ],
+  "Box": [
+    {
+      "PositionX": 10,
+      "PositionY": 10,
+      "WidthX": 10,
+      "WidthY": 10
+    },
+    {
+      "PositionX": -10,
+      "PositionY": -10,
+      "WidthX": 10,
+      "WidthY": 10
+    }
+  ]
+}
