@@ -9,6 +9,9 @@
 #include "InputManager.h"
 #include "LevelSelect.h"
 #include "Timer.h"
+#include "PlayerAccessor.h"
+#include "Player_JsonParser.h"
+#include "tga2d/sprite/sprite.h"
 #define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
 namespace Studio
@@ -31,6 +34,13 @@ namespace Studio
         myHud.Add(myHeart2Element);
         myHud.Add(myHeart3Element);
         myHud.Add(myHeart4Element);
+        myHud.Add(myAbilityFrame);
+        myHud.Add(myAbilityRapid);
+        myHud.Add(myAbilityMissile);
+        myHud.Add(myAbilityShield);
+        myHud.Add(myRapidCooldownText);
+        myHud.Add(myMissileCooldownText);
+        myHud.Add(myShieldCooldownText);
         myHud.Add(myScoreText);
         myHud.Add(myCoinText);
         myHud.Disable();
@@ -71,6 +81,9 @@ namespace Studio
         myLoadingScreen = new SpriteSheet("Sprites/UI/LoadingScreen.dds");
         myLoadingScreen->SetPosition({ 960, 540 });
         myLoadingScreen->SetLayer(10);
+
+        
+        
     }
 
     MenuObject* Studio::MenuManager::GetMainMenu()
@@ -106,6 +119,8 @@ namespace Studio
         myPausMenu.Update();
         myOptionsMenu.Update();
         myLevelSelect->Update();
+
+        
 
         if (myIsLoading && hasStartedGame)
         {
@@ -176,6 +191,12 @@ namespace Studio
         myMasterVolumeSliderText->Render();
         myMasterVolumeLabelText->Render();
         myShopDescriptionText->Render();
+        if (myRapidCooldown > 0)
+            myRapidCooldownText->Render();
+        if (myMissileCooldown > 0)
+            myMissileCooldownText->Render();
+        if (myShieldCooldown > 0)
+            myShieldCooldownText->Render();
     }
 
     void MenuManager::ResetShop()
@@ -264,6 +285,44 @@ namespace Studio
     TextElement* MenuManager::GetShopDescriptionText()
     {
         return myShopDescriptionText;
+    }
+    void MenuManager::GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown)
+    {
+        if (aRapidFireCooldown > 0.f )
+        {
+            myRapidCooldown = aRapidFireCooldown;
+            myAbilityRapid->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
+            myRapidCooldownText->SetText(std::to_string(myRapidCooldown));
+
+        }
+        else
+        {
+            myAbilityRapid->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 1.f });
+        }
+        
+        if (aMissileCooldown > 0.f)
+        {
+            myMissileCooldown = aMissileCooldown;
+            myAbilityMissile->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
+            myMissileCooldownText->SetText(std::to_string(myMissileCooldown));
+        }
+        else
+        {
+            myAbilityMissile->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 1.f });
+        }
+
+        if (aShieldCooldown > 0.f)
+        {
+            myShieldCooldown = aShieldCooldown;
+            myAbilityShield->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
+            myShieldCooldownText->SetText(std::to_string(myShieldCooldown));
+        }
+        
+        else
+        {
+            myAbilityShield->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 1.f });
+
+        }
     }
 
 }

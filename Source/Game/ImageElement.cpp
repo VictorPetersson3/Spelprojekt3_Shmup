@@ -40,3 +40,8 @@ void Studio::ImageElement::Update()
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 	}
 }
+
+Studio::SpriteSheet* Studio::ImageElement::GetSpriteSheet()
+{
+	return mySpriteSheet;
+}

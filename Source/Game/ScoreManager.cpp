@@ -13,10 +13,6 @@ namespace Studio
 		myCoinTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetHUD()->GetElementWithTag("CoinText"));
 		myKillTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetHUD()->GetElementWithTag("ScoreText"));
 		myShopCoinTextElement = static_cast<TextElement*>(MenuManagerSingleton::GetInstance()->GetShop()->GetElementWithTag("ShopCoinText"));
-		if (myCoinTextElement != nullptr)
-		{
-			std::cout << "Score text found" << std::endl;
-		}
 	}
 	void ScoreManager::Update()
 	{

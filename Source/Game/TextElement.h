@@ -10,6 +10,7 @@ namespace Studio
 	public:
 		TextElement(Tga2D::EFontSize aFontSize, VECTOR2F aPosition, const char* aTag);
 		TextElement(Tga2D::EFontSize aFontSize, VECTOR2F aPosition, const char* aTag, Tga2D::CColor aTextColor);
+		TextElement(Tga2D::EFontSize aFontSize, VECTOR2F aPosition, const char* aTag, Tga2D::CColor aTextColor, const char* aFont);
 
 		~TextElement();
 
