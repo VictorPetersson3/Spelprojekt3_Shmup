@@ -270,9 +270,13 @@ namespace Studio
 
 	void Studio::Player::ResetPlayerCurrentLevel()
 	{
+		myShieldCurrentCooldown = 0.f;
+		myMissileCurrentCooldown = 0.f;
+		myRapidFireCurrentCooldown = 0.f;
 		GameObject::GetHealth().ResetHealth();
 		myPosition = { 300, 540 };
 		GameObject::SetPosition(myPosition);
+		
 	}
 
 	bool Player::GetHasPenetratingRounds()
@@ -576,7 +580,6 @@ namespace Studio
 		myShieldHealth = myPlayerData->GetShieldHealth();
 		myShieldIsActive = true;
 		myShieldCurrentCooldown = myPlayerData->GetShieldCooldown() + myPlayerData->GetShieldDuration();
-		myShieldCurrentCooldown = 0.f;
 		AudioManagerAccessor::GetInstance()->Play2D("Audio/Shield.mp3", false, 0.2f);
 	}
 	void Studio::Player::ShieldIsActive()

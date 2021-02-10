@@ -34,7 +34,9 @@ namespace Studio
         myHud.Add(myHeart2Element);
         myHud.Add(myHeart3Element);
         myHud.Add(myHeart4Element);
-        myHud.Add(myAbilityFrame);
+        myHud.Add(myAbilityRapidBorder);
+        myHud.Add(myAbilityMissileBorder);
+        myHud.Add(myAbilityShieldBorder);
         myHud.Add(myAbilityRapid);
         myHud.Add(myAbilityMissile);
         myHud.Add(myAbilityShield);
@@ -81,8 +83,6 @@ namespace Studio
         myLoadingScreen = new SpriteSheet("Sprites/UI/LoadingScreen.dds");
         myLoadingScreen->SetPosition({ 960, 540 });
         myLoadingScreen->SetLayer(10);
-
-        
         
     }
 
@@ -288,9 +288,12 @@ namespace Studio
     }
     void MenuManager::GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown)
     {
+        myRapidCooldown = aRapidFireCooldown;
+        myMissileCooldown = aMissileCooldown;
+        myShieldCooldown = aShieldCooldown;
+
         if (aRapidFireCooldown > 0.f )
         {
-            myRapidCooldown = aRapidFireCooldown;
             myAbilityRapid->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
             myRapidCooldownText->SetText(std::to_string(myRapidCooldown));
 
@@ -302,7 +305,6 @@ namespace Studio
         
         if (aMissileCooldown > 0.f)
         {
-            myMissileCooldown = aMissileCooldown;
             myAbilityMissile->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
             myMissileCooldownText->SetText(std::to_string(myMissileCooldown));
         }
@@ -313,7 +315,6 @@ namespace Studio
 
         if (aShieldCooldown > 0.f)
         {
-            myShieldCooldown = aShieldCooldown;
             myAbilityShield->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
             myShieldCooldownText->SetText(std::to_string(myShieldCooldown));
         }
