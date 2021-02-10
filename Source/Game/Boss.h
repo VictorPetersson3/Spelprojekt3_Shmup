@@ -31,6 +31,7 @@ namespace Studio
 		bool CheckEnrageCondition();
 		bool ShouldTransition();
 
+
 		//Legacy Boss "Swedish Abilities"
 		/*void SendInTheCaroleans(float anAmountOfCanonFodder);
 		void ActivateWelfare(float aTaxAmount);
@@ -42,22 +43,24 @@ namespace Studio
 
 		void PlayIntroMovement();
 
+		void PlayTransition();
+
+		bool ReturnToOriginalPosition();
+
 		void ActivateShield(Shield* aShield);
 
 		void HitLogic(float aDamage);
 
 		void SetPosition(const VECTOR2F aPosition);
 
-		void ResetBoss();
-
-		void PlayTransition();
-
-		//Temp function until
-		void SwitchSprite();
-
 		float GetTotalBossTime();
 		
 		VECTOR2F* GetPosition();
+
+		void ResetBoss();
+
+		//Temp function until
+		void SwitchSprite();
 	protected:
 
 	private:
@@ -76,7 +79,6 @@ namespace Studio
 		Movement* myMovement;
 		Movement* myIntroMovement;
 
-		
 		HealthBar myHealthBar;
 		Shield* myShield;
 		std::vector<Condition*> myConditions;

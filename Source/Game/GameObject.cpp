@@ -35,7 +35,7 @@ namespace Studio
 
 		// Visial hit effect
 		myTimeSinceHit += DELTA_TIME;
-		if (myTimeSinceHit < 1.0f)
+		if (myTimeSinceHit < 1.0f && !myHealth.GetGodMode())
 		{
 			auto color = Tga2D::CColor(1.0f, 1.0f, 1.0f, 1.0f);
 			color.myR = 1.0f / myTimeSinceHit;

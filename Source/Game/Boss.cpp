@@ -30,7 +30,8 @@ namespace Studio
 		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ 1.0f,1.0f });
 		myEnrageCondition = nullptr;
 		myPosition = { 2050.0f, 540.0f };
-		Boss::GameObject::GetCollider().AddCircleColliderObject({0,-20.0f }, 280.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject({10.0f,-20.0f }, 280.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject({90.0f,-310.0f }, 30.0f);
 		Boss::GameObject::GetCollider().AddBoxColliderObject({ 220.0f, 257.0f }, { 135.0f, 305.0f });
 		Boss::GameObject::GetCollider().AddBoxColliderObject({ -182.0f, 257.0f }, { 135.0f, 305.0f });
 		if (aBossParameters.HasMember("Conditions") && aBossParameters["Conditions"].IsArray())
@@ -249,21 +250,30 @@ namespace Studio
 	void Boss::PlayTransition()
 	{
 		SetGodMode(true);
-		VECTOR2F aDirection = myOriginalPosition - myPosition;
-
-		if (aDirection.y < 10.0f && aDirection.y > -10.0f)
+		
+		if (ReturnToOriginalPosition())
 		{
 			SwitchSprite();
 			myIsTransitioning = false;
 			SetGodMode(false);
 		}
+		Boss::GameObject::Update(myPosition);
+		RendererAccessor::GetInstance()->Render(*this);
+		//TODO add playing of correct transition
+	}
+
+	bool Boss::ReturnToOriginalPosition()
+	{
+		VECTOR2F aDirection = myOriginalPosition - myPosition;
+		if (aDirection.y < 10.0f && aDirection.y > -10.0f)
+		{
+			return true;
+		}
 		else
 		{
 			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
 		}
-		Boss::GameObject::Update(myPosition);
-		RendererAccessor::GetInstance()->Render(*this);
-		//TODO add playing of correct transition
+		return false;
 	}
 
 	void Boss::SwitchSprite()
