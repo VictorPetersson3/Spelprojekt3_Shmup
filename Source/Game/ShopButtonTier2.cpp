@@ -128,3 +128,8 @@ void Studio::ShopButtonTier2::Reset()
 {
 	myHasBeenPurchased = false;
 }
+
+Studio::Enums::Tier2Upgrades Studio::ShopButtonTier2::GetUpgradeType()
+{
+	return myUpgradeType;
+}

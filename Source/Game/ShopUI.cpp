@@ -25,7 +25,7 @@ Studio::ShopUI::ShopUI()
 	myTier1Buttons.push_back(new ShopButton("Sprites/UI/ShopUI/shopUI_cards_tier1.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::MissileCooldown, 5, "Missile Cooldown Tier 1"));
 	myTier1Buttons.push_back(new ShopButton("Sprites/UI/ShopUI/shopUI_cards_tier1.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::MissileDamage, 5, "Missile Damage Tier 1"));
 	myTier1Buttons.push_back(new ShopButton("Sprites/UI/ShopUI/shopUI_cards_tier1.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 5000000, Enums::Tier1Upgrades::MissileExplosionRadius, 5, "Missile Explosion Radius Tier 1"));
-
+	
 	myTier2Buttons.push_back(new ShopButtonTier2("Sprites/UI/ShopUI/shopUI_cards_tier2.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 500000, Enums::Tier2Upgrades::BasicAttackAdditionalProjectile, 10, "Additonal Basic Attack Projectile"));
 	myTier2Buttons.push_back(new ShopButtonTier2("Sprites/UI/ShopUI/shopUI_cards_tier2.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 500000, Enums::Tier2Upgrades::RapidFireDuration, 10, "Rapid Fire Duration Tier 2"));
 	myTier2Buttons.push_back(new ShopButtonTier2("Sprites/UI/ShopUI/shopUI_cards_tier2.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 500000, Enums::Tier2Upgrades::ShieldCooldown, 10, "Shield Cooldown Tier 2"));
@@ -105,6 +105,12 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 		int temp = GetRandomNumberInRange(myTier2ButtonsTemp.size()-1);
 
 		ShopButtonTier2* buttonToPushBack = myTier2ButtonsTemp[temp];
+
+		while (PlayerAccessor::GetInstance()->GetAmountOfProjectiles() < 3 && buttonToPushBack->GetUpgradeType()==Enums::Tier2Upgrades::BasicAttackAdditionalProjectile)
+		{
+			temp = GetRandomNumberInRange(myTier2ButtonsTemp.size() - 1);
+			buttonToPushBack = myTier2ButtonsTemp[temp];
+		}
 
 		myTier2ButtonsTemp.erase(myTier2ButtonsTemp.begin() + temp);
 

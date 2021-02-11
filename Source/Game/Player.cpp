@@ -280,6 +280,14 @@ namespace Studio
 		return myHasCollided;
 	}
 
+	float Studio::Player::GetAmountOfProjectiles()
+	{
+		if (this != nullptr)
+		{
+			return myAmountOfProjectiles;
+		}
+	}
+
 	void Player::Movement()
 	{
 
