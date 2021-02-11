@@ -34,6 +34,7 @@ namespace Studio
 		MenuObject* GetPauseMenu();
 		MenuObject* GetShop();
 		MenuObject* GetOptionsMenu();
+		MenuObject* GetEndOfGameMenu();
 
 		void Update();
 
@@ -62,6 +63,7 @@ namespace Studio
 		MenuObject myPausMenu;
 		MenuObject myShop;
 		MenuObject myOptionsMenu;
+		MenuObject myEndOfGameMenu;
 
 		ShopUI* myShopUI;
 
@@ -136,6 +138,10 @@ namespace Studio
 		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	
 		LevelSelect* myLevelSelect;
+
+
+		// EndOfGameMenu
+		GoToMainMenuButton* myEGMMainMenu = new GoToMainMenuButton("Sprites/UI/UI_exit.dds", { 960, 540 }, { 1, 1 }, { 0.5f, 0.5f }, "EGMMainMenu", 190);
 	};
 
 

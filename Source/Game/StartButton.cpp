@@ -120,6 +120,7 @@ void Studio::StartButton::OnClick()
 
 
 	printf("I have started level: %f", myLevelToLoad);
+	LevelAccessor::GetInstance()->StartUpdating();
 }
 
 void Studio::StartButton::SetLevelToLoad(const int aIndex)

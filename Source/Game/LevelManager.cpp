@@ -41,6 +41,9 @@
 #include "AudioManager.h"
 #include "AudioManagerAccesor.h"
 
+// Cutscenes
+#include "VideoPlayerAccessor.h"
+
 namespace Studio
 {
 	LevelManager::LevelManager(BackgroundManager* aBackgroundManager, Player* aPlayer) :
@@ -122,6 +125,8 @@ namespace Studio
 
 	void LevelManager::Update()
 	{
+		if (!myIsUpdating) return;
+
 		if (Studio::InputManager::GetInstance()->IsKeyPressed('H'))
 		{
 			ScoreAccessor::GetInstance()->AddCoinScore(100000);
@@ -133,6 +138,10 @@ namespace Studio
 			if (myCurrentLevel > myLevelPaths.size() - 1)
 			{
 				//StartCredits
+				StopUpdating();
+				//Studio::MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
+				Studio::MenuManagerSingleton::GetInstance()->GetEndOfGameMenu()->Enable();
+				Studio::VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Outro);
 			}
 			else
 			{
@@ -498,6 +507,16 @@ namespace Studio
 	const int LevelManager::GetCurrentLevelIndex() const { return myCurrentLevel; }
 
 	const std::vector<std::string>& LevelManager::GetLevelPaths() const { return myLevelPaths; }
+
+	void LevelManager::StopUpdating()
+	{
+		myIsUpdating = false;
+	}
+
+	void LevelManager::StartUpdating()
+	{
+		myIsUpdating = true;
+	}
 
 	void LevelManager::CheckIfLevelIsCleared()
 	{

@@ -70,6 +70,9 @@ namespace Studio
         myOptionsMenu.Add(myMasterVolumeLabelText);
         myOptionsMenu.Add(myVolumeSliderBackground);
 
+        // EndOfGameMenu
+        myEndOfGameMenu.Add(myEGMMainMenu);
+
         std::string optionsMenuLabel = "Options";
         std::string masterVolumeLabel = "Master Volume";
         myOptionsMenuTitleText->SetText(optionsMenuLabel);
@@ -110,6 +113,11 @@ namespace Studio
     {
         return &myOptionsMenu;
     }
+
+    MenuObject* MenuManager::GetEndOfGameMenu()
+    {
+        return &myEndOfGameMenu;
+    }
  
     void MenuManager::Update()
     {
@@ -119,7 +127,7 @@ namespace Studio
         myPausMenu.Update();
         myOptionsMenu.Update();
         myLevelSelect->Update();
-
+        myEndOfGameMenu.Update();
         
 
         if (myIsLoading && hasStartedGame)
