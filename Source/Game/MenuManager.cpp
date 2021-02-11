@@ -198,7 +198,6 @@ namespace Studio
         myOptionsMenuTitleText->Render();
         myMasterVolumeSliderText->Render();
         myMasterVolumeLabelText->Render();
-        myShopDescriptionText->Render();
         if (myRapidCooldown > 0)
             myRapidCooldownText->Render();
         if (myMissileCooldown > 0)
@@ -290,10 +289,10 @@ namespace Studio
         }
     }
 
-    TextElement* MenuManager::GetShopDescriptionText()
+    /*TextElement* MenuManager::GetShopDescriptionText()
     {
         return myShopDescriptionText;
-    }
+    }*/
     void MenuManager::GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown)
     {
         myRapidCooldown = aRapidFireCooldown;

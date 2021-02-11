@@ -70,7 +70,7 @@ void Studio::ShopButton::Update()
 					{
 						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
 						hasBeenHoveredOver = true;
-						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetText(myDescription);
+						//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetText(myDescription);
 					}
 
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
