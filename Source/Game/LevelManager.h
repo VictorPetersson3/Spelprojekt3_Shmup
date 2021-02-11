@@ -13,7 +13,6 @@ namespace Studio
 	class BossManager;
 	class BackgroundManager;
 	class EffectExplosionLarge;
-	
 	class LevelManager
 	{
 	public:
@@ -32,6 +31,7 @@ namespace Studio
 		void SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius, const float aDamageAmount, const float aExplosionDamageAmount);
 		void SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius);
 		void SpawnTimedBomb(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aVelocity, const float aBlastRadius, const float aDamage);
+		void CreateExplosionAt(const Tga2D::Vector2f& aPosition, const float aRadius = 20.0f);
 		bool LevelIsCleared();
 		void LoadLevel(const int aLevelIndex);
 		void ReloadLevel();
