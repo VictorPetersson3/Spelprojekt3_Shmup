@@ -598,24 +598,8 @@ namespace Studio
 
 	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius, const float aDamageAmount, const float aExplosionDamageAmount)
 	{
-		switch (aOwner)
-		{
-		case Enums::BulletOwner::Player:
-		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
-			myBullets.push_back(missile);
-		}
-		break;
-		case Enums::BulletOwner::Enemy:
-		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
-			myBullets.push_back(missile);
-		}
-		break;
-		default:
-			break;
-		}
-
+		Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
+		myBullets.push_back(missile);
 	}
 
 	void LevelManager::SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius)
