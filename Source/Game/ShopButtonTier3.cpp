@@ -16,8 +16,9 @@
 #include "MenuManager.h"
 #include "MenuObject.h"
 #include "TextElement.h"
+#include "ImageElement.h"
 
-Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost, const char* aDescription)
+Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost, char* aDescription)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -74,7 +75,8 @@ void Studio::ShopButtonTier3::Update()
 					{
 						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonMouseOver.flac", false, 0.05f);
 						hasBeenHoveredOver = true;
-						//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetText(myDescription);
+						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
+						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetSprite(myDescription);
 					}
 
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
@@ -86,11 +88,14 @@ void Studio::ShopButtonTier3::Update()
 				else
 				{
 					hasBeenHoveredOver = false;
+					MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
+
 				}
 			}
 			else
 			{
 				hasBeenHoveredOver = false;
+				MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
 			}
 		}
 

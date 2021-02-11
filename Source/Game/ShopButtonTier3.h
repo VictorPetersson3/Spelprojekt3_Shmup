@@ -7,7 +7,7 @@ namespace Studio
 	class ShopButtonTier3 : public ButtonElement
 	{
 	public:
-		ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost, const char* aDescription);
+		ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost, char* aDescription);
 		~ShopButtonTier3();
 
 		void Update() override;
@@ -17,7 +17,7 @@ namespace Studio
 		bool myIsClicked = false;
 		bool myHasBeenPurchased = false;
 		Enums::Tier3Upgrades myUpgradeType;
-		std::string myDescription;
+		char* myDescription;
 		int myCost;
 	};
 }
