@@ -68,10 +68,14 @@ namespace Studio
 		int myCurrentPhase;
 		int myPhaseAmount;
 		int myTotalFightTime;
+		int myTransitionPhase1 = 3;
+		int myTransitionPhase2 = 6;
 		
 
 		bool myIntroMovementPlayed;
 		bool myIsTransitioning;
+		bool myTransitionAnimationPart1;
+		bool myTransitionAnimationPart2;
 
 		VECTOR2F myPosition;
 		VECTOR2F myOriginalPosition = { 1500.0f , 540.0f};
