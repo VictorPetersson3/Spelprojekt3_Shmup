@@ -28,15 +28,19 @@ namespace Studio
 	{
 		mySpriteSheet.SetLayer(-1);
 
-		//incase there is no enrage condition
+		mySpriteSheet.SetAmountOfFrames({ 8.0f, 8.0f });
+		mySpriteSheet.LoopAnimationInRange(0.0833f, { 1, 1 }, { 6, 1 });
+		//mySpriteSheet.SetSize({ 100, 100 });
+
+		//in case there is no enrage condition
 		myEnrageCondition = nullptr;
 
 		//StartPosition outside of screen for intro movement
 		myPosition = { 2050.0f, 540.0f };
 
 		//CollisionObjects
-		Boss::GameObject::GetCollider().AddCircleColliderObject({10.0f,-20.0f }, 280.0f);
-		Boss::GameObject::GetCollider().AddCircleColliderObject({90.0f,-310.0f }, 30.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject({ 10.0f,-20.0f }, 280.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject({ 90.0f,-310.0f }, 30.0f);
 		Boss::GameObject::GetCollider().AddBoxColliderObject({ 220.0f, 257.0f }, { 135.0f, 305.0f });
 		Boss::GameObject::GetCollider().AddBoxColliderObject({ -182.0f, 257.0f }, { 135.0f, 305.0f });
 		if (aBossParameters.HasMember("Conditions") && aBossParameters["Conditions"].IsArray())
@@ -98,6 +102,8 @@ namespace Studio
 		myShield = nullptr;
 		myMovement = nullptr;
 		myIntroMovementPlayed = true;
+		myTransitionAnimationPart1 = false;
+		myTransitionAnimationPart2 = false;
 		myIsTransitioning = false;
 		SetGodMode(true);
 
@@ -159,7 +165,7 @@ namespace Studio
 				{
 					CheckTransition();
 				}
-				
+
 				//Om bossen försvinner skyll på det här...
 				if (myPosition.x < -150.0f)
 				{
@@ -226,9 +232,16 @@ namespace Studio
 		++myCurrentPhase;
 		printf("Changed to Phase: %i\n", myCurrentPhase);
 
-		if (myCurrentPhase == 3 || myCurrentPhase == 6)
+		if (myCurrentPhase == myTransitionPhase1)
 		{
 			myIsTransitioning = true;
+			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 2 }, { 6, 2 });
+		}
+		else if (myCurrentPhase == myTransitionPhase2)
+		{
+			myIsTransitioning = true;
+			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 4 }, { 6, 4 });
+			myTransitionAnimationPart1 = true;
 		}
 	}
 
@@ -236,9 +249,16 @@ namespace Studio
 	{
 		if (ReturnToOriginalPosition())
 		{
-			SwitchSprite();
 			myIsTransitioning = false;
 			SetGodMode(false);
+			if (myCurrentPhase == myTransitionPhase1)
+			{
+				mySpriteSheet.LoopAnimationInRange(0.0833f, { 1, 3 }, { 6, 3 });
+			}
+			if (myCurrentPhase == myTransitionPhase2)
+			{
+				mySpriteSheet.LoopAnimationInRange(0.0833f, { 1, 7 }, { 6, 7 });
+			}
 		}
 		//TODO add playing of correct transition
 	}
@@ -246,7 +266,20 @@ namespace Studio
 	bool Boss::ReturnToOriginalPosition()
 	{
 		VECTOR2F aDirection = myOriginalPosition - myPosition;
-		if (aDirection.y < 10.0f && aDirection.y > -10.0f)
+		if (myCurrentPhase == myTransitionPhase2 && myTransitionAnimationPart1 && !myTransitionAnimationPart2 &&!mySpriteSheet.IsAnimating())
+		{
+			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 5 }, { 6, 5 });
+			myTransitionAnimationPart1 = false;
+			myTransitionAnimationPart2 = true;
+			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
+		}
+		else if (myCurrentPhase == myTransitionPhase2 && !myTransitionAnimationPart1 && myTransitionAnimationPart2 && !mySpriteSheet.IsAnimating())
+		{
+			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 6 }, { 6, 6 });
+			myTransitionAnimationPart2 = false;
+			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
+		}
+		else if (aDirection.y < 10.0f && aDirection.y > -10.0f && !mySpriteSheet.IsAnimating() && !myTransitionAnimationPart1 && !myTransitionAnimationPart2)
 		{
 			return true;
 		}
@@ -255,18 +288,6 @@ namespace Studio
 			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
 		}
 		return false;
-	}
-
-	void Boss::SwitchSprite()
-	{
-		if (myCurrentPhase == 3)
-		{
-			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_02.dds");
-		}
-		if (myCurrentPhase == 6)
-		{
-			mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_03.dds");
-		}
 	}
 
 	bool Boss::CheckCurrentPhaseCondition()
@@ -318,9 +339,11 @@ namespace Studio
 		myPosition = { 2000.0f, 540.0f };
 		myIntroMovementPlayed = false;
 		myIsTransitioning = false;
+		myTransitionAnimationPart1 = false;
+		myTransitionAnimationPart2 = false;
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
-		mySpriteSheet.SetImagePath("Sprites/assets/enemies/boss/globePhase_01.dds");
+		mySpriteSheet.LoopAnimationInRange(0.0833f, { 1, 1 }, { 6, 1 });
 	}
 
 }
