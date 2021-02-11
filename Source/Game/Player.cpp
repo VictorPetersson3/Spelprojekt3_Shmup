@@ -65,15 +65,6 @@ namespace Studio
 	{
 		if (!IsDead())
 		{
-			if (InputManager::GetInstance()->IsKeyPressed('5'))
-			{
-				UpgradeT2(Enums::Tier2Upgrades::BasicAttackAdditionalProjectile);
-			}
-			if (InputManager::GetInstance()->IsKeyPressed('6'))
-			{
-				UpgradeT3(Enums::Tier3Upgrades::RapidFirePenetrating);
-
-			}
 			Movement();
 
 			Player::GameObject::Update(myPosition + myDirection);
