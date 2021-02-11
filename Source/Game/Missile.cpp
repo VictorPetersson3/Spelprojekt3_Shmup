@@ -105,7 +105,7 @@ namespace Studio
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
 
 		if (myTypePattern->GetOwner() == Enums::BulletOwner::Player
-			//&& PlayerAccessor::GetInstance()->GetHasClusterBombs()
+			&& PlayerAccessor::GetInstance()->GetHasClusterBombs()
 			)
 		{
 			float angle = 180.0f / MATH_PI * 90.0f;
