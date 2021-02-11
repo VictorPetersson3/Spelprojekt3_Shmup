@@ -71,8 +71,12 @@ void Studio::ShopButton::Update()
 						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.15f);
 						hasBeenHoveredOver = true;
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
-						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetSprite(myDescription);
+						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet()->SetImagePath(myDescription);
+
 					}
+
+					RendererAccessor::GetInstance()->Render(*MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet());
+
 
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
@@ -83,13 +87,12 @@ void Studio::ShopButton::Update()
 				else
 				{
 					hasBeenHoveredOver = false;
-					MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
 
 				}
 			}
 			else
 			{
-				MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
+				hasBeenHoveredOver = false;
 			}
 		}
 
