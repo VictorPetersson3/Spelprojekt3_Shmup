@@ -16,6 +16,7 @@
 #include "SliderElement.h"
 #include "GoToMainMenuButton.h"
 #include "LevelSelectButton.h"
+#include "macros.h"
 
 namespace Studio
 {
@@ -52,7 +53,11 @@ namespace Studio
 		void ResetButtonColliders();
 		TextElement* GetShopDescriptionText();
 
+		//Jimmikod
+		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
 	private:
+
+		
 
 		MenuObject myMainMenu;
 		MenuObject myHud;
@@ -87,6 +92,22 @@ namespace Studio
 		ImageElement* myHeart4Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1080,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart4");
 		ImageElement* myShopBackground = new ImageElement("Sprites/UI/ShopUI/shopUI_BG.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 0, "ShopBackground");
 		ImageElement* myShopFrames = new ImageElement("Sprites/UI/ShopUI/shopUI_frames.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "ShopFrames");
+
+		int myRapidCooldown;
+		int myMissileCooldown;
+		int myShieldCooldown;
+
+		TextElement* myRapidCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.375 , 0.91 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myMissileCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.460  , 0.91 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myShieldCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.551 , 0.91 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		
+
+		ImageElement* myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 790, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
+		ImageElement* myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 960, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
+		ImageElement* myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 1130, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
+		ImageElement* myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds" , { 790, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
+		ImageElement* myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds" , { 960, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
+		ImageElement* myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds" , { 1130, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
 
 
 		ImageElement* myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");

@@ -19,7 +19,7 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	if (aModuleParameter.HasMember("Interval"))
 	{
 		myCounter.SetInterval(aModuleParameter["Interval"].GetFloat() / 1000.0f);
-		printf("%f\n", aModuleParameter["Interval"].GetFloat() / 1000.0f);
+		//printf("%f\n", aModuleParameter["Interval"].GetFloat() / 1000.0f);
 	}
 	else
 	{
@@ -93,10 +93,8 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 {
 	if (mySpawnIsRelative)
 	{
-		//printf("mySpawnPositionX: %f, %f\n", mySpawnPosition.x, mySpawnPosition.y);
 		mySpawnPosition.x = aBoss.GetPosition()->x + myOriginalSpawnPosition.x;
 		mySpawnPosition.y = aBoss.GetPosition()->y - myOriginalSpawnPosition.y;
-		//printf("----------------- %f, %f\n", mySpawnPosition.x, mySpawnPosition.y);
 	}
 	else
 	{
@@ -116,12 +114,10 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 		{
 			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition, 1);
 		}
-		//printf("Spawned Bullet\n");
 	}
 	if (myElapsedTime >= myActiveDuration)
 	{
 		myElapsedTime = 0.0f;
-		//printf("Shoot Done\n");
 		return true;
 	}
 	return false;

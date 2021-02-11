@@ -13,6 +13,7 @@
 #include "Bullet.h"
 #include "Missile.h"
 #include "AOEBullet.h"
+#include "TimedBomb.h"
 #include "Pack.h"
 #include "EnemyFactory.h"
 #include "BulletFactory.h"
@@ -158,7 +159,7 @@ namespace Studio
 			else
 			{
 
-				 int packSize = myPacks.size()-1;
+				int packSize = myPacks.size() - 1;
 
 				if (myPackIndex < (packSize))
 				{
@@ -255,41 +256,43 @@ namespace Studio
 	void LevelManager::LevelLogic()
 	{
 		UpdateEnemies();
-		// Copy & Paste from Jimmi
-		for (Bullet* bullet : myBullets)
-		{
-			bullet->Update();
-
-			Studio::RendererAccessor::GetInstance()->Render(*bullet);
-		}
-
 		for (int i = myBullets.size() - 1; i >= 0; i--)
 		{
-			if (myBullets[i]->GetPosition().x > 1920 || myBullets[i]->GetPosition().x < 0 || myBullets[i]->GetPosition().y < 0 || myBullets[i]->GetPosition().y > 1080)
-			{
-				if (i != myBullets.size() - 1)
-				{
-					std::swap(myBullets[i], myBullets.back());
-					SAFE_DELETE(myBullets.back());
-					myBullets.pop_back();
-				}
-			}
+			myBullets[i]->Update();
 		}
 
 		//Pu
 		CheckCollision();
 
+		for (int i = myBullets.size() - 1; i >= 0; i--)
+		{
+			if (myBullets[i]->GetPosition().x > 1920 || myBullets[i]->GetPosition().x < 0 || myBullets[i]->GetPosition().y < 0 || myBullets[i]->GetPosition().y > 1080)
+			{
+				myBullets[i]->ShouldDeleteThis(true);
+				/*if (i != myBullets.size() - 1)
+				{
+					std::swap(myBullets[i], myBullets.back());
+				}
+				SAFE_DELETE(myBullets.back());
+				myBullets.pop_back();*/
+			}
+		}
+
 		// Remove bullets that's supposed to be deleted
-		for (size_t i = 0; i < myBullets.size(); i++)
+		for (int i = myBullets.size() - 1; i >= 0; i--)
 		{
 			if (myBullets[i]->ShouldDeleteThis())
 			{
-				if (i != myBullets.size() - 1)
+				if ((i) != myBullets.size() - 1)
 				{
 					std::swap(myBullets[i], myBullets.back());
 				}
 				SAFE_DELETE(myBullets.back());
 				myBullets.pop_back();
+			}
+			else
+			{
+				Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);
 			}
 		}
 
@@ -325,18 +328,15 @@ namespace Studio
 			{
 				for (int i = myBullets.size() - 1; i >= 0; i--)
 				{
-					if (myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player && myBoss->Intersects(*myBullets[i]))
+					if (myBullets[i]->GetOwner() == Studio::Enums::BulletOwner::Player && myBoss->Intersects(*myBullets[i]) && myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
 					{
-						if (myBullets[i]->IsEnemyAlreadyHit(myBoss) == false)
-						{
-							myBullets[i]->RegisterEnemyHit(myBoss);
-							myBoss->HitLogic(myBullets[i]->GetDamage());
-							myBullets[i]->Impact();
+						myBullets[i]->RegisterEnemyHit(myBoss);
+						myBoss->HitLogic(myBullets[i]->GetDamage());
+						myBullets[i]->Impact();
 
-							if (myBullets[i]->GetIsPenetrating() == false)
-							{
-								myBullets.erase(myBullets.begin() + i);
-							}
+						if (myBullets[i]->GetIsPenetrating() == false)
+						{
+							myBullets.erase(myBullets.begin() + i);
 						}
 					}
 				}
@@ -353,64 +353,58 @@ namespace Studio
 				myBoss = nullptr;
 			}
 		}
+
+		//Check if Player Hit
 		if (!myBullets.empty())
 		{
 			for (int j = myBullets.size() - 1; j >= 0; j--)
 			{
-				if (myBullets[j]->GetOwner() == Studio::Enums::BulletOwner::Enemy)
+				if (myBullets[j]->GetOwner() == Studio::Enums::BulletOwner::Enemy && myPlayer->Intersects(*myBullets[j]))
 				{
-					if (myPlayer->Intersects(*myBullets[j]))
+					if (myPlayer->GetIsShieldActive())
 					{
-						if (myPlayer->GetIsShieldActive())
-						{
-							myPlayer->TakeShieldDamage(myBullets[j]->GetDamage());
-						}
-						else
-						{
-							myPlayer->TakeDamage(myBullets[j]->GetDamage());
-						}
-						//printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
-						myBullets[j]->Impact();
-						myBullets.erase(myBullets.begin() + j);
+						myPlayer->TakeShieldDamage(myBullets[j]->GetDamage());
 					}
+					else
+					{
+						myPlayer->TakeDamage(myBullets[j]->GetDamage());
+					}
+					//printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
+					myBullets[j]->Impact();
+					myBullets.erase(myBullets.begin() + j);
 				}
 			}
 		}
 
-		if (myEnemies.size() > 0)
+		//Check if Enemies Hit
+		if (!myEnemies.empty() && !myBullets.empty())
 		{
-			if (myBullets.size() > 0)
+			for (int i = myEnemies.size() - 1; i >= 0; i--)
 			{
-				for (int i = myEnemies.size() - 1; i >= 0; i--)
+				if (!myEnemies[i]->IsDead())
 				{
-					if (!myEnemies[i]->IsDead())
+					for (int j = myBullets.size() - 1; j >= 0; j--)
 					{
-						for (int j = myBullets.size() - 1; j >= 0; j--)
+						if (myBullets[j]->GetOwner() == Studio::Enums::BulletOwner::Player &&
+							myEnemies[i]->Intersects(*myBullets[j]) &&
+							myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
 						{
-							if (myBullets[j]->GetOwner() == Studio::Enums::BulletOwner::Player)
+							myBullets[j]->RegisterEnemyHit(myEnemies[i]);
+							if (!myEnemies[i]->GetIsTerrain())
 							{
-								if (myEnemies[i]->Intersects(*myBullets[j]))
-								{
-									if (myBullets[j]->IsEnemyAlreadyHit(myEnemies[i]) == false)
-									{
-										myBullets[j]->RegisterEnemyHit(myEnemies[i]);
-										if (!myEnemies[i]->GetIsTerrain())
-										{
-											myEnemies[i]->TakeDamage(myBullets[j]->GetDamage());
-										}
-										myBullets[j]->Impact();
+								myEnemies[i]->TakeDamage(myBullets[j]->GetDamage());
+							}
+							myBullets[j]->Impact();
 
-										if (myBullets[j]->GetIsPenetrating() == false)
-										{
-											myBullets.erase(myBullets.begin() + j);
-										}
-									}
-								}
+							if (myBullets[j]->GetIsPenetrating() == false)
+							{
+								myBullets.erase(myBullets.begin() + j);
 							}
 						}
 					}
 				}
 			}
+
 		}
 	}
 
@@ -609,5 +603,10 @@ namespace Studio
 	{
 		auto aoeBullet = myBulletFactory->CreateAOEBullet(aOwner, aPosition, aRadius);
 		myBullets.push_back(aoeBullet);
+	}
+	void LevelManager::SpawnTimedBomb(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aVelocity, const float aBlastRadius, const float aDamage)
+	{
+		auto bomb = myBulletFactory->CreateTimedBomb(aPosition, aVelocity, aBlastRadius, aDamage);
+		myBullets.push_back(bomb);
 	}
 }

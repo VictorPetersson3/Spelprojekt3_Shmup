@@ -257,6 +257,8 @@
     </ClCompile>
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Game_Accessor.cpp" />
+    <ClCompile Include="CutsceneAccessor.cpp" />
+    <ClCompile Include="TimedBomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -527,6 +529,8 @@
     </ClInclude>
     <ClInclude Include="Options.h" />
     <ClInclude Include="Game_Accessor.h" />
+    <ClInclude Include="CutsceneAccessor.h" />
+    <ClInclude Include="TimedBomb.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

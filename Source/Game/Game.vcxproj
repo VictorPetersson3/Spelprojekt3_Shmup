@@ -227,6 +227,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestButton.h" />
     <ClInclude Include="TextElement.h" />
+    <ClInclude Include="TimedBomb.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TurretPipe.h" />
     <ClInclude Include="TypePattern_Background.h" />
@@ -330,6 +331,7 @@
     </ClCompile>
     <ClCompile Include="TestButton.cpp" />
     <ClCompile Include="TextElement.cpp" />
+    <ClCompile Include="TimedBomb.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TurretPipe.cpp" />
     <ClCompile Include="TypePattern_Background.cpp" />

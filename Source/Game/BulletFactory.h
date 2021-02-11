@@ -7,6 +7,7 @@ namespace Studio
 	class Bullet;
 	class Missile;
 	class AOEBullet;
+	class TimedBomb;
 	class TypePattern_Bullet;
 	class BulletFactory
 	{
@@ -20,6 +21,7 @@ namespace Studio
 		//Missile* CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aDirection);
 		Missile* CreateMissileObject(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition,const float aExplosionRadius);
 		AOEBullet* CreateAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius);
+		TimedBomb* CreateTimedBomb(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aVelocity, const float aBlastRadius, const float aDamage);
 
 	private:
 		std::map<std::string, TypePattern_Bullet*> myBullets;

@@ -96,6 +96,10 @@ namespace Studio
 	{
 		return myDeleteMeThisFrame;
 	}
+	void Bullet::ShouldDeleteThis(const bool aDeleteIt)
+	{
+		myDeleteMeThisFrame = aDeleteIt;
+	}
 	Enums::BulletOwner Bullet::GetOwner() const
 	{
 		return myTypePattern->GetOwner();
