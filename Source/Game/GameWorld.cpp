@@ -150,7 +150,7 @@ void CGameWorld::InputStuff()
 	}
 	if (Studio::InputManager::GetInstance()->IsKeyPressed('G'))
 	{
-		myPlayer->SetGodMode(true);
+		myPlayer->SetGodMode(!myPlayer->GetHealth().GetGodMode());
 	}
 
 	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))
