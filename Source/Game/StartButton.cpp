@@ -6,7 +6,8 @@
 #include "AudioManagerAccesor.h"
 #include "AudioManager.h"
 #include "LevelAccessor.h"
-
+#include "MenuManager.h"
+#include "MenuManagerSingleton.h"
 
 Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer,const bool aShouldStartnextLevel)
 {
@@ -59,12 +60,12 @@ void Studio::StartButton::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.1f);
 						hasBeenHoveredOver = true;
 					}
 
 
-					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
+					if (Studio::InputManager::GetInstance()->GetMouseLDown())
 					{
 						OnClick();
 						myIsClicked = true;
@@ -74,6 +75,7 @@ void Studio::StartButton::Update()
 				else
 				{
 					hasBeenHoveredOver = false;
+					AudioManagerAccessor::GetInstance()->StopSound("Audio/ButtonMouseOver.wav");
 				}
 			}
 			else
@@ -114,10 +116,15 @@ void Studio::StartButton::OnClick()
 		}
 	}
 
+	
+
 	AudioManagerAccessor::GetInstance()->StopAllSounds();
+	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
+	AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
 
 	//AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
 
+	//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
 
 	printf("I have started level: %f", myLevelToLoad);
 	LevelAccessor::GetInstance()->StartUpdating();

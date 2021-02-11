@@ -59,7 +59,7 @@ void Studio::ShopButton::Update()
 		GetCursorPos(&pt);
 		ScreenToClient(myWindowHandle, &pt);
 
-		
+
 		if (myIsClicked == false)
 		{
 			if (pt.x >= myLeft && pt.x <= myRight)
@@ -68,7 +68,7 @@ void Studio::ShopButton::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.15f);
 						hasBeenHoveredOver = true;
 						//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetText(myDescription);
 					}
@@ -107,6 +107,7 @@ void Studio::ShopButton::OnClick()
 		{
 			PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
 			std::cout << "Shop button pressed" << std::endl;
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			myHasBeenPurchased = true;
 		}

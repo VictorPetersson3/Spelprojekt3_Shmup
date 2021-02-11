@@ -71,7 +71,7 @@ void Studio::ShopButtonTier2::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.15f);
 						hasBeenHoveredOver = true;
 						//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetText(myDescription);
 					}
@@ -113,6 +113,7 @@ void Studio::ShopButtonTier2::OnClick()
 			PlayerAccessor::GetInstance()->UpgradeT2(myUpgradeType);
 			std::cout << "Shop button pressed" << std::endl;
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			myHasBeenPurchased = true;
 		}
 		

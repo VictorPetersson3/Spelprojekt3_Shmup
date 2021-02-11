@@ -38,13 +38,21 @@ Studio::TextElement::~TextElement()
 
 void Studio::TextElement::Render()
 {
+
 	if (myIsEnabled == true)
 	{
 		myText->Render();
+	}
+	else
+	{
+		myText->SetText("");
 	}
 }
 
 void Studio::TextElement::SetText(std::string& aText)
 {
-	myText->SetText(aText);
+	if (myIsEnabled == true)
+	{
+		myText->SetText(aText);
+	}
 }

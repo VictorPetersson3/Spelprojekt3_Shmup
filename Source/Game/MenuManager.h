@@ -51,6 +51,7 @@ namespace Studio
 		void QuitGameSession();
 
 		//TextElement* GetShopDescriptionText();
+		ImageElement* GetShopDescriptionText();
 
 		//Jimmikod
 		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
@@ -119,8 +120,10 @@ namespace Studio
 
 		ImageElement* myMainMenuLogo = new ImageElement("Sprites/UI/UI_gamelogo.dds", { 960,250 }, { 1,1 }, { 0.5f,0.5f }, 6, "MainMenuBackground");
 
-		ImageElement* myPausMenuBackground = new ImageElement("Sprites/UI/TempPausMenuBackground.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 10, "PausMenuBackground");
-		GenericButton* myPausMenuResumeButton = new GenericButton("Sprites/UI/ResumeButtonTemp.dds", { 960,600 }, { 1,1 }, { 0.5f,0.5f }, "ResumeButton", 11);
+		ImageElement* myPausMenuBackground = new ImageElement("Sprites/UI/UI_emptyFrame.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 10, "PausMenuBackground");
+		ImageElement* myPausMenuTitle = new ImageElement("Sprites/UI/UI_pause.dds", { 960,275 }, { 1,1 }, { 0.5f,0.5f }, 11, "PausMenuTitle");
+
+		GenericButton* myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 5,5 }, { 0.5f,0.5f }, "ResumeButton", 11);
 		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
 		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.86,0.105 }, "ShopCoinText", Tga2D::CColor({1,1,1,1}));

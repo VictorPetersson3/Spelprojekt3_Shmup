@@ -86,7 +86,7 @@ void CGameWorld::Init()
 	Studio::VideoPlayerAccessor::SetInstance(myVideoPlayer);
 	//myVideoPlayer->PlayVideo(Studio::Enums::Video::Logos);
 
-	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.2f);
+	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
 
 }
 

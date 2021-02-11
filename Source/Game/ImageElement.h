@@ -13,7 +13,11 @@ namespace Studio
 		~ImageElement();
 		void Update() override;
 
+		void SetSprite(const char* aPath);
+
 		SpriteSheet* GetSpriteSheet();
+
+
 	private:
 		SpriteSheet* mySpriteSheet;
 

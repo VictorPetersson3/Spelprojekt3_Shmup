@@ -60,6 +60,7 @@ namespace Studio
         myShop.Disable();
 
         myPausMenu.Add(myPausMenuBackground);
+        myPausMenu.Add(myPausMenuTitle);
         myPausMenu.Add(myPausMenuResumeButton);
         myPausMenu.Add(myPausMenuQuitButton);
         myPausMenu.Disable();
@@ -177,6 +178,7 @@ namespace Studio
         if (myNextLevelButton->IsClicked())
         {
             ResetShop();
+            myShopDescriptionText->SetActive(false);
             myNextLevelButton->SetActive(false);
         }
 
@@ -287,6 +289,11 @@ namespace Studio
         {
             Studio::Timer::GetInstance()->ToggleFreeze();
         }
+    }
+
+    ImageElement* MenuManager::GetShopDescriptionText()
+    {
+        return myShopDescriptionText;
     }
 
     /*TextElement* MenuManager::GetShopDescriptionText()

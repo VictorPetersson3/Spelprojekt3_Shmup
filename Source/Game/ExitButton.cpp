@@ -57,7 +57,7 @@ void Studio::ExitButton::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.05f);
 						hasBeenHoveredOver = true;
 					}
 
@@ -92,4 +92,6 @@ void Studio::ExitButton::Update()
 void Studio::ExitButton::OnClick()
 {
 	PostMessage(myWindowHandle, WM_CLOSE, 0, 0);
+	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
+
 }
