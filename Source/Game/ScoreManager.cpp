@@ -3,6 +3,9 @@
 #include "MenuManagerSingleton.h"
 #include <iostream>
 #include <string>
+#include "AudioManager.h"
+#include "AudioManagerAccesor.h"
+
 namespace Studio
 {
 	ScoreManager::ScoreManager()
@@ -27,6 +30,7 @@ namespace Studio
 	void ScoreManager::AddCoinScore(int anAmount)
 	{
 		myCoinScore += anAmount;
+		AudioManagerAccessor::GetInstance()->Play2D("Audio/CoinPickUp.mp3", false, 0.2f);
 	}
 
 	void ScoreManager::RemoveCoinScore(int anAmount)

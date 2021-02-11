@@ -34,6 +34,7 @@ namespace Studio
 		MenuObject* GetPauseMenu();
 		MenuObject* GetShop();
 		MenuObject* GetOptionsMenu();
+		MenuObject* GetEndOfGameMenu();
 
 		void Update();
 
@@ -49,7 +50,8 @@ namespace Studio
 		void StartGame();
 		void QuitGameSession();
 
-		TextElement* GetShopDescriptionText();
+		//TextElement* GetShopDescriptionText();
+		ImageElement* GetShopDescriptionText();
 
 		//Jimmikod
 		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
@@ -62,6 +64,7 @@ namespace Studio
 		MenuObject myPausMenu;
 		MenuObject myShop;
 		MenuObject myOptionsMenu;
+		MenuObject myEndOfGameMenu;
 
 		ShopUI* myShopUI;
 
@@ -91,6 +94,8 @@ namespace Studio
 		ImageElement* myShopBackground = new ImageElement("Sprites/UI/ShopUI/shopUI_BG.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 0, "ShopBackground");
 		ImageElement* myShopFrames = new ImageElement("Sprites/UI/ShopUI/shopUI_frames.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "ShopFrames");
 
+		ImageElement* myShopDescriptionText = new ImageElement("Sprites/UI/ShopUI/RapidFireAST1.dds", { 1400, 700 }, { 1,1 }, { 0.5f,0.5f }, 4, "ShopText");
+
 		int myRapidCooldown;
 		int myMissileCooldown;
 		int myShieldCooldown;
@@ -115,12 +120,14 @@ namespace Studio
 
 		ImageElement* myMainMenuLogo = new ImageElement("Sprites/UI/UI_gamelogo.dds", { 960,250 }, { 1,1 }, { 0.5f,0.5f }, 6, "MainMenuBackground");
 
-		ImageElement* myPausMenuBackground = new ImageElement("Sprites/UI/TempPausMenuBackground.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 10, "PausMenuBackground");
-		GenericButton* myPausMenuResumeButton = new GenericButton("Sprites/UI/ResumeButtonTemp.dds", { 960,600 }, { 1,1 }, { 0.5f,0.5f }, "ResumeButton", 11);
+		ImageElement* myPausMenuBackground = new ImageElement("Sprites/UI/UI_emptyFrame.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 10, "PausMenuBackground");
+		ImageElement* myPausMenuTitle = new ImageElement("Sprites/UI/UI_pause.dds", { 960,275 }, { 1,1 }, { 0.5f,0.5f }, 11, "PausMenuTitle");
+
+		GenericButton* myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 5,5 }, { 0.5f,0.5f }, "ResumeButton", 11);
 		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
 		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.86,0.105 }, "ShopCoinText", Tga2D::CColor({1,1,1,1}));
-		TextElement* myShopDescriptionText = new TextElement(Tga2D::EFontSize_24, { 0.65,0.65 }, "ShopDescriptionText", Tga2D::CColor({ 1,1,1,1 }));
+		//TextElement* myShopDescriptionText = new TextElement(Tga2D::EFontSize_24, { 0.65,0.65 }, "ShopDescriptionText", Tga2D::CColor({ 1,1,1,1 }));
 		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.515 }, "myMasterVolumePercentageText");
 		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.4 }, "myMasterVolumeLabelText");
 
@@ -136,6 +143,10 @@ namespace Studio
 		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	
 		LevelSelect* myLevelSelect;
+
+
+		// EndOfGameMenu
+		GoToMainMenuButton* myEGMMainMenu = new GoToMainMenuButton("Sprites/UI/UI_exit.dds", { 960, 540 }, { 1, 1 }, { 0.5f, 0.5f }, "EGMMainMenu", 190);
 	};
 
 

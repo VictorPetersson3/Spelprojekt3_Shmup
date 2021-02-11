@@ -93,6 +93,7 @@ void Studio::GoToMainMenuButton::Update()
 void Studio::GoToMainMenuButton::OnClick()
 {
 	MenuManagerSingleton::GetInstance()->GetOptionsMenu()->Disable();
+	MenuManagerSingleton::GetInstance()->GetEndOfGameMenu()->Disable();
 	Sleep(200);
 	MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
 }

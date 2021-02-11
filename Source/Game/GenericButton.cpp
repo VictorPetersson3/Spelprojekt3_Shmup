@@ -62,7 +62,7 @@ void Studio::GenericButton::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.1f);
 						hasBeenHoveredOver = true;
 					}
 
@@ -99,6 +99,7 @@ void Studio::GenericButton::Update()
 
 void Studio::GenericButton::OnClick()
 {
+	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 }
 
 bool Studio::GenericButton::IsClicked()

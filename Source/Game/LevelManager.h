@@ -39,6 +39,9 @@ namespace Studio
 		const int GetCurrentLevelIndex() const;
 		const std::vector<std::string>& GetLevelPaths() const;
 
+		void StopUpdating();
+		void StartUpdating();
+
 	private:
 		void UpdateEnemies();
 		void LevelLogic();
@@ -49,6 +52,7 @@ namespace Studio
 		void ClearPacks();
 		void ClearBullets();
 
+		bool myIsUpdating = true;
 
 		bool myLevelIsCleared;
 		bool myLevelEnemiesCleared;

@@ -41,6 +41,11 @@ void Studio::ImageElement::Update()
 	}
 }
 
+void Studio::ImageElement::SetSprite(const char* aPath)
+{
+	mySpriteSheet->SetImagePath(aPath);
+}
+
 Studio::SpriteSheet* Studio::ImageElement::GetSpriteSheet()
 {
 	return mySpriteSheet;

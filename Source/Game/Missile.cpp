@@ -41,10 +41,12 @@ namespace Studio
 			myInitialSpeed = -10.0f;
 			myDeaccelerationSpeed = -50.0f;
 			myAccelerationSpeed = -2.0f;
+			myExplosionRadius = aExplosionRadius;
+			myDamage = 1;
 
 			myVelocity = { myInitialSpeed, 0.0f };
 
-			myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
+			myCollider.AddBoxColliderObject({ 0, 0 }, { 10,5 });
 
 			mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
 

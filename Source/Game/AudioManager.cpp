@@ -29,12 +29,11 @@ void Studio::AudioManager::Play2D(const char* aPath, bool aLooping, float volume
 	{
 		sound->setDefaultVolume(volume*volumeMultiplier);
 
-		myAudioEngine->play2D(sound, aLooping, false, true);
+		myAudioEngine->play2D(sound, aLooping, false, false);
 	}
 	else
 	{
-		myAudioEngine->play2D(myAudioEngine->getSoundSource(aPath), aLooping, false, true);
-
+		myAudioEngine->play2D(myAudioEngine->getSoundSource(aPath), aLooping, false, false);
 	}
 }
 

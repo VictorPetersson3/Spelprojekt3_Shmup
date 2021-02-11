@@ -58,7 +58,7 @@ void Studio::ReturnToMainMenuButton::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.mp3", false, 0.05f);
 						hasBeenHoveredOver = true;
 					}
 

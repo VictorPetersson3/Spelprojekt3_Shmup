@@ -65,15 +65,6 @@ namespace Studio
 	{
 		if (!IsDead())
 		{
-			if (InputManager::GetInstance()->IsKeyPressed('5'))
-			{
-				UpgradeT2(Enums::Tier2Upgrades::BasicAttackAdditionalProjectile);
-			}
-			if (InputManager::GetInstance()->IsKeyPressed('6'))
-			{
-				UpgradeT3(Enums::Tier3Upgrades::RapidFirePenetrating);
-
-			}
 			Movement();
 
 			Player::GameObject::Update(myPosition + myDirection);
@@ -287,6 +278,14 @@ namespace Studio
 	const bool Player::GetHasCollided() const
 	{
 		return myHasCollided;
+	}
+
+	float Studio::Player::GetAmountOfProjectiles()
+	{
+		if (this != nullptr)
+		{
+			return myAmountOfProjectiles;
+		}
 	}
 
 	void Player::Movement()

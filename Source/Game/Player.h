@@ -35,6 +35,7 @@ namespace Studio
 		bool GetIsShieldActive();
 		bool GetHasClusterBombs();
 		bool GetHasExplodingShield();
+		float GetAmountOfProjectiles();
 
 		Player_JsonParser* GetPlayerData();
 	private:

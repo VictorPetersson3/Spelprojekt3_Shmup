@@ -15,8 +15,9 @@
 #include "MenuManager.h"
 #include "MenuManagerSingleton.h"
 #include "TextElement.h"
+#include "ImageElement.h"
 
-Studio::ShopButtonTier2::ShopButtonTier2(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier2Upgrades aUpgradeType, int aCost, const char* aDescription)
+Studio::ShopButtonTier2::ShopButtonTier2(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier2Upgrades aUpgradeType, int aCost, char* aDescription)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -71,9 +72,10 @@ void Studio::ShopButtonTier2::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.15f);
 						hasBeenHoveredOver = true;
-						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetText(myDescription);
+						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
+						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetSprite(myDescription);
 					}
 
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
@@ -85,12 +87,14 @@ void Studio::ShopButtonTier2::Update()
 				else
 				{
 					hasBeenHoveredOver = false;
+					MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
 
 
 				}
 			}
 			else
 			{
+				MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
 				hasBeenHoveredOver = false;
 			}
 		}
@@ -113,6 +117,7 @@ void Studio::ShopButtonTier2::OnClick()
 			PlayerAccessor::GetInstance()->UpgradeT2(myUpgradeType);
 			std::cout << "Shop button pressed" << std::endl;
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			myHasBeenPurchased = true;
 		}
 		
@@ -122,4 +127,9 @@ void Studio::ShopButtonTier2::OnClick()
 void Studio::ShopButtonTier2::Reset()
 {
 	myHasBeenPurchased = false;
+}
+
+Studio::Enums::Tier2Upgrades Studio::ShopButtonTier2::GetUpgradeType()
+{
+	return myUpgradeType;
 }
