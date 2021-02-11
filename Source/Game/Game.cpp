@@ -4,7 +4,8 @@
 #include <tga2d/error/error_manager.h>
 #include "Timer.h"
 #include "InputManager.h"
-
+#include "Game_Accessor.h"
+#include "wtypes.h"
 using namespace std::placeholders;
 
 #ifdef _DEBUG
@@ -24,6 +25,11 @@ CGame::CGame()
 {
 	Studio::InputManager::Construct();
 	Studio::Timer::Construct();
+	myResolution = { 0, 0 };
+	myChangeResolution = false;
+	myToggleFullscreen = false;
+	myIsFullScreen = false;
+	Studio::GameAccessor::GetInstance().SetGame(this);
 }
 
 
@@ -72,10 +78,13 @@ bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 	createParameters.myApplicationName = L"TGA 2D " + BUILD_NAME + L"[" + aVersion + L"] ";
 	unsigned short windowWidth = 1920;
 	unsigned short windowHeight = 1080;
-	createParameters.myWindowHeight = windowHeight;
-	createParameters.myWindowWidth = windowWidth;
+	createParameters.myRenderWidth = windowHeight;
+	createParameters.myRenderWidth = windowWidth;
+	createParameters.myWindowHeight = 720;
+	createParameters.myWindowWidth = 1280;
 	//createParameters.myPreferedMultiSamplingQuality = Tga2D::EMultiSamplingQuality_High;
 	createParameters.myClearColor = (Tga2D::CColor{ 0,0,0,0 });
+	createParameters.myUseLetterboxAndPillarbox = true;
 	createParameters.myActivateDebugSystems = Tga2D::eDebugFeature_Fps |
 		Tga2D::eDebugFeature_Mem |
 		Tga2D::eDebugFeature_Drawcalls |
@@ -90,9 +99,20 @@ bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 		system("pause");
 		return false;
 	}
-
 	// End of program
 	return true;
+}
+
+void CGame::SetResolution(const Tga2D::Vector2ui aResolution)
+{
+	myResolution = aResolution;
+	myChangeResolution = true;
+}
+
+void CGame::ToggleFullScreen()
+{
+	myIsFullScreen = !myIsFullScreen;
+	myToggleFullscreen = true;
 }
 
 void CGame::InitCallBack()
@@ -109,6 +129,20 @@ void CGame::UpdateCallBack()
 		std::this_thread::sleep_for(std::chrono::microseconds(1));
 	}
 	myGameWorld.SwapBuffers();
+	if (myChangeResolution == true)
+	{
+		Tga2D::CEngine::GetInstance()->SetResolution(myResolution, true);
+		printf("Render Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetRenderSize().x, Tga2D::CEngine::GetInstance()->GetRenderSize().y);
+		printf("Window Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
+		myChangeResolution = false;
+	}
+	if (myToggleFullscreen)
+	{
+		Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
+		printf("After Fullscreen \nRender Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetRenderSize().x, Tga2D::CEngine::GetInstance()->GetRenderSize().y);
+		printf("Window Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
+		myToggleFullscreen = false;
+	}
 	myGamePlayDone = false;
 	myHasSwappedBuffers = true;
 }

@@ -23,10 +23,7 @@ Studio::ReturnToMainMenuButton::ReturnToMainMenuButton(const char* aSpritePath, 
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
 
-	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
-	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
-	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
-	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
+	CalculateButtonCollider();
 
 	tag = aTag;
 }

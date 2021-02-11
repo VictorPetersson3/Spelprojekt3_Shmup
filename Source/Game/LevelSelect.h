@@ -14,6 +14,7 @@ namespace Studio
 		void Update();
 		void Enable();
 		void Disable();
+		void RecalcColliders();
 	private:
 		bool myIsActive;
 		GenericButton* myLevel1Button;

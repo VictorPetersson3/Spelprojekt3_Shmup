@@ -9,6 +9,7 @@
 #include "InputManager.h"
 #include "LevelSelect.h"
 #include "Timer.h"
+#include "Options.h"
 #define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
 namespace Studio
@@ -71,6 +72,8 @@ namespace Studio
         myLoadingScreen = new SpriteSheet("Sprites/UI/LoadingScreen.dds");
         myLoadingScreen->SetPosition({ 960, 540 });
         myLoadingScreen->SetLayer(10);
+        myOptions = new Options(this);
+        ResetButtonColliders();
     }
 
     MenuObject* Studio::MenuManager::GetMainMenu()
@@ -97,15 +100,26 @@ namespace Studio
     {
         return &myOptionsMenu;
     }
+
+    Options* MenuManager::GetOptions()
+    {
+        return myOptions;
+    }
  
     void MenuManager::Update()
     {
+        if (myResizeAllElements)
+        {
+            ResetButtonColliders();
+            myResizeAllElements = false;
+        }
         myMainMenu.Update();
         myHud.Update();
         myShop.Update();
         myPausMenu.Update();
         myOptionsMenu.Update();
         myLevelSelect->Update();
+        myOptions->Update();
 
         if (myIsLoading && hasStartedGame)
         {
@@ -139,6 +153,7 @@ namespace Studio
         {
             myMainMenu.Disable();
             myOptionsMenu.Enable();
+            myOptions->Enable();
             mySettingsButton->SetActive(false);
         }
         if (myLevelSelectButton->IsClicked())
@@ -192,6 +207,11 @@ namespace Studio
         myShop.Add(myShopCoinText);
         myShop.Add(myNextLevelButton);
         myShop.Disable();
+    }
+
+    void MenuManager::ResetAllSizes()
+    {
+        myResizeAllElements = true;
     }
 
     bool MenuManager::GameStarted()
@@ -259,6 +279,22 @@ namespace Studio
         {
             Studio::Timer::GetInstance()->ToggleFreeze();
         }
+    }
+
+    void MenuManager::ResetButtonColliders()
+    {
+        myStartButton->CalculateButtonCollider();
+        myNextLevelButton->CalculateButtonCollider();
+        mySettingsButton->CalculateButtonCollider();
+        myCreditsButton->CalculateButtonCollider();
+        myExitButton->CalculateButtonCollider();
+
+        myPausMenuResumeButton->CalculateButtonCollider();
+        myPausMenuQuitButton->CalculateButtonCollider();
+        myOptionsMenuReturnButton->CalculateButtonCollider();
+        myLevelSelectButton->CalculateButtonCollider();
+        myOptions->RecalcColliders();
+        myLevelSelect->RecalcColliders();
     }
 
     TextElement* MenuManager::GetShopDescriptionText()

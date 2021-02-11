@@ -9,6 +9,7 @@
 #include "MenuManagerSingleton.h"
 #include "MenuManager.h"
 #include "LevelAccessor.h"
+#include "Options.h"
 
 Studio::GoToMainMenuButton::GoToMainMenuButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer)
 {
@@ -24,11 +25,7 @@ Studio::GoToMainMenuButton::GoToMainMenuButton(const char* aSpritePath, const VE
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
 
-	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
-	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
-	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
-	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
-
+	CalculateButtonCollider();
 	tag = aTag;
 }
 
@@ -92,7 +89,7 @@ void Studio::GoToMainMenuButton::Update()
 
 void Studio::GoToMainMenuButton::OnClick()
 {
-	MenuManagerSingleton::GetInstance()->GetOptionsMenu()->Disable();
+	MenuManagerSingleton::GetInstance()->GetOptions()->Disable();
 	Sleep(200);
 	MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
 }

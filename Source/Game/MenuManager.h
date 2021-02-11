@@ -20,6 +20,7 @@
 namespace Studio
 {
 	class LevelSelect;
+	class Options;
 	class LevelManager;
 	class MenuManager
 	{
@@ -33,13 +34,14 @@ namespace Studio
 		MenuObject* GetPauseMenu();
 		MenuObject* GetShop();
 		MenuObject* GetOptionsMenu();
+		Options* GetOptions();
 
 		void Update();
 
 		void Render();
 
 		void ResetShop();
-
+		void ResetAllSizes();
 		bool GameStarted();
 		bool GetGodMode();
 		void SetPlayButtonIndex(const int aIndex);
@@ -47,7 +49,7 @@ namespace Studio
 		void Load();
 		void StartGame();
 		void QuitGameSession();
-
+		void ResetButtonColliders();
 		TextElement* GetShopDescriptionText();
 
 	private:
@@ -64,7 +66,7 @@ namespace Studio
 
 		bool hasStartedGame = false;
 		bool inGodMode = false;
-
+		bool myResizeAllElements;
 		bool myIsLoading;
 		int myLevelToLoad;
 		SpriteSheet* myLoadingScreen;
@@ -115,6 +117,7 @@ namespace Studio
 		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	
 		LevelSelect* myLevelSelect;
+		Options* myOptions;
 	};
 
 

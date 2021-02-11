@@ -16,6 +16,7 @@ namespace Studio
 		ButtonElement();
 		~ButtonElement();
 
+		void CalculateButtonCollider();
 		virtual void OnClick();
 		virtual void Update();
 

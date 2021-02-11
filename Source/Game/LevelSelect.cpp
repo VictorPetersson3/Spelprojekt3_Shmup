@@ -10,7 +10,7 @@ Studio::LevelSelect::LevelSelect(MenuManager* aMenuManager) :
 	myLevel2Button = new GenericButton("Sprites/UI/UI_level2.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 	myLevel3Button = new GenericButton("Sprites/UI/UI_level3.dds", { 1560, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 	printf("Back To Main Menu\n");
-	myBackButton = new GenericButton("Sprites/UI/UI_backToMain_text.dds", { 200,900 }, { 1,1 }, { 0.0f,0.5f }, "BackButton", 10);
+	myBackButton = new GenericButton("Sprites/UI/UI_backToMain_text.dds", { 400,900 }, { 1,1 }, { 0.5f,0.5f }, "BackButton", 10);
 	myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
 	myIsActive = false;
 	MenuObject::Add(myLevel1Button);
@@ -19,7 +19,6 @@ Studio::LevelSelect::LevelSelect(MenuManager* aMenuManager) :
 	MenuObject::Add(myBackButton);
 	MenuObject::Add(myMainMenuBackground);
 	MenuObject::Disable();
-
 }
 
 Studio::LevelSelect::~LevelSelect()
@@ -73,6 +72,14 @@ void Studio::LevelSelect::Disable()
 {
 	myIsActive = false;
 	MenuObject::Disable();
+}
+
+void Studio::LevelSelect::RecalcColliders()
+{
+	myLevel1Button->CalculateButtonCollider();
+	myLevel2Button->CalculateButtonCollider();
+	myLevel3Button->CalculateButtonCollider();
+	myBackButton->CalculateButtonCollider();
 }
 
 

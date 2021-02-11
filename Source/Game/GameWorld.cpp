@@ -146,6 +146,8 @@ void CGameWorld::InputStuff()
 	if (Studio::InputManager::GetInstance()->IsKeyPressed('G'))
 	{
 		myPlayer->SetGodMode(true);
+		Tga2D::CEngine::GetInstance()->SetFullScreen(true);
+
 	}
 
 	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))

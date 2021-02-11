@@ -22,18 +22,10 @@ Studio::GenericButton::GenericButton(const char* aSpritePath, const VECTOR2F aPo
 	mySpriteSheet->SetPosition(aPosition);
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
-
-	Tga2D::Vector2f spawnPos;
-	spawnPos.x = aPosition.x + (static_cast<float>(mySprite->GetImageSize().x) * (aPivot.x - 0.5)) * -1.0f;
-	spawnPos.y = aPosition.y + (static_cast<float>(mySprite->GetImageSize().y) * (aPivot.y - 0.5)) * -1.0f;
-	myLeft = spawnPos.x - (mySprite->GetImageSize().x * 0.45f);
-	myRight = spawnPos.x + (mySprite->GetImageSize().x * 0.45f);
-	myTop = spawnPos.y - (mySprite->GetImageSize().y * 0.45f);
-	myBottom = spawnPos.y + (mySprite->GetImageSize().y * 0.45f);
-
 	tag = aTag;
 	mySize = 1;
 	mySizeTimer = 0;
+	CalculateButtonCollider();
 }
 
 Studio::GenericButton::~GenericButton()
@@ -52,9 +44,9 @@ void Studio::GenericButton::Update()
 		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
 	}
 
-	if (myIsEnabled == true)
+	if (myIsEnabled)
 	{
-		if (myIsClicked == false)
+		if (!myIsClicked)
 		{
 			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{

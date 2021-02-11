@@ -163,6 +163,7 @@ namespace Tga2D
         float GetWindowRatio() const;
         float GetWindowRatioInversed() const;
 
+
 		float GetDeltaTime() const { return myDeltaTime; }
         HWND* GetHWND() const;
         HINSTANCE GetHInstance() const;
@@ -188,6 +189,7 @@ namespace Tga2D
 
 		CFileWatcher* GetFileWatcher() { return myFileWatcher; }
 		
+        unsigned int GetScreenResolutionX();
 		CRenderer& GetRenderer() const { return *myRenderer; }
 		CTextService& GetTextService() const { return *myTextService; }
 		CWindowsWindow& GetWindow() const { return *myWindow; }

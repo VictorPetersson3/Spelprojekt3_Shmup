@@ -314,6 +314,14 @@ float Tga2D::CEngine::GetWindowRatioInversed() const
 	return myWindowRatioInversed;
 }
 
+unsigned int Tga2D::CEngine::GetScreenResolutionX()
+{
+		RECT desktop;
+		const HWND hDesktop = GetDesktopWindow();
+		GetWindowRect(hDesktop, &desktop);
+		return desktop.bottom;
+}
+
 VECTOR2F Tga2D::CEngine::GetWindowRatioVec() const
 {
 	return myWindowRatioVec;
@@ -329,7 +337,7 @@ void Tga2D::CEngine::SetTargetSize(const VECTOR2UI& aTargetSize)
 	myTargetSize = aTargetSize;
 }
 
-void Tga2D::CEngine::SetResolution(const VECTOR2UI &aResolution, bool aAlsoSetWindowSize)
+void Tga2D::CEngine::SetResolution(const VECTOR2UI& aResolution, bool aAlsoSetWindowSize)
 {
 	myWindowSize = aResolution;
 	if (aAlsoSetWindowSize)
@@ -338,8 +346,6 @@ void Tga2D::CEngine::SetResolution(const VECTOR2UI &aResolution, bool aAlsoSetWi
 	}
 	myDirect3D->SetResolution(aResolution);
 	CalculateRatios();
-	
-
 }
 
 void Tga2D::CEngine::CalculateRatios()
@@ -406,6 +412,13 @@ void Tga2D::CEngine::SetFullScreen(bool aFullScreen)
 	if (myDirect3D)
 	{
 		myDirect3D->SetFullScreen(aFullScreen);
+		if (aFullScreen)
+		{
+			unsigned int x = static_cast<float>(GetScreenResolutionX()) * (1920 / 1080);
+			Tga2D::Vector2ui resolution = { x, GetScreenResolutionX() };
+			printf("Fullscreen Res X: %i Y: %i\n", resolution.x, resolution.y);
+			SetResolution(resolution, true);
+		}
 	}
 }
 
