@@ -14,6 +14,8 @@ namespace Studio
 		void OnClick() override;
 		void Reset();
 
+		Enums::Tier2Upgrades GetUpgradeType();
+
 	private:
 		bool myIsClicked = false;
 		bool myHasBeenPurchased = false;
