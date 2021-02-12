@@ -13,7 +13,7 @@ namespace Studio
 		{
 			myWorldCoins[i]->Update();
 			RendererAccessor::GetInstance()->Render(*myWorldCoins[i]);
-			if (myWorldCoins[i]->GetLifeTime() > 5)
+			if (myWorldCoins[i]->GetLifeTime() > 8.f)
 			{
 				SAFE_DELETE(myWorldCoins[i]);
 				std::swap(myWorldCoins[i], myWorldCoins.back());
@@ -23,7 +23,7 @@ namespace Studio
 	}
 
 	void CoinManager::CreateCoin(VECTOR2F aPosition)
-	{
+ 	{
 		myWorldCoins.push_back(new Coin(aPosition));
 	}
 

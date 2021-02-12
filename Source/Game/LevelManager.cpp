@@ -229,6 +229,14 @@ namespace Studio
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsTerrain())
 			{
 				myPlayer->Bounce(myEnemies[i]->GetPosition());
+				if (myPlayer->GetIsShieldActive())
+				{
+					myPlayer->TakeShieldDamage(1);
+				}
+				else
+				{
+					myPlayer->TakeDamage(1.0f);
+				}
 			}
 			
 			//If enemy collides with player, take shield damage first, if no shield, take normal damage.
