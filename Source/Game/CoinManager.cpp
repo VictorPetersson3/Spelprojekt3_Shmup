@@ -9,7 +9,7 @@ namespace Studio
 {
 	void CoinManager::Update()
 	{
-		for (int i = myWorldCoins.size(); --i > 0;)
+		for (int i = myWorldCoins.size(); --i >= 0;)
 		{
 			myWorldCoins[i]->Update();
 			RendererAccessor::GetInstance()->Render(*myWorldCoins[i]);
