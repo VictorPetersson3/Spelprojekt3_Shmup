@@ -140,8 +140,9 @@ namespace Studio
 				//StartCredits
 				StopUpdating();
 				//Studio::MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
-				Studio::MenuManagerSingleton::GetInstance()->GetEndOfGameMenu()->Enable();
-				Studio::VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Outro);
+				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+				MenuManagerSingleton::GetInstance()->GetCreditsMenu()->Enable();
+				VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Outro);
 			}
 			else
 			{

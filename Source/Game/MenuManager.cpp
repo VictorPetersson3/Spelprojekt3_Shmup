@@ -72,8 +72,9 @@ namespace Studio
         myOptionsMenu.Add(myMasterVolumeLabelText);
         myOptionsMenu.Add(myVolumeSliderBackground);
 
-        // EndOfGameMenu
-        myEndOfGameMenu.Add(myEGMMainMenu);
+        // Credits
+        myCreditsMenu.Add(myCreditsBackground);
+        myCreditsMenu.Add(myCreditsBackButton);
 
         std::string optionsMenuLabel = "Options";
         std::string masterVolumeLabel = "Master Volume";
@@ -121,9 +122,9 @@ namespace Studio
     {
         return myOptions;
     }
-    MenuObject* MenuManager::GetEndOfGameMenu()
+    MenuObject* MenuManager::GetCreditsMenu()
     {
-        return &myEndOfGameMenu;
+        return &myCreditsMenu;
     }
  
     void MenuManager::Update()
@@ -141,7 +142,13 @@ namespace Studio
         myLevelSelect->Update();
         myOptions->Update();
 
-        myEndOfGameMenu.Update();
+        myCreditsMenu.Update();
+
+        if (myCreditsButton->IsClicked())
+        {
+            myMainMenu.Disable();
+            myCreditsMenu.Enable();
+        }
         
 
         if (myIsLoading && hasStartedGame)
@@ -303,6 +310,7 @@ namespace Studio
         myPausMenu.Disable();
         myOptionsMenu.Disable();
         myHud.Disable();
+        myCreditsMenu.Disable();
         hasStartedGame = false;
         myStartButton->myIsClicked = false;
         if (Studio::Timer::GetInstance()->IsFrozen())

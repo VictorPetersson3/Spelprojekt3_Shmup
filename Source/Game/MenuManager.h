@@ -36,7 +36,7 @@ namespace Studio
 		MenuObject* GetShop();
 		MenuObject* GetOptionsMenu();
 		Options* GetOptions();
-		MenuObject* GetEndOfGameMenu();
+		MenuObject* GetCreditsMenu();
 
 		void Update();
 
@@ -67,7 +67,7 @@ namespace Studio
 		MenuObject myPausMenu;
 		MenuObject myShop;
 		MenuObject myOptionsMenu;
-		MenuObject myEndOfGameMenu;
+		MenuObject myCreditsMenu;
 
 		ShopUI* myShopUI;
 
@@ -148,8 +148,9 @@ namespace Studio
 		LevelSelect* myLevelSelect;
 		Options* myOptions;
 
-		// EndOfGameMenu
-		GoToMainMenuButton* myEGMMainMenu = new GoToMainMenuButton("Sprites/UI/UI_exit.dds", { 960, 540 }, { 1, 1 }, { 0.5f, 0.5f }, "EGMMainMenu", 190);
+		// Credits
+		ImageElement* myCreditsBackground = new ImageElement("Sprites/credits.dds", { 960.0f, 540.0f }, { 1.0f, 1.0f }, { 0.5f, 0.5f }, 20, "CreditsBackground");
+		ReturnToMainMenuButton* myCreditsBackButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 384.0f, 892.0f, }, { 1.0f, 1.0f }, { 0.5f, 0.5f }, "CreditsGoBackButton", 21);
 	};
 
 
