@@ -29,6 +29,7 @@ namespace Studio
 		myMovement = nullptr;
 		myType = aEnemyType;
 		myPosition = aSpawnPosition;
+		myPosition.x += 200;
 		myScoreValue = 100;
 		myShootTimer = 0;
 		AddColliders();
