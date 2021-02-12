@@ -40,6 +40,7 @@ namespace Studio
 		myShieldCurrentCooldown = 0.f;
 		myShieldHealth = somePlayerData->GetShieldHealth();
 		myAmountOfProjectiles = 1;
+		myInvincibilityTimer = 0.f;
 
 		myMissileCurrentCooldown = 0.f;
 
@@ -79,6 +80,8 @@ namespace Studio
 				else
 					module->Update();
 			}
+
+			InvincibilityLogic();
 
 			Shoot();
 
@@ -525,6 +528,8 @@ namespace Studio
 	{
 		Studio::LevelAccessor::GetInstance()->SpawnMissile(Enums::BulletOwner::Player, myPosition, myPlayerData->GetMissileRadius(), myPlayerData->GetMissileDamage(), myPlayerData->GetMissileDamage());
 	}
+	
+	
 	void Studio::Player::ShieldLogic()
 	{
 		if (InputManager::GetInstance()->IsCustomKeyPressed(Enums::CustomKey_Shield) && myShieldCurrentCooldown <= 0)
@@ -575,9 +580,39 @@ namespace Studio
 		}
 		
 	}
+	void Studio::Player::ActivateInvincibility()
+	{
+		myInvincibilityTimer = 0.5f;
+	}
+	void Studio::Player::InvincibilityLogic()
+	{
+		
+		myInvincibilityTimer -= Timer::GetInstance()->TGetDeltaTime();
+		
+		if (myInvincibilityTimer > 0.f)
+		{
+			myIsInvincible = true;
+		}
+		else
+		{
+			myIsInvincible = false;
+		}
+	}
 	void Studio::Player::TakeShieldDamage(int someDamage)
 	{
-		myShieldHealth -= someDamage;
+		if (!myIsInvincible)
+		{
+			myShieldHealth -= someDamage;
+			ActivateInvincibility();
+		}
+	}
+	void Studio::Player::TakeDamage(const int someDamage)
+	{
+		if (!myIsInvincible)
+		{
+			GameObject::TakeDamage(someDamage);
+			ActivateInvincibility();
+		}
 	}
 	bool Studio::Player::GetIsShieldActive()
 	{

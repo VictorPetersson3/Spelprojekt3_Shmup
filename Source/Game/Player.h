@@ -31,6 +31,7 @@ namespace Studio
 		void UpgradeT3(Enums::Tier3Upgrades aTier3Upgrade);
 		void ResetPlayerCurrentLevel();
 		void TakeShieldDamage(int someDamage);
+		void TakeDamage(const int someDamage);
 		bool GetHasPenetratingRounds();
 		bool GetIsShieldActive();
 		bool GetHasClusterBombs();
@@ -46,6 +47,8 @@ namespace Studio
 		void DeactivateRapidFire();
 		void AddAnotherProjectile();
 		void LaunchMissile();
+		void ActivateInvincibility();
+		void InvincibilityLogic();
 		//Shield
 		void ShieldLogic();
 		void ActivateShield();
@@ -60,6 +63,7 @@ namespace Studio
 		float myRapidFireCurrentCooldown;
 		float myRapidFireCurrentlyActiveTime;
 		float myRapidFireMaxActiveTime;
+		float myInvincibilityTimer;
 
 		//BasicAttacks
 		float myAmountOfProjectiles;
@@ -89,6 +93,7 @@ namespace Studio
 		bool myHasPurchasedPenetratingRounds = false;
 		bool myHasPurchasedShieldExplosion = false;
 		bool myHasPurchasedClusterBombs = false;
+		bool myIsInvincible = false;
 
 		//Shield
 		bool myShieldIsActive = false;
