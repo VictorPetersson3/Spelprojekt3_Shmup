@@ -11,6 +11,9 @@ namespace Studio
 		void Update() override;
 		void OnClick() override;
 
+	private:
+		float mySizeTimer;
+		float mySize;
 	};
 }
 

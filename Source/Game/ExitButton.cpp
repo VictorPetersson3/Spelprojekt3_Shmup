@@ -8,7 +8,9 @@
 #include "Renderer.h"
 #include "RendererAccessor.h"
 #include <stdlib.h>
+#include "Timer.h"
 
+#define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::ExitButton::ExitButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer)
 {
 	mySprite = new Tga2D::CSprite(aSpritePath);
@@ -21,6 +23,9 @@ Studio::ExitButton::ExitButton(const char* aSpritePath, const VECTOR2F aPosition
 	mySpriteSheet->SetPosition(aPosition);
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
+
+	mySize = 1;
+	mySizeTimer = 0;
 
 	CalculateButtonCollider();
 
@@ -37,20 +42,20 @@ Studio::ExitButton::~ExitButton()
 
 void Studio::ExitButton::Update()
 {
-	myWindowHandle = GetForegroundWindow();
 
-	POINT pt;
-	GetCursorPos(&pt);
-	ScreenToClient(myWindowHandle, &pt);
-
+	if (mySizeTimer <= 0.05f && hasBeenHoveredOver)
+	{
+		mySize += Studio::Timer::GetInstance()->TGetDeltaTime();
+		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
+	}
 
 	if (myIsEnabled == true)
 	{
 		if (myIsClicked == false)
 		{
-			if (pt.x >= myLeft && pt.x <= myRight)
+			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
-				if (pt.y >= myTop && pt.y <= myBottom)
+				if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
 				{
 					if (!hasBeenHoveredOver)
 					{
@@ -68,11 +73,15 @@ void Studio::ExitButton::Update()
 				}
 				else
 				{
+					mySize = 1;
+					mySizeTimer = 0;
 					hasBeenHoveredOver = false;
 				}
 			}
 			else
 			{
+				mySize = 1;
+				mySizeTimer = 0;
 				hasBeenHoveredOver = false;
 			}
 		}
@@ -82,6 +91,7 @@ void Studio::ExitButton::Update()
 			myIsClicked = false;
 		}
 
+		mySpriteSheet->SetSizeRelativeToImage({ mySize, mySize });
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 	}
 }
