@@ -12,7 +12,7 @@ namespace Studio
 	class ShopButton : public ButtonElement
 	{
 	public:
-		ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer,Enums::Tier1Upgrades aUpgradeType,int aCost, const char* aDescription);
+		ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer,Enums::Tier1Upgrades aUpgradeType,int aCost, char* aDescription);
 		~ShopButton();
 
 		void Update() override;
@@ -23,7 +23,7 @@ namespace Studio
 		bool myIsClicked = false;
 		bool myHasBeenPurchased = false;
 		Enums::Tier1Upgrades myUpgradeType;
-		std::string myDescription;
+		char* myDescription;
 		int myCost;
 	};
 }

@@ -41,6 +41,9 @@
 #include "AudioManager.h"
 #include "AudioManagerAccesor.h"
 
+// Cutscenes
+#include "VideoPlayerAccessor.h"
+
 namespace Studio
 {
 	LevelManager::LevelManager(BackgroundManager* aBackgroundManager, Player* aPlayer) :
@@ -122,6 +125,8 @@ namespace Studio
 
 	void LevelManager::Update()
 	{
+		if (!myIsUpdating) return;
+
 		if (Studio::InputManager::GetInstance()->IsKeyPressed('H'))
 		{
 			ScoreAccessor::GetInstance()->AddCoinScore(100000);
@@ -133,6 +138,10 @@ namespace Studio
 			if (myCurrentLevel > myLevelPaths.size() - 1)
 			{
 				//StartCredits
+				StopUpdating();
+				//Studio::MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
+				Studio::MenuManagerSingleton::GetInstance()->GetEndOfGameMenu()->Enable();
+				Studio::VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Outro);
 			}
 			else
 			{
@@ -235,7 +244,7 @@ namespace Studio
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsPopcorn())
 			{
 				myEnemies[i]->TakeDamage(100);
-				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
+				CreateExplosionAt(myEnemies[i]->GetPosition());
 				//My Player take damage, blow up mine
 			}
 
@@ -301,7 +310,7 @@ namespace Studio
 			if (myEnemies[i]->IsDead())
 			{
 				myEnemies[i]->DeathLogic();
-				myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
+				CreateExplosionAt(myEnemies[i]->GetPosition());
 				SAFE_DELETE(myEnemies[i]);
 				myEnemies.erase(myEnemies.begin() + i);
 			}
@@ -346,7 +355,7 @@ namespace Studio
 			{
 				for (int i = 0; i < myEnemies.size(); i++)
 				{
-					myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, myEnemies[i]->GetPosition()));
+					CreateExplosionAt(myEnemies[i]->GetPosition());
 				}
 				myEnemies.clear();
 				myBullets.clear();
@@ -499,6 +508,16 @@ namespace Studio
 
 	const std::vector<std::string>& LevelManager::GetLevelPaths() const { return myLevelPaths; }
 
+	void LevelManager::StopUpdating()
+	{
+		myIsUpdating = false;
+	}
+
+	void LevelManager::StartUpdating()
+	{
+		myIsUpdating = true;
+	}
+
 	void LevelManager::CheckIfLevelIsCleared()
 	{
 
@@ -579,24 +598,8 @@ namespace Studio
 
 	void LevelManager::SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius, const float aDamageAmount, const float aExplosionDamageAmount)
 	{
-		switch (aOwner)
-		{
-		case Enums::BulletOwner::Player:
-		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
-			myBullets.push_back(missile);
-		}
-		break;
-		case Enums::BulletOwner::Enemy:
-		{
-			Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
-			myBullets.push_back(missile);
-		}
-		break;
-		default:
-			break;
-		}
-
+		Missile* missile = myBulletFactory->CreateMissileObject(aOwner, aPosition, aExplosionRadius);
+		myBullets.push_back(missile);
 	}
 
 	void LevelManager::SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius)
@@ -608,5 +611,11 @@ namespace Studio
 	{
 		auto bomb = myBulletFactory->CreateTimedBomb(aPosition, aVelocity, aBlastRadius, aDamage);
 		myBullets.push_back(bomb);
+	}
+	void LevelManager::CreateExplosionAt(const Tga2D::Vector2f& aPosition, const float aRadius)
+	{
+		auto explosion = new EffectExplosionLarge("sprites/Particles/explosion_spritesheet.dds", { 8,1 }, aPosition);
+		explosion->GetSpriteSheet().SetSize({ aRadius * 2 * 2, aRadius * 2 * 2 }); // Times 5 because the small explosion on the sprite
+		myExplosions.push_back(explosion);
 	}
 }

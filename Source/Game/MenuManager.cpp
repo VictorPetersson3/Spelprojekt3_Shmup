@@ -61,6 +61,7 @@ namespace Studio
         myShop.Disable();
 
         myPausMenu.Add(myPausMenuBackground);
+        myPausMenu.Add(myPausMenuTitle);
         myPausMenu.Add(myPausMenuResumeButton);
         myPausMenu.Add(myPausMenuQuitButton);
         myPausMenu.Disable();
@@ -70,6 +71,9 @@ namespace Studio
         myOptionsMenu.Add(myVolumeSlider);
         myOptionsMenu.Add(myMasterVolumeLabelText);
         myOptionsMenu.Add(myVolumeSliderBackground);
+
+        // EndOfGameMenu
+        myEndOfGameMenu.Add(myEGMMainMenu);
 
         std::string optionsMenuLabel = "Options";
         std::string masterVolumeLabel = "Master Volume";
@@ -116,6 +120,9 @@ namespace Studio
     Options* MenuManager::GetOptions()
     {
         return myOptions;
+    MenuObject* MenuManager::GetEndOfGameMenu()
+    {
+        return &myEndOfGameMenu;
     }
  
     void MenuManager::Update()
@@ -133,6 +140,7 @@ namespace Studio
         myLevelSelect->Update();
         myOptions->Update();
 
+        myEndOfGameMenu.Update();
         
 
         if (myIsLoading && hasStartedGame)
@@ -183,6 +191,7 @@ namespace Studio
         if (myNextLevelButton->IsClicked())
         {
             ResetShop();
+            myShopDescriptionText->SetActive(false);
             myNextLevelButton->SetActive(false);
         }
 
@@ -204,7 +213,6 @@ namespace Studio
         myOptionsMenuTitleText->Render();
         myMasterVolumeSliderText->Render();
         myMasterVolumeLabelText->Render();
-        myShopDescriptionText->Render();
         if (myRapidCooldown > 0)
             myRapidCooldownText->Render();
         if (myMissileCooldown > 0)
@@ -318,9 +326,15 @@ namespace Studio
     }
 
     TextElement* MenuManager::GetShopDescriptionText()
+    ImageElement* MenuManager::GetShopDescriptionText()
     {
         return myShopDescriptionText;
     }
+
+    /*TextElement* MenuManager::GetShopDescriptionText()
+    {
+        return myShopDescriptionText;
+    }*/
     void MenuManager::GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown)
     {
         myRapidCooldown = aRapidFireCooldown;

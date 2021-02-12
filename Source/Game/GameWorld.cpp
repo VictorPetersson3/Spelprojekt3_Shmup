@@ -88,6 +88,9 @@ void CGameWorld::Init()
 	//myVideoPlayer->PlayVideo(Studio::Enums::Video::Logos);
 	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.2f);
 	myHasStarted = false;
+
+	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
+
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
@@ -158,7 +161,7 @@ void CGameWorld::InputStuff()
 	}
 	if (Studio::InputManager::GetInstance()->IsKeyPressed('G'))
 	{
-		myPlayer->SetGodMode(true);
+		myPlayer->SetGodMode(!myPlayer->GetHealth().GetGodMode());
 	}
 
 	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))

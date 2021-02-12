@@ -11,7 +11,7 @@
 #include "MenuObject.h"
 #include "TextElement.h"
 
-Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier1Upgrades aUpgradeType, int aCost, const char* aDescription)
+Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier1Upgrades aUpgradeType, int aCost, char* aDescription)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -59,7 +59,7 @@ void Studio::ShopButton::Update()
 		GetCursorPos(&pt);
 		ScreenToClient(myWindowHandle, &pt);
 
-		
+
 		if (myIsClicked == false)
 		{
 			if (pt.x >= myLeft && pt.x <= myRight)
@@ -68,10 +68,15 @@ void Studio::ShopButton::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/UI/ButtonHoverTemp.wav", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.15f);
 						hasBeenHoveredOver = true;
-						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetText(myDescription);
+						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
+						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet()->SetImagePath(myDescription);
+
 					}
+
+					RendererAccessor::GetInstance()->Render(*MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet());
+
 
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
@@ -82,6 +87,7 @@ void Studio::ShopButton::Update()
 				else
 				{
 					hasBeenHoveredOver = false;
+
 				}
 			}
 			else
@@ -107,6 +113,7 @@ void Studio::ShopButton::OnClick()
 		{
 			PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
 			std::cout << "Shop button pressed" << std::endl;
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			myHasBeenPurchased = true;
 		}

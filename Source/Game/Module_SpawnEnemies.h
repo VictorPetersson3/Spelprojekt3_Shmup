@@ -13,6 +13,7 @@ namespace Studio
 	private:
 		std::string myType;
 		VECTOR2F mySpawnPosition;
+		VECTOR2F myOriginalSpawnPosition;
 		bool mySpawnIsRelative;
 	};
 
