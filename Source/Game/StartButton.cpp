@@ -8,7 +8,9 @@
 #include "LevelAccessor.h"
 #include "MenuManager.h"
 #include "MenuManagerSingleton.h"
+#include "Timer.h"
 
+#define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer,const bool aShouldStartnextLevel)
 {
 	mySprite = new Tga2D::CSprite(aSpritePath);
@@ -23,11 +25,16 @@ Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPositi
 	mySpriteSheet->SetLayer(aLayer);
 
 	
-	CalculateButtonCollider();
 	tag = aTag;
+
+	mySize = 1;
+	mySizeTimer = 0;
 
 	myShouldLoadNextLevel = aShouldStartnextLevel;
 	myLevelToLoad = 0;
+
+	CalculateButtonCollider();
+
 }
 
 Studio::StartButton::~StartButton()
@@ -40,20 +47,20 @@ Studio::StartButton::~StartButton()
 
 void Studio::StartButton::Update()
 {
-	myWindowHandle = GetForegroundWindow();
 
-	POINT pt;
-	GetCursorPos(&pt);
-	ScreenToClient(myWindowHandle, &pt);
-
+	if (mySizeTimer <= 0.05f && hasBeenHoveredOver)
+	{
+		mySize += Studio::Timer::GetInstance()->TGetDeltaTime();
+		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
+	}
 
 	if (myIsEnabled == true)
 	{
 		if (myIsClicked == false)
 		{
-			if (pt.x >= myLeft && pt.x <= myRight)
+			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
-				if (pt.y >= myTop && pt.y <= myBottom)
+				if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
 				{
 					if (!hasBeenHoveredOver)
 					{
@@ -71,12 +78,15 @@ void Studio::StartButton::Update()
 				}
 				else
 				{
+					mySize = 1;
+					mySizeTimer = 0;
 					hasBeenHoveredOver = false;
-					AudioManagerAccessor::GetInstance()->StopSound("Audio/ButtonMouseOver.wav");
 				}
 			}
 			else
 			{
+				mySize = 1;
+				mySizeTimer = 0;
 				hasBeenHoveredOver = false;
 			}
 		}
@@ -86,6 +96,7 @@ void Studio::StartButton::Update()
 			myIsClicked = false;
 		}
 
+		mySpriteSheet->SetSizeRelativeToImage({ mySize, mySize });
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 	}
 }

@@ -25,5 +25,8 @@ namespace Studio
 		Enums::Tier1Upgrades myUpgradeType;
 		char* myDescription;
 		int myCost;
+
+		float mySizeTimer;
+		float mySize;
 	};
 }

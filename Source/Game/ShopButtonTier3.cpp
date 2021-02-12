@@ -17,7 +17,9 @@
 #include "MenuObject.h"
 #include "TextElement.h"
 #include "ImageElement.h"
+#include "Timer.h"
 
+#define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost, char* aDescription)
 {
 	mySprite = new Tga2D::CSprite(aPath);
@@ -37,39 +39,38 @@ Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosi
 
 	myDescription = aDescription;
 
-	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
-	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
-	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
-	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
+	mySize = 1;
+	mySizeTimer = 0;
+
+	CalculateButtonCollider();
 }
 
 Studio::ShopButtonTier3::~ShopButtonTier3()
 {
+	delete mySprite;
+	delete mySpriteSheet;
+	mySprite = nullptr;
+	mySpriteSheet = nullptr;
 }
 
 void Studio::ShopButtonTier3::Update()
 {
-	myLeft = mySpriteSheet->GetPosition().x - (128 / 2);
-	myRight = mySpriteSheet->GetPosition().x + (128 / 2);
-	myTop = mySpriteSheet->GetPosition().y - (128 / 2);
-	myBottom = mySpriteSheet->GetPosition().y + (128 / 2);
+	CalculateButtonCollider();
 
+	if (mySizeTimer <= 0.05f && hasBeenHoveredOver)
+	{
+		mySize += Studio::Timer::GetInstance()->TGetDeltaTime();
+		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
+	}
 
 	if (myIsEnabled == true)
 	{
 
-		myWindowHandle = GetForegroundWindow();
-
-		POINT pt;
-		GetCursorPos(&pt);
-		ScreenToClient(myWindowHandle, &pt);
-
-
 		if (myIsClicked == false)
 		{
-			if (pt.x >= myLeft && pt.x <= myRight)
+			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
-				if (pt.y >= myTop && pt.y <= myBottom)
+				if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
 				{
 					if (!hasBeenHoveredOver)
 					{
@@ -89,15 +90,16 @@ void Studio::ShopButtonTier3::Update()
 				}
 				else
 				{
+					mySize = 1;
+					mySizeTimer = 0;
 					hasBeenHoveredOver = false;
-					//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
-
 				}
 			}
 			else
 			{
+				mySize = 1;
+				mySizeTimer = 0;
 				hasBeenHoveredOver = false;
-				//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
 			}
 		}
 
@@ -105,7 +107,7 @@ void Studio::ShopButtonTier3::Update()
 		{
 			myIsClicked = false;
 		}
-
+		mySpriteSheet->SetSizeRelativeToImage({ mySize, mySize });
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 	}
 }

@@ -10,7 +10,9 @@
 #include "MenuManager.h"
 #include "MenuObject.h"
 #include "TextElement.h"
+#include "Timer.h"
 
+#define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier1Upgrades aUpgradeType, int aCost, char* aDescription)
 {
 	mySprite = new Tga2D::CSprite(aPath);
@@ -35,36 +37,37 @@ Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, cons
 	myTop = mySpriteSheet->GetPosition().y - (mySprite->GetImageSize().y / 2);
 	myBottom = mySprite->GetPosition().y + (mySprite->GetImageSize().y / 2);
 
+	mySize = 1;
+	mySizeTimer = 0;
+	CalculateButtonCollider();
+
 }
 
 Studio::ShopButton::~ShopButton()
 {
+	delete mySprite;
+	delete mySpriteSheet;
 }
 
 void Studio::ShopButton::Update()
 {
 
-	myLeft = mySpriteSheet->GetPosition().x - (128 / 2);
-	myRight = mySpriteSheet->GetPosition().x + (128 / 2);
-	myTop = mySpriteSheet->GetPosition().y - (128 / 2);
-	myBottom = mySpriteSheet->GetPosition().y + (128 / 2);
+	CalculateButtonCollider();
 
+	if (mySizeTimer <= 0.05f && hasBeenHoveredOver)
+	{
+		mySize += Studio::Timer::GetInstance()->TGetDeltaTime();
+		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
+	}
 
 	if (myIsEnabled == true)
 	{
 
-		myWindowHandle = GetForegroundWindow();
-
-		POINT pt;
-		GetCursorPos(&pt);
-		ScreenToClient(myWindowHandle, &pt);
-
-
 		if (myIsClicked == false)
 		{
-			if (pt.x >= myLeft && pt.x <= myRight)
+			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
-				if (pt.y >= myTop && pt.y <= myBottom)
+				if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
 				{
 					if (!hasBeenHoveredOver)
 					{
@@ -86,12 +89,15 @@ void Studio::ShopButton::Update()
 				}
 				else
 				{
+					mySize = 1;
+					mySizeTimer = 0;
 					hasBeenHoveredOver = false;
-
 				}
 			}
 			else
 			{
+				mySize = 1;
+				mySizeTimer = 0;
 				hasBeenHoveredOver = false;
 			}
 		}
@@ -101,6 +107,7 @@ void Studio::ShopButton::Update()
 			myIsClicked = false;
 		}
 
+		mySpriteSheet->SetSizeRelativeToImage({ mySize, mySize });
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 	}
 }

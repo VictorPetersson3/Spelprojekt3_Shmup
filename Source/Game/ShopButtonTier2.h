@@ -24,6 +24,9 @@ namespace Studio
 		char* myDescription;
 
 		int myCost;
+
+		float mySize;
+		float mySizeTimer;
 	};
 }
 
