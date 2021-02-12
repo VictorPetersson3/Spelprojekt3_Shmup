@@ -44,3 +44,8 @@ bool Studio::UIElement::HasTag(const char* aTag)
     }
     return false;
 }
+
+bool Studio::UIElement::GetIsEnabled()
+{
+    return myIsEnabled;
+}

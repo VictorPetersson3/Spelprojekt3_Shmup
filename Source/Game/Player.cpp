@@ -63,7 +63,7 @@ namespace Studio
 
 	void Player::Update()
 	{
-		if (!IsDead())
+		if (!IsDead() && !MenuManagerSingleton::GetInstance()->GetShop()->GetIsEnabled())
 		{
 			Movement();
 
@@ -322,31 +322,6 @@ namespace Studio
 			myHasCollided = false;
 			myCurrentBounceTime = 0;
 			myBounceDirection = myBounceDirection.Zero;
-			//W
-			/*if ((wKey && aKey) || (wKey && dKey) || (sKey && aKey) || (sKey && dKey))
-			{
-
-				if (mySpeed <= myPlayerData->GetMinSpeed())
-				{
-					mySpeed = myPlayerData->GetMinSpeed();
-				}
-				else
-				{
-					mySpeed -= myAcceleration * 2;
-				}
-			}
-			else
-			{
-				if (mySpeed >= myPlayerData->GetMaxSpeed())
-				{
-					mySpeed = myPlayerData->GetMaxSpeed();
-				}
-				else
-				{
-					mySpeed += myAcceleration;
-				}
-			}*/
-
 			if (!wKey && !aKey && !sKey && !dKey)
 			{
 				if (mySpeed <= myPlayerData->GetMinSpeed())
@@ -370,7 +345,7 @@ namespace Studio
 				}
 			}
 			//printf("Player Speed: %f\n", mySpeed);
-			if (wKey && myPosition.y > 0)
+			if (wKey && myPosition.y > 30)
 			{
 				if (myIsAnimatingDown || !myIsAnimating)
 				{
@@ -388,13 +363,13 @@ namespace Studio
 				myDirection.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 			}
 			//A
-			if (aKey && myPosition.x > 0)
+			if (aKey && myPosition.x > 100)
 			{
 				myDirection.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 				myCurrentFlame = 1;
 			}
 			//S
-			if (sKey && myPosition.y < 1080)
+			if (sKey && myPosition.y < 1050)
 			{
 				if (myIsAnimatingUp || !myIsAnimating)
 				{
@@ -413,7 +388,7 @@ namespace Studio
 				myDirection.y += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 			}
 			//D
-			if (dKey && myPosition.x < 1920)
+			if (dKey && myPosition.x < 1820)
 			{
 				myDirection.x += mySpeed * Timer::GetInstance()->TGetDeltaTime();
 				myCurrentFlame = 3;

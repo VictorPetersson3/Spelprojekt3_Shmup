@@ -48,6 +48,18 @@ void Studio::MenuObject::Update()
 	}
 }
 
+bool Studio::MenuObject::GetIsEnabled()
+{
+	for (UIElement* e : myElements)
+	{
+		if (!e->GetIsEnabled())
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 Studio::UIElement* Studio::MenuObject::GetElementWithTag(const char* aTag)
 {
 	for (UIElement* e : myElements)

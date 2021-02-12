@@ -19,6 +19,7 @@ namespace Studio
 		void SetActive(bool aState);
 		void SetTag(const char* aTag);
 		bool HasTag(const char* aTag);
+		bool GetIsEnabled();
 		bool myIsClicked = false;
 
 	protected:
