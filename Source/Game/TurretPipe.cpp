@@ -40,17 +40,33 @@ void Studio::TurretPipe::Update()
 	myTurretDirection.y = sinf(mySpriteSheet->GetRotation() - (PI * 0.5f)) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 	myTurretDirection = myTurretDirection.GetNormalized() * myPipeLength;
 
+	const float EPSILON = 0.00001f;
 	//Tga2D::Vector2f playerDirection = (PlayerAccessor::GetInstance()->GetPosition() - myPosition).GetNormalized();
 	float angleToPlayer = atan2f(myPosition.y - PlayerAccessor::GetInstance()->GetPosition().y, myPosition.x - PlayerAccessor::GetInstance()->GetPosition().x);
-	if (mySpriteSheet->GetRotation() <= PI && mySpriteSheet->GetRotation() < angleToPlayer)
+	float currentRotation = mySpriteSheet->GetRotation();
+	float turretRotationSpeed = myEnemyType->GetTurretRotationSpeed();
+
+	float rightOrLeftModifier = 0.f;
+	if (mySpriteSheet->GetRotation() <= PI && currentRotation < angleToPlayer + EPSILON)
 	{
-		mySpriteSheet->SetRotation(mySpriteSheet->GetRotation() + (myEnemyType->GetTurretRotationSpeed() * Studio::Timer::GetInstance()->TGetDeltaTime()));
+		rightOrLeftModifier = 1.f;
 	}
-	else if (mySpriteSheet->GetRotation() >= 0 && mySpriteSheet->GetRotation() > angleToPlayer)
+	else if (mySpriteSheet->GetRotation() >= 0 && mySpriteSheet->GetRotation() > angleToPlayer - EPSILON)
 	{
-		mySpriteSheet->SetRotation(mySpriteSheet->GetRotation() + (-myEnemyType->GetTurretRotationSpeed() * Studio::Timer::GetInstance()->TGetDeltaTime()));
+		rightOrLeftModifier = -1.f;
 	}
-	if (angleToPlayer < mySpriteSheet->GetRotation() + 0.05 && angleToPlayer > mySpriteSheet->GetRotation() - 0.05)
+
+	float new_rotation = currentRotation + (turretRotationSpeed * Studio::Timer::GetInstance()->TGetDeltaTime() * rightOrLeftModifier);
+	if (new_rotation < angleToPlayer + EPSILON || new_rotation > angleToPlayer - EPSILON)
+	{
+		mySpriteSheet->SetRotation(angleToPlayer);
+	}
+	else
+	{
+		mySpriteSheet->SetRotation(new_rotation);
+	}
+
+	if (angleToPlayer < currentRotation + 0.05 && angleToPlayer > currentRotation - 0.05)
 	{
 		allowedToShoot = true;
 	}

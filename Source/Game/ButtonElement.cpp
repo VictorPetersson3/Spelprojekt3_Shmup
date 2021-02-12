@@ -22,12 +22,11 @@ void Studio::ButtonElement::CalculateButtonCollider()
 {
 	Tga2D::Vector2f spawnPos;
 	float ratioX = static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x) / static_cast<float>(1920);
-	float ratioY = static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().y) / static_cast<float>(1080);
-	spawnPos.x = (mySpriteSheet->GetPosition().x + (static_cast<float>(mySprite->GetImageSize().y) * (mySprite->GetPivot().x - 0.5)) * -1.0f) * ratioX;
-	spawnPos.y = (mySpriteSheet->GetPosition().y + (static_cast<float>(mySprite->GetImageSize().y) * (mySprite->GetPivot().y - 0.5)) * -1.0f) * ratioY;
+	spawnPos.x = (mySpriteSheet->GetPosition().x + (static_cast<float>(mySprite->GetImageSize().y) * (mySprite->GetPivot().x - 0.5))) * ratioX;
+	spawnPos.y = (mySpriteSheet->GetPosition().y + (static_cast<float>(mySprite->GetImageSize().y) * (mySprite->GetPivot().y - 0.5))) * ratioX;
 	printf("Window Size X: %i Y %i\n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
 	printf("Render Size X: %i Y %i\n", Tga2D::CEngine::GetInstance()->GetRenderSize().x, Tga2D::CEngine::GetInstance()->GetRenderSize().y);
-	printf("Ratio X: %f Y: %f \n\n", ratioX, ratioY);
+	printf("Ratio X: %f \n\n", ratioX);
 	float scale;
 	if (ratioX > 1)
 	{
@@ -37,11 +36,10 @@ void Studio::ButtonElement::CalculateButtonCollider()
 	{
 		scale = ratioX * 2;
 	}
-	myLeft = spawnPos.x - ((mySprite->GetImageSize().x * (0.15f * scale)) * ratioX);
-	myRight = spawnPos.x + ((mySprite->GetImageSize().x * (0.15f * scale)) * ratioX);
-	myTop = spawnPos.y - ((mySprite->GetImageSize().y * (0.15f * scale)) * ratioX);
-	myBottom = spawnPos.y + ((mySprite->GetImageSize().y * (0.15f * scale)) * ratioX);
-
+	myLeft = spawnPos.x - (mySprite->GetImageSize().x * (0.15f * ratioX));
+	myRight = spawnPos.x + (mySprite->GetImageSize().x * (0.15f * ratioX));
+	myTop = spawnPos.y - (mySprite->GetImageSize().y * (0.15f * ratioX));
+	myBottom = spawnPos.y + (mySprite->GetImageSize().y * (0.15f * ratioX));
 }
 
 void Studio::ButtonElement::OnClick()
