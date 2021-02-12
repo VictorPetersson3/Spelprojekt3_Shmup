@@ -24,9 +24,7 @@ void Studio::ButtonElement::CalculateButtonCollider()
 	float ratioX = static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x) / static_cast<float>(1920);
 	spawnPos.x = (mySpriteSheet->GetPosition().x + (static_cast<float>(mySprite->GetImageSize().y) * (mySprite->GetPivot().x - 0.5))) * ratioX;
 	spawnPos.y = (mySpriteSheet->GetPosition().y + (static_cast<float>(mySprite->GetImageSize().y) * (mySprite->GetPivot().y - 0.5))) * ratioX;
-	printf("Window Size X: %i Y %i\n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
-	printf("Render Size X: %i Y %i\n", Tga2D::CEngine::GetInstance()->GetRenderSize().x, Tga2D::CEngine::GetInstance()->GetRenderSize().y);
-	printf("Ratio X: %f \n\n", ratioX);
+	//printf("Window Size X: %i Y %i\n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
 	float scale;
 	if (ratioX > 1)
 	{
@@ -36,10 +34,10 @@ void Studio::ButtonElement::CalculateButtonCollider()
 	{
 		scale = ratioX * 2;
 	}
-	myLeft = spawnPos.x - (mySprite->GetImageSize().x * (0.15f * ratioX));
-	myRight = spawnPos.x + (mySprite->GetImageSize().x * (0.15f * ratioX));
-	myTop = spawnPos.y - (mySprite->GetImageSize().y * (0.15f * ratioX));
-	myBottom = spawnPos.y + (mySprite->GetImageSize().y * (0.15f * ratioX));
+	myLeft = spawnPos.x - (mySprite->GetImageSize().x * (0.25f * ratioX));
+	myRight = spawnPos.x + (mySprite->GetImageSize().x * (0.25f * ratioX));
+	myTop = spawnPos.y - (mySprite->GetImageSize().y * (0.25f * ratioX));
+	myBottom = spawnPos.y + (mySprite->GetImageSize().y * (0.25f * ratioX));
 }
 
 void Studio::ButtonElement::OnClick()

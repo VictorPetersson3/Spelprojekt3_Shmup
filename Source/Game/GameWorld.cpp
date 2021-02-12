@@ -123,8 +123,8 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying, bool aH
 	if (!myHasStarted)
 	{
 		myHasStarted = true;
-		Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-		myMenuManager->ResetAllSizes();
+		//Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+		//myMenuManager->ResetAllSizes();
 	}
 }
 

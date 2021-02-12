@@ -84,7 +84,7 @@ bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 	createParameters.myRenderWidth = windowWidth;
 	createParameters.myWindowHeight = windowHeight;
 	createParameters.myWindowWidth = windowWidth;
-	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
+	//createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
 	//createParameters.myPreferedMultiSamplingQuality = Tga2D::EMultiSamplingQuality_High;
 	//createParameters.myStartInFullScreen = true;
 	createParameters.myClearColor = (Tga2D::CColor{ 0,0,0,0 });
@@ -152,20 +152,20 @@ void CGame::UpdateCallBack()
 	if (GetActiveWindow() != GetForegroundWindow())
 	{
 		myHasTabbed = true;
-		if (!Studio::Timer::GetInstance()->IsFrozen())
-		{
-			Studio::Timer::GetInstance()->Freeze();
-			Studio::GameAccessor::GetInstance().GetGame()->Minimize();
-		}
+		//if (!Studio::Timer::GetInstance()->IsFrozen())
+		//{
+		//	Studio::Timer::GetInstance()->Freeze();
+		//}
+		//Studio::GameAccessor::GetInstance().GetGame()->Minimize();
 	}
 	if (myHasTabbed && GetActiveWindow() == GetForegroundWindow())
 	{
-		Studio::GameAccessor::GetInstance().GetGame()->ReMinimize();
+		//Studio::GameAccessor::GetInstance().GetGame()->ReMinimize();
 		if (myIsFullScreen)
 		{
-			Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
-			Studio::MenuManagerSingleton::GetInstance()->ResetButtonColliders();
+			//Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
 		}
+		Studio::MenuManagerSingleton::GetInstance()->ResetButtonColliders();
 		myHasTabbed = false;
 	}
 	if (myChangeResolution)
@@ -176,8 +176,7 @@ void CGame::UpdateCallBack()
 	if (myToggleFullscreen)
 	{
 		Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
-		printf("After Fullscreen \nRender Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetRenderSize().x, Tga2D::CEngine::GetInstance()->GetRenderSize().y);
-		printf("Window Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
+		printf("Game SetFullscreen\n");
 		myToggleFullscreen = false;
 		myChangeResolution = true;
 	}

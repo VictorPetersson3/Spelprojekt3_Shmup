@@ -120,6 +120,7 @@ namespace Studio
     Options* MenuManager::GetOptions()
     {
         return myOptions;
+    }
     MenuObject* MenuManager::GetEndOfGameMenu()
     {
         return &myEndOfGameMenu;
@@ -325,7 +326,6 @@ namespace Studio
         myLevelSelect->RecalcColliders();
     }
 
-    TextElement* MenuManager::GetShopDescriptionText()
     ImageElement* MenuManager::GetShopDescriptionText()
     {
         return myShopDescriptionText;

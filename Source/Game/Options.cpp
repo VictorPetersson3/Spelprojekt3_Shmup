@@ -6,17 +6,24 @@
 Studio::Options::Options(MenuManager* aMenuManager)
 {
 	myMenuManager = aMenuManager;
-	myToggleFullScreen = new GenericButton("Sprites/UI/UI_level1.dds", { 1300, 100 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my640x360 = new GenericButton("Sprites/UI/UI_level2.dds", { 1300, 250 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my960x540 = new GenericButton("Sprites/UI/UI_level3.dds", { 1300, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1280x720 = new GenericButton("Sprites/UI/UI_level3.dds", { 1300, 550 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1600x900 = new GenericButton("Sprites/UI/UI_level3.dds", { 1300, 700 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1920x1080 = new GenericButton("Sprites/UI/UI_level3.dds", { 1300, 850 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my2560x1440 = new GenericButton("Sprites/UI/UI_level3.dds", { 1300, 1000 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myFullscreenText = new ImageElement("Sprites/UI/UI_fullscreen.dds", { 960,320 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
+	myToggleFullScreenOff = new GenericButton("Sprites/UI/UI_checkBoxOK.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myToggleFullScreenOn = new GenericButton("Sprites/UI/UI_checkBox.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+
+	my640x360 = new GenericButton("Sprites/UI/UI_640x360.dds", { 960, 475 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my960x540 = new GenericButton("Sprites/UI/UI_960x540.dds", { 960, 525 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1280x720 = new GenericButton("Sprites/UI/UI_1280x720.dds", { 960, 600 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1600x900 = new GenericButton("Sprites/UI/UI_1600x900.dds", { 960, 675 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1920x1080 = new GenericButton("Sprites/UI/UI_1920x1080.dds", { 960, 750 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my2560x1440 = new GenericButton("Sprites/UI/UI_2560x1440.dds", { 960, 825 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+
 	myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
 	myIsActive = false;
 
-	MenuObject::Add(myToggleFullScreen);
+	MenuObject::Add(myFullscreenText);
+	MenuObject::Add(myToggleFullScreenOn);
+
+	MenuObject::Add(myToggleFullScreenOff);
 	MenuObject::Add(my640x360);
 	MenuObject::Add(my960x540);
 	MenuObject::Add(my1280x720);
@@ -26,11 +33,12 @@ Studio::Options::Options(MenuManager* aMenuManager)
 	MenuObject::Add(myMainMenuBackground);
 	MenuObject::Disable();
 	myClickTimer = 0;
+	
 }
 
 Studio::Options::~Options()
 {
-	SAFE_DELETE(myToggleFullScreen);
+	SAFE_DELETE(myToggleFullScreenOff);
 	SAFE_DELETE(my640x360);
 	SAFE_DELETE(my960x540);
 	SAFE_DELETE(my1280x720);
@@ -46,8 +54,25 @@ void Studio::Options::Update()
 	if (myIsActive)
 	{
 		Tga2D::Vector2ui res;
-
-		if (myToggleFullScreen->IsClicked())
+		if (myToggleFullScreenOff->IsClicked())
+		{
+			myToggleFullScreenOff->SetActive(false);
+			myToggleFullScreenOn->SetActive(true);
+			Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+			myMenuManager->ResetAllSizes();
+			myClickTimer = 0;
+			Disable();
+		}
+		if (myToggleFullScreenOn->IsClicked())
+		{
+			myToggleFullScreenOff->SetActive(true);
+			myToggleFullScreenOn->SetActive(false);
+			Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+			myMenuManager->ResetAllSizes();
+			myClickTimer = 0;
+			Disable();
+		}
+		if (myToggleFullScreenOff->IsClicked())
 		{
 			Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
 			myMenuManager->ResetAllSizes();
@@ -118,6 +143,20 @@ void Studio::Options::Update()
 void Studio::Options::Enable()
 {
 	MenuObject::Enable();
+	if (Studio::GameAccessor::GetInstance().GetGame()->GetIsFullscreen())
+	{
+		myToggleFullScreenOn->SetActive(false);
+		my640x360->SetActive(false);
+		my960x540->SetActive(false);
+		my1280x720->SetActive(false);
+		my1600x900->SetActive(false);
+		my1920x1080->SetActive(false);
+		my2560x1440->SetActive(false);
+	}
+	else
+	{
+		myToggleFullScreenOff->SetActive(false);
+	}
 	myIsActive = true;
 }
 
@@ -131,7 +170,7 @@ void Studio::Options::Disable()
 
 void Studio::Options::RecalcColliders()
 {
-	myToggleFullScreen->CalculateButtonCollider();
+	myToggleFullScreenOff->CalculateButtonCollider();
 	my640x360->CalculateButtonCollider();
 	my960x540->CalculateButtonCollider();
 	my1280x720->CalculateButtonCollider();

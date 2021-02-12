@@ -18,7 +18,8 @@ namespace Studio
 	private:
 		bool myIsActive;
 		float myClickTimer;
-		GenericButton* myToggleFullScreen;
+		GenericButton* myToggleFullScreenOff;
+		GenericButton* myToggleFullScreenOn;
 		GenericButton* my640x360;
 		GenericButton* my960x540;
 		GenericButton* my1280x720;
@@ -28,6 +29,7 @@ namespace Studio
 		
 		ImageElement* myMainMenuBackground;
 		ImageElement* myResolutionImageElement;
+		ImageElement* myFullscreenText;
 		MenuManager* myMenuManager;
 	};
 };

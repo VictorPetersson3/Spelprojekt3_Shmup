@@ -52,7 +52,6 @@ namespace Studio
 		void StartGame();
 		void QuitGameSession();
 		void ResetButtonColliders();
-		TextElement* GetShopDescriptionText();
 
 		//TextElement* GetShopDescriptionText();
 		ImageElement* GetShopDescriptionText();
@@ -132,12 +131,12 @@ namespace Studio
 
 		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.86,0.105 }, "ShopCoinText", Tga2D::CColor({1,1,1,1}));
 		//TextElement* myShopDescriptionText = new TextElement(Tga2D::EFontSize_24, { 0.65,0.65 }, "ShopDescriptionText", Tga2D::CColor({ 1,1,1,1 }));
-		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.515 }, "myMasterVolumePercentageText");
-		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.4 }, "myMasterVolumeLabelText");
+		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.104 }, "myMasterVolumePercentageText");
+		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");
 
 		TextElement* myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.2 }, "OptionsTitle");
-		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 250,540 }, { 500,50 }, 15);
-		ImageElement* myVolumeSliderBackground = new ImageElement("Sprites/debugpixel.dds", { 960 - 250,540 }, { 500,50 }, { 0.0f,0.5f }, 14, "VolumeSliderBackground", { 0.3f,0.3f,0.3f,1 });
+		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 250,200 }, { 500,50 }, 15);
+		ImageElement* myVolumeSliderBackground = new ImageElement("Sprites/debugpixel.dds", { 960 - 250,200 }, { 500,50 }, { 0.0f,0.5f }, 14, "VolumeSliderBackground", { 0.3f,0.3f,0.3f,1 });
 
 		GoToMainMenuButton* myOptionsMenuReturnButton = new GoToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
@@ -147,14 +146,10 @@ namespace Studio
 		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	
 		LevelSelect* myLevelSelect;
-<<<<<<< HEAD
 		Options* myOptions;
-=======
-
 
 		// EndOfGameMenu
 		GoToMainMenuButton* myEGMMainMenu = new GoToMainMenuButton("Sprites/UI/UI_exit.dds", { 960, 540 }, { 1, 1 }, { 0.5f, 0.5f }, "EGMMainMenu", 190);
->>>>>>> 91484667793a58a58f55de8ecc2d6b00fda05bd5
 	};
 
 
