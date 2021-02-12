@@ -57,7 +57,6 @@ void Studio::GenericButton::Update()
 						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.1f);
 						hasBeenHoveredOver = true;
 					}
-
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
 						OnClick();
