@@ -304,6 +304,7 @@ namespace Studio
         myOptionsMenu.Disable();
         myHud.Disable();
         hasStartedGame = false;
+        myStartButton->myIsClicked = false;
         if (Studio::Timer::GetInstance()->IsFrozen())
         {
             Studio::Timer::GetInstance()->ToggleFreeze();

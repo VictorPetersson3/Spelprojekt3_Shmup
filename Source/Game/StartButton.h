@@ -22,5 +22,8 @@ namespace Studio
 	private:
 		int myLevelToLoad;
 		bool myShouldLoadNextLevel = false;
+
+		float mySizeTimer;
+		float mySize;
 	};
 }

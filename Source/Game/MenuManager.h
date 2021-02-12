@@ -127,7 +127,7 @@ namespace Studio
 		ImageElement* myPausMenuTitle = new ImageElement("Sprites/UI/UI_pause.dds", { 960,275 }, { 1,1 }, { 0.5f,0.5f }, 11, "PausMenuTitle");
 
 		GenericButton* myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 5,5 }, { 0.5f,0.5f }, "ResumeButton", 11);
-		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,800 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
+		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
 		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.86,0.105 }, "ShopCoinText", Tga2D::CColor({1,1,1,1}));
 		//TextElement* myShopDescriptionText = new TextElement(Tga2D::EFontSize_24, { 0.65,0.65 }, "ShopDescriptionText", Tga2D::CColor({ 1,1,1,1 }));
