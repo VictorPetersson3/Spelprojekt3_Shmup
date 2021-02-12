@@ -143,7 +143,7 @@ namespace Studio
 
 
 
-		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 200,540 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
+		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,100 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	
 		LevelSelect* myLevelSelect;
 		Options* myOptions;

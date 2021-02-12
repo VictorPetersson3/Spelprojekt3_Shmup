@@ -128,9 +128,9 @@ namespace Studio
  
     void MenuManager::Update()
     {
+        ResetButtonColliders();
         if (myResizeAllElements)
         {
-            ResetButtonColliders();
             myResizeAllElements = false;
         }
         myMainMenu.Update();
