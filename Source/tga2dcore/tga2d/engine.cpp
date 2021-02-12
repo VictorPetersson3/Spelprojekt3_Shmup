@@ -347,9 +347,9 @@ void Tga2D::CEngine::SetResolution(const VECTOR2UI& aResolution, bool aAlsoSetWi
 		res.y = 720;
 		if (aAlsoSetWindowSize)
 		{
-			myWindow->SetResolution(res);
+			myWindow->SetResolution(GetScreenResolution());
 		}
-		myDirect3D->SetResolution(res);
+		myDirect3D->SetResolution(GetScreenResolution());
 	}
 	else
 	{
