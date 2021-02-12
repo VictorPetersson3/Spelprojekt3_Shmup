@@ -63,6 +63,8 @@ void Studio::ShopUI::ResetButtons()
 
 std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 {
+	myActiveButtonPtrs.clear();
+
 	auto myTier1ButtonsTemp = myTier1Buttons;
 	auto myTier2ButtonsTemp = myTier2Buttons;
 	auto myTier3ButtonsTemp = myTier3Buttons;
