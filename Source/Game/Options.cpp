@@ -33,7 +33,7 @@ Studio::Options::Options(MenuManager* aMenuManager)
 	MenuObject::Add(myMainMenuBackground);
 	MenuObject::Disable();
 	myClickTimer = 0;
-	
+	myHasStarted = false;
 }
 
 Studio::Options::~Options()
@@ -50,92 +50,99 @@ Studio::Options::~Options()
 
 void Studio::Options::Update()
 {
-	myClickTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
-	if (myIsActive)
+	if (myHasStarted)
 	{
-		Tga2D::Vector2ui res;
-		if (myToggleFullScreenOff->IsClicked())
+		myClickTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
+		if (myIsActive)
 		{
-			myToggleFullScreenOff->SetActive(false);
-			myToggleFullScreenOn->SetActive(true);
-			Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-			myMenuManager->ResetAllSizes();
-			myClickTimer = 0;
-			Disable();
+			Tga2D::Vector2ui res;
+			if (myToggleFullScreenOff->IsClicked())
+			{
+				myToggleFullScreenOff->SetActive(false);
+				myToggleFullScreenOn->SetActive(true);
+				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+				myMenuManager->ResetAllSizes();
+				myClickTimer = 0;
+				Disable();
+			}
+			if (myToggleFullScreenOn->IsClicked())
+			{
+				myToggleFullScreenOff->SetActive(true);
+				myToggleFullScreenOn->SetActive(false);
+				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+				myMenuManager->ResetAllSizes();
+				myClickTimer = 0;
+				Disable();
+			}
+			if (myToggleFullScreenOff->IsClicked())
+			{
+				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+				myMenuManager->ResetAllSizes();
+				myClickTimer = 0;
+				Disable();
+			}
+			if (!Studio::GameAccessor::GetInstance().GetGame()->GetIsFullscreen())
+			{
+				if (my640x360->IsClicked())
+				{
+					res.x = 640;
+					res.y = 360;
+					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
+					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					Disable();
+				}
+				if (my960x540->IsClicked())
+				{
+					res.x = 960;
+					res.y = 540;
+					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
+					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					Disable();
+				}
+				if (my1280x720->IsClicked())
+				{
+					res.x = 1280;
+					res.y = 720;
+					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
+					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					Disable();
+				}
+				if (my1600x900->IsClicked())
+				{
+					res.x = 1600;
+					res.y = 900;
+					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
+					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					Disable();
+				}
+				if (my1920x1080->IsClicked())
+				{
+					res.x = 1920;
+					res.y = 1080;
+					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
+					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					Disable();
+				}
+				if (my2560x1440->IsClicked())
+				{
+					res.x = 2560;
+					res.y = 1440;
+					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
+					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					Disable();
+				}
+			}
 		}
-		if (myToggleFullScreenOn->IsClicked())
-		{
-			myToggleFullScreenOff->SetActive(true);
-			myToggleFullScreenOn->SetActive(false);
-			Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-			myMenuManager->ResetAllSizes();
-			myClickTimer = 0;
-			Disable();
-		}
-		if (myToggleFullScreenOff->IsClicked())
-		{
-			Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-			myMenuManager->ResetAllSizes();
-			myClickTimer = 0;
-			Disable();
-		}
-		if (!Studio::GameAccessor::GetInstance().GetGame()->GetIsFullscreen())
-		{
-			if (my640x360->IsClicked())
-			{
-				res.x = 640;
-				res.y = 360;
-				Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-				myMenuManager->ResetAllSizes();
-				myClickTimer = 0;
-				Disable();
-			}
-			if (my960x540->IsClicked())
-			{
-				res.x = 960;
-				res.y = 540;
-				Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-				myMenuManager->ResetAllSizes();
-				myClickTimer = 0;
-				Disable();
-			}
-			if (my1280x720->IsClicked())
-			{
-				res.x = 1280;
-				res.y = 720;
-				Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-				myMenuManager->ResetAllSizes();
-				myClickTimer = 0;
-				Disable();
-			}
-			if (my1600x900->IsClicked())
-			{
-				res.x = 1600;
-				res.y = 900;
-				Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-				myMenuManager->ResetAllSizes();
-				myClickTimer = 0;
-				Disable();
-			}
-			if (my1920x1080->IsClicked())
-			{
-				res.x = 1920;
-				res.y = 1080;
-				Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-				myMenuManager->ResetAllSizes();
-				myClickTimer = 0;
-				Disable();
-			}
-			if (my2560x1440->IsClicked())
-			{
-				res.x = 2560;
-				res.y = 1440;
-				Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-				myMenuManager->ResetAllSizes();
-				myClickTimer = 0;
-				Disable();
-			}
-		}
+	}
+	else
+	{
+		myHasStarted = true;
 	}
 	MenuObject::Update();
 }
@@ -163,6 +170,7 @@ void Studio::Options::Enable()
 void Studio::Options::Disable()
 {
 	myIsActive = false;
+	myHasStarted = false;
 	MenuObject::Disable();
 	myMenuManager->GetOptionsMenu()->Disable();
 	myMenuManager->GetMainMenu()->Enable();

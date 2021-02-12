@@ -17,6 +17,7 @@ namespace Studio
 		void RecalcColliders();
 	private:
 		bool myIsActive;
+		bool myHasStarted;
 		float myClickTimer;
 		GenericButton* myToggleFullScreenOff;
 		GenericButton* myToggleFullScreenOn;
