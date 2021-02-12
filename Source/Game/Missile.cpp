@@ -27,7 +27,14 @@ namespace Studio
 
 			myCollider.AddBoxColliderObject({ 0, 0 }, { 5,5 });
 
-			mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
+			if (PlayerAccessor::GetInstance()->GetHasClusterBombs())
+			{
+				mySpriteSheet.SetImagePath("sprites/bullets/missilelvl2.dds");
+			}
+			else
+			{
+				mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
+			}
 			myIsReversed = false;
 		}
 		if (aOwner == Enums::BulletOwner::Enemy)
