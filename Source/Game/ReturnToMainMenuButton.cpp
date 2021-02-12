@@ -60,7 +60,7 @@ void Studio::ReturnToMainMenuButton::Update()
 				{
 					if (!hasBeenHoveredOver)
 					{
-						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.05f);
+						AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonMouseOver.flac", false, 0.15f);
 						hasBeenHoveredOver = true;
 					}
 
@@ -106,6 +106,7 @@ void Studio::ReturnToMainMenuButton::Update()
 
 void Studio::ReturnToMainMenuButton::OnClick()
 {
+	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 	LevelAccessor::GetInstance()->ClearLevel();
 	MenuManagerSingleton::GetInstance()->QuitGameSession();
 }

@@ -164,7 +164,7 @@ void CGameWorld::InputStuff()
 		myPlayer->SetGodMode(!myPlayer->GetHealth().GetGodMode());
 	}
 
-	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))
+	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause) && myMenuManager->GameStarted())
 	{
 		myMenuManager->GetOptionsMenu()->Disable();
 		Studio::Timer::GetInstance()->ToggleFreeze();

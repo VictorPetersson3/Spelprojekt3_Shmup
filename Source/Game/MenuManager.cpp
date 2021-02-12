@@ -306,6 +306,8 @@ namespace Studio
 
     void MenuManager::QuitGameSession()
     {
+        myOptions->Disable();
+        myOptionsMenu.Disable();
         myMainMenu.Enable();
         myPausMenu.Disable();
         myOptionsMenu.Disable();

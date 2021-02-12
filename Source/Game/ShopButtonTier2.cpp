@@ -122,7 +122,6 @@ void Studio::ShopButtonTier2::OnClick()
 		if (!myHasBeenPurchased)
 		{
 			PlayerAccessor::GetInstance()->UpgradeT2(myUpgradeType);
-			std::cout << "Shop button pressed" << std::endl;
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			myHasBeenPurchased = true;
