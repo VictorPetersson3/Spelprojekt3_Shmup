@@ -107,6 +107,5 @@ void Studio::ReturnToMainMenuButton::Update()
 void Studio::ReturnToMainMenuButton::OnClick()
 {
 	LevelAccessor::GetInstance()->ClearLevel();
-	LevelAccessor::GetInstance()->StopUpdating();
 	MenuManagerSingleton::GetInstance()->QuitGameSession();
 }
