@@ -24,6 +24,7 @@
 #include "VideoPlayerAccessor.h"
 #include "AudioManager.h"
 #include "AudioManagerAccesor.h"
+#include "Game_Accessor.h"
 
 CGameWorld::CGameWorld()
 {
@@ -85,35 +86,42 @@ void CGameWorld::Init()
 	SAFE_CREATE(myVideoPlayer, Studio::VideoPlayer());
 	Studio::VideoPlayerAccessor::SetInstance(myVideoPlayer);
 	//myVideoPlayer->PlayVideo(Studio::Enums::Video::Logos);
-
 	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.2f);
-
+	myHasStarted = false;
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
-void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying)
+void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying, bool aHasTabbed)
 {
-	InputStuff();
-
-	if (myVideoPlayer->IsPlaying())
+	if (!aHasTabbed)
 	{
-		myVideoPlayer->Update();
-	}
-	else
-	{
-		if (myMenuManager->GameStarted())
+		InputStuff();
+		if (myVideoPlayer->IsPlaying())
 		{
-			if (myMenuManager->GetGodMode() == true)
-			{
-				myPlayer->SetGodMode(true);
-			}
-			myScoreManager->Update();
-			myPlayer->Update();
-			myLevelManager->Update();
-			myCoinManager->Update();
-			myBackgroundManager.UpdateBackground(aDeltaTime);
+			myVideoPlayer->Update();
 		}
-		myMenuManager->Update();
+		else
+		{
+			if (myMenuManager->GameStarted())
+			{
+				if (myMenuManager->GetGodMode() == true)
+				{
+					myPlayer->SetGodMode(true);
+				}
+				myScoreManager->Update();
+				myPlayer->Update();
+				myLevelManager->Update();
+				myCoinManager->Update();
+				myBackgroundManager.UpdateBackground(aDeltaTime);
+			}
+			myMenuManager->Update();
+		}
+	}
+	if (!myHasStarted)
+	{
+		myHasStarted = true;
+		Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+		myMenuManager->ResetAllSizes();
 	}
 }
 
@@ -151,8 +159,6 @@ void CGameWorld::InputStuff()
 	if (Studio::InputManager::GetInstance()->IsKeyPressed('G'))
 	{
 		myPlayer->SetGodMode(true);
-		Tga2D::CEngine::GetInstance()->SetFullScreen(true);
-
 	}
 
 	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause))

@@ -6,6 +6,8 @@
 #include "InputManager.h"
 #include "Game_Accessor.h"
 #include "wtypes.h"
+#include "MenuManagerSingleton.h"
+
 using namespace std::placeholders;
 
 #ifdef _DEBUG
@@ -80,9 +82,11 @@ bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 	unsigned short windowHeight = 1080;
 	createParameters.myRenderWidth = windowHeight;
 	createParameters.myRenderWidth = windowWidth;
-	createParameters.myWindowHeight = 720;
-	createParameters.myWindowWidth = 1280;
+	createParameters.myWindowHeight = windowHeight;
+	createParameters.myWindowWidth = windowWidth;
+	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
 	//createParameters.myPreferedMultiSamplingQuality = Tga2D::EMultiSamplingQuality_High;
+	//createParameters.myStartInFullScreen = true;
 	createParameters.myClearColor = (Tga2D::CColor{ 0,0,0,0 });
 	createParameters.myUseLetterboxAndPillarbox = true;
 	createParameters.myActivateDebugSystems = Tga2D::eDebugFeature_Fps |
@@ -91,7 +95,7 @@ bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 		Tga2D::eDebugFeature_Cpu |
 		Tga2D::eDebugFeature_Filewatcher |
 		Tga2D::eDebugFeature_OptimiceWarnings;
-
+	myHasTabbed = false;
 	myGameLogic = std::thread(&CGame::GamePlayThread, this);
 	if (!Tga2D::CEngine::Start(createParameters))
 	{
@@ -115,25 +119,58 @@ void CGame::ToggleFullScreen()
 	myToggleFullscreen = true;
 }
 
+const bool CGame::GetIsFullscreen() const
+{
+	return myIsFullScreen;
+}
+
+void CGame::Minimize()
+{
+	Tga2D::CEngine::GetInstance()->Minimize();
+}
+
+void CGame::ReMinimize()
+{
+	Tga2D::CEngine::GetInstance()->ReMinimize();
+}
+
 void CGame::InitCallBack()
 {
-	myGameWorld.Init();
+	myGameWorld.Init();	
 	myHasStarted = true;
 }
 
 void CGame::UpdateCallBack()
 {
+	
 	myGameWorld.Render();
 	while (!myGamePlayDone)
 	{
 		std::this_thread::sleep_for(std::chrono::microseconds(1));
 	}
 	myGameWorld.SwapBuffers();
-	if (myChangeResolution == true)
+	if (GetActiveWindow() != GetForegroundWindow())
+	{
+		myHasTabbed = true;
+		if (!Studio::Timer::GetInstance()->IsFrozen())
+		{
+			Studio::Timer::GetInstance()->Freeze();
+			Studio::GameAccessor::GetInstance().GetGame()->Minimize();
+		}
+	}
+	if (myHasTabbed && GetActiveWindow() == GetForegroundWindow())
+	{
+		Studio::GameAccessor::GetInstance().GetGame()->ReMinimize();
+		if (myIsFullScreen)
+		{
+			Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
+			Studio::MenuManagerSingleton::GetInstance()->ResetButtonColliders();
+		}
+		myHasTabbed = false;
+	}
+	if (myChangeResolution)
 	{
 		Tga2D::CEngine::GetInstance()->SetResolution(myResolution, true);
-		printf("Render Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetRenderSize().x, Tga2D::CEngine::GetInstance()->GetRenderSize().y);
-		printf("Window Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
 		myChangeResolution = false;
 	}
 	if (myToggleFullscreen)
@@ -142,7 +179,9 @@ void CGame::UpdateCallBack()
 		printf("After Fullscreen \nRender Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetRenderSize().x, Tga2D::CEngine::GetInstance()->GetRenderSize().y);
 		printf("Window Size X: %i Y: %i \n", Tga2D::CEngine::GetInstance()->GetWindowSize().x, Tga2D::CEngine::GetInstance()->GetWindowSize().y);
 		myToggleFullscreen = false;
+		myChangeResolution = true;
 	}
+	
 	myGamePlayDone = false;
 	myHasSwappedBuffers = true;
 }
@@ -155,7 +194,7 @@ void CGame::GamePlayThread()
 		{
 			Studio::Timer::GetInstance()->TUpdate();
 			Studio::InputManager::GetInstance()->Update();
-			myGameWorld.Update(Studio::Timer::GetInstance()->TGetDeltaTime(), myIsPlaying);
+			myGameWorld.Update(Studio::Timer::GetInstance()->TGetDeltaTime(), myIsPlaying, myHasTabbed);
 			myGamePlayDone = true;
 			while (!myHasSwappedBuffers)
 			{
