@@ -229,6 +229,7 @@ namespace Studio
 			{
 				myPlayer->Bounce(myEnemies[i]->GetPosition());
 			}
+			
 			//If enemy collides with player, take shield damage first, if no shield, take normal damage.
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided())
 			{
@@ -326,6 +327,12 @@ namespace Studio
 		if (mySpawnedBoss && myBoss != nullptr)
 		{
 			myBoss->Update();
+
+			if (myPlayer->Intersects(*myBoss))
+			{
+				myPlayer->Bounce(*myBoss->GetPosition());
+				myPlayer->TakeDamage(1.0f);
+			}
 		}
 	}
 	//Pu

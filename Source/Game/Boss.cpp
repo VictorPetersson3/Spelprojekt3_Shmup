@@ -39,10 +39,10 @@ namespace Studio
 		myPosition = { 2050.0f, 540.0f };
 
 		//CollisionObjects
-		Boss::GameObject::GetCollider().AddCircleColliderObject({ 10.0f,-20.0f }, 280.0f);
-		Boss::GameObject::GetCollider().AddCircleColliderObject({ 90.0f,-310.0f }, 30.0f);
-		Boss::GameObject::GetCollider().AddBoxColliderObject({ 220.0f, 257.0f }, { 135.0f, 305.0f });
-		Boss::GameObject::GetCollider().AddBoxColliderObject({ -182.0f, 257.0f }, { 135.0f, 305.0f });
+		Boss::GameObject::GetCollider().AddCircleColliderObject({ 20.0f, 0.0f }, 280.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject({ -20.0f,-280.0f }, 25.0f);
+		Boss::GameObject::GetCollider().AddBoxColliderObject({ 170.0f, 180.0f }, { 135.0f, 200.0f });
+		Boss::GameObject::GetCollider().AddBoxColliderObject({ -190.0f, 180.0f }, { 135.0f, 200.0f });
 		if (aBossParameters.HasMember("Conditions") && aBossParameters["Conditions"].IsArray())
 		{
 			auto conditions = aBossParameters["Conditions"].GetArray();
@@ -88,6 +88,7 @@ namespace Studio
 				myPhases.push_back(new Phase(phases[i]));
 			}
 		}
+		
 		SAFE_CREATE(myIntroMovement, MovementStraight(&myPosition, 50.0f));
 
 		if (myEnrageCondition != nullptr)
@@ -266,7 +267,7 @@ namespace Studio
 	bool Boss::ReturnToOriginalPosition()
 	{
 		VECTOR2F aDirection = myOriginalPosition - myPosition;
-		if (myCurrentPhase == myTransitionPhase2 && myTransitionAnimationPart1 && !myTransitionAnimationPart2 &&!mySpriteSheet.IsAnimating())
+		if (myCurrentPhase == myTransitionPhase2 && myTransitionAnimationPart1 && !myTransitionAnimationPart2 && !mySpriteSheet.IsAnimating())
 		{
 			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 5 }, { 6, 5 });
 			myTransitionAnimationPart1 = false;
