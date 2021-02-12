@@ -33,7 +33,7 @@ namespace Studio
 
 			break;
 		}
-		mySpriteSheet.SetLayer(3);
+		mySpriteSheet.SetLayer(1);
 	}
 	void PowerUpModule::Update()
 	{

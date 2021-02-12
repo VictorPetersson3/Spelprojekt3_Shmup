@@ -20,6 +20,8 @@ namespace Studio
 
 		void Update();
 
+		bool GetIsEnabled();
+
 		UIElement* GetElementWithTag(const char* aTag);
 
 	private:
