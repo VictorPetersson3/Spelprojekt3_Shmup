@@ -10,6 +10,7 @@
 #include "Module_Shoot.h"
 #include "Module_SpawnEnemies.h"
 #include "Module_Movement.h"
+#include "Module_Laser.h"
 
 //Gameplay
 #include "Boss.h"
@@ -57,6 +58,11 @@ Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 					myModules.push_back(new Module_Shoot(modules[i]));
 				}
 				else if (type == "Movement")
+				{
+					myModules.push_back(new Module_Movement(modules[i]));
+
+				}
+				else if (type == "Laser")
 				{
 					myModules.push_back(new Module_Movement(modules[i]));
 

@@ -11,6 +11,7 @@ namespace Studio
 	class BulletFactory;
 	class Boss;
 	class BossManager;
+	class Laser;
 	class BackgroundManager;
 	class EffectExplosionLarge;
 	class LevelManager
@@ -31,6 +32,7 @@ namespace Studio
 		void SpawnMissile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius, const float aDamageAmount, const float aExplosionDamageAmount);
 		void SpawnAOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aRadius);
 		void SpawnTimedBomb(const Tga2D::Vector2f& aPosition, const Tga2D::Vector2f& aVelocity, const float aBlastRadius, const float aDamage);
+		void FireLaser(bool aChoice);
 		void CreateExplosionAt(const Tga2D::Vector2f& aPosition, const float aRadius = 50.0f);
 		bool LevelIsCleared();
 		void LoadLevel(const int aLevelIndex);
@@ -60,11 +62,13 @@ namespace Studio
 		bool mySpawnedBoss;
 		bool myHasReloaded;
 		bool myHasResetShop = false;
+		bool myLaserIsFiring = false;
 		int myPackIndex;
 		int myCurrentLevel;
 		Pack* myCurrentPack;
 		Player* myPlayer = nullptr;
 		Boss* myBoss = nullptr;
+		Laser* myLaser = nullptr;
 		BossManager* myBossManager = nullptr;
 		std::vector<EffectExplosionLarge*> myExplosions;
 		std::vector<Pack*> myPacks;

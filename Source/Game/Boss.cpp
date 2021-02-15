@@ -172,15 +172,17 @@ namespace Studio
 				{
 					SetPosition({ 2050.0f , myPosition.y });
 				}
+
+				myHealthBar.Update(GetHealth());
+				if (myShield != nullptr)
+				{
+					myShield->Update(myPosition);
+				}
 			}
 			//Update to render everything
 			RendererAccessor::GetInstance()->Render(*this);
 			Boss::GameObject::Update(myPosition);
-			myHealthBar.Update(GetHealth());
-			if (myShield != nullptr)
-			{
-				myShield->Update();
-			}
+			
 		}
 	}
 

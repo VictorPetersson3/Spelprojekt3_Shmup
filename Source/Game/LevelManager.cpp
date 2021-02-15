@@ -23,6 +23,7 @@
 #include "BackgroundManager.h"
 #include "EffectExplosionLarge.h"
 #include "CoinAccessor.h"
+#include "Laser.h"
 
 // Rendering
 #include "RendererAccessor.h"
@@ -121,6 +122,10 @@ namespace Studio
 		SAFE_DELETE_VECTOR(myExplosions);
 		SAFE_DELETE(myBulletFactory);
 		SAFE_DELETE(myBossManager);
+		if (myLaser != nullptr)
+		{
+			SAFE_DELETE(myLaser);
+		}
 	}
 
 	void LevelManager::Update()
@@ -346,6 +351,14 @@ namespace Studio
 			{
 				myPlayer->Bounce(*myBoss->GetPosition());
 				myPlayer->TakeDamage(1.0f);
+			}
+			if (myLaserIsFiring)
+			{
+				myLaser->Update(myBoss->GetPosition()->y);
+				if (myPlayer->Intersects(*myLaser))
+				{
+					myPlayer->TakeDamage(myLaser->GetDamage());
+				}
 			}
 		}
 	}
@@ -632,6 +645,19 @@ namespace Studio
 	{
 		auto bomb = myBulletFactory->CreateTimedBomb(aPosition, aVelocity, aBlastRadius, aDamage);
 		myBullets.push_back(bomb);
+	}
+	void LevelManager::FireLaser(bool aChoice)
+	{
+		if (aChoice && myLaser == nullptr && myBoss != nullptr)
+		{
+			myLaser = new Laser(*myBoss->GetPosition());
+			myLaserIsFiring = true;
+		}
+		if (!aChoice && myLaser != nullptr)
+		{
+			myLaserIsFiring = false;
+			SAFE_DELETE(myLaser);
+		}
 	}
 	void LevelManager::CreateExplosionAt(const Tga2D::Vector2f& aPosition, const float aRadius)
 	{
