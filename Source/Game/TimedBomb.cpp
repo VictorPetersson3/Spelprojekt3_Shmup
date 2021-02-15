@@ -25,15 +25,10 @@ namespace Studio
 		myCounter.Tick();
 		if (myCounter.PastInterval())
 		{
-			Impact();
+			myDeleteMeThisFrame = true;
+			LevelAccessor::GetInstance()->SpawnAOEBullet(Enums::BulletOwner::Player, myPosition, myBlastRadius);
 		}
 
 		GameObject::Update(myPosition);
-	}
-
-	void TimedBomb::Impact()
-	{
-		myDeleteMeThisFrame = true;
-		LevelAccessor::GetInstance()->SpawnAOEBullet(Enums::BulletOwner::Player, myPosition, myBlastRadius);
 	}
 }

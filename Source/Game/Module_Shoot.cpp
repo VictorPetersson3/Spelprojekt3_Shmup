@@ -28,7 +28,8 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	}
 	if (aModuleParameter.HasMember("ShootTowardsPlayer"))
 	{
-		if (aModuleParameter["ShootTowardsPlayer"].GetString() == "Yes")
+		std::string type = aModuleParameter["ShootTowardsPlayer"].GetString();
+		if  (type == "Yes")
 		{
 			myShootTowardsPlayer = true;
 		}
@@ -94,7 +95,7 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 	if (mySpawnIsRelative)
 	{
 		mySpawnPosition.x = aBoss.GetPosition()->x + myOriginalSpawnPosition.x;
-		mySpawnPosition.y = aBoss.GetPosition()->y - myOriginalSpawnPosition.y;
+		mySpawnPosition.y = aBoss.GetPosition()->y + myOriginalSpawnPosition.y;
 	}
 	else
 	{
@@ -107,8 +108,8 @@ bool Studio::Module_Shoot::DoStuff(Boss& aBoss)
 	{
 		if (myShootTowardsPlayer)
 		{
-			VECTOR2F direction = Studio::PlayerAccessor::GetInstance()->GetPosition() - *aBoss.GetPosition();
-			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition, direction, 1);
+			VECTOR2F direction = mySpawnPosition - Studio::PlayerAccessor::GetInstance()->GetPosition();
+			Studio::LevelAccessor::GetInstance()->SpawnBullet(myBulletType, mySpawnPosition, direction.GetNormalized(), 1);
 		}
 		else
 		{

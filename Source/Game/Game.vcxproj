@@ -171,6 +171,7 @@
     <ClInclude Include="GoToMainMenuButton.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="ImageElement.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="LevelAccessor.h" />
     <ClInclude Include="LevelSelect.h" />
     <ClInclude Include="LevelSelectButton.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_Delay.h" />
     <ClInclude Include="Module_Immunity.h" />
+    <ClInclude Include="Module_Laser.h" />
     <ClInclude Include="Module_Missile.h" />
     <ClInclude Include="Module_Movement.h" />
     <ClInclude Include="Module_Shield.h" />
@@ -274,6 +276,7 @@
     <ClCompile Include="GoToMainMenuButton.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="ImageElement.cpp" />
+    <ClCompile Include="Laser.cpp" />
     <ClCompile Include="LevelAccessor.cpp" />
     <ClCompile Include="LevelSelect.cpp" />
     <ClCompile Include="LevelSelectButton.cpp" />
@@ -284,6 +287,7 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Module_Delay.cpp" />
     <ClCompile Include="Module_Immunity.cpp" />
+    <ClCompile Include="Module_Laser.cpp" />
     <ClCompile Include="Module_Missile.cpp" />
     <ClCompile Include="Module_Movement.cpp" />
     <ClCompile Include="Module_Shield.cpp" />
