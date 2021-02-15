@@ -13,6 +13,7 @@
 #include "Condition_Time.h"
 #include "Phase.h"
 #include "Shield.h"
+#include "LevelAccessor.h"
 
 //Json
 #include "rapidjson/document.h"
@@ -167,22 +168,16 @@ namespace Studio
 					CheckTransition();
 				}
 
-				//Om bossen försvinner skyll på det här...
-				if (myPosition.x < -150.0f)
-				{
-					SetPosition({ 2050.0f , myPosition.y });
-				}
-
 				myHealthBar.Update(GetHealth());
 				if (myShield != nullptr)
 				{
-					myShield->Update(myPosition);
+					myShield->Update({ myPosition.x + myLateGameOffset.x, myPosition.y + myLateGameOffset.y });
 				}
 			}
 			//Update to render everything
 			RendererAccessor::GetInstance()->Render(*this);
 			Boss::GameObject::Update(myPosition);
-			
+			myCollider.Update({ myPosition.x + myLateGameOffset.x, myPosition.y + myLateGameOffset.y });
 		}
 	}
 
@@ -234,11 +229,15 @@ namespace Studio
 	{
 		++myCurrentPhase;
 		printf("Changed to Phase: %i\n", myCurrentPhase);
-
+		if (LevelAccessor::GetInstance()->IsLaserFiring())
+		{
+			myPhases[myCurrentPhase - 1]->ResetPhase();
+		}
 		if (myCurrentPhase == myTransitionPhase1)
 		{
 			myIsTransitioning = true;
 			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 2 }, { 6, 2 });
+			myLateGameOffset = { 0.0f, -75.0f };
 		}
 		else if (myCurrentPhase == myTransitionPhase2)
 		{
@@ -274,13 +273,13 @@ namespace Studio
 			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 5 }, { 6, 5 });
 			myTransitionAnimationPart1 = false;
 			myTransitionAnimationPart2 = true;
-			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
+			myPosition += aDirection * 2 * Timer::GetInstance()->TGetDeltaTime();
 		}
 		else if (myCurrentPhase == myTransitionPhase2 && !myTransitionAnimationPart1 && myTransitionAnimationPart2 && !mySpriteSheet.IsAnimating())
 		{
 			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 6 }, { 6, 6 });
 			myTransitionAnimationPart2 = false;
-			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
+			myPosition += aDirection * 2 * Timer::GetInstance()->TGetDeltaTime();
 		}
 		else if (aDirection.y < 10.0f && aDirection.y > -10.0f && !mySpriteSheet.IsAnimating() && !myTransitionAnimationPart1 && !myTransitionAnimationPart2)
 		{
@@ -288,7 +287,7 @@ namespace Studio
 		}
 		else
 		{
-			myPosition += aDirection * Timer::GetInstance()->TGetDeltaTime();
+			myPosition += aDirection * 2 * Timer::GetInstance()->TGetDeltaTime();
 		}
 		return false;
 	}
@@ -347,6 +346,7 @@ namespace Studio
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
 		mySpriteSheet.LoopAnimationInRange(0.0833f, { 1, 1 }, { 6, 1 });
+		myLateGameOffset = { 0.0f, 0.0f };
 	}
 
 }

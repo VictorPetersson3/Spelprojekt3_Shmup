@@ -552,6 +552,11 @@ namespace Studio
 		myIsUpdating = true;
 	}
 
+	bool LevelManager::IsLaserFiring()
+	{
+		return myLaserIsFiring;
+	}
+
 	void LevelManager::CheckIfLevelIsCleared()
 	{
 

@@ -25,26 +25,19 @@ namespace Studio
 
 		void Update();
 
+		//Condition Checks for Phase transitions
 		bool CheckCurrentPhaseCondition();
-		//Tänk på en ny lösning när du får tid
 		bool GetCurrentPhaseHasPlayedOnce();
 		bool CheckEnrageCondition();
+
+		//Check if there is a transition on the current phase
 		void CheckTransition();
-
-
-		//Legacy Boss "Swedish Abilities"
-		/*void SendInTheCaroleans(float anAmountOfCanonFodder);
-		void ActivateWelfare(float aTaxAmount);
-		float SellGuns(float aMoralLimit);
-		bool ActPassive(float aInternationalNotoriety);
-		void EnforceAlleMansRätt();*/
 		
 		void UpdateMovement(Movement* aMovement);
 
+		//Different "Cinematic" movements
 		void PlayIntroMovement();
-
 		void PlayTransition();
-
 		bool ReturnToOriginalPosition();
 
 		void ActivateShield(Shield* aShield);
@@ -59,8 +52,6 @@ namespace Studio
 
 		void ResetBoss();
 
-		//Temp function until
-		void SwitchSprite();
 	protected:
 
 	private:
@@ -79,14 +70,15 @@ namespace Studio
 
 		VECTOR2F myPosition;
 		VECTOR2F myOriginalPosition = { 1500.0f , 540.0f};
+		VECTOR2F myLateGameOffset = {0.0f, 0.0f};
 		
 		Movement* myMovement;
 		Movement* myIntroMovement;
 
-		HealthBar myHealthBar;
 		Shield* myShield;
-		std::vector<Condition*> myConditions;
+		HealthBar myHealthBar;
 		Condition* myEnrageCondition;
+		std::vector<Condition*> myConditions;
 		std::vector<Phase*> myPhases;
 	};
 

@@ -259,6 +259,10 @@
         "Seconds": 3
       },
       {
+        "Module": "Laser",
+        "Duration": 3
+      },
+      {
         "Module": "Shoot",
         "Type": "",
         "Speed": 200,

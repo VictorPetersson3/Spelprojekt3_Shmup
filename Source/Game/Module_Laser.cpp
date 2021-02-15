@@ -24,7 +24,6 @@ bool Studio::Module_Laser::DoStuff(Boss& aBoss)
 
 	if (myElapsedTime >= myDuration)
 	{
-		printf("Delay Done\n");
 		myElapsedTime = 0.0f;
 		Studio::LevelAccessor::GetInstance()->FireLaser(false);
 		return true;
@@ -35,4 +34,6 @@ bool Studio::Module_Laser::DoStuff(Boss& aBoss)
 
 void Studio::Module_Laser::ResetModule()
 {
+	myElapsedTime = 0.0f;
+	Studio::LevelAccessor::GetInstance()->FireLaser(false);
 }

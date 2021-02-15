@@ -64,7 +64,7 @@ Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 				}
 				else if (type == "Laser")
 				{
-					myModules.push_back(new Module_Movement(modules[i]));
+					myModules.push_back(new Module_Laser(modules[i]));
 
 				}
 				else

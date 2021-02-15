@@ -44,6 +44,7 @@ namespace Studio
 		void StopUpdating();
 		void StartUpdating();
 
+		bool IsLaserFiring();
 	private:
 		void UpdateEnemies();
 		void LevelLogic();
