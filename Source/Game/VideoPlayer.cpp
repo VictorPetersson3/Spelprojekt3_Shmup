@@ -41,19 +41,19 @@ namespace Studio
 		case Enums::Video::Logos:
 		{
 			// TODO: Change to correct .mp4
-			PlayVideo("Vidoes/Look At All Those Chickens.mp4");
+			PlayVideo("Vidoes/Logos.mp4");
 			break;
 		}
 		case Enums::Video::Intro:
 		{
 			// TODO: Change to correct .mp4
-			PlayVideo("Vidoes/Shortest Video on Youtube.mp4");
+			PlayVideo("Vidoes/Intro.mp4");
 			break;
 		}
 		case Enums::Video::Outro:
 		{
 			// TODO: Change to correct .mp4
-			PlayVideo("Vidoes/Dog Sleep Farting Makes Cat Angry.mp4");
+			PlayVideo("Vidoes/Outro.mp4");
 			break;
 		}
 		default:
