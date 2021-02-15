@@ -37,10 +37,19 @@ namespace Studio
 
 		// Visial hit effect
 		myTimeSinceHit += DELTA_TIME;
-		if (myTimeSinceHit < 1.0f && !myHealth.GetGodMode())
+		                   // 1.0f
+		if (myTimeSinceHit < 0.25f && !myHealth.GetGodMode())
 		{
-			auto color = Tga2D::CColor(1.0f, 1.0f, 1.0f, 1.0f);
-			color.myR = 1.0f / myTimeSinceHit;
+			auto color = Tga2D::CColor(2550.0f, 2550.0f, 2550.0f, 1.0f);
+			if (fmodf(myTimeSinceHit, 0.20f) > 0.10f)
+			{
+				color = Tga2D::CColor(2550.0f, 0.0f, 0.0f, 1.0f);
+			}
+
+			// Old code
+			//auto color = Tga2D::CColor(1.0f, 1.0f, 1.0f, 1.0f);
+			//color.myR = 1.0f / myTimeSinceHit;
+
 			mySpriteSheet.GetSprite()->SetColor(color);
 		}
 		else
