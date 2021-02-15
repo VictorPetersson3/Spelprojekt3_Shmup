@@ -14,7 +14,8 @@
 #include "Phase.h"
 #include "Shield.h"
 #include "LevelAccessor.h"
-
+#include "AudioManagerAccesor.h"
+#include "AudioManager.h"
 //Json
 #include "rapidjson/document.h"
 
@@ -35,9 +36,6 @@ namespace Studio
 
 		//in case there is no enrage condition
 		myEnrageCondition = nullptr;
-
-		//StartPosition outside of screen for intro movement
-		myPosition = { 2050.0f, 540.0f };
 
 		//CollisionObjects
 		Boss::GameObject::GetCollider().AddCircleColliderObject({ 20.0f, 0.0f }, 280.0f);
@@ -90,7 +88,7 @@ namespace Studio
 			}
 		}
 		
-		SAFE_CREATE(myIntroMovement, MovementStraight(&myPosition, 50.0f));
+		SAFE_CREATE(myIntroMovement, MovementStraight(&myPosition, 55.0f));
 
 		if (myEnrageCondition != nullptr)
 		{
@@ -338,7 +336,7 @@ namespace Studio
 		}
 		myHealth.ResetHealth();
 		SetGodMode(true);
-		myPosition = { 2000.0f, 540.0f };
+		myPosition = { 2300.0f, 540.0f };
 		myIntroMovementPlayed = false;
 		myIsTransitioning = false;
 		myTransitionAnimationPart1 = false;
@@ -347,6 +345,8 @@ namespace Studio
 		myCurrentPhase = 0;
 		mySpriteSheet.LoopAnimationInRange(0.0833f, { 1, 1 }, { 6, 1 });
 		myLateGameOffset = { 0.0f, 0.0f };
+		AudioManagerAccessor::GetInstance()->StopAllSounds();
+		AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBaltic_-_The_Might_of_the_Three_Crowns.mp3", true, 0.1f);
 	}
 
 }
