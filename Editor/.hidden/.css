@@ -262,6 +262,7 @@ legend, fieldset {
 #tk-movement,       .mod-movement   { background-color: lightpink; }
 #tk-shoot,          .mod-shoot      { background-color: #ffd31d; }
 #tk-immunity,       .mod-immunity   { background-color: orangered; }
+#tk-laser,          .mod-laser      { background-color: plum; }
 .tk-text {
     color: white;
     background-color: green;

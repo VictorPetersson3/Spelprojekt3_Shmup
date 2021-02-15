@@ -199,25 +199,20 @@ function GetModule(id)
     switch (id) {
         case "tk-enemy":
             return ModuleEnemy();
-            break;
         case "tk-ability":
             return ModuleAbility();
-            break;
         case "tk-movement":
             return ModuleMovement();
-            break;
         case "tk-shoot":
             return ModuleShoot();
-            break;
         case "tk-immunity":
             return ModuleImmmunity();
-            break;
         case "tk-delay":
             return ModuleDelay();
-            break;
+        case "tk-laser":
+            return ModuleLaser();
         default:
             return Text();
-            break;
     }
 }
 //? BaseClass
@@ -365,6 +360,17 @@ function ModuleDelay()
     module.classList.add("mod-delay");
     module.innerHTML = `
         Wait <input type="number" data-input="Seconds" min="0" step="0.1" value="0"> (seconds)
+    `;
+    return module;
+}
+
+function ModuleLaser()
+{
+    let module = Module();
+    module.dataset["module"] = "Laser";
+    module.classList.add("mod-laser");
+    module.innerHTML = `
+        Duration <input type="number" data-input="Duration" min="0" step="0.1" value="0"> (seconds)
     `;
     return module;
 }
