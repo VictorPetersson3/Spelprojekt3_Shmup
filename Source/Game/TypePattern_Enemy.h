@@ -60,6 +60,7 @@ namespace Studio
 		const bool GetHasExtraCollission() const;
 
 		const bool GetIsTurret() const;
+		const bool GetIsUpright() const;
 
 		const std::vector<std::pair<float, VECTOR2F>>& GetCircleColliders();
 		const std::vector<std::pair<VECTOR2F, VECTOR2F>>& GetBoxColliders();
@@ -113,6 +114,8 @@ namespace Studio
 		bool myDiagonalIsTop;
 		bool myHasExtraColliders;
 		bool myIsTurret;  // Getter
+
+		bool myIsUpright;
 
 		std::string myImagePath;
 		//Key for Bullet Types as well as imagePath

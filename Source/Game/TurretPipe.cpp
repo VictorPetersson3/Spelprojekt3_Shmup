@@ -39,30 +39,46 @@ void Studio::TurretPipe::Update()
 	myTurretDirection.x = cosf(mySpriteSheet->GetRotation() - (PI * 0.5f)) / Tga2D::CEngine::GetInstance()->GetWindowSize().x;
 	myTurretDirection.y = sinf(mySpriteSheet->GetRotation() - (PI * 0.5f)) / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
 	myTurretDirection = myTurretDirection.GetNormalized() * myPipeLength;
-
 	const float EPSILON = 0.00001f;
-	//Tga2D::Vector2f playerDirection = (PlayerAccessor::GetInstance()->GetPosition() - myPosition).GetNormalized();
 	float angleToPlayer = atan2f(myPosition.y - PlayerAccessor::GetInstance()->GetPosition().y, myPosition.x - PlayerAccessor::GetInstance()->GetPosition().x);
 	float currentRotation = mySpriteSheet->GetRotation();
 	float turretRotationSpeed = myEnemyType->GetTurretRotationSpeed();
-
 	float rightOrLeftModifier = 0.f;
-	if (mySpriteSheet->GetRotation() <= PI && currentRotation < angleToPlayer + EPSILON)
+	
+	if (myEnemyType->GetIsUpright())
 	{
-		rightOrLeftModifier = 1.f;
+		myPosition = myEnemyType->GetTurretSpawnPoint() + myEnemy->GetPosition();
+		if (currentRotation <= PI && currentRotation < angleToPlayer + EPSILON)
+		{
+			rightOrLeftModifier = 1.f;
+		}
+		else if (currentRotation >= 0 && mySpriteSheet->GetRotation() > angleToPlayer - EPSILON)
+		{
+			rightOrLeftModifier = -1.f;
+		}
 	}
-	else if (mySpriteSheet->GetRotation() >= 0 && mySpriteSheet->GetRotation() > angleToPlayer - EPSILON)
+	else
 	{
-		rightOrLeftModifier = -1.f;
+		myPosition = myEnemy->GetPosition() - myEnemyType->GetTurretSpawnPoint();
+		printf("TurretRotaton : %f\n", currentRotation);
+		if (currentRotation <= 0 && currentRotation < angleToPlayer + EPSILON)
+		{
+			rightOrLeftModifier = 1.f;
+		}
+		else if (currentRotation >= -PI && mySpriteSheet->GetRotation() > angleToPlayer - EPSILON)
+		{
+			rightOrLeftModifier = -1.f;
+		}
 	}
-
+	//Rotate art and check if movement will overshoot the rotation then do not rotate to stop jittering
 	float new_rotation = currentRotation + (turretRotationSpeed * Studio::Timer::GetInstance()->TGetDeltaTime() * rightOrLeftModifier);
-	if (new_rotation < angleToPlayer + EPSILON || new_rotation > angleToPlayer - EPSILON)
+	if (new_rotation < angleToPlayer + EPSILON && new_rotation > angleToPlayer - EPSILON)
 	{
 		mySpriteSheet->SetRotation(angleToPlayer);
 	}
 	else
 	{
+		printf("New Rotation: %f\n", turretRotationSpeed * Studio::Timer::GetInstance()->TGetDeltaTime() * rightOrLeftModifier);
 		mySpriteSheet->SetRotation(new_rotation);
 	}
 
@@ -70,7 +86,6 @@ void Studio::TurretPipe::Update()
 	{
 		allowedToShoot = true;
 	}
-	printf("Cannon Angle to PLayer: %f\n", mySpriteSheet->GetRotation());
 	mySpriteSheet->SetPosition(myPosition);
 
 

@@ -207,6 +207,7 @@ void Studio::TypePattern_Enemy::CreateTurretObject(rapidjson::Document& aJsonDoc
 	myTurretSpawnPoint.y = aJsonDoc["SpawnPositionY"].GetFloat();
 	myTurretBulletSpawnPoint.x = aJsonDoc["BulletSpawnPositionX"].GetFloat();
 	myTurretBulletSpawnPoint.y = aJsonDoc["BulletSpawnPositionY"].GetFloat();
+	myIsUpright = aJsonDoc["IsUpright"].GetBool();
 }
 
 const Studio::Enums::MovementPattern Studio::TypePattern_Enemy::GetMovementType() const { return myMovementType; }
@@ -268,6 +269,8 @@ const bool Studio::TypePattern_Enemy::GetDiagonalIsTop() const { return myDiagon
 const bool Studio::TypePattern_Enemy::GetHasExtraCollission() const { return myHasExtraColliders; }
 
 const bool Studio::TypePattern_Enemy::GetIsTurret() const {return myIsTurret; }
+
+const bool Studio::TypePattern_Enemy::GetIsUpright() const { return myIsUpright; }
 
 const std::vector<std::pair<float, VECTOR2F>>& Studio::TypePattern_Enemy::GetCircleColliders() { return myCircleColliders; }
 

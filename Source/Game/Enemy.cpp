@@ -69,6 +69,10 @@ namespace Studio
 		if (aEnemyType->GetIsTurret())
 		{
 			myTurretPipe = new TurretPipe(this, aEnemyType);
+			if (!myType->GetIsUpright())
+			{
+				mySpriteSheet.SetSizeRelativeToImage({1, -1});
+			}
 		}
 		if (aEnemyType->GetIsPopcorn())
 		{
