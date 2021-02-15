@@ -38,9 +38,6 @@ namespace Studio
 				mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
 			}
 			myIsReversed = false;
-
-			// Test
-			RendererAccessor::GetInstance()->ShakeCamera(15.0f, 0.5f);
 		}
 		if (aOwner == Enums::BulletOwner::Enemy)
 		{
@@ -111,12 +108,18 @@ namespace Studio
 
 		myPosition += myVelocity * deltaTime;
 		GameObject::Update(myPosition);
+
+		// Shake the camera # TEST
+		RendererAccessor::GetInstance()->ShakeCamera(0.5f, 0.0625f);
 	}
 
 	void Missile::Impact()
 	{
 		printf_s("Missile impacted!\n");
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
+
+		// Shake the camera # TEST
+		RendererAccessor::GetInstance()->ShakeCamera(15.0f, 0.25f);
 
 		if (myTypePattern->GetOwner() == Enums::BulletOwner::Player
 			&& PlayerAccessor::GetInstance()->GetHasClusterBombs()

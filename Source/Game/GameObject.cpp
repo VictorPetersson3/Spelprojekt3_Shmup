@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include <tga2d/sprite/sprite.h>
 #include "Timer.h"
+#include "Renderer.h"
+#include "RendererAccessor.h"
 namespace Studio
 {
 	GameObject::GameObject() : mySpriteSheet(nullptr)
@@ -101,6 +103,12 @@ namespace Studio
 		myTimeSinceHit = 0.0f;
 
 		myHealth.TakeDamage(aDamage);
+
+		if (aDamage > 0.0f)
+		{
+			// Test
+			RendererAccessor::GetInstance()->ShakeCamera(2.0f, 0.125f);
+		}
 	}
 
 	const float GameObject::GetMaxHealth()
