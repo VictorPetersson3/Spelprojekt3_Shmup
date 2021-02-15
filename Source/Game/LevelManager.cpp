@@ -251,6 +251,9 @@ namespace Studio
 				else
 				{
 					myPlayer->TakeDamage(1.0f);
+
+					// Test
+					RendererAccessor::GetInstance()->ShakeCamera(5.0f, 0.125f);
 				}
 			}
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsPopcorn())

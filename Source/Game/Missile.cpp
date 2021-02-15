@@ -4,6 +4,8 @@
 #include "Timer.h"
 #include "LevelAccessor.h"
 #include "PlayerAccessor.h"
+#include "Renderer.h"
+#include "RendererAccessor.h"
 #include <tga2d/sprite/sprite.h>
 namespace Studio
 {
@@ -36,6 +38,9 @@ namespace Studio
 				mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
 			}
 			myIsReversed = false;
+
+			// Test
+			RendererAccessor::GetInstance()->ShakeCamera(15.0f, 0.5f);
 		}
 		if (aOwner == Enums::BulletOwner::Enemy)
 		{

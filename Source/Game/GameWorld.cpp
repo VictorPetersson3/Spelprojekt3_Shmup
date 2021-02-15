@@ -136,7 +136,7 @@ void CGameWorld::Render()
 	}
 	else
 	{
-		myRenderer.Render();
+		myRenderer.Render(Studio::DELTA_TIME);
 		myMenuManager->Render();
 	}
 }

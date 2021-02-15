@@ -34,12 +34,15 @@ public:
 	void Render(Studio::GameObject& aGameObject);
 	void Render(Studio::SpriteSheet& aSpriteSheet);
 	void SwapBuffers();
-	void Render();
+	void Render(const float aDeltaTime = 1.0f / 60.0f);
+	void ShakeCamera(const float aOomphValue, const float aDuration);
 
 	// Legacy code
 	void RenderRenderCommand(Studio::RenderCommand aRenderCommand);
 
 private:
+	void Update(float aDeltaTime);
+
 	SpriteSheetBuffer myBatchBuffer1; // threading
 	SpriteSheetBuffer myBatchBuffer2; // threading
 	SpriteSheetBuffer* myWriteBuffer; // threading
@@ -54,5 +57,9 @@ private:
 			Tga2D::CSpriteBatch* // SpriteBatch to reduce draw calls to the GPU
 		>
 	> myCoolMap; // myLayeredBatches
+
+	float myOomph = 0.0f;
+	float myShakeDuration = 1.0f;
+	float _x = 0.0f, _y = 0.0f;
 };
 
