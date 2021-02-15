@@ -56,6 +56,8 @@ namespace Studio
 		//TextElement* GetShopDescriptionText();
 		ImageElement* GetShopDescriptionText();
 
+		TextElement* GetShopCostText();
+
 		//Jimmikod
 		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
 	private:
@@ -129,8 +131,9 @@ namespace Studio
 		GenericButton* myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 5,5 }, { 0.5f,0.5f }, "ResumeButton", 11);
 		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
-		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.86,0.105 }, "ShopCoinText", Tga2D::CColor({1,1,1,1}));
-		//TextElement* myShopDescriptionText = new TextElement(Tga2D::EFontSize_24, { 0.65,0.65 }, "ShopDescriptionText", Tga2D::CColor({ 1,1,1,1 }));
+		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.56,0.195 }, "ShopCoinText", Tga2D::CColor({1,1,1,1}));
+		TextElement* myShopCostText = new TextElement(Tga2D::EFontSize_24, { 0.75f,0.738f }, "ShopCoinCostText", Tga2D::CColor({ 1,1,1,1 }));
+
 		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.104 }, "myMasterVolumePercentageText");
 		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");
 
@@ -139,9 +142,6 @@ namespace Studio
 		ImageElement* myVolumeSliderBackground = new ImageElement("Sprites/debugpixel.dds", { 960 - 250,200 }, { 500,50 }, { 0.0f,0.5f }, 14, "VolumeSliderBackground", { 0.3f,0.3f,0.3f,1 });
 
 		ReturnToMainMenuButton* myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
-
-
-
 
 		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,100 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	

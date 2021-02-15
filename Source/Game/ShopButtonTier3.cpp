@@ -78,6 +78,12 @@ void Studio::ShopButtonTier3::Update()
 						hasBeenHoveredOver = true;
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet()->SetImagePath(myDescription);
+
+						std::string b = "Cost: " + myCost;
+
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
+
 					}
 
 					RendererAccessor::GetInstance()->Render(*MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet());
@@ -92,6 +98,13 @@ void Studio::ShopButtonTier3::Update()
 				{
 					mySize = 1;
 					mySizeTimer = 0;
+
+					if (hasBeenHoveredOver)
+					{
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+
+					}
+
 					hasBeenHoveredOver = false;
 				}
 			}
@@ -99,6 +112,13 @@ void Studio::ShopButtonTier3::Update()
 			{
 				mySize = 1;
 				mySizeTimer = 0;
+
+				if (hasBeenHoveredOver)
+				{
+					MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+
+				}
+
 				hasBeenHoveredOver = false;
 			}
 		}
@@ -121,7 +141,6 @@ void Studio::ShopButtonTier3::OnClick()
 			PlayerAccessor::GetInstance()->UpgradeT3(myUpgradeType);
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 
-			std::cout << "Shop button pressed" << std::endl;
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			myHasBeenPurchased = true;
 		}

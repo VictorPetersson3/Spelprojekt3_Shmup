@@ -58,6 +58,7 @@ namespace Studio
         myShop.Add(myNextLevelButton);
         myShop.Add(myShopFrames);
         myShop.Add(myShopDescriptionText);
+        myShop.Add(myShopCostText);
         myShop.Disable();
 
         myPausMenu.Add(myPausMenuBackground);
@@ -227,6 +228,8 @@ namespace Studio
             myMissileCooldownText->Render();
         if (myShieldCooldown > 0)
             myShieldCooldownText->Render();
+        myShopCostText->Render();
+
     }
 
     void MenuManager::ResetShop()
@@ -242,6 +245,7 @@ namespace Studio
         myShop.Add(myShopFrames);
         myShop.Add(myShopCoinText);
         myShop.Add(myNextLevelButton);
+        myShop.Add(myShopCostText);
         myShop.Disable();
     }
 
@@ -313,6 +317,7 @@ namespace Studio
         myOptionsMenu.Disable();
         myHud.Disable();
         myCreditsMenu.Disable();
+        myShop.Disable();
         hasStartedGame = false;
         myStartButton->myIsClicked = false;
         if (Studio::Timer::GetInstance()->IsFrozen())
@@ -342,10 +347,11 @@ namespace Studio
         return myShopDescriptionText;
     }
 
-    /*TextElement* MenuManager::GetShopDescriptionText()
+    TextElement* MenuManager::GetShopCostText()
     {
-        return myShopDescriptionText;
-    }*/
+        return myShopCostText;
+    }
+
     void MenuManager::GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown)
     {
         myRapidCooldown = aRapidFireCooldown;

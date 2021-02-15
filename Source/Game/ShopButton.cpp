@@ -75,8 +75,12 @@ void Studio::ShopButton::Update()
 						hasBeenHoveredOver = true;
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet()->SetImagePath(myDescription);
+						std::string s = "Cost: " + myCost;
 
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
 					}
+
 
 					RendererAccessor::GetInstance()->Render(*MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet());
 
@@ -91,14 +95,31 @@ void Studio::ShopButton::Update()
 				{
 					mySize = 1;
 					mySizeTimer = 0;
+
+					if (hasBeenHoveredOver)
+					{
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+					}
+
 					hasBeenHoveredOver = false;
+					
+
 				}
 			}
 			else
 			{
 				mySize = 1;
 				mySizeTimer = 0;
+
+				if (hasBeenHoveredOver)
+				{
+					MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+
+				}
+
 				hasBeenHoveredOver = false;
+
+				
 			}
 		}
 

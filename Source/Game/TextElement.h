@@ -16,6 +16,7 @@ namespace Studio
 
 		void Render();
 		void SetText(std::string& aText);
+		void SetText(const char* aText);
 
 	private:
 		Tga2D::CText* myText;

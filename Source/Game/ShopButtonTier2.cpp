@@ -78,6 +78,11 @@ void Studio::ShopButtonTier2::Update()
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetSprite(myDescription);
 
+						std::string s = "Cost: " + myCost;
+
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
+
 						hasBeenHoveredOver = true;
 
 					}
@@ -94,6 +99,13 @@ void Studio::ShopButtonTier2::Update()
 				{
 					mySize = 1;
 					mySizeTimer = 0;
+
+					if (hasBeenHoveredOver)
+					{
+						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+
+					}
+
 					hasBeenHoveredOver = false;
 				}
 			}
@@ -101,6 +113,13 @@ void Studio::ShopButtonTier2::Update()
 			{
 				mySize = 1;
 				mySizeTimer = 0;
+
+				if (hasBeenHoveredOver)
+				{
+					MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+
+				}
+
 				hasBeenHoveredOver = false;
 			}
 		}

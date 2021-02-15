@@ -56,3 +56,11 @@ void Studio::TextElement::SetText(std::string& aText)
 		myText->SetText(aText);
 	}
 }
+
+void Studio::TextElement::SetText(const char* aText)
+{
+	if (myIsEnabled == true)
+	{
+		myText->SetText(aText);
+	}
+}
