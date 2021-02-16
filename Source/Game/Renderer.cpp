@@ -145,4 +145,10 @@ void Renderer::Update(const float aDeltaTime)
 
 	// dampen the oomph
 	myOomph -= myOomph * myShakeDuration * aDeltaTime;
+
+	// Prevent the shake to steer out of control
+	if (myOomph < 0.0f)
+	{
+		myOomph = 0.0f;
+	}
 }
