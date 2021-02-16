@@ -8,6 +8,7 @@ Studio::MousePointer::MousePointer() :
 {
 	mySpriteSheet.SetPivot({0.0f, 0.0f});
 	mySpriteSheet.SetLayer(999999);
+	mySpriteSheet.SetSizeRelativeToImage({0.5f, 0.5f});
 	SetGodMode(true);
 }
 
