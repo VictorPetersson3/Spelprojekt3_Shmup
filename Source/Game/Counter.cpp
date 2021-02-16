@@ -22,4 +22,8 @@ namespace Studio
 	{
 		myTime += Timer::GetInstance()->TGetDeltaTime();
 	}
+	const float Counter::GetTime() const
+	{
+		return myTime;
+	}
 }
