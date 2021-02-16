@@ -25,6 +25,7 @@
 #include "AudioManager.h"
 #include "AudioManagerAccesor.h"
 #include "Game_Accessor.h"
+#include "MousePointer.h"
 
 CGameWorld::CGameWorld()
 {
@@ -71,6 +72,8 @@ void CGameWorld::Init()
 
 	Studio::PlayerAccessor::SetInstance(myPlayer);
 
+	SAFE_CREATE(myMousePointer, Studio::MousePointer());
+
 	SAFE_CREATE(myCoinManager, Studio::CoinManager());
 	Studio::CoinAccessor::SetInstance(myCoinManager);
 	SAFE_CREATE(myScoreManager, Studio::ScoreManager());
@@ -90,6 +93,8 @@ void CGameWorld::Init()
 	myHasStarted = false;
 
 	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
+
+
 
 }
 
@@ -119,6 +124,10 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying, bool aH
 			}
 			myMenuManager->Update();
 		}
+		if (myMousePointer != nullptr)
+		{
+			myMousePointer->Update({ Studio::InputManager::GetInstance()->GetMousePosition().x,  Studio::InputManager::GetInstance()->GetMousePosition().y });
+		}
 	}
 	if (!myHasStarted)
 	{
@@ -126,6 +135,7 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying, bool aH
 		//Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
 		//myMenuManager->ResetAllSizes();
 	}
+	
 }
 
 void CGameWorld::Render()
