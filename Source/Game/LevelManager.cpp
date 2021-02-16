@@ -154,7 +154,14 @@ namespace Studio
 			}
 			else
 			{
+				if (!myHasStoppedLevelMusic)
+				{
+					AudioManagerAccessor::GetInstance()->StopAllSounds();
+					AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBaltic_-_TheBootyMerchant.mp3", true, 0.2f);
+					myHasStoppedLevelMusic = true;
+				}
 				MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+				
 				if (myHasResetShop == false)
 				{
 					MenuManagerSingleton::GetInstance()->ResetShop();
@@ -169,6 +176,8 @@ namespace Studio
 		{
 			CheckIfLevelIsCleared();
 			myHasResetShop = false;
+			myHasStoppedLevelMusic = false;
+
 			// Pack
 			if (!myCurrentPack->ExitConditionIsMet())
 			{
