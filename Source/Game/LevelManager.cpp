@@ -24,6 +24,7 @@
 #include "EffectExplosionLarge.h"
 #include "CoinAccessor.h"
 #include "Laser.h"
+#include "ParticleEmitter.h"
 
 // Rendering
 #include "RendererAccessor.h"
@@ -107,6 +108,7 @@ namespace Studio
 			}
 		}
 		myCurrentLevel = levelToStart;
+		myParticleEmitter = nullptr;
 		myLevelBossSpawned = false;
 		myLevelEnemiesCleared = false;
 		myLevelIsCleared = false;
@@ -140,6 +142,7 @@ namespace Studio
 
 		if (myLevelIsCleared == true)
 		{
+			myParticleEmitter->Deactivate();
 			if (myCurrentLevel > myLevelPaths.size() - 1)
 			{
 				//StartCredits
@@ -187,6 +190,8 @@ namespace Studio
 			LevelLogic();
 			// Check if Player cleared the level
 		}
+		myParticleEmitter->SpawnParticle();
+		myParticleEmitter->Update();
 	}
 
 	const std::string& LevelManager::CurrentLevelPath()
@@ -509,6 +514,9 @@ namespace Studio
 			myLevelBossSpawned = true;
 		}
 		mySpawnedBoss = false;
+		SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
+		myParticleEmitter->Init(Studio::Enums::EParticleTypes::eRain);
+		myParticleEmitter->Activate();
 		MenuManagerSingleton::GetInstance()->GetShop()->Disable();
 		MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
 		MenuManagerSingleton::GetInstance()->GetMainMenu()->Disable();
@@ -532,6 +540,7 @@ namespace Studio
 		ClearEnemies();
 		ClearPacks();
 		ClearBullets();
+		SAFE_DELETE(myParticleEmitter);
 		myBackgroundManager->ClearBackground();
 		CoinAccessor::GetInstance()->ResetWorldCoins();
 		myPlayer->ResetPlayerCurrentLevel();

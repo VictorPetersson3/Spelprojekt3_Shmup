@@ -14,6 +14,8 @@ namespace Studio
 	class Laser;
 	class BackgroundManager;
 	class EffectExplosionLarge;
+	class ParticleEmitter;
+
 	class LevelManager
 	{
 	public:
@@ -77,5 +79,6 @@ namespace Studio
 		std::vector<Bullet*> myBullets;
 		std::vector<std::string> myLevelPaths;
 		BackgroundManager* myBackgroundManager;
+		ParticleEmitter* myParticleEmitter;
 	};
 }

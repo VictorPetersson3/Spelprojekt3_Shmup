@@ -121,6 +121,10 @@ namespace Studio
 	{
 		mySprite->SetPivot(aPivot);
 	}
+	void SpriteSheet::SetColor(const Tga2D::CColor& aColor)
+	{
+		mySprite->SetColor(aColor);
+	}
 	void SpriteSheet::SetSize(const Tga2D::Vector2f& aSize)
 	{
 		mySize = aSize;

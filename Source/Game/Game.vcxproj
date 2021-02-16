@@ -204,6 +204,8 @@
     <ClInclude Include="MovementWave.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Pack.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleEmitter.h" />
     <ClInclude Include="PlayerAccessor.h" />
     <ClInclude Include="Player_JsonParser.h" />
     <ClInclude Include="Phase.h" />
@@ -308,6 +310,8 @@
     <ClCompile Include="MovementWave.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Pack.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="PlayerAccessor.cpp" />
     <ClCompile Include="Player_JsonParser.cpp" />
     <ClCompile Include="Phase.cpp" />
