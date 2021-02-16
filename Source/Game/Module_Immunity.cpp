@@ -29,7 +29,6 @@ Studio::Module_Immunity::Module_Immunity(rapidjson::Value& aModuleParameters) :
 bool Studio::Module_Immunity::DoStuff(Boss& aBoss)
 {
 	aBoss.SetGodMode(myGodmodeChoice);
-	printf("immunity set\n");
 	return true;
 }
 

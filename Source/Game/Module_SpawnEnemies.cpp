@@ -61,7 +61,6 @@ bool Studio::Module_SpawnEnemies::DoStuff(Boss& aBoss)
 	}
 	auto enemy = Studio::LevelAccessor::GetInstance()->myEnemyFactory->CreateEnemyObject(myType, mySpawnPosition);
 	Studio::LevelAccessor::GetInstance()->AddEnemy(enemy);
-	//printf("Spawned Enemy Done\n");
 	return true;
 }
 

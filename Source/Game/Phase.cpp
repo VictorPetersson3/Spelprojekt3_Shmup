@@ -67,20 +67,8 @@ Studio::Phase::Phase(rapidjson::Value& aPhaseParameters)
 					myModules.push_back(new Module_Laser(modules[i]));
 
 				}
-				else
-				{
-					printf("The Module Type: %s is either wrong or not implemented\n", modules[i]["Module"].GetString());
-				}
-			}
-			else
-			{
-				printf("Cant read Module Type");
 			}
 		}
-	}
-	else
-	{
-		printf_s("Phase Is Not Correctly Read Through Json");
 	}
 	myModuleAmount = static_cast<int>(myModules.size());
 	myCurrentModule = 0;

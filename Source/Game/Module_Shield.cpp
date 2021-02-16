@@ -22,7 +22,6 @@ bool Studio::Module_Shield::DoStuff(Boss& aBoss)
 	{
       	aBoss.ActivateShield(new Shield(myHitPoints));
 		myHasCreatedShield = true;
-		printf("Shield Activated\n");
 	}
 	return true;
 }
