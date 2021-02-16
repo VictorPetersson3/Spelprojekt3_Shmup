@@ -82,11 +82,11 @@ void Studio::ShopButtonTier2::Update()
 
 						std::string s = "Cost: " + myCost;
 
-						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
-						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
-
-						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
-						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(true);
+						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
+						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
+						//
+						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
+						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(true);
 
 						hasBeenHoveredOver = true;
 
@@ -150,6 +150,7 @@ void Studio::ShopButtonTier2::OnClick()
 			PlayerAccessor::GetInstance()->UpgradeT2(myUpgradeType);
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
+			mySpriteSheet->GetSprite()->SetColor({ 1,1,1,0.4f });
 			myHasBeenPurchased = true;
 		}
 		
@@ -159,6 +160,8 @@ void Studio::ShopButtonTier2::OnClick()
 void Studio::ShopButtonTier2::Reset()
 {
 	myHasBeenPurchased = false;
+	mySpriteSheet->GetSprite()->SetColor({ 1,1,1,1 });
+
 }
 
 Studio::Enums::Tier2Upgrades Studio::ShopButtonTier2::GetUpgradeType()

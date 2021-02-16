@@ -78,11 +78,11 @@ void Studio::ShopButton::Update()
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet()->SetImagePath(myDescription);
 						std::string s = "Cost: " + myCost;
 
-						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
-						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
-
-						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
-						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(true);
+						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
+						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
+						//
+						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
+						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(true);
 					}
 
 
@@ -148,6 +148,7 @@ void Studio::ShopButton::OnClick()
 			PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
+			mySpriteSheet->GetSprite()->SetColor({ 1,1,1,0.4f });
 			myHasBeenPurchased = true;
 		}
 	}
@@ -155,5 +156,6 @@ void Studio::ShopButton::OnClick()
 
 void Studio::ShopButton::Reset()
 {
+	mySpriteSheet->GetSprite()->SetColor({ 1,1,1,1 });
 	myHasBeenPurchased = false;
 }
