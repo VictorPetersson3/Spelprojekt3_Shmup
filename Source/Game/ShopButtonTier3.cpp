@@ -20,7 +20,7 @@
 #include "Timer.h"
 
 #define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
-Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost, char* aDescription)
+Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier3Upgrades aUpgradeType, int aCost, char* aDescription, char* aName)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -38,6 +38,8 @@ Studio::ShopButtonTier3::ShopButtonTier3(const char* aPath, const VECTOR2F aPosi
 	myCost = aCost;
 
 	myDescription = aDescription;
+
+	myName = aName;
 
 	mySize = 1;
 	mySizeTimer = 0;
@@ -84,6 +86,9 @@ void Studio::ShopButtonTier3::Update()
 						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
 						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
 
+
+						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
+						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(false);
 					}
 
 					RendererAccessor::GetInstance()->Render(*MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet());
@@ -102,6 +107,7 @@ void Studio::ShopButtonTier3::Update()
 					if (hasBeenHoveredOver)
 					{
 						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(false);
 
 					}
 
@@ -116,6 +122,7 @@ void Studio::ShopButtonTier3::Update()
 				if (hasBeenHoveredOver)
 				{
 					MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+					MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(false);
 
 				}
 

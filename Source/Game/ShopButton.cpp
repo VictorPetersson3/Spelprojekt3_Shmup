@@ -13,7 +13,7 @@
 #include "Timer.h"
 
 #define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
-Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier1Upgrades aUpgradeType, int aCost, char* aDescription)
+Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier1Upgrades aUpgradeType, int aCost, char* aDescription, char* aName)
 {
 	mySprite = new Tga2D::CSprite(aPath);
 	mySprite->SetPivot(aPivot);
@@ -31,6 +31,7 @@ Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, cons
 	myCost = aCost;
 
 	myDescription = aDescription;
+	myName = aName;
 
 	myLeft = mySpriteSheet->GetPosition().x - (mySprite->GetImageSize().x / 2);
 	myRight = mySpriteSheet->GetPosition().x + (mySprite->GetImageSize().x / 2);
@@ -79,6 +80,9 @@ void Studio::ShopButton::Update()
 
 						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
 						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
+
+						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
+						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(true);
 					}
 
 
@@ -99,6 +103,8 @@ void Studio::ShopButton::Update()
 					if (hasBeenHoveredOver)
 					{
 						MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+						MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(false);
+
 					}
 
 					hasBeenHoveredOver = false;
@@ -114,12 +120,12 @@ void Studio::ShopButton::Update()
 				if (hasBeenHoveredOver)
 				{
 					MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(false);
+					MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(false);
 
 				}
 
 				hasBeenHoveredOver = false;
 
-				
 			}
 		}
 
@@ -140,7 +146,6 @@ void Studio::ShopButton::OnClick()
 		if (!myHasBeenPurchased)
 		{
 			PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
-			std::cout << "Shop button pressed" << std::endl;
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			myHasBeenPurchased = true;
@@ -152,9 +157,3 @@ void Studio::ShopButton::Reset()
 {
 	myHasBeenPurchased = false;
 }
-
-//void Studio::ShopButton::SetPosition(VECTOR2F aPosition)
-//{
-//	mySpriteSheet->SetPosition(aPosition);
-//}
-//

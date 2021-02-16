@@ -53,10 +53,13 @@ namespace Studio
 		void QuitGameSession();
 		void ResetButtonColliders();
 
+		
+
 		//TextElement* GetShopDescriptionText();
 		ImageElement* GetShopDescriptionText();
 
 		TextElement* GetShopCostText();
+		TextElement* GetShopUpgradeNameText();
 
 		//Jimmikod
 		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
@@ -99,7 +102,7 @@ namespace Studio
 		ImageElement* myShopBackground = new ImageElement("Sprites/UI/ShopUI/shopUI_BG.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 0, "ShopBackground");
 		ImageElement* myShopFrames = new ImageElement("Sprites/UI/ShopUI/shopUI_frames.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "ShopFrames");
 
-		ImageElement* myShopDescriptionText = new ImageElement("Sprites/UI/ShopUI/RapidFireAST1.dds", { 1500, 750 }, { 1,1 }, { 0.5f,0.5f }, 60000000, "ShopText");
+		ImageElement* myShopDescriptionText = new ImageElement("Sprites/UI/ShopUI/RapidFireAST1.dds", { 1500, 768 }, { 1,1 }, { 0.5f,0.5f }, 60000000, "ShopText");
 
 		int myRapidCooldown;
 		int myMissileCooldown;
@@ -132,7 +135,9 @@ namespace Studio
 		ReturnToMainMenuButton* myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
 		TextElement* myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.56,0.195 }, "ShopCoinText", Tga2D::CColor({1,1,1,1}));
-		TextElement* myShopCostText = new TextElement(Tga2D::EFontSize_24, { 0.75f,0.738f }, "ShopCoinCostText", Tga2D::CColor({ 1,1,1,1 }));
+		TextElement* myShopCostText = new TextElement(Tga2D::EFontSize_18, { 0.76f,0.738f }, "ShopCoinCostText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
+		TextElement* myShopUpgradeNameText = new TextElement(Tga2D::EFontSize_24, { 0.78f,0.645f }, "ShopNameText", Tga2D::CColor({ 1,1,1,1 }),"Text/Beaufort Medium.otf",true);
+		
 
 		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.104 }, "myMasterVolumePercentageText");
 		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");

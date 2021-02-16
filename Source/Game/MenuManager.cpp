@@ -59,6 +59,7 @@ namespace Studio
         myShop.Add(myShopFrames);
         myShop.Add(myShopDescriptionText);
         myShop.Add(myShopCostText);
+        myShop.Add(myShopUpgradeNameText);
         myShop.Disable();
 
         myPausMenu.Add(myPausMenuBackground);
@@ -222,6 +223,7 @@ namespace Studio
         myOptionsMenuTitleText->Render();
         myMasterVolumeSliderText->Render();
         myMasterVolumeLabelText->Render();
+        myShopUpgradeNameText->Render();
         if (myRapidCooldown > 0)
             myRapidCooldownText->Render();
         if (myMissileCooldown > 0)
@@ -246,6 +248,7 @@ namespace Studio
         myShop.Add(myShopCoinText);
         myShop.Add(myNextLevelButton);
         myShop.Add(myShopCostText);
+        myShop.Add(myShopUpgradeNameText);
         myShop.Disable();
     }
 
@@ -350,6 +353,11 @@ namespace Studio
     TextElement* MenuManager::GetShopCostText()
     {
         return myShopCostText;
+    }
+
+    TextElement* MenuManager::GetShopUpgradeNameText()
+    {
+        return(myShopUpgradeNameText);
     }
 
     void MenuManager::GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown)

@@ -4,9 +4,13 @@
 #include "Timer.h"
 #include "LevelAccessor.h"
 #include "PlayerAccessor.h"
+#include "AudioManager.h"
+#include "AudioManagerAccesor.h"
+
 #include "Renderer.h"
 #include "RendererAccessor.h"
 #include <tga2d/sprite/sprite.h>
+
 namespace Studio
 {
 	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius)
@@ -117,6 +121,8 @@ namespace Studio
 	{
 		printf_s("Missile impacted!\n");
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
+
+		AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.15f);
 
 		// Shake the camera # TEST
 		RendererAccessor::GetInstance()->ShakeCamera(15.0f, 0.25f);

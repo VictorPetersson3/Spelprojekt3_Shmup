@@ -83,7 +83,7 @@ namespace Studio
 
 	Enemy::~Enemy()
 	{
-		AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.2f);
+		AudioManagerAccessor::GetInstance()->Play2D("Audio/EnemyKilled.flac", false, 0.4f);
 
 		SAFE_DELETE(myMovement);
 	}
