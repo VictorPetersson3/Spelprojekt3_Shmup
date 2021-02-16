@@ -11,7 +11,6 @@ Studio::Module_Delay::Module_Delay(rapidjson::Value& aModuleParameters) :
 	}
 	else
 	{
-		printf_s("Module Delay Time is not set correct\n");
 		myDelayTime = 0.5f;
 	}
 	myElapsedTime = 0.0f;
@@ -23,7 +22,6 @@ bool Studio::Module_Delay::DoStuff(Boss& aBoss)
 
 	if (myElapsedTime >= myDelayTime)
 	{
-		printf("Delay Done\n");
 		myElapsedTime = 0.0f;
 		return true;
 	}

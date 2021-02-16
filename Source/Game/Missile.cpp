@@ -119,7 +119,6 @@ namespace Studio
 
 	void Missile::Impact()
 	{
-		printf_s("Missile impacted!\n");
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
 
 		AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.15f);

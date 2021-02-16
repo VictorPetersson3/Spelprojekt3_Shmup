@@ -30,7 +30,8 @@ void Studio::AudioManager::Play2D(const char* aPath, bool aLooping, float volume
 		sound->setDefaultVolume(volume*volumeMultiplier);
 
 		myAudioEngine->play2D(sound, aLooping, false, false);
-	}
+
+	} 
 	else
 	{
 		myAudioEngine->play2D(myAudioEngine->getSoundSource(aPath), aLooping, false, false);
@@ -97,6 +98,8 @@ void Studio::AudioManager::RemoveAllAudioFromEngine()
 void Studio::AudioManager::SetVolumeMultiplier(float aNewMultiplier)
 {
 	volumeMultiplier = aNewMultiplier;
+
+	myAudioEngine->setSoundVolume(volumeMultiplier);
 }
 
 bool Studio::AudioManager::IsCurrentlyPlaying(const char* aPath)

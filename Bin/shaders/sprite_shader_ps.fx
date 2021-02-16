@@ -45,5 +45,25 @@ float4 PShader(PixelInputType input) : SV_TARGET
 	} 
 	#endif
 	
-	return float4(AmbientColor + DirectColor, Diffuse.w);
+	// Normal TGA2D
+    float4 color = float4(AmbientColor + DirectColor, Diffuse.w);
+	
+	// Flash effect Hijack
+	if (input.color.r > 1.0)
+    {
+		// White
+        if (input.color.b > 1.0)
+        {
+            color.rgb = 1.0;
+        }
+		// Red
+		else
+        {
+            color.r = 255.0 / 255.0;
+            color.g = 16.0 / 255.0;
+            color.b = 31.0 / 255.0;
+        }
+    }
+	
+	return color;
 }

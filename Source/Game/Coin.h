@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Counter.h"
 namespace Studio
 {
 	class Coin : public GameObject
@@ -16,6 +17,12 @@ namespace Studio
 		float mySpeed;
 		VECTOR2F myPosition;
 
+		bool myIsBlinked;
+		float myTimeBlinked;
+		float myInterval;
+		Counter myTimeCounter;
+		Counter myBlinkingCounter;
+		Counter myThirdCounter;
 	};
 }
 

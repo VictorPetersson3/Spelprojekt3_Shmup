@@ -37,3 +37,9 @@ T_mountain_small
 T_mountain_bunker
 T_sandpiles
 T_sandpiles_wave
+tut_Movement
+tut_BasicAttacks
+tut_Coins
+tut_Rapidfire
+tut_Missile
+tut_Shield

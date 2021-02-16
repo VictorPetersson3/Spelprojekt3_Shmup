@@ -188,6 +188,7 @@
     <ClInclude Include="Module_Shield.h" />
     <ClInclude Include="Module_Shoot.h" />
     <ClInclude Include="Module_SpawnEnemies.h" />
+    <ClInclude Include="MousePointer.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -295,6 +296,7 @@
     <ClCompile Include="Module_Shield.cpp" />
     <ClCompile Include="Module_Shoot.cpp" />
     <ClCompile Include="Module_SpawnEnemies.cpp" />
+    <ClCompile Include="MousePointer.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
