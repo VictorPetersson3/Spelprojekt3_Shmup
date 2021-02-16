@@ -262,6 +262,7 @@
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="MousePointer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -537,6 +538,7 @@
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Laser.h" />
+    <ClInclude Include="MousePointer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">

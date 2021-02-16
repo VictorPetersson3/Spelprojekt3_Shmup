@@ -1,0 +1,504 @@
+{
+  "Conditions": [
+    {
+      "Type": "BelowHealth",
+      "Percentage": 75
+    },
+    { "Type": "Once" },
+    {
+      "Type": "BelowHealth",
+      "Percentage": 70
+    },
+    {
+      "Type": "BelowHealth",
+      "Percentage": 50
+    },
+    { "Type": "Once" },
+    {
+      "Type": "BelowHealth",
+      "Percentage": 45
+    },
+    {
+      "Type": "BelowHealth",
+      "Percentage": 0
+    }
+  ],
+  "Phases": [
+    [
+      { "Module": "Text" },
+      {
+        "Module": "Movement",
+        "Type": "Bobbing",
+        "Speed": 100,
+        "Height": 500
+      },
+      {
+        "Module": "Shoot",
+        "Type": "",
+        "Speed": 200,
+        "ShootTowardsPlayer": "Yes",
+        "Interval": 500,
+        "Duration": 2,
+        "X": -131,
+        "Y": -259,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Shoot",
+        "Type": "",
+        "Speed": 200,
+        "ShootTowardsPlayer": "Yes",
+        "Interval": 500,
+        "Duration": 2,
+        "X": -131,
+        "Y": -269,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Ability",
+        "Ability": "Missile",
+        "InitialSpeed": 50,
+        "Deacceleration": 25,
+        "Acceleration": 400,
+        "X": -212,
+        "Y": 0,
+        "Style": "Relative"
+      }
+    ],
+    [
+      { "Module": "Text" },
+      {
+        "Module": "Ability",
+        "Ability": "Shield",
+        "HitPoints": 100
+      }
+    ],
+    [
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": -425,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": -250,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 150,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": 250,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 425,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": 200,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": -100,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 0,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": 425,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 250,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": -250,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": 300,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": -300,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": 150,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": -150,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      }
+    ],
+    [
+      {
+        "Module": "Movement",
+        "Type": "Bobbing",
+        "Speed": 150,
+        "Height": 400
+      },
+      {
+        "Module": "Shoot",
+        "Type": "",
+        "Speed": 200,
+        "ShootTowardsPlayer": "Yes",
+        "Interval": 400,
+        "Duration": 2,
+        "X": -131,
+        "Y": -337,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 3
+      },
+      {
+        "Module": "Laser",
+        "Duration": 3
+      },
+      {
+        "Module": "Shoot",
+        "Type": "",
+        "Speed": 200,
+        "ShootTowardsPlayer": "Yes",
+        "Interval": 400,
+        "Duration": 2,
+        "X": -131,
+        "Y": -337,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 3
+      },
+      {
+        "Module": "Ability",
+        "Ability": "Missile",
+        "InitialSpeed": 50,
+        "Deacceleration": 15,
+        "Acceleration": 500,
+        "X": -225,
+        "Y": -75,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 1.5
+      },
+      {
+        "Module": "Ability",
+        "Ability": "Missile",
+        "InitialSpeed": 50,
+        "Deacceleration": 15,
+        "Acceleration": 500,
+        "X": -225,
+        "Y": -75,
+        "Style": "Relative"
+      }
+    ],
+    [
+      { "Module": "Text" },
+      {
+        "Module": "Ability",
+        "Ability": "Shield",
+        "HitPoints": 100
+      }
+    ],
+    [
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": 100,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": -100,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": -425,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 0,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 425,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCDb",
+        "X": 400,
+        "Y": 500,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCDt",
+        "X": 400,
+        "Y": -500,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "PCW",
+        "X": 0,
+        "Y": 0,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 200,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": -200,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 0,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": 425,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Enemy",
+        "Type": "GW",
+        "X": 0,
+        "Y": -425,
+        "Style": "Absolute"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 4
+      }
+    ],
+    [
+      {
+        "Module": "Movement",
+        "Type": "Bobbing",
+        "Speed": 200,
+        "Height": 400
+      },
+      {
+        "Module": "Shoot",
+        "Type": "",
+        "Speed": 200,
+        "ShootTowardsPlayer": "Yes",
+        "Interval": 250,
+        "Duration": 2,
+        "X": -131,
+        "Y": -337,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 3
+      },
+      {
+        "Module": "Shoot",
+        "Type": "",
+        "Speed": 200,
+        "ShootTowardsPlayer": "Yes",
+        "Interval": 250,
+        "Duration": 2,
+        "X": -131,
+        "Y": -337,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 3
+      },
+      {
+        "Module": "Ability",
+        "Ability": "Missile",
+        "InitialSpeed": 50,
+        "Deacceleration": 10,
+        "Acceleration": 600,
+        "X": -225,
+        "Y": -75,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 3
+      },
+      {
+        "Module": "Ability",
+        "Ability": "Missile",
+        "InitialSpeed": 50,
+        "Deacceleration": 10,
+        "Acceleration": 600,
+        "X": -225,
+        "Y": -75,
+        "Style": "Relative"
+      },
+      {
+        "Module": "Delay",
+        "Seconds": 3
+      },
+      {
+        "Module": "Ability",
+        "Ability": "Missile",
+        "InitialSpeed": 50,
+        "Deacceleration": 10,
+        "Acceleration": 600,
+        "X": -225,
+        "Y": -75,
+        "Style": "Relative"
+      }
+    ]
+  ],
+  "LazyHTML": "<div id=\"conditions\"><fieldset><legend id=\"conditions-legend\"><strong>Conditions</strong></legend><div id=\"conditions-container\" data-accept=\"tk-con\"><div data-target=\"tk-con\" data-keep=\"true\" class=\"condition\" data-type=\"BelowHealth\">When below <input class=\"percentage-input\" type=\"number\" value=\"0\" min=\"0\" max=\"100\"> % of HP</div><div data-target=\"tk-con\" data-keep=\"true\" class=\"condition\" data-type=\"Once\">Do Once</div><div data-target=\"tk-con\" data-keep=\"true\" class=\"condition\" data-type=\"BelowHealth\">When below <input class=\"percentage-input\" type=\"number\" value=\"0\" min=\"0\" max=\"100\"> % of HP</div><div data-target=\"tk-con\" data-keep=\"true\" class=\"condition\" data-type=\"BelowHealth\">When below <input class=\"percentage-input\" type=\"number\" value=\"0\" min=\"0\" max=\"100\"> % of HP</div><div data-target=\"tk-con\" data-keep=\"true\" class=\"condition\" data-type=\"Once\">Do Once</div><div data-target=\"tk-con\" data-keep=\"true\" class=\"condition\" data-type=\"BelowHealth\">When below <input class=\"percentage-input\" type=\"number\" value=\"0\" min=\"0\" max=\"100\"> % of HP</div><div data-target=\"tk-con\" data-keep=\"true\" class=\"condition\" data-type=\"BelowHealth\">When below <input class=\"percentage-input\" type=\"number\" value=\"0\" min=\"0\" max=\"100\"> % of HP</div></div></fieldset></div><div id=\"phases\"><fieldset><legend id=\"phases-legend\"><strong>Phases</strong></legend><div id=\"phase-container\"><fieldset class=\"phase-fieldset\">\n        <legend>\n            Phase\n            <button class=\"bad\" onclick=\"event.target.parentNode.parentNode.remove()\">Delete</button>\n        </legend>\n        <div class=\"phase\" data-accept=\"tk-mod\"><div class=\"module tk-text\" data-target=\"tk-con tk-mod\" data-keep=\"true\" data-module=\"Text\" data-type=\"Text\" spellcheck=\"false\" contenteditable=\"true\">Text</div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-movement\" data-module=\"Movement\">\n        <p>\n            Type\n            <select onchange=\"changeMovementParameters(event.target)\" data-input=\"Type\">\n                <option>Straight</option>\n                <option>Diagonal</option>\n                <option>Wave</option>\n                <option>Bobbing</option>\n                <option>Seeking</option>\n                <option>Homing</option>\n                <option>U-Turn</option>\n            </select>\n        </p>\n        <div class=\"m-parameters\">\n                <p>\n                    Speed \n                    <input data-input=\"Speed\" type=\"number\" value=\"0\">\n                    (pixels/second)\n                </p>\n                <p>\n                    Wave Height\n                    <input data-input=\"Height\" type=\"number\" value=\"0\">\n                    (pixels)\n                </p>\n            </div></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-shoot\" data-module=\"Shoot\">\n        <p>\n            Type <input data-input=\"Type\" type=\"text\" placeholder=\"I.e Missile\">\n        </p>\n        <p>\n            Speed <input data-input=\"Speed\" type=\"number\" value=\"0\"> (pixels/second)\n        </p>\n        <p>\n            Shoot towards player\n            <select data-input=\"ShootTowardsPlayer\">\n                <option>No</option>\n                <option>Yes</option>\n            </select>\n        </p>\n        <p>\n            Interval <input data-input=\"Interval\" type=\"number\" min=\"0\" value=\"100\" step=\"10\"> (milliseconds)\n        </p>\n        <p>\n            Duration <input data-input=\"Duration\" type=\"number\" min=\"0\" value=\"0\" step=\"0.1\"> (seconds)\n        </p>\n        <p>\n            Spawn Position\n            <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n            <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n        </p>\n        <p>\n            Style\n            <select data-input=\"Style\">\n                <option>Absolute</option>\n                <option>Relative</option>\n            </select>\n        </p>\n        </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-shoot\" data-module=\"Shoot\">\n        <p>\n            Type <input data-input=\"Type\" type=\"text\" placeholder=\"I.e Missile\">\n        </p>\n        <p>\n            Speed <input data-input=\"Speed\" type=\"number\" value=\"0\"> (pixels/second)\n        </p>\n        <p>\n            Shoot towards player\n            <select data-input=\"ShootTowardsPlayer\">\n                <option>No</option>\n                <option>Yes</option>\n            </select>\n        </p>\n        <p>\n            Interval <input data-input=\"Interval\" type=\"number\" min=\"0\" value=\"100\" step=\"10\"> (milliseconds)\n        </p>\n        <p>\n            Duration <input data-input=\"Duration\" type=\"number\" min=\"0\" value=\"0\" step=\"0.1\"> (seconds)\n        </p>\n        <p>\n            Spawn Position\n            <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n            <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n        </p>\n        <p>\n            Style\n            <select data-input=\"Style\">\n                <option>Absolute</option>\n                <option>Relative</option>\n            </select>\n        </p>\n        </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    Init Speed <input data-input=\"InitialSpeed\" type=\"number&quot;\" value=\"0\"> (pixels/second)\n                </p>\n                <p>\n                    Deacceleration <input data-input=\"Deacceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Acceleration <input data-input=\"Acceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Spawn Position\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </p>\n                <p>\n                    Style\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                </p>\n            </div></div></div></fieldset><fieldset class=\"phase-fieldset\">\n        <legend>\n            Phase\n            <button class=\"bad\" onclick=\"event.target.parentNode.parentNode.remove()\">Delete</button>\n        </legend>\n        <div class=\"phase\" data-accept=\"tk-mod\"><div class=\"module tk-text\" data-target=\"tk-con tk-mod\" data-keep=\"true\" data-module=\"Text\" data-type=\"Text\" spellcheck=\"false\" contenteditable=\"true\">Shield Phase (PrePhase2)</div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    HitPoints <input data-input=\"HitPoints\" type=\"number\" min=\"0\" value=\"0\" step=\"1\">\n                </p></div></div></div></fieldset><fieldset class=\"phase-fieldset\">\n        <legend>\n            Phase\n            <button class=\"bad\" onclick=\"event.target.parentNode.parentNode.remove()\">Delete</button>\n        </legend>\n        <div class=\"phase\" data-accept=\"tk-mod\"><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div></div></fieldset><fieldset class=\"phase-fieldset\">\n        <legend>\n            Phase\n            <button class=\"bad\" onclick=\"event.target.parentNode.parentNode.remove()\">Delete</button>\n        </legend>\n        <div class=\"phase\" data-accept=\"tk-mod\"><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-movement\" data-module=\"Movement\">\n        <p>\n            Type\n            <select onchange=\"changeMovementParameters(event.target)\" data-input=\"Type\">\n                <option>Straight</option>\n                <option>Diagonal</option>\n                <option>Wave</option>\n                <option>Bobbing</option>\n                <option>Seeking</option>\n                <option>Homing</option>\n                <option>U-Turn</option>\n            </select>\n        </p>\n        <div class=\"m-parameters\">\n                <p>\n                    Speed \n                    <input data-input=\"Speed\" type=\"number\" value=\"0\">\n                    (pixels/second)\n                </p>\n                <p>\n                    Wave Height\n                    <input data-input=\"Height\" type=\"number\" value=\"0\">\n                    (pixels)\n                </p>\n            </div></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-shoot\" data-module=\"Shoot\">\n        <p>\n            Type <input data-input=\"Type\" type=\"text\" placeholder=\"I.e Missile\">\n        </p>\n        <p>\n            Speed <input data-input=\"Speed\" type=\"number\" value=\"0\"> (pixels/second)\n        </p>\n        <p>\n            Shoot towards player\n            <select data-input=\"ShootTowardsPlayer\">\n                <option>No</option>\n                <option>Yes</option>\n            </select>\n        </p>\n        <p>\n            Interval <input data-input=\"Interval\" type=\"number\" min=\"0\" value=\"100\" step=\"10\"> (milliseconds)\n        </p>\n        <p>\n            Duration <input data-input=\"Duration\" type=\"number\" min=\"0\" value=\"0\" step=\"0.1\"> (seconds)\n        </p>\n        <p>\n            Spawn Position\n            <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n            <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n        </p>\n        <p>\n            Style\n            <select data-input=\"Style\">\n                <option>Absolute</option>\n                <option>Relative</option>\n            </select>\n        </p>\n        </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-shoot\" data-module=\"Shoot\">\n        <p>\n            Type <input data-input=\"Type\" type=\"text\" placeholder=\"I.e Missile\">\n        </p>\n        <p>\n            Speed <input data-input=\"Speed\" type=\"number\" value=\"0\"> (pixels/second)\n        </p>\n        <p>\n            Shoot towards player\n            <select data-input=\"ShootTowardsPlayer\">\n                <option>No</option>\n                <option>Yes</option>\n            </select>\n        </p>\n        <p>\n            Interval <input data-input=\"Interval\" type=\"number\" min=\"0\" value=\"100\" step=\"10\"> (milliseconds)\n        </p>\n        <p>\n            Duration <input data-input=\"Duration\" type=\"number\" min=\"0\" value=\"0\" step=\"0.1\"> (seconds)\n        </p>\n        <p>\n            Spawn Position\n            <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n            <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n        </p>\n        <p>\n            Style\n            <select data-input=\"Style\">\n                <option>Absolute</option>\n                <option>Relative</option>\n            </select>\n        </p>\n        </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    Init Speed <input data-input=\"InitialSpeed\" type=\"number&quot;\" value=\"0\"> (pixels/second)\n                </p>\n                <p>\n                    Deacceleration <input data-input=\"Deacceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Acceleration <input data-input=\"Acceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Spawn Position\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </p>\n                <p>\n                    Style\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                </p>\n            </div></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    Init Speed <input data-input=\"InitialSpeed\" type=\"number&quot;\" value=\"0\"> (pixels/second)\n                </p>\n                <p>\n                    Deacceleration <input data-input=\"Deacceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Acceleration <input data-input=\"Acceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Spawn Position\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </p>\n                <p>\n                    Style\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                </p>\n            </div></div></div></fieldset><fieldset class=\"phase-fieldset\">\n        <legend>\n            Phase\n            <button class=\"bad\" onclick=\"event.target.parentNode.parentNode.remove()\">Delete</button>\n        </legend>\n        <div class=\"phase\" data-accept=\"tk-mod\"><div class=\"module tk-text\" data-target=\"tk-con tk-mod\" data-keep=\"true\" data-module=\"Text\" data-type=\"Text\" spellcheck=\"false\" contenteditable=\"true\">Text</div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    HitPoints <input data-input=\"HitPoints\" type=\"number\" min=\"0\" value=\"0\" step=\"1\">\n                </p></div></div></div></fieldset><fieldset class=\"phase-fieldset\">\n        <legend>\n            Phase\n            <button class=\"bad\" onclick=\"event.target.parentNode.parentNode.remove()\">Delete</button>\n        </legend>\n        <div class=\"phase\" data-accept=\"tk-mod\"><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-enemy\" data-module=\"Enemy\">\n        <table>\n            <tbody><tr class=\"enemy-table-header-row\">\n                <th>Type</th>\n                <th>Position</th>\n                <th>Style</th>\n            </tr>\n            <tr>\n                <td>\n                    <input data-input=\"Type\" class=\"enemy-box-input\" type=\"text\" value=\"Default\">\n                </td>\n                <td>\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </td>\n                <td>\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                \n            </td></tr>\n        </tbody></table></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div></div></fieldset><fieldset class=\"phase-fieldset\">\n        <legend>\n            Phase\n            <button class=\"bad\" onclick=\"event.target.parentNode.parentNode.remove()\">Delete</button>\n        </legend>\n        <div class=\"phase\" data-accept=\"tk-mod\"><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-movement\" data-module=\"Movement\">\n        <p>\n            Type\n            <select onchange=\"changeMovementParameters(event.target)\" data-input=\"Type\">\n                <option>Straight</option>\n                <option>Diagonal</option>\n                <option>Wave</option>\n                <option>Bobbing</option>\n                <option>Seeking</option>\n                <option>Homing</option>\n                <option>U-Turn</option>\n            </select>\n        </p>\n        <div class=\"m-parameters\">\n                <p>\n                    Speed \n                    <input data-input=\"Speed\" type=\"number\" value=\"0\">\n                    (pixels/second)\n                </p>\n                <p>\n                    Wave Height\n                    <input data-input=\"Height\" type=\"number\" value=\"0\">\n                    (pixels)\n                </p>\n            </div></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-shoot\" data-module=\"Shoot\">\n        <p>\n            Type <input data-input=\"Type\" type=\"text\" placeholder=\"I.e Missile\">\n        </p>\n        <p>\n            Speed <input data-input=\"Speed\" type=\"number\" value=\"0\"> (pixels/second)\n        </p>\n        <p>\n            Shoot towards player\n            <select data-input=\"ShootTowardsPlayer\">\n                <option>No</option>\n                <option>Yes</option>\n            </select>\n        </p>\n        <p>\n            Interval <input data-input=\"Interval\" type=\"number\" min=\"0\" value=\"100\" step=\"10\"> (milliseconds)\n        </p>\n        <p>\n            Duration <input data-input=\"Duration\" type=\"number\" min=\"0\" value=\"0\" step=\"0.1\"> (seconds)\n        </p>\n        <p>\n            Spawn Position\n            <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n            <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n        </p>\n        <p>\n            Style\n            <select data-input=\"Style\">\n                <option>Absolute</option>\n                <option>Relative</option>\n            </select>\n        </p>\n        </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-shoot\" data-module=\"Shoot\">\n        <p>\n            Type <input data-input=\"Type\" type=\"text\" placeholder=\"I.e Missile\">\n        </p>\n        <p>\n            Speed <input data-input=\"Speed\" type=\"number\" value=\"0\"> (pixels/second)\n        </p>\n        <p>\n            Shoot towards player\n            <select data-input=\"ShootTowardsPlayer\">\n                <option>No</option>\n                <option>Yes</option>\n            </select>\n        </p>\n        <p>\n            Interval <input data-input=\"Interval\" type=\"number\" min=\"0\" value=\"100\" step=\"10\"> (milliseconds)\n        </p>\n        <p>\n            Duration <input data-input=\"Duration\" type=\"number\" min=\"0\" value=\"0\" step=\"0.1\"> (seconds)\n        </p>\n        <p>\n            Spawn Position\n            <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n            <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n        </p>\n        <p>\n            Style\n            <select data-input=\"Style\">\n                <option>Absolute</option>\n                <option>Relative</option>\n            </select>\n        </p>\n        </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    Init Speed <input data-input=\"InitialSpeed\" type=\"number&quot;\" value=\"0\"> (pixels/second)\n                </p>\n                <p>\n                    Deacceleration <input data-input=\"Deacceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Acceleration <input data-input=\"Acceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Spawn Position\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </p>\n                <p>\n                    Style\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                </p>\n            </div></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    Init Speed <input data-input=\"InitialSpeed\" type=\"number&quot;\" value=\"0\"> (pixels/second)\n                </p>\n                <p>\n                    Deacceleration <input data-input=\"Deacceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Acceleration <input data-input=\"Acceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Spawn Position\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </p>\n                <p>\n                    Style\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                </p>\n            </div></div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-delay\" data-module=\"Delay\">\n        Wait <input type=\"number\" data-input=\"Seconds\" min=\"0\" step=\"0.1\" value=\"0\"> (seconds)\n    </div><div data-target=\"tk-mod\" data-keep=\"true\" class=\"module mod-ability\" data-module=\"Ability\">\n        <p>\n            Ability\n            <select data-input=\"Ability\" onchange=\"changeAbility(event.target)\">\n                <option>Shield</option>\n                <option>Missile</option>\n            </select>\n        </p>\n        <div>\n                <p>\n                    Init Speed <input data-input=\"InitialSpeed\" type=\"number&quot;\" value=\"0\"> (pixels/second)\n                </p>\n                <p>\n                    Deacceleration <input data-input=\"Deacceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Acceleration <input data-input=\"Acceleration\" type=\"number&quot;\" value=\"0\"> (pixels/second²)\n                </p>\n                <p>\n                    Spawn Position\n                    <input data-input=\"X\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"x\">\n                    <input data-input=\"Y\" class=\"enemy-box-input enemy-box-input-position\" type=\"number\" value=\"0\" placeholder=\"y\">\n                </p>\n                <p>\n                    Style\n                    <select data-input=\"Style\">\n                        <option>Absolute</option>\n                        <option>Relative</option>\n                    </select>\n                </p>\n            </div></div></div></fieldset></div><hr style=\"border: inset 1px whitesmoke\"><button onclick=\"addPhase()\">Add Phase</button></fieldset></div>"
+}
