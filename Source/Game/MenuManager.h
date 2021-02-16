@@ -17,6 +17,7 @@
 #include "GoToMainMenuButton.h"
 #include "LevelSelectButton.h"
 #include "macros.h"
+#include "Counter.h"
 
 namespace Studio
 {
@@ -63,6 +64,7 @@ namespace Studio
 
 		//Jimmikod
 		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
+		void GreyOutAbilitiesDuringTutorial();
 	private:
 
 		
@@ -74,6 +76,8 @@ namespace Studio
 		MenuObject myOptionsMenu;
 		MenuObject myCreditsMenu;
 
+		Counter myTutorialCounter;
+
 		ShopUI* myShopUI;
 
 		Studio::Player* myPlayer;
@@ -82,7 +86,11 @@ namespace Studio
 		bool inGodMode = false;
 		bool myResizeAllElements;
 		bool myIsLoading;
+		bool myRapidTutorialGrey = true;
+		bool myMissileTutorialGrey = true;
+		bool myShieldTutorialGrey = true;
 		int myLevelToLoad;
+		int myTutorialAction;
 		SpriteSheet* myLoadingScreen;
 
 		StartButton* myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton",10,false);
