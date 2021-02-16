@@ -25,6 +25,12 @@ Studio::SliderElement::SliderElement(const char* aSpritePath, const VECTOR2F& aP
 	mySpriteSheet->SetPivot({ 0.0f,0.5f });
 	mySpriteSheet->SetLayer(aLayer);
 
+	myHandleSprite = new SpriteSheet("Sprites/UI/UI_volumeSlider.dds");
+	myHandleSprite->SetPivot({ 0.5f,0.5f });
+	myHandleSprite->SetPosition({ mySpriteSheet->GetPosition().x + (mySize.x),mySpriteSheet->GetPosition().y });
+
+	myHandleSprite->SetLayer(100);
+
 	std::cout << myLeft << "" << myRight << std::endl;
 }
 
@@ -54,13 +60,16 @@ void Studio::SliderElement::Update()
 					if (Studio::InputManager::GetInstance()->GetMouseLDown())
 					{
 						fillPercentage = (pt.x - myLeft) / mySize.x;
+						myHandleSprite->SetPosition({ static_cast<float>(pt.x),myHandleSprite->GetPosition().y });
 					}
 				}
 			}
 
 		mySpriteSheet->SetSize({ mySize.x * fillPercentage,mySize.y });
+		//myHandleSprite->SetPosition({ myRight,myHandleSprite->GetPosition().y });
 
-		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
+		Studio::RendererAccessor::GetInstance()->Render(*myHandleSprite);
+		//Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
 		AudioManagerAccessor::GetInstance()->SetVolumeMultiplier(fillPercentage);
 	}
 

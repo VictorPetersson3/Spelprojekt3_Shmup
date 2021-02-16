@@ -64,6 +64,7 @@ namespace Studio
 		bool myHasReloaded;
 		bool myHasResetShop = false;
 		bool myLaserIsFiring = false;
+		bool myHasStoppedLevelMusic = false;
 		int myPackIndex;
 		int myCurrentLevel;
 		Pack* myCurrentPack;

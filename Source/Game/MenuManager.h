@@ -139,12 +139,14 @@ namespace Studio
 		TextElement* myShopUpgradeNameText = new TextElement(Tga2D::EFontSize_24, { 0.78f,0.645f }, "ShopNameText", Tga2D::CColor({ 1,1,1,1 }),"Text/Beaufort Medium.otf",true);
 		
 
-		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.104 }, "myMasterVolumePercentageText");
+		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.24 }, "myMasterVolumePercentageText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
 		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");
 
-		TextElement* myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.2 }, "OptionsTitle");
-		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 250,200 }, { 500,50 }, 15);
-		ImageElement* myVolumeSliderBackground = new ImageElement("Sprites/debugpixel.dds", { 960 - 250,200 }, { 500,50 }, { 0.0f,0.5f }, 14, "VolumeSliderBackground", { 0.3f,0.3f,0.3f,1 });
+		TextElement* myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.25 }, "OptionsTitle");
+		ImageElement* myVolumeLabel = new ImageElement("Sprites/UI/UI_volume.dds", { 960,160 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
+		ImageElement* myVolumeBar = new ImageElement("Sprites/UI/UI_volumeSliderBar.dds", { 960,250 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
+
+		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 185,250 }, { 370,50 }, 15);
 
 		ReturnToMainMenuButton* myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 

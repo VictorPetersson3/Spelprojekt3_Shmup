@@ -13,6 +13,9 @@
 #include "PlayerAccessor.h"
 #include "Player_JsonParser.h"
 #include "tga2d/sprite/sprite.h"
+#include "AudioManager.h"
+#include "AudioManagerAccesor.h"
+
 #define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
 namespace Studio
@@ -72,7 +75,6 @@ namespace Studio
         myOptionsMenu.Add(myOptionsMenuBackground);
         myOptionsMenu.Add(myVolumeSlider);
         myOptionsMenu.Add(myMasterVolumeLabelText);
-        myOptionsMenu.Add(myVolumeSliderBackground);
 
         // Credits
         myCreditsMenu.Add(myCreditsBackground);
@@ -84,6 +86,8 @@ namespace Studio
         myMasterVolumeLabelText->SetText(masterVolumeLabel);
         myOptionsMenu.Add(myOptionsMenuTitleText);
         myOptionsMenu.Add(myOptionsMenuReturnButton);
+        myOptionsMenu.Add(myVolumeLabel);
+        myOptionsMenu.Add(myVolumeBar);
         myOptionsMenu.Disable();
 
         myPlayer = aPlayer;
@@ -203,6 +207,7 @@ namespace Studio
             ResetShop();
             myShopDescriptionText->SetActive(false);
             myNextLevelButton->SetActive(false);
+            AudioManagerAccessor::GetInstance()->StopSound("Audio/PiratesOfTheBaltic_-_TheBootyMerchant.mp3");
         }
 
         if (Studio::InputManager::GetInstance()->IsKeyPressed('N'))
