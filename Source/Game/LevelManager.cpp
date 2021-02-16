@@ -376,7 +376,7 @@ namespace Studio
 						myBullets[i]->RegisterEnemyHit(myBoss);
 						myBoss->HitLogic(myBullets[i]->GetDamage());
 						myBullets[i]->Impact();
-						myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/impactSprite.dds", { 4,1 }, myBullets[i]->GetPosition()));
+						myExplosions.push_back(new EffectExplosionLarge("sprites/Particles/impactSprite.dds", { 8,1 }, myBullets[i]->GetPosition()));
 						if (myBullets[i]->GetIsPenetrating() == false)
 						{
 							myBullets.erase(myBullets.begin() + i);
