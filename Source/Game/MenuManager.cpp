@@ -461,7 +461,10 @@ namespace Studio
 
         }
 
-        GreyOutAbilitiesDuringTutorial();
+        if (LevelAccessor::GetInstance()->GetCurrentLevelIndex() == 0)
+        {
+            GreyOutAbilitiesDuringTutorial();
+        }
     }
         
     
