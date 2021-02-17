@@ -85,7 +85,7 @@ namespace Studio
         mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,780 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "OptionsButton", 12);
         myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,900 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "CreditsButton", 12);
 
-        myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 5,5 }, { 0.5f,0.5f }, "ResumeButton", 11);
+        myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 2,2 }, { 0.5f,0.5f }, "ResumeButton", 11);
         myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "LevelSelectButton", 20);
 
         myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton", 10, false);

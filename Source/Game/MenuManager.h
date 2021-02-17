@@ -37,6 +37,7 @@ namespace Studio
 		MenuObject* GetOptionsMenu();
 		Options* GetOptions();
 		MenuObject* GetCreditsMenu();
+		
 
 		void Update();
 
