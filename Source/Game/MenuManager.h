@@ -72,7 +72,7 @@ namespace Studio
 
 		MenuObject myMainMenu;
 		MenuObject myHud;
-		MenuObject myPausMenu;
+		MenuObject myPauseMenu;
 		MenuObject myShop;
 		MenuObject myOptionsMenu;
 		MenuObject myCreditsMenu;

@@ -65,11 +65,11 @@ namespace Studio
         myShop.Add(myShopUpgradeNameText);
         myShop.Disable();
 
-        myPausMenu.Add(myPausMenuBackground);
-        myPausMenu.Add(myPausMenuTitle);
-        myPausMenu.Add(myPausMenuResumeButton);
-        myPausMenu.Add(myPausMenuQuitButton);
-        myPausMenu.Disable();
+        myPauseMenu.Add(myPausMenuBackground);
+        myPauseMenu.Add(myPausMenuTitle);
+        myPauseMenu.Add(myPausMenuResumeButton);
+        myPauseMenu.Add(myPausMenuQuitButton);
+        myPauseMenu.Disable();
 
         myOptionsMenu.Add(myMasterVolumeSliderText);
         myOptionsMenu.Add(myOptionsMenuBackground);
@@ -165,7 +165,7 @@ namespace Studio
 
     MenuObject* Studio::MenuManager::GetPauseMenu()
     {
-        return &myPausMenu;
+        return &myPauseMenu;
     }
 
     MenuObject* MenuManager::GetShop()
@@ -198,7 +198,7 @@ namespace Studio
         myMainMenu.Update();
         myHud.Update();
         myShop.Update();
-        myPausMenu.Update();
+        myPauseMenu.Update();
         myOptionsMenu.Update();
         myLevelSelect->Update();
         myOptions->Update();
@@ -376,13 +376,14 @@ namespace Studio
         myOptions->Disable();
         myOptionsMenu.Disable();
         myMainMenu.Enable();
-        myPausMenu.Disable();
+        myPauseMenu.Disable();
         myOptionsMenu.Disable();
         myHud.Disable();
         myCreditsMenu.Disable();
         myShop.Disable();
         hasStartedGame = false;
         myStartButton->myIsClicked = false;
+        Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
         if (Studio::Timer::GetInstance()->IsFrozen())
         {
             Studio::Timer::GetInstance()->ToggleFreeze();
