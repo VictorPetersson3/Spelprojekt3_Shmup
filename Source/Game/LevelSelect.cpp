@@ -2,6 +2,9 @@
 #include "LevelSelect.h"
 #include "MenuManager.h"
 #include "LevelAccessor.h"
+#include "GenericButton.h"
+#include "ImageElement.h"
+#include "UIElement.h"
 #include "AudioManagerAccesor.h"
 
 Studio::LevelSelect::LevelSelect(MenuManager* aMenuManager) :
