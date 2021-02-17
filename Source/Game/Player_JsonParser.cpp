@@ -15,12 +15,10 @@ Studio::Player_JsonParser::Player_JsonParser(const std::string& aJsonPath)
 		while (std::getline(file, line))
 		{
 			text.append(line);
-			//printf("%s\n", line.c_str());
 		}
 	}
 	file.close();
 	document.Parse(text.c_str());
-	//printf("Path: %s \nDocument%s", levelPath, text.c_str());
 
 	//----------- FLOATS
 	if (ValidateJsonDataFloat(document, "MissileDamage"))

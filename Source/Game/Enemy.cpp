@@ -150,7 +150,6 @@ namespace Studio
 		{
 			CoinAccessor::GetInstance()->CreateCoin(myPosition);
 			ScoreAccessor::GetInstance()->AddKillScore(1);
-			printf_s("%f", myPosition.x);
 			myHasDied = true;
 		}
 	}

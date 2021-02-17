@@ -62,8 +62,6 @@ namespace Studio
 	}
 	void VideoPlayer::PlayVideo(const std::string& aVideoPath)
 	{
-		printf_s("Video: Tries to play \"%s\"\n", aVideoPath.c_str());
-
 		myIsPlaying = true;
 		LoadVideo(aVideoPath);
 		myVideo->Play();

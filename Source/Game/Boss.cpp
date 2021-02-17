@@ -54,10 +54,6 @@ namespace Studio
 					{
 						myEnrageCondition = new Condition_Timed(conditions[i]);
 					}
-					else
-					{
-						printf_s("Timed Condition is only for enrage timer and you cant have two enrage Condition\n");
-					}
 				}
 				if (type.compare("BelowHealth") == 0)
 				{
@@ -71,10 +67,6 @@ namespace Studio
 				{
 					myConditions.push_back(new Condition_Time(conditions[i]));
 				}
-				//else
-				//{
-				//	printf("Condition type: %s Is not implemented\n", conditions[i]["Type"].GetString());
-				//}
 			}
 		}
 
@@ -226,7 +218,6 @@ namespace Studio
 	void Boss::CheckTransition()
 	{
 		++myCurrentPhase;
-		printf("Changed to Phase: %i\n", myCurrentPhase);
 		if (LevelAccessor::GetInstance()->IsLaserFiring())
 		{
 			myPhases[myCurrentPhase - 1]->ResetPhase();

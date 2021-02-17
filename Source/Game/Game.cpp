@@ -176,7 +176,6 @@ void CGame::UpdateCallBack()
 	if (myToggleFullscreen)
 	{
 		Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
-		printf("Game SetFullscreen\n");
 		myToggleFullscreen = false;
 		myChangeResolution = true;
 	}

@@ -25,12 +25,10 @@ void Studio::BackgroundManager::CreateBackground(const int aLevelIndex)
 		while (std::getline(file, line))
 		{
 			text.append(line);
-			//printf("%s\n", line.c_str());
 		}
 	}
 	file.close();
 	document.Parse(text.c_str());
-	//printf("Path: %s \nDocument%s", levelPath, text.c_str());
 	if (document.HasMember("Json") && document["Json"].IsArray())
 	{
 		std::vector<std::string> myTypes;
@@ -42,7 +40,6 @@ void Studio::BackgroundManager::CreateBackground(const int aLevelIndex)
 				for (int j = 0; j < objects[i].GetArray().Size(); j++)
 				{
 					auto backgroundObjects = objects[i].GetArray();
-					//printf_s("===JSON===\n%s\n==========\n", text.c_str());
 					for (rapidjson::SizeType iterator = 0; iterator < backgroundObjects.Size(); iterator++)
 					{
 						int myTypeIndex = 0;
@@ -79,7 +76,6 @@ void Studio::BackgroundManager::CreateBackground(const int aLevelIndex)
 			}
 			else
 			{
-				//printf_s("===JSON===\n%s\n==========\n", text.c_str());
 				int myTypeIndex = 0;
 				bool isNewType = true;
 				DebugJsonDocNonIterator(objects[i]);
@@ -114,7 +110,6 @@ void Studio::BackgroundManager::Init(float LevelWidth)
 		std::string levelPathStitched = "JSON/Background/";
 		levelPathStitched.append(type);
 		myLevelPaths.push_back(levelPathStitched);
-		printf("Level Background Path: %s\n", levelPathStitched.c_str());
 	}
 }
 

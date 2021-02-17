@@ -48,7 +48,6 @@ namespace Studio
 		if (myHasDirection)
 		{
 			myPosition = myPosition + (myDirection * myTypePattern->GetSpeed() * Timer::GetInstance()->TGetDeltaTime());
-			//printf("Turret Bullet Position X: %f Y: %f\n", myPosition.x, myPosition.y);
 		}
 		else
 		{

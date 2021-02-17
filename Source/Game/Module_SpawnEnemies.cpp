@@ -12,7 +12,6 @@ Studio::Module_SpawnEnemies::Module_SpawnEnemies(rapidjson::Value& aModuleParame
 	}
 	else
 	{
-		printf_s("Enemy Type is not being correctly read throug JSON in Boss Module\n");
 		myType = "Default";
 	}
 	if (aModuleParameters.HasMember("Style"))
@@ -27,10 +26,6 @@ Studio::Module_SpawnEnemies::Module_SpawnEnemies(rapidjson::Value& aModuleParame
 			mySpawnIsRelative = false;
 		}
 	}
-	else
-	{
-		printf("Parameter Style is not correct in spawn enemies\n");
-	}
 	
 	if (aModuleParameters.HasMember("X"))
 	{
@@ -40,10 +35,6 @@ Studio::Module_SpawnEnemies::Module_SpawnEnemies(rapidjson::Value& aModuleParame
 		y = aModuleParameters["Y"].GetFloat();
 
 		myOriginalSpawnPosition = { x , y };
-	}
-	else
-	{
-		printf("SpawnPosition of boss enemies is not correct\n");
 	}
 }
 

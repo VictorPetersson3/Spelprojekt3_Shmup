@@ -59,7 +59,6 @@ namespace Studio
         {
             //8.5 - (t(x) - 3.75) * 2
             auto factor = (16.0f - myLifeTime * 2.0f);
-            printf_s("Factor: %f\n", factor);
             auto size = 64.0f * factor;
             mySpriteSheet.SetSize({ size, size });
         }

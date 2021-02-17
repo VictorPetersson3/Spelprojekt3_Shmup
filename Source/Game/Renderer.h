@@ -36,10 +36,6 @@ public:
 	void SwapBuffers();
 	void Render(const float aDeltaTime = 1.0f / 60.0f);
 	void ShakeCamera(const float aOomphValue, const float aDuration);
-
-	// Legacy code
-	void RenderRenderCommand(Studio::RenderCommand aRenderCommand);
-
 private:
 	void Update(float aDeltaTime);
 
