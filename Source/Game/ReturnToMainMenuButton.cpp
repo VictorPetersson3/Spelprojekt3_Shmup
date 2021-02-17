@@ -106,6 +106,7 @@ void Studio::ReturnToMainMenuButton::Update()
 
 void Studio::ReturnToMainMenuButton::OnClick()
 {
+	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 	LevelAccessor::GetInstance()->ClearLevel();
 	MenuManagerSingleton::GetInstance()->QuitGameSession();

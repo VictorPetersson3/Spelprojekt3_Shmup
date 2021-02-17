@@ -366,7 +366,7 @@ namespace Studio
 				myDirection.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 			}
 			//A
-			if (aKey && myPosition.x > 100)
+			if (aKey && myPosition.x > 300)
 			{
 				myDirection.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 				myCurrentFlame = 1;
@@ -559,7 +559,7 @@ namespace Studio
 		myShieldHealth = myPlayerData->GetShieldHealth();
 		myShieldIsActive = true;
 		myShieldCurrentCooldown = myPlayerData->GetShieldCooldown() + myPlayerData->GetShieldDuration();
-		AudioManagerAccessor::GetInstance()->Play2D("Audio/Shield.mp3", false, 0.2f);
+		AudioManagerAccessor::GetInstance()->Play2D("Audio/Shield.mp3", false, 0.5f);
 	}
 	void Studio::Player::ShieldIsActive()
 	{

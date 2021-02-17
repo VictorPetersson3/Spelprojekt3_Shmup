@@ -96,6 +96,5 @@ void Studio::TestButton::Update()
 
 void Studio::TestButton::OnClick()
 {
-	std::cout << "TestButton Pressed" << std::endl;
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/SP3SountrackSample.wav", true, 0.1f);
 }

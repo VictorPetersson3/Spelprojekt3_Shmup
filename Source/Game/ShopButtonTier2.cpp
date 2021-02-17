@@ -82,12 +82,6 @@ void Studio::ShopButtonTier2::Update()
 
 						std::string s = "Cost: " + myCost;
 
-						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
-						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
-						//
-						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
-						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(true);
-
 						hasBeenHoveredOver = true;
 
 					}

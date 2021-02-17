@@ -24,7 +24,8 @@ Studio::ExitButton::ExitButton(const char* aSpritePath, const VECTOR2F aPosition
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
 
-	mySize = 1;
+	mySize = aSize.x;
+	myOriginalSize = aSize.x;
 	mySizeTimer = 0;
 
 	CalculateButtonCollider();
@@ -73,14 +74,14 @@ void Studio::ExitButton::Update()
 				}
 				else
 				{
-					mySize = 1;
+					mySize = myOriginalSize;
 					mySizeTimer = 0;
 					hasBeenHoveredOver = false;
 				}
 			}
 			else
 			{
-				mySize = 1;
+				mySize = myOriginalSize;
 				mySizeTimer = 0;
 				hasBeenHoveredOver = false;
 			}

@@ -45,12 +45,12 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	}
 	if (aModuleParameter.HasMember("Type"))
 	{
-		myBulletType = "Enemy"/*aModuleParameter["Type"].GetString()*/;
+		myBulletType = "Boss"/*aModuleParameter["Type"].GetString()*/;
 	}
 	else
 	{
 		printf("BulletType in Shoot Module is not read correctly\n");
-		myBulletType = "Enemy";
+		myBulletType = "Boss";
 	}
 	if (aModuleParameter.HasMember("Style"))
 	{

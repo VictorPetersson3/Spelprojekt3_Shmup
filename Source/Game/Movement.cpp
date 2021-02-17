@@ -12,5 +12,9 @@ namespace Studio
 	{
 		return myPattern;
 	}
+	const VECTOR2F& Movement::GetDirection() const
+	{
+		return myDirection;
+	}
 }
 

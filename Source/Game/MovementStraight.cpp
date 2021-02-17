@@ -18,10 +18,9 @@ namespace Studio
 
 	void MovementStraight::Update()
 	{
-		float deltaTime = Timer::GetInstance()->TGetDeltaTime();
-
-		myObjectsPosition->x -= mySpeed * deltaTime;
-
+		myDirection = *myObjectsPosition;
+		myObjectsPosition->x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
+		myDirection = (myDirection - *myObjectsPosition).GetNormalized();
 	}
 }
 

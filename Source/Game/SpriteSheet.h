@@ -2,6 +2,7 @@
 namespace Tga2D
 {
 	class CSprite;
+	class CColor;
 }
 namespace Studio
 {
@@ -45,6 +46,7 @@ namespace Studio
 		void SetLayer(signed int aLayer);
 		void SetImagePath(const std::string& aImagePath);
 		void SetPivot(const Tga2D::Vector2f& aPivot);
+		void SetColor(const Tga2D::CColor& aColor);
 		//Pixel Based Size
 		void SetSize(const Tga2D::Vector2f& aSize);
 		//Image Based Size

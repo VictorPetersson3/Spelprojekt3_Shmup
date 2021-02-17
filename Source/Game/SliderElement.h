@@ -16,6 +16,7 @@ namespace Studio
 
     private:
         SpriteSheet* mySpriteSheet;
+        SpriteSheet* myHandleSprite;
 
         VECTOR2F mySize;
 

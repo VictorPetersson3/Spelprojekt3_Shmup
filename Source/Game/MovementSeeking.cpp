@@ -20,6 +20,7 @@ namespace Studio
 
 	void MovementSeeking::Update()
 	{
+		myDirection = *myObjectsPosition;
 		myObjectsPosition->x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		if (!myIsLevelWithTarget)
 		{
@@ -39,8 +40,8 @@ namespace Studio
 			{
 				myObjectsPosition->y -= mySpeed * 0.5 * Timer::GetInstance()->TGetDeltaTime();
 				printf_s("%f\n%f\n", myObjectsPosition->y, myTargetObjectsPosition.y);
-
 			}
 		}
+		myDirection = (myDirection - *myObjectsPosition).GetNormalized();
 	}
 }

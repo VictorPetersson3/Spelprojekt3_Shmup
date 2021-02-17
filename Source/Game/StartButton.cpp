@@ -128,13 +128,8 @@ void Studio::StartButton::OnClick()
 
 	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
-	AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
 
-	//AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
-
-	//MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(false);
-
-	printf("I have started level: %f", myLevelToLoad);
+	//printf("I have started level: %f", myLevelToLoad);
 	LevelAccessor::GetInstance()->StartUpdating();
 }
 

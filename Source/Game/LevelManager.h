@@ -14,6 +14,8 @@ namespace Studio
 	class Laser;
 	class BackgroundManager;
 	class EffectExplosionLarge;
+	class ParticleEmitter;
+
 	class LevelManager
 	{
 	public:
@@ -64,6 +66,7 @@ namespace Studio
 		bool myHasReloaded;
 		bool myHasResetShop = false;
 		bool myLaserIsFiring = false;
+		bool myHasStoppedLevelMusic = false;
 		int myPackIndex;
 		int myCurrentLevel;
 		Pack* myCurrentPack;
@@ -77,5 +80,6 @@ namespace Studio
 		std::vector<Bullet*> myBullets;
 		std::vector<std::string> myLevelPaths;
 		BackgroundManager* myBackgroundManager;
+		ParticleEmitter* myParticleEmitter;
 	};
 }

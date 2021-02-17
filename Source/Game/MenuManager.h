@@ -17,6 +17,7 @@
 #include "GoToMainMenuButton.h"
 #include "LevelSelectButton.h"
 #include "macros.h"
+#include "Counter.h"
 
 namespace Studio
 {
@@ -27,7 +28,8 @@ namespace Studio
 	{
 	public:
 		MenuManager(Studio::Player* aPlayer);
-		
+		~MenuManager();
+
 		std::vector<UIElement*> myShopButtons;
 
 		MenuObject* GetMainMenu();
@@ -63,16 +65,19 @@ namespace Studio
 
 		//Jimmikod
 		void GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown);
+		void GreyOutAbilitiesDuringTutorial();
 	private:
 
 		
 
 		MenuObject myMainMenu;
 		MenuObject myHud;
-		MenuObject myPausMenu;
+		MenuObject myPauseMenu;
 		MenuObject myShop;
 		MenuObject myOptionsMenu;
 		MenuObject myCreditsMenu;
+
+		Counter myTutorialCounter;
 
 		ShopUI* myShopUI;
 
@@ -82,14 +87,18 @@ namespace Studio
 		bool inGodMode = false;
 		bool myResizeAllElements;
 		bool myIsLoading;
+		bool myRapidTutorialGrey = true;
+		bool myMissileTutorialGrey = true;
+		bool myShieldTutorialGrey = true;
 		int myLevelToLoad;
+		int myTutorialAction;
 		SpriteSheet* myLoadingScreen;
 
 		StartButton* myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton",10,false);
 		StartButton* myNextLevelButton = new StartButton("Sprites/UI/ShopUI/shopUI_buttons_continue.dds", { 1500,960 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton",10,true);
-		GenericButton* mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "OptionsButton", 12);
-		GenericButton* myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,860 }, { 1,1 }, { 0.5f,0.5f }, "CreditsButton", 12);
-		ExitButton* myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 10);
+		GenericButton* mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,780 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "OptionsButton", 12);
+		GenericButton* myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,900 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "CreditsButton", 12);
+		ExitButton* myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "ExitButton", 10);
 
 		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.17,0.15 }, "ScoreText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
 		TextElement* myCoinText = new TextElement(Tga2D::EFontSize_18, { 0.14,0.214 }, "CoinText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
@@ -108,17 +117,17 @@ namespace Studio
 		int myMissileCooldown;
 		int myShieldCooldown;
 
-		TextElement* myRapidCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.375 , 0.91 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
-		TextElement* myMissileCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.460  , 0.91 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
-		TextElement* myShieldCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.551 , 0.91 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myRapidCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.360 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myMissileCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04  , 0.499 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myShieldCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.638 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
 		
 
-		ImageElement* myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 790, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
-		ImageElement* myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 960, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
-		ImageElement* myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 1130, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
-		ImageElement* myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds" , { 790, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
-		ImageElement* myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds" , { 960, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
-		ImageElement* myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds" , { 1130, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
+		ImageElement* myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
+		ImageElement* myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
+		ImageElement* myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
+		ImageElement* myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
+		ImageElement* myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
+		ImageElement* myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
 
 
 		ImageElement* myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
@@ -139,16 +148,18 @@ namespace Studio
 		TextElement* myShopUpgradeNameText = new TextElement(Tga2D::EFontSize_24, { 0.78f,0.645f }, "ShopNameText", Tga2D::CColor({ 1,1,1,1 }),"Text/Beaufort Medium.otf",true);
 		
 
-		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.104 }, "myMasterVolumePercentageText");
-		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");
+		TextElement* myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64, 0.29 }, "myMasterVolumePercentageText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
+		TextElement* myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42, 0.15625 }, "myMasterVolumeLabelText");
 
-		TextElement* myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.2 }, "OptionsTitle");
-		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 250,200 }, { 500,50 }, 15);
-		ImageElement* myVolumeSliderBackground = new ImageElement("Sprites/debugpixel.dds", { 960 - 250,200 }, { 500,50 }, { 0.0f,0.5f }, 14, "VolumeSliderBackground", { 0.3f,0.3f,0.3f,1 });
+		TextElement* myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.25 }, "OptionsTitle");
+		ImageElement* myVolumeLabel = new ImageElement("Sprites/UI/UI_volume.dds", { 960,200 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
+		ImageElement* myVolumeBar = new ImageElement("Sprites/UI/UI_volumeSliderBar.dds", { 960,300 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
 
-		ReturnToMainMenuButton* myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
+		SliderElement* myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 185,300 }, { 370,50 }, 15);
 
-		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,100 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
+		ReturnToMainMenuButton* myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
+
+		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	
 		LevelSelect* myLevelSelect;
 		Options* myOptions;

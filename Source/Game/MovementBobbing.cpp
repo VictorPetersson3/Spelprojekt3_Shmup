@@ -23,8 +23,10 @@ namespace Studio
 
 	void MovementBobbing::Update()
 	{
+		myDirection = *myObjectsPosition;
 		myTotalTime += Timer::GetInstance()->TGetDeltaTime();
 		myObjectsPosition->y = -sinf(myTotalTime * myCalculatedSpeed) * myWaveHeight * 0.5f + mySpawnYPos;
+		myDirection = (myDirection - *myObjectsPosition).GetNormalized();
 	}
 }
 

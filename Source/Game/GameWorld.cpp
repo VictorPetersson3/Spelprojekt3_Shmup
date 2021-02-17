@@ -59,7 +59,7 @@ void CGameWorld::Init()
 	// InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKey_Explosive)
 	//// Or
 	// InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Explosive)
-
+	ShowCursor(false);
 	myRenderer.Init();
 	Studio::AudioManagerAccessor::Construct();
 	Studio::RendererAccessor::SetInstance(&myRenderer);
@@ -89,7 +89,6 @@ void CGameWorld::Init()
 	SAFE_CREATE(myVideoPlayer, Studio::VideoPlayer());
 	Studio::VideoPlayerAccessor::SetInstance(myVideoPlayer);
 	//myVideoPlayer->PlayVideo(Studio::Enums::Video::Logos);
-	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.2f);
 	myHasStarted = false;
 
 	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);

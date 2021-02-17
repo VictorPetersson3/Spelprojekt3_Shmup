@@ -110,5 +110,11 @@ namespace Studio
 			Intro,
 			Outro
 		};
+
+		enum class EParticleTypes
+		{
+			eRain,
+			eSnow
+		};
 	}
 }

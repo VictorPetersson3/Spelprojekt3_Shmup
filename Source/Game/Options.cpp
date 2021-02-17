@@ -6,16 +6,16 @@
 Studio::Options::Options(MenuManager* aMenuManager)
 {
 	myMenuManager = aMenuManager;
-	myFullscreenText = new ImageElement("Sprites/UI/UI_fullscreen.dds", { 960,320 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
-	myToggleFullScreenOff = new GenericButton("Sprites/UI/UI_checkBoxOK.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	myToggleFullScreenOn = new GenericButton("Sprites/UI/UI_checkBox.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myFullscreenText = new ImageElement("Sprites/UI/UI_fullscreen.dds", { 960,400 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
+	myToggleFullScreenOff = new GenericButton("Sprites/UI/UI_checkBoxOK.dds", { 960, 470 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myToggleFullScreenOn = new GenericButton("Sprites/UI/UI_checkBox.dds", { 960, 470 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 
-	my640x360 = new GenericButton("Sprites/UI/UI_640x360.dds", { 960, 475 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my960x540 = new GenericButton("Sprites/UI/UI_960x540.dds", { 960, 525 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1280x720 = new GenericButton("Sprites/UI/UI_1280x720.dds", { 960, 600 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1600x900 = new GenericButton("Sprites/UI/UI_1600x900.dds", { 960, 675 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1920x1080 = new GenericButton("Sprites/UI/UI_1920x1080.dds", { 960, 750 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my2560x1440 = new GenericButton("Sprites/UI/UI_2560x1440.dds", { 960, 825 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my640x360 = new GenericButton("Sprites/UI/UI_640x360.dds", { 810, 575 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my960x540 = new GenericButton("Sprites/UI/UI_960x540.dds", { 810, 650 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1280x720 = new GenericButton("Sprites/UI/UI_1280x720.dds", { 810, 725 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1600x900 = new GenericButton("Sprites/UI/UI_1600x900.dds", { 1110, 575 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1920x1080 = new GenericButton("Sprites/UI/UI_1920x1080.dds", { 1110, 650 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my2560x1440 = new GenericButton("Sprites/UI/UI_2560x1440.dds", { 1110, 725 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 
 	myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
 	myIsActive = false;

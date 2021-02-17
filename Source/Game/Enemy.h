@@ -36,9 +36,13 @@ namespace Studio
 	private:
 		void UpdateBullets(float aDeltaTime);
 		void AddColliders();
+		void AnimationLogic();
 	private:
 		int myScoreValue;
 		bool myHasDied = false;
+		bool myMovingUp;
+		bool myMovingIdle;
+		bool myMovingDown;
 		float myShootTimer;
 		std::vector<Bullet*> myBullets;
 

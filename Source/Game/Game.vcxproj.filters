@@ -255,14 +255,24 @@
     <ClCompile Include="TurretPipe.cpp">
       <Filter>GameObjects\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Options.cpp" />
-    <ClCompile Include="Game_Accessor.cpp" />
     <ClCompile Include="TimedBomb.cpp" />
     <ClCompile Include="Module_Laser.cpp">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="Particle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEmitter.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Accessor.cpp">
+      <Filter>Singletons</Filter>
+    </ClCompile>
     <ClCompile Include="MousePointer.cpp" />
+    <ClCompile Include="Options.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -531,14 +541,24 @@
     <ClInclude Include="TurretPipe.h">
       <Filter>GameObjects\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Options.h" />
-    <ClInclude Include="Game_Accessor.h" />
     <ClInclude Include="TimedBomb.h" />
     <ClInclude Include="Module_Laser.h">
       <Filter>GameObjects\Boss\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Laser.h" />
+    <ClInclude Include="Particle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEmitter.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Accessor.h">
+      <Filter>Singletons</Filter>
+    </ClInclude>
     <ClInclude Include="MousePointer.h" />
+    <ClInclude Include="Options.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -609,6 +629,9 @@
     </Filter>
     <Filter Include="GameObjects\Effects">
       <UniqueIdentifier>{08bcf401-d3a6-4008-bbf7-82ffe9bb2dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{c942d1a7-a3e3-4ec1-9602-5da828c25b59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -25,9 +25,11 @@ namespace Studio
 
 	void MovementWave::Update()
 	{
+		myDirection = *myObjectsPosition;
 		myTotalTime += Timer::GetInstance()->TGetDeltaTime();
 		myObjectsPosition->x -= Timer::GetInstance()->TGetDeltaTime() * myHorizontalSpeed;
 		myObjectsPosition->y = -sinf(myTotalTime * myCalculatedSpeed) * myWaveHeight * 0.5f + mySpawnYPos;
+		myDirection = (myDirection - *myObjectsPosition).GetNormalized();
 	}
 }
 

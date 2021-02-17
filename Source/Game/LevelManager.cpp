@@ -24,6 +24,7 @@
 #include "EffectExplosionLarge.h"
 #include "CoinAccessor.h"
 #include "Laser.h"
+#include "ParticleEmitter.h"
 
 // Rendering
 #include "RendererAccessor.h"
@@ -62,6 +63,7 @@ namespace Studio
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
 		myBulletFactory->InitBulletType("Sprites/Bullets/redround.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
 		myBulletFactory->InitBulletType("Sprites/Bullets/FireBullet.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
+		myBulletFactory->InitBulletType("Sprites/Bullets/redround.dds", 12, "Boss", -900.0f, Enums::BulletOwner::Enemy);
 		myBossManager->LoadBosses();
 		// Load chosen level by Lever Designers
 		std::fstream file;
@@ -107,6 +109,7 @@ namespace Studio
 			}
 		}
 		myCurrentLevel = levelToStart;
+		myParticleEmitter = nullptr;
 		myLevelBossSpawned = false;
 		myLevelEnemiesCleared = false;
 		myLevelIsCleared = false;
@@ -140,6 +143,7 @@ namespace Studio
 
 		if (myLevelIsCleared == true)
 		{
+			myParticleEmitter->Deactivate();
 			if (myCurrentLevel > myLevelPaths.size() - 1)
 			{
 				//StartCredits
@@ -151,7 +155,14 @@ namespace Studio
 			}
 			else
 			{
+				if (!myHasStoppedLevelMusic)
+				{
+					AudioManagerAccessor::GetInstance()->StopAllSounds();
+					AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBaltic_-_TheBootyMerchant.mp3", true, 0.2f);
+					myHasStoppedLevelMusic = true;
+				}
 				MenuManagerSingleton::GetInstance()->GetShop()->Enable();
+				
 				if (myHasResetShop == false)
 				{
 					MenuManagerSingleton::GetInstance()->ResetShop();
@@ -166,6 +177,8 @@ namespace Studio
 		{
 			CheckIfLevelIsCleared();
 			myHasResetShop = false;
+			myHasStoppedLevelMusic = false;
+
 			// Pack
 			if (!myCurrentPack->ExitConditionIsMet())
 			{
@@ -187,6 +200,8 @@ namespace Studio
 			LevelLogic();
 			// Check if Player cleared the level
 		}
+		myParticleEmitter->SpawnParticle();
+		myParticleEmitter->Update();
 	}
 
 	const std::string& LevelManager::CurrentLevelPath()
@@ -513,6 +528,36 @@ namespace Studio
 		MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
 		MenuManagerSingleton::GetInstance()->GetMainMenu()->Disable();
 		MenuManagerSingleton::GetInstance()->GetPauseMenu()->Disable();
+
+		//Song loading & Particle loading
+		switch (myCurrentLevel)
+		{
+		case 0:
+			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
+			myParticleEmitter->Activate();
+			break;
+		case 1:
+			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
+			myParticleEmitter->Activate();
+			break;
+		case 2:
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			break;
+		case 3:
+			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eRain);
+			myParticleEmitter->Activate();
+			break;
+		default:
+			break;
+		}
+
+
 	}
 
 	void LevelManager::ReloadLevel()
@@ -532,6 +577,7 @@ namespace Studio
 		ClearEnemies();
 		ClearPacks();
 		ClearBullets();
+		SAFE_DELETE(myParticleEmitter);
 		myBackgroundManager->ClearBackground();
 		CoinAccessor::GetInstance()->ResetWorldCoins();
 		myPlayer->ResetPlayerCurrentLevel();
