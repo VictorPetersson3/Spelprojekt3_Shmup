@@ -260,7 +260,7 @@
       },
       {
         "Module": "Laser",
-        "Duration": 3
+        "Duration": 5
       },
       {
         "Module": "Shoot",
@@ -446,6 +446,10 @@
         "Seconds": 3
       },
       {
+        "Module": "Laser",
+        "Duration": 5
+      },
+      {
         "Module": "Shoot",
         "Type": "",
         "Speed": 200,
@@ -459,6 +463,10 @@
       {
         "Module": "Delay",
         "Seconds": 3
+      },
+      {
+        "Module": "Laser",
+        "Duration": 5
       },
       {
         "Module": "Ability",
