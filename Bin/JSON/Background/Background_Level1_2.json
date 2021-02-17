@@ -1,0 +1,363 @@
+{
+  "Json": [
+    {
+      "Type": "Coastal_Background",
+      "ImagePath": "sprites/Background/AlphaLevel/Background_SkySea.dds",
+      "IsTiling": false,
+      "IsCentered": true,
+      "Pivot": {
+        "X": 0.5,
+        "Y": 0.5
+      },
+      "LayerOrder": -20,
+      "Position": {
+        "X": 960,
+        "Y": 540
+      },
+      "Scale": {
+        "X": 1.0,
+        "Y": 1.1
+      },
+      "Speed": 0,
+      "CreateMany": false,
+      "UseRandom": false
+    },
+    [
+      {
+        "Type": "City_Layer1Image",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_CityIsland1.dds",
+        "IsTiling": true,
+        "IsCentered": false,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 1.0
+        },
+        "LayerOrder": -9,
+        "Position": {
+          "X": 960,
+          "Y": 1135
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -175.5,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_FogLayer1_2Image",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_FogLayer1_2.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -10,
+        "Position": {
+          "X": 960,
+          "Y": 870.0
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -0.0,
+        "CreateMany": false,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_Layer2Image",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_CityIsland2.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -11,
+        "Position": {
+          "X": 960,
+          "Y": 870
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -140.5,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_Layer3Image",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_CityIsland3.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -12,
+        "Position": {
+          "X": 960,
+          "Y": 926
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -130.5,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_FogLayer3_4Image",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_FogLayer3_4.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -13,
+        "Position": {
+          "X": 960,
+          "Y": 856
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -100.5,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_Layer4",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_CityIsland4.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -14,
+        "Position": {
+          "X": 960,
+          "Y": 820
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -80.0,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_Layer5",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_CityIsland5.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -15,
+        "Position": {
+          "X": 960,
+          "Y": 751
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -50.0,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_Layer6",
+        "ImagePath": "sprites/Background/CityLevel/City_FG_CityIsland6.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -16,
+        "Position": {
+          "X": 960,
+          "Y": 728
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -30.0,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "City_Layer7",
+        "ImagePath": "sprites/Background/CityLevel/City_BG_CityIsland7Flying.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -17,
+        "Position": {
+          "X": 960,
+          "Y": 760
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -20.0,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": true,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "Min": 0,
+            "Max": 1920
+          },
+          "RandomPositionY": {
+            "Min": 666,
+            "Max": 820
+          },
+          "RandomSpeed": {
+            "Min": -30,
+            "Max": -5
+          }
+        }
+      }
+    ]
+  ]
+
+}
+
