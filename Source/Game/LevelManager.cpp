@@ -200,8 +200,11 @@ namespace Studio
 			LevelLogic();
 			// Check if Player cleared the level
 		}
-		myParticleEmitter->SpawnParticle();
-		myParticleEmitter->Update();
+		if (myHasParticleOnMap)
+		{
+			myParticleEmitter->SpawnParticle();
+			myParticleEmitter->Update();
+		}
 	}
 
 	const std::string& LevelManager::CurrentLevelPath()
@@ -537,21 +540,25 @@ namespace Studio
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
 			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
 			myParticleEmitter->Activate();
+			myHasParticleOnMap = true;
 			break;
 		case 1:
 			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
 			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
 			myParticleEmitter->Activate();
+			myHasParticleOnMap = true;
 			break;
 		case 2:
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			myHasParticleOnMap = false;
 			break;
 		case 3:
 			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
 			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eRain);
 			myParticleEmitter->Activate();
+			myHasParticleOnMap = true;
 			break;
 		default:
 			break;

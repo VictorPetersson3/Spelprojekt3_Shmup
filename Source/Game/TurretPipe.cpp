@@ -82,17 +82,20 @@ void Studio::TurretPipe::Update()
 		mySpriteSheet->SetRotation(new_rotation);
 	}
 
-	if (angleToPlayer < currentRotation + 0.05 && angleToPlayer > currentRotation - 0.05)
+	if (angleToPlayer - EPSILON - 0.001 < currentRotation && angleToPlayer + EPSILON + 0.001 > currentRotation)
 	{
 		allowedToShoot = true;
 	}
 	mySpriteSheet->SetPosition(myPosition);
 
-
+#define PIPE_ENDPOS myPosition - ((myPosition - PlayerAccessor::GetInstance()->GetPosition()).GetNormalized() * myPipeLength)
 	myShootTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
 	if (myShootTimer > myEnemyType->GetShootInterval() && allowedToShoot)
 	{
-		Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", myPosition - ((myPosition - PlayerAccessor::GetInstance()->GetPosition()).GetNormalized() * myPipeLength), ((myPosition + myTurretDirection) - PlayerAccessor::GetInstance()->GetPosition()).GetNormalized(), 1);
+		Studio::LevelAccessor::GetInstance()->SpawnBullet("Enemy", 
+			PIPE_ENDPOS,
+			(PIPE_ENDPOS - PlayerAccessor::GetInstance()->GetNextFramePosition()).GetNormalized(),
+			1);
 		myShootTimer = 0;
 	}
 	Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);

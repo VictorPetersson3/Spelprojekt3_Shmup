@@ -24,6 +24,7 @@ namespace Studio
 		void Shoot();
 		void Bounce(const Tga2D::Vector2f aObjectPosition);
 		const Tga2D::Vector2f GetDirection() const;
+		const Tga2D::Vector2f GetNextFramePosition() const;
 		const bool GetHasCollided() const;
 
 		void UpgradeT1(Enums::Tier1Upgrades aTier1Upgrade);
