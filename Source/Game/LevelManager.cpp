@@ -710,11 +710,13 @@ namespace Studio
 		{
 			myLaser = new Laser(*myBoss->GetPosition());
 			myLaserIsFiring = true;
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/RideTheLightning.mp3", false, 0.5f);
 		}
 		if (!aChoice && myLaser != nullptr)
 		{
 			myLaserIsFiring = false;
 			SAFE_DELETE(myLaser);
+			AudioManagerAccessor::GetInstance()->StopSound("Audio/RideTheLightning.mp3");
 		}
 	}
 	void LevelManager::CreateExplosionAt(const Tga2D::Vector2f& aPosition, const float aRadius)
