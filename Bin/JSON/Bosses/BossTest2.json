@@ -91,7 +91,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 1
       },
       {
         "Module": "Enemy",
@@ -102,7 +102,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 1
       },
       {
         "Module": "Enemy",
@@ -113,7 +113,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 1
       },
       {
         "Module": "Enemy",
@@ -124,7 +124,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 1
       },
       {
         "Module": "Enemy",
@@ -135,7 +135,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       },
       {
         "Module": "Enemy",
@@ -146,7 +146,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       },
       {
         "Module": "Enemy",
@@ -157,7 +157,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       },
       {
         "Module": "Enemy",
@@ -168,7 +168,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       },
       {
         "Module": "Enemy",
@@ -179,7 +179,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       },
       {
         "Module": "Enemy",
@@ -197,7 +197,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       },
       {
         "Module": "Enemy",
@@ -215,7 +215,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       },
       {
         "Module": "Enemy",
@@ -233,7 +233,7 @@
       },
       {
         "Module": "Delay",
-        "Seconds": 4
+        "Seconds": 2
       }
     ],
     [

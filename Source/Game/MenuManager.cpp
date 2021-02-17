@@ -97,6 +97,9 @@ namespace Studio
         myLoadingScreen->SetLayer(10);
         myOptions = new Options(this);
         ResetButtonColliders();
+        myTutorialAction = 0;
+        myTutorialCounter.SetInterval(17.f);
+        
     }
 
     MenuObject* Studio::MenuManager::GetMainMenu()
@@ -135,6 +138,7 @@ namespace Studio
  
     void MenuManager::Update()
     {
+        
         ResetButtonColliders();
         if (myResizeAllElements)
         {
@@ -367,12 +371,14 @@ namespace Studio
 
     void MenuManager::GreyOutAbilitiesOnCooldown(float aRapidFireCooldown, float aMissileCooldown, float aShieldCooldown)
     {
+        
         myRapidCooldown = aRapidFireCooldown;
         myMissileCooldown = aMissileCooldown;
         myShieldCooldown = aShieldCooldown;
 
-        if (aRapidFireCooldown > 0.f )
+        if (aRapidFireCooldown > 0.f)
         {
+            
             myAbilityRapid->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
             myRapidCooldownText->SetText(std::to_string(myRapidCooldown));
 
@@ -381,7 +387,7 @@ namespace Studio
         {
             myAbilityRapid->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 1.f });
         }
-        
+
         if (aMissileCooldown > 0.f)
         {
             myAbilityMissile->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
@@ -397,12 +403,59 @@ namespace Studio
             myAbilityShield->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.5f });
             myShieldCooldownText->SetText(std::to_string(myShieldCooldown));
         }
-        
+
         else
         {
             myAbilityShield->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 1.f });
 
         }
+
+        GreyOutAbilitiesDuringTutorial();
+    }
+        
+    
+
+    void MenuManager::GreyOutAbilitiesDuringTutorial()
+    {
+        myTutorialCounter.Tick();
+
+        if (myRapidTutorialGrey)
+        {
+            myAbilityRapid->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.1f });
+        }
+        if (myMissileTutorialGrey)
+        {
+            myAbilityMissile->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.1f });
+        }
+        if (myShieldTutorialGrey)
+        {
+            myAbilityShield->GetSpriteSheet()->GetSprite()->SetColor({ 1.f, 1.f, 1.f, 0.1f });
+        }
+          
+
+        if (myTutorialCounter.PastInterval())
+        {
+            if (myTutorialAction == 2)
+            {
+                myShieldTutorialGrey = false;
+            }    
+
+            if (myTutorialAction == 1)
+            {
+                myTutorialAction = 2;
+                myMissileTutorialGrey = false;
+                myTutorialCounter.SetInterval(8.f);
+            }
+
+            if (myTutorialAction == 0)
+            {
+                myTutorialAction = 1;
+                myRapidTutorialGrey = false;
+                myTutorialCounter.SetInterval(7.f);
+            }
+
+        }
+        
     }
 
 }
