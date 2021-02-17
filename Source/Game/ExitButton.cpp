@@ -99,7 +99,7 @@ void Studio::ExitButton::Update()
 
 void Studio::ExitButton::OnClick()
 {
-	PostMessage(myWindowHandle, WM_CLOSE, 0, 0);
+	//PostMessage(myWindowHandle, WM_CLOSE, 0, 0);
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 
 }

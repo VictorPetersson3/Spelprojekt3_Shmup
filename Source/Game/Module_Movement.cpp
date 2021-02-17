@@ -36,12 +36,10 @@ Studio::Module_Movement::Module_Movement(rapidjson::Value& aModuleParameters) :
 		}
 		else if (type == "Diagonal")
 		{
-			printf("Tell Pu to implement the Diagonal Movement if LD wants it\n");
 			myMovementPattern = Enums::MovementPattern::None;
 		}
 		else
 		{
-			printf("This Movement: %s is not implemented in boss. \n", aModuleParameters["Type"].GetString());
 			myMovementPattern = Enums::MovementPattern::None;
 		}
 	}

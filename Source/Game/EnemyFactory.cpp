@@ -44,7 +44,6 @@ void Studio::EnemyFactory::InitAllEnemyTypes()
 	for (const auto& entry : std::filesystem::directory_iterator(directory))
 	{
 		auto file = entry.path().string();
-		printf_s("File %s\n", file.c_str());
 		
 		if (entry.path().extension().string() == ".json")
 		{

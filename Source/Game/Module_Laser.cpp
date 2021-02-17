@@ -12,7 +12,6 @@ Studio::Module_Laser::Module_Laser(rapidjson::Value& aModuleParameters) :
 	}
 	else
 	{
-		printf_s("Module Laser duration is not set correct\n");
 		myDuration = 0.5f;
 	}
 	myElapsedTime = 0.0f;

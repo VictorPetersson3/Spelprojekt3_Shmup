@@ -352,7 +352,6 @@ namespace Studio
 					mySpeed += myPlayerData->GetAcceleration();
 				}
 			}
-			//printf("Player Speed: %f\n", mySpeed);
 			if (wKey && myPosition.y > 30)
 			{
 				if (myIsAnimatingDown || !myIsAnimating)
@@ -469,7 +468,6 @@ namespace Studio
 		}
 		myPosition += myDirection.Normalize() * mySpeed * Timer::GetInstance()->TGetDeltaTime();
 		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 48, myPosition.y });
-		//printf_s("Player Direction X: %f Y: %f \n", myDirection.x, myDirection.y);
 		
 	}
 	void Player::RapidFireLogic()
@@ -608,6 +606,10 @@ namespace Studio
 		if (!myIsInvincible)
 		{
 			myShieldHealth -= someDamage;
+			
+			
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/ShieldHit.flac", false, 100.0f);
+			
 			ActivateInvincibility();
 		}
 	}
@@ -617,7 +619,8 @@ namespace Studio
 		{
 			GameObject::TakeDamage(someDamage);
 			ActivateInvincibility();
-		}
+		}		
+			
 	}
 	bool Studio::Player::GetIsShieldActive()
 	{

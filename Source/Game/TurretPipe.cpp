@@ -23,7 +23,6 @@ Studio::TurretPipe::TurretPipe(Enemy* aEnemyPointer, TypePattern_Enemy* aTypePat
 	myPipeLength = (myEnemyType->GetTurretPivot().x * mySpriteSheet->GetSprite()->GetImageSize().x - ((mySpriteSheet->GetSprite()->GetImageSize().x * 0.5f) + myEnemyType->GetTurretBulletSpawnPoint().x) );
 	mySpriteSheet->SetRotation(PI * 0.5f);
 	myShootTimer = 0;
-	//printf("\nPipeLength: %f\n\n", myPipeLength);
 }
 
 Studio::TurretPipe::~TurretPipe()
@@ -60,7 +59,6 @@ void Studio::TurretPipe::Update()
 	else
 	{
 		myPosition = myEnemy->GetPosition() - myEnemyType->GetTurretSpawnPoint();
-		//printf("TurretRotaton : %f\n", currentRotation);
 		if (currentRotation <= 0 && currentRotation < angleToPlayer + EPSILON)
 		{
 			rightOrLeftModifier = 1.f;
@@ -78,7 +76,6 @@ void Studio::TurretPipe::Update()
 	}
 	else
 	{
-		//printf("New Rotation: %f\n", turretRotationSpeed * Studio::Timer::GetInstance()->TGetDeltaTime() * rightOrLeftModifier);
 		mySpriteSheet->SetRotation(new_rotation);
 	}
 
