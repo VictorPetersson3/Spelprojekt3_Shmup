@@ -131,6 +131,13 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 
 		ShopButtonTier2* buttonToPushBack = myTier2ButtonsTemp[temp];
 
+		if (PlayerAccessor::GetInstance()->GetAmountOfProjectiles() >= 3 && buttonToPushBack->GetUpgradeType() == Enums::Tier2Upgrades::BasicAttackAdditionalProjectile)
+		{
+			myTier2ButtonsTemp.erase(myTier2ButtonsTemp.begin() + temp);
+			temp = GetRandomNumberInRange(myTier2ButtonsTemp.size() - 1);
+			buttonToPushBack = myTier2ButtonsTemp[temp];
+		}
+
 		myTier2ButtonsTemp.erase(myTier2ButtonsTemp.begin() + temp);
 
 		buttonToPushBack->SetPosition({ 570+i*150, 600 });
