@@ -140,7 +140,7 @@ void Studio::ShopButton::OnClick()
 		if (!myHasBeenPurchased)
 		{
 			PlayerAccessor::GetInstance()->UpgradeT1(myUpgradeType);
-			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/Audio_Purchase.flac", false, 0.15f);
 			ScoreAccessor::GetInstance()->RemoveCoinScore(myCost);
 			mySpriteSheet->GetSprite()->SetColor({ 1,1,1,0.4f });
 			myHasBeenPurchased = true;
