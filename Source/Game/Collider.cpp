@@ -93,6 +93,12 @@ namespace Studio
 			}
 		}
 	}
+
+	void Collider::ClearCollider()
+	{
+		myCollisionObjects.clear();
+	}
+
 	bool Collider::CircleToCircleIntersect(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject)
 	{
 		float deltaX = aSecondCollisionObject.GetPosition().x - aFirstCollisionObject.GetPosition().x;
