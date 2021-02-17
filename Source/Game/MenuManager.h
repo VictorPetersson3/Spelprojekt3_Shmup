@@ -28,7 +28,8 @@ namespace Studio
 	{
 	public:
 		MenuManager(Studio::Player* aPlayer);
-		
+		~MenuManager();
+
 		std::vector<UIElement*> myShopButtons;
 
 		MenuObject* GetMainMenu();

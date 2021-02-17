@@ -102,6 +102,57 @@ namespace Studio
         
     }
 
+    MenuManager::~MenuManager()
+    {
+        SAFE_DELETE(myLoadingScreen);
+        SAFE_DELETE(myStartButton);
+        SAFE_DELETE(myNextLevelButton);
+        SAFE_DELETE(mySettingsButton);
+        SAFE_DELETE(myCreditsButton);
+        SAFE_DELETE(myExitButton);
+        SAFE_DELETE(myScoreText);
+        SAFE_DELETE(myCoinText);
+        SAFE_DELETE(myTestElement);
+        SAFE_DELETE(myHeart1Element);
+        SAFE_DELETE(myHeart2Element);
+        SAFE_DELETE(myHeart3Element);
+        SAFE_DELETE(myHeart4Element);
+        SAFE_DELETE(myShopBackground);
+        SAFE_DELETE(myShopFrames);
+        SAFE_DELETE(myShopDescriptionText);
+        SAFE_DELETE(myRapidCooldownText);
+        SAFE_DELETE(myMissileCooldownText);
+        SAFE_DELETE(myShieldCooldownText);
+        SAFE_DELETE(myAbilityRapidBorder);
+        SAFE_DELETE(myAbilityMissileBorder);
+        SAFE_DELETE(myAbilityShieldBorder);
+        SAFE_DELETE(myAbilityRapid);
+        SAFE_DELETE(myAbilityMissile);
+        SAFE_DELETE(myAbilityShield);
+        SAFE_DELETE(myMainMenuBackground);
+        SAFE_DELETE(myOptionsMenuBackground);
+        SAFE_DELETE(myMainMenuLogo);
+        SAFE_DELETE(myPausMenuBackground);
+        SAFE_DELETE(myPausMenuTitle);
+        SAFE_DELETE(myPausMenuResumeButton);
+        SAFE_DELETE(myPausMenuQuitButton);
+        SAFE_DELETE(myShopCoinText);
+        SAFE_DELETE(myShopCostText);
+        SAFE_DELETE(myShopUpgradeNameText);
+        SAFE_DELETE(myMasterVolumeSliderText);
+        SAFE_DELETE(myMasterVolumeLabelText);
+        SAFE_DELETE(myOptionsMenuTitleText);
+        SAFE_DELETE(myVolumeLabel);
+        SAFE_DELETE(myVolumeBar);
+        SAFE_DELETE(myVolumeSlider);
+        SAFE_DELETE(myOptionsMenuReturnButton);
+        SAFE_DELETE(myLevelSelectButton);
+        SAFE_DELETE(myLevelSelect);
+        SAFE_DELETE(myOptions);
+        SAFE_DELETE(myCreditsBackground);
+        SAFE_DELETE(myCreditsBackButton);
+    }              
+
     MenuObject* Studio::MenuManager::GetMainMenu()
     {
         return &myMainMenu;
