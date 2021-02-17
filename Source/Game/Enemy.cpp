@@ -116,10 +116,10 @@ namespace Studio
 				{
 					myMovingUp = false;
 					myMovingDown = false;
-					SPRITESHEET.ReverseAndStartAnimation();
+					//SPRITESHEET.ReverseAndStartAnimation();
 					if (!SPRITESHEET.IsAnimating())
 					{
-						SPRITESHEET.LoopAnimationInRange(0.083f, myType->GetIdleAnimationRange().first, myType->GetIdleAnimationRange().second);
+						//SPRITESHEET.LoopAnimationInRange(0.083f, myType->GetIdleAnimationRange().first, myType->GetIdleAnimationRange().second);
 						myMovingIdle = true;
 					}
 				}
@@ -128,14 +128,14 @@ namespace Studio
 					myMovingUp = true;
 					myMovingDown = false;
 					myMovingIdle = false;
-					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetUpAnimationRange().first, myType->GetUpAnimationRange().second);
+					//SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetUpAnimationRange().first, myType->GetUpAnimationRange().second);
 				}
 				if (angle < 0 - EPSILON && !myMovingDown && myMovingUp || myMovingIdle)
 				{
 					myMovingUp = false;
 					myMovingDown = true;
 					myMovingIdle = false;
-					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetDownAnimationRange().first, myType->GetDownAnimationRange().second);
+					//SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetDownAnimationRange().first, myType->GetDownAnimationRange().second);
 				}
 			}
 			Enemy::GameObject::Update(myPosition);
