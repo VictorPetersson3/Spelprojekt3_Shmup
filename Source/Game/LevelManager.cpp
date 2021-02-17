@@ -143,7 +143,6 @@ namespace Studio
 
 		if (myLevelIsCleared == true)
 		{
-			myParticleEmitter->Deactivate();
 			if (myCurrentLevel > myLevelPaths.size() - 1)
 			{
 				//StartCredits
