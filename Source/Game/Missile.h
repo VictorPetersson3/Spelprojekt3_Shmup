@@ -1,5 +1,6 @@
 #pragma once
 #include "Bullet.h"
+#include "EngineFlame.h"
 namespace Studio
 {
 	class Missile : public Bullet
@@ -17,7 +18,7 @@ namespace Studio
 			myExplosionRadius;
 		bool myIsSlowingDown;
 		bool myIsReversed;
-
+		EngineFlame myFlame;
 		Tga2D::Vector2f myVelocity;
 	};
 }
