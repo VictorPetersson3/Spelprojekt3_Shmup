@@ -76,13 +76,6 @@ void Studio::ShopButton::Update()
 						hasBeenHoveredOver = true;
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->SetActive(true);
 						MenuManagerSingleton::GetInstance()->GetShopDescriptionText()->GetSpriteSheet()->SetImagePath(myDescription);
-						std::string s = "Cost: " + myCost;
-
-						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetText("Cost: " + std::to_string(myCost));
-						//MenuManagerSingleton::GetInstance()->GetShopCostText()->SetActive(true);
-						//
-						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetText(myName);
-						//MenuManagerSingleton::GetInstance()->GetShopUpgradeNameText()->SetActive(true);
 					}
 
 

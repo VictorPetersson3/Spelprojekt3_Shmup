@@ -96,9 +96,9 @@ namespace Studio
 
 		StartButton* myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton",10,false);
 		StartButton* myNextLevelButton = new StartButton("Sprites/UI/ShopUI/shopUI_buttons_continue.dds", { 1500,960 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton",10,true);
-		GenericButton* mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "OptionsButton", 12);
-		GenericButton* myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,860 }, { 1,1 }, { 0.5f,0.5f }, "CreditsButton", 12);
-		ExitButton* myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 10);
+		GenericButton* mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,780 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "OptionsButton", 12);
+		GenericButton* myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,900 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "CreditsButton", 12);
+		ExitButton* myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "ExitButton", 10);
 
 		TextElement* myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.17,0.15 }, "ScoreText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
 		TextElement* myCoinText = new TextElement(Tga2D::EFontSize_18, { 0.14,0.214 }, "CoinText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
@@ -159,7 +159,7 @@ namespace Studio
 
 		ReturnToMainMenuButton* myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
 
-		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,100 }, { 1,1 }, { 0.5f,0.5f }, "LevelSelectButton",20);
+		GenericButton* myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "LevelSelectButton",20);
 	
 		LevelSelect* myLevelSelect;
 		Options* myOptions;

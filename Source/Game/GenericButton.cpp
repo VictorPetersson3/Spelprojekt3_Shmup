@@ -23,7 +23,8 @@ Studio::GenericButton::GenericButton(const char* aSpritePath, const VECTOR2F aPo
 	mySpriteSheet->SetSizeRelativeToImage(aSize);
 	mySpriteSheet->SetLayer(aLayer);
 	tag = aTag;
-	mySize = 1;
+	mySize = aSize.x;
+	myOriginalSize = aSize.x;
 	mySizeTimer = 0;
 	CalculateButtonCollider();
 }
@@ -66,7 +67,7 @@ void Studio::GenericButton::Update()
 				}
 				else
 				{
-					mySize = 1; 
+					mySize = myOriginalSize;
 					mySizeTimer = 0;
 					hasBeenHoveredOver = false;
 				}
@@ -74,7 +75,7 @@ void Studio::GenericButton::Update()
 			else
 			{
 				hasBeenHoveredOver = false; 
-				mySize = 1;
+				mySize = myOriginalSize;
 				mySizeTimer = 0;
 			}
 		}
