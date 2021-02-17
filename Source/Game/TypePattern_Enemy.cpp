@@ -83,8 +83,22 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 		path.append(".dds");
 		myImagePath = path;
 
-		
-		if (!JSON["AmountOfFrames"]["X"].IsString() && !JSON["AmountOfFrames"]["Y"].IsString())
+		myUpAnimationRange.first.x = 1;
+		myUpAnimationRange.first.y = 1;
+		myUpAnimationRange.second.x = 1;
+		myUpAnimationRange.second.y = 1;
+
+		myDownAnimationRange.first.x = 1;
+		myDownAnimationRange.first.y = 1;
+		myDownAnimationRange.second.x = 1;
+		myDownAnimationRange.second.y = 1;
+
+		myIdleAnimationRange.first.x = 1;
+		myIdleAnimationRange.first.y = 1;
+		myIdleAnimationRange.second.x = 1;
+		myIdleAnimationRange.second.y = 1;
+
+		if (!JSON["AmountOfFrames"]["X"].IsString() && !JSON["AmountOfFrames"]["Y"].IsString() || JSON["AmountOfFrames"]["Y"].GetFloat() == 1 && JSON["AmountOfFrames"]["X"].GetFloat() == 1)
 		{
 			myAmountOfFrames.x = JSON["AmountOfFrames"]["X"].GetFloat();
 			myAmountOfFrames.y = JSON["AmountOfFrames"]["Y"].GetFloat();
@@ -102,18 +116,34 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 				if (!JSON["IdleAnimationRange"]["FrameStartX"].IsString())
 				{
 					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartX"].GetFloat();
+					if (myIdleAnimationRange.first.x == 0)
+					{
+						myIdleAnimationRange.first.x = 1;
+					}
 				}
 				if (!JSON["IdleAnimationRange"]["FrameStartY"].IsString())
 				{
 					myIdleAnimationRange.first.y = JSON["IdleAnimationRange"]["FrameStartY"].GetFloat();
+					if (myIdleAnimationRange.first.y == 0)
+					{
+						myIdleAnimationRange.first.y = 1;
+					}
 				}
 				if (!JSON["IdleAnimationRange"]["FrameEndX"].IsString())
 				{
 					myIdleAnimationRange.second.x = JSON["IdleAnimationRange"]["FrameEndX"].GetFloat();
+					if (myIdleAnimationRange.second.x == 0)
+					{
+						myIdleAnimationRange.second.x = 1;
+					}
 				}
 				if (!JSON["IdleAnimationRange"]["FrameEndY"].IsString())
 				{
 					myIdleAnimationRange.second.y = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
+					if (myIdleAnimationRange.second.x == 0)
+					{
+						myIdleAnimationRange.second.x = 1;
+					}
 				}
 			}
 			if (JSON["UpAnimationRange"]["Type"].GetString()[0] == 'S')
@@ -122,18 +152,34 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 				if (!JSON["UpAnimationRange"]["FrameStartX"].IsString())
 				{
 					myUpAnimationRange.first.x = JSON["UpAnimationRange"]["FrameStartX"].GetFloat();
+					if (myUpAnimationRange.first.x == 0)
+					{
+						myUpAnimationRange.first.x = 1;
+					}
 				}
 				if (!JSON["UpAnimationRange"]["FrameStartY"].IsString())
 				{
 					myUpAnimationRange.first.y = JSON["UpAnimationRange"]["FrameStartY"].GetFloat();
+					if (myUpAnimationRange.first.y == 0)
+					{
+						myUpAnimationRange.first.y = 1;
+					}
 				}
 				if (!JSON["UpAnimationRange"]["FrameEndX"].IsString())
 				{
 					myUpAnimationRange.second.x = JSON["UpAnimationRange"]["FrameEndX"].GetFloat();
+					if (myUpAnimationRange.second.x == 0)
+					{
+						myUpAnimationRange.second.x = 1;
+					}
 				}
 				if (!JSON["UpAnimationRange"]["FrameEndY"].IsString())
 				{
 					myUpAnimationRange.second.y = JSON["UpAnimationRange"]["FrameEndY"].GetFloat();
+					if (myUpAnimationRange.second.y == 0)
+					{
+						myUpAnimationRange.second.y = 1;
+					}
 					printf("UpAnimation Range first x: %f y: %f Second x: %f y: %f", myUpAnimationRange.first.x, myUpAnimationRange.first.y, myUpAnimationRange.second.x, myUpAnimationRange.second.y);
 				}
 			}
@@ -143,18 +189,34 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 				if (!JSON["DownAnimationRange"]["FrameStartX"].IsString())
 				{
 					myDownAnimationRange.first.x = JSON["DownAnimationRange"]["FrameStartX"].GetFloat();
+					if (myUpAnimationRange.first.x == 0)
+					{
+						myUpAnimationRange.first.x = 1;
+					}
 				}
 				if (!JSON["DownAnimationRange"]["FrameStartY"].IsString())
 				{
 					myDownAnimationRange.first.y = JSON["DownAnimationRange"]["FrameStartY"].GetFloat();
+					if (myUpAnimationRange.first.y == 0)
+					{
+						myUpAnimationRange.first.y = 1;
+					}
 				}
 				if (!JSON["DownAnimationRange"]["FrameEndX"].IsString())
 				{
 					myDownAnimationRange.second.x = JSON["DownAnimationRange"]["FrameEndX"].GetFloat();
+					if (myUpAnimationRange.second.x == 0)
+					{
+						myUpAnimationRange.second.x = 1;
+					}
 				}
 				if (!JSON["DownAnimationRange"]["FrameEndY"].IsString())
 				{
 					myDownAnimationRange.second.y = JSON["DownAnimationRange"]["FrameEndY"].GetFloat();
+					if (myUpAnimationRange.second.y == 0)
+					{
+						myUpAnimationRange.second.y = 1;
+					}
 				}
 			}
 		}
