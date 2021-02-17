@@ -33,13 +33,11 @@ namespace Studio
 			else if (myObjectsPosition->y < myTargetObjectsPosition.y)
 			{
 				myObjectsPosition->y += mySpeed * 0.5 * Timer::GetInstance()->TGetDeltaTime();
-				printf_s("%f\n%f", myObjectsPosition->y, myTargetObjectsPosition.y);
 
 			}
 			else if (myObjectsPosition->y > myTargetObjectsPosition.y)
 			{
 				myObjectsPosition->y -= mySpeed * 0.5 * Timer::GetInstance()->TGetDeltaTime();
-				printf_s("%f\n%f\n", myObjectsPosition->y, myTargetObjectsPosition.y);
 			}
 		}
 		myDirection = (myDirection - *myObjectsPosition).GetNormalized();

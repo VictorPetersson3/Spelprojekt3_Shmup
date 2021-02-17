@@ -7,15 +7,12 @@ Studio::EffectExplosionLarge::EffectExplosionLarge(const std::string& aImagePath
 	GameObject::SetPosition(aPosition);
 	GameObject::mySpriteSheet.PlayAnimationInRange(0.083, { 1,1 }, {6, 1});
 	GameObject::mySpriteSheet.SetLayer(10);
-	printf("SpawnedExplosion\n");
 }
 
 
 void Studio::EffectExplosionLarge::Update()
 {
 	GameObject::Update(GameObject::GetPosition());
-	//printf("Exploding Right now\n");
-
 }
 
 const bool Studio::EffectExplosionLarge::IsAnimating() const

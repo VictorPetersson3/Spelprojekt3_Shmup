@@ -10,7 +10,6 @@ Studio::Module_Shield::Module_Shield(rapidjson::Value& aModuleParameters) :
 	}
 	else
 	{
-		printf("Duration is not valid in Shield Module\n");
 		myHitPoints = 0.5f;
 	}
 	myHasCreatedShield = false;

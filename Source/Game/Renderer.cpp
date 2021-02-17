@@ -21,15 +21,6 @@ void Renderer::Init()
 	myReadBuffer = &myBatchBuffer2;
 }
 
-// LEGACY CODE - REMOVE ALL REFERENCES AS SOON AS POSSIBLE
-// References found (1):
-//    1. TestButton.cpp | Found in "void Update()"
-void Renderer::RenderRenderCommand(Studio::RenderCommand aRenderCommand)
-{
-	SETCONSOLECOLOR(CONSOLE_COLOR_RED);
-	printf_s("Renderer: OBSOLETE CODE CALLED! -> Renderer::RenderRenderCommand\n");
-	SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
-}
 
 void Renderer::SwapBuffers()
 {

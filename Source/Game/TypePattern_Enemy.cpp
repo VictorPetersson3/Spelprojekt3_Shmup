@@ -180,7 +180,6 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 					{
 						myUpAnimationRange.second.y = 1;
 					}
-					printf("UpAnimation Range first x: %f y: %f Second x: %f y: %f", myUpAnimationRange.first.x, myUpAnimationRange.first.y, myUpAnimationRange.second.x, myUpAnimationRange.second.y);
 				}
 			}
 			if (JSON["DownAnimationRange"]["Type"].GetString()[0] == 'S')
