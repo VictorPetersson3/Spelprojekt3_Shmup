@@ -117,17 +117,17 @@ namespace Studio
 		int myMissileCooldown;
 		int myShieldCooldown;
 
-		TextElement* myRapidCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.375 , 0.91 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
-		TextElement* myMissileCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.460  , 0.91 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
-		TextElement* myShieldCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.551 , 0.91 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myRapidCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.360 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myMissileCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04  , 0.499 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+		TextElement* myShieldCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.638 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
 		
 
-		ImageElement* myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 790, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
-		ImageElement* myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 960, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
-		ImageElement* myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 1130, 990 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
-		ImageElement* myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds" , { 790, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
-		ImageElement* myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds" , { 960, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
-		ImageElement* myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds" , { 1130, 990 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
+		ImageElement* myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
+		ImageElement* myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
+		ImageElement* myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
+		ImageElement* myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
+		ImageElement* myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
+		ImageElement* myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
 
 
 		ImageElement* myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");

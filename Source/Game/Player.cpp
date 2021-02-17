@@ -366,7 +366,7 @@ namespace Studio
 				myDirection.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 			}
 			//A
-			if (aKey && myPosition.x > 100)
+			if (aKey && myPosition.x > 300)
 			{
 				myDirection.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 				myCurrentFlame = 1;
