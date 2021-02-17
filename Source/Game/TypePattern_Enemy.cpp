@@ -85,7 +85,6 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 			myAmountOfFrames.x = JSON["AmountOfFrames"]["X"].GetFloat();
 			myAmountOfFrames.y = JSON["AmountOfFrames"]["Y"].GetFloat();
 			myIsAnimating = true;
-
 			//if (JSON["IdleAnimationRange"]["Type"].GetString() == "Custom")
 			//{
 			//	std::stringstream ss = JSON["IdleAnimationRange"]["Frames"].GetString();
@@ -93,7 +92,7 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 			//
 			//	myUsingCustomIdleFrames = true;
 			//}
-			if (JSON["IdleAnimationRange"]["Type"].GetString() == "Start/End")
+			if (JSON["IdleAnimationRange"]["Type"].GetString()[0] == 'S')
 			{
 				myUsingCustomIdleFrames = false;
 				if (!JSON["IdleAnimationRange"]["FrameStartX"].IsString())
@@ -102,55 +101,56 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 				}
 				if (!JSON["IdleAnimationRange"]["FrameStartY"].IsString())
 				{
-					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartY"].GetFloat();
+					myIdleAnimationRange.first.y = JSON["IdleAnimationRange"]["FrameStartY"].GetFloat();
 				}
 				if (!JSON["IdleAnimationRange"]["FrameEndX"].IsString())
 				{
-					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndX"].GetFloat();
+					myIdleAnimationRange.second.x = JSON["IdleAnimationRange"]["FrameEndX"].GetFloat();
 				}
 				if (!JSON["IdleAnimationRange"]["FrameEndY"].IsString())
 				{
-					myIdleAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
+					myIdleAnimationRange.second.y = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
 				}
 			}
-			if (JSON["UpAnimationRange"]["Type"].GetString() == "Start/End")
+			if (JSON["UpAnimationRange"]["Type"].GetString()[0] == 'S')
 			{
 				myUsingCustomIdleFrames = false;
 				if (!JSON["UpAnimationRange"]["FrameStartX"].IsString())
 				{
-					myUpAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartX"].GetFloat();
+					myUpAnimationRange.first.x = JSON["UpAnimationRange"]["FrameStartX"].GetFloat();
 				}
 				if (!JSON["UpAnimationRange"]["FrameStartY"].IsString())
 				{
-					myUpAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartY"].GetFloat();
+					myUpAnimationRange.first.y = JSON["UpAnimationRange"]["FrameStartY"].GetFloat();
 				}
 				if (!JSON["UpAnimationRange"]["FrameEndX"].IsString())
 				{
-					myUpAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndX"].GetFloat();
+					myUpAnimationRange.second.x = JSON["UpAnimationRange"]["FrameEndX"].GetFloat();
 				}
 				if (!JSON["UpAnimationRange"]["FrameEndY"].IsString())
 				{
-					myUpAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
+					myUpAnimationRange.second.y = JSON["UpAnimationRange"]["FrameEndY"].GetFloat();
+					printf("UpAnimation Range first x: %f y: %f Second x: %f y: %f", myUpAnimationRange.first.x, myUpAnimationRange.first.y, myUpAnimationRange.second.x, myUpAnimationRange.second.y);
 				}
 			}
-			if (JSON["DownAnimationRange"]["Type"].GetString() == "Start/End")
+			if (JSON["DownAnimationRange"]["Type"].GetString()[0] == 'S')
 			{
 				myUsingCustomIdleFrames = false;
 				if (!JSON["DownAnimationRange"]["FrameStartX"].IsString())
 				{
-					myDownAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartX"].GetFloat();
+					myDownAnimationRange.first.x = JSON["DownAnimationRange"]["FrameStartX"].GetFloat();
 				}
 				if (!JSON["DownAnimationRange"]["FrameStartY"].IsString())
 				{
-					myDownAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameStartY"].GetFloat();
+					myDownAnimationRange.first.y = JSON["DownAnimationRange"]["FrameStartY"].GetFloat();
 				}
 				if (!JSON["DownAnimationRange"]["FrameEndX"].IsString())
 				{
-					myDownAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndX"].GetFloat();
+					myDownAnimationRange.second.x = JSON["DownAnimationRange"]["FrameEndX"].GetFloat();
 				}
 				if (!JSON["DownAnimationRange"]["FrameEndY"].IsString())
 				{
-					myDownAnimationRange.first.x = JSON["IdleAnimationRange"]["FrameEndY"].GetFloat();
+					myDownAnimationRange.second.y = JSON["DownAnimationRange"]["FrameEndY"].GetFloat();
 				}
 			}
 		}

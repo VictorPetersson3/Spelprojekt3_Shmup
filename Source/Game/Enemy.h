@@ -39,6 +39,9 @@ namespace Studio
 	private:
 		int myScoreValue;
 		bool myHasDied = false;
+		bool myMovingUp;
+		bool myMovingIdle;
+		bool myMovingDown;
 		float myShootTimer;
 		std::vector<Bullet*> myBullets;
 

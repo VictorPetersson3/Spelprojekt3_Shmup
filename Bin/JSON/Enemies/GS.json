@@ -1,1 +1,44 @@
-{"HealthPoints":3,"Movement":{"Type":"Seeking","Speed":100,"Acceleration":5},"Bullet":{"Type":"","Speed":250,"ShootTowardsPlayer":true,"Interval":250}}
+{
+  "HealthPoints": 10,
+  "Movement": {
+    "Type": "Seeking",
+    "Speed": 100,
+    "Acceleration": 5
+  },
+  "Bullet": {
+
+    "Type": "",
+    "Speed": 250,
+    "ShootTowardsPlayer": true,
+    "Interval": 250
+  },
+  "Animation": {
+    
+    "ImagePath": "assets/enemies/plane/enemy_plane",
+    "AmountOfFrames": {
+      "X": 1,
+      "Y": 8
+    },
+    "Frames/Second": 12,
+    "IdleAnimationRange": {
+      "Type": "Start/End",
+      "FrameStartX": 1,
+      "FrameStartY": 1,
+      "FrameEndX": 1,
+      "FrameEndY": 1
+    },
+    "UpAnimationRange": {
+      "Type": "Start/End",
+      "FrameStartX": 1,
+      "FrameStartY": 2,
+      "FrameEndX": 1,
+      "FrameEndY": 3
+    },
+    "DownAnimationRange": {
+      "Type": "Start/End",
+      "FrameStartX": 1,
+      "FrameStartY": 4,
+      "FrameEndX": 1,
+      "FrameEndY": 5
+    }
+  }}

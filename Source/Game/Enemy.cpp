@@ -19,6 +19,10 @@
 #include "AudioManager.h"
 #include "AudioManagerAccesor.h"
 
+#define PI (3.14159265358979323846f)
+#define EPSILON (0.001f)
+#define SPRITESHEET GameObject::GetSpriteSheet()
+
 namespace Studio
 {
 	Enemy::Enemy(TypePattern_Enemy* aEnemyType, const Tga2D::Vector2f& aSpawnPosition) :
@@ -76,8 +80,12 @@ namespace Studio
 		}
 		if (aEnemyType->GetIsPopcorn())
 		{
-			GameObject::GetSpriteSheet().SetAmountOfFrames({ 4, 1 });
-			GameObject::GetSpriteSheet().LoopAnimationInRange(0.083f, { 1,1 }, {3,1});
+			SPRITESHEET.SetAmountOfFrames({ 4, 1 });
+			SPRITESHEET.LoopAnimationInRange(0.083f, { 1,1 }, {3,1});
+		}
+		if (!aEnemyType->GetIsPopcorn() && !aEnemyType->GetIsTurret() && !aEnemyType->GetIsTerrain() && aEnemyType->GetIsAnimating())
+		{
+			SPRITESHEET.SetAmountOfFrames(aEnemyType->GetAmountOfFrames());
 		}
 	}
 
@@ -101,11 +109,38 @@ namespace Studio
 				Shoot(aDeltaTime);
 			}
 			myMovement->Update();
+			if (!myType->GetIsPopcorn() && !myType->GetIsTurret() && !myType->GetIsTerrain() && myType->GetIsAnimating())
+			{
+				float angle = atan(myMovement->GetDirection().y / myMovement->GetDirection().x);
+				if (angle > 0 - EPSILON && angle < 0 + EPSILON && !myMovingIdle)
+				{
+					myMovingUp = false;
+					myMovingDown = false;
+					SPRITESHEET.ReverseAndStartAnimation();
+					if (!SPRITESHEET.IsAnimating())
+					{
+						SPRITESHEET.LoopAnimationInRange(0.083f, myType->GetIdleAnimationRange().first, myType->GetIdleAnimationRange().second);
+						myMovingIdle = true;
+					}
+				}
+				if (angle > 0 + EPSILON && !myMovingUp && myMovingDown || myMovingIdle)
+				{
+					myMovingUp = true;
+					myMovingDown = false;
+					myMovingIdle = false;
+					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetUpAnimationRange().first, myType->GetUpAnimationRange().second);
+				}
+				if (angle < 0 - EPSILON && !myMovingDown && myMovingUp || myMovingIdle)
+				{
+					myMovingUp = false;
+					myMovingDown = true;
+					myMovingIdle = false;
+					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetDownAnimationRange().first, myType->GetDownAnimationRange().second);
+				}
+			}
 			Enemy::GameObject::Update(myPosition);
 		}
-
 		UpdateBullets(aDeltaTime);
-
 		for (int i = 0; i < myBullets.size(); i++)
 		{
 			Studio::RendererAccessor::GetInstance()->Render(*myBullets[i]);

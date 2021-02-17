@@ -524,7 +524,7 @@ namespace Studio
 		}
 		mySpawnedBoss = false;
 		SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
-		myParticleEmitter->Init(Studio::Enums::EParticleTypes::eRain);
+		myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
 		myParticleEmitter->Activate();
 		MenuManagerSingleton::GetInstance()->GetShop()->Disable();
 		MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
