@@ -161,6 +161,11 @@ namespace Studio
 		return myDirection;
 	}
 
+	const Tga2D::Vector2f Studio::Player::GetNextFramePosition() const
+	{
+		return myPosition + myDirection.GetNormalized() * mySpeed * Timer::GetInstance()->TGetDeltaTime();
+	}
+
 	void Player::UpgradeT1(Enums::Tier1Upgrades aTier1Upgrade)
 	{
 		switch (aTier1Upgrade)
