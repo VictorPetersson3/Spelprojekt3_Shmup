@@ -30,8 +30,12 @@ T_Fyrwave
 T_island_big
 T_island_big_wave
 T_island_medium
+T_island_medium_bana2
+T_island_medium_bana3
 T_island_medium_wave
 T_island_small
+T_island_small_bana2
+T_island_small_bana3
 T_island_small_wave
 T_mountain
 T_mountain_small
