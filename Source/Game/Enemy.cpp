@@ -109,35 +109,7 @@ namespace Studio
 				Shoot(aDeltaTime);
 			}
 			myMovement->Update();
-			if (!myType->GetIsPopcorn() && !myType->GetIsTurret() && !myType->GetIsTerrain() && myType->GetIsAnimating())
-			{
-				float angle = atan(myMovement->GetDirection().y / myMovement->GetDirection().x);
-				if (angle > 0 - EPSILON && angle < 0 + EPSILON && !myMovingIdle)
-				{
-					myMovingUp = false;
-					myMovingDown = false;
-					//SPRITESHEET.ReverseAndStartAnimation();
-					if (!SPRITESHEET.IsAnimating())
-					{
-						SPRITESHEET.LoopAnimationInRange(0.083f, myType->GetIdleAnimationRange().first, myType->GetIdleAnimationRange().second);
-						myMovingIdle = true;
-					}
-				}
-				if (angle > 0 + EPSILON && !myMovingUp && myMovingDown || myMovingIdle)
-				{
-					myMovingUp = true;
-					myMovingDown = false;
-					myMovingIdle = false;
-					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetUpAnimationRange().first, myType->GetUpAnimationRange().second);
-				}
-				if (angle < 0 - EPSILON && !myMovingDown && myMovingUp || myMovingIdle)
-				{
-					myMovingUp = false;
-					myMovingDown = true;
-					myMovingIdle = false;
-					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetDownAnimationRange().first, myType->GetDownAnimationRange().second);
-				}
-			}
+			AnimationLogic();
 			Enemy::GameObject::Update(myPosition);
 		}
 		UpdateBullets(aDeltaTime);
@@ -230,6 +202,50 @@ namespace Studio
 		else
 		{
 			Enemy::GameObject::GetCollider().AddCircleColliderObject({0, 0}, 50);
+		}
+	}
+	void Enemy::AnimationLogic()
+	{
+		if (!myType->GetIsPopcorn() && !myType->GetIsTurret() && !myType->GetIsTerrain() && myType->GetIsAnimating())
+		{
+			float angle = atan(myMovement->GetDirection().y / myMovement->GetDirection().x);
+			if (myMovementType == Studio::Enums::MovementPattern::Wave)
+			{
+				if (angle > 0 - EPSILON && angle < 0 + EPSILON && !myMovingIdle)
+				{
+					myMovingUp = false;
+					myMovingDown = false;
+					//SPRITESHEET.ReverseAndStartAnimation();
+					if (!SPRITESHEET.IsAnimating())
+					{
+						SPRITESHEET.LoopAnimationInRange(0.083f, myType->GetIdleAnimationRange().first, myType->GetIdleAnimationRange().second);
+						myMovingIdle = true;
+					}
+				}
+				if (angle > 0 + EPSILON && !myMovingUp && myMovingDown || myMovingIdle)
+				{
+					myMovingUp = true;
+					myMovingDown = false;
+					myMovingIdle = false;
+					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetUpAnimationRange().first, myType->GetUpAnimationRange().second);
+				}
+				if (angle < 0 - EPSILON && !myMovingDown && myMovingUp || myMovingIdle)
+				{
+					myMovingUp = false;
+					myMovingDown = true;
+					myMovingIdle = false;
+					SPRITESHEET.PlayAnimationInRange(0.083f, myType->GetDownAnimationRange().first, myType->GetDownAnimationRange().second);
+				}
+			}
+			else
+			{
+				if (!SPRITESHEET.IsAnimating())
+				{
+					SPRITESHEET.LoopAnimationInRange(0.083f, myType->GetIdleAnimationRange().first, myType->GetIdleAnimationRange().second);
+					myMovingIdle = true;
+				}
+			}
+
 		}
 	}
 }

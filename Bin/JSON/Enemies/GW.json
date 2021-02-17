@@ -10,7 +10,7 @@
     "Type": "",
     "Speed": 0,
     "ShootTowardsPlayer": false,
-    "Interval": 100
+    "Interval": 200
   },
   "Animation": 
   {

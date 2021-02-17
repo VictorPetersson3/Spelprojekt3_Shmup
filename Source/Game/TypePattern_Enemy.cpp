@@ -98,7 +98,7 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 		myIdleAnimationRange.second.x = 1;
 		myIdleAnimationRange.second.y = 1;
 
-		if (!JSON["AmountOfFrames"]["X"].IsString() && !JSON["AmountOfFrames"]["Y"].IsString() || JSON["AmountOfFrames"]["Y"].GetFloat() == 1 && JSON["AmountOfFrames"]["X"].GetFloat() == 1)
+		if (!JSON["AmountOfFrames"]["X"].IsString() && !JSON["AmountOfFrames"]["Y"].IsString() || JSON["AmountOfFrames"]["Y"].GetFloat() != 1 && JSON["AmountOfFrames"]["X"].GetFloat() != 1)
 		{
 			myAmountOfFrames.x = JSON["AmountOfFrames"]["X"].GetFloat();
 			myAmountOfFrames.y = JSON["AmountOfFrames"]["Y"].GetFloat();
