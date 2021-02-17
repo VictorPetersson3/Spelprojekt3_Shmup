@@ -235,6 +235,8 @@ namespace Studio
 		{
 			myIsTransitioning = true;
 			mySpriteSheet.PlayAnimationInRange(0.0833f, { 1, 2 }, { 6, 2 });
+			Boss::GameObject::GetCollider().AddBoxColliderObject({ 170.0f, 250.0f }, { 135.0f, 200.0f });
+			Boss::GameObject::GetCollider().AddBoxColliderObject({ -190.0f, 250.0f }, { 135.0f, 200.0f });
 			myLateGameOffset = { 0.0f, -75.0f };
 		}
 		else if (myCurrentPhase == myTransitionPhase2)
@@ -345,6 +347,11 @@ namespace Studio
 		myCurrentPhase = 0;
 		mySpriteSheet.LoopAnimationInRange(0.0833f, { 1, 1 }, { 6, 1 });
 		myLateGameOffset = { 0.0f, 0.0f };
+		myCollider.ClearCollider();
+		Boss::GameObject::GetCollider().AddCircleColliderObject({ 20.0f, 0.0f }, 280.0f);
+		Boss::GameObject::GetCollider().AddCircleColliderObject({ -20.0f,-280.0f }, 25.0f);
+		Boss::GameObject::GetCollider().AddBoxColliderObject({ 170.0f, 180.0f }, { 135.0f, 200.0f });
+		Boss::GameObject::GetCollider().AddBoxColliderObject({ -190.0f, 180.0f }, { 135.0f, 200.0f });
 		AudioManagerAccessor::GetInstance()->StopAllSounds();
 		AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBaltic_-_The_Might_of_the_Three_Crowns.mp3", true, 0.1f);
 	}

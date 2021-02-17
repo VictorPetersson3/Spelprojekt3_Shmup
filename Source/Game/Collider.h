@@ -20,6 +20,8 @@ namespace Studio
 
 		void Render();
 
+		void ClearCollider();
+
 	private:
 		bool CircleToCircleIntersect(CollisionObject& aFirstCollisionObject, CollisionObject& aSecondCollisionObject);
 
