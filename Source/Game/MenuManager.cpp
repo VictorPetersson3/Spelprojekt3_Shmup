@@ -15,6 +15,18 @@
 #include "tga2d/sprite/sprite.h"
 #include "AudioManager.h"
 #include "AudioManagerAccesor.h"
+#include "ImageElement.h"
+#include "TextElement.h"
+#include "SliderElement.h"
+#include "GenericButton.h"
+#include "StartButton.h"
+#include "ExitButton.h"
+#include "UIElement.h"
+#include "ReturnToMainMenuButton.h"
+#include "ShopUI.h"
+#include "Counter.h"
+#include "MenuObject.h"
+#include "SpriteSheet.h"
 
 #define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
@@ -22,8 +34,78 @@ namespace Studio
 {
     Studio::MenuManager::MenuManager(Studio::Player* aPlayer)
     {
+#pragma region Declarations
+        myTestElement = new ImageElement("Sprites/UI/UI_playerInfo_captain.dds", { 0,0 }, { 1,1 }, { 0.f,0.f }, 2, "HUD");
+        myHeart1Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 990,560 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart1");
+        myHeart2Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1040,560 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart2");
+        myHeart3Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1090,560 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart3");
+        myHeart4Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1140,560 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart4");
+        myShopBackground = new ImageElement("Sprites/UI/ShopUI/shopUI_BG.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 0, "ShopBackground");
+        myShopFrames = new ImageElement("Sprites/UI/ShopUI/shopUI_frames.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "ShopFrames");
+        myShopDescriptionText = new ImageElement("Sprites/UI/ShopUI/RapidFireAST1.dds", { 1500, 750 }, { 1,1 }, { 0.5f,0.5f }, 60000000, "ShopText");
+
+        myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
+        myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
+        myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
+        myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
+        myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
+        myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
+
+        myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
+        myOptionsMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "OptionsMenuBackground");
+        myMainMenuLogo = new ImageElement("Sprites/UI/UI_gamelogo.dds", { 960,250 }, { 1,1 }, { 0.5f,0.5f }, 6, "MainMenuBackground");
+
+        myPausMenuBackground = new ImageElement("Sprites/UI/UI_emptyFrame.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 10, "PausMenuBackground");
+        myPausMenuTitle = new ImageElement("Sprites/UI/UI_pause.dds", { 960,275 }, { 1,1 }, { 0.5f,0.5f }, 11, "PausMenuTitle");
+
+        myVolumeLabel = new ImageElement("Sprites/UI/UI_volume.dds", { 960,160 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
+        myVolumeBar = new ImageElement("Sprites/UI/UI_volumeSliderBar.dds", { 960,250 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
+
+        myCreditsBackground = new ImageElement("Sprites/credits.dds", { 960.0f, 540.0f }, { 1.0f, 1.0f }, { 0.5f, 0.5f }, 20, "CreditsBackground");
+
+
+        myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.17,0.15 }, "ScoreText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
+        myCoinText = new TextElement(Tga2D::EFontSize_18, { 0.14,0.214 }, "CoinText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
+
+        myRapidCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.360 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+        myMissileCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04  , 0.499 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+        myShieldCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.638 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+
+        myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.56,0.195 }, "ShopCoinText", Tga2D::CColor({ 1,1,1,1 }));
+        myShopCostText = new TextElement(Tga2D::EFontSize_18, { 0.76f,0.738f }, "ShopCoinCostText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
+        myShopUpgradeNameText = new TextElement(Tga2D::EFontSize_24, { 0.78f,0.645f }, "ShopNameText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf", true);
+
+        myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.24 }, "myMasterVolumePercentageText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
+        myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");
+
+        myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.25 }, "OptionsTitle");
+
+        myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 185,250 }, { 370,50 }, 15);
+
+        mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,780 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "OptionsButton", 12);
+        myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,900 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "CreditsButton", 12);
+
+        myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 5,5 }, { 0.5f,0.5f }, "ResumeButton", 11);
+        myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "LevelSelectButton", 20);
+
+        myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton", 10, false);
+        myNextLevelButton = new StartButton("Sprites/UI/ShopUI/shopUI_buttons_continue.dds", { 1500,960 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton", 10, true);
+
+        myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "ExitButton", 10);
+
+        myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
+        myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
+        myCreditsBackButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 384.0f, 892.0f, }, { 1.0f, 1.0f }, { 0.5f, 0.5f }, "CreditsGoBackButton", 21);
+
         myShopUI = new Studio::ShopUI();
         myLevelSelect = new Studio::LevelSelect(this);
+        myTutorialCounter = new Studio::Counter();
+        myOptions = new Options(this);
+
+#pragma endregion
+
+#pragma region AddMenuObjects
+
         myMainMenu.Add(myStartButton);
         myMainMenu.Add(myMainMenuBackground);
         myMainMenu.Add(myMainMenuLogo);
@@ -32,7 +114,7 @@ namespace Studio
         myMainMenu.Add(myExitButton);
         myMainMenu.Add(myLevelSelectButton);
         myMainMenu.Enable();
-        
+
         myHud.Add(myTestElement);
         myHud.Add(myHeart1Element);
         myHud.Add(myHeart2Element);
@@ -90,15 +172,17 @@ namespace Studio
         myOptionsMenu.Add(myVolumeBar);
         myOptionsMenu.Disable();
 
+#pragma endregion
+
+
         myPlayer = aPlayer;
         myIsLoading = false;
         myLoadingScreen = new SpriteSheet("Sprites/UI/LoadingScreen.dds");
         myLoadingScreen->SetPosition({ 960, 540 });
         myLoadingScreen->SetLayer(10);
-        myOptions = new Options(this);
         ResetButtonColliders();
         myTutorialAction = 0;
-        myTutorialCounter.SetInterval(17.f);
+        myTutorialCounter->SetInterval(17.f);
         
     }
 
@@ -151,6 +235,7 @@ namespace Studio
         SAFE_DELETE(myOptions);
         SAFE_DELETE(myCreditsBackground);
         SAFE_DELETE(myCreditsBackButton);
+        SAFE_DELETE(myTutorialCounter);
     }              
 
     MenuObject* Studio::MenuManager::GetMainMenu()
@@ -472,7 +557,7 @@ namespace Studio
 
     void MenuManager::GreyOutAbilitiesDuringTutorial()
     {
-        myTutorialCounter.Tick();
+        myTutorialCounter->Tick();
 
         if (myRapidTutorialGrey)
         {
@@ -488,7 +573,7 @@ namespace Studio
         }
           
 
-        if (myTutorialCounter.PastInterval())
+        if (myTutorialCounter->PastInterval())
         {
             if (myTutorialAction == 2)
             {
@@ -499,14 +584,14 @@ namespace Studio
             {
                 myTutorialAction = 2;
                 myMissileTutorialGrey = false;
-                myTutorialCounter.SetInterval(8.f);
+                myTutorialCounter->SetInterval(8.f);
             }
 
             if (myTutorialAction == 0)
             {
                 myTutorialAction = 1;
                 myRapidTutorialGrey = false;
-                myTutorialCounter.SetInterval(7.f);
+                myTutorialCounter->SetInterval(7.f);
             }
 
         }

@@ -3,6 +3,10 @@
 #include "MenuManager.h"
 #include "Game_Accessor.h"
 #include "Timer.h"
+#include "ImageElement.h"
+#include "GenericButton.h"
+#include "UIElement.h"
+
 Studio::Options::Options(MenuManager* aMenuManager)
 {
 	myMenuManager = aMenuManager;

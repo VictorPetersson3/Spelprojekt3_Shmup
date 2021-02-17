@@ -11,6 +11,7 @@
 #include "MenuObject.h"
 #include "TextElement.h"
 #include "Timer.h"
+#include "ImageElement.h"
 
 #define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::ShopButton::ShopButton(const char* aPath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, int aLayer, Enums::Tier1Upgrades aUpgradeType, int aCost, char* aDescription, char* aName)
