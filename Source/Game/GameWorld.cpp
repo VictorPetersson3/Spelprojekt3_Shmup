@@ -59,7 +59,7 @@ void CGameWorld::Init()
 	// InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKey_Explosive)
 	//// Or
 	// InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Explosive)
-
+	ShowCursor(false);
 	myRenderer.Init();
 	Studio::AudioManagerAccessor::Construct();
 	Studio::RendererAccessor::SetInstance(&myRenderer);
