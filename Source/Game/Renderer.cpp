@@ -98,7 +98,7 @@ void Renderer::Render(const float aDeltaTime)
 				spriteSheet.GetSize().x / SCREEN_HEIGHT, // Use height on both because
 				spriteSheet.GetSize().y / SCREEN_HEIGHT // Tga2D is "special"
 			});
-			sprite->SetPosition({ (spriteSheet.GetPosition().x + _x) / SCREEN_WIDTH, (spriteSheet.GetPosition().y + _y) / SCREEN_HEIGHT });
+			sprite->SetPosition({ (spriteSheet.GetPosition().x + myScreenXOffset) / SCREEN_WIDTH, (spriteSheet.GetPosition().y + myScreenYOffset) / SCREEN_HEIGHT });
 
 			//sprite->SetPosition(sprite->GetPosition() + VECTOR2F(aDeltaTime, aDeltaTime));
 
@@ -130,9 +130,17 @@ void Renderer::ShakeCamera(const float aOomphValue, const float aDuration)
 
 void Renderer::Update(const float aDeltaTime)
 {
-	_x = (rand() % 5) * myOomph;
-	_y = (rand() % 7) * myOomph;
-	
+	// Prevent shake during paused dT
+	if (aDeltaTime > 0.0f)
+	{
+		myScreenXOffset = (rand() % 5) * myOomph;
+		myScreenYOffset = (rand() % 7) * myOomph;
+	}
+	else
+	{
+		myScreenXOffset = 0.0f;
+		myScreenYOffset = 0.0f;
+	}
 
 	// dampen the oomph
 	myOomph -= myOomph * myShakeDuration * aDeltaTime;

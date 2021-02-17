@@ -56,6 +56,6 @@ private:
 
 	float myOomph = 0.0f;
 	float myShakeDuration = 1.0f;
-	float _x = 0.0f, _y = 0.0f;
+	float myScreenXOffset = 0.0f, myScreenYOffset = 0.0f;
 };
 
