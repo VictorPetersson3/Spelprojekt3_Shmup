@@ -1,0 +1,11 @@
+{
+  "ImagePath": "Sprites/assets/enemies/turret_02/turretBarrel.dds",
+  "RotationSpeed": 2.5,
+  "PivotX": 0.7,
+  "PivotY": 0.5,
+  "SpawnPositionX": 0.0,
+  "SpawnPositionY": 0.0,
+  "BulletSpawnPositionX": -59.0,
+  "BulletSpawnPositionY": 0.0,
+  "IsUpright": true
+}
