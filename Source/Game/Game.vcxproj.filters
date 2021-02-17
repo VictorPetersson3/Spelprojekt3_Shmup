@@ -255,7 +255,6 @@
     <ClCompile Include="TurretPipe.cpp">
       <Filter>GameObjects\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Options.cpp" />
     <ClCompile Include="TimedBomb.cpp" />
     <ClCompile Include="Module_Laser.cpp">
       <Filter>GameObjects\Boss\Modules</Filter>
@@ -271,6 +270,9 @@
       <Filter>Singletons</Filter>
     </ClCompile>
     <ClCompile Include="MousePointer.cpp" />
+    <ClCompile Include="Options.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -539,7 +541,6 @@
     <ClInclude Include="TurretPipe.h">
       <Filter>GameObjects\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Options.h" />
     <ClInclude Include="TimedBomb.h" />
     <ClInclude Include="Module_Laser.h">
       <Filter>GameObjects\Boss\Modules</Filter>
@@ -555,6 +556,9 @@
       <Filter>Singletons</Filter>
     </ClInclude>
     <ClInclude Include="MousePointer.h" />
+    <ClInclude Include="Options.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
