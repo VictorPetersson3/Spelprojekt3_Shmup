@@ -50,7 +50,6 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	lParam;
 	wParam;
 	hWnd;
-	ShowCursor(false);
 	Studio::InputManager::GetInstance()->UpdateMouseInputEvents(hWnd, message, wParam, lParam);
 	switch (message)
 	{
@@ -58,7 +57,6 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 	{
 		myIsPlaying = false;
-		ShowCursor(true);
 		// close the application entirely
 		PostQuitMessage(0);
 		return 0;

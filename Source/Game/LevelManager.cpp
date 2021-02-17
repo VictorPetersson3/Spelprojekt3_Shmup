@@ -63,6 +63,7 @@ namespace Studio
 		//temp BulletFactory to try and spawn bullets via LevelManager -->Pu
 		myBulletFactory->InitBulletType("Sprites/Bullets/redround.dds", 12, "Enemy", -500.0f, Enums::BulletOwner::Enemy);
 		myBulletFactory->InitBulletType("Sprites/Bullets/FireBullet.dds", 12, "Player", 800.0f, Enums::BulletOwner::Player);
+		myBulletFactory->InitBulletType("Sprites/Bullets/redround.dds", 12, "Boss", -900.0f, Enums::BulletOwner::Enemy);
 		myBossManager->LoadBosses();
 		// Load chosen level by Lever Designers
 		std::fstream file;
