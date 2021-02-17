@@ -616,6 +616,13 @@ namespace Studio
 			GameObject::TakeDamage(someDamage);
 			ActivateInvincibility();
 		}
+		else
+		{
+			if (!AudioManagerAccessor::GetInstance()->IsCurrentlyPlaying("Audio/ShieldHit.flac"))
+			{
+				AudioManagerAccessor::GetInstance()->Play2D("Audio/ShieldHit.flac", false, 0.13f);
+			}
+		}
 	}
 	bool Studio::Player::GetIsShieldActive()
 	{
