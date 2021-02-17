@@ -15,14 +15,6 @@ Studio::Module_Immunity::Module_Immunity(rapidjson::Value& aModuleParameters) :
 		{
 			myGodmodeChoice = false;
 		}
-		else
-		{
-			printf("Module immunity is not read correctly\n");
-		}
-	}
-	else
-	{
-		printf("Module immunity is not read correctly\n");
 	}
 }
 

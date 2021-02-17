@@ -85,7 +85,6 @@ namespace Studio
 		path.append(levelPath);
 		path.append(".json");
 
-		//printf_s("PATH %s\n", path.c_str());
 
 		std::string directory = "JSON/Levels";
 		for (const auto& entry : std::filesystem::directory_iterator(directory))
@@ -99,7 +98,6 @@ namespace Studio
 				std::string levelPathStitched = "JSON/Levels/";
 				levelPathStitched.append(type);
 				myLevelPaths.push_back(levelPathStitched);
-				printf("LevelPath: %s\n", levelPathStitched.c_str());
 
 				if (path == levelPathStitched)
 				{
@@ -190,9 +188,7 @@ namespace Studio
 
 				if (myPackIndex < (packSize))
 				{
-					printf_s("changing to next pack from pack %i ...\n", myPackIndex + 1);
 					myCurrentPack = myPacks[++myPackIndex];
-					printf_s("Size of new pack: %i\n", myCurrentPack->myStoredEnemies.size());
 				}
 			}
 			//Pu
@@ -213,7 +209,6 @@ namespace Studio
 
 	void LevelManager::AddEnemy(Enemy* anEnemy)
 	{
-		printf_s("Recieved an enemy\n");
 		myEnemies.push_back(anEnemy);
 	}
 
@@ -442,7 +437,6 @@ namespace Studio
 					{
 						myPlayer->TakeDamage(myBullets[j]->GetDamage());
 					}
-					//printf_s("Current Health: %f\n", myPlayer->GetCurrentHealth());
 					myBullets[j]->Impact();
 					myBullets.erase(myBullets.begin() + j);
 				}
@@ -508,7 +502,6 @@ namespace Studio
 		{
 			auto packs = document["Packs"].GetArray();
 
-			printf_s("===JSON===\n%s\n==========\n", text.c_str());
 
 			for (rapidjson::SizeType i = 0; i < packs.Size(); i++)
 			{
@@ -517,12 +510,6 @@ namespace Studio
 
 			myPackIndex = 0;
 			myCurrentPack = myPacks[myPackIndex];
-		}
-		else
-		{
-			SETCONSOLECOLOR(CONSOLE_COLOR_RED);
-			printf_s("ERROR: \"%s\" is missing packs\n", myLevelPaths[myCurrentLevel]);
-			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
 		if (myCurrentLevel >= myBackgroundManager->GetPathsSize() - 1)
 		{
@@ -632,7 +619,6 @@ namespace Studio
 			if (myLevelBossSpawned)
 			{
 				myBoss = myBossManager->GetLevelBoss(0);
-				printf("Boss Spawned");
 				myLevelBossSpawned = false;
 				mySpawnedBoss = true;
 			}
@@ -724,11 +710,13 @@ namespace Studio
 		{
 			myLaser = new Laser(*myBoss->GetPosition());
 			myLaserIsFiring = true;
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/RideTheLightning.mp3", false, 0.5f);
 		}
 		if (!aChoice && myLaser != nullptr)
 		{
 			myLaserIsFiring = false;
 			SAFE_DELETE(myLaser);
+			AudioManagerAccessor::GetInstance()->StopSound("Audio/RideTheLightning.mp3");
 		}
 	}
 	void LevelManager::CreateExplosionAt(const Tga2D::Vector2f& aPosition, const float aRadius)

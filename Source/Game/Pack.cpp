@@ -28,7 +28,6 @@ namespace Studio
 
 				x = SCREEN_WIDTH - x;
 				y = y + SCREEN_HEIGHT * 0.5f;
-				printf_s("Stored enemy at location {x: %f, y: %f}\n", x, y);
 
 				// Store the interval at when the enemy should be spawned
 				myTimedIntervals.push_back(enemies[i]["Timer"].GetFloat() / 1000.0f);
@@ -51,7 +50,6 @@ namespace Studio
 			SETCONSOLECOLOR(CONSOLE_COLOR_WHITE);
 		}
 
-		printf_s("This pack had %i enemies in it\n", c);
 	}
 	
 	Pack::~Pack()
@@ -72,11 +70,9 @@ namespace Studio
 			myCounter->Tick();
 			if (myCounter->PastInterval())
 			{
-				printf_s("Transfered an enemy\n");
 				myLevelManager->AddEnemy(myStoredEnemies[0]);
 				myTransferredEnemies.push_back(myStoredEnemies[0]); // Future proofing for ExitCondition
 				myStoredEnemies.erase(myStoredEnemies.begin());
-				printf_s("Enemies left in storage: %i\n", myStoredEnemies.size());
 
 				myTimedIntervals.erase(myTimedIntervals.begin());
 				if (myTimedIntervals.size() > 0)

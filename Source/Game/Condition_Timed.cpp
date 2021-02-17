@@ -9,10 +9,6 @@ Studio::Condition_Timed::Condition_Timed(rapidjson::Value& aConditionParameters)
 		myCondition = aConditionParameters["Minutes"].GetFloat();
 		myCondition *= 60.0f;
 	}
-	else
-	{
-		printf_s("Enrage Timer Minutes are not read correctly in Boss Conditions\n");
-	}
 }
 
 bool Studio::Condition_Timed::IsDone(Boss& aBoss)

@@ -129,7 +129,6 @@ void Studio::StartButton::OnClick()
 	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 
-	//printf("I have started level: %f", myLevelToLoad);
 	LevelAccessor::GetInstance()->StartUpdating();
 }
 

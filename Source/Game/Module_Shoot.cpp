@@ -13,17 +13,14 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	}
 	else
 	{
-		printf("Duration in Shoot Module is not read correctly\n");
 		myActiveDuration = 0.0f;
 	}
 	if (aModuleParameter.HasMember("Interval"))
 	{
 		myCounter.SetInterval(aModuleParameter["Interval"].GetFloat() / 1000.0f);
-		//printf("%f\n", aModuleParameter["Interval"].GetFloat() / 1000.0f);
 	}
 	else
 	{
-		printf("Interval in Shoot Module is not read correctly\n");
 		myCounter.SetInterval(0.1f);
 	}
 	if (aModuleParameter.HasMember("ShootTowardsPlayer"))
@@ -40,7 +37,6 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	}
 	else
 	{
-		printf("ShootTowardsPlayer in Shoot Module is not read correctly\n");
 		myShootTowardsPlayer = false;
 	}
 	if (aModuleParameter.HasMember("Type"))
@@ -49,7 +45,6 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 	}
 	else
 	{
-		printf("BulletType in Shoot Module is not read correctly\n");
 		myBulletType = "Boss";
 	}
 	if (aModuleParameter.HasMember("Style"))
@@ -64,10 +59,6 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 			mySpawnIsRelative = false;
 		}
 	}
-	else
-	{
-		printf("Style in Shoot Module is not read correctly\n");
-	}
 
 	if (aModuleParameter.HasMember("X"))
 	{
@@ -77,14 +68,7 @@ Studio::Module_Shoot::Module_Shoot(rapidjson::Value& aModuleParameter) :
 		x = aModuleParameter["X"].GetFloat();
 		y = aModuleParameter["Y"].GetFloat();
 
-
-		
 		myOriginalSpawnPosition = { x , y };
-
-	}
-	else
-	{
-		printf("Position in Shoot Module is not read correctly\n");
 	}
 
 	myElapsedTime = 0.0f;

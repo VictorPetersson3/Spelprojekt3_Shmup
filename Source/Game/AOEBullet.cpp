@@ -8,12 +8,6 @@ namespace Studio
 {
 	AOEBullet::AOEBullet(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, float aRadius)
 	{
-		printf_s("\n[AOE]\nCreated by %s at {%f, %f} with radius: %f\n\n",
-			aOwner == Enums::BulletOwner::Player ? "Player" : "Boss",
-			aPosition.x, aPosition.y,
-			aRadius
-		);
-
 		myTypePattern = new TypePattern_Bullet("Sprites/Particles/AOE_Temp.dds", 12, 0.0f, aOwner);
 		myPosition = aPosition;
 
