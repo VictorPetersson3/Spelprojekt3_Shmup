@@ -36,6 +36,7 @@ namespace Studio
 		myPosition.x += 200;
 		myScoreValue = 100;
 		myShootTimer = 0;
+		GetHealth().SetStartHealth(myType->GetStartHealth());
 		AddColliders();
 		switch (aEnemyType->GetMovementType())
 		{

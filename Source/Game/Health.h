@@ -16,6 +16,7 @@ namespace Studio
 		bool GetGodMode();
 		void SetGodMode(bool aChoice);
 		void ResetHealth();
+		void SetStartHealth(const float aHealthValue);
 	private:
 		float myMaxHealth = 0;
 		float myCurrentHealth = 0;

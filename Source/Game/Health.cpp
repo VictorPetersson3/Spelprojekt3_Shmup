@@ -50,3 +50,9 @@ void Studio::Health::ResetHealth()
 	myCurrentHealth = myMaxHealth;
 	myIsDead = false;
 }
+
+void Studio::Health::SetStartHealth(const float aHealthValue)
+{
+	myMaxHealth = aHealthValue;
+	myCurrentHealth = myMaxHealth;
+}
