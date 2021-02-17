@@ -128,7 +128,6 @@ void Studio::StartButton::OnClick()
 
 	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
-	AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
 
 	//AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
 

@@ -2,15 +2,15 @@
   "HealthPoints": 10,
   "Movement": {
     "Type": "Wave",
-    "HorizontalSpeed": 400,
-    "VerticalSpeed": 100,
-    "Height": 100
+    "HorizontalSpeed": 300,
+    "VerticalSpeed": 200,
+    "Height": 350
   },
   "Bullet": {
     "Type": "",
-    "Speed": 0,
+    "Speed": 1000,
     "ShootTowardsPlayer": false,
-    "Interval": 200
+    "Interval": 1000
   },
   "Animation": 
   {

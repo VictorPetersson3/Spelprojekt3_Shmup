@@ -20,6 +20,7 @@ namespace Studio
 		GenericButton* myLevel1Button;
 		GenericButton* myLevel2Button;
 		GenericButton* myLevel3Button;
+		GenericButton* myTutorialButton;
 		ImageElement* myMainMenuBackground;
 
 		GenericButton* myBackButton;

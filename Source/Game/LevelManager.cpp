@@ -523,13 +523,40 @@ namespace Studio
 			myLevelBossSpawned = true;
 		}
 		mySpawnedBoss = false;
-		SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
-		myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
-		myParticleEmitter->Activate();
 		MenuManagerSingleton::GetInstance()->GetShop()->Disable();
 		MenuManagerSingleton::GetInstance()->GetHUD()->Enable();
 		MenuManagerSingleton::GetInstance()->GetMainMenu()->Disable();
 		MenuManagerSingleton::GetInstance()->GetPauseMenu()->Disable();
+
+		//Song loading & Particle loading
+		switch (myCurrentLevel)
+		{
+		case 0:
+			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
+			myParticleEmitter->Activate();
+			break;
+		case 1:
+			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eSnow);
+			myParticleEmitter->Activate();
+			break;
+		case 2:
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			break;
+		case 3:
+			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eRain);
+			myParticleEmitter->Activate();
+			break;
+		default:
+			break;
+		}
+
+
 	}
 
 	void LevelManager::ReloadLevel()
