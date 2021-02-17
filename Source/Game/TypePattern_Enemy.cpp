@@ -64,6 +64,10 @@ Studio::TypePattern_Enemy::TypePattern_Enemy(rapidjson::Document& aJsonDoc, cons
 	if (aJsonDoc["Bullet"].HasMember("Interval"))
 	{
 		myShootInterval = aJsonDoc["Bullet"]["Interval"].GetFloat() * 0.001;
+		if (myShootInterval == 0)
+		{
+			myShootInterval = 1000000;
+		}
 	}
 	else
 	{
