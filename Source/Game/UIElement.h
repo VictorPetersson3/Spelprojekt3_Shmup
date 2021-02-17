@@ -28,8 +28,6 @@ namespace Studio
 
 		float renderAspect = 1.51515f;
 		float renderAspectY = 0;
-
-		RenderCommand myRenderCommand;
 	};
 }
 

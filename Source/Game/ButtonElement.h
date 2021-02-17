@@ -30,6 +30,8 @@ namespace Studio
 		float myTop;
 		float myBottom;
 
+		float myOriginalSize;
+
 		bool hasBeenHoveredOver = false;
 
 		HWND myWindowHandle;
