@@ -468,6 +468,7 @@ namespace Studio
         myShop.Disable();
         hasStartedGame = false;
         myStartButton->myIsClicked = false;
+        Studio::AudioManagerAccessor::GetInstance()->StopAllSounds();
         Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
         if (Studio::Timer::GetInstance()->IsFrozen())
         {
