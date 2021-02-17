@@ -248,6 +248,19 @@ namespace Studio
 		{
 
 			myEnemies[i]->Update(Timer::GetInstance()->TGetDeltaTime());
+
+			if (!myBullets.empty())
+			{
+				//Ta bort enemy-bullets som träffar terräng.
+				for (int j = myBullets.size() - 1; j >= 0; j--)
+				{
+					if (myBullets[j]->GetOwner() == Studio::Enums::BulletOwner::Enemy && myEnemies[i]->GetIsTerrain() && myEnemies[i]->Intersects(*myBullets[j]))
+					{
+						myBullets.erase(myBullets.begin() + j);
+					}
+				}
+			}
+
 			if (myEnemies[i]->GetCollider().Intersects(myPlayer->GetCollider()) && !myPlayer->GetHasCollided() && myEnemies[i]->GetIsTerrain())
 			{
 				//Om man vill att spelaren ska bouncea.
