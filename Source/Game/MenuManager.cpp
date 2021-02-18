@@ -110,7 +110,7 @@ namespace Studio
         myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "ExitButton", 10);
 
         myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
-        myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
+        myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitOptionsButton", 11);
         myCreditsBackButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 384.0f, 892.0f, }, { 1.0f, 1.0f }, { 0.5f, 0.5f }, "CreditsGoBackButton", 21);
 
         myShopUI = new Studio::ShopUI();
