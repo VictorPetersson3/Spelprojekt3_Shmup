@@ -97,8 +97,9 @@ namespace Studio
 	}
 	void SpriteSheet::SetAmountOfFrames(const Tga2D::Vector2f& aAmountOfFrames)
 	{
-		myRectSize.x = (mySize.x / aAmountOfFrames.x) / mySize.x;
-		myRectSize.y = (mySize.y / aAmountOfFrames.y) / mySize.y;
+		const float EPSILON = 0.00001f;
+		myRectSize.x = (mySize.x / aAmountOfFrames.x) / mySize.x - EPSILON;
+		myRectSize.y = (mySize.y / aAmountOfFrames.y) / mySize.y - EPSILON;
 		mySprite->SetTextureRect(myRectSize.x - myRectSize.x, myRectSize.y - myRectSize.y, myRectSize.x, myRectSize.y);
 		mySize.x = mySize.x / aAmountOfFrames.x;
 		mySize.y = mySize.y / aAmountOfFrames.y;
