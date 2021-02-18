@@ -28,7 +28,7 @@
 namespace Studio
 {
 	Boss::Boss(const char* aImagePath, rapidjson::Value& aBossParameters) :
-		Boss::GameObject(aImagePath, 1200.0f),
+		Boss::GameObject(aImagePath, 900.0f),
 		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
 		mySpriteSheet.SetLayer(-1);

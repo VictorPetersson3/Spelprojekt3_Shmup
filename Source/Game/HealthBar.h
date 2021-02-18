@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "SpriteSheet.h"
 namespace Tga2D
 {
 	CSprite;
@@ -22,9 +23,11 @@ namespace Studio
 
 
 	private:
-		VECTOR2F myPosition;
 		float myOriginalX;
 		float myOriginalY;
+		bool myHaveFrame;
+		VECTOR2F myPosition;
+		SpriteSheet myFrameSprite;
 
 	};
 }
