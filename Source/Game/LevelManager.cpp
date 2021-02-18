@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-
+#include <algorithm>
 // Spelfiler
 #include "Timer.h"
 #include "Enemy.h"
@@ -68,8 +68,6 @@ namespace Studio
 		// Load chosen level by Lever Designers
 		std::fstream file;
 		std::string levelPath;
-		int levelIterator = 0;
-		int levelToStart = 0;
 		file.open("JSON/Levels/level.txt");
 		{
 			bool lineIsComment = true;
@@ -87,6 +85,7 @@ namespace Studio
 
 
 		std::string directory = "JSON/Levels";
+		
 		for (const auto& entry : std::filesystem::directory_iterator(directory))
 		{
 			if (entry.path().extension().string() == ".json")
@@ -98,15 +97,14 @@ namespace Studio
 				std::string levelPathStitched = "JSON/Levels/";
 				levelPathStitched.append(type);
 				myLevelPaths.push_back(levelPathStitched);
-
-				if (path == levelPathStitched)
-				{
-					levelToStart = levelIterator;
-				}
-				levelIterator++;
 			}
 		}
-		myCurrentLevel = levelToStart;
+		std::sort(myLevelPaths.begin(), myLevelPaths.end());
+		for (int i = 0; i < myLevelPaths.size(); i++)
+		{
+			printf("My Sorted Level Path: %s\n", myLevelPaths.at(i).c_str());
+		}
+		myCurrentLevel = 0;
 		myParticleEmitter = nullptr;
 		myLevelBossSpawned = false;
 		myLevelEnemiesCleared = false;
