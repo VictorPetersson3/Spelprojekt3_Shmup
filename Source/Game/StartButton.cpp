@@ -29,6 +29,7 @@ Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPositi
 
 	mySize = 1;
 	mySizeTimer = 0;
+	myScale = aSize;
 
 	myShouldLoadNextLevel = aShouldStartnextLevel;
 	myLevelToLoad = 0;

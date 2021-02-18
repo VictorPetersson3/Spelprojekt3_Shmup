@@ -27,6 +27,7 @@ Studio::ReturnToMainMenuButton::ReturnToMainMenuButton(const char* aSpritePath, 
 
 	mySize = 1;
 	mySizeTimer = 0;
+	myScale = aSize;
 
 	CalculateButtonCollider();
 

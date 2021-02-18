@@ -27,6 +27,7 @@ Studio::ExitButton::ExitButton(const char* aSpritePath, const VECTOR2F aPosition
 	mySize = aSize.x;
 	myOriginalSize = aSize.x;
 	mySizeTimer = 0;
+	myScale = aSize;
 
 	CalculateButtonCollider();
 

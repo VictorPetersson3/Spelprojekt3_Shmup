@@ -44,6 +44,9 @@ Studio::ShopButtonTier2::ShopButtonTier2(const char* aPath, const VECTOR2F aPosi
 	mySize = 1;
 	mySizeTimer = 0;
 
+	myScale = aSize;
+
+
 	CalculateButtonCollider();
 
 }
