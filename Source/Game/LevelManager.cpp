@@ -132,11 +132,6 @@ namespace Studio
 	{
 		if (!myIsUpdating) return;
 
-		if (Studio::InputManager::GetInstance()->IsKeyPressed('H'))
-		{
-			ScoreAccessor::GetInstance()->AddCoinScore(100000);
-		}
-
 
 		if (myLevelIsCleared == true)
 		{
