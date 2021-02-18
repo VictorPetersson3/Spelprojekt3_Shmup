@@ -32,6 +32,7 @@ Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPositi
 	mySize = 1;
 	mySizeTimer = 0;
 	myScale = aSize;
+	myClickTimer = 0;
 
 	myLevelToLoad = 0;
 	myIsMainMenuStart = aMainMenuButton;
@@ -55,10 +56,10 @@ void Studio::StartButton::Update()
 		mySize += Studio::Timer::GetInstance()->TGetDeltaTime();
 		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
 	}
-
+	myClickTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
 	if (myIsEnabled == true)
 	{
-		if (myIsClicked == false)
+		if (myIsClicked == false && myClickTimer > 0.25f)
 		{
 			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
@@ -76,6 +77,7 @@ void Studio::StartButton::Update()
 						OnClick();
 						myIsClicked = true;
 						myIsEnabled = false;
+						myClickTimer = 0;
 					}
 				}
 				else
@@ -96,6 +98,7 @@ void Studio::StartButton::Update()
 		if (Studio::InputManager::GetInstance()->GetMouseLReleased() && myIsClicked)
 		{
 			myIsClicked = false;
+			myClickTimer = 0;
 		}
 
 		mySpriteSheet->SetSizeRelativeToImage({ mySize, mySize });
@@ -127,6 +130,11 @@ void Studio::StartButton::OnClick()
 	MenuManagerSingleton::GetInstance()->SetIsInShop(false);
 
 	LevelAccessor::GetInstance()->StartUpdating();
+}
+
+void Studio::StartButton::ResetClickTimer()
+{
+	myClickTimer = 0;
 }
 
 void Studio::StartButton::SetLevelToLoad(const int aIndex)

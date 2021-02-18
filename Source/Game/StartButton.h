@@ -14,7 +14,7 @@ namespace Studio
 
 		void Update() override;
 		void OnClick() override;
-
+		void ResetClickTimer();
 		void SetLevelToLoad(const int aIndex);
 
 		bool myIsClicked = false;
@@ -22,6 +22,7 @@ namespace Studio
 	private:
 		bool myIsMainMenuStart;
 		int myLevelToLoad;
+		float myClickTimer;
 
 		float mySizeTimer;
 		float mySize;

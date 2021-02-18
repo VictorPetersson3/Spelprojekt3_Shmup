@@ -268,7 +268,7 @@ namespace Studio
 				}
 				else
 				{
-					myPlayer->TakeDamage(2.0f);
+					myPlayer->TakeDamage(1.0f);
 				}
 				//myPlayer->TakeDamage(2.f);
 			}

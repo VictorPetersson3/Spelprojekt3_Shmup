@@ -14,12 +14,12 @@ Studio::Options::Options(MenuManager* aMenuManager)
 	myToggleFullScreenOff = new GenericButton("Sprites/UI/UI_checkBoxOK.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 	myToggleFullScreenOn = new GenericButton("Sprites/UI/UI_checkBox.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 
-	my640x360 = new GenericButton("Sprites/UI/UI_640x360.dds", { 810, 500 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my960x540 = new GenericButton("Sprites/UI/UI_960x540.dds", { 810, 575 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1280x720 = new GenericButton("Sprites/UI/UI_1280x720.dds", { 810, 650 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1600x900 = new GenericButton("Sprites/UI/UI_1600x900.dds", { 1110, 500 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my1920x1080 = new GenericButton("Sprites/UI/UI_1920x1080.dds", { 1110, 575 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	my2560x1440 = new GenericButton("Sprites/UI/UI_2560x1440.dds", { 1110, 650 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my640x360 = new GenericButton("Sprites/UI/UI_640x360.dds", { 710, 500 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my960x540 = new GenericButton("Sprites/UI/UI_960x540.dds", { 710, 575 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1280x720 = new GenericButton("Sprites/UI/UI_1280x720.dds", { 710, 650 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1600x900 = new GenericButton("Sprites/UI/UI_1600x900.dds", { 1210, 500 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my1920x1080 = new GenericButton("Sprites/UI/UI_1920x1080.dds", { 1210, 575 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	my2560x1440 = new GenericButton("Sprites/UI/UI_2560x1440.dds", { 1210, 650 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 
 	myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
 	myIsActive = false;
@@ -54,29 +54,24 @@ Studio::Options::~Options()
 
 void Studio::Options::Update()
 {
-	if (!myHasStarted)
+	if (myIsActive)
 	{
-		if (myIsActive)
+		//Enable();
+		if (myHasStarted)
 		{
 			Tga2D::Vector2ui res;
 			if (myToggleFullScreenOff->IsClicked())
 			{
-				myToggleFullScreenOff->SetActive(false);
-				myToggleFullScreenOn->SetActive(true);
+				myClickTimer = 0;
+				myHasStarted = false;
 				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
 				myMenuManager->ResetAllSizes();
 				Disable();
 			}
 			if (myToggleFullScreenOn->IsClicked())
 			{
-				myToggleFullScreenOff->SetActive(true);
-				myToggleFullScreenOn->SetActive(false);
-				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-				myMenuManager->ResetAllSizes();
-				Disable();
-			}
-			if (myToggleFullScreenOff->IsClicked())
-			{
+				myClickTimer = 0;
+				myHasStarted = false;
 				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
 				myMenuManager->ResetAllSizes();
 				Disable();
@@ -89,6 +84,8 @@ void Studio::Options::Update()
 					res.y = 360;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
 					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					myHasStarted = false;
 					Disable();
 				}
 				if (my960x540->IsClicked())
@@ -97,6 +94,8 @@ void Studio::Options::Update()
 					res.y = 540;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
 					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					myHasStarted = false;
 					Disable();
 				}
 				if (my1280x720->IsClicked())
@@ -106,6 +105,8 @@ void Studio::Options::Update()
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
 					myMenuManager->ResetAllSizes();
 					Disable();
+					myClickTimer = 0;
+					myHasStarted = false;
 				}
 				if (my1600x900->IsClicked())
 				{
@@ -114,6 +115,8 @@ void Studio::Options::Update()
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
 					myMenuManager->ResetAllSizes();
 					Disable();
+					myClickTimer = 0;
+					myHasStarted = false;
 				}
 				if (my1920x1080->IsClicked())
 				{
@@ -122,6 +125,8 @@ void Studio::Options::Update()
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
 					myMenuManager->ResetAllSizes();
 					Disable();
+					myClickTimer = 0;
+					myHasStarted = false;
 				}
 				if (my2560x1440->IsClicked())
 				{
@@ -129,20 +134,22 @@ void Studio::Options::Update()
 					res.y = 1440;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
 					myMenuManager->ResetAllSizes();
+					myClickTimer = 0;
+					myHasStarted = false;
 					Disable();
 				}
 			}
 		}
+		else
+		{
+			myClickTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
+		}
+		if (myClickTimer > 0.25)
+		{
+			myHasStarted = true;
+		}
+		MenuObject::Update();
 	}
-	else
-	{
-		myClickTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
-	}
-	if (myClickTimer > 0.25)
-	{
-		myHasStarted = true;
-	}
-	MenuObject::Update();
 }
 
 void Studio::Options::Enable()
@@ -163,7 +170,6 @@ void Studio::Options::Enable()
 		myToggleFullScreenOff->SetActive(false);
 	}
 	myIsActive = true;
-	myClickTimer = 0;
 }
 
 void Studio::Options::Disable()

@@ -488,6 +488,7 @@ namespace Studio
     {
         myOptions->Disable();
         myOptionsMenu.Disable();
+        myStartButton->ResetClickTimer();
         myMainMenu.Enable();
         myPauseMenu.Disable();
         myOptionsMenu.Disable();

@@ -26,6 +26,7 @@ Studio::GenericButton::GenericButton(const char* aSpritePath, const VECTOR2F aPo
 	mySize = aSize.x;
 	myOriginalSize = aSize.x;
 	mySizeTimer = 0;
+	myClickTimer = 0;
 	myScale = aSize;
 
 
@@ -47,10 +48,11 @@ void Studio::GenericButton::Update()
 		mySize += Studio::Timer::GetInstance()->TGetDeltaTime();
 		mySizeTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
 	}
+	myClickTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
 
 	if (myIsEnabled)
 	{
-		if (!myIsClicked)
+		if (!myIsClicked && myClickTimer >= 0.25f)
 		{
 			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
@@ -64,6 +66,7 @@ void Studio::GenericButton::Update()
 					if (Studio::InputManager::GetInstance()->GetMouseLPressed())
 					{
 						OnClick();
+						myClickTimer = 0;
 						myIsClicked = true;
 						myIsEnabled = false;
 					}
@@ -86,6 +89,7 @@ void Studio::GenericButton::Update()
 		if (Studio::InputManager::GetInstance()->GetMouseLReleased() && myIsClicked)
 		{
 			myIsClicked = false;
+			myClickTimer = 0;
 		}
 		mySpriteSheet->SetSizeRelativeToImage({ mySize, mySize });
 		Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
