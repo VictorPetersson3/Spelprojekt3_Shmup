@@ -10,6 +10,8 @@
 #include "MenuManagerSingleton.h"
 #include "Timer.h"
 
+#include "VideoPlayerAccessor.h"
+
 #define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer,const bool aShouldStartnextLevel)
 {
@@ -104,6 +106,11 @@ void Studio::StartButton::Update()
 
 void Studio::StartButton::OnClick()
 {
+	if (myLevelToLoad == 0)
+	{
+		VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Intro);
+	}
+
 	if (myShouldLoadNextLevel)
 	{
 		myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex() + 1;
