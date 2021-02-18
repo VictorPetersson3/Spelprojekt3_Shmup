@@ -75,6 +75,8 @@ namespace Studio
         myShopCostText = new TextElement(Tga2D::EFontSize_18, { 0.76f,0.738f }, "ShopCoinCostText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
         myShopUpgradeNameText = new TextElement(Tga2D::EFontSize_24, { 0.78f,0.645f }, "ShopNameText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf", true);
 
+        myShopMerchantPortrait = new ImageElement("Sprites/UI/ShopUI/shopUI_merchantPortrait.dds", { 1495,470 }, { 1,1 }, { 0.5f,0.5f }, 600, "MerchantPortrait");
+
         myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.24 }, "myMasterVolumePercentageText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
         myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");
 
@@ -145,6 +147,7 @@ namespace Studio
         myShop.Add(myShopDescriptionText);
         myShop.Add(myShopCostText);
         myShop.Add(myShopUpgradeNameText);
+        myShop.Add(myShopMerchantPortrait);
         myShop.Disable();
 
         myPauseMenu.Add(myPausMenuBackground);
@@ -394,6 +397,7 @@ namespace Studio
         myShop.Add(myNextLevelButton);
         myShop.Add(myShopCostText);
         myShop.Add(myShopUpgradeNameText);
+        myShop.Add(myShopMerchantPortrait);
         myShop.Disable();
     }
 
