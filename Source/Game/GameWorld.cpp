@@ -99,6 +99,11 @@ void CGameWorld::Init()
 //aIsPlaying is an atomic bool to close the gameplay thread
 void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying, bool aHasTabbed)
 {
+	if (!myHasStarted)
+	{
+		myHasStarted = true;
+		Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
+	}
 	if (!aHasTabbed)
 	{
 		if (myVideoPlayer->IsPlaying())
@@ -137,13 +142,6 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying, bool aH
 			myMousePointer->Update({ Studio::InputManager::GetInstance()->GetMousePosition().x,  Studio::InputManager::GetInstance()->GetMousePosition().y });
 		}
 	}
-	if (!myHasStarted)
-	{
-		myHasStarted = true;
-		//Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-		//myMenuManager->ResetAllSizes();
-	}
-	
 }
 
 void CGameWorld::Render()
@@ -165,22 +163,22 @@ void CGameWorld::SwapBuffers()
 }
 void CGameWorld::InputStuff()
 {
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('F'))
-	{
-		Studio::Timer::GetInstance()->ToggleFreeze();
-		if (Studio::Timer::GetInstance()->IsFrozen())
-		{
-			printf_s("Froze game\n");
-		}
-		else
-		{
-			printf_s("Resumed game\n");
-		}
-	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('G'))
-	{
-		myPlayer->SetGodMode(!myPlayer->GetHealth().GetGodMode());
-	}
+	//if (Studio::InputManager::GetInstance()->IsKeyPressed('F'))
+	//{
+	//	Studio::Timer::GetInstance()->ToggleFreeze();
+	//	if (Studio::Timer::GetInstance()->IsFrozen())
+	//	{
+	//		printf_s("Froze game\n");
+	//	}
+	//	else
+	//	{
+	//		printf_s("Resumed game\n");
+	//	}
+	//}
+	//if (Studio::InputManager::GetInstance()->IsKeyPressed('G'))
+	//{
+	//	myPlayer->SetGodMode(!myPlayer->GetHealth().GetGodMode());
+	//}
 
 	if (Studio::InputManager::GetInstance()->IsCustomKeyPressed(Studio::Enums::CustomKey_Pause) && myMenuManager->GameStarted() && myMenuManager->GetIsInShop()==false)
 	{
@@ -202,24 +200,24 @@ void CGameWorld::InputStuff()
 		myMenuManager->GetPauseMenu()->Disable();
 		myMenuManager->GetPauseMenu()->GetElementWithTag("ResumeButton")->myIsClicked = false;
 	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('B'))
-	{
-		Tga2D::CEngine::GetInstance()->Shutdown();
-	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('L'))
-	{
-		myLevelManager->ReloadLevel();
-	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('7'))
-	{
-		Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 2);
-	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('8'))
-	{
-		Studio::Timer::GetInstance()->SetSpeed(1);
-	}
-	if (Studio::InputManager::GetInstance()->IsKeyPressed('9'))
-	{
-		Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 0.5);
-	}
+	//if (Studio::InputManager::GetInstance()->IsKeyPressed('B'))
+	//{
+	//	Tga2D::CEngine::GetInstance()->Shutdown();
+	//}
+	//if (Studio::InputManager::GetInstance()->IsKeyPressed('L'))
+	//{
+	//	myLevelManager->ReloadLevel();
+	//}
+	//if (Studio::InputManager::GetInstance()->IsKeyPressed('7'))
+	//{
+	//	Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 2);
+	//}
+	//if (Studio::InputManager::GetInstance()->IsKeyPressed('8'))
+	//{
+	//	Studio::Timer::GetInstance()->SetSpeed(1);
+	//}
+	//if (Studio::InputManager::GetInstance()->IsKeyPressed('9'))
+	//{
+	//	Studio::Timer::GetInstance()->SetSpeed(Studio::Timer::GetInstance()->GetSpeed() * 0.5);
+	//}
 }

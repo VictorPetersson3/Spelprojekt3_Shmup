@@ -339,12 +339,8 @@ void Tga2D::CEngine::SetTargetSize(const VECTOR2UI& aTargetSize)
 
 void Tga2D::CEngine::SetResolution(const VECTOR2UI& aResolution, bool aAlsoSetWindowSize)
 {
-	printf("Engine Set Resolution, Res x: %i, y: %i\n", aResolution.x, aResolution.y);
 	if (aResolution.x == 0 || aResolution.y == 0)
 	{
-		Tga2D::Vector2ui res;
-		res.x = 1280;
-		res.y = 720;
 		if (aAlsoSetWindowSize)
 		{
 			myWindow->SetResolution(GetScreenResolution());
@@ -360,7 +356,6 @@ void Tga2D::CEngine::SetResolution(const VECTOR2UI& aResolution, bool aAlsoSetWi
 		myDirect3D->SetResolution(aResolution);
 	}
 	CalculateRatios();
-	//UpdateWindowSizeChanges(true);
 }
 
 void Tga2D::CEngine::CalculateRatios()

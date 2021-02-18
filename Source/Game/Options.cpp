@@ -10,9 +10,9 @@
 Studio::Options::Options(MenuManager* aMenuManager)
 {
 	myMenuManager = aMenuManager;
-	myFullscreenText = new ImageElement("Sprites/UI/UI_fullscreen.dds", { 960,400 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
-	myToggleFullScreenOff = new GenericButton("Sprites/UI/UI_checkBoxOK.dds", { 960, 470 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	myToggleFullScreenOn = new GenericButton("Sprites/UI/UI_checkBox.dds", { 960, 470 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myFullscreenText = new ImageElement("Sprites/UI/UI_fullscreen.dds", { 960,280 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
+	myToggleFullScreenOff = new GenericButton("Sprites/UI/UI_checkBoxOK.dds", { 960, 320 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myToggleFullScreenOn = new GenericButton("Sprites/UI/UI_checkBox.dds", { 960, 320 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 
 	my640x360 = new GenericButton("Sprites/UI/UI_640x360.dds", { 810, 575 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
 	my960x540 = new GenericButton("Sprites/UI/UI_960x540.dds", { 810, 650 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
