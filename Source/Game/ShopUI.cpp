@@ -42,7 +42,6 @@ Studio::ShopUI::ShopUI()
 	myTier3Buttons.push_back(new ShopButtonTier3("Sprites/UI/ShopUI/FinalCards/shopUI_cards_G3TR3-KT_Tier3.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 500, Enums::Tier3Upgrades::MissileCluster, 30, "Sprites/UI/ShopUI/MissileT3.dds", "G3TR3-KT"));
 	myTier3Buttons.push_back(new ShopButtonTier3("Sprites/UI/ShopUI/FinalCards/shopUI_cards_RideTheLightning_Tier3.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 500, Enums::Tier3Upgrades::RapidFirePenetrating, 30, "Sprites/UI/ShopUI/RapidFirePENT3.dds","Ride The Lightning"));
 	myTier3Buttons.push_back(new ShopButtonTier3("Sprites/UI/ShopUI/FinalCards/shopUI_cards_EMPoweredShieldReactor_Tier3.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 500, Enums::Tier3Upgrades::ShieldExplosion, 30, "Sprites/UI/ShopUI/ShieldT3.dds","EMPowered Shield Reactor"));
-	myTier3Buttons.push_back(new ShopButtonTier3("Sprites/UI/ShopUI/FinalCards/shopUI_cards_G3TR3-KT_Tier3.dds", { 0,0 }, { 1,1 }, { 0.5f,0.5f }, 500, Enums::Tier3Upgrades::MissileCluster, 30, "Sprites/UI/ShopUI/MissileT3.dds", "G3TR3-KT"));
 
 }
 
@@ -145,26 +144,42 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 		myActiveButtonPtrs.push_back(buttonToPushBack);
 	}
 
-	if (PlayerAccessor::GetInstance() != nullptr)
-	{
-		if (PlayerAccessor::GetInstance()->GetHasClusterBombs())
-		{
-			myTier3Buttons.erase(myTier3Buttons.begin() + 1);
-		}
-		if (PlayerAccessor::GetInstance()->GetHasExplodingShield())
-		{			
-			myTier3Buttons.erase(myTier3Buttons.begin() + 3);
-		}
-		if (PlayerAccessor::GetInstance()->GetHasPenetratingRounds())
-		{
-			myTier3Buttons.erase(myTier3Buttons.begin() + 2);
-		}
-	}
+	
 	
 
 	ShopButtonTier3* buttonToPushBack = myTier3Buttons[GetRandomNumberInRange(myTier3Buttons.size() - 1)];
 
+	if (PlayerAccessor::GetInstance() != nullptr)
+	{
+		if (PlayerAccessor::GetInstance()->GetHasClusterBombs())
+		{
+			while (buttonToPushBack->GetUpgradeType() == Enums::Tier3Upgrades::MissileCluster)
+			{
+				int temp = GetRandomNumberInRange(myTier3Buttons.size() - 1);
+				buttonToPushBack = myTier3Buttons[temp];
+			}
+
+		}
+		if (PlayerAccessor::GetInstance()->GetHasExplodingShield())
+		{
+			while (buttonToPushBack->GetUpgradeType() == Enums::Tier3Upgrades::ShieldExplosion)
+			{
+				int temp = GetRandomNumberInRange(myTier3Buttons.size() - 1);
+				buttonToPushBack = myTier3Buttons[temp];
+			}
+		}
+		if (PlayerAccessor::GetInstance()->GetHasPenetratingRounds())
+		{
+			while (buttonToPushBack->GetUpgradeType() == Enums::Tier3Upgrades::RapidFirePenetrating)
+			{
+				int temp = GetRandomNumberInRange(myTier3Buttons.size() - 1);
+				buttonToPushBack = myTier3Buttons[temp];
+			}
+		}
+	}
+
 	buttonToPushBack->SetPosition({ 1020,600 });
+
 
 	myActiveButtonPtrs.push_back(buttonToPushBack);
 
