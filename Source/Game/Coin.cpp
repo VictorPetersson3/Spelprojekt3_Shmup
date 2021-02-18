@@ -13,7 +13,7 @@ namespace Studio
         GameObject::myCollider.AddCircleColliderObject({0,0}, 32);
         mySpriteSheet.LoopAnimationInRange(0.1f, { 1,1 }, { 6,1 });
         myScoreValue = 1;
-        mySpeed = 100;
+        mySpeed = 75;
 
         SetGodMode(true);
         myInterval = 1.0f;
