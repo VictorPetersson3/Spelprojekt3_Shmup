@@ -13,7 +13,7 @@
 #include "VideoPlayerAccessor.h"
 
 #define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
-Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer,const bool aShouldStartnextLevel)
+Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer,const bool aMainMenuButton)
 {
 	mySprite = new Tga2D::CSprite(aSpritePath);
 	mySprite->SetPivot(aPivot);
@@ -33,9 +33,8 @@ Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPositi
 	mySizeTimer = 0;
 	myScale = aSize;
 
-	myShouldLoadNextLevel = aShouldStartnextLevel;
 	myLevelToLoad = 0;
-
+	myIsMainMenuStart = aMainMenuButton;
 	CalculateButtonCollider();
 
 }
@@ -106,16 +105,15 @@ void Studio::StartButton::Update()
 
 void Studio::StartButton::OnClick()
 {
-	if (myLevelToLoad == 0)
+	if (myIsMainMenuStart)
 	{
 		VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Intro);
+		LevelAccessor::GetInstance()->LoadLevel(0);
 	}
-
-	if (myShouldLoadNextLevel)
+	else
 	{
-		myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex() + 1;
-
-		if (myLevelToLoad >= LevelAccessor::GetInstance()->GetLevelPaths().size() -1)
+		myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex();
+		if (myLevelToLoad > LevelAccessor::GetInstance()->GetLevelPaths().size() - 1)
 		{
 			myLevelToLoad = LevelAccessor::GetInstance()->GetCurrentLevelIndex();
 		}
@@ -124,15 +122,6 @@ void Studio::StartButton::OnClick()
 			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoad);
 		}
 	}
-	else
-	{
-		if (myLevelToLoad <= LevelAccessor::GetInstance()->GetLevelPaths().size())
-		{
-			LevelAccessor::GetInstance()->LoadLevel(myLevelToLoad);
-		}
-	}
-
-	
 
 	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);

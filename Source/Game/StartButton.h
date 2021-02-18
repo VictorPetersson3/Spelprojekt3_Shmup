@@ -8,7 +8,7 @@ namespace Studio
 	class StartButton : public ButtonElement
 	{
 	public: 
-		StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer,const bool aShouldStartnextLevel);
+		StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag, int aLayer,const bool aMainMenuButton);
 		~StartButton();
 
 
@@ -20,8 +20,8 @@ namespace Studio
 		bool myIsClicked = false;
 
 	private:
+		bool myIsMainMenuStart;
 		int myLevelToLoad;
-		bool myShouldLoadNextLevel = false;
 
 		float mySizeTimer;
 		float mySize;

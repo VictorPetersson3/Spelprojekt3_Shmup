@@ -104,8 +104,8 @@ namespace Studio
         myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 2,2 }, { 0.5f,0.5f }, "ResumeButton", 11);
         myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "LevelSelectButton", 20);
 
-        myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton", 10, false);
-        myNextLevelButton = new StartButton("Sprites/UI/ShopUI/shopUI_buttons_continue.dds", { 1500,960 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton", 10, true);
+        myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton", 10, true);
+        myNextLevelButton = new StartButton("Sprites/UI/ShopUI/shopUI_buttons_continue.dds", { 1500,960 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton", 10, false);
 
         myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "ExitButton", 10);
 
