@@ -43,6 +43,7 @@ namespace Studio
 				mySpriteSheet.SetImagePath("sprites/bullets/missilelvl1.dds");
 			}
 			myIsReversed = false;
+
 		}
 		if (aOwner == Enums::BulletOwner::Enemy)
 		{
@@ -69,6 +70,8 @@ namespace Studio
 			myIsReversed = true;
 
 			myFlame.GetSpriteSheet().SetSizeRelativeToImage({ -1.0f, 0.25f });
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/Missile.mp3", false, 0.25f);
+
 		}
 	}
 
@@ -87,6 +90,7 @@ namespace Studio
 
 				if (myVelocity.x <= 0.0f)
 				{
+					AudioManagerAccessor::GetInstance()->Play2D("Audio/Missile.mp3", false, 0.25f);
 					myIsSlowingDown = false;
 					myVelocity.x = 0.0f;
 					myVelocity.y = 0.0f;
@@ -127,8 +131,8 @@ namespace Studio
 	void Missile::Impact()
 	{
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
+		AudioManagerAccessor::GetInstance()->StopSound("zapsplat_warfare_missile_rocket_small_launch_fizz_whoosh_004_62724.mp3");
 		AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.15f);
-
 
 		// Shake the camera # TEST
 		RendererAccessor::GetInstance()->ShakeCamera(15.0f, 0.25f);
