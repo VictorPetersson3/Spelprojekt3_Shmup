@@ -4,6 +4,8 @@
 #include "InputManager.h"
 #include "RendererAccessor.h"
 #include "Renderer.h"
+#include "VideoPlayerAccessor.h"
+#include "MenuManagerSingleton.h"
 #include <tga2d/sprite/sprite.h>
 namespace Studio
 {
@@ -18,6 +20,8 @@ namespace Studio
 		myLogo = new SpriteSheet("Sprites/Logos/tga_logo.dds");
 		myLogo->SetPosition({ 960, 540 });
 		myLogo->SetSizeRelativeToImage({ 0.75f, 0.75f });
+		myLogo->SetLayer(10);
+		HijackGameWorld();
 	}
 	void Cutscenes::LoadIntroResources()
 	{
@@ -46,6 +50,8 @@ namespace Studio
 	}
 	void Cutscenes::ReleaseLogosResources()
 	{
+		delete myLogo;
+		myLogo = nullptr;
 	}
 	void Cutscenes::ReleaseIntroResources()
 	{
@@ -79,6 +85,18 @@ namespace Studio
 	bool Cutscenes::IsCurrentyPlaying() const
 	{
 		return myIsCurrentlyPlayingScene;
+	}
+	bool Cutscenes::IsHijackingGameWorld() const
+	{
+		return myIsHijackingGameWorld;
+	}
+	void Cutscenes::HijackGameWorld()
+	{
+		myIsHijackingGameWorld = true;
+	}
+	void Cutscenes::StopHijackingGameWorld()
+	{
+		myIsHijackingGameWorld = false;
 	}
 	void Cutscenes::UpdateCurrentScene()
 	{
@@ -173,10 +191,11 @@ namespace Studio
 		}
 		case 8:
 		{
-			myIsCurrentlyPlayingScene = false;
-			break;
+			StopHijackingGameWorld();
+			GotoNextAction();
 		}
 		default:
+			myIsCurrentlyPlayingScene = false;
 			break;
 		}
 	}
@@ -185,6 +204,38 @@ namespace Studio
 	}
 	void Cutscenes::UpdateOutroScene(float aDeltaTime)
 	{
+		switch (myActionsDone)
+		{
+		case 0:
+		{
+			myTime = 0.0f;
+			GotoNextAction();
+			break;
+		}
+		case 1:
+		{
+			Tga2D::CEngine::GetInstance()->SetAmbientLightValue(1.0f - myTime * 0.5f);
+			RunAboveForXSeconds(2.0f);
+			break;
+		}
+		case 2:
+		{
+			Tga2D::CEngine::GetInstance()->SetAmbientLightValue(1.0f);
+			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
+			MenuManagerSingleton::GetInstance()->GetCreditsMenu()->Enable();
+			VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Outro);
+			GotoNextAction();
+			break;
+		}
+		case 3:
+		{
+			myIsCurrentlyPlayingScene = false;
+			break;
+		}
+		default:
+			myIsCurrentlyPlayingScene = false;
+			break;
+		}
 	}
 	void Cutscenes::GotoNextAction()
 	{
@@ -195,7 +246,7 @@ namespace Studio
 		myTime += Timer::GetInstance()->TGetDeltaTime();
 		if (myTime > aTime)
 		{
-			myTime -= aTime;
+			myTime = 0.0f;
 			myActionsDone++;
 			return true;
 		}
