@@ -105,6 +105,7 @@ void Studio::StartButton::Update()
 
 void Studio::StartButton::OnClick()
 {
+	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	if (myIsMainMenuStart)
 	{
 		CutscenesAccessor::GetInstance()->PlayScene(Enums::Cutscene::Intro);
@@ -122,7 +123,6 @@ void Studio::StartButton::OnClick()
 		}
 	}
 
-	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 	MenuManagerSingleton::GetInstance()->SetIsInShop(false);
 
