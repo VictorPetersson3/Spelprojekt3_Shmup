@@ -16,6 +16,7 @@ namespace Studio
 	class Player_JsonParser;
 	class VideoPlayer;
 	class MousePointer;
+	class Cutscenes;
 }
 namespace Tga2D
 {
@@ -58,4 +59,6 @@ private:
 	Studio::VideoPlayer* myVideoPlayer;
 	
 	Studio::MousePointer* myMousePointer;
+
+	Studio::Cutscenes* myCutscenes;
 };

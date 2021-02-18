@@ -273,6 +273,7 @@
     <ClCompile Include="Options.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="CutscenesAccessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h">
@@ -559,6 +560,7 @@
     <ClInclude Include="Options.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="CutscenesAccessor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
