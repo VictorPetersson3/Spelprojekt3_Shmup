@@ -99,11 +99,13 @@ namespace Studio
 		//Shield
 		bool myShieldIsActive = false;
 
+		float myOldFlame;
 		EngineFlame myEngineFlame;
 		Player_JsonParser* myPlayerData;
 
 		std::vector<PowerUpModule*> myPowerUpModules;
 		PowerUpModule* myShieldModule;
+
 	};
 }
 

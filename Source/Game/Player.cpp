@@ -468,8 +468,17 @@ namespace Studio
 			}
 			//Spacebar
 		}
+
+		if (myOldFlame != myCurrentFlame)
+		{
+			myOldFlame = myCurrentFlame;
+			myEngineFlame.GetSpriteSheet().LoopAnimationInRange(0.08333333f, { 1.0f, myCurrentFlame }, { 4.0f, myCurrentFlame });
+
+			printf_s("SWITCHED ANIMATION\n");
+		}
+
 		myPosition += myDirection.Normalize() * mySpeed * Timer::GetInstance()->TGetDeltaTime();
-		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 48, myPosition.y });
+		myEngineFlame.Update(myCurrentFlame, { myPosition.x - 8.0f, myPosition.y });
 		
 	}
 	void Player::RapidFireLogic()
