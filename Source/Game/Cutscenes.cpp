@@ -5,7 +5,9 @@
 #include "RendererAccessor.h"
 #include "Renderer.h"
 #include "VideoPlayerAccessor.h"
+#include "LevelAccessor.h"
 #include "MenuManagerSingleton.h"
+#include "Boss.h"
 #include <tga2d/sprite/sprite.h>
 namespace Studio
 {
@@ -216,10 +218,16 @@ namespace Studio
 		{
 			Tga2D::CEngine::GetInstance()->SetAmbientLightValue(1.0f - myTime * 0.5f);
 			RunAboveForXSeconds(2.0f);
+			if (LevelAccessor::GetInstance()->GetBoss() != nullptr)
+			{
+				LevelAccessor::GetInstance()->GetBoss()->Update();
+				LevelAccessor::GetInstance()->UpdateExplosions();
+			}
 			break;
 		}
 		case 2:
 		{
+			LevelAccessor::GetInstance()->ClearLevel();
 			Tga2D::CEngine::GetInstance()->SetAmbientLightValue(1.0f);
 			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 			MenuManagerSingleton::GetInstance()->GetCreditsMenu()->Enable();

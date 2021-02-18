@@ -144,6 +144,10 @@ namespace Studio
 			{
 				//StartCredits
 				StopUpdating();
+				if (myBoss != nullptr)
+				{
+					myBoss->Update();
+				}
 				//Studio::MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
 				CutscenesAccessor::GetInstance()->PlayScene(Enums::Cutscene::Outro);
 			}
@@ -416,7 +420,8 @@ namespace Studio
 				}
 				myEnemies.clear();
 				myBullets.clear();
-				myBoss = nullptr;
+				myLevelIsCleared = true;
+				myCurrentLevel++;
 			}
 		}
 
@@ -608,6 +613,15 @@ namespace Studio
 	bool LevelManager::IsLaserFiring()
 	{
 		return myLaserIsFiring;
+	}
+
+	Boss* LevelManager::GetBoss()
+	{
+		if (myBoss!= nullptr)
+		{
+			return myBoss;
+		}
+		return nullptr;
 	}
 
 	void LevelManager::CheckIfLevelIsCleared()

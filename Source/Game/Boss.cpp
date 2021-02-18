@@ -6,6 +6,7 @@
 #include "MovementBobbing.h"
 #include "MovementWave.h"
 #include "MovementStraight.h"
+#include "MovementDiagonal.h"
 #include "Condition.h"
 #include "Condition_BelowHealth.h"
 #include "Condition_DoOnce.h"
@@ -16,6 +17,8 @@
 #include "LevelAccessor.h"
 #include "AudioManagerAccesor.h"
 #include "AudioManager.h"
+#include "Counter.h"
+#include "CommonUtilities/CURandom.h"
 //Json
 #include "rapidjson/document.h"
 
@@ -25,7 +28,7 @@
 namespace Studio
 {
 	Boss::Boss(const char* aImagePath, rapidjson::Value& aBossParameters) :
-		Boss::GameObject(aImagePath, 200.0f),
+		Boss::GameObject(aImagePath, 1200.0f),
 		myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 13)
 	{
 		mySpriteSheet.SetLayer(-1);
@@ -79,8 +82,9 @@ namespace Studio
 				myPhases.push_back(new Phase(phases[i]));
 			}
 		}
-		
+		Tga2D::Vector2f angle = Tga2D::Vector2f({ 1920, 1080 }) - myOriginalPosition;
 		SAFE_CREATE(myIntroMovement, MovementStraight(&myPosition, 55.0f));
+		SAFE_CREATE(myOutroMovement, MovementDiagonal(&myPosition, 0.25f, angle));
 
 		if (myEnrageCondition != nullptr)
 		{
@@ -101,6 +105,7 @@ namespace Studio
 
 		myTotalFightTime = 0.0f;
 		myCurrentPhase = 0;
+		myCounter.SetInterval(0.5f);
 
 	}
 
@@ -108,6 +113,7 @@ namespace Studio
 	{
 		SAFE_DELETE(myMovement);
 		SAFE_DELETE(myIntroMovement);
+		SAFE_DELETE(myOutroMovement);
 		SAFE_DELETE(myEnrageCondition);
 		for (Condition* condition : myConditions)
 		{
@@ -168,6 +174,20 @@ namespace Studio
 			RendererAccessor::GetInstance()->Render(*this);
 			Boss::GameObject::Update(myPosition);
 			myCollider.Update({ myPosition.x + myLateGameOffset.x, myPosition.y + myLateGameOffset.y });
+		}
+		if (IsDead())
+		{
+			myPhases[myPhaseAmount - 1]->ResetPhase();
+			myCounter.Tick();
+			RendererAccessor::GetInstance()->Render(*this);
+			myCollider.ClearCollider();
+			Boss::GameObject::Update(myPosition);
+			myOutroMovement->Update();
+			if (myCounter.PastInterval())
+			{
+				Tga2D::Vector2f SpawnPosition = {CommonUtilities::GetRandomFloat(myPosition.x - 280.0f, myPosition.x + 280.0f), CommonUtilities::GetRandomFloat(myPosition.y - 280.0f, myPosition.y + 280.0f) };
+				LevelAccessor::GetInstance()->CreateExplosionAt(SpawnPosition, 100.0f);
+			}
 		}
 	}
 

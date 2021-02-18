@@ -47,12 +47,14 @@ namespace Studio
 		void StartUpdating();
 
 		bool IsLaserFiring();
+
+		void UpdateExplosions();
+		Boss* GetBoss();
 	private:
 		void UpdateEnemies();
 		void LevelLogic();
 		void CheckCollision();
 		void CheckIfLevelIsCleared();
-		void UpdateExplosions();
 		void ClearEnemies();
 		void ClearPacks();
 		void ClearBullets();

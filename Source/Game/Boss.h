@@ -3,6 +3,7 @@
 #include "Enums.h"
 #include "HealthBar.h"
 #include "rapidjson/document.h"
+#include "Counter.h"
 #include <vector>
 namespace Studio
 {
@@ -74,6 +75,9 @@ namespace Studio
 		
 		Movement* myMovement;
 		Movement* myIntroMovement;
+		Movement* myOutroMovement;
+
+		Counter myCounter;
 
 		Shield* myShield;
 		HealthBar myHealthBar;
@@ -81,6 +85,4 @@ namespace Studio
 		std::vector<Condition*> myConditions;
 		std::vector<Phase*> myPhases;
 	};
-
-
 }
