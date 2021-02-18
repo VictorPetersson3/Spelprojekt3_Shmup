@@ -149,20 +149,14 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 	{
 		if (PlayerAccessor::GetInstance()->GetHasClusterBombs())
 		{
-			delete myTier3Buttons[1];
-			myTier3Buttons[1] = nullptr;
 			myTier3Buttons.erase(myTier3Buttons.begin() + 1);
 		}
 		if (PlayerAccessor::GetInstance()->GetHasExplodingShield())
-		{
-			delete myTier3Buttons[3];
-			myTier3Buttons[3] = nullptr;
+		{			
 			myTier3Buttons.erase(myTier3Buttons.begin() + 3);
 		}
 		if (PlayerAccessor::GetInstance()->GetHasPenetratingRounds())
 		{
-			delete myTier3Buttons[2];
-			myTier3Buttons[2] = nullptr;
 			myTier3Buttons.erase(myTier3Buttons.begin() + 2);
 		}
 	}
