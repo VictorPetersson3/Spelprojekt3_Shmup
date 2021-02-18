@@ -6,7 +6,7 @@
 #include "Renderer.h"
 Studio::Shield::Shield(float aHitPoints) :
 	GameObject("Sprites/assets/player/upgrades/effects/shieldSpriteRed.dds", aHitPoints),
-	myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, 184, { 0.0f,0.0f,1.0f,0.5f })
+	myHealthBar("Sprites/debugpixel.dds", { 700.0f, 100.0f }, -1, { 0.0f,0.0f,1.0f,0.5f })
 {
 	GameObject::GetSpriteSheet().GetSprite()->SetColor({ 0.0f, 0.0f, 1.0f, 1.0f });
 	mySpriteSheet.SetAmountOfFrames({ 4, 4 });
