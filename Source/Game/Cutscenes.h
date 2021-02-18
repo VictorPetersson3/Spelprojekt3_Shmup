@@ -15,8 +15,11 @@ namespace Studio
 		void PlayScene(const Enums::Cutscene& aSceneToPlay);
 		void UpdateCurrentScene();
 		bool IsCurrentyPlaying() const;
+		bool IsHijackingGameWorld() const;
 
 	private:
+		void HijackGameWorld();
+		void StopHijackingGameWorld();
 		void UpdateLogoScene(float aDeltaTime);
 		void UpdateIntroScene(float aDeltaTime);
 		void UpdateOutroScene(float aDeltaTime);
@@ -32,17 +35,11 @@ namespace Studio
 		void GotoNextAction();
 		bool RunAboveForXSeconds(float aTime);
 
+		bool myIsHijackingGameWorld = true;
 		bool myIsCurrentlyPlayingScene = false;
 		Enums::Cutscene myCurrentScene;
 		float myTime;
 		int myActionsDone;
-
 		SpriteSheet* myLogo;
-
-		SpriteSheet* myBackground;
-		// Outro Stuff
-
-
-		// Intro Stuff
 	};
 }

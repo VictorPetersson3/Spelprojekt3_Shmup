@@ -45,6 +45,7 @@
 
 // Cutscenes
 #include "VideoPlayerAccessor.h"
+#include "CutscenesAccessor.h"
 
 namespace Studio
 {
@@ -144,9 +145,7 @@ namespace Studio
 				//StartCredits
 				StopUpdating();
 				//Studio::MenuManagerSingleton::GetInstance()->GetMainMenu()->Enable();
-				MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
-				MenuManagerSingleton::GetInstance()->GetCreditsMenu()->Enable();
-				VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Outro);
+				CutscenesAccessor::GetInstance()->PlayScene(Enums::Cutscene::Outro);
 			}
 			else
 			{

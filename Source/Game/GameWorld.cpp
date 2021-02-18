@@ -26,6 +26,7 @@
 #include "AudioManagerAccesor.h"
 #include "Game_Accessor.h"
 #include "MousePointer.h"
+#include "CutscenesAccessor.h"
 
 CGameWorld::CGameWorld()
 {
@@ -88,13 +89,13 @@ void CGameWorld::Init()
 
 	SAFE_CREATE(myVideoPlayer, Studio::VideoPlayer());
 	Studio::VideoPlayerAccessor::SetInstance(myVideoPlayer);
-	//myVideoPlayer->PlayVideo(Studio::Enums::Video::Logos);
 	myHasStarted = false;
 
 	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
 
-
-
+	SAFE_CREATE(myCutscenes, Studio::Cutscenes());
+	Studio::CutscenesAccessor::SetInstance(myCutscenes);
+	myCutscenes->PlayScene(Studio::Enums::Cutscene::Logos);
 }
 
 //aIsPlaying is an atomic bool to close the gameplay thread
@@ -102,13 +103,23 @@ void CGameWorld::Update(float aDeltaTime, std::atomic<bool>& aIsPlaying, bool aH
 {
 	if (!aHasTabbed)
 	{
-		InputStuff();
 		if (myVideoPlayer->IsPlaying())
 		{
 			myVideoPlayer->Update();
 		}
 		else
 		{
+			InputStuff();
+			if (myCutscenes->IsCurrentyPlaying())
+			{
+				myCutscenes->UpdateCurrentScene();
+
+				if (myCutscenes->IsHijackingGameWorld())
+				{
+					return;
+				}
+			}
+
 			if (myMenuManager->GameStarted())
 			{
 				if (myMenuManager->GetGodMode() == true)

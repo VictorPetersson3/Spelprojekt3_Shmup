@@ -40,7 +40,7 @@ namespace Studio
         myHeart2Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1040,560 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart2");
         myHeart3Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1090,560 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart3");
         myHeart4Element = new ImageElement("Sprites/UI/IGUI/IGUI_Heart.dds", { 1140,560 }, { 1,1 }, { 0.5f,0.5f }, 3, "Heart4");
-        myShopBackground = new ImageElement("Sprites/UI/ShopUI/shopUI_BG.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 0, "ShopBackground");
+        myShopBackground = new ImageElement("Sprites/UI/ShopUI/shopUI_BG.dds", { 960,540 }, { 1.05f,1.05f }, { 0.5f,0.5f }, 0, "ShopBackground");
         myShopFrames = new ImageElement("Sprites/UI/ShopUI/shopUI_frames.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "ShopFrames");
         myShopDescriptionText = new ImageElement("Sprites/UI/ShopUI/RapidFireAST1.dds", { 1500, 750 }, { 1,1 }, { 0.5f,0.5f }, 60000000, "ShopText");
 
