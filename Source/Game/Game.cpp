@@ -84,7 +84,7 @@ bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 	createParameters.myRenderWidth = windowWidth;
 	createParameters.myWindowHeight = windowHeight;
 	createParameters.myWindowWidth = windowWidth;
-	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
+	//createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
 	//createParameters.myPreferedMultiSamplingQuality = Tga2D::EMultiSamplingQuality_High;
 	//createParameters.myStartInFullScreen = true;
 	createParameters.myClearColor = (Tga2D::CColor{ 0,0,0,0 });
@@ -163,7 +163,7 @@ void CGame::UpdateCallBack()
 		//Studio::GameAccessor::GetInstance().GetGame()->ReMinimize();
 		if (myIsFullScreen)
 		{
-			//Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
+			Tga2D::CEngine::GetInstance()->SetFullScreen(myIsFullScreen);
 		}
 		Studio::MenuManagerSingleton::GetInstance()->ResetButtonColliders();
 		myHasTabbed = false;

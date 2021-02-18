@@ -423,8 +423,7 @@ void Tga2D::CEngine::SetFullScreen(bool aFullScreen)
 	{
 		if (aFullScreen)
 		{
-			printf("Screen Size FullScreen X: %i Y: %i\n", GetScreenResolution().x, GetScreenResolution().y);
-			SetResolution(GetScreenResolution(), true);
+			//SetResolution(GetScreenResolution(), true);
 		}		
 		myDirect3D->SetFullScreen(aFullScreen);
 	}
