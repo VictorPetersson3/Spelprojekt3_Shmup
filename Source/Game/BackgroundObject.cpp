@@ -98,4 +98,8 @@ namespace Studio
 	{
 		return myTypeObject;
 	}
+	const float BackgroundObject::GetImageWidth()
+	{
+		return GameObject::GetSpriteSheet().GetSize().x;
+	}
 }

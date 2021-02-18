@@ -15,7 +15,6 @@ namespace Studio
 		void UpdateBackground(float aDeltaTime);
 		const int GetPathsSize() const;
 		void ClearBackground();
-
 	private:
 		std::vector<std::string> myLevelPaths;
 		BackgroundFactory myBackgroundFactory;
