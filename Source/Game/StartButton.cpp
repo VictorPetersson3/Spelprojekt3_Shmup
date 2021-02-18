@@ -10,7 +10,7 @@
 #include "MenuManagerSingleton.h"
 #include "Timer.h"
 
-#include "VideoPlayerAccessor.h"
+#include "CutscenesAccessor.h"
 
 #define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::StartButton::StartButton(const char* aSpritePath, const VECTOR2F aPosition, const VECTOR2F aSize, const VECTOR2F aPivot, const char* aTag,int aLayer,const bool aMainMenuButton)
@@ -107,8 +107,7 @@ void Studio::StartButton::OnClick()
 {
 	if (myIsMainMenuStart)
 	{
-		VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Intro);
-		LevelAccessor::GetInstance()->LoadLevel(0);
+		CutscenesAccessor::GetInstance()->PlayScene(Enums::Cutscene::Intro);
 	}
 	else
 	{

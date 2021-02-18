@@ -559,7 +559,7 @@ namespace Studio
 			break;
 		case 3:
 			SAFE_CREATE(myParticleEmitter, Studio::ParticleEmitter);
-			AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBalticLevel12Song.mp3", true, 0.17f);
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.17f);
 			myParticleEmitter->Init(Studio::Enums::EParticleTypes::eRain);
 			myParticleEmitter->Activate();
 			myHasParticleOnMap = true;

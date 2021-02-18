@@ -8,6 +8,8 @@
 #include "LevelAccessor.h"
 #include "MenuManagerSingleton.h"
 #include "Boss.h"
+#include "AudioManagerAccesor.h"
+#include "LevelAccessor.h"
 #include <tga2d/sprite/sprite.h>
 namespace Studio
 {
@@ -27,6 +29,7 @@ namespace Studio
 	}
 	void Cutscenes::LoadIntroResources()
 	{
+		HijackGameWorld();
 	}
 	void Cutscenes::LoadOutroResources()
 	{
@@ -195,6 +198,7 @@ namespace Studio
 		{
 			StopHijackingGameWorld();
 			GotoNextAction();
+			break;
 		}
 		default:
 			myIsCurrentlyPlayingScene = false;
@@ -203,6 +207,25 @@ namespace Studio
 	}
 	void Cutscenes::UpdateIntroScene(float aDeltaTime)
 	{
+		switch (myActionsDone)
+		{
+		case 0:
+		{
+			AudioManagerAccessor::GetInstance()->StopAllSounds();
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/Cutscenes/Intro.flac");
+			VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Intro);
+			GotoNextAction();
+			break;
+		}
+		case 1:
+		{
+			LevelAccessor::GetInstance()->LoadLevel(0);
+			StopHijackingGameWorld();
+			myIsCurrentlyPlayingScene = false;
+			break;
+		}
+		default: break;
+		}
 	}
 	void Cutscenes::UpdateOutroScene(float aDeltaTime)
 	{
@@ -229,6 +252,8 @@ namespace Studio
 		{
 			LevelAccessor::GetInstance()->ClearLevel();
 			Tga2D::CEngine::GetInstance()->SetAmbientLightValue(1.0f);
+			AudioManagerAccessor::GetInstance()->StopAllSounds();
+			AudioManagerAccessor::GetInstance()->Play2D("Audio/Cutscenes/Outro.flac");
 			MenuManagerSingleton::GetInstance()->GetHUD()->Disable();
 			MenuManagerSingleton::GetInstance()->GetCreditsMenu()->Enable();
 			VideoPlayerAccessor::GetInstance()->PlayVideo(Enums::Video::Outro);
