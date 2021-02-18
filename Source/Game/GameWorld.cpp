@@ -91,8 +91,6 @@ void CGameWorld::Init()
 	Studio::VideoPlayerAccessor::SetInstance(myVideoPlayer);
 	myHasStarted = false;
 
-	Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
-
 	SAFE_CREATE(myCutscenes, Studio::Cutscenes());
 	Studio::CutscenesAccessor::SetInstance(myCutscenes);
 	myCutscenes->PlayScene(Studio::Enums::Cutscene::Logos);

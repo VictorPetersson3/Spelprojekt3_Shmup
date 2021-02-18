@@ -1,14 +1,63 @@
-<<<<<<< Updated upstream
-﻿  tga2dcore.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\..\Lib\TGA2D_Debug.lib
-=======
-﻿  DDSTextureLoader.cpp
+﻿  stdafx.cpp
+  -------Never give up your dreams!-------------
+  DDSTextureLoader.cpp
   ScreenGrab.cpp
+  WICTextureLoader.cpp
   CAnimation.cpp
   MathFunc.cpp
+  audio.cpp
+  audio_out.cpp
+  direct_3d.cpp
+  custom_shape_drawer.cpp
+  debug_drawer.cpp
+  debug_performancegraph.cpp
+  line_drawer.cpp
+  textured_quad_batch_drawer.cpp
+  textured_quad_drawer.cpp
+  engine.cpp
+  error_manager.cpp
+  file_watcher.cpp
   CImGuiInterface.cpp
+  XInput.cpp
+  light.cpp
+  light_manager.cpp
   FBXLoader.cpp
+  tgaloader.cpp
+  common_math.cpp
   FBXModel.cpp
-C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(321,36): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(508,48): warning C4100: 'aMapType': unreferenced formal parameter
-  tga2dcore.vcxproj -> C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Lib\TGA2D_Debug.lib
->>>>>>> Stashed changes
+  perlin_noise.cpp
+  custom_shape.cpp
+  line_primitive.cpp
+  model_shape.cpp
+  renderer.cpp
+  render_object.cpp
+  customshader.cpp
+  shader.cpp
+  shader_model.cpp
+  shader_normal.cpp
+  shader_normal_instanced.cpp
+  sprite.cpp
+D:\Github\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(321,36): warning C4018: '<': signed/unsigned mismatch
+D:\Github\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(508,48): warning C4100: 'aMapType': unreferenced formal parameter
+  sprite_batch.cpp
+  textured_quad.cpp
+  textured_quad_batch.cpp
+  texture.cpp
+  texture_manager.cpp
+  fontfile.cpp
+  parser.cpp
+  text.cpp
+  textfile.cpp
+  text_service.cpp
+  token.cpp
+  video.cpp
+  videoplayer.cpp
+  video_audio.cpp
+  windows_window.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_widgets.cpp
+  tga2dcore.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\..\Lib\TGA2D_Debug.lib

@@ -128,11 +128,22 @@ namespace Studio
 		{
 		case 0:
 		{
-			// Void
-			RunAboveForXSeconds(1.5f);
+			RunAboveForXSeconds(0.5f);
 			break;
 		}
 		case 1:
+		{
+			Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/Cutscenes/Logos.mp3", true, 0.15f);
+			GotoNextAction();
+			break;
+		}
+		case 2:
+		{
+			// Void
+			RunAboveForXSeconds(1.0f);
+			break;
+		}
+		case 3:
 		{
 			// TGA LOGO fade in
 			float alpha = myTime / 3.0f;
@@ -142,14 +153,14 @@ namespace Studio
 			RunAboveForXSeconds(3.0f);
 			break;
 		}
-		case 2:
+		case 4:
 		{
 			// TOGO LOGO stay
 			RendererAccessor::GetInstance()->Render(*myLogo);
 			RunAboveForXSeconds(1.0f);
 			break;
 		}
-		case 3:
+		case 5:
 		{
 			// TGA LOGO fade out
 			float alpha = myTime / 0.5f;
@@ -159,7 +170,7 @@ namespace Studio
 			RunAboveForXSeconds(0.5f);
 			break;
 		}
-		case 4:
+		case 6:
 		{
 			// Resource switch
 			myLogo->SetImagePath("Sprites/Logos/flygpirater_logo.dds");
@@ -167,7 +178,7 @@ namespace Studio
 			GotoNextAction();
 			break;
 		}
-		case 5:
+		case 7:
 		{
 			// OUR LOGO fade in
 			float alpha = myTime / 3.0f;
@@ -177,14 +188,14 @@ namespace Studio
 			RunAboveForXSeconds(3.0f);
 			break;
 		}
-		case 6:
+		case 8:
 		{
 			// OUR LOGO stay
 			RendererAccessor::GetInstance()->Render(*myLogo);
 			RunAboveForXSeconds(1.0f);
 			break;
 		}
-		case 7:
+		case 9:
 		{
 			// OUR LOGO fade out
 			float alpha = myTime / 0.5f;
@@ -194,8 +205,10 @@ namespace Studio
 			RunAboveForXSeconds(0.5f);
 			break;
 		}
-		case 8:
+		case 10:
 		{
+			Studio::AudioManagerAccessor::GetInstance()->StopAllSounds();
+			Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
 			StopHijackingGameWorld();
 			GotoNextAction();
 			break;
