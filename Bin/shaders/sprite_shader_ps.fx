@@ -9,7 +9,13 @@ Texture2D shaderTextures[2] : register( t1 );
 
 float4 PShader(PixelInputType input) : SV_TARGET
 {
-	float4 Diffuse = shaderTextures[DIFFUSE_MAP].Sample(SampleType, input.tex) * input.color;
+    float4 alpha = input.color;
+	if (input.color.r > 1.0)
+    {
+        alpha = float4(float3(1.0, 1.0, 1.0), input.color.a);
+    }
+	
+	float4 Diffuse = shaderTextures[DIFFUSE_MAP].Sample(SampleType, input.tex) * alpha;
 	
 	#ifdef USE_NOISE
 	float4 noise = myNoiseTexture.Sample(SampleType, input.tex); 
@@ -54,14 +60,16 @@ float4 PShader(PixelInputType input) : SV_TARGET
 		// White
         if (input.color.b > 1.0)
         {
-            color.rgb = 1.0;
+            color.r += 40.0 / 255.0;
+            color.g += 40.0 / 255.0;
+            color.b += 40.0 / 255.0;
         }
 		// Red
 		else
         {
-            color.r = 255.0 / 255.0;
-            color.g = 16.0 / 255.0;
-            color.b = 31.0 / 255.0;
+            color.r += 255.0 / 255.0;
+            color.g += 16.0 / 255.0;
+            color.b += 31.0 / 255.0;
         }
     }
 	
