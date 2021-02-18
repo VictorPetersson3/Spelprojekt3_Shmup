@@ -116,9 +116,10 @@ void Studio::BackgroundManager::UpdateBackground(float aDeltaTime)
 	for (int i = 0; i < myBackgroundObjects.size(); i++)
 	{
 		myBackgroundObjects.at(i)->Update(aDeltaTime);
-		if (myBackgroundObjects.at(i)->GetPosition().x < -myLevelWidth)
+		const float EPSILON = 0.00001f;
+		if (myBackgroundObjects.at(i)->GetPosition().x < -myLevelWidth && myBackgroundObjects.at(i)->GetIsTiling())
 		{
-			myBackgroundObjects.at(i)->SetPosition({ myBackgroundObjects.at(i)->GetPosition().x + (myLevelWidth * myBackgroundObjects.at(i)->GetTypeObject()->GetAmount()), myBackgroundObjects.at(i)->GetPosition().y });
+			myBackgroundObjects.at(i)->SetPosition({ (myBackgroundObjects.at(i)->GetPosition().x + (myBackgroundObjects.at(i)->GetImageWidth() * myBackgroundObjects.at(i)->GetTypeObject()->GetAmount())) - EPSILON, myBackgroundObjects.at(i)->GetPosition().y });
 		}
 		Studio::RendererAccessor::GetInstance()->Render(*myBackgroundObjects.at(i));
 	}
@@ -137,6 +138,7 @@ void Studio::BackgroundManager::ClearBackground()
 	}
 	myBackgroundObjects.clear();
 }
+
 
 void Studio::BackgroundManager::DebugJsonDoc(rapidjson::Value& aJsonObject, const int aIterator)
 {

@@ -21,6 +21,7 @@ namespace Studio
 		void SetPosition(const Tga2D::Vector2f& aPosition);
 		const bool GetIsTiling() const;
 		const TypePattern_Background* GetTypeObject() const;
+		const float GetImageWidth();
 
 	private:
 		TypePattern_Background* myTypeObject;
