@@ -84,7 +84,7 @@ bool CGame::Init(const std::wstring& aVersion, HWND /*aHWND*/)
 	createParameters.myRenderWidth = windowWidth;
 	createParameters.myWindowHeight = windowHeight;
 	createParameters.myWindowWidth = windowWidth;
-	//createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
+	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
 	//createParameters.myPreferedMultiSamplingQuality = Tga2D::EMultiSamplingQuality_High;
 	//createParameters.myStartInFullScreen = true;
 	createParameters.myClearColor = (Tga2D::CColor{ 0,0,0,0 });
