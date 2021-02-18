@@ -10,10 +10,10 @@
 Studio::LevelSelect::LevelSelect(MenuManager* aMenuManager) :
 	myMenuManager(aMenuManager)
 {
-	myLevel1Button = new GenericButton("Sprites/UI/UI_level1.dds", { 360, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	myLevel2Button = new GenericButton("Sprites/UI/UI_level2.dds", { 960, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	myLevel3Button = new GenericButton("Sprites/UI/UI_level3.dds", { 1560, 400 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
-	myTutorialButton = new GenericButton("Sprites/UI/UI_level3.dds", { 960, 200 }, { 0.8f, 0.8f }, { 0.5f,0.5f }, "LevelButton", 10);
+	myLevel1Button = new GenericButton("Sprites/UI/UI_level1.dds", { 360, 500 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myLevel2Button = new GenericButton("Sprites/UI/UI_level2.dds", { 960, 500 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myLevel3Button = new GenericButton("Sprites/UI/UI_level3.dds", { 1560, 500 }, { 1,1 }, { 0.5f,0.5f }, "LevelButton", 10);
+	myTutorialButton = new GenericButton("Sprites/UI/UI_tutorial.dds", { 960, 300 }, { 0.8f, 0.8f }, { 0.5f,0.5f }, "LevelButton", 10);
 	printf("Back To Main Menu\n");
 	myBackButton = new GenericButton("Sprites/UI/UI_backToMain_text.dds", { 400,900 }, { 1,1 }, { 0.5f,0.5f }, "BackButton", 10);
 	myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
