@@ -428,7 +428,17 @@ namespace Studio
     {
         return inGodMode;
     }
+
+    bool MenuManager::GetIsInShop()
+    {
+        return myIsInShop;
+    }
   
+    void MenuManager::SetIsInShop(bool aState)
+    {
+        myIsInShop = aState;
+    }
+
     void MenuManager::SetPlayButtonIndex(const int aIndex)
     {
         myStartButton->SetLevelToLoad(aIndex);

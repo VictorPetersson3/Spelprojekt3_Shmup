@@ -128,6 +128,7 @@ void Studio::StartButton::OnClick()
 
 	AudioManagerAccessor::GetInstance()->StopAllSounds();
 	AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
+	MenuManagerSingleton::GetInstance()->SetIsInShop(false);
 
 	LevelAccessor::GetInstance()->StartUpdating();
 }

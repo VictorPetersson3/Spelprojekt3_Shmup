@@ -157,6 +157,7 @@ namespace Studio
 					AudioManagerAccessor::GetInstance()->StopAllSounds();
 					AudioManagerAccessor::GetInstance()->Play2D("Audio/PiratesOfTheBaltic_-_TheBootyMerchant.mp3", true, 0.2f);
 					myHasStoppedLevelMusic = true;
+					MenuManagerSingleton::GetInstance()->SetIsInShop(true);
 				}
 				MenuManagerSingleton::GetInstance()->GetShop()->Enable();
 				
