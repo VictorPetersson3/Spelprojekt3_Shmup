@@ -49,21 +49,20 @@ Studio::ShopUI::~ShopUI()
 {
 	for (ShopButton* s : myTier1Buttons)
 	{
-		delete s;
-		s = nullptr;
+		SAFE_DELETE(s);
+
 
 	}
 
 	for (ShopButtonTier2* s : myTier2Buttons)
 	{
-		delete s;
-		s = nullptr;
+		SAFE_DELETE(s);
+
 	}
 
 	for (ShopButtonTier3* s : myTier3Buttons)
 	{
-		delete s;
-		s = nullptr;
+		SAFE_DELETE(s);
 	}
 
 	myTier1Buttons.clear();
