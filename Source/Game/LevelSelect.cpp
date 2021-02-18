@@ -48,6 +48,7 @@ void Studio::LevelSelect::Update()
 			AudioManagerAccessor::GetInstance()->StopAllSounds();
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			Studio::LevelAccessor::GetInstance()->LoadLevel(0);
+			Studio::LevelAccessor::GetInstance()->StartUpdating();
 			myMenuManager->StartGame();
 			Disable();
 		}
@@ -56,6 +57,7 @@ void Studio::LevelSelect::Update()
 			AudioManagerAccessor::GetInstance()->StopAllSounds();
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			Studio::LevelAccessor::GetInstance()->LoadLevel(1);
+			Studio::LevelAccessor::GetInstance()->StartUpdating();
 			myMenuManager->StartGame();
 			Disable();
 		}
@@ -64,6 +66,7 @@ void Studio::LevelSelect::Update()
 			AudioManagerAccessor::GetInstance()->StopAllSounds();
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			Studio::LevelAccessor::GetInstance()->LoadLevel(2);
+			Studio::LevelAccessor::GetInstance()->StartUpdating();
 			myMenuManager->StartGame();
 			Disable();
 		}
@@ -72,6 +75,7 @@ void Studio::LevelSelect::Update()
 			AudioManagerAccessor::GetInstance()->StopAllSounds();
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/ButtonClick.flac", false, 0.15f);
 			Studio::LevelAccessor::GetInstance()->LoadLevel(3);
+			Studio::LevelAccessor::GetInstance()->StartUpdating();
 			myMenuManager->StartGame();
 			Disable();
 		}
