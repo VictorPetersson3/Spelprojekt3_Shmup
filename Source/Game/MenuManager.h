@@ -47,6 +47,8 @@ namespace Studio
 		void ResetAllSizes();
 		bool GameStarted();
 		bool GetGodMode();
+		bool GetIsInShop();
+		void SetIsInShop(bool aState);
 		void SetPlayButtonIndex(const int aIndex);
 		void SetNextLevelIndex(const int aIndex);
 		void Load();
@@ -66,7 +68,7 @@ namespace Studio
 		void GreyOutAbilitiesDuringTutorial();
 	private:
 
-		
+		bool myIsInShop = false;
 
 		MenuObject myMainMenu;
 		MenuObject myHud;

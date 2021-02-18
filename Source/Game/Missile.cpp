@@ -14,6 +14,7 @@
 namespace Studio
 {
 	Missile::Missile(const Enums::BulletOwner& aOwner, const Tga2D::Vector2f& aPosition, const float aExplosionRadius)
+		: myFlame("Sprites/assets/player/Flame.dds", { 1.0f, 4.0f }, { 960.0f, 540.0f })
 	{
 		if (aOwner == Enums::BulletOwner::Player)
 		{
@@ -73,6 +74,9 @@ namespace Studio
 	{
 		auto deltaTime = Timer::GetInstance()->TGetDeltaTime();
 
+		myPosition += myVelocity * deltaTime;
+		GameObject::Update(myPosition);
+
 		if (!myIsReversed)
 		{
 			if (myIsSlowingDown)
@@ -89,6 +93,8 @@ namespace Studio
 			else
 			{
 				myVelocity.x += myAccelerationSpeed;
+
+				myFlame.Update(4, { myPosition.x - 23.0f, myPosition.y + myVelocity.y });
 			}
 		}
 		else
@@ -107,11 +113,10 @@ namespace Studio
 			else
 			{
 				myVelocity.x += myAccelerationSpeed;
+
+				myFlame.Update(1, { myPosition.x + 23.0f, myPosition.y + myVelocity.y });
 			}
 		}
-
-		myPosition += myVelocity * deltaTime;
-		GameObject::Update(myPosition);
 
 		// Shake the camera # TEST
 		RendererAccessor::GetInstance()->ShakeCamera(0.5f, 0.0625f);

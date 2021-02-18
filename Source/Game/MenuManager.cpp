@@ -428,7 +428,17 @@ namespace Studio
     {
         return inGodMode;
     }
+
+    bool MenuManager::GetIsInShop()
+    {
+        return myIsInShop;
+    }
   
+    void MenuManager::SetIsInShop(bool aState)
+    {
+        myIsInShop = aState;
+    }
+
     void MenuManager::SetPlayButtonIndex(const int aIndex)
     {
         myStartButton->SetLevelToLoad(aIndex);
@@ -468,6 +478,7 @@ namespace Studio
         myShop.Disable();
         hasStartedGame = false;
         myStartButton->myIsClicked = false;
+        Studio::AudioManagerAccessor::GetInstance()->StopAllSounds();
         Studio::AudioManagerAccessor::GetInstance()->Play2D("Audio/MainTheme.mp3", true, 0.15f);
         if (Studio::Timer::GetInstance()->IsFrozen())
         {

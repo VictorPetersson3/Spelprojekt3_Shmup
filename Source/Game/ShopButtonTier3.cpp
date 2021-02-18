@@ -156,3 +156,8 @@ void Studio::ShopButtonTier3::OnClick()
 		
 	}
 }
+
+Studio::Enums::Tier3Upgrades Studio::ShopButtonTier3::GetUpgradeType()
+{
+	return myUpgradeType;
+}
