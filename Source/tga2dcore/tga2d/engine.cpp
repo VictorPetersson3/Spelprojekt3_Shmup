@@ -318,7 +318,6 @@ VECTOR2UI Tga2D::CEngine::GetScreenResolution()
 		RECT desktop;
 		const HWND hDesktop = GetDesktopWindow();
 		GetWindowRect(hDesktop, &desktop);
-		//printf("Get Windows Rect Y: %i\n", desktop.bottom);
 		return { static_cast<unsigned int>(desktop.right), static_cast<unsigned int>(desktop.bottom)};
 }
 

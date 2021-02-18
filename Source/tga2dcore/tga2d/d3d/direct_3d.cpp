@@ -1196,13 +1196,6 @@ void CDirectEngine::Set3DRenderState()
 void Tga2D::CDirectEngine::SetFullScreen(bool aFullScreen)
 {
 	mySwapchain->SetFullscreenState(aFullScreen, nullptr);
-	if (aFullScreen)
-	{
-		RECT desktop;
-		const HWND hDesktop = GetDesktopWindow();
-		GetWindowRect(hDesktop, &desktop);
-		SetResolution({ static_cast<unsigned int>(desktop.right), static_cast<unsigned int>(desktop.bottom) });
-	}
 }
 
 void Tga2D::CDirectEngine::SetBlendState(EBlendState aState)
