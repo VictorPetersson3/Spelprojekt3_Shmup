@@ -1,0 +1,178 @@
+{
+  "Json": [
+    {
+      "Type": "BackgroundImage_Ice",
+      "ImagePath": "sprites/Background/IcyLevel/BG_Sky_1.dds",
+      "IsTiling": false,
+      "IsCentered": true,
+      "Pivot": {
+        "X": 0.5,
+        "Y": 0.5
+      },
+      "LayerOrder": -20,
+      "Position": {
+        "X": 960,
+        "Y": 540
+      },
+      "Scale": {
+        "X": 1.0,
+        "Y": 1.0
+      },
+      "Speed": 0,
+      "CreateMany": false,
+      "UseRandom": false
+    },
+    [
+      {
+        "Type": "MountainRangeTileAble",
+        "ImagePath": "sprites/Background/IcyLevel/BG_Mountains_4.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -19,
+        "Position": {
+          "X": -960,
+          "Y": 870
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -40.5,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "Min": 0,
+            "Max": 1920
+          },
+          "RandomPositionY": {
+            "Min": 0,
+            "Max": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "NorthernLight",
+        "ImagePath": "sprites/Background/AlphaLevel/BG_NorthernLight.dds",
+        "IsTiling": true,
+        "IsCentered": false,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.0
+        },
+        "LayerOrder": -18,
+        "Position": {
+          "X": -960,
+          "Y": 0
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -20.15,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "Min": 0,
+            "Max": 1920
+          },
+          "RandomPositionY": {
+            "Min": 0,
+            "Max": 1920
+          },
+          "RandomSpeed": {
+            "Min": 20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "IceSheet",
+        "ImagePath": "sprites/Background/AlphaLevel/BG_GroundPlane.dds",
+        "IsTiling": true,
+        "IsCentered": false,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 1.0
+        },
+        "LayerOrder": -17,
+        "Position": {
+          "X": 960,
+          "Y": 1080
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1.0
+        },
+        "Speed": -70.1,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "Min": 0,
+            "Max": 1920
+          },
+          "RandomPositionY": {
+            "Min": 0,
+            "Max": 1920
+          },
+          "RandomSpeed": {
+            "Min": 20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "SkyRockSmall",
+        "ImagePath": "sprites/Background/IcyLevel/BG_floatingSmall1.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -16,
+        "Position": {
+          "X": 960,
+          "Y": 1080
+        },
+        "Scale": {
+          "X": 1,
+          "Y": 1
+        },
+        "Speed": -30.1,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": true,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "Min": 0,
+            "Max": 5000
+          },
+          "RandomPositionY": {
+            "Min": 300,
+            "Max": 700
+          },
+          "RandomSpeed": {
+            "Min": -30,
+            "Max": -20
+          }
+        }
+      }
+    ]
+  ]
+
+}
+
