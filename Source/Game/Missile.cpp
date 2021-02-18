@@ -125,8 +125,8 @@ namespace Studio
 	void Missile::Impact()
 	{
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
-
 		AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.15f);
+
 
 		// Shake the camera # TEST
 		RendererAccessor::GetInstance()->ShakeCamera(15.0f, 0.25f);
