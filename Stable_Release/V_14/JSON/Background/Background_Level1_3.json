@@ -339,7 +339,7 @@
         },
         "Speed": -20.0,
         "CreateMany": true,
-        "Amount": 3,
+        "Amount": 1,
         "UseRandom": true,
         "RandomAtributes": {
           "RandomPositionX": {
