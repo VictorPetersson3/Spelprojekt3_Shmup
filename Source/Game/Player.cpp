@@ -52,9 +52,6 @@ namespace Studio
 		myPowerUpModules.push_back(new PowerUpModule(Enums::PowerUpModules::Shield));
 		myShieldModule = myPowerUpModules[0]; 
 
-		
-		UpgradeT2(Enums::Tier2Upgrades::BasicAttackAdditionalProjectile);
-		UpgradeT2(Enums::Tier2Upgrades::BasicAttackAdditionalProjectile);
 	}
 
 	Player::~Player()
