@@ -1,1 +1,14 @@
+<<<<<<< Updated upstream
 ﻿  tga2dcore.vcxproj -> D:\Github\Spelprojekt3_Shmup\Source\..\Lib\TGA2D_Debug.lib
+=======
+﻿  DDSTextureLoader.cpp
+  ScreenGrab.cpp
+  CAnimation.cpp
+  MathFunc.cpp
+  CImGuiInterface.cpp
+  FBXLoader.cpp
+  FBXModel.cpp
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(321,36): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Source\tga2dcore\tga2d\loaders\FBXLoader.cpp(508,48): warning C4100: 'aMapType': unreferenced formal parameter
+  tga2dcore.vcxproj -> C:\Users\Oliwer\Documents\GitHub\Spelprojekt3_Shmup\Lib\TGA2D_Debug.lib
+>>>>>>> Stashed changes
