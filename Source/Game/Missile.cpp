@@ -67,6 +67,8 @@ namespace Studio
 			mySpriteSheet.GetSprite()->SetTextureRect(1.0f, 0.0f, 0.0f, 1.0f);
 
 			myIsReversed = true;
+
+			myFlame.GetSpriteSheet().SetSizeRelativeToImage({ -1.0f, 0.25f });
 		}
 	}
 
@@ -92,9 +94,9 @@ namespace Studio
 			}
 			else
 			{
-				myVelocity.x += myAccelerationSpeed;
+				myFlame.Update(4, { myPosition.x - 23.0f, myPosition.y });
 
-				myFlame.Update(4, { myPosition.x - 23.0f, myPosition.y + myVelocity.y });
+				myVelocity.x += myAccelerationSpeed;
 			}
 		}
 		else
@@ -112,9 +114,9 @@ namespace Studio
 			}
 			else
 			{
-				myVelocity.x += myAccelerationSpeed;
-
 				myFlame.Update(1, { myPosition.x + 23.0f, myPosition.y + myVelocity.y });
+				
+				myVelocity.x += myAccelerationSpeed;
 			}
 		}
 
@@ -125,8 +127,8 @@ namespace Studio
 	void Missile::Impact()
 	{
 		LevelAccessor::GetInstance()->SpawnAOEBullet(myTypePattern->GetOwner(), myPosition, myExplosionRadius);
-
 		AudioManagerAccessor::GetInstance()->Play2D("Audio/Explosion.mp3", false, 0.15f);
+
 
 		// Shake the camera # TEST
 		RendererAccessor::GetInstance()->ShakeCamera(15.0f, 0.25f);

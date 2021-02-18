@@ -152,6 +152,7 @@ namespace Studio
 		TextElement* myShopCostText;
 		TextElement* myShopUpgradeNameText;
 		
+		ImageElement* myShopMerchantPortrait;
 
 		TextElement* myMasterVolumeSliderText;
 		TextElement* myMasterVolumeLabelText;

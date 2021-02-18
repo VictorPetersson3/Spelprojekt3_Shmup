@@ -30,6 +30,8 @@ namespace Studio
 		float myTop;
 		float myBottom;
 
+		VECTOR2F myScale;
+
 		float myOriginalSize;
 
 		bool hasBeenHoveredOver = false;

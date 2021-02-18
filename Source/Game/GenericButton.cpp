@@ -26,6 +26,9 @@ Studio::GenericButton::GenericButton(const char* aSpritePath, const VECTOR2F aPo
 	mySize = aSize.x;
 	myOriginalSize = aSize.x;
 	mySizeTimer = 0;
+	myScale = aSize;
+
+
 	CalculateButtonCollider();
 }
 

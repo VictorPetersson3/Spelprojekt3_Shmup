@@ -37,10 +37,10 @@ void Studio::ButtonElement::CalculateButtonCollider()
 		spawnPos.y = (mySpriteSheet->GetPosition().y + (static_cast<float>(mySprite->GetImageSize().y) * (mySprite->GetPivot().y - 0.5))) * ratio;
 	}
 	
-	myLeft = spawnPos.x - (mySprite->GetImageSize().x * (0.35f * ratio));
-	myRight = spawnPos.x + (mySprite->GetImageSize().x * (0.35f * ratio));
-	myTop = spawnPos.y - (mySprite->GetImageSize().y * (0.35f * ratio));
-	myBottom = spawnPos.y + (mySprite->GetImageSize().y * (0.35f * ratio));
+	myLeft = spawnPos.x - (mySprite->GetImageSize().x * myScale.x * (0.35f * ratio));
+	myRight = spawnPos.x + (mySprite->GetImageSize().x * myScale.x  * (0.35f * ratio));
+	myTop = spawnPos.y - (mySprite->GetImageSize().y * myScale.y * (0.35f * ratio));
+	myBottom = spawnPos.y + (mySprite->GetImageSize().y * myScale.y * (0.35f * ratio));
 }
 
 void Studio::ButtonElement::OnClick()

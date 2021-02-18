@@ -44,12 +44,26 @@ namespace Studio
         myShopFrames = new ImageElement("Sprites/UI/ShopUI/shopUI_frames.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 3, "ShopFrames");
         myShopDescriptionText = new ImageElement("Sprites/UI/ShopUI/RapidFireAST1.dds", { 1500, 750 }, { 1,1 }, { 0.5f,0.5f }, 60000000, "ShopText");
 
-        myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
-        myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 400 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
-        myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
-        myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 550 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
-        myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
-        myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 150, 700 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
+        myAbilityRapid = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_RapidFire.dds", { 100, 300 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityRapid");
+        myAbilityRapidBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 100, 300 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityRapidBorder");
+        myAbilityMissile = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_ExplosiveArsenal.dds", { 200, 300 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityMissile");
+        myAbilityMissileBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 200, 300 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityMissileBorder");
+        myAbilityShield = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_Shield.dds", { 300, 300 }, { 1,1 }, { 0.5f,0.5f }, 4, "AbilityShield");
+        myAbilityShieldBorder = new ImageElement("Sprites/UI/IGUI/IGUI_Abilities_CooldownFrame.dds", { 300, 300 }, { 1,1 }, { 0.5f,0.5f }, 3, "AbilityShieldBorder");
+
+        VECTOR2F myAbilityRapidSize = myAbilityRapid->GetSpriteSheet()->GetSize();
+        VECTOR2F myAbilityRapidBorderSize = myAbilityRapidBorder->GetSpriteSheet()->GetSize();
+        VECTOR2F myAbilityMissileSize = myAbilityMissile->GetSpriteSheet()->GetSize();
+        VECTOR2F myAbilityMissileBorderSize = myAbilityMissileBorder->GetSpriteSheet()->GetSize();
+        VECTOR2F myAbilityShieldSize = myAbilityShield->GetSpriteSheet()->GetSize();
+        VECTOR2F myAbilityShieldBorderSize = myAbilityShieldBorder->GetSpriteSheet()->GetSize();
+
+        myAbilityRapid          ->GetSpriteSheet()->SetSize({ myAbilityRapidSize.x * 0.5f, myAbilityRapidSize.y * 0.5f});
+        myAbilityRapidBorder    ->GetSpriteSheet()->SetSize({ myAbilityRapidBorderSize.x * 0.5f, myAbilityRapidBorderSize.y * 0.5f});
+        myAbilityMissile        ->GetSpriteSheet()->SetSize({ myAbilityMissileSize.x * 0.5f, myAbilityMissileSize.y * 0.5f});
+        myAbilityMissileBorder  ->GetSpriteSheet()->SetSize({ myAbilityMissileBorderSize.x * 0.5f, myAbilityMissileBorderSize.y * 0.5f});
+        myAbilityShield         ->GetSpriteSheet()->SetSize({ myAbilityShieldSize.x * 0.5f, myAbilityShieldSize.y * 0.5f});
+        myAbilityShieldBorder   ->GetSpriteSheet()->SetSize({ myAbilityShieldBorderSize.x * 0.5f, myAbilityShieldBorderSize.y * 0.5f});
 
         myMainMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "MainMenuBackground");
         myOptionsMenuBackground = new ImageElement("Sprites/UI/background_maintitle.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, 5, "OptionsMenuBackground");
@@ -67,13 +81,15 @@ namespace Studio
         myScoreText = new TextElement(Tga2D::EFontSize_18, { 0.17,0.15 }, "ScoreText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
         myCoinText = new TextElement(Tga2D::EFontSize_18, { 0.14,0.214 }, "CoinText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
 
-        myRapidCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.360 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
-        myMissileCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04  , 0.499 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
-        myShieldCooldownText = new TextElement(Tga2D::EFontSize_36, { 0.04 , 0.638 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+        myRapidCooldownText = new TextElement(Tga2D::EFontSize_24, { 0.033 , 0.277 }, "RapidText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+        myMissileCooldownText = new TextElement(Tga2D::EFontSize_24, { 0.085  , 0.277 }, "MissileText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
+        myShieldCooldownText = new TextElement(Tga2D::EFontSize_24, { 0.137 , 0.277 }, "ShieldText", { 1.f, 1.f, 1.f, 1.f }, "Text/Beaufort Medium.otf");
 
         myShopCoinText = new TextElement(Tga2D::EFontSize_36, { 0.56,0.195 }, "ShopCoinText", Tga2D::CColor({ 1,1,1,1 }));
         myShopCostText = new TextElement(Tga2D::EFontSize_18, { 0.76f,0.738f }, "ShopCoinCostText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
         myShopUpgradeNameText = new TextElement(Tga2D::EFontSize_24, { 0.78f,0.645f }, "ShopNameText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf", true);
+
+        myShopMerchantPortrait = new ImageElement("Sprites/UI/ShopUI/shopUI_merchantPortrait.dds", { 1495,470 }, { 1,1 }, { 0.5f,0.5f }, 600, "MerchantPortrait");
 
         myMasterVolumeSliderText = new TextElement(Tga2D::EFontSize_30, { 0.64,0.24 }, "myMasterVolumePercentageText", Tga2D::CColor({ 1,1,1,1 }), "Text/Beaufort Medium.otf");
         myMasterVolumeLabelText = new TextElement(Tga2D::EFontSize_36, { 0.42,0.104 }, "myMasterVolumeLabelText");
@@ -82,16 +98,16 @@ namespace Studio
 
         myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 185,250 }, { 370,50 }, 15);
 
-        mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,780 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "OptionsButton", 12);
-        myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,900 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "CreditsButton", 12);
+        mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,780 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "OptionsButton", 12);
+        myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,900 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "CreditsButton", 12);
 
         myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 2,2 }, { 0.5f,0.5f }, "ResumeButton", 11);
-        myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "LevelSelectButton", 20);
+        myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "LevelSelectButton", 20);
 
         myStartButton = new StartButton("Sprites/UI/UI_play.dds", { 960,540 }, { 1,1 }, { 0.5f,0.5f }, "PlayButton", 10, false);
         myNextLevelButton = new StartButton("Sprites/UI/ShopUI/shopUI_buttons_continue.dds", { 1500,960 }, { 1,1 }, { 0.5f,0.5f }, "NextLevelButton", 10, true);
 
-        myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 0.9f,0.9f }, { 0.5f,0.5f }, "ExitButton", 10);
+        myExitButton = new ExitButton("Sprites/UI/UI_exit.dds", { 960,1020 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "ExitButton", 10);
 
         myPausMenuQuitButton = new ReturnToMainMenuButton("Sprites/UI/UI_backToMain_text.dds", { 960,700 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
         myOptionsMenuReturnButton = new ReturnToMainMenuButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "ExitButton", 11);
@@ -145,6 +161,7 @@ namespace Studio
         myShop.Add(myShopDescriptionText);
         myShop.Add(myShopCostText);
         myShop.Add(myShopUpgradeNameText);
+        myShop.Add(myShopMerchantPortrait);
         myShop.Disable();
 
         myPauseMenu.Add(myPausMenuBackground);
@@ -394,6 +411,7 @@ namespace Studio
         myShop.Add(myNextLevelButton);
         myShop.Add(myShopCostText);
         myShop.Add(myShopUpgradeNameText);
+        myShop.Add(myShopMerchantPortrait);
         myShop.Disable();
     }
 

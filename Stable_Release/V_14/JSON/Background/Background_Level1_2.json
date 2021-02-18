@@ -1,22 +1,22 @@
 {
   "Json": [
     {
-      "Type": "BackgroundImage",
-      "ImagePath": "sprites/Background/AlphaLevel/Background_SkySea.dds",
+      "Type": "Coastal_Background",
+      "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_Sky.dds",
       "IsTiling": false,
-      "IsCentered": true,
+      "IsCentered": false,
       "Pivot": {
         "X": 0.5,
-        "Y": 0.5
+        "Y": 0.0
       },
-      "LayerOrder": -20,
+      "LayerOrder": -25,
       "Position": {
         "X": 960,
-        "Y": 540
+        "Y": 0
       },
       "Scale": {
         "X": 1.0,
-        "Y": 1.1
+        "Y": 1.0
       },
       "Speed": 0,
       "CreateMany": false,
@@ -24,24 +24,24 @@
     },
     [
       {
-        "Type": "MountainRangeTileAble",
-        "ImagePath": "sprites/Background/AlphaLevel/BG_Mountains.dds",
+        "Type": "Coastal_LayerCloadImage",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_Clouds2.dds",
         "IsTiling": true,
         "IsCentered": true,
         "Pivot": {
           "X": 0.5,
           "Y": 0.5
         },
-        "LayerOrder": -19,
+        "LayerOrder": -24,
         "Position": {
-          "X": -960,
-          "Y": 870
+          "X": 960,
+          "Y": 665
         },
         "Scale": {
-          "X": 1,
-          "Y": 1
+          "X": 1.00,
+          "Y": 1.00
         },
-        "Speed": -10.5,
+        "Speed": -30.5,
         "CreateMany": true,
         "Amount": 3,
         "UseRandom": false,
@@ -61,24 +61,61 @@
         }
       },
       {
-        "Type": "NorthernLight",
-        "ImagePath": "sprites/Background/AlphaLevel/BG_NorthernLight.dds",
-        "IsTiling": true,
-        "IsCentered": false,
+        "Type": "Coastal_FogLayer1_Image",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_CloudFog1_2.dds",
+        "IsTiling": false,
+        "IsCentered": true,
         "Pivot": {
           "X": 0.5,
-          "Y": 0.0
+          "Y": 0.5
         },
-        "LayerOrder": -18,
+        "LayerOrder": -23,
         "Position": {
-          "X": -960,
-          "Y": 0
+          "X": 960,
+          "Y": 760.0
         },
         "Scale": {
-          "X": 1,
-          "Y": 1
+          "X": 8.00,
+          "Y": 1.00
         },
-        "Speed": -0.15,
+        "Speed": 0.0,
+        "CreateMany": false,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_LayerCloadImage2",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_Clouds1.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -22,
+        "Position": {
+          "X": 960,
+          "Y": 746
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -40.5,
         "CreateMany": true,
         "Amount": 3,
         "UseRandom": false,
@@ -92,15 +129,311 @@
             "Y": 1920
           },
           "RandomSpeed": {
-            "Min": 20,
+            "Min": -20,
             "Max": 100
           }
         }
       },
       {
-        "Type": "RockReflection",
-        "ImagePath": "sprites/Background/AlphaLevel/MG_RockReflection.dds",
+        "Type": "Coastal_Wreck",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_ShipwreckBig.dds",
+        "IsTiling": false,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -21,
+        "Position": {
+          "X": 2500,
+          "Y": 836
+        },
+        "Scale": {
+          "X": 1.0,
+          "Y": 1.0
+        },
+        "Speed": -60.5,
+        "CreateMany": false,
+        "Amount": 1,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_Island_3Image",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_FloatingIsland3.dds",
+        "IsTiling": false,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -21,
+        "Position": {
+          "X": 3000,
+          "Y": 193
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -60.5,
+        "CreateMany": false,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_Island_1Image",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_FloatingIsland1.dds",
+        "IsTiling": false,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -21,
+        "Position": {
+          "X": 1400,
+          "Y": 307
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -60.5,
+        "CreateMany": false,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_Island_2Image",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_FloatingIsland2.dds",
+        "IsTiling": false,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -21,
+        "Position": {
+          "X": 2500,
+          "Y": 400
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -60.0,
+        "CreateMany": false,
+        "Amount": 1,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_Island_4Image",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_FloatingIsland4.dds",
         "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -21,
+        "Position": {
+          "X": 4500,
+          "Y": 221
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -60.0,
+        "CreateMany": false,
+        "Amount": 1,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_MG_Land",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_MG_Land.dds",
+        "IsTiling": true,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -18,
+        "Position": {
+          "X": 960,
+          "Y": 838
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": -80.0,
+        "CreateMany": true,
+        "Amount": 3,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_BG_Sea",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_BG_Sea.dds",
+        "IsTiling": false,
+        "IsCentered": false,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 1.0
+        },
+        "LayerOrder": -19,
+        "Position": {
+          "X": 960,
+          "Y": 1080
+        },
+        "Scale": {
+          "X": 1.00,
+          "Y": 1.00
+        },
+        "Speed": 0.0,
+        "CreateMany": false,
+        "Amount": 1,
+        "UseRandom": false,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomPositionY": {
+            "X": 0,
+            "Y": 1920
+          },
+          "RandomSpeed": {
+            "Min": -20,
+            "Max": 100
+          }
+        }
+      },
+      {
+        "Type": "Coastal_MG_Shipwreck",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_MG_ShipwreckSmall.dds",
+        "IsTiling": false,
+        "IsCentered": true,
+        "Pivot": {
+          "X": 0.5,
+          "Y": 0.5
+        },
+        "LayerOrder": -16,
+        "Position": {
+          "X": 1300,
+          "Y": 910
+        },
+        "Scale": {
+          "X": 0.80,
+          "Y": 0.80
+        },
+        "Speed": -110.0,
+        "CreateMany": true,
+        "Amount": 2,
+        "UseRandom": true,
+        "RandomAtributes": {
+          "RandomPositionX": {
+            "Min": 0,
+            "Max": 8000
+          },
+          "RandomPositionY": {
+            "Min": 920,
+            "Max": 1000
+          },
+          "RandomSpeed": {
+            "Min": -180,
+            "Max": -140
+          }
+        }
+      },
+      {
+        "Type": "Coastal_FG_RockBig",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_FG_RocksBig.dds",
+        "IsTiling": false,
         "IsCentered": true,
         "Pivot": {
           "X": 0.5,
@@ -108,152 +441,72 @@
         },
         "LayerOrder": -17,
         "Position": {
-          "X": -1360,
-          "Y": 1000
+          "X": 4050,
+          "Y": 851
         },
         "Scale": {
-          "X": 1,
-          "Y": 1
+          "X": 1.00,
+          "Y": 1.00
         },
-        "Speed": -30.1,
-        "CreateMany": true,
-        "Amount": 3,
+        "Speed": -140.0,
+        "CreateMany": false,
+        "Amount": 1,
         "UseRandom": false,
         "RandomAtributes": {
           "RandomPositionX": {
-            "X": 0,
-            "Y": 1920
+            "Min": 0,
+            "Max": 1920
           },
           "RandomPositionY": {
-            "X": 0,
-            "Y": 1920
+            "Min": 666,
+            "Max": 820
           },
           "RandomSpeed": {
-            "Min": 20,
-            "Max": 100
+            "Min": -30,
+            "Max": -5
           }
         }
-      }
-    ],
-    {
-      "Type": "GradientImage",
-      "ImagePath": "sprites/Background/AlphaLevel/Background_SkySea.dds",
-      "IsTiling": false,
-      "IsCentered": true,
-      "Pivot": {
-        "X": 0.5,
-        "Y": 0.5
       },
-      "LayerOrder": -17,
-      "Position": {
-        "X": 960,
-        "Y": 540
-      },
-      "Scale": {
-        "X": 0,
-        "Y": 0
-      },
-      "Speed": 0,
-      "CreateMany": false,
-      "Amount": 10,
-      "UseRandom": false,
-      "RandomAtributes": {
-        "RandomPositionX": {
-          "X": 0,
-          "Y": 1920
-        },
-        "RandomPositionY": {
-          "X": 0,
-          "Y": 1920
-        },
-        "RandomSpeed": {
-          "Min": 20,
-          "Max": 100
-        }
-      }
-    },
-    [
       {
-        "Type": "GroundIce",
-        "ImagePath": "sprites/Background/AlphaLevel/BG_GroundPlane.dds",
-        "IsTiling": true,
-        "IsCentered": false,
-        "Pivot": {
-          "X": 0.5,
-          "Y": 1.0
-        },
-        "LayerOrder": -16,
-        "Position": {
-          "X": 960,
-          "Y": 1080
-        },
-        "Scale": {
-          "X": 1,
-          "Y": 1
-        },
-        "Speed": -30.1,
-        "CreateMany": true,
-        "Amount": 3,
-        "UseRandom": false,
-        "RandomAtributes": {
-          "RandomPositionX": {
-            "X": 0,
-            "Y": 1920
-          },
-          "RandomPositionY": {
-            "X": 0,
-            "Y": 1920
-          },
-          "RandomSpeed": {
-            "Min": 20,
-            "Max": 100
-          }
-        }
-      }
-    ],
-    [
-      {
-        "Type": "MG_Rock",
-        "ImagePath": "sprites/Background/AlphaLevel/MG_Rock.dds",
-        "IsTiling": true,
+        "Type": "Coastal_FG_RockMedium",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_FG_RocksMedium.dds",
+        "IsTiling": false,
         "IsCentered": true,
         "Pivot": {
           "X": 0.5,
           "Y": 0.5
         },
-        "LayerOrder": -15,
+        "LayerOrder": -16,
         "Position": {
-          "X": -1360,
-          "Y": 860
+          "X": 800,
+          "Y": 997
         },
         "Scale": {
-          "X": 1,
-          "Y": 1
+          "X": 1.00,
+          "Y": 1.00
         },
-        "Speed": -30.1,
+        "Speed": -150.0,
         "CreateMany": true,
         "Amount": 3,
-        "UseRandom": false,
+        "UseRandom": true,
         "RandomAtributes": {
           "RandomPositionX": {
-            "X": 0,
-            "Y": 1920
+            "Min": 1600,
+            "Max": 6000
           },
           "RandomPositionY": {
-            "X": 0,
-            "Y": 1920
+            "Min": 900,
+            "Max": 1080
           },
           "RandomSpeed": {
-            "Min": 20,
-            "Max": 100
+            "Min": -180,
+            "Max": -160
           }
         }
-      }
-    ],    
-    [
+      },
       {
-        "Type": "Foreground",
-        "ImagePath": "sprites/Background/Background_GradientBackground_01.dds",
+        "Type": "Coastal_FG_RockSmall",
+        "ImagePath": "sprites/Background/CoastalLevel/Coastal_FG_RocksSmall.dds",
         "IsTiling": false,
         "IsCentered": true,
         "Pivot": {
@@ -262,29 +515,29 @@
         },
         "LayerOrder": -15,
         "Position": {
-          "X": 960,
-          "Y": 400
+          "X": 800,
+          "Y": 997
         },
         "Scale": {
-          "X": 0,
-          "Y": 0
+          "X": 1.00,
+          "Y": 1.00
         },
-        "Speed": 0,
-        "CreateMany": false,
-        "Amount": 10,
-        "UseRandom": false,
+        "Speed": -100.0,
+        "CreateMany": true,
+        "Amount": 5,
+        "UseRandom": true,
         "RandomAtributes": {
           "RandomPositionX": {
-            "X": 0,
-            "Y": 1920
+            "Min": 0.0,
+            "Max": 10000.0
           },
           "RandomPositionY": {
-            "X": 0,
-            "Y": 1920
+            "Min": 990.0,
+            "Max": 1080.0
           },
           "RandomSpeed": {
-            "Min": 20,
-            "Max": 100
+            "Min": -180,
+            "Max": -160
           }
         }
       }

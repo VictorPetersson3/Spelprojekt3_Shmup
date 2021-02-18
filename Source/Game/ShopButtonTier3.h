@@ -13,6 +13,8 @@ namespace Studio
 		void Update() override;
 		void OnClick() override;
 
+		Enums::Tier3Upgrades GetUpgradeType();
+
 	private:
 		bool myIsClicked = false;
 		bool myHasBeenPurchased = false;

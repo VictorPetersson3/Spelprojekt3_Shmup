@@ -257,6 +257,7 @@ namespace Studio
 			myPlayerData->UpgradeBasicAttackSpeedT3();
 			break;
 		case Studio::Enums::Tier3Upgrades::MissileCluster:
+			myHasPurchasedClusterBombs = true;
 			break;
 		case Studio::Enums::Tier3Upgrades::ShieldExplosion:
 			myShieldModule->GetSpriteSheet().SetImagePath("Sprites/assets/player/upgrades/effects/shieldSpriteRed.dds");
@@ -370,7 +371,7 @@ namespace Studio
 				myDirection.y -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 			}
 			//A
-			if (aKey && myPosition.x > 300)
+			if (aKey && myPosition.x > 200)
 			{
 				myDirection.x -= mySpeed * Timer::GetInstance()->TGetDeltaTime();
 				myCurrentFlame = 1;

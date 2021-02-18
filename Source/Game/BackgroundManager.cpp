@@ -37,42 +37,40 @@ void Studio::BackgroundManager::CreateBackground(const int aLevelIndex)
 		{
 			if (objects[i].IsArray())
 			{
-				for (int j = 0; j < objects[i].GetArray().Size(); j++)
+				auto backgroundObjects = objects[i].GetArray();
+				for (rapidjson::SizeType iterator = 0; iterator < backgroundObjects.Size(); iterator++)
 				{
-					auto backgroundObjects = objects[i].GetArray();
-					for (rapidjson::SizeType iterator = 0; iterator < backgroundObjects.Size(); iterator++)
+					int myTypeIndex = 0;
+					bool isNewType = true;
+					DebugJsonDocNonIterator(backgroundObjects[iterator]);
+					for (int j = 0; j < myTypes.size(); j++)
 					{
-						int myTypeIndex = 0;
-						bool isNewType = true;
-						DebugJsonDocNonIterator(backgroundObjects[iterator]);
-						for (int j = 0; j < myTypes.size(); j++)
+						if (myTypes.at(j) == backgroundObjects[iterator]["Type"].GetString())
 						{
-							if (myTypes.at(j) == backgroundObjects[iterator]["Type"].GetString())
-							{
-								myTypeIndex = j;
-								isNewType = false;
-								break;
-							}
-							myTypeIndex = j + 1;
+							myTypeIndex = j;
+							isNewType = false;
+							break;
 						}
-						if (isNewType)
+						myTypeIndex = j + 1;
+					}
+					if (isNewType)
+					{
+						myTypes.push_back(backgroundObjects[iterator]["Type"].GetString());
+						myBackgroundFactory.InitBackGroundObject(backgroundObjects[iterator], myTypes.at(myTypeIndex));
+					}
+					if (backgroundObjects[iterator]["CreateMany"].GetBool())
+					{
+						for (int k = 0; k < backgroundObjects[iterator]["Amount"].GetFloat(); k++)
 						{
-							myTypes.push_back(backgroundObjects[iterator]["Type"].GetString());
-							myBackgroundFactory.InitBackGroundObject(backgroundObjects[iterator], myTypes.at(myTypeIndex));
-						}
-						if (backgroundObjects[iterator]["CreateMany"].GetBool())
-						{
-							for (int k = 0; k < backgroundObjects[iterator]["Amount"].GetFloat(); k++)
-							{
-								myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject(myTypes.at(myTypeIndex), backgroundObjects[iterator], k));
-							}
-						}
-						else
-						{
-							myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject(myTypes.at(myTypeIndex), backgroundObjects[iterator]));
+							myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject(myTypes.at(myTypeIndex), backgroundObjects[iterator], k));
 						}
 					}
+					else
+					{
+						myBackgroundObjects.push_back(myBackgroundFactory.CreateBackgroundObject(myTypes.at(myTypeIndex), backgroundObjects[iterator]));
+					}
 				}
+					
 			}
 			else
 			{

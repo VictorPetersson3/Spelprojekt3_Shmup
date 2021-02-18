@@ -12,10 +12,10 @@ namespace Studio
 	{
 		if (aJsonObject["UseRandom"].GetBool())
 		{
-			GameObject::SetPositionX(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionXmin"].GetFloat(),
-				aJsonObject["RandomAtributes"]["RandomPositionXmax"].GetFloat()));
-			GameObject::SetPositionY(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionYmin"].GetFloat(),
-				aJsonObject["RandomAtributes"]["RandomPositionYmax"].GetFloat()));
+			GameObject::SetPositionX(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionX"]["Min"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionX"]["Max"].GetFloat()));
+			GameObject::SetPositionY(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionY"]["Min"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionY"]["Max"].GetFloat()));
 			myScrollSpeed = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomSpeed"]["Min"].GetFloat(),
 				aJsonObject["RandomAtributes"]["RandomSpeed"]["Max"].GetFloat());
 		}
@@ -42,9 +42,7 @@ namespace Studio
 		GameObject::GameObject(aTypeObject->GetImagePath()),
 		myTypeObject(aTypeObject)
 	{
-		GameObject::SetPosition({ aJsonObject["Position"]["X"].GetFloat() + (aIndex * GameObject::GetSpriteSheet().GetSprite()->GetImageSize().x), aJsonObject["Position"]["Y"].GetFloat() });
 		GameObject::GetSpriteSheet().SetLayer(aJsonObject["LayerOrder"].GetFloat());
-		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()});
 		myScrollSpeed = aJsonObject["Speed"].GetFloat();
 		myIsTiling = aJsonObject["IsTiling"].GetBool();
 		if (aJsonObject["IsCentered"].IsTrue())
@@ -55,6 +53,23 @@ namespace Studio
 		{
 			GameObject::GetSpriteSheet().SetPivot({ aJsonObject["Pivot"]["X"].GetFloat(), aJsonObject["Pivot"]["Y"].GetFloat() });
 		}
+		if (aJsonObject["UseRandom"].GetBool())
+		{
+			GameObject::SetPositionX(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionX"]["Min"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionX"]["Max"].GetFloat()));
+			GameObject::SetPositionY(CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomPositionY"]["Min"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomPositionY"]["Max"].GetFloat()));
+			myScrollSpeed = CommonUtilities::GetRandomFloat(aJsonObject["RandomAtributes"]["RandomSpeed"]["Min"].GetFloat(),
+				aJsonObject["RandomAtributes"]["RandomSpeed"]["Max"].GetFloat());
+		}
+		else
+		{
+			GameObject::SetPosition({ aJsonObject["Position"]["X"].GetFloat() + (aIndex * GameObject::GetSpriteSheet().GetSprite()->GetImageSize().x), aJsonObject["Position"]["Y"].GetFloat() });
+			GameObject::GetSpriteSheet().SetLayer(aJsonObject["LayerOrder"].GetFloat());
+			myScrollSpeed = aJsonObject["Speed"].GetFloat();
+		}
+		
+		GameObject::GetSpriteSheet().SetSizeRelativeToImage({ aJsonObject["Scale"]["X"].GetFloat(), aJsonObject["Scale"]["Y"].GetFloat()});
 	}
 	
 	BackgroundObject::~BackgroundObject()
