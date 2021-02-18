@@ -384,7 +384,14 @@ namespace Studio
 				myLaser->Update(myBoss->GetPosition()->y);
 				if (myPlayer->Intersects(*myLaser))
 				{
-					myPlayer->TakeDamage(myLaser->GetDamage());
+					if (myPlayer->GetIsShieldActive())
+					{
+						myPlayer->TakeShieldDamage(myLaser->GetDamage());
+					}
+					else
+					{
+						myPlayer->TakeDamage(myLaser->GetDamage());
+					}
 				}
 			}
 		}

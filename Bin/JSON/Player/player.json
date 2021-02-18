@@ -58,10 +58,10 @@
     "FrameEndX": 1.0,
     "FrameEndY": 1.0
   },
-  "FlameImagePath": "sprites/assets/player/Flame.dds",
+  "FlameImagePath": "sprites/assets/player/thrusterFireSprite.dds",
   "AmountOfFramesFlame": {
-    "X": 1.0,
-    "Y": 4.0
+    "X": 4.0,
+    "Y": 5.0
   }
 
 
