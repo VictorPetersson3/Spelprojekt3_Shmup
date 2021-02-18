@@ -33,7 +33,7 @@ namespace Studio
 		myMovement = nullptr;
 		myType = aEnemyType;
 		myPosition = aSpawnPosition;
-		myPosition.x += 200;
+		myPosition.x += 400;
 		myScoreValue = 100;
 		myShootTimer = 0;
 		GetHealth().SetStartHealth(myType->GetStartHealth());
@@ -57,15 +57,18 @@ namespace Studio
 		case Studio::Enums::MovementPattern::Diagonal:
 			if (myType->GetDiagonalIsTop())
 			{
+				myPosition.y += 200;
 				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 1080}) - GameObject::GetPosition();
 				SAFE_CREATE(myMovement, MovementDiagonal(&myPosition,
 					myType->GetSpeed(), angle.GetNormalized()));
 			}
 			else
 			{
+				myPosition.y += -200;
 				Tga2D::Vector2f angle = Tga2D::Vector2f({0, 0}) - GameObject::GetPosition();
 				SAFE_CREATE(myMovement, MovementDiagonal(&myPosition,
 					myType->GetSpeed(), angle.GetNormalized()));
+
 			}
 			break;
 		default:

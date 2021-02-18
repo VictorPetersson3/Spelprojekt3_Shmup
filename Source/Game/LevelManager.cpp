@@ -300,7 +300,7 @@ namespace Studio
 				Studio::RendererAccessor::GetInstance()->Render(*myEnemies[i]);
 			}
 
-			if (myEnemies[i]->GetPosition().x < -50.0f || myEnemies[i]->GetPosition().y < -50.0f || myEnemies[i]->GetPosition().y > 1130.0f)
+			if (myEnemies[i]->GetPosition().x < -200.0f)
 			{
 				myEnemies.erase(myEnemies.begin() + i);
 			}

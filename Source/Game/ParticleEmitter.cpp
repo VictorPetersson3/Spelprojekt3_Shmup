@@ -22,7 +22,7 @@ Studio::ParticleEmitter::~ParticleEmitter()
 
 void Studio::ParticleEmitter::Init(const Enums::EParticleTypes aParticleType)
 {
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 250; i++)
 	{
 		myParticles.push_back(new Particle(aParticleType));
 	}
@@ -40,11 +40,10 @@ void Studio::ParticleEmitter::Deactivate()
 
 void Studio::ParticleEmitter::SpawnParticle()
 {
-	
 	if (myIsActive)
 	{
 		mySpawnTimer += Studio::Timer::GetInstance()->TGetDeltaTime();
-		if (mySpawnTimer > 0.025f)
+		if (mySpawnTimer > 0.015f)
 		{
 			for (int i = myLatestSpawnedParticle; i < myParticles.size(); i++)
 			{

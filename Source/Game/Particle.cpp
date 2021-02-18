@@ -43,7 +43,7 @@ void Studio::Particle::Init()
         mySprite->SetPivot({ 0.5, 0.5 });
         mySprite->GetSprite()->SetBlendState(EBlendState::EBlendState_Alphablend);
         //Life time, gravity and velocity
-        randomLifeTime = CommonUtilities::GetRandomFloat(01.3, 2.5);
+        randomLifeTime = CommonUtilities::GetRandomFloat(0.83, 1.5);
         randomVelocity = CommonUtilities::GetRandomFloat(850, 950.5);
         myGravity = 1.0;
         myVelocity = randomVelocity;
