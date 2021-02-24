@@ -25,9 +25,10 @@ void Studio::AudioManager::Play2D(const char* aPath, bool aLooping)
 void Studio::AudioManager::Play2D(const char* aPath, bool aLooping, float volume)
 {
 	irrklang::ISoundSource* sound = myAudioEngine->addSoundSourceFromFile(aPath);
+
 	if (sound != nullptr)
 	{
-		sound->setDefaultVolume(volume*volumeMultiplier);
+		sound->setDefaultVolume(volume);
 
 		myAudioEngine->play2D(sound, aLooping, false, false);
 

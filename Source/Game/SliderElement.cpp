@@ -9,6 +9,7 @@
 #include "RendererAccessor.h"
 #include "Renderer.h"
 
+#define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::SliderElement::SliderElement(const char* aSpritePath, const VECTOR2F& aPosition,const VECTOR2F& aSize, const int aLayer)
 {
 	mySpriteSheet = new SpriteSheet(aSpritePath);
@@ -43,33 +44,25 @@ Studio::SliderElement::~SliderElement()
 void Studio::SliderElement::Update()
 {
 
-	myWindowHandle = GetForegroundWindow();
-
-	POINT pt;
-	GetCursorPos(&pt);
-	ScreenToClient(myWindowHandle, &pt);
-
-
 	if (myIsEnabled == true)
 	{	
-			if (pt.x >= myLeft && pt.x <= myRight)
+			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
 			{
-				if (pt.y >= myTop && pt.y <= myBottom)
+				if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
 				{
 					
 					if (Studio::InputManager::GetInstance()->GetMouseLDown())
 					{
-						fillPercentage = (pt.x - myLeft) / mySize.x;
-						myHandleSprite->SetPosition({ static_cast<float>(pt.x),myHandleSprite->GetPosition().y });
+						fillPercentage = (MOUSEPOS.x - myLeft) / mySize.x;
+						myHandleSprite->SetPosition({ static_cast<float>(MOUSEPOS.x),myHandleSprite->GetPosition().y });
 					}
 				}
 			}
 
 		mySpriteSheet->SetSize({ mySize.x * fillPercentage,mySize.y });
-		//myHandleSprite->SetPosition({ myRight,myHandleSprite->GetPosition().y });
 
 		Studio::RendererAccessor::GetInstance()->Render(*myHandleSprite);
-		//Studio::RendererAccessor::GetInstance()->Render(*mySpriteSheet);
+
 		AudioManagerAccessor::GetInstance()->SetVolumeMultiplier(fillPercentage);
 	}
 

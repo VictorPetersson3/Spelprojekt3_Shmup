@@ -187,10 +187,13 @@ void CGameWorld::InputStuff()
 		if (Studio::Timer::GetInstance()->IsFrozen())
 		{
 			myMenuManager->GetPauseMenu()->Enable();
+			myMenuManager->SetIsPaused(true);
 		}
 		else
 		{
 			myMenuManager->GetPauseMenu()->Disable();
+			myMenuManager->SetIsPaused(false);
+
 		}
 	}
 
@@ -198,6 +201,8 @@ void CGameWorld::InputStuff()
 	{
 		Studio::Timer::GetInstance()->ToggleFreeze();
 		myMenuManager->GetPauseMenu()->Disable();
+		myMenuManager->SetIsPaused(false);
+
 		myMenuManager->GetPauseMenu()->GetElementWithTag("ResumeButton")->myIsClicked = false;
 	}
 	//if (Studio::InputManager::GetInstance()->IsKeyPressed('B'))

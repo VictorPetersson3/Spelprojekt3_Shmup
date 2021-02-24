@@ -22,7 +22,7 @@ void Studio::ButtonElement::CalculateButtonCollider()
 {
 	Tga2D::Vector2f spawnPos;
 	float ratio = static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().y) / static_cast<float>(1080.f);
-	float EPSILON = 0.00001;
+	float EPSILON = 0.00001f;
 	float ratioComparison = static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x) / static_cast<float>(1920.f);
 	if (ratioComparison > ratio + EPSILON)
 	{

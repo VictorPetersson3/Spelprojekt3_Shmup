@@ -178,7 +178,7 @@ void Studio::Options::Disable()
 	myHasStarted = false;
 	MenuObject::Disable();
 	myMenuManager->GetOptionsMenu()->Disable();
-	myMenuManager->GetMainMenu()->Enable();
+	//myMenuManager->GetMainMenu()->Enable();
 }
 
 void Studio::Options::RecalcColliders()

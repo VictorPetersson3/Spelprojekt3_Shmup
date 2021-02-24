@@ -49,6 +49,7 @@ namespace Studio
 		bool GetGodMode();
 		bool GetIsInShop();
 		void SetIsInShop(bool aState);
+		void SetIsPaused(bool aState);
 		void SetPlayButtonIndex(const int aIndex);
 		void SetNextLevelIndex(const int aIndex);
 		void Load();
@@ -69,6 +70,7 @@ namespace Studio
 	private:
 
 		bool myIsInShop = false;
+		bool myIsPaused = false;
 
 		MenuObject myMainMenu;
 		MenuObject myHud;
@@ -104,6 +106,8 @@ namespace Studio
 
 #pragma endregion
 
+		GenericButton* myPausMenuSettingsButton;
+		GenericButton* myPausSettingsReturnButton;
 
 		StartButton* myNextLevelButton;
 

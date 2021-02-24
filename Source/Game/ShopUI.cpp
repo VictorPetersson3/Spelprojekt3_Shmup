@@ -50,14 +50,11 @@ Studio::ShopUI::~ShopUI()
 	for (ShopButton* s : myTier1Buttons)
 	{
 		SAFE_DELETE(s);
-
-
 	}
 
 	for (ShopButtonTier2* s : myTier2Buttons)
 	{
 		SAFE_DELETE(s);
-
 	}
 
 	for (ShopButtonTier3* s : myTier3Buttons)
@@ -93,7 +90,9 @@ std::vector<Studio::ButtonElement*> Studio::ShopUI::GetShopButtons()
 	for (size_t i = 0; i < 6; i++)
 	{
 		int temp = GetRandomNumberInRange(myTier1ButtonsTemp.size()-1);
+
 		ShopButton* buttonToPushBack = myTier1ButtonsTemp[temp];
+
 		myTier1ButtonsTemp.erase(myTier1ButtonsTemp.begin()+temp);
 
 		switch (i)

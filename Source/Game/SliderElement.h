@@ -25,9 +25,6 @@ namespace Studio
         float myRight;
         float myTop;
         float myBottom;
-
-        HWND myWindowHandle;
-
     };
 }
 
