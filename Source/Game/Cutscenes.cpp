@@ -23,7 +23,7 @@ namespace Studio
 	{
 		myLogo = new SpriteSheet("Sprites/Logos/tga_logo.dds");
 		myLogo->SetPosition({ 960, 540 });
-		myLogo->SetSizeRelativeToImage({ 0.75f, 0.75f });
+		myLogo->SetSize({ 640.0f, 188.0f });
 		myLogo->SetLayer(10);
 		HijackGameWorld();
 	}
@@ -174,7 +174,7 @@ namespace Studio
 		{
 			// Resource switch
 			myLogo->SetImagePath("Sprites/Logos/flygpirater_logo.dds");
-			myLogo->SetSize({ 1024.0f, 1024.0f });
+			myLogo->SetSize({ 640.0f, 640.0f });
 			GotoNextAction();
 			break;
 		}
