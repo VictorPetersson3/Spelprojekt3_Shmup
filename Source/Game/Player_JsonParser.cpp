@@ -371,12 +371,12 @@ void Studio::Player_JsonParser::UpgradeRapidFireCooldownT1()
 
 void Studio::Player_JsonParser::UpgradeRapidFireAttackSpeedT1()
 {
-	myRapidFireAttackSpeed += myRapidFireAttackSpeedIncreaseT1;
+	myRapidFireAttackSpeed += myRapidFireAttackSpeed * (myRapidFireAttackSpeedIncreaseT1 * 0.01);
 }
 
 void Studio::Player_JsonParser::UpgradeRapidFireAttackSpeedT2()
 {
-	myRapidFireAttackSpeed += myRapidFireAttackSpeedIncreaseT2;
+	myRapidFireAttackSpeed += myRapidFireAttackSpeed * (myRapidFireAttackSpeedIncreaseT2 * 0.01);
 }
 
 void Studio::Player_JsonParser::UpgradeRapidFireDurationT1()
@@ -391,17 +391,17 @@ void Studio::Player_JsonParser::UpgradeRapidFireDurationT2()
 
 void Studio::Player_JsonParser::UpgradeBasicAttackSpeedT1()
 {
-	myShootCoolDown += myBasicAttackSpeedIncreaseT1;
+	myShootCoolDown -= myBasicAttackSpeedIncreaseT1;
 }
 
 void Studio::Player_JsonParser::UpgradeBasicAttackSpeedT2()
 {
-	myShootCoolDown += myBasicAttackSpeedIncreaseT2;
+	myShootCoolDown -= myBasicAttackSpeedIncreaseT2;
 }
 
 void Studio::Player_JsonParser::UpgradeBasicAttackSpeedT3()
 {
-	myShootCoolDown += myBasicAttackSpeedIncreaseT3;
+	myShootCoolDown -= myBasicAttackSpeedIncreaseT3;
 }
 
 void Studio::Player_JsonParser::UpgradeShieldDurationT1()

@@ -111,7 +111,7 @@ namespace Studio
 	void Player::Shoot()
 	{
 		myTimeSinceLastShot += Timer::GetInstance()->TGetDeltaTime();
-		if (InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Shoot) && myTimeSinceLastShot > 1 / myPlayerData->GetShootCoolDown())
+		if (InputManager::GetInstance()->IsCustomKeyDown(Enums::CustomKeys::CustomKey_Shoot) && myTimeSinceLastShot > myPlayerData->GetShootCoolDown())
 		{
 
 			AudioManagerAccessor::GetInstance()->Play2D("Audio/BasicAttack.mp3", false, 0.2f);
@@ -502,7 +502,7 @@ namespace Studio
 				myHasPenetratingRounds = true;
 			}
 
-			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() + myPlayerData->GetRapidFireAttackSpeed() * 0.01);
+			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() - myPlayerData->GetRapidFireAttackSpeed() * 0.01);
 		}
 	}
 	//Check if Rapidfire is active
@@ -526,7 +526,7 @@ namespace Studio
 		{
 			myRapidFireIsActive = false;
 			myHasPenetratingRounds = false;
-			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() - myPlayerData->GetRapidFireAttackSpeed() * 0.01);
+			myPlayerData->SetShootCoolDown(myPlayerData->GetShootCoolDown() + myPlayerData->GetRapidFireAttackSpeed() * 0.01);
 		}
 	}
 	void Player::AddAnotherProjectile()

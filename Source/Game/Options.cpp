@@ -65,16 +65,16 @@ void Studio::Options::Update()
 				myClickTimer = 0;
 				myHasStarted = false;
 				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-				myMenuManager->ResetAllSizes();
 				Disable();
+				myMenuManager->GetMainMenu()->Enable();
 			}
 			if (myToggleFullScreenOn->IsClicked())
 			{
 				myClickTimer = 0;
 				myHasStarted = false;
 				Studio::GameAccessor::GetInstance().GetGame()->ToggleFullScreen();
-				myMenuManager->ResetAllSizes();
 				Disable();
+				myMenuManager->GetMainMenu()->Enable();
 			}
 			if (!Studio::GameAccessor::GetInstance().GetGame()->GetIsFullscreen())
 			{
@@ -83,28 +83,28 @@ void Studio::Options::Update()
 					res.x = 640;
 					res.y = 360;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-					myMenuManager->ResetAllSizes();
 					myClickTimer = 0;
 					myHasStarted = false;
 					Disable();
+					myMenuManager->GetMainMenu()->Enable();
 				}
 				if (my960x540->IsClicked())
 				{
 					res.x = 960;
 					res.y = 540;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-					myMenuManager->ResetAllSizes();
 					myClickTimer = 0;
 					myHasStarted = false;
 					Disable();
+					myMenuManager->GetMainMenu()->Enable();
 				}
 				if (my1280x720->IsClicked())
 				{
 					res.x = 1280;
 					res.y = 720;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-					myMenuManager->ResetAllSizes();
 					Disable();
+					myMenuManager->GetMainMenu()->Enable();
 					myClickTimer = 0;
 					myHasStarted = false;
 				}
@@ -113,8 +113,8 @@ void Studio::Options::Update()
 					res.x = 1600;
 					res.y = 900;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-					myMenuManager->ResetAllSizes();
 					Disable();
+					myMenuManager->GetMainMenu()->Enable();
 					myClickTimer = 0;
 					myHasStarted = false;
 				}
@@ -123,8 +123,8 @@ void Studio::Options::Update()
 					res.x = 1920;
 					res.y = 1080;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-					myMenuManager->ResetAllSizes();
 					Disable();
+					myMenuManager->GetMainMenu()->Enable();
 					myClickTimer = 0;
 					myHasStarted = false;
 				}
@@ -133,10 +133,10 @@ void Studio::Options::Update()
 					res.x = 2560;
 					res.y = 1440;
 					Studio::GameAccessor::GetInstance().GetGame()->SetResolution(res);
-					myMenuManager->ResetAllSizes();
 					myClickTimer = 0;
 					myHasStarted = false;
 					Disable();
+					myMenuManager->GetMainMenu()->Enable();
 				}
 			}
 		}

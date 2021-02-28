@@ -2,12 +2,12 @@
 #include "SliderElement.h"
 #include "tga2d/sprite/sprite.h"
 #include "InputManager.h"
-#include <iostream>
 #include "AudioManagerAccesor.h"
 #include "AudioManager.h"
 #include "LevelAccessor.h"
 #include "RendererAccessor.h"
 #include "Renderer.h"
+#include "CommonUtilities/CUMath.h"
 
 #define MOUSEPOS Studio::InputManager::GetInstance()->GetMousePosition()
 Studio::SliderElement::SliderElement(const char* aSpritePath, const VECTOR2F& aPosition,const VECTOR2F& aSize, const int aLayer)
@@ -17,7 +17,7 @@ Studio::SliderElement::SliderElement(const char* aSpritePath, const VECTOR2F& aP
 	mySpriteSheet->SetPivot({ 0.5f,0.5f });
 	mySpriteSheet->SetPosition(aPosition);
 	mySize = aSize;
-
+	myRatio = 1.f;
 	myLeft = mySpriteSheet->GetPosition().x;
 	myRight = mySpriteSheet->GetPosition().x + (mySize.x);
 	myTop = mySpriteSheet->GetPosition().y - (mySize.y / 2);
@@ -31,8 +31,7 @@ Studio::SliderElement::SliderElement(const char* aSpritePath, const VECTOR2F& aP
 	myHandleSprite->SetPosition({ mySpriteSheet->GetPosition().x + (mySize.x),mySpriteSheet->GetPosition().y });
 
 	myHandleSprite->SetLayer(100);
-
-	std::cout << myLeft << "" << myRight << std::endl;
+	ReCalculateColliders();
 }
 
 Studio::SliderElement::~SliderElement()
@@ -43,27 +42,52 @@ Studio::SliderElement::~SliderElement()
 
 void Studio::SliderElement::Update()
 {
-
 	if (myIsEnabled == true)
 	{	
-			if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
+		ReCalculateColliders();	
+		myHandleSprite->SetPosition({ CommonUtilities::Lerp(myLeft / myRatio, myRight / myRatio, AudioManagerAccessor::GetInstance()->GetVolumeMultiplier()), myHandleSprite->GetPosition().y });
+		if (MOUSEPOS.x >= myLeft && MOUSEPOS.x <= myRight)
+		{
+			if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
 			{
-				if (MOUSEPOS.y >= myTop && MOUSEPOS.y <= myBottom)
-				{
 					
-					if (Studio::InputManager::GetInstance()->GetMouseLDown())
-					{
-						fillPercentage = (MOUSEPOS.x - myLeft) / mySize.x;
-						myHandleSprite->SetPosition({ static_cast<float>(MOUSEPOS.x),myHandleSprite->GetPosition().y });
-					}
+				if (Studio::InputManager::GetInstance()->GetMouseLDown())
+				{
+					fillPercentage = (static_cast<float>(MOUSEPOS.x) - myLeft) / (mySize.x * myRatio);
+					//Change position to match fill percentage
+					myHandleSprite->SetPosition({ static_cast<float>(MOUSEPOS.x) / myRatio, myHandleSprite->GetPosition().y });
 				}
 			}
+		}
 
-		mySpriteSheet->SetSize({ mySize.x * fillPercentage,mySize.y });
+		mySpriteSheet->SetSize({ mySize.x * fillPercentage, mySize.y });
 
 		Studio::RendererAccessor::GetInstance()->Render(*myHandleSprite);
-
+		//Get Volume Multiplier
 		AudioManagerAccessor::GetInstance()->SetVolumeMultiplier(fillPercentage);
+		printf("fillPercentage: %f\n", fillPercentage);
 	}
 
+}
+
+void Studio::SliderElement::ReCalculateColliders()
+{
+	Tga2D::Vector2f spawnPos;
+	myRatio = static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().y) / static_cast<float>(1080.f);
+	float EPSILON = 0.00001f;
+	float ratioComparison = static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x) / static_cast<float>(1920.f);
+	if (ratioComparison > myRatio + EPSILON)
+	{
+		float xSpaceToAdd = (static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x) * (ratioComparison - myRatio)) * 0.5;
+		xSpaceToAdd = (static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().x) - (static_cast<float>(Tga2D::CEngine::GetInstance()->GetWindowSize().y) * 1.777777777f)) * 0.5f;
+		myLeft = ((mySpriteSheet->GetPosition().x - (mySize.x * 0.5f)) * myRatio) + xSpaceToAdd;
+		myRight = ((mySpriteSheet->GetPosition().x + (mySize.x * 0.5f)) * myRatio) + xSpaceToAdd;
+	}
+	else
+	{
+		myLeft = (mySpriteSheet->GetPosition().x - (mySize.x * 0.5f)) * myRatio;
+		myRight = (mySpriteSheet->GetPosition().x + (mySize.x * 0.5f)) * myRatio;
+	}
+	myTop = (mySpriteSheet->GetPosition().y - (mySize.y * 0.5f)) * myRatio;
+	myBottom = (mySpriteSheet->GetPosition().y + (mySize.y * 0.5f)) * myRatio;
 }

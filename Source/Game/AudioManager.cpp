@@ -12,6 +12,11 @@ Studio::AudioManager::~AudioManager()
 	myAudioEngine->drop();
 }
 
+const float Studio::AudioManager::GetVolumeMultiplier() const
+{
+	return volumeMultiplier;
+}
+
 void Studio::AudioManager::Play2D(const char* aPath)
 {
 	myAudioEngine->play2D(aPath);

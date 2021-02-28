@@ -27,6 +27,7 @@
 #include "Counter.h"
 #include "MenuObject.h"
 #include "SpriteSheet.h"
+#include "GoToMainMenuButton.h"
 
 #define LEVELMANAGER Studio::LevelAccessor::GetInstance()
 
@@ -96,13 +97,15 @@ namespace Studio
 
         myOptionsMenuTitleText = new TextElement(Tga2D::EFontSize_48, { 0.45,0.25 }, "OptionsTitle");
 
-        myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960 - 185,250 }, { 370,50 }, 15);
+        myVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960, 250 }, { 370,50 }, 15);
 
         mySettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,780 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "OptionsButton", 12);
         myCreditsButton = new GenericButton("Sprites/UI/UI_credits.dds", { 960,900 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "CreditsButton", 12);
 
-        myPausMenuSettingsButton = new GenericButton("Sprites/UI/UI_options.dds", { 960,500 }, { 0.8f, 0.8f }, { 0.5f,0.5f }, "PsueMenuSettingsButton", 12);
-        myPausSettingsReturnButton = new GenericButton("Sprites/UI/UI_exit.dds", { 960,1000 }, { 1,1 }, { 0.5f,0.5f }, "PuseSettingsReturnButton", 12);
+        myPauseVolumeSlider = new SliderElement("Sprites/debugpixel.dds", { 960, 450 }, { 370,50 }, 15);
+        myPauseVolumeLabel = new ImageElement("Sprites/UI/UI_volume.dds", { 960,360 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
+        myPauseVolumeBar = new ImageElement("Sprites/UI/UI_volumeSliderBar.dds", { 960,450 }, { 1,1 }, { 0.5f,0.5f }, 50, "volumeSliderLabel");
+
 
         myPausMenuResumeButton = new GenericButton("Sprites/UI/UI_resumeText.dds", { 960,600 }, { 2,2 }, { 0.5f,0.5f }, "ResumeButton", 11);
         myLevelSelectButton = new GenericButton("Sprites/UI/UI_LevelSelect.dds", { 960,660 }, { 0.8f,0.8f }, { 0.5f,0.5f }, "LevelSelectButton", 20);
@@ -171,7 +174,9 @@ namespace Studio
         myPauseMenu.Add(myPausMenuTitle);
         myPauseMenu.Add(myPausMenuResumeButton);
         myPauseMenu.Add(myPausMenuQuitButton);
-        myPauseMenu.Add(myPausMenuSettingsButton);
+        myPauseMenu.Add(myPauseVolumeSlider);
+        myPauseMenu.Add(myPauseVolumeLabel);
+        myPauseMenu.Add(myPauseVolumeBar);
         myPauseMenu.Disable();
 
         myOptionsMenu.Add(myMasterVolumeSliderText);
@@ -191,7 +196,6 @@ namespace Studio
         myOptionsMenu.Add(myOptionsMenuReturnButton);
         myOptionsMenu.Add(myVolumeLabel);
         myOptionsMenu.Add(myVolumeBar);
-        myOptionsMenu.Add(myPausSettingsReturnButton);
         myOptionsMenu.Disable();
 
 #pragma endregion
@@ -298,10 +302,6 @@ namespace Studio
     {
         
         ResetButtonColliders();
-        if (myResizeAllElements)
-        {
-            myResizeAllElements = false;
-        }
         myMainMenu.Update();
         myHud.Update();
         myShop.Update();
@@ -347,32 +347,13 @@ namespace Studio
             myHud.GetElementWithTag("Heart1")->SetActive(false);
         }
 
-        if (mySettingsButton->IsClicked() || myPausMenuSettingsButton->IsClicked())
+        if (mySettingsButton->IsClicked())
         {
             myMainMenu.Disable();
             myPauseMenu.Disable();
             myOptionsMenu.Enable();
             myOptions->Enable();
             mySettingsButton->SetActive(false);
-
-            if (myIsPaused)
-            {
-                myPausSettingsReturnButton->SetActive(true);
-                myOptionsMenuReturnButton->SetActive(false);
-            }
-            else
-            {
-                myPausSettingsReturnButton->SetActive(false);
-                myOptionsMenuReturnButton->SetActive(true);
-            }
-        }
-
-        if (myPausSettingsReturnButton->IsClicked())
-        {
-            myOptionsMenu.Disable();
-            myOptions->Disable();
-
-            myPauseMenu.Enable();
         }
 
         if (myLevelSelectButton->IsClicked())
@@ -518,11 +499,10 @@ namespace Studio
     void MenuManager::QuitGameSession()
     {
         myOptions->Disable();
-        myOptionsMenu.Disable();
         myStartButton->ResetClickTimer();
         myMainMenu.Enable();
-        myPauseMenu.Disable();
         myOptionsMenu.Disable();
+        myPauseMenu.Disable();
         myHud.Disable();
         myCreditsMenu.Disable();
         myShop.Disable();
@@ -550,8 +530,10 @@ namespace Studio
 
         myPausMenuResumeButton->CalculateButtonCollider();
         myPausMenuQuitButton->CalculateButtonCollider();
+
         myOptionsMenuReturnButton->CalculateButtonCollider();
         myLevelSelectButton->CalculateButtonCollider();
+
         myOptions->RecalcColliders();
         myLevelSelect->RecalcColliders();
     }

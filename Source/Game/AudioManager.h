@@ -13,6 +13,8 @@ namespace Studio
 
 		irrklang::ISoundEngine* myAudioEngine;
 
+		const float GetVolumeMultiplier() const;
+
 		void Play2D(const char* aPath);
 		void Play2D(const char* aPath, bool aLooping);
 		void Play2D(const char* aPath, bool aLooping, float volume);

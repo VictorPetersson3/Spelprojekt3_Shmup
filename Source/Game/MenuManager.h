@@ -21,6 +21,7 @@ namespace Studio
 	class Counter;
 	class Player;
 	class SpriteSheet;
+	class GoToMainMenuButton;
 
 	class MenuManager
 	{
@@ -106,9 +107,6 @@ namespace Studio
 
 #pragma endregion
 
-		GenericButton* myPausMenuSettingsButton;
-		GenericButton* myPausSettingsReturnButton;
-
 		StartButton* myNextLevelButton;
 
 		TextElement* myScoreText;
@@ -166,6 +164,10 @@ namespace Studio
 		ImageElement* myVolumeBar;
 
 		SliderElement* myVolumeSlider;
+
+		ImageElement* myPauseVolumeLabel;
+		ImageElement* myPauseVolumeBar;
+		SliderElement* myPauseVolumeSlider;
 
 		ReturnToMainMenuButton* myOptionsMenuReturnButton;
 

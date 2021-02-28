@@ -15,6 +15,7 @@ namespace Studio
         float fillPercentage = 1.0f;
 
     private:
+        void ReCalculateColliders();
         SpriteSheet* mySpriteSheet;
         SpriteSheet* myHandleSprite;
 
@@ -25,6 +26,7 @@ namespace Studio
         float myRight;
         float myTop;
         float myBottom;
+        float myRatio;
     };
 }
 
